@@ -1,0 +1,160 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div>
+      <div class="auth-logo" style="margin-bottom: 0;">StageUp</div>
+      <p style="color: var(--text-secondary); font-size: 14px;">Internship Opportunity Details</p>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <%= link_to "Browse Offers", offers_path, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
+      <%= link_to "My Dashboard", dashboard_path, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
+    </div>
+  </div>
+
+  <% if flash[:alert] %>
+    <div class="flash-message flash-alert">
+      <span>⚠️</span> <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <% if flash[:notice] %>
+    <div class="flash-message flash-notice">
+      <span>✅</span> <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: start;">
+    
+    <!-- Left Column: Internship Details -->
+    <div class="profile-card" style="padding: 40px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;">
+        <div>
+          <h2 style="font-size: 26px; margin-bottom: 6px;"><%= @offer.title %></h2>
+          <span style="font-size: 16px; color: var(--text-secondary);"><%= @company.name %></span>
+        </div>
+        <span class="badge badge-info" style="font-size: 12px; padding: 4px 10px;"><%= @offer.stage_type.upcase %></span>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">
+        <span class="badge" style="background-color: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 4px 10px; font-size: 12px;">
+          📍 <%= @offer.location %>
+        </span>
+        <span class="badge" style="background-color: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 4px 10px; font-size: 12px;">
+          💻 <%= @offer.work_mode.capitalize %>
+        </span>
+        <span class="badge" style="background-color: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 4px 10px; font-size: 12px;">
+          👥 <%= pluralize(@offer.spots, 'spot') %> available
+        </span>
+        <% if @offer.deadline %>
+          <span class="badge" style="background-color: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 4px 10px; font-size: 12px;">
+            📅 Deadline: <%= @offer.deadline.strftime("%b %d, %Y") %>
+          </span>
+        <% end %>
+      </div>
+
+      <div style="margin-bottom: 35px;">
+        <h3 style="font-size: 18px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Role Description</h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; font-size: 15px; white-space: pre-line;">
+          <%= @offer.description %>
+        </p>
+      </div>
+
+      <!-- Mission / Proof Layer -->
+      <% if @mission %>
+        <div style="background-color: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); padding: 30px; border-radius: var(--radius-md);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(99, 102, 241, 0.15); padding-bottom: 10px;">
+            <h3 style="font-size: 18px; color: #818CF8;">⚡ Attached Proof Mission</h3>
+            <span class="badge" style="background-color: rgba(99, 102, 241, 0.15); color: #818CF8; font-size: 11px;">
+              ⏱️ Est. Time: <%= @mission.estimated_duration_minutes %> mins
+            </span>
+          </div>
+          <h4 style="font-size: 15px; margin-bottom: 8px;"><%= @mission.title %></h4>
+          <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; white-space: pre-line;">
+            <%= @mission.instructions %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Right Column: Recruiter Stats & Application Button -->
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      
+      <!-- Recruiter Transparency Card -->
+      <div class="profile-card" style="padding: 25px;">
+        <h3 style="font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Employer Reputation</h3>
+        
+        <!-- Grace Period Check -->
+        <% in_grace_period = @company.first_offer_posted_at.nil? || @company.first_offer_posted_at > 30.days.ago %>
+        <% if in_grace_period %>
+          <div style="text-align: center; padding: 15px 0;">
+            <span class="badge" style="background-color: rgba(245, 158, 11, 0.15); color: #FBBF24; font-size: 11px; margin-bottom: 10px;">Establishing Reputation</span>
+            <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.5;">
+              This employer recently started posting on StageUp. Detailed response rate metrics are hidden during their 30-day grace period.
+            </p>
+          </div>
+        <% else %>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+            <span style="color: var(--text-secondary);">Response Rate</span>
+            <strong style="color: var(--success);"><%= @company.response_rate %>%</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+            <span style="color: var(--text-secondary);">Avg. Decision Time</span>
+            <strong><%= @company.avg_response_time_hours %> hours</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 14px;">
+            <span style="color: var(--text-secondary);">Verified Recruiter</span>
+            <strong><%= @company.verified? ? "Yes" : "No" %></strong>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Application Status / Actions -->
+      <div class="profile-card" style="padding: 25px; border-color: var(--primary);">
+        <h3 style="font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Application</h3>
+
+        <% if current_user.profileable_type == "StudentProfile" %>
+          <% if @submission.nil? %>
+            <% if @offer.mission %>
+              <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 20px; line-height: 1.5;">
+                This offer has an attached task. Clicking below starts a <strong>48-hour window</strong> to complete the mission and submit your work.
+              </p>
+              <%= button_to "Start Proof Mission", submissions_path(offer_id: @offer.id, mission_id: @offer.mission.id), class: "btn btn-primary" %>
+            <% else %>
+              <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 20px; line-height: 1.5;">
+                This offer accepts standard applications. Clicking below will instantly submit your CV.
+              </p>
+              <%= button_to "Apply with CV", submissions_path(offer_id: @offer.id), class: "btn btn-primary" %>
+            <% end %>
+          
+          <% elsif @submission.status == "started" %>
+            <div style="background-color: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 15px; border-radius: var(--radius-sm); margin-bottom: 15px; text-align: center;">
+              <span style="color: #FBBF24; font-size: 14px; font-weight: 600; display: block; margin-bottom: 4px;">Mission In Progress</span>
+              <span style="color: var(--text-secondary); font-size: 12px; display: block;">You started this mission. Don't forget to submit your code link before the deadline!</span>
+            </div>
+            <%= link_to "Paste Solution URL", edit_submission_path(@submission), class: "btn btn-primary" %>
+
+          <% else %>
+            <div style="text-align: center; padding: 10px 0;">
+              <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Application Status:</p>
+              <span class="badge badge-success" style="font-size: 12px; padding: 4px 10px;">
+                <%= @submission.status.upcase.gsub('_', ' ') %>
+              </span>
+              <% if @submission.github_link.present? %>
+                <div style="margin-top: 15px; font-size: 13px;">
+                  <%= link_to "View My Submission Link", @submission.github_link, target: "_blank" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+
+        <% else %>
+          <p style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 10px 0;">
+            Only logged-in students can apply to internships.
+          </p>
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

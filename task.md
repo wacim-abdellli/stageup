@@ -1,0 +1,8 @@
+- `[x]` Generate and run migration to add `approved` column to `university_profiles`
+- `[x]` Implement coordinator approval redirect in `DashboardsController` and create `pending_approval` view
+- `[x]` Generate database migrations and models for `Offer`, `Mission`, and `Submission`
+- `[x]` Configure model relationships, validations, and status enums/scopes
+- `[x]` Implement `OffersController` and views (`index`, `show`, `new`) for posting/browsing internships
+- `[x]` Implement `SubmissionsController` and views for starting missions and pasting submission URLs
+- `[x]` Write unit tests for coordinator privacy gates, database transactions, and submission states
+- `[x]` Run the test suite and verify all test states pass successfully

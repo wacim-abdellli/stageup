@@ -1,0 +1,11 @@
+one:
+  profileable: mohamed (StudentProfile)
+  event_type: student_mission_expired
+  score_delta: -10.0
+  description: Expired test mission
+
+two:
+  profileable: mohamed (StudentProfile)
+  event_type: student_completed_internship
+  score_delta: 15.0
+  description: Completed stage

@@ -1,0 +1,21 @@
+one:
+  company_profile: one
+  title: Software Engineer Intern
+  description: Join our team to build amazing web applications.
+  stage_type: PFE
+  spots: 2
+  location: Sfax
+  work_mode: onsite
+  status: active
+  deadline: 2026-08-11 12:00:00
+
+two:
+  company_profile: two
+  title: UI/UX Designer
+  description: Help us design beautiful mobile interfaces.
+  stage_type: PFA
+  spots: 1
+  location: Tunis
+  work_mode: remote
+  status: active
+  deadline: 2026-08-11 12:00:00

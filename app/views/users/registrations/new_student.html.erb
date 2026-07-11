@@ -1,0 +1,96 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-logo">StageUp</div>
+      <h2 class="auth-title">Join as a Student</h2>
+      <p class="auth-subtitle">Verify your academic status & showcase your work</p>
+    </div>
+
+    <% if flash[:alert] %>
+      <div class="flash-message flash-alert">
+        <span>⚠️</span> <%= flash[:alert] %>
+      </div>
+    <% end %>
+
+    <%= form_with scope: :student_profile, url: student_registration_path, local: true do |f| %>
+      
+      <!-- Display Validation Errors from both Profile and User -->
+      <% errors = (@student_profile.errors.full_messages + @user.errors.full_messages).uniq %>
+      <% if errors.any? %>
+        <div class="flash-message flash-alert" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+          <strong>Please fix the following errors:</strong>
+          <ul style="margin-left: 20px; font-size: 13px;">
+            <% errors.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="first_name">First Name</label>
+          <%= f.text_field :first_name, value: @student_profile.first_name, id: "first_name", class: "form-control", placeholder: "Mohamed", required: true %>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="last_name">Last Name</label>
+          <%= f.text_field :last_name, value: @student_profile.last_name, id: "last_name", class: "form-control", placeholder: "Ben Ali", required: true %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="phone">Phone Number</label>
+        <%= f.telephone_field :phone, value: @student_profile.phone, id: "phone", class: "form-control", placeholder: "+216 99 123 456" %>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="major">Major / Specialty</label>
+          <%= f.text_field :major, value: @student_profile.major, id: "major", class: "form-control", placeholder: "Software Engineering" %>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="graduation_year">Graduation Year</label>
+          <%= f.number_field :graduation_year, value: @student_profile.graduation_year || Time.current.year + 1, id: "graduation_year", class: "form-control", placeholder: "2027" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="bio">Short Bio</label>
+        <%= f.text_area :bio, value: @student_profile.bio, id: "bio", class: "form-control", rows: 3, placeholder: "Describe your skills, interests, and past projects..." %>
+      </div>
+
+      <!-- Nested User Fields -->
+      <%= fields_for :user, @user do |u| %>
+        <div class="form-group">
+          <label class="form-label" for="user_email">University or Personal Email</label>
+          <%= u.email_field :email, id: "user_email", class: "form-control", placeholder: "student@isetsf.rnu.tn", required: true %>
+          <small style="display: block; font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+            💡 Use your university email domain (e.g. @isetsf.rnu.tn) for instant auto-verification!
+          </small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="user_password">Password</label>
+            <%= u.password_field :password, id: "user_password", class: "form-control", placeholder: "••••••••", required: true %>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="user_password_confirmation">Confirm Password</label>
+            <%= u.password_field :password_confirmation, id: "user_password_confirmation", class: "form-control", placeholder: "••••••••", required: true %>
+          </div>
+        </div>
+      <% end %>
+
+      <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+        Register Student Profile
+      </button>
+    <% end %>
+
+    <div style="text-align: center; font-size: 14px; color: var(--text-secondary); margin-top: 25px;">
+      Not a student? <%= link_to "Go Back", select_role_path %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+mohamed:
+  first_name: Mohamed
+  last_name: Ben Ali
+  phone: "+216 99 123 456"
+  university: iset_sfax
+  major: Software Engineering
+  graduation_year: 2027
+  bio: Web developer
+  commitment_score: 100.0
+
+cyrine:
+  first_name: Cyrine
+  last_name: Trabelsi
+  phone: "+216 22 987 654"
+  university: enis
+  major: Data Science
+  graduation_year: 2026
+  bio: Data engineer
+  commitment_score: 95.0

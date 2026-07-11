@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div>
+      <div class="auth-logo" style="margin-bottom: 0;">StageUp</div>
+      <p style="color: var(--text-secondary); font-size: 14px;">Logged in as: <strong><%= @user.email %></strong></p>
+    </div>
+    <div>
+      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
+    </div>
+  </div>
+
+  <div class="profile-card" style="text-align: center; padding: 50px 30px;">
+    <div style="font-size: 64px; margin-bottom: 20px;">🔒</div>
+    <h2 style="font-size: 26px; margin-bottom: 12px;">Verification Pending</h2>
+    <p style="color: var(--text-secondary); font-size: 16px; max-width: 600px; margin: 0 auto 30px;">
+      Thank you for registering as a coordinator for <strong><%= @profile.university.name %></strong> (<%= @profile.department %>). 
+      To protect student data privacy, coordinator dashboards must be verified by StageUp administrators before activation.
+    </p>
+
+    <div style="background-color: var(--bg-primary); border: 1px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); max-width: 500px; margin: 0 auto; text-align: left;">
+      <h3 style="font-size: 16px; margin-bottom: 8px; color: var(--text-primary);">What happens next?</h3>
+      <ul style="color: var(--text-secondary); font-size: 14px; margin-left: 20px; line-height: 1.6;">
+        <li>We will verify your official university email domain.</li>
+        <li>We may contact your department head or review university records.</li>
+        <li>Once approved, you will receive a notification email and full access will be unlocked.</li>
+      </ul>
+    </div>
+
+    <p style="color: var(--text-muted); font-size: 13px; margin-top: 30px;">
+      Need urgent activation? Contact us at <a href="mailto:support@stageup.tn">support@stageup.tn</a>.
+    </p>
+  </div>
+</div>

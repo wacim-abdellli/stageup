@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+iset_sfax:
+  name: ISET Sfax
+  email_domain: isetsf.rnu.tn
+  approved: true
+
+enis:
+  name: ENIS
+  email_domain: enis.tn
+  approved: true

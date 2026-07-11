@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5439:5432"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    volumes:
+      - .:/app
+      - bundle_data:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+  bundle_data:

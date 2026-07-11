@@ -1,0 +1,48 @@
+<div class="auth-container">
+  <div class="auth-card" style="max-width: 600px;">
+    <div class="auth-header">
+      <div class="auth-logo">StageUp</div>
+      <h2 class="auth-title">Submit Proof of Work</h2>
+      <p class="auth-subtitle">Paste your solution URL and notes below</p>
+    </div>
+
+    <div style="background-color: var(--bg-primary); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-sm); margin-bottom: 25px;">
+      <span style="font-size: 13px; color: var(--text-secondary); display: block;">Internship Offer:</span>
+      <strong style="font-size: 15px; color: var(--text-primary);"><%= @submission.offer.title %></strong>
+      <span style="font-size: 13px; color: var(--text-secondary); display: block; margin-top: 10px;">Mission Task:</span>
+      <strong style="font-size: 15px; color: #818CF8;"><%= @submission.mission.title %></strong>
+    </div>
+
+    <%= form_with model: @submission, local: true do |f| %>
+      
+      <% if @submission.errors.any? %>
+        <div class="flash-message flash-alert" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+          <strong>Please fix the errors below:</strong>
+          <ul style="margin-left: 20px; font-size: 13px;">
+            <% @submission.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <label class="form-label" for="github_link">Solution URL (GitHub, Figma, Google Drive)</label>
+        <%= f.url_field :github_link, id: "github_link", class: "form-control", placeholder: "https://github.com/myusername/myrepo", required: true %>
+        <small style="display: block; font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+          ⚠️ Double check that your link is public so recruiters can review your submission!
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="submission_notes">Notes / Explanation</label>
+        <%= f.text_area :submission_notes, id: "submission_notes", class: "form-control", rows: 4, placeholder: "Describe your solution, installation instructions, or technical choices..." %>
+      </div>
+
+      <div style="display: flex; gap: 15px; margin-top: 25px;">
+        <%= link_to "Cancel", offer_path(@submission.offer), class: "btn btn-secondary", style: "width: auto; flex: 1;" %>
+        <%= f.submit "Submit Proof of Work", class: "btn btn-primary", style: "flex: 2;" %>
+      </div>
+    <% end %>
+  </div>
+</div>

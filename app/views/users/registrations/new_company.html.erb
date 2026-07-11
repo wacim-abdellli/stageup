@@ -1,0 +1,74 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-logo">StageUp</div>
+      <h2 class="auth-title">Join as an Employer</h2>
+      <p class="auth-subtitle">Post internship offers & evaluate actual proof of work</p>
+    </div>
+
+    <% if flash[:alert] %>
+      <div class="flash-message flash-alert">
+        <span>⚠️</span> <%= flash[:alert] %>
+      </div>
+    <% end %>
+
+    <%= form_with scope: :company_profile, url: company_registration_path, local: true do |f| %>
+      
+      <!-- Display Validation Errors -->
+      <% errors = (@company_profile.errors.full_messages + @user.errors.full_messages).uniq %>
+      <% if errors.any? %>
+        <div class="flash-message flash-alert" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+          <strong>Please fix the following errors:</strong>
+          <ul style="margin-left: 20px; font-size: 13px;">
+            <% errors.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <label class="form-label" for="company_name">Company / Startup Name</label>
+        <%= f.text_field :name, value: @company_profile.name, id: "company_name", class: "form-control", placeholder: "My Startup", required: true %>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="website">Company Website</label>
+        <%= f.url_field :website, value: @company_profile.website, id: "website", class: "form-control", placeholder: "https://mystartup.tn" %>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="description">Company Description</label>
+        <%= f.text_area :description, value: @company_profile.description, id: "description", class: "form-control", rows: 4, placeholder: "Brief description of your business domain, workspace culture, and technologies..." %>
+      </div>
+
+      <!-- Nested User Fields -->
+      <%= fields_for :user, @user do |u| %>
+        <div class="form-group">
+          <label class="form-label" for="user_email">Work / Admin Email</label>
+          <%= u.email_field :email, id: "user_email", class: "form-control", placeholder: "hr@mystartup.tn", required: true %>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="user_password">Password</label>
+            <%= u.password_field :password, id: "user_password", class: "form-control", placeholder: "••••••••", required: true %>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="user_password_confirmation">Confirm Password</label>
+            <%= u.password_field :password_confirmation, id: "user_password_confirmation", class: "form-control", placeholder: "••••••••", required: true %>
+          </div>
+        </div>
+      <% end %>
+
+      <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+        Register Company Profile
+      </button>
+    <% end %>
+
+    <div style="text-align: center; font-size: 14px; color: var(--text-secondary); margin-top: 25px;">
+      Not a company? <%= link_to "Go Back", select_role_path %>
+    </div>
+  </div>
+</div>

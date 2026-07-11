@@ -1,0 +1,127 @@
+class SubmissionsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_student!, only: [:create, :edit, :update]
+  before_action :ensure_company!, only: [:accept, :reject]
+  before_action :set_submission_for_student, only: [:edit, :update]
+  before_action :set_submission_for_company, only: [:accept, :reject]
+
+  # POST /submissions
+  def create
+    @offer = Offer.find(params[:offer_id])
+    @mission = params[:mission_id].present? ? Mission.find(params[:mission_id]) : nil
+
+    # Create submission
+    @submission = current_user.profileable.submissions.build(
+      offer: @offer,
+      mission: @mission,
+      status: @offer.mission.present? ? "started" : "submitted",
+      submitted_at: @offer.mission.present? ? nil : Time.current
+    )
+
+    if @submission.save
+      notice_msg = if @offer.mission.present?
+                     "Mission started! You have 48 hours to submit your solution."
+                   else
+                     "Application successfully submitted with your CV."
+                   end
+      redirect_to offer_path(@offer), notice: notice_msg
+    else
+      redirect_to offer_path(@offer), alert: "Unable to start application: #{@submission.errors.full_messages.join(', ')}"
+    end
+  end
+
+  # GET /submissions/:id/edit
+  def edit
+    unless @submission.status == "started"
+      redirect_to offer_path(@submission.offer), alert: "This application has already been submitted."
+    end
+  end
+
+  # PATCH/PUT /submissions/:id
+  def update
+    @submission.assign_attributes(submission_params)
+    @submission.status = "submitted"
+    @submission.submitted_at = Time.current
+
+    if @submission.save
+      redirect_to offer_path(@submission.offer), notice: "Your proof mission was successfully submitted!"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  # POST /submissions/:id/accept
+  def accept
+    @submission.status = "accepted"
+    @submission.responded_at = Time.current
+
+    ActiveRecord::Base.transaction do
+      if @submission.save
+        log_company_response_event(@submission)
+        @submission.offer.company_profile.recalculate_metrics!
+        redirect_to dashboard_path, notice: "Application was successfully accepted! We logged your response."
+      else
+        redirect_to dashboard_path, alert: "Failed to accept application."
+      end
+    end
+  end
+
+  # POST /submissions/:id/reject
+  def reject
+    @submission.status = "rejected"
+    @submission.responded_at = Time.current
+
+    ActiveRecord::Base.transaction do
+      if @submission.save
+        log_company_response_event(@submission)
+        @submission.offer.company_profile.recalculate_metrics!
+        redirect_to dashboard_path, notice: "Application was rejected. We logged your response."
+      else
+        redirect_to dashboard_path, alert: "Failed to reject application."
+      end
+    end
+  end
+
+  private
+
+  def set_submission_for_student
+    @submission = current_user.profileable.submissions.find(params[:id])
+  end
+
+  def set_submission_for_company
+    # Find the submission, ensuring the company owns the offer it belongs to
+    @submission = Submission.joins(:offer).where(offers: { company_profile_id: current_user.profileable_id }).find(params[:id])
+  end
+
+  def submission_params
+    params.require(:submission).permit(:github_link, :submission_notes)
+  end
+
+  def ensure_student!
+    unless current_user.profileable_type == "StudentProfile"
+      redirect_to dashboard_path, alert: "Only students can apply or submit proof of work."
+    end
+  end
+
+  def ensure_company!
+    unless current_user.profileable_type == "CompanyProfile"
+      redirect_to dashboard_path, alert: "Only companies can review or accept/reject applications."
+    end
+  end
+
+  def log_company_response_event(submission)
+    company = submission.offer.company_profile
+    submitted = submission.submitted_at || submission.created_at
+    late = submitted < 14.days.ago
+
+    event_type = late ? "company_responded_late" : "company_responded_on_time"
+    delta = late ? -5.0 : +1.0
+    desc = late ? "Responded late (over 14 days) to application for '#{submission.offer.title}'" : "Responded on time (within 14 days) to application for '#{submission.offer.title}'"
+
+    company.commitment_events.create!(
+      event_type: event_type,
+      score_delta: delta,
+      description: desc
+    )
+  end
+end

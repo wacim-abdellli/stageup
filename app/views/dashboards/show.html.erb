@@ -1,0 +1,286 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div>
+      <div class="auth-logo" style="margin-bottom: 0;">StageUp</div>
+      <p style="color: var(--text-secondary); font-size: 14px;">Logged in as: <strong><%= @user.email %></strong></p>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <%= link_to "Browse Offers", offers_path, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
+      <% if @role_type == "CompanyProfile" %>
+        <%= link_to "Post an Offer", new_offer_path, class: "btn btn-primary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if flash[:notice] %>
+    <div class="flash-message flash-notice">
+      <span>✅</span> <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <div class="flash-message flash-alert">
+      <span>⚠️</span> <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: start;">
+    
+    <!-- Left Column: Primary Details -->
+    <div>
+      <div class="profile-card" style="margin-bottom: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+          <h2 style="font-size: 22px;">My Profile</h2>
+          <div>
+            <% if @role_type == "StudentProfile" %>
+              <span class="badge badge-info">Student</span>
+            <% elsif @role_type == "CompanyProfile" %>
+              <span class="badge badge-success">Company</span>
+            <% else %>
+              <span class="badge badge-info" style="background-color: rgba(168, 85, 247, 0.15); color: #C084FC;">University Admin</span>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Student Details -->
+        <% if @role_type == "StudentProfile" %>
+          <div class="profile-detail">
+            <strong>Name:</strong> <%= @profile.first_name %> <%= @profile.last_name %>
+          </div>
+          <div class="profile-detail">
+            <strong>Phone:</strong> <%= @profile.phone.presence || "Not specified" %>
+          </div>
+          <div class="profile-detail">
+            <strong>Major:</strong> <%= @profile.major.presence || "Not specified" %>
+          </div>
+          <div class="profile-detail">
+            <strong>Graduation Year:</strong> <%= @profile.graduation_year.presence || "Not specified" %>
+          </div>
+          <div class="profile-detail">
+            <strong>University:</strong> 
+            <% if @profile.university %>
+              <%= @profile.university.name %>
+              <% if @profile.university.approved? %>
+                <span class="badge badge-success" style="font-size: 10px; padding: 2px 6px; margin-left: 5px;">Verified Partner</span>
+              <% end %>
+            <% else %>
+              <em style="color: var(--text-muted);">Self-declared / Unassociated</em>
+            <% end %>
+          </div>
+          <div class="profile-detail" style="margin-top: 20px;">
+            <strong>Bio:</strong>
+            <p style="color: var(--text-secondary); margin-top: 6px; background-color: var(--bg-primary); padding: 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <%= @profile.bio.presence || "No bio added yet." %>
+            </p>
+          </div>
+
+        <!-- Company Details -->
+        <% elsif @role_type == "CompanyProfile" %>
+          <div class="profile-detail">
+            <strong>Company Name:</strong> <%= @profile.name %>
+            <% if @profile.verified? %>
+              <span class="badge badge-success" style="font-size: 10px; padding: 2px 6px; margin-left: 5px;">Verified Partner</span>
+            <% end %>
+          </div>
+          <div class="profile-detail">
+            <strong>Website:</strong> 
+            <% if @profile.website.present? %>
+              <%= link_to @profile.website, @profile.website, target: "_blank" %>
+            <% else %>
+              <em style="color: var(--text-muted);">No website listed</em>
+            <% end %>
+          </div>
+          <div class="profile-detail" style="margin-top: 20px;">
+            <strong>Description:</strong>
+            <p style="color: var(--text-secondary); margin-top: 6px; background-color: var(--bg-primary); padding: 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <%= @profile.description.presence || "No company description added yet." %>
+            </p>
+          </div>
+
+        <!-- University Coordinator Details -->
+        <% elsif @role_type == "UniversityProfile" %>
+          <div class="profile-detail">
+            <strong>Coordinator Name:</strong> <%= @profile.admin_name %>
+          </div>
+          <div class="profile-detail">
+            <strong>University:</strong> <%= @profile.university.name %>
+          </div>
+          <div class="profile-detail">
+            <strong>Department:</strong> <%= @profile.department %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Recruiter Submissions Panel (Hiring Hub) -->
+      <% if @role_type == "CompanyProfile" %>
+        <div class="profile-card">
+          <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+            📥 Incoming Applications
+          </h2>
+
+          <% if @profile.submissions.any? %>
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <% @profile.offers.each do |offer| %>
+                <% pending_subs = offer.submissions.where(status: "submitted") %>
+                <% if pending_subs.any? %>
+                  <div style="background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px;">
+                    <h3 style="font-size: 15px; color: var(--primary); margin-bottom: 15px;">
+                      <%= offer.title %> (<%= pending_subs.count %> pending)
+                    </h3>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                      <% pending_subs.each do |sub| %>
+                        <div style="border-top: 1px solid var(--border-color); padding-top: 15px; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+                          <div>
+                            <strong style="font-size: 14px; color: var(--text-primary);">
+                              <%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>
+                            </strong>
+                            <span style="font-size: 12px; color: var(--text-secondary); display: block; margin-top: 4px;">
+                              Major: <%= sub.student_profile.major %> | Class of <%= sub.student_profile.graduation_year %>
+                            </span>
+                            <span style="font-size: 12px; color: var(--text-secondary); display: block; margin-top: 4px;">
+                              Submitted: <%= time_ago_in_words(sub.submitted_at) %> ago
+                            </span>
+                            
+                            <% if sub.github_link.present? %>
+                              <div style="margin-top: 8px; font-size: 13px;">
+                                🔗 <%= link_to "View Proof Solution", sub.github_link, target: "_blank", style: "font-weight: 500;" %>
+                              </div>
+                            <% end %>
+
+                            <% if sub.submission_notes.present? %>
+                              <p style="font-size: 13px; color: var(--text-muted); background-color: var(--bg-secondary); padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-top: 8px;">
+                                "<%= sub.submission_notes %>"
+                              </p>
+                            <% end %>
+                          </div>
+
+                          <div style="display: flex; gap: 8px;">
+                            <%= button_to "Accept", accept_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); box-shadow: none;" %>
+                            <%= button_to "Reject", reject_submission_path(sub), method: :post, class: "btn btn-secondary", style: "width: auto; padding: 6px 12px; font-size: 12px; border-color: var(--danger); color: #F87171;" %>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+
+              <!-- Show processed applications briefly -->
+              <% processed_subs = @profile.submissions.where(status: ["accepted", "rejected", "completed"]) %>
+              <% if processed_subs.any? %>
+                <div style="margin-top: 15px;">
+                  <h4 style="font-size: 14px; color: var(--text-secondary); margin-bottom: 10px;">Processed History</h4>
+                  <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
+                    <thead>
+                      <tr style="color: var(--text-muted); border-bottom: 1px solid var(--border-color);">
+                        <th style="padding: 8px 0;">Student</th>
+                        <th>Offer</th>
+                        <th>Status</th>
+                        <th>Actioned</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% processed_subs.order(responded_at: :desc).limit(10).each do |sub| %>
+                        <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                          <td style="padding: 10px 0; font-weight: 500; color: var(--text-primary);">
+                            <%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>
+                          </td>
+                          <td><%= sub.offer.title %></td>
+                          <td>
+                            <span class="badge" style="background-color: <%= sub.status == 'accepted' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)' %>; color: <%= sub.status == 'accepted' ? '#34D399' : '#F87171' %>; font-size: 9px; padding: 2px 6px;">
+                              <%= sub.status %>
+                            </span>
+                          </td>
+                          <td><%= sub.responded_at ? time_ago_in_words(sub.responded_at) + " ago" : "N/A" %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p style="color: var(--text-secondary); font-size: 14px; text-align: center; padding: 20px 0;">
+              No applications received yet.
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Right Column: Reputation Metrics & Event History -->
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      
+      <!-- Metrics Card -->
+      <div class="profile-card" style="padding: 25px;">
+        <h3 style="font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+          Reputation Metrics
+        </h3>
+        
+        <% if @role_type == "StudentProfile" %>
+          <div style="text-align: center; padding: 15px 0;">
+            <div style="font-size: 36px; font-weight: 700; color: <%= @profile.commitment_score >= 80 ? 'var(--success)' : 'var(--danger)' %>; margin-bottom: 4px;">
+              <%= @profile.commitment_score.round(0) %>
+            </div>
+            <span style="color: var(--text-secondary); font-size: 13px;">Commitment Score</span>
+          </div>
+
+        <% elsif @role_type == "CompanyProfile" %>
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-secondary);">Response Rate:</span>
+              <strong style="color: var(--success);"><%= @profile.response_rate %>%</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-secondary);">Avg. Decision Time:</span>
+              <strong><%= @profile.avg_response_time_hours %> hours</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-secondary);">Active Offers:</span>
+              <strong><%= @profile.offers.count %></strong>
+            </div>
+          </div>
+
+        <% else %>
+          <p style="color: var(--text-secondary); font-size: 13px; text-align: center; padding: 10px 0;">
+            University Administrator Account.
+          </p>
+        <% end %>
+      </div>
+
+      <!-- Reputation History Ledger -->
+      <% unless @role_type == "UniversityProfile" %>
+        <div class="profile-card" style="padding: 25px;">
+          <h3 style="font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+            Commitment Ledger
+          </h3>
+
+          <% events = @profile.commitment_events.order(created_at: :desc) %>
+          <% if events.any? %>
+            <div style="display: flex; flex-direction: column; gap: 12px; max-height: 300px; overflow-y: auto; padding-right: 5px;">
+              <% events.each do |event| %>
+                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 8px; font-size: 12px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="font-weight: 600; color: <%= event.score_delta > 0 ? 'var(--success)' : 'var(--danger)' %>">
+                      <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %>
+                    </span>
+                    <span style="color: var(--text-muted); font-size: 10px;"><%= time_ago_in_words(event.created_at) %> ago</span>
+                  </div>
+                  <p style="color: var(--text-secondary); line-height: 1.4;"><%= event.description %></p>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 15px 0;">
+              No reputation events logged yet.
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,74 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-logo">StageUp</div>
+      <h2 class="auth-title">Join as a Coordinator</h2>
+      <p class="auth-subtitle">Validate local internships & oversee student track records</p>
+    </div>
+
+    <% if flash[:alert] %>
+      <div class="flash-message flash-alert">
+        <span>⚠️</span> <%= flash[:alert] %>
+      </div>
+    <% end %>
+
+    <%= form_with scope: :university_profile, url: university_registration_path, local: true do |f| %>
+      
+      <!-- Display Validation Errors -->
+      <% errors = (@university_profile.errors.full_messages + @user.errors.full_messages).uniq %>
+      <% if errors.any? %>
+        <div class="flash-message flash-alert" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+          <strong>Please fix the following errors:</strong>
+          <ul style="margin-left: 20px; font-size: 13px;">
+            <% errors.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <label class="form-label" for="university_id">Your University</label>
+        <%= f.collection_select :university_id, @universities, :id, :name, { prompt: "Select your University" }, { id: "university_id", class: "form-control", required: true } %>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="admin_name">Coordinator Full Name</label>
+        <%= f.text_field :admin_name, value: @university_profile.admin_name, id: "admin_name", class: "form-control", placeholder: "Prof. Ahmed Mansour", required: true %>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="department">Academic Department</label>
+        <%= f.text_field :department, value: @university_profile.department, id: "department", class: "form-control", placeholder: "Department of IT", required: true %>
+      </div>
+
+      <!-- Nested User Fields -->
+      <%= fields_for :user, @user do |u| %>
+        <div class="form-group">
+          <label class="form-label" for="user_email">Official University Email</label>
+          <%= u.email_field :email, id: "user_email", class: "form-control", placeholder: "admin@isetsf.rnu.tn", required: true %>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="user_password">Password</label>
+            <%= u.password_field :password, id: "user_password", class: "form-control", placeholder: "••••••••", required: true %>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="user_password_confirmation">Confirm Password</label>
+            <%= u.password_field :password_confirmation, id: "user_password_confirmation", class: "form-control", placeholder: "••••••••", required: true %>
+          </div>
+        </div>
+      <% end %>
+
+      <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+        Register Coordinator Profile
+      </button>
+    <% end %>
+
+    <div style="text-align: center; font-size: 14px; color: var(--text-secondary); margin-top: 25px;">
+      Not a coordinator? <%= link_to "Go Back", select_role_path %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  offer: one
+  title: MyString
+  instructions: MyText
+  estimated_duration_minutes: 1
+
+two:
+  offer: two
+  title: MyString
+  instructions: MyText
+  estimated_duration_minutes: 1
