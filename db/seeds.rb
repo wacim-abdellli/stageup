@@ -92,4 +92,56 @@ User.find_or_create_by!(email: "ahmed.mansour@isetsf.rnu.tn") do |u|
   u.profileable = uni_admin_profile
 end
 
+puts "Seeding Offers & Missions..."
+offer_1 = Offer.find_or_initialize_by(title: "Full Stack Rails Intern", company_profile: company_1_profile)
+offer_1.update!(
+  description: "Learn Rails 8 in production.",
+  stage_type: "PFE",
+  spots: 2,
+  location: "Sfax",
+  work_mode: "hybrid",
+  status: "active",
+  deadline: 30.days.from_now
+)
+
+mission_1 = Mission.find_or_initialize_by(offer: offer_1)
+mission_1.update!(
+  title: "Rails URL Shortener Task",
+  instructions: "Build a Rails API that shortens URLs. Include tests.",
+  estimated_duration_minutes: 90
+)
+
+offer_2 = Offer.find_or_initialize_by(title: "Data Science Intern", company_profile: company_2_profile)
+offer_2.update!(
+  description: "Clean data, build models.",
+  stage_type: "PFA",
+  spots: 1,
+  location: "Remote",
+  work_mode: "remote",
+  status: "active",
+  deadline: 30.days.from_now
+)
+
+puts "Seeding Submissions..."
+# 1. Mohamed has started the mission on offer 1
+sub_1 = Submission.find_or_initialize_by(student_profile: student_1_profile, offer: offer_1)
+sub_1.update!(
+  mission: mission_1,
+  status: "started",
+  created_at: Time.current
+)
+
+# 2. Cyrine has submitted on offer 1
+sub_2 = Submission.find_or_initialize_by(student_profile: student_2_profile, offer: offer_1)
+sub_2.update!(
+  mission: mission_1,
+  status: "submitted",
+  github_link: "https://github.com/cyrine-trabelsi/url-shortener",
+  submission_notes: "Here is my URL shortener code. It includes 10 unit tests.",
+  submitted_at: 1.day.ago
+)
+
+company_1_profile.recalculate_metrics!
+company_2_profile.recalculate_metrics!
+
 puts "Database successfully seeded!"
