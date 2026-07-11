@@ -140,7 +140,12 @@
       <div class="profile-card" style="padding: 25px; border-color: var(--primary);">
         <h3 style="font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Application</h3>
 
-        <% if current_user.profileable_type == "StudentProfile" %>
+        <% if current_user.nil? %>
+          <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 20px; line-height: 1.5;">
+            You must be logged in as a student to apply or take on the proof-of-work mission.
+          </p>
+          <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent", style: "text-decoration: none;" %>
+        <% elsif current_user.profileable_type == "StudentProfile" %>
           <% if @submission.nil? %>
             <% if @offer.mission %>
               <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 20px; line-height: 1.5;">

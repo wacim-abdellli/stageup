@@ -1,23 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-primary: #0F172A;
-  --bg-secondary: #1E293B;
-  --bg-tertiary: #334155;
+  --bg-primary: #0F0F23;
+  --bg-secondary: #161633;
+  --bg-tertiary: #1E1B4B;
   --text-primary: #F8FAFC;
   --text-secondary: #94A3B8;
   --text-muted: #64748B;
   
-  --primary: #6366F1;
+  --primary: #4338CA;
   --primary-hover: #4F46E5;
-  --primary-light: rgba(99, 102, 241, 0.15);
+  --primary-light: rgba(67, 56, 202, 0.15);
+  
+  --accent: #F97316;
+  --accent-hover: #EA580C;
   
   --success: #10B981;
   --danger: #EF4444;
   --warning: #F59E0B;
   
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(99, 102, 241, 0.4);
+  --border-color: rgba(67, 56, 202, 0.25);
+  --border-focus: rgba(249, 115, 22, 0.5);
   
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -378,3 +381,71 @@ a:hover {
   max-width: 400px;
   margin: 0 auto;
 }
+
+/* Orange Accent Button */
+.btn-accent {
+  background-color: var(--accent);
+  color: white;
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+}
+
+.btn-accent:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+  color: white;
+}
+
+.btn-accent:active {
+  transform: translateY(0);
+}
+
+/* Cinema Glow Background */
+.cinema-glow-bg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  height: 600px;
+  background: radial-gradient(circle at top, rgba(99, 102, 241, 0.12) 0%, rgba(249, 115, 22, 0.03) 40%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Glassmorphism card variant */
+.glass-card {
+  background: rgba(22, 22, 51, 0.4) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(67, 56, 202, 0.25) !important;
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bento-card {
+  background: rgba(22, 22, 51, 0.5);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  transition: var(--transition);
+  text-align: left;
+}
+
+.bento-card:hover {
+  border-color: rgba(249, 115, 22, 0.3);
+  transform: translateY(-2px);
+}
+

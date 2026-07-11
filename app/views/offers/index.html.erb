@@ -5,11 +5,15 @@
       <p style="color: var(--text-secondary); font-size: 14px;">Browse active internship opportunities in Tunisia</p>
     </div>
     <div style="display: flex; gap: 10px; align-items: center;">
-      <%= link_to "My Dashboard", dashboard_path, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
-      <% if current_user.profileable_type == "CompanyProfile" %>
-        <%= link_to "Post an Offer", new_offer_path, class: "btn btn-primary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
+      <% if current_user %>
+        <%= link_to "My Dashboard", dashboard_path, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
+        <% if current_user.profileable_type == "CompanyProfile" %>
+          <%= link_to "Post an Offer", new_offer_path, class: "btn btn-primary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
+        <% end %>
+        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px; margin: 0;" %>
+      <% else %>
+        <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent", style: "width: auto; padding: 8px 16px; font-size: 13px; text-decoration: none;" %>
       <% end %>
-      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px; margin: 0;" %>
     </div>
   </div>
 

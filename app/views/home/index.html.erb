@@ -1,0 +1,99 @@
+<div style="position: relative; min-height: 100vh; overflow-x: hidden; padding: 40px 20px;">
+  <!-- Cinema glow ambient light blob -->
+  <div class="cinema-glow-bg"></div>
+
+  <div style="max-width: 1000px; margin: 0 auto; position: relative; z-index: 10; text-align: center; padding-top: 60px;">
+    <!-- Logo Header -->
+    <div style="font-size: 24px; font-weight: 800; letter-spacing: -0.5px; color: var(--text-primary); margin-bottom: 50px; display: inline-flex; align-items: center; gap: 8px;">
+      <span style="background: linear-gradient(135deg, var(--accent) 0%, var(--primary-hover) 100%); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 20px; border: 1px solid rgba(255,255,255,0.15)">S</span>
+      StageUp
+    </div>
+
+    <!-- Centered Hero Title -->
+    <h1 style="font-size: clamp(36px, 5vw, 64px); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; color: #FFFFFF;">
+      Verify Practical Skills.<br>
+      <span style="background: linear-gradient(135deg, var(--accent) 0%, #FB7185 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Build Your Reputation.</span><br>
+      Hired Instantly.
+    </h1>
+
+    <!-- Sub-headline -->
+    <p style="font-size: clamp(15px, 2vw, 18px); color: var(--text-secondary); max-width: 650px; margin: 0 auto 40px; line-height: 1.6;">
+      The premier student-recruiter network for PFEs and PFAs in Tunisia. Verify development capabilities via targeted coding challenges, secure with university domains, and enforce commitment ledgers.
+    </p>
+
+    <!-- Call to Actions -->
+    <div style="display: flex; gap: 15px; justify-content: center; align-items: center; max-width: 450px; margin: 0 auto 80px; flex-wrap: wrap;">
+      <%= link_to "Browse Internships", offers_path, class: "btn btn-accent", style: "flex: 1; min-width: 180px; text-decoration: none; padding: 14px 28px;" %>
+      <%= link_to "Get Started", select_role_path, class: "btn glass-card", style: "flex: 1; min-width: 180px; text-decoration: none; padding: 14px 28px; color: white;" %>
+    </div>
+
+    <!-- Bento Grid Section -->
+    <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">A Better Internship Loop</h2>
+    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 40px;">Verifiable trust replacing static, unverified resumes</p>
+
+    <div class="bento-grid">
+      <!-- Card 1: Proof of Work -->
+      <div class="bento-card glass-card">
+        <div style="font-size: 24px; margin-bottom: 15px;">⚡</div>
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Proof-of-Work Missions</h3>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+          Skip the endless CV filtering. Recruiters attach hands-on 48-hour coding challenges. Students submit clean code solutions directly to unlock interviews.
+        </p>
+      </div>
+
+      <!-- Card 2: Reputation Ledger -->
+      <div class="bento-card glass-card">
+        <div style="font-size: 24px; margin-bottom: 15px;">🏆</div>
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Reputation Ledger</h3>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+          Verify reliability upfront. Our immutable scoring system penalizes ghosting or missed deadlines, and rewards verified completions on both sides.
+        </p>
+      </div>
+
+      <!-- Card 3: University Verification -->
+      <div class="bento-card glass-card">
+        <div style="font-size: 24px; margin-bottom: 15px;">🎓</div>
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Academic Verification</h3>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+          Official email domain tracking (e.g. <code>@isetsf.rnu.tn</code> or <code>@enis.tn</code>) instantly verifies student credentials and connects them to registered coordinators.
+        </p>
+      </div>
+    </div>
+
+    <!-- Active Offers Section -->
+    <% if @active_offers.any? %>
+      <div style="margin-top: 100px; border-top: 1px solid var(--border-color); padding-top: 60px; text-align: left; margin-bottom: 100px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
+          <div>
+            <h2 style="font-size: 24px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">⚡ Featured Opportunities</h2>
+            <p style="color: var(--text-secondary); font-size: 14px;">Browse active internship listings and take on their proof missions</p>
+          </div>
+          <%= link_to "View All Offers →", offers_path, style: "font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none;" %>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+          <% @active_offers.each do |offer| %>
+            <div class="glass-card" style="padding: 25px; border-radius: var(--radius-lg); display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; border: 1px solid var(--border-color); transition: var(--transition);">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;"><%= offer.stage_type %></span>
+                  <% if offer.mission.present? %>
+                    <span style="background-color: rgba(249, 115, 22, 0.15); color: var(--accent); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">⚡ Mission Attached</span>
+                  <% else %>
+                    <span style="background-color: rgba(67, 56, 202, 0.15); color: #818CF8; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">📄 CV Only</span>
+                  <% end %>
+                </div>
+                <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px;"><%= link_to offer.title, offer, style: "color: white; text-decoration: none;" %></h3>
+                <span style="font-size: 13px; color: var(--text-secondary); display: block; margin-bottom: 12px;"><%= offer.company_profile.name %></span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 15px; margin-top: 15px;">
+                <span style="font-size: 12px; color: var(--text-secondary);"><%= offer.location %> (<%= offer.work_mode.upcase %>)</span>
+                <%= link_to "View details", offer, style: "font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none;" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

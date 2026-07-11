@@ -1,6 +1,8 @@
-- `[x]` Create `lib/tasks/demo.rake` and implement the `rails demo:reset` task
-- `[x]` Update `app/assets/stylesheets/application.css` with empty state styles and layout polish
-- `[x]` Update student dashboard to render empty state cards if they have no internships
-- `[x]` Update employer dashboard to show empty state cards for applications and active internships
-- `[x]` Run `rails demo:reset` inside the Docker container to verify it works successfully
-- `[x]` Run the test suite to confirm no regression errors
+- `[x]` Update `config/routes.rb` to map `root` to `home#index`
+- `[x]` Create `app/controllers/home_controller.rb` with guest rendering and user dashboard redirect logic
+- `[x]` Update `app/controllers/offers_controller.rb` to skip authorization on `index` and `show`
+- `[x]` Update `app/assets/stylesheets/application.css` with Modern Dark color variables and radial glow animations
+- `[x]` Create `app/views/home/index.html.erb` containing the Centered Hero layout, CTAs, and Bento Grid features
+- `[x]` Update `app/views/offers/show.html.erb` to render authentication buttons for guest visitors
+- `[x]` Write routing and controller tests to verify guest access and user redirects
+- `[x]` Run the test suite and confirm 100% success

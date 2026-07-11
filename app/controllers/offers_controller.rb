@@ -1,5 +1,5 @@
 class OffersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :ensure_company!, only: [:new, :create]
 
   # GET /offers
@@ -13,7 +13,7 @@ class OffersController < ApplicationController
     @company = @offer.company_profile
     @mission = @offer.mission
 
-    if current_user.profileable_type == "StudentProfile"
+    if current_user && current_user.profileable_type == "StudentProfile"
       @submission = current_user.profileable.submissions.find_by(offer: @offer)
     end
   end
