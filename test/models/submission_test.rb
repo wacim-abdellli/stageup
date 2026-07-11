@@ -86,7 +86,7 @@ class SubmissionTest < ActiveSupport::TestCase
     assert_includes sub.errors[:status], "is not included in the list"
   end
 
-  test "should trigger check_and_expire! and apply student penalty via job if past 48 hours" do
+  test "should first-time expire via job with 0 penalty warning" do
     @student.commitment_events.destroy_all
     @student.update_columns(commitment_score: 100.0)
 
@@ -102,7 +102,36 @@ class SubmissionTest < ActiveSupport::TestCase
     event = @student.commitment_events.last
     assert_not_nil event
     assert_equal "student_mission_expired", event.event_type
-    assert_equal -10.0, event.score_delta
+    assert_equal 0.0, event.score_delta
+    assert_includes event.description, "First-time warning"
+    assert_equal 100.0, @student.commitment_score
+  end
+
+  test "should apply -10 penalty on second expiration via job" do
+    @student.commitment_events.destroy_all
+    @student.update_columns(commitment_score: 100.0)
+
+    # Create a prior expiration event
+    @student.commitment_events.create!(
+      event_type: "student_mission_expired",
+      score_delta: 0.0,
+      description: "First-time warning"
+    )
+
+    sub = submissions(:one)
+    sub.update_columns(created_at: 3.days.ago, status: "started")
+
+    ResolveExpiredSubmissionsJob.perform_now
+
+    sub.reload
+    assert_equal "expired", sub.status
+
+    @student.reload
+    event = @student.commitment_events.last
+    assert_not_nil event
+    assert_equal "student_mission_expired", event.event_type
+    assert_equal(-10.0, event.score_delta)
+    assert_not_includes event.description, "First-time"
     assert_equal 90.0, @student.commitment_score
   end
 

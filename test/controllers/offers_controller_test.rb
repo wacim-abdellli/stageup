@@ -62,7 +62,7 @@ class OffersControllerTest < ActionDispatch::IntegrationTest
       delete offer_url(draft_offer)
     end
     assert_redirected_to dashboard_path
-    assert_equal "Draft offer was permanently deleted.", flash[:notice]
+    assert_equal "Offer was permanently deleted.", flash[:notice]
   end
 
   test "destroy on active offer archives instead of deleting" do

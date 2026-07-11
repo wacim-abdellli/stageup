@@ -118,9 +118,19 @@ class SubmissionsController < ApplicationController
       return
     end
 
-    @submission.update!(status: "cancelled", responded_at: Time.current)
+    ActiveRecord::Base.transaction do
+      @submission.update!(status: "abandoned", responded_at: Time.current)
 
-    redirect_to dashboard_path, notice: "Internship has been cancelled and your commitment score has been adjusted."
+      student = @submission.student_profile
+      student.commitment_events.create!(
+        event_type: "student_ghosted_offer",
+        score_delta: -15.0,
+        description: "Ghosted employer on active internship for '#{@submission.offer.title}'."
+      )
+      student.recalculate_commitment_score!
+    end
+
+    redirect_to dashboard_path, notice: "Internship has been cancelled and the student's commitment score has been adjusted."
   end
 
   # POST /submissions/:id/confirm_completion

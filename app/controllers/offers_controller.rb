@@ -57,12 +57,12 @@ class OffersController < ApplicationController
 
   # DELETE /offers/:id
   def destroy
-    if @offer.status == "draft"
+    if @offer.submissions.none?
       @offer.destroy
-      redirect_to dashboard_path, notice: "Draft offer was permanently deleted."
+      redirect_to dashboard_path, notice: "Offer was permanently deleted."
     else
       @offer.update!(status: "archived")
-      redirect_to dashboard_path, notice: "Offer was archived and is no longer visible to students."
+      redirect_to dashboard_path, alert: "Offer has applications and cannot be deleted. It has been archived instead."
     end
   end
 

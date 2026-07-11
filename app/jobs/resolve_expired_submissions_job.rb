@@ -6,13 +6,24 @@ class ResolveExpiredSubmissionsJob < ApplicationJob
       ActiveRecord::Base.transaction do
         sub.update_columns(status: "expired", updated_at: Time.current)
 
-        sub.student_profile.commitment_events.create!(
+        student = sub.student_profile
+        prior_expired_count = student.commitment_events.where(event_type: "student_mission_expired").count
+
+        if prior_expired_count == 0
+          delta = 0.0
+          desc = "Proof mission for '#{sub.offer.title}' expired. First-time warning (no penalty)."
+        else
+          delta = -10.0
+          desc = "Proof mission for '#{sub.offer.title}' expired after 48 hours."
+        end
+
+        student.commitment_events.create!(
           event_type: "student_mission_expired",
-          score_delta: -10.0,
-          description: "Proof mission for '#{sub.offer.title}' expired after 48 hours."
+          score_delta: delta,
+          description: desc
         )
 
-        sub.student_profile.recalculate_commitment_score!
+        student.recalculate_commitment_score!
       end
     end
 
