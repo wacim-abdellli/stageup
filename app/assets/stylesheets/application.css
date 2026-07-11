@@ -435,6 +435,12 @@ a:hover {
   color: #818CF8;
 }
 
+.badge-review {
+  background-color: rgba(168, 85, 247, 0.06);
+  border-color: rgba(168, 85, 247, 0.2);
+  color: #C084FC;
+}
+
 .badge-accepted {
   background-color: rgba(59, 130, 246, 0.06);
   border-color: rgba(59, 130, 246, 0.2);
@@ -451,6 +457,24 @@ a:hover {
   background-color: rgba(239, 68, 68, 0.06);
   border-color: rgba(239, 68, 68, 0.2);
   color: #F87171;
+}
+
+.badge-expired {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+}
+
+.badge-abandoned {
+  background-color: rgba(225, 29, 72, 0.04);
+  border-color: rgba(225, 29, 72, 0.15);
+  color: #FDA4AF;
+}
+
+.badge-completion-pending {
+  background-color: rgba(45, 212, 191, 0.06);
+  border-color: rgba(45, 212, 191, 0.2);
+  color: #2DD4BF;
 }
 
 /* Grace Period Component */

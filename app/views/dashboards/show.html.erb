@@ -156,7 +156,7 @@
                   <div>
                     <% if sub.status == "accepted" %>
                       <% if sub.student_confirmed_completed %>
-                        <span class="badge-status badge-pending">
+                        <span class="badge-status badge-completion-pending">
                           Waiting for Employer
                         </span>
                       <% else %>
@@ -210,7 +210,7 @@
                   <div>
                     <% if sub.status == "accepted" %>
                       <% if sub.company_confirmed_completed %>
-                        <span class="badge-status badge-pending">
+                        <span class="badge-status badge-completion-pending">
                           Waiting for Student
                         </span>
                       <% else %>
