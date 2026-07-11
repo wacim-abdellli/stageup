@@ -78,14 +78,12 @@ class SubmissionTest < ActiveSupport::TestCase
     
     assert_equal "expired", reloaded_sub.status
     
-    # Check that a commitment event was created
+    # Reload student to clear association cache and check events + score
+    @student.reload
     event = @student.commitment_events.last
     assert_not_nil event
     assert_equal "student_mission_expired", event.event_type
     assert_equal -10.0, event.score_delta
-    
-    # Check that student score was updated
-    @student.reload
     assert_equal 90.0, @student.commitment_score
   end
 
