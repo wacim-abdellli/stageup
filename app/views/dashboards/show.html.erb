@@ -112,8 +112,93 @@
         <% end %>
       </div>
 
-      <!-- Recruiter Submissions Panel (Hiring Hub) -->
+      <!-- Student Internships Panel -->
+      <% if @role_type == "StudentProfile" %>
+        <% internships = @profile.submissions.where(status: ["accepted", "completed"]) %>
+        <% if internships.any? %>
+          <div class="profile-card" style="margin-bottom: 30px;">
+            <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+              💼 My Internships
+            </h2>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+              <% internships.each do |sub| %>
+                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+                  <div>
+                    <strong style="font-size: 15px;"><%= sub.offer.title %></strong>
+                    <span style="display: block; font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                      Company: <%= sub.offer.company_profile.name %>
+                    </span>
+                  </div>
+                  <div>
+                    <% if sub.status == "accepted" %>
+                      <% if sub.student_confirmed_completed %>
+                        <span class="badge" style="background-color: rgba(245, 158, 11, 0.15); color: #FBBF24; font-size: 11px;">
+                          Waiting for Employer Confirmation
+                        </span>
+                      <% else %>
+                        <%= button_to "Mark Internship Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); box-shadow: none;" %>
+                      <% end %>
+                    <% else %>
+                      <span class="badge badge-success" style="font-size: 11px; margin-right: 10px;">Completed</span>
+                      <% my_review = sub.reviews.find_by(author: current_user) %>
+                      <% if my_review.nil? %>
+                        <%= link_to "Leave Review", new_submission_review_path(sub), class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; display: inline-block;" %>
+                      <% else %>
+                        <span style="font-size: 12px; color: var(--text-muted);">Review Submitted</span>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+      <!-- Recruiter Submissions Panel (Hiring Hub) & Active Internships -->
       <% if @role_type == "CompanyProfile" %>
+        <!-- Active Internships -->
+        <% active_internships = @profile.submissions.where(status: ["accepted", "completed"]) %>
+        <% if active_internships.any? %>
+          <div class="profile-card" style="margin-bottom: 30px;">
+            <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+              💼 Active & Past Internships
+            </h2>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+              <% active_internships.each do |sub| %>
+                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+                  <div>
+                    <strong style="font-size: 15px;"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></strong>
+                    <span style="display: block; font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                      Role: <%= sub.offer.title %>
+                    </span>
+                  </div>
+                  <div>
+                    <% if sub.status == "accepted" %>
+                      <% if sub.company_confirmed_completed %>
+                        <span class="badge" style="background-color: rgba(245, 158, 11, 0.15); color: #FBBF24; font-size: 11px;">
+                          Waiting for Student Confirmation
+                        </span>
+                      <% else %>
+                        <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); box-shadow: none;" %>
+                      <% end %>
+                    <% else %>
+                      <span class="badge badge-success" style="font-size: 11px; margin-right: 10px;">Completed</span>
+                      <% my_review = sub.reviews.find_by(author: current_user) %>
+                      <% if my_review.nil? %>
+                        <%= link_to "Leave Review", new_submission_review_path(sub), class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; display: inline-block;" %>
+                      <% else %>
+                        <span style="font-size: 12px; color: var(--text-muted);">Review Submitted</span>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Pending Applications -->
         <div class="profile-card">
           <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
             📥 Incoming Applications
@@ -189,7 +274,7 @@
                           </td>
                           <td><%= sub.offer.title %></td>
                           <td>
-                            <span class="badge" style="background-color: <%= sub.status == 'accepted' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)' %>; color: <%= sub.status == 'accepted' ? '#34D399' : '#F87171' %>; font-size: 9px; padding: 2px 6px;">
+                            <span class="badge" style="background-color: <%= sub.status == 'accepted' ? 'rgba(16, 185, 129, 0.1)' : (sub.status == 'completed' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(239, 68, 68, 0.1)') %>; color: <%= sub.status == 'accepted' ? '#34D399' : (sub.status == 'completed' ? '#60A5FA' : '#F87171') %>; font-size: 9px; padding: 2px 6px;">
                               <%= sub.status %>
                             </span>
                           </td>

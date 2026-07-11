@@ -7,3 +7,8 @@ cyrine_user:
   email: cyrine.trabelsi@enis.tn
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
   profileable: cyrine (StudentProfile)
+
+company_user:
+  email: contact@devcorp.tn
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  profileable: one (CompanyProfile)

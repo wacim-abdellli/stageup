@@ -4,6 +4,7 @@ class SubmissionsController < ApplicationController
   before_action :ensure_company!, only: [:accept, :reject]
   before_action :set_submission_for_student, only: [:edit, :update]
   before_action :set_submission_for_company, only: [:accept, :reject]
+  before_action :set_submission_for_completion, only: [:confirm_completion]
 
   # POST /submissions
   def create
@@ -82,6 +83,19 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  # POST /submissions/:id/confirm_completion
+  def confirm_completion
+    role = current_user.profileable_type
+    @submission.confirm_completion_by!(role)
+
+    notice_msg = if @submission.status == "completed"
+                   "Internship successfully completed! You can now leave a review."
+                 else
+                   "Your completion confirmation has been logged. Waiting for the other side to confirm."
+                 end
+    redirect_to dashboard_path, notice: notice_msg
+  end
+
   private
 
   def set_submission_for_student
@@ -91,6 +105,16 @@ class SubmissionsController < ApplicationController
   def set_submission_for_company
     # Find the submission, ensuring the company owns the offer it belongs to
     @submission = Submission.joins(:offer).where(offers: { company_profile_id: current_user.profileable_id }).find(params[:id])
+  end
+
+  def set_submission_for_completion
+    if current_user.profileable_type == "StudentProfile"
+      @submission = current_user.profileable.submissions.find(params[:id])
+    elsif current_user.profileable_type == "CompanyProfile"
+      @submission = Submission.joins(:offer).where(offers: { company_profile_id: current_user.profileable_id }).find(params[:id])
+    else
+      redirect_to dashboard_path, alert: "Not authorized."
+    end
   end
 
   def submission_params

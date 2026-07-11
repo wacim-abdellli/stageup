@@ -123,4 +123,55 @@ class SubmissionTest < ActiveSupport::TestCase
     # Avg response time should be ~2 hours
     assert_in_delta 2.0, company.avg_response_time_hours, 0.1
   end
+
+  test "should require double confirmation to mark completed" do
+    sub = submissions(:one)
+    sub.update_columns(status: "accepted", student_confirmed_completed: false, company_confirmed_completed: false)
+    
+    # 1. Student confirms completion
+    sub.confirm_completion_by!("StudentProfile")
+    assert sub.student_confirmed_completed
+    assert_not sub.company_confirmed_completed
+    assert_equal "accepted", sub.status
+    assert_not_nil sub.first_completion_confirmed_at
+
+    # 2. Company confirms completion
+    sub.confirm_completion_by!("CompanyProfile")
+    assert sub.company_confirmed_completed
+    assert_equal "completed", sub.status
+    
+    # Assert score was bumped for mohamed
+    @student.reload
+    assert_equal "student_completed_internship", @student.commitment_events.last.event_type
+    assert_equal 15.0, @student.commitment_events.last.score_delta
+  end
+
+  test "should auto-complete lazily after 7 days if only one side has confirmed completion" do
+    # Clear existing events, then add a pre-existing penalty event (-20) so they start at 80
+    @student.commitment_events.destroy_all
+    @student.commitment_events.create!(event_type: "student_mission_expired", score_delta: -20.0, description: "Initial penalty")
+    @student.recalculate_commitment_score!
+    assert_equal 80.0, @student.commitment_score
+
+    sub = submissions(:one)
+    
+    # Force state where student confirmed 8 days ago but company did not respond
+    sub.update_columns(
+      status: "accepted",
+      student_confirmed_completed: true,
+      company_confirmed_completed: false,
+      first_completion_confirmed_at: 8.days.ago
+    )
+
+    # Reloading should trigger check_and_resolve_status!
+    reloaded_sub = Submission.find(sub.id)
+    
+    assert_equal "completed", reloaded_sub.status
+    assert reloaded_sub.student_confirmed_completed
+    assert reloaded_sub.company_confirmed_completed
+
+    @student.reload
+    assert_equal 95.0, @student.commitment_score
+    assert_equal "student_completed_internship", @student.commitment_events.last.event_type
+  end
 end

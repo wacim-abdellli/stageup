@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     member do
       post :accept
       post :reject
+      post :confirm_completion
     end
+    resources :reviews, only: [:new, :create]
   end
   root to: "dashboards#show"
 

@@ -1,0 +1,50 @@
+<div class="auth-container">
+  <div class="auth-card" style="max-width: 600px; padding: 45px;">
+    <div class="auth-header">
+      <div class="auth-logo">StageUp</div>
+      <h2 class="auth-title">Share Your Experience</h2>
+      <p class="auth-subtitle">Leave a review for your recent internship</p>
+    </div>
+
+    <div style="background-color: var(--bg-primary); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-sm); margin-bottom: 25px;">
+      <span style="font-size: 13px; color: var(--text-secondary); display: block;">Internship:</span>
+      <strong style="font-size: 15px; color: var(--text-primary);"><%= @submission.offer.title %></strong>
+      <span style="font-size: 13px; color: var(--text-secondary); display: block; margin-top: 10px;">With:</span>
+      <strong style="font-size: 15px; color: #818CF8;">
+        <%= current_user == @submission.student_profile.user ? @submission.offer.company_profile.name : "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name}" %>
+      </strong>
+    </div>
+
+    <%= form_with model: [@submission, @review], local: true do |f| %>
+      
+      <% if @review.errors.any? %>
+        <div class="flash-message flash-alert" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+          <strong>Please fix the errors below:</strong>
+          <ul style="margin-left: 20px; font-size: 13px;">
+            <% @review.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <label class="form-label" for="rating">Rating (1 to 5 Stars)</label>
+        <%= f.select :rating, [["⭐️⭐️⭐️⭐️⭐️ (5) - Excellent", 5], ["⭐️⭐️⭐️⭐️ (4) - Good", 4], ["⭐️⭐️⭐️ (3) - Average", 3], ["⭐️⭐️ (2) - Below Average", 2], ["⭐️ (1) - Poor", 1]], { prompt: "Select Rating" }, { id: "rating", class: "form-control", required: true } %>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="comment">Detailed Feedback & Review</label>
+        <%= f.text_area :comment, id: "comment", class: "form-control", rows: 5, placeholder: "Describe the collaboration, skills learned, professionalism, and any constructive comments...", required: true %>
+        <small style="display: block; font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+          ⚠️ Reviews must be at least 10 characters long and cannot be edited once submitted.
+        </small>
+      </div>
+
+      <div style="display: flex; gap: 15px; margin-top: 25px;">
+        <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary", style: "width: auto; flex: 1;" %>
+        <%= f.submit "Submit Review", class: "btn btn-primary", style: "flex: 2;" %>
+      </div>
+    <% end %>
+  </div>
+</div>
