@@ -7,8 +7,8 @@
     </div>
 
     <% if flash[:alert] %>
-      <div class="flash-message flash-alert" style="display: flex; align-items: center; gap: 8px;">
-        <i data-lucide="alert-circle" style="width: 16px; height: 16px; stroke: #F87171; flex-shrink: 0;"></i>
+      <div class="flash-message flash-alert flash-row">
+        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0" style="stroke: #F87171;"></i>
         <span><%= flash[:alert] %></span>
       </div>
     <% end %>
@@ -18,12 +18,12 @@
       <!-- Display Validation Errors -->
       <% errors = (@university_profile.errors.full_messages + @user.errors.full_messages).uniq %>
       <% if errors.any? %>
-        <div class="flash-message flash-alert" style="flex-direction: column; align-items: flex-start; gap: 6px;">
-          <div style="display: flex; align-items: center; gap: 6px;">
-            <i data-lucide="alert-circle" style="width: 16px; height: 16px; stroke: #F87171; flex-shrink: 0;"></i>
+        <div class="flash-message flash-alert flash-col">
+          <div class="flash-col-header">
+            <i data-lucide="alert-circle" class="icon-16 flex-shrink-0" style="stroke: #F87171;"></i>
             <strong>Please resolve the following errors:</strong>
           </div>
-          <ul style="margin-left: 24px; font-size: 13px; margin-top: 0; margin-bottom: 0;">
+          <ul class="error-list">
             <% errors.each do |msg| %>
               <li><%= msg %></li>
             <% end %>
@@ -66,12 +66,12 @@
         </div>
       <% end %>
 
-      <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+      <button type="submit" class="btn btn-primary btn-mt">
         Register Coordinator Profile
       </button>
     <% end %>
 
-    <div style="text-align: center; font-size: 14px; color: var(--text-secondary); margin-top: 25px;">
+    <div class="auth-footer mt-25">
       Not a coordinator? <%= link_to "Go Back", select_role_path %>
     </div>
   </div>

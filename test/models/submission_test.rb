@@ -3,8 +3,14 @@ require "test_helper"
 class SubmissionTest < ActiveSupport::TestCase
   setup do
     @student = student_profiles(:mohamed)
-    @offer = offers(:one)
     @mission = missions(:one)
+    # Use a dedicated offer not tied to any fixture submission to avoid uniqueness conflicts
+    @offer = Offer.create!(
+      company_profile: company_profiles(:one),
+      title: "Test Offer",
+      description: "For model tests",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
   end
 
   test "should be valid with started status and no link" do
@@ -192,6 +198,55 @@ class SubmissionTest < ActiveSupport::TestCase
     @student.reload
     assert_equal "student_completed_internship", @student.commitment_events.last.event_type
     assert_equal 15.0, @student.commitment_events.last.score_delta
+  end
+
+  test "should reject duplicate application to same offer" do
+    other_offer = Offer.create!(
+      company_profile: company_profiles(:one),
+      title: "Uniqueness Test Offer",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
+    Submission.create!(
+      student_profile: @student,
+      offer: other_offer,
+      mission: @mission,
+      status: "started"
+    )
+    dup = Submission.new(
+      student_profile: @student,
+      offer: other_offer,
+      mission: @mission,
+      status: "started"
+    )
+    assert_not dup.valid?
+    assert_includes dup.errors[:student_profile_id], "has already applied to this offer"
+  end
+
+  test "should raise on confirm_completion_by! when status is not accepted" do
+    sub = Submission.new(
+      student_profile: @student,
+      offer: @offer,
+      mission: @mission,
+      status: "started"
+    )
+
+    assert_raises(ActiveRecord::RecordInvalid) do
+      sub.confirm_completion_by!("StudentProfile")
+    end
+
+    sub = Submission.new(
+      student_profile: @student,
+      offer: @offer,
+      mission: @mission,
+      status: "submitted",
+      github_link: "https://github.com/test",
+      submitted_at: Time.current
+    )
+
+    assert_raises(ActiveRecord::RecordInvalid) do
+      sub.confirm_completion_by!("CompanyProfile")
+    end
   end
 
   test "should auto-complete via job after 7 days if only one side has confirmed completion" do

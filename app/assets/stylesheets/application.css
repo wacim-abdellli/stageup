@@ -1405,3 +1405,181 @@ a:hover {
   gap: 4px;
 }
 
+.btn-sm {
+  width: auto;
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+/* ============= REGISTRATION / AUTH CSS EXTRACTED ============= */
+
+/* Flash message flex row */
+.flash-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flash-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.flash-col-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.error-list {
+  margin-left: 24px;
+  font-size: 13px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.auth-footer a {
+  font-weight: 500;
+}
+
+.hint-text {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.btn-mt {
+  margin-top: 10px;
+}
+
+.form-group-mt {
+  margin-top: 25px;
+}
+
+/* Role icon override */
+.role-icon svg,
+.role-icon i {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-secondary);
+}
+
+/* Offer form specific */
+.auth-card-wide {
+  max-width: 700px;
+  padding: 45px;
+}
+
+.auth-container-compact {
+  min-height: auto;
+  padding: 60px 20px;
+}
+
+/* Section headings in forms */
+.section-heading-lg {
+  font-size: 18px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+}
+
+.section-heading-mission {
+  font-size: 18px;
+  margin-top: 35px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+  color: #818CF8;
+}
+
+.form-footer-row {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.form-footer-row .btn-secondary {
+  width: auto;
+  flex: 1;
+}
+
+.form-footer-row .btn-primary {
+  flex: 2;
+}
+
+.mission-info-text {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Pending approval page */
+.pending-lock-icon {
+  width: 64px;
+  height: 64px;
+  stroke: var(--text-muted);
+}
+
+.pending-title {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.pending-text {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.pending-info-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 25px;
+  border-radius: var(--radius-md);
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.pending-info-title {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.pending-info-list {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-left: 20px;
+  line-height: 1.6;
+}
+
+.pending-contact {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 30px;
+}
+
+/* Pending approval profile card */
+.profile-card-centered {
+  text-align: center;
+  padding: 50px 30px;
+}
+
+.pending-icon-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+

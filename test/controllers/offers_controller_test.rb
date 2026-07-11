@@ -65,6 +65,35 @@ class OffersControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Offer was permanently deleted.", flash[:notice]
   end
 
+  test "non-owner cannot view draft offer" do
+    sign_in @student_user
+
+    draft = Offer.create!(
+      company_profile: company_profiles(:one),
+      title: "Secret Draft",
+      description: "Not ready",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "draft"
+    )
+
+    get offer_url(draft)
+    assert_redirected_to dashboard_path
+    assert_equal "Offer not found or not yet active.", flash[:alert]
+  end
+
+  test "owner can view draft offer" do
+    sign_in @company_user
+
+    draft = Offer.create!(
+      company_profile: company_profiles(:one),
+      title: "My Draft",
+      description: "Not ready",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "draft"
+    )
+
+    get offer_url(draft)
+    assert_response :success
+  end
+
   test "destroy on active offer archives instead of deleting" do
     sign_in @company_user
 

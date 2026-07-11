@@ -1,5 +1,5 @@
-<div class="auth-container" style="min-height: auto; padding: 60px 20px;">
-  <div class="auth-card" style="max-width: 700px; padding: 45px;">
+<div class="auth-container auth-container-compact">
+  <div class="auth-card auth-card-wide">
     <div class="auth-header">
       <%= render "layouts/navbar_brand" %>
       <h2 class="auth-title">Post an Internship Offer</h2>
@@ -10,12 +10,12 @@
       
       <!-- Validation Errors -->
       <% if @offer.errors.any? %>
-        <div class="flash-message flash-alert" style="flex-direction: column; align-items: flex-start; gap: 6px;">
-          <div style="display: flex; align-items: center; gap: 6px;">
-            <i data-lucide="alert-circle" style="width: 16px; height: 16px; stroke: #F87171; flex-shrink: 0;"></i>
+        <div class="flash-message flash-alert flash-col">
+          <div class="flash-col-header">
+            <i data-lucide="alert-circle" class="icon-16 flex-shrink-0" style="stroke: #F87171;"></i>
             <strong>Please resolve the following errors:</strong>
           </div>
-          <ul style="margin-left: 24px; font-size: 13px; margin-top: 0; margin-bottom: 0;">
+          <ul class="error-list">
             <% @offer.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
             <% end %>
@@ -23,7 +23,7 @@
         </div>
       <% end %>
 
-      <h3 style="font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">
+      <h3 class="section-heading-lg">
         1. Internship Details
       </h3>
 
@@ -66,10 +66,10 @@
         <%= f.date_field :deadline, id: "offer_deadline", class: "form-control" %>
       </div>
 
-      <h3 style="font-size: 18px; margin-top: 35px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; color: #818CF8;">
+      <h3 class="section-heading-mission">
         2. Proof of Work Mission (Optional)
       </h3>
-      <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 20px; line-height: 1.5;">
+      <p class="mission-info-text">
         Attach a small test (30-90 min) to filter candidate capability. If you leave these fields empty, candidates will apply directly with their standard CVs.
       </p>
 
@@ -90,9 +90,9 @@
         </div>
       <% end %>
 
-      <div style="display: flex; gap: 15px; margin-top: 30px;">
-        <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary", style: "width: auto; flex: 1;" %>
-        <%= f.submit "Post Internship & Mission", class: "btn btn-primary", style: "flex: 2;" %>
+      <div class="form-footer-row">
+        <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary" %>
+        <%= f.submit "Post Internship & Mission", class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>

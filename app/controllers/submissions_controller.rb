@@ -9,6 +9,12 @@ class SubmissionsController < ApplicationController
   # POST /submissions
   def create
     @offer = Offer.find(params[:offer_id])
+
+    unless @offer.status == "active"
+      redirect_to offer_path(@offer), alert: "You cannot apply to an inactive offer."
+      return
+    end
+
     @mission = params[:mission_id].present? ? Mission.find(params[:mission_id]) : nil
 
     # Create submission

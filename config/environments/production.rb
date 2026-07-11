@@ -22,6 +22,9 @@ Rails.application.configure do
   # config.asset_host = "http://assets.example.com"
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
+  # WARNING: :local storage is volatile — files will be lost on deploy/restart in containerized environments.
+  # Migrate to :amazon (S3) or :google (GCS) before production launch.
+  # To migrate existing blobs, use `rails active_storage:update_migrate_service`.
   config.active_storage.service = :local
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.

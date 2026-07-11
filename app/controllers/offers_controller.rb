@@ -27,6 +27,13 @@ class OffersController < ApplicationController
 
   # GET /offers/:id
   def show
+    if @offer.status == "draft"
+      unless current_user && current_user.profileable_type == "CompanyProfile" && @offer.company_profile == current_user.profileable
+        redirect_to dashboard_path, alert: "Offer not found or not yet active."
+        return
+      end
+    end
+
     @company = @offer.company_profile
     @mission = @offer.mission
 

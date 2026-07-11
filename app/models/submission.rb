@@ -8,6 +8,7 @@ class Submission < ApplicationRecord
   validates :github_link, presence: true, if: :github_link_required?
   validates :github_link, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: "must be a valid URL" }, allow_blank: true
   validates :submitted_at, presence: true, if: :submitted?
+  validates :student_profile_id, uniqueness: { scope: :offer_id, message: "has already applied to this offer" }
 
   def submitted?
     status == "submitted"
@@ -18,6 +19,11 @@ class Submission < ApplicationRecord
   end
 
   def confirm_completion_by!(role)
+    unless status == "accepted"
+      errors.add(:base, "Only accepted internships can be marked as completed.")
+      raise ActiveRecord::RecordInvalid, self
+    end
+
     if role == "StudentProfile"
       self.student_confirmed_completed = true
     elsif role == "CompanyProfile"

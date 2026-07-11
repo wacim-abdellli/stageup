@@ -36,6 +36,42 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 80.0, @student_profile.commitment_score
   end
 
+  test "cannot apply to inactive offer" do
+    sign_in @student_user
+
+    draft_offer = Offer.create!(
+      company_profile: @company_profile,
+      title: "Draft Offer",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "draft"
+    )
+
+    post submissions_path, params: { offer_id: draft_offer.id, submission: { mission_id: "" } }
+    assert_redirected_to offer_path(draft_offer)
+    assert_equal "You cannot apply to an inactive offer.", flash[:alert]
+  end
+
+  test "cannot double-apply to same offer" do
+    sign_in @student_user
+
+    offer = Offer.create!(
+      company_profile: @company_profile,
+      title: "Double Apply Test",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
+    Submission.create!(
+      student_profile: @student_profile,
+      offer: offer,
+      status: "started"
+    )
+
+    assert_no_difference "Submission.count" do
+      post submissions_path, params: { offer_id: offer.id, submission: { mission_id: "" } }
+    end
+    assert_redirected_to offer_path(offer)
+  end
+
   test "cancel changes status to abandoned and penalizes student score via ghosting" do
     sign_in @company_user
 
