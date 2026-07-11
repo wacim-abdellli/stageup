@@ -1,14 +1,38 @@
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_approved_coordinator!
+  before_action :ensure_student!, only: [:update_cv]
 
   def show
     @user = current_user
-    @profile = @user.profileable
     @role_type = @user.profileable_type
+    @profile = @user.profileable
+  end
 
-    if @role_type == "UniversityProfile" && !@profile.approved?
-      render :pending_approval
-      return
+  def update_cv
+    @profile = current_user.profileable
+    if @profile.update(cv_params)
+      redirect_to dashboard_path, notice: "CV successfully uploaded!"
+    else
+      redirect_to dashboard_path, alert: "Failed to upload CV: #{@profile.errors.full_messages.join(', ')}"
+    end
+  end
+
+  private
+
+  def cv_params
+    params.require(:student_profile).permit(:cv)
+  end
+
+  def ensure_student!
+    unless current_user.profileable_type == "StudentProfile"
+      redirect_to dashboard_path, alert: "Only students can upload CVs."
+    end
+  end
+
+  def ensure_approved_coordinator!
+    if current_user.profileable_type == "UniversityProfile" && !current_user.profileable.approved?
+      render "dashboards/pending_approval"
     end
   end
 end

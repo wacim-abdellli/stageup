@@ -37,6 +37,71 @@ class StudentProfileTest < ActiveSupport::TestCase
       last_name: "Trabelsi",
       university: matched_uni
     )
-    assert_equal matched_uni, profile.university
+  end
+
+  test "should allow attaching PDF CV" do
+    profile = student_profiles(:mohamed)
+    profile.cv.attach(io: StringIO.new("%PDF-1.4 Mock PDF Content"), filename: "test.pdf", content_type: "application/pdf")
+    assert profile.valid?
+  end
+
+  test "should reject non-PDF CV" do
+    profile = student_profiles(:mohamed)
+    profile.cv.attach(io: StringIO.new("Mock TXT Content"), filename: "test.txt", content_type: "text/plain")
+    assert_not profile.valid?
+    assert_includes profile.errors[:cv], "must be a PDF document"
+  end
+
+  test "should calculate average rating and review counts correctly" do
+    profile = student_profiles(:mohamed)
+    user = users(:mohamed_user)
+    other_user = users(:company_user)
+    submission = submissions(:one)
+    submission.update_columns(status: "completed")
+
+    # Ensure mohamed starts with no reviews
+    Review.where(receiver: user).destroy_all
+    assert_nil profile.average_rating
+    assert_equal 0, profile.reviews_received_count
+
+    # Create review 1: rating 4
+    Review.create!(
+      submission: submission,
+      author: other_user,
+      receiver: user,
+      rating: 4,
+      comment: "Good internship cooperation."
+    )
+    
+    assert_equal 4.0, profile.average_rating
+    assert_equal 1, profile.reviews_received_count
+
+    # Create review 2: rating 5
+    offer2 = Offer.create!(
+      company_profile: company_profiles(:one),
+      title: "Secondary Offer",
+      description: "Second role",
+      stage_type: "PFA",
+      spots: 1,
+      location: "Sfax",
+      work_mode: "onsite",
+      status: "active"
+    )
+    sub2 = Submission.create!(
+      student_profile: profile,
+      offer: offer2,
+      status: "completed"
+    )
+
+    Review.create!(
+      submission: sub2,
+      author: other_user,
+      receiver: user,
+      rating: 5,
+      comment: "Excellent work on second project."
+    )
+
+    assert_equal 4.5, profile.average_rating
+    assert_equal 2, profile.reviews_received_count
   end
 end

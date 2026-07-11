@@ -21,4 +21,15 @@ class CompanyProfile < ApplicationRecord
       offers_count: offers.count
     )
   end
+
+  def average_rating
+    return nil unless user
+    reviews = Review.where(receiver: user)
+    reviews.any? ? (reviews.average(:rating).to_f).round(1) : nil
+  end
+
+  def reviews_received_count
+    return 0 unless user
+    Review.where(receiver: user).count
+  end
 end

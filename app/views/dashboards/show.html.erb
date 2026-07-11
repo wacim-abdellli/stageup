@@ -75,6 +75,29 @@
             </p>
           </div>
 
+          <div style="margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+            <strong style="display: block; margin-bottom: 8px;">Resume / CV</strong>
+            <% if @profile.cv.attached? %>
+              <div style="background-color: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.15); padding: 12px; border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <span style="font-size: 13px; color: var(--text-primary);">
+                  📄 <%= link_to @profile.cv.filename.to_s, rails_blob_path(@profile.cv, disposition: "attachment"), target: "_blank", style: "font-weight: 600;" %>
+                </span>
+                <span style="font-size: 11px; color: var(--text-muted);"><%= number_to_human_size(@profile.cv.byte_size) %></span>
+              </div>
+            <% else %>
+              <div style="background-color: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.15); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 15px; font-size: 13px; color: var(--text-secondary);">
+                ⚠️ No CV uploaded yet. Recruiter applications will be blank.
+              </div>
+            <% end %>
+
+            <%= form_with model: @profile, url: update_cv_dashboard_path, method: :patch, local: true, multipart: true do |f| %>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <%= f.file_field :cv, accept: "application/pdf", class: "form-control", style: "font-size: 12px; padding: 6px; background-color: var(--bg-primary);" %>
+                <%= f.submit "Upload", class: "btn btn-primary", style: "width: auto; padding: 6px 15px; font-size: 12px;" %>
+              </div>
+            <% end %>
+          </div>
+
         <!-- Company Details -->
         <% elsif @role_type == "CompanyProfile" %>
           <div class="profile-detail">
@@ -228,6 +251,16 @@
                               Submitted: <%= time_ago_in_words(sub.submitted_at) %> ago
                             </span>
                             
+                            <% if sub.student_profile.cv.attached? %>
+                              <div style="margin-top: 8px; font-size: 13px;">
+                                📄 <%= link_to "Download Candidate CV", rails_blob_path(sub.student_profile.cv, disposition: "attachment"), target: "_blank", style: "font-weight: 600; color: #818CF8;" %>
+                              </div>
+                            <% else %>
+                              <div style="margin-top: 8px; font-size: 12px; color: var(--text-muted);">
+                                ⚠️ No CV attached (candidate hasn't uploaded one).
+                              </div>
+                            <% end %>
+
                             <% if sub.github_link.present? %>
                               <div style="margin-top: 8px; font-size: 13px;">
                                 🔗 <%= link_to "View Proof Solution", sub.github_link, target: "_blank", style: "font-weight: 500;" %>
@@ -309,7 +342,16 @@
             <div style="font-size: 36px; font-weight: 700; color: <%= @profile.commitment_score >= 80 ? 'var(--success)' : 'var(--danger)' %>; margin-bottom: 4px;">
               <%= @profile.commitment_score.round(0) %>
             </div>
-            <span style="color: var(--text-secondary); font-size: 13px;">Commitment Score</span>
+            <span style="color: var(--text-secondary); font-size: 13px; display: block;">Commitment Score</span>
+            
+            <% student_avg = @profile.average_rating %>
+            <% if student_avg %>
+              <div style="margin-top: 15px; font-size: 14px; font-weight: 600;">
+                ⭐️ <%= student_avg %> <span style="font-weight: normal; color: var(--text-secondary);">/ 5.0 (<%= @profile.reviews_received_count %> reviews)</span>
+              </div>
+            <% else %>
+              <div style="margin-top: 15px; font-size: 12px; color: var(--text-muted);">Unrated (No reviews yet)</div>
+            <% end %>
           </div>
 
         <% elsif @role_type == "CompanyProfile" %>
@@ -325,6 +367,15 @@
             <div style="display: flex; justify-content: space-between;">
               <span style="color: var(--text-secondary);">Active Offers:</span>
               <strong><%= @profile.offers.count %></strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: 5px;">
+              <span style="color: var(--text-secondary);">Average Rating:</span>
+              <% company_avg = @profile.average_rating %>
+              <% if company_avg %>
+                <strong>⭐️ <%= company_avg %> (<%= @profile.reviews_received_count %> reviews)</strong>
+              <% else %>
+                <strong style="color: var(--text-secondary);">Unrated</strong>
+              <% end %>
             </div>
           </div>
 

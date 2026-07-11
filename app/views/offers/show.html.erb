@@ -106,7 +106,35 @@
             <strong><%= @company.verified? ? "Yes" : "No" %></strong>
           </div>
         <% end %>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: 10px;">
+          <span style="color: var(--text-secondary);">Average Rating</span>
+          <% comp_avg = @company.average_rating %>
+          <% if comp_avg %>
+            <strong>⭐️ <%= comp_avg %> (<%= @company.reviews_received_count %> reviews)</strong>
+          <% else %>
+            <strong style="color: var(--text-secondary);">Unrated</strong>
+          <% end %>
+        </div>
       </div>
+
+      <!-- Employer Reviews List -->
+      <% if @company.reviews_received_count > 0 %>
+        <div class="profile-card" style="padding: 25px; margin-bottom: 20px;">
+          <h3 style="font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Candidate Reviews</h3>
+          <div style="display: flex; flex-direction: column; gap: 12px; max-height: 250px; overflow-y: auto;">
+            <% Review.where(receiver: @company.user).order(created_at: :desc).each do |rev| %>
+              <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 8px; font-size: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <span style="font-weight: 600; color: #FBBF24;">⭐️ <%= rev.rating %> / 5</span>
+                  <span style="color: var(--text-muted); font-size: 10px;"><%= time_ago_in_words(rev.created_at) %> ago</span>
+                </div>
+                <p style="color: var(--text-secondary); line-height: 1.4;">"<%= rev.comment %>"</p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
 
       <!-- Application Status / Actions -->
       <div class="profile-card" style="padding: 25px; border-color: var(--primary);">

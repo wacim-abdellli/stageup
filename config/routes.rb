@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     post 'signup/university', to: 'users/registrations#create_university', as: :university_registration
   end
 
-  resource :dashboard, only: [:show]
+  resource :dashboard, only: [:show] do
+    patch :update_cv, on: :member
+  end
   resources :offers
   resources :submissions, only: [:create, :edit, :update] do
     member do
