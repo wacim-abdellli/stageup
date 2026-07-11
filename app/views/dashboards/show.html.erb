@@ -138,11 +138,11 @@
       <!-- Student Internships Panel -->
       <% if @role_type == "StudentProfile" %>
         <% internships = @profile.submissions.where(status: ["accepted", "completed"]) %>
-        <% if internships.any? %>
-          <div class="profile-card" style="margin-bottom: 30px;">
-            <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-              💼 My Internships
-            </h2>
+        <div class="profile-card" style="margin-bottom: 30px;">
+          <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+            💼 My Internships
+          </h2>
+          <% if internships.any? %>
             <div style="display: flex; flex-direction: column; gap: 15px;">
               <% internships.each do |sub| %>
                 <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
@@ -174,19 +174,28 @@
                 </div>
               <% end %>
             </div>
-          </div>
-        <% end %>
+          <% else %>
+            <div class="empty-state-card">
+              <div class="empty-state-icon">💼</div>
+              <h3 class="empty-state-title">No Internships Yet</h3>
+              <p class="empty-state-text">
+                You haven't started or completed any internships on StageUp. Go search for active offers, apply, and complete your proof mission!
+              </p>
+              <%= link_to "Browse Internship Offers", offers_path, class: "btn btn-primary", style: "width: auto; padding: 8px 20px; font-size: 13px; margin-top: 5px;" %>
+            </div>
+          <% end %>
+        </div>
       <% end %>
 
       <!-- Recruiter Submissions Panel (Hiring Hub) & Active Internships -->
       <% if @role_type == "CompanyProfile" %>
         <!-- Active Internships -->
         <% active_internships = @profile.submissions.where(status: ["accepted", "completed"]) %>
-        <% if active_internships.any? %>
-          <div class="profile-card" style="margin-bottom: 30px;">
-            <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-              💼 Active & Past Internships
-            </h2>
+        <div class="profile-card" style="margin-bottom: 30px;">
+          <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+            💼 Active & Past Internships
+          </h2>
+          <% if active_internships.any? %>
             <div style="display: flex; flex-direction: column; gap: 15px;">
               <% active_internships.each do |sub| %>
                 <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
@@ -218,8 +227,16 @@
                 </div>
               <% end %>
             </div>
-          </div>
-        <% end %>
+          <% else %>
+            <div class="empty-state-card">
+              <div class="empty-state-icon">💼</div>
+              <h3 class="empty-state-title">No Active Internships</h3>
+              <p class="empty-state-text">
+                Once you review student submissions, accept their work, and start working together, your active student list will appear here.
+              </p>
+            </div>
+          <% end %>
+        </div>
 
         <!-- Pending Applications -->
         <div class="profile-card">
@@ -320,9 +337,14 @@
               <% end %>
             </div>
           <% else %>
-            <p style="color: var(--text-secondary); font-size: 14px; text-align: center; padding: 20px 0;">
-              No applications received yet.
-            </p>
+            <div class="empty-state-card">
+              <div class="empty-state-icon">📥</div>
+              <h3 class="empty-state-title">No Applications Yet</h3>
+              <p class="empty-state-text">
+                You haven't received any student applications yet. Keep posting offers to attract more candidate talent.
+              </p>
+              <%= link_to "Post a New Offer", new_offer_path, class: "btn btn-primary", style: "width: auto; padding: 8px 20px; font-size: 13px; margin-top: 5px;" %>
+            </div>
           <% end %>
         </div>
       <% end %>

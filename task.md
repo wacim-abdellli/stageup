@@ -1,9 +1,6 @@
-- `[x]` Run `rails active_storage:install` and execute the database migrations
-- `[x]` Configure `has_one_attached :cv` and PDF size/format validations on `StudentProfile`
-- `[x]` Implement `average_rating` and review count helper methods on `StudentProfile` and `CompanyProfile`
-- `[x]` Add the `update_cv` route and action to `DashboardsController`
-- `[x]` Update student dashboard to allow PDF CV upload and display their rating
-- `[x]` Update employer dashboard to show candidate CV download buttons and show recruiter ratings
-- `[x]` Display rating averages and review list on the Offer details page
-- `[x]` Write unit tests verifying CV attachment validations and average rating calculation arithmetic
-- `[x]` Run the test suite and verify all test states pass successfully
+- `[x]` Create `lib/tasks/demo.rake` and implement the `rails demo:reset` task
+- `[x]` Update `app/assets/stylesheets/application.css` with empty state styles and layout polish
+- `[x]` Update student dashboard to render empty state cards if they have no internships
+- `[x]` Update employer dashboard to show empty state cards for applications and active internships
+- `[x]` Run `rails demo:reset` inside the Docker container to verify it works successfully
+- `[x]` Run the test suite to confirm no regression errors
