@@ -139,8 +139,9 @@
       <% if @role_type == "StudentProfile" %>
         <% internships = @profile.submissions.where(status: ["accepted", "completed"]) %>
         <div class="profile-card" style="margin-bottom: 30px;">
-          <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-            💼 My Internships
+          <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="briefcase" style="width: 20px; height: 20px; stroke: var(--primary-hover);"></i>
+            My Internships
           </h2>
           <% if internships.any? %>
             <div style="display: flex; flex-direction: column; gap: 15px;">
@@ -155,14 +156,14 @@
                   <div>
                     <% if sub.status == "accepted" %>
                       <% if sub.student_confirmed_completed %>
-                        <span class="badge" style="background-color: rgba(245, 158, 11, 0.15); color: #FBBF24; font-size: 11px;">
-                          Waiting for Employer Confirmation
+                        <span class="badge-status badge-pending">
+                          Waiting for Employer
                         </span>
                       <% else %>
-                        <%= button_to "Mark Internship Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); box-shadow: none;" %>
+                        <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); color: white; box-shadow: none;" %>
                       <% end %>
                     <% else %>
-                      <span class="badge badge-success" style="font-size: 11px; margin-right: 10px;">Completed</span>
+                      <span class="badge-status badge-completed" style="margin-right: 10px;">Completed</span>
                       <% my_review = sub.reviews.find_by(author: current_user) %>
                       <% if my_review.nil? %>
                         <%= link_to "Leave Review", new_submission_review_path(sub), class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; display: inline-block;" %>
@@ -176,7 +177,7 @@
             </div>
           <% else %>
             <div class="empty-state-card">
-              <div class="empty-state-icon">💼</div>
+              <div style="margin-bottom: 5px;"><i data-lucide="briefcase" style="width: 40px; height: 40px; stroke: var(--text-muted);"></i></div>
               <h3 class="empty-state-title">No Internships Yet</h3>
               <p class="empty-state-text">
                 You haven't started or completed any internships on StageUp. Go search for active offers, apply, and complete your proof mission!
@@ -192,8 +193,9 @@
         <!-- Active Internships -->
         <% active_internships = @profile.submissions.where(status: ["accepted", "completed"]) %>
         <div class="profile-card" style="margin-bottom: 30px;">
-          <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-            💼 Active & Past Internships
+          <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="briefcase" style="width: 20px; height: 20px; stroke: var(--primary-hover);"></i>
+            Active & Past Internships
           </h2>
           <% if active_internships.any? %>
             <div style="display: flex; flex-direction: column; gap: 15px;">
@@ -208,14 +210,14 @@
                   <div>
                     <% if sub.status == "accepted" %>
                       <% if sub.company_confirmed_completed %>
-                        <span class="badge" style="background-color: rgba(245, 158, 11, 0.15); color: #FBBF24; font-size: 11px;">
-                          Waiting for Student Confirmation
+                        <span class="badge-status badge-pending">
+                          Waiting for Student
                         </span>
                       <% else %>
-                        <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); box-shadow: none;" %>
+                        <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); color: white; box-shadow: none;" %>
                       <% end %>
                     <% else %>
-                      <span class="badge badge-success" style="font-size: 11px; margin-right: 10px;">Completed</span>
+                      <span class="badge-status badge-completed" style="margin-right: 10px;">Completed</span>
                       <% my_review = sub.reviews.find_by(author: current_user) %>
                       <% if my_review.nil? %>
                         <%= link_to "Leave Review", new_submission_review_path(sub), class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; display: inline-block;" %>
@@ -229,7 +231,7 @@
             </div>
           <% else %>
             <div class="empty-state-card">
-              <div class="empty-state-icon">💼</div>
+              <div style="margin-bottom: 5px;"><i data-lucide="briefcase" style="width: 40px; height: 40px; stroke: var(--text-muted);"></i></div>
               <h3 class="empty-state-title">No Active Internships</h3>
               <p class="empty-state-text">
                 Once you review student submissions, accept their work, and start working together, your active student list will appear here.
@@ -240,8 +242,9 @@
 
         <!-- Pending Applications -->
         <div class="profile-card">
-          <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-            📥 Incoming Applications
+          <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="inbox" style="width: 20px; height: 20px; stroke: var(--primary-hover);"></i>
+            Incoming Applications
           </h2>
 
           <% if @profile.submissions.any? %>
@@ -324,7 +327,7 @@
                           </td>
                           <td><%= sub.offer.title %></td>
                           <td>
-                            <span class="badge" style="background-color: <%= sub.status == 'accepted' ? 'rgba(16, 185, 129, 0.1)' : (sub.status == 'completed' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(239, 68, 68, 0.1)') %>; color: <%= sub.status == 'accepted' ? '#34D399' : (sub.status == 'completed' ? '#60A5FA' : '#F87171') %>; font-size: 9px; padding: 2px 6px;">
+                            <span class="badge-status <%= sub.status == 'accepted' ? 'badge-accepted' : (sub.status == 'completed' ? 'badge-completed' : 'badge-rejected') %>">
                               <%= sub.status %>
                             </span>
                           </td>
@@ -338,7 +341,7 @@
             </div>
           <% else %>
             <div class="empty-state-card">
-              <div class="empty-state-icon">📥</div>
+              <div style="margin-bottom: 5px;"><i data-lucide="inbox" style="width: 40px; height: 40px; stroke: var(--text-muted);"></i></div>
               <h3 class="empty-state-title">No Applications Yet</h3>
               <p class="empty-state-text">
                 You haven't received any student applications yet. Keep posting offers to attract more candidate talent.
@@ -361,15 +364,23 @@
         
         <% if @role_type == "StudentProfile" %>
           <div style="text-align: center; padding: 15px 0;">
-            <div style="font-size: 36px; font-weight: 700; color: <%= @profile.commitment_score >= 80 ? 'var(--success)' : 'var(--danger)' %>; margin-bottom: 4px;">
-              <%= @profile.commitment_score.round(0) %>
+            <div style="display: flex; justify-content: center; margin-bottom: 12px;">
+              <% score = @profile.commitment_score.round(0) %>
+              <div class="score-pill">
+                <span class="dot <%= score >= 90 ? 'dot-success' : (score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
+                <strong><%= score %></strong>
+                <span class="score-label">Commitment</span>
+              </div>
             </div>
-            <span style="color: var(--text-secondary); font-size: 13px; display: block;">Commitment Score</span>
             
             <% student_avg = @profile.average_rating %>
             <% if student_avg %>
-              <div style="margin-top: 15px; font-size: 14px; font-weight: 600;">
-                ⭐️ <%= student_avg %> <span style="font-weight: normal; color: var(--text-secondary);">/ 5.0 (<%= @profile.reviews_received_count %> reviews)</span>
+              <div style="display: flex; justify-content: center; margin-top: 15px;">
+                <div class="rating-display">
+                  <i data-lucide="star"></i>
+                  <strong><%= student_avg %></strong>
+                  <span class="rating-count">(<%= @profile.reviews_received_count %> reviews)</span>
+                </div>
               </div>
             <% else %>
               <div style="margin-top: 15px; font-size: 12px; color: var(--text-muted);">Unrated (No reviews yet)</div>
@@ -377,6 +388,15 @@
           </div>
 
         <% elsif @role_type == "CompanyProfile" %>
+          <% if @profile.submissions.where(status: "completed").count < 3 %>
+            <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+              <div class="badge-grace" title="Commitment score is protected during your first 3 internships to help you get established.">
+                <i data-lucide="sparkles"></i>
+                <span>New Recruiter (Grace Period)</span>
+              </div>
+            </div>
+          <% end %>
+
           <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
             <div style="display: flex; justify-content: space-between;">
               <span style="color: var(--text-secondary);">Response Rate:</span>
@@ -394,7 +414,11 @@
               <span style="color: var(--text-secondary);">Average Rating:</span>
               <% company_avg = @profile.average_rating %>
               <% if company_avg %>
-                <strong>⭐️ <%= company_avg %> (<%= @profile.reviews_received_count %> reviews)</strong>
+                <div class="rating-display">
+                  <i data-lucide="star"></i>
+                  <strong><%= company_avg %></strong>
+                  <span class="rating-count">(<%= @profile.reviews_received_count %> reviews)</span>
+                </div>
               <% else %>
                 <strong style="color: var(--text-secondary);">Unrated</strong>
               <% end %>

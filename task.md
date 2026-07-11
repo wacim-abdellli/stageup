@@ -1,6 +1,0 @@
-- `[x]` Update `app/assets/stylesheets/application.css` with premium neutral zinc/slate CSS variables
-- `[x]` Refine `.profile-card`, button classes, list layouts, and badges in `application.css`
-- `[x]` Overhaul the role selection template `select_role.html.erb` to remove thick purple borders and use clean card borders
-- `[x]` Update the landing page `home/index.html.erb` with clean neutral styles and a soft radial glow
-- `[x]` Verify all dashboards, offers, and sign-up templates render cohesively and look highly polished
-- `[x]` Run the test suite to confirm no regressions

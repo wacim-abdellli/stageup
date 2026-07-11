@@ -10,7 +10,9 @@
   </div>
 
   <div class="profile-card" style="text-align: center; padding: 50px 30px;">
-    <div style="font-size: 64px; margin-bottom: 20px;">🔒</div>
+    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+      <i data-lucide="lock" style="width: 64px; height: 64px; stroke: var(--text-muted);"></i>
+    </div>
     <h2 style="font-size: 26px; margin-bottom: 12px;">Verification Pending</h2>
     <p style="color: var(--text-secondary); font-size: 16px; max-width: 600px; margin: 0 auto 30px;">
       Thank you for registering as a coordinator for <strong><%= @profile.university.name %></strong> (<%= @profile.department %>). 

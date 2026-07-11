@@ -117,6 +117,36 @@ Follow mobile-first style queries. Use these standardized screen widths:
 * Hover state: `border-color: rgba(255, 255, 255, 0.18)` and `background-color: rgba(255, 255, 255, 0.04)`.
 * **NO** colored outlines or neon gradients on the cards.
 
+### 4.4 Commitment Score & Rating Displays
+* **Commitment Score Pill (`.score-pill`):**
+  * Background: `rgba(99, 102, 241, 0.06)`, border: `1px solid rgba(99, 102, 241, 0.15)`, padding: `4px 10px`, border-radius: `9999px`, display: `inline-flex`, align-items: `center`, gap: `6px`.
+  * Status indicator dot: Left side, green `#10B981` (score >= 90), orange `#F59E0B` (70 <= score < 90), red `#EF4444` (score < 70).
+  * Structure: `<div class="score-pill"><span class="dot dot-success"></span><strong>95</strong><span class="score-label">Commitment</span></div>`
+* **Rating Display (`.rating-display`):**
+  * Muted gold star icon: Lucide `star` (`#F59E0B`), bold decimal rating, counts in parenthesis.
+  * Structure: `<div class="rating-display"><i data-lucide="star" style="fill: #F59E0B; stroke: #F59E0B;"></i><strong>4.8</strong><span class="rating-count">(12 reviews)</span></div>`
+
+### 4.5 Unified Status Badge System
+Apply the following CSS classes and styles for consistent states:
+* `.badge-status`: Base size `11px`, weight `600`, padding `2px 8px`, border-radius `9999px`, inline-flex, border: `1px solid`.
+* **Pending (`pending` / `.badge-pending`):**
+  * Style: `background-color: rgba(245, 158, 11, 0.06); border-color: rgba(245, 158, 11, 0.2); color: #F59E0B;`
+* **In Progress (`started` / `.badge-progress`):**
+  * Style: `background-color: rgba(99, 102, 241, 0.06); border-color: rgba(99, 102, 241, 0.2); color: #818CF8;`
+* **Accepted / Active (`accepted` / `.badge-accepted`):**
+  * Style: `background-color: rgba(59, 130, 246, 0.06); border-color: rgba(59, 130, 246, 0.2); color: #60A5FA;`
+* **Completed (`completed` / `.badge-completed`):**
+  * Style: `background-color: rgba(16, 185, 129, 0.06); border-color: rgba(16, 185, 129, 0.2); color: #34D399;`
+* **Rejected (`rejected` / `.badge-rejected`):**
+  * Style: `background-color: rgba(239, 68, 68, 0.06); border-color: rgba(239, 68, 68, 0.2); color: #F87171;`
+
+### 4.6 'Grace Period / New Recruiter' Component
+For companies with < 3 completed contracts:
+* Class: `.badge-grace` (background: `rgba(255, 255, 255, 0.02)`, border: `1px solid var(--border-color)`, border-radius: `9999px`, color: `var(--text-secondary)`, display: `inline-flex`, align-items: `center`, padding: `4px 10px`, gap: `6px`, font-size: `12px`).
+* Icon: Lucide `sparkles` in soft blue (`#60A5FA`).
+* Text: `New Recruiter (Grace Period)`.
+* Tooltip/Tooltip container: Displays: *"Commitment score is protected during your first 3 internships to help you get established."*
+
 ---
 
 ## 5. Anti-"AI-Generated UI" Self-Checking Checklist
