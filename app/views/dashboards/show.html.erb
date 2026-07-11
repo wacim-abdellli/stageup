@@ -14,14 +14,16 @@
   </div>
 
   <% if flash[:notice] %>
-    <div class="flash-message flash-notice">
-      <span>✅</span> <%= flash[:notice] %>
+    <div class="flash-message flash-notice" style="display: flex; align-items: center; gap: 8px;">
+      <i data-lucide="check-circle" style="width: 16px; height: 16px; stroke: #34D399; flex-shrink: 0;"></i>
+      <span><%= flash[:notice] %></span>
     </div>
   <% end %>
 
   <% if flash[:alert] %>
-    <div class="flash-message flash-alert">
-      <span>⚠️</span> <%= flash[:alert] %>
+    <div class="flash-message flash-alert" style="display: flex; align-items: center; gap: 8px;">
+      <i data-lucide="alert-circle" style="width: 16px; height: 16px; stroke: #F87171; flex-shrink: 0;"></i>
+      <span><%= flash[:alert] %></span>
     </div>
   <% end %>
 

@@ -236,6 +236,8 @@ a:hover {
   text-align: left;
   position: relative;
   width: 100%;
+  text-decoration: none;
+  color: inherit;
 }
 
 .role-card:hover {
@@ -627,14 +629,14 @@ a:hover {
   text-decoration: underline;
 }
 
-.auth-card a:not(.btn) {
+.auth-card a:not(.btn):not(.role-card) {
   color: var(--text-secondary);
   text-decoration: none;
   font-weight: 500;
   transition: var(--transition);
 }
 
-.auth-card a:not(.btn):hover {
+.auth-card a:not(.btn):not(.role-card):hover {
   color: white;
   text-decoration: underline;
 }
