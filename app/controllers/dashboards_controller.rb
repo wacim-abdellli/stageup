@@ -29,6 +29,21 @@ class DashboardsController < ApplicationController
       @company_offers = @profile.offers.order(created_at: :desc)
 
       @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc)
+    elsif @role_type == "UniversityProfile"
+      @university = @profile.university
+      @students = StudentProfile.where(university: @university).includes(:user, :submissions).order(last_name: :asc)
+      @total_students_count = @students.size
+      @active_internships_count = Submission.joins(:student_profile)
+                                             .where(student_profiles: { university_id: @university.id })
+                                             .where(status: ["accepted", "completed"])
+                                             .count
+      @avg_student_score = StudentProfile.where(university: @university).average(:commitment_score)&.round(1) || 100.0
+      @recent_reputation_events = CommitmentEvent
+                                   .where(profileable_type: "StudentProfile",
+                                          profileable_id: StudentProfile.where(university_id: @university.id).select(:id))
+                                   .includes(:profileable)
+                                   .order(created_at: :desc)
+                                   .limit(20)
     end
   end
 
@@ -61,6 +76,8 @@ class DashboardsController < ApplicationController
 
   def ensure_approved_coordinator!
     if current_user.profileable_type == "UniversityProfile" && !current_user.profileable.approved?
+      @user = current_user
+      @profile = current_user.profileable
       render "dashboards/pending_approval"
     end
   end

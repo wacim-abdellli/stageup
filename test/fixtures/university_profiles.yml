@@ -2,3 +2,10 @@ ahmed:
   university: iset_sfax
   admin_name: Prof. Ahmed Mansour
   department: IT Department
+  approved: true
+
+pending:
+  university: enis
+  admin_name: Prof. Pending User
+  department: Science Department
+  approved: false

@@ -12,3 +12,13 @@ company_user:
   email: contact@devcorp.tn
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
   profileable: one (CompanyProfile)
+
+university_user:
+  email: ahmed.mansour@isetsf.rnu.tn
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  profileable: ahmed (UniversityProfile)
+
+pending_university_user:
+  email: pending@enis.tn
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  profileable: pending (UniversityProfile)
