@@ -10,6 +10,7 @@ class Submission < ApplicationRecord
   validates :github_link, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: "must be a valid URL" }, allow_blank: true
   validates :submitted_at, presence: true, if: :submitted?
   validates :student_profile_id, uniqueness: { scope: :offer_id, message: "has already applied to this offer" }
+  validates :auto_verification_status, inclusion: { in: %w[pending checking passed failed] }, allow_nil: true
 
   def submitted?
     status == "submitted"

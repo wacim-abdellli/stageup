@@ -115,11 +115,21 @@ class InternshipAgreementsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "You cannot mark this internship as completed until the Convention de Stage is fully signed by all three parties.", flash[:alert]
   end
 
-  test "completion is allowed if no agreement exists" do
+  test "completion is blocked if no agreement exists" do
     sign_in @student_user
 
     post confirm_completion_submission_path(@submission)
     assert_redirected_to dashboard_path
+    assert_equal "You cannot mark this internship as completed until a Convention de Stage has been generated.", flash[:alert]
+  end
+
+  test "completion is allowed when agreement is fully executed" do
+    sign_in @student_user
+    agreement = InternshipAgreement.create!(submission: @submission, start_date: Date.today, end_date: Date.today + 90, status: "fully_executed", student_signed_at: Time.current, company_signed_at: Time.current, university_signed_at: Time.current)
+
+    post confirm_completion_submission_path(@submission)
+    assert_redirected_to dashboard_path
+    assert_not_equal "You cannot mark this internship as completed until a Convention de Stage has been generated.", flash[:alert]
     assert_not_equal "You cannot mark this internship as completed until the Convention de Stage is fully signed by all three parties.", flash[:alert]
   end
 end

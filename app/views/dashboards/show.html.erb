@@ -440,6 +440,13 @@
                             <% if sub.github_link.present? %>
                               <div class="solution-link mt-8 fs-13">
                                 🔗 <%= link_to "View Proof Solution", sub.github_link, target: "_blank" %>
+                                <% if sub.auto_verification_status == "checking" || sub.auto_verification_status == "pending" %>
+                                  <span class="badge-status badge-pending" style="margin-left: 8px;">Checking URL...</span>
+                                <% elsif sub.auto_verification_status == "passed" %>
+                                  <span class="badge-status badge-completed" style="margin-left: 8px;">✓ Passed Auto-Check</span>
+                                <% elsif sub.auto_verification_status == "failed" %>
+                                  <span class="badge-status badge-rejected" style="margin-left: 8px;" title="<%= sub.auto_verification_log %>">✗ Failed Auto-Check</span>
+                                <% end %>
                               </div>
                             <% end %>
 

@@ -47,10 +47,11 @@ class SubmissionsController < ApplicationController
   # PATCH/PUT /submissions/:id
   def update
     @submission.assign_attributes(submission_params)
-    @submission.status = "submitted"
+    @submission.status = "under_review"
     @submission.submitted_at = Time.current
 
     if @submission.save
+      VerifySubmissionJob.perform_later(@submission)
       redirect_to offer_path(@submission.offer), notice: "Your proof mission was successfully submitted!"
     else
       render :edit, status: :unprocessable_entity
@@ -141,7 +142,12 @@ class SubmissionsController < ApplicationController
 
   # POST /submissions/:id/confirm_completion
   def confirm_completion
-    if @submission.internship_agreement.present? && @submission.internship_agreement.status == "pending_signatures"
+    if @submission.internship_agreement.nil?
+      redirect_to dashboard_path, alert: "You cannot mark this internship as completed until a Convention de Stage has been generated."
+      return
+    end
+
+    unless @submission.internship_agreement.status == "fully_executed"
       redirect_to dashboard_path, alert: "You cannot mark this internship as completed until the Convention de Stage is fully signed by all three parties."
       return
     end
