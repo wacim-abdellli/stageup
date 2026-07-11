@@ -4,11 +4,12 @@
       <div class="auth-logo" style="margin-bottom: 0;">StageUp</div>
       <p style="color: var(--text-secondary); font-size: 14px;">Logged in as: <strong><%= @user.email %></strong></p>
     </div>
-    <div style="display: flex; gap: 10px;">
+    <div style="display: flex; gap: 10px; align-items: center;">
       <%= link_to "Browse Offers", offers_path, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
       <% if @role_type == "CompanyProfile" %>
         <%= link_to "Post an Offer", new_offer_path, class: "btn btn-primary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
       <% end %>
+      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px; margin: 0;" %>
     </div>
   </div>
 
