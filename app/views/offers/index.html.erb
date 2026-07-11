@@ -1,74 +1,133 @@
 <div class="dashboard-container">
-  <div class="dashboard-header">
+  <!-- Page Header -->
+  <div class="dashboard-header" style="margin-bottom: 32px; border-bottom: 1px solid var(--border-color); padding-bottom: 24px;">
     <div>
       <%= render "layouts/navbar_brand" %>
-      <p style="color: var(--text-secondary); font-size: 14px;">Browse active internship opportunities in Tunisia</p>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px;">Tunisia's first verified internship directory</p>
     </div>
-    <div style="display: flex; gap: 10px; align-items: center;">
+    <div style="display: flex; gap: 12px; align-items: center;">
       <% if current_user %>
-        <%= link_to "My Dashboard", dashboard_path, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
+        <%= link_to "My Dashboard", dashboard_path, class: "btn glass-card", style: "text-decoration: none; color: white; padding: 10px 20px; font-size: 13px;" %>
         <% if current_user.profileable_type == "CompanyProfile" %>
-          <%= link_to "Post an Offer", new_offer_path, class: "btn btn-primary", style: "width: auto; padding: 8px 16px; font-size: 13px;" %>
+          <%= link_to "Post an Offer", new_offer_path, class: "btn btn-accent", style: "text-decoration: none; padding: 10px 20px; font-size: 13px;" %>
         <% end %>
-        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary", style: "width: auto; padding: 8px 16px; font-size: 13px; margin: 0;" %>
+        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn glass-card", style: "padding: 10px 20px; font-size: 13px; margin: 0; color: #F87171;" %>
       <% else %>
-        <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent", style: "width: auto; padding: 8px 16px; font-size: 13px; text-decoration: none;" %>
+        <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent", style: "text-decoration: none; padding: 10px 20px; font-size: 13px;" %>
       <% end %>
     </div>
   </div>
 
-  <h2 style="font-size: 22px; margin-bottom: 25px;">Available Internships</h2>
+  <!-- Main Directory Layout -->
+  <div style="display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start;" class="offers-directory-layout">
+    
+    <!-- Sidebar Filters -->
+    <div class="glass-card" style="padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); position: sticky; top: 20px;">
+      <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 20px; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+        <i data-lucide="sliders-horizontal" style="width: 16px; height: 16px; stroke: var(--text-secondary);"></i>
+        Filter Offers
+      </h3>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;">
-    <% if @offers.any? %>
-      <% @offers.each do |offer| %>
-         <div class="profile-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 25px; transition: var(--transition); cursor: pointer;" onclick="window.location='<%= offer_path(offer) %>'">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-              <div>
-                <h3 style="font-size: 18px; margin-bottom: 4px;"><%= offer.title %></h3>
-                <span style="font-size: 14px; color: var(--text-secondary);"><%= offer.company_profile.name %></span>
-              </div>
-              <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; text-transform: uppercase;"><%= offer.stage_type %></span>
-            </div>
-
-            <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
-              <%= offer.description %>
-            </p>
-          </div>
-
-          <div style="border-top: 1px solid var(--border-color); padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
-              <% if offer.location.downcase != "remote" %>
-                <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px;">
-                  <i data-lucide="map-pin" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
-                  <%= offer.location %>
-                </span>
-              <% end %>
-              <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px;">
-                <i data-lucide="monitor" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
-                <%= offer.work_mode.capitalize %>
-              </span>
-              <% if offer.mission %>
-                <span class="badge-status" style="background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.2); color: #818CF8; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px;">
-                  <i data-lucide="git-commit" style="width: 12px; height: 12px; stroke: #818CF8;"></i>
-                  Mission Attached
-                </span>
-              <% else %>
-                <span class="badge-status" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px;">
-                  <i data-lucide="check-circle" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
-                  CV Only
-                </span>
-              <% end %>
-            </div>
-            <%= link_to "Details →", offer_path(offer), style: "font-size: 13px; font-weight: 600;" %>
+      <%= form_tag offers_path, method: :get, id: "filters-form" do %>
+        <!-- Search Input -->
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Search keyword</label>
+          <div style="position: relative;">
+            <i data-lucide="search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: var(--text-muted);"></i>
+            <%= text_field_tag :query, params[:query], placeholder: "Search title, company...", style: "width: 100%; padding: 10px 12px 10px 36px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: white; font-size: 13px;" %>
           </div>
         </div>
+
+        <!-- Stage Type Filter -->
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Stage Type</label>
+          <%= select_tag :stage_type, options_for_select([["All types", ""], ["PFE", "PFE"], ["PFA", "PFA"]], params[:stage_type]), onchange: "this.form.submit();", style: "width: 100%; padding: 10px 12px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: white; font-size: 13px; cursor: pointer;" %>
+        </div>
+
+        <!-- Work Mode Filter -->
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Work Mode</label>
+          <%= select_tag :work_mode, options_for_select([["All modes", ""], ["Remote", "remote"], ["On-site", "onsite"], ["Hybrid", "hybrid"]], params[:work_mode]), onchange: "this.form.submit();", style: "width: 100%; padding: 10px 12px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: white; font-size: 13px; cursor: pointer;" %>
+        </div>
+
+        <!-- Actions -->
+        <div style="display: flex; gap: 8px; flex-direction: column;">
+          <%= submit_tag "Apply Search", class: "btn btn-accent", style: "width: 100%; padding: 10px; font-size: 13px; cursor: pointer;" %>
+          <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
+            <%= link_to "Reset Filters", offers_path, class: "btn glass-card", style: "width: 100%; text-decoration: none; color: white; padding: 10px; font-size: 13px; text-align: center;" %>
+          <% end %>
+        </div>
       <% end %>
-    <% else %>
-      <div class="profile-card" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-        <p style="color: var(--text-secondary);">No active internship offers available at the moment.</p>
+    </div>
+
+    <!-- Listings Side -->
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="font-size: 20px; font-weight: 700; color: white; margin: 0;">Available Internships</h2>
+        <span style="font-size: 13px; color: var(--text-secondary);"><%= pluralize(@offers.size, 'internship') %> found</span>
       </div>
-    <% end %>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px;">
+        <% if @offers.any? %>
+          <% @offers.each do |offer| %>
+            <div class="glass-card" style="padding: 24px; border-radius: var(--radius-lg); display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; border: 1px solid var(--border-color); transition: var(--transition); cursor: pointer;" onclick="window.location='<%= offer_path(offer) %>'">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                  <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; text-transform: uppercase; padding: 2px 8px; font-size: 10px;"><%= offer.stage_type %></span>
+                  
+                  <% if offer.mission.present? %>
+                    <span class="badge-status" style="background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.2); color: #818CF8; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px; font-size: 10px;">
+                      <i data-lucide="git-commit" style="width: 12px; height: 12px; stroke: #818CF8;"></i>
+                      Mission Attached
+                    </span>
+                  <% else %>
+                    <span class="badge-status" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px; font-size: 10px;">
+                      <i data-lucide="check-circle" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
+                      CV Only
+                    </span>
+                  <% end %>
+                </div>
+
+                <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 6px 0; color: white;"><%= offer.title %></h3>
+                <span style="font-size: 13px; color: var(--text-secondary); display: block; margin-bottom: 12px;"><%= offer.company_profile.name %></span>
+                
+                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5; margin: 0 0 16px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                  <%= offer.description %>
+                </p>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 12px;">
+                <span style="font-size: 12px; color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px;">
+                  <i data-lucide="map-pin" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
+                  <% if offer.location.downcase == "remote" %>
+                    Remote
+                  <% else %>
+                    <%= offer.location %> (<%= offer.work_mode.capitalize %>)
+                  <% end %>
+                </span>
+                <span style="font-size: 12px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 4px;">
+                  Details <i data-lucide="arrow-right" style="width: 12px; height: 12px; stroke: var(--accent);"></i>
+                </span>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="glass-card" style="grid-column: 1 / -1; text-align: center; padding: 48px; border: 1px solid var(--border-color); border-radius: var(--radius-lg);">
+            <i data-lucide="search-code" style="width: 40px; height: 40px; stroke: var(--text-muted); margin-bottom: 12px; display: inline-block;"></i>
+            <h3 style="font-size: 16px; font-weight: 600; color: white; margin-bottom: 6px;">No offers match your criteria</h3>
+            <p style="color: var(--text-secondary); font-size: 13px; margin: 0;">Try broadening your query or clearing active filters.</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
+
+<style>
+  @media (max-width: 992px) {
+    .offers-directory-layout {
+      grid-template-columns: 1fr !important;
+      gap: 24px !important;
+    }
+  }
+</style>

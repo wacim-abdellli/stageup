@@ -4,7 +4,23 @@ class OffersController < ApplicationController
 
   # GET /offers
   def index
-    @offers = Offer.where(status: "active").order(created_at: :desc)
+    @offers = Offer.where(status: "active")
+
+    if params[:query].present?
+      q_val = "%#{params[:query]}%"
+      @offers = @offers.joins(:company_profile)
+                       .where("offers.title ILIKE :q OR offers.description ILIKE :q OR company_profiles.name ILIKE :q", q: q_val)
+    end
+
+    if params[:stage_type].present?
+      @offers = @offers.where(stage_type: params[:stage_type])
+    end
+
+    if params[:work_mode].present?
+      @offers = @offers.where(work_mode: params[:work_mode])
+    end
+
+    @offers = @offers.order(created_at: :desc)
   end
 
   # GET /offers/:id
