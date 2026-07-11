@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       post :accept
       post :reject
       post :confirm_completion
+      post :abandon
+      post :cancel
     end
     resources :reviews, only: [:new, :create]
   end

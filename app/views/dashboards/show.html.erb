@@ -139,15 +139,14 @@
 
       <!-- Student Internships Panel -->
       <% if @role_type == "StudentProfile" %>
-        <% internships = @profile.submissions.where(status: ["accepted", "completed"]) %>
         <div class="profile-card" style="margin-bottom: 30px;">
           <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; display: flex; align-items: center; gap: 8px;">
             <i data-lucide="briefcase" style="width: 20px; height: 20px; stroke: var(--primary-hover);"></i>
             My Internships
           </h2>
-          <% if internships.any? %>
+          <% if @active_internships.any? %>
             <div style="display: flex; flex-direction: column; gap: 15px;">
-              <% internships.each do |sub| %>
+              <% @active_internships.each do |sub| %>
                 <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
                   <div>
                     <strong style="font-size: 15px;"><%= sub.offer.title %></strong>
@@ -157,16 +156,19 @@
                   </div>
                   <div>
                     <% if sub.status == "accepted" %>
-                      <% if sub.student_confirmed_completed %>
-                        <span class="badge-status badge-completion-pending">
-                          Waiting for Employer
-                        </span>
-                      <% else %>
-                        <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); color: white; box-shadow: none;" %>
-                      <% end %>
+                      <div style="display: flex; gap: 6px;">
+                        <% if sub.student_confirmed_completed %>
+                          <span class="badge-status badge-completion-pending">
+                            Waiting for Employer
+                          </span>
+                        <% else %>
+                          <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); color: white; box-shadow: none;" %>
+                          <%= button_to "Abandon", abandon_submission_path(sub), method: :post, class: "btn btn-secondary", style: "width: auto; padding: 6px 12px; font-size: 12px; border-color: var(--danger); color: #F87171; box-shadow: none;", data: { turbo_confirm: "Are you sure you want to abandon this internship? Your commitment score will be penalized." } %>
+                        <% end %>
+                      </div>
                     <% else %>
                       <span class="badge-status badge-completed" style="margin-right: 10px;">Completed</span>
-                      <% my_review = sub.reviews.find_by(author: current_user) %>
+                      <% my_review = sub.reviews.detect { |r| r.author_id == current_user.id } %>
                       <% if my_review.nil? %>
                         <%= link_to "Leave Review", new_submission_review_path(sub), class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; display: inline-block;" %>
                       <% else %>
@@ -192,16 +194,52 @@
 
       <!-- Recruiter Submissions Panel (Hiring Hub) & Active Internships -->
       <% if @role_type == "CompanyProfile" %>
+        <!-- My Offers Management -->
+        <div class="profile-card" style="margin-bottom: 30px;">
+          <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="megaphone" style="width: 20px; height: 20px; stroke: var(--primary-hover);"></i>
+            My Offers
+          </h2>
+          <% if @company_offers.any? %>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <% @company_offers.each do |offer| %>
+                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <strong style="font-size: 14px;"><%= link_to offer.title, offer_path(offer), style: "color: var(--primary);" %></strong>
+                    <span style="font-size: 12px; color: var(--text-secondary); display: block; margin-top: 2px;">
+                      <%= offer.status.humanize %> &middot; <%= offer.submissions.count %> applicant(s)
+                    </span>
+                  </div>
+                  <div style="display: flex; gap: 8px;">
+                    <%= link_to "Edit", edit_offer_path(offer), class: "btn btn-primary", style: "width: auto; padding: 4px 10px; font-size: 11px;" %>
+                    <% if offer.draft? %>
+                      <%= button_to "Delete", offer_path(offer), method: :delete, class: "btn btn-secondary", style: "width: auto; padding: 4px 10px; font-size: 11px; border-color: var(--danger); color: #F87171;", data: { turbo_confirm: "Permanently delete this draft?" } %>
+                    <% else %>
+                      <%= button_to "Archive", offer_path(offer), method: :delete, class: "btn btn-secondary", style: "width: auto; padding: 4px 10px; font-size: 11px; border-color: var(--danger); color: #F87171;", data: { turbo_confirm: "Archive this offer? It will no longer be visible to students." } %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="empty-state-card">
+              <div style="margin-bottom: 5px;"><i data-lucide="megaphone" style="width: 40px; height: 40px; stroke: var(--text-muted);"></i></div>
+              <h3 class="empty-state-title">No Offers Yet</h3>
+              <p class="empty-state-text">You haven't posted any internship offers yet. Create your first one to attract candidates.</p>
+              <%= link_to "Post an Offer", new_offer_path, class: "btn btn-primary", style: "width: auto; padding: 8px 20px; font-size: 13px; margin-top: 5px;" %>
+            </div>
+          <% end %>
+        </div>
+
         <!-- Active Internships -->
-        <% active_internships = @profile.submissions.where(status: ["accepted", "completed"]) %>
         <div class="profile-card" style="margin-bottom: 30px;">
           <h2 style="font-size: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; display: flex; align-items: center; gap: 8px;">
             <i data-lucide="briefcase" style="width: 20px; height: 20px; stroke: var(--primary-hover);"></i>
             Active & Past Internships
           </h2>
-          <% if active_internships.any? %>
+          <% if @active_internships.any? %>
             <div style="display: flex; flex-direction: column; gap: 15px;">
-              <% active_internships.each do |sub| %>
+              <% @active_internships.each do |sub| %>
                 <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
                   <div>
                     <strong style="font-size: 15px;"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></strong>
@@ -211,16 +249,19 @@
                   </div>
                   <div>
                     <% if sub.status == "accepted" %>
-                      <% if sub.company_confirmed_completed %>
-                        <span class="badge-status badge-completion-pending">
-                          Waiting for Student
-                        </span>
-                      <% else %>
-                        <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); color: white; box-shadow: none;" %>
-                      <% end %>
+                      <div style="display: flex; gap: 6px;">
+                        <% if sub.company_confirmed_completed %>
+                          <span class="badge-status badge-completion-pending">
+                            Waiting for Student
+                          </span>
+                        <% else %>
+                          <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; background-color: var(--success); color: white; box-shadow: none;" %>
+                          <%= button_to "Cancel", cancel_submission_path(sub), method: :post, class: "btn btn-secondary", style: "width: auto; padding: 6px 12px; font-size: 12px; border-color: var(--danger); color: #F87171; box-shadow: none;", data: { turbo_confirm: "Cancel this internship? This will notify the student." } %>
+                        <% end %>
+                      </div>
                     <% else %>
                       <span class="badge-status badge-completed" style="margin-right: 10px;">Completed</span>
-                      <% my_review = sub.reviews.find_by(author: current_user) %>
+                      <% my_review = sub.reviews.detect { |r| r.author_id == current_user.id } %>
                       <% if my_review.nil? %>
                         <%= link_to "Leave Review", new_submission_review_path(sub), class: "btn btn-primary", style: "width: auto; padding: 6px 12px; font-size: 12px; display: inline-block;" %>
                       <% else %>
@@ -249,18 +290,16 @@
             Incoming Applications
           </h2>
 
-          <% if @profile.submissions.any? %>
+          <% if @pending_submissions.any? || @processed_submissions.any? %>
             <div style="display: flex; flex-direction: column; gap: 20px;">
-              <% @profile.offers.each do |offer| %>
-                <% pending_subs = offer.submissions.where(status: "submitted") %>
-                <% if pending_subs.any? %>
-                  <div style="background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px;">
-                    <h3 style="font-size: 15px; color: var(--primary); margin-bottom: 15px;">
-                      <%= offer.title %> (<%= pending_subs.count %> pending)
-                    </h3>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 15px;">
-                      <% pending_subs.each do |sub| %>
+              <% @pending_submissions.group_by(&:offer).each do |offer, pending_subs| %>
+                <div style="background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px;">
+                  <h3 style="font-size: 15px; color: var(--primary); margin-bottom: 15px;">
+                    <%= offer.title %> (<%= pending_subs.size %> pending)
+                  </h3>
+                  
+                  <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <% pending_subs.each do |sub| %>
                         <div style="border-top: 1px solid var(--border-color); padding-top: 15px; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
                           <div>
                             <strong style="font-size: 14px; color: var(--text-primary);">
@@ -305,11 +344,9 @@
                     </div>
                   </div>
                 <% end %>
-              <% end %>
 
               <!-- Show processed applications briefly -->
-              <% processed_subs = @profile.submissions.where(status: ["accepted", "rejected", "completed"]) %>
-              <% if processed_subs.any? %>
+              <% if @processed_submissions.any? %>
                 <div style="margin-top: 15px;">
                   <h4 style="font-size: 14px; color: var(--text-secondary); margin-bottom: 10px;">Processed History</h4>
                   <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
@@ -322,7 +359,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <% processed_subs.order(responded_at: :desc).limit(10).each do |sub| %>
+                      <% @processed_submissions.each do |sub| %>
                         <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
                           <td style="padding: 10px 0; font-weight: 500; color: var(--text-primary);">
                             <%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>
@@ -390,14 +427,23 @@
           </div>
 
         <% elsif @role_type == "CompanyProfile" %>
-          <% if @profile.submissions.where(status: "completed").count < 3 %>
-            <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+          <% if @completed_internships_count < 3 %>
+            <div style="display: flex; justify-content: center; margin-bottom: 12px;">
               <div class="badge-grace" title="Commitment score is protected during your first 3 internships to help you get established.">
                 <i data-lucide="sparkles"></i>
                 <span>New Recruiter (Grace Period)</span>
               </div>
             </div>
           <% end %>
+
+          <% company_score = @profile.commitment_score.round(0) %>
+          <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+            <div class="score-pill">
+              <span class="dot <%= company_score >= 90 ? 'dot-success' : (company_score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
+              <strong><%= company_score %></strong>
+              <span class="score-label">Commitment</span>
+            </div>
+          </div>
 
           <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
             <div style="display: flex; justify-content: space-between;">
@@ -410,7 +456,7 @@
             </div>
             <div style="display: flex; justify-content: space-between;">
               <span style="color: var(--text-secondary);">Active Offers:</span>
-              <strong><%= @profile.offers.count %></strong>
+              <strong><%= @offers_count %></strong>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: 5px;">
               <span style="color: var(--text-secondary);">Average Rating:</span>
@@ -441,10 +487,9 @@
             Commitment Ledger
           </h3>
 
-          <% events = @profile.commitment_events.order(created_at: :desc) %>
-          <% if events.any? %>
+          <% if @commitment_ledger_events.any? %>
             <div style="display: flex; flex-direction: column; gap: 12px; max-height: 300px; overflow-y: auto; padding-right: 5px;">
-              <% events.each do |event| %>
+              <% @commitment_ledger_events.each do |event| %>
                 <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 8px; font-size: 12px;">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                     <span style="font-weight: 600; color: <%= event.score_delta > 0 ? 'var(--success)' : 'var(--danger)' %>">

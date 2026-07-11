@@ -42,14 +42,24 @@ class StudentProfileTest < ActiveSupport::TestCase
   test "should allow attaching PDF CV" do
     profile = student_profiles(:mohamed)
     profile.cv.attach(io: StringIO.new("%PDF-1.4 Mock PDF Content"), filename: "test.pdf", content_type: "application/pdf")
+    profile.save!
     assert profile.valid?
   end
 
   test "should reject non-PDF CV" do
     profile = student_profiles(:mohamed)
     profile.cv.attach(io: StringIO.new("Mock TXT Content"), filename: "test.txt", content_type: "text/plain")
+    profile.save
     assert_not profile.valid?
     assert_includes profile.errors[:cv], "must be a PDF document"
+  end
+
+  test "should reject PDF with .pdf extension but wrong magic bytes" do
+    profile = student_profiles(:mohamed)
+    profile.cv.attach(io: StringIO.new("FakePDF content disguised"), filename: "resume.pdf", content_type: "application/pdf")
+    profile.save
+    assert_not profile.valid?
+    assert_includes profile.errors[:cv], "file is corrupted or not a valid PDF document"
   end
 
   test "should calculate average rating and review counts correctly" do

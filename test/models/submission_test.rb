@@ -40,13 +40,26 @@ class SubmissionTest < ActiveSupport::TestCase
     assert_includes sub.errors[:github_link], "must be a valid URL"
   end
 
-  test "should be valid with submitted status and good link format" do
+  test "should be invalid with submitted status and no submitted_at" do
     sub = Submission.new(
       student_profile: @student,
       offer: @offer,
       mission: @mission,
       status: "submitted",
       github_link: "https://github.com/myusername/myproject"
+    )
+    assert_not sub.valid?
+    assert_includes sub.errors[:submitted_at], "can't be blank"
+  end
+
+  test "should be valid with submitted status and good link format" do
+    sub = Submission.new(
+      student_profile: @student,
+      offer: @offer,
+      mission: @mission,
+      status: "submitted",
+      github_link: "https://github.com/myusername/myproject",
+      submitted_at: Time.current
     )
     assert sub.valid?
   end
@@ -56,7 +69,8 @@ class SubmissionTest < ActiveSupport::TestCase
       student_profile: @student,
       offer: @offer,
       mission: nil,
-      status: "submitted"
+      status: "submitted",
+      submitted_at: Time.current
     )
     assert sub.valid?
   end
@@ -72,23 +86,18 @@ class SubmissionTest < ActiveSupport::TestCase
     assert_includes sub.errors[:status], "is not included in the list"
   end
 
-  test "should trigger check_and_expire! and apply student penalty on load if past 48 hours" do
-    # Clear existing events for mohamed so we start with a clean score of 100
+  test "should trigger check_and_expire! and apply student penalty via job if past 48 hours" do
     @student.commitment_events.destroy_all
     @student.update_columns(commitment_score: 100.0)
 
-    # Get the existing fixture submission
     sub = submissions(:one)
-    
-    # Force created_at to 3 days ago, bypassing callbacks, and reset status to started
     sub.update_columns(created_at: 3.days.ago, status: "started")
 
-    # Reloading from database should trigger after_initialize callback and lazy expiry
-    reloaded_sub = Submission.find(sub.id)
-    
-    assert_equal "expired", reloaded_sub.status
-    
-    # Reload student to clear association cache and check events + score
+    ResolveExpiredSubmissionsJob.perform_now
+
+    sub.reload
+    assert_equal "expired", sub.status
+
     @student.reload
     event = @student.commitment_events.last
     assert_not_nil event
@@ -156,16 +165,13 @@ class SubmissionTest < ActiveSupport::TestCase
     assert_equal 15.0, @student.commitment_events.last.score_delta
   end
 
-  test "should auto-complete lazily after 7 days if only one side has confirmed completion" do
-    # Clear existing events, then add a pre-existing penalty event (-20) so they start at 80
+  test "should auto-complete via job after 7 days if only one side has confirmed completion" do
     @student.commitment_events.destroy_all
     @student.commitment_events.create!(event_type: "student_mission_expired", score_delta: -20.0, description: "Initial penalty")
     @student.recalculate_commitment_score!
     assert_equal 80.0, @student.commitment_score
 
     sub = submissions(:one)
-    
-    # Force state where student confirmed 8 days ago but company did not respond
     sub.update_columns(
       status: "accepted",
       student_confirmed_completed: true,
@@ -173,12 +179,12 @@ class SubmissionTest < ActiveSupport::TestCase
       first_completion_confirmed_at: 8.days.ago
     )
 
-    # Reloading should trigger check_and_resolve_status!
-    reloaded_sub = Submission.find(sub.id)
-    
-    assert_equal "completed", reloaded_sub.status
-    assert reloaded_sub.student_confirmed_completed
-    assert reloaded_sub.company_confirmed_completed
+    ResolveExpiredSubmissionsJob.perform_now
+
+    sub.reload
+    assert_equal "completed", sub.status
+    assert sub.student_confirmed_completed
+    assert sub.company_confirmed_completed
 
     @student.reload
     assert_equal 95.0, @student.commitment_score

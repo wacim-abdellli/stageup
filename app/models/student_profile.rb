@@ -35,6 +35,18 @@ class StudentProfile < ApplicationRecord
       unless cv.content_type.in?(%w[application/pdf])
         errors.add(:cv, "must be a PDF document")
       end
+
+      if errors[:cv].none? && cv.byte_size > 0
+        begin
+          header = cv.download.first(4)
+          unless header == "%PDF"
+            errors.add(:cv, "file is corrupted or not a valid PDF document")
+          end
+        rescue ActiveStorage::FileNotFoundError
+          # File not yet accessible during initial attachment; skip magic-byte check
+        end
+      end
+
       if cv.byte_size > 5.megabytes
         errors.add(:cv, "size must be less than 5MB")
       end

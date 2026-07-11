@@ -7,6 +7,29 @@ class DashboardsController < ApplicationController
     @user = current_user
     @role_type = @user.profileable_type
     @profile = @user.profileable
+
+    if @role_type == "StudentProfile"
+      submissions = @profile.submissions.where(status: ["accepted", "completed"])
+      @active_internships = submissions.includes({ offer: :company_profile }, :reviews).order(created_at: :desc)
+      @completed_internships_count = @profile.submissions.where(status: "completed").count
+      @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc)
+    elsif @role_type == "CompanyProfile"
+      company_subs = @profile.submissions.where(status: ["accepted", "completed"])
+      @active_internships = company_subs.includes(:student_profile, :offer, :reviews).order(created_at: :desc)
+      @completed_internships_count = @profile.submissions.where(status: "completed").count
+      @offers_count = @profile.offers.count
+
+      offer_ids = @profile.offers.select(:id)
+      pending = Submission.where(offer_id: offer_ids).where(status: "submitted")
+      @pending_submissions = pending.includes(:offer, student_profile: { cv_attachment: :blob }).order(created_at: :desc)
+
+      processed = Submission.where(offer_id: offer_ids).where(status: ["accepted", "rejected", "completed"])
+      @processed_submissions = processed.includes(:student_profile, :offer).order(responded_at: :desc).limit(10)
+
+      @company_offers = @profile.offers.order(created_at: :desc)
+
+      @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc)
+    end
   end
 
   def update_cv

@@ -119,8 +119,17 @@
           </div>
         <% end %>
 
-        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: 10px;">
-          <span style="color: var(--text-secondary);">Average Rating</span>
+          <div style="display: flex; justify-content: center; margin-bottom: 12px; border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 12px;">
+            <% company_score = @company.commitment_score.round(0) %>
+            <div class="score-pill" style="font-size: 12px;">
+              <span class="dot <%= company_score >= 90 ? 'dot-success' : (company_score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
+              <strong><%= company_score %></strong>
+              <span class="score-label">Commitment</span>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+            <span style="color: var(--text-secondary);">Average Rating</span>
           <% comp_avg = @company.average_rating %>
           <% if comp_avg %>
             <strong style="display: inline-flex; align-items: center; gap: 4px;">

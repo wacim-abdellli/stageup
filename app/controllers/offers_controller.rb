@@ -1,6 +1,8 @@
 class OffersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :ensure_company!, only: [:new, :create]
+  before_action :ensure_company!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_offer, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_offer_owner!, only: [:edit, :update, :destroy]
 
   # GET /offers
   def index
@@ -25,7 +27,6 @@ class OffersController < ApplicationController
 
   # GET /offers/:id
   def show
-    @offer = Offer.find(params[:id])
     @company = @offer.company_profile
     @mission = @offer.mission
 
@@ -41,6 +42,30 @@ class OffersController < ApplicationController
   end
 
   # POST /offers
+  # GET /offers/:id/edit
+  def edit
+  end
+
+  # PATCH /offers/:id
+  def update
+    if @offer.update(offer_params)
+      redirect_to dashboard_path, notice: "Offer was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /offers/:id
+  def destroy
+    if @offer.status == "draft"
+      @offer.destroy
+      redirect_to dashboard_path, notice: "Draft offer was permanently deleted."
+    else
+      @offer.update!(status: "archived")
+      redirect_to dashboard_path, notice: "Offer was archived and is no longer visible to students."
+    end
+  end
+
   def create
     @offer = current_user.profileable.offers.build(offer_params)
     
@@ -71,6 +96,16 @@ class OffersController < ApplicationController
   def ensure_company!
     unless current_user.profileable_type == "CompanyProfile"
       redirect_to dashboard_path, alert: "Only registered employers can post internship offers."
+    end
+  end
+
+  def set_offer
+    @offer = Offer.find(params[:id])
+  end
+
+  def ensure_offer_owner!
+    unless @offer.company_profile == current_user.profileable
+      redirect_to dashboard_path, alert: "You can only manage your own offers."
     end
   end
 end

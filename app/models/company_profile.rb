@@ -6,6 +6,13 @@ class CompanyProfile < ApplicationRecord
 
   validates :name, presence: true
 
+  def recalculate_commitment_score!
+    base = 100.0
+    delta = commitment_events.sum(:score_delta)
+    new_score = (base + delta).clamp(0.0, 100.0)
+    update!(commitment_score: new_score)
+  end
+
   def recalculate_metrics!
     total_apps = submissions.where.not(status: ["started", "abandoned", "expired"])
     responded_apps = total_apps.where.not(responded_at: nil)

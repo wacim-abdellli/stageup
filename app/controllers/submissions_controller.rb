@@ -59,7 +59,9 @@ class SubmissionsController < ApplicationController
     ActiveRecord::Base.transaction do
       if @submission.save
         log_company_response_event(@submission)
-        @submission.offer.company_profile.recalculate_metrics!
+        company = @submission.offer.company_profile
+        company.recalculate_metrics!
+        company.recalculate_commitment_score!
         redirect_to dashboard_path, notice: "Application was successfully accepted! We logged your response."
       else
         redirect_to dashboard_path, alert: "Failed to accept application."
@@ -75,12 +77,50 @@ class SubmissionsController < ApplicationController
     ActiveRecord::Base.transaction do
       if @submission.save
         log_company_response_event(@submission)
-        @submission.offer.company_profile.recalculate_metrics!
+        company = @submission.offer.company_profile
+        company.recalculate_metrics!
+        company.recalculate_commitment_score!
         redirect_to dashboard_path, notice: "Application was rejected. We logged your response."
       else
         redirect_to dashboard_path, alert: "Failed to reject application."
       end
     end
+  end
+
+  # POST /submissions/:id/abandon
+  def abandon
+    @submission = current_user.profileable.submissions.find(params[:id])
+
+    unless @submission.status == "accepted"
+      redirect_to dashboard_path, alert: "You can only abandon an active internship."
+      return
+    end
+
+    @submission.update!(status: "abandoned", responded_at: Time.current)
+
+    student = @submission.student_profile
+    student.commitment_events.create!(
+      event_type: "student_abandoned_mission",
+      score_delta: -25.0,
+      description: "Abandoned internship '#{@submission.offer.title}' at #{@submission.offer.company_profile.name}."
+    )
+    student.recalculate_commitment_score!
+
+    redirect_to dashboard_path, notice: "You have abandoned the internship. A penalty has been applied to your commitment score."
+  end
+
+  # POST /submissions/:id/cancel
+  def cancel
+    @submission = Submission.joins(:offer).where(offers: { company_profile_id: current_user.profileable_id }).find(params[:id])
+
+    unless @submission.status == "accepted"
+      redirect_to dashboard_path, alert: "You can only cancel an active internship."
+      return
+    end
+
+    @submission.update!(status: "cancelled", responded_at: Time.current)
+
+    redirect_to dashboard_path, notice: "Internship has been cancelled and your commitment score has been adjusted."
   end
 
   # POST /submissions/:id/confirm_completion
