@@ -1,0 +1,17 @@
+{
+  "name": "StageUp",
+  "short_name": "StageUp",
+  "description": "Verify practical skills, complete proof missions, and secure top-tier internships.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090B",
+  "theme_color": "#4F46E5",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}
