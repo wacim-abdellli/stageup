@@ -51,6 +51,16 @@ class SubmissionTest < ActiveSupport::TestCase
     assert sub.valid?
   end
 
+  test "should be valid with submitted status and no link for CV-only offer" do
+    sub = Submission.new(
+      student_profile: @student,
+      offer: @offer,
+      mission: nil,
+      status: "submitted"
+    )
+    assert sub.valid?
+  end
+
   test "should validate status inclusion" do
     sub = Submission.new(
       student_profile: @student,

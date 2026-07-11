@@ -5,12 +5,17 @@ class Submission < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
   validates :status, presence: true, inclusion: { in: %w[started submitted under_review accepted rejected completed abandoned expired] }
-  validates :github_link, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: "must be a valid URL" }, if: :submitted?
+  validates :github_link, presence: true, if: :github_link_required?
+  validates :github_link, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: "must be a valid URL" }, allow_blank: true
 
   after_initialize :check_and_resolve_status!, if: :persisted?
 
   def submitted?
     status == "submitted"
+  end
+
+  def github_link_required?
+    mission_id.present? && status == "submitted"
   end
 
   def check_and_resolve_status!
