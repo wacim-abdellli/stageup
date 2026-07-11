@@ -12,14 +12,16 @@
   </div>
 
   <% if flash[:alert] %>
-    <div class="flash-message flash-alert">
-      <span>⚠️</span> <%= flash[:alert] %>
+    <div class="flash-message flash-alert" style="display: flex; align-items: center; gap: 8px;">
+      <i data-lucide="alert-circle" style="width: 16px; height: 16px; stroke: #F87171; flex-shrink: 0;"></i>
+      <span><%= flash[:alert] %></span>
     </div>
   <% end %>
 
   <% if flash[:notice] %>
-    <div class="flash-message flash-notice">
-      <span>✅</span> <%= flash[:notice] %>
+    <div class="flash-message flash-notice" style="display: flex; align-items: center; gap: 8px;">
+      <i data-lucide="check-circle" style="width: 16px; height: 16px; stroke: #34D399; flex-shrink: 0;"></i>
+      <span><%= flash[:notice] %></span>
     </div>
   <% end %>
 
@@ -121,7 +123,10 @@
           <span style="color: var(--text-secondary);">Average Rating</span>
           <% comp_avg = @company.average_rating %>
           <% if comp_avg %>
-            <strong>⭐️ <%= comp_avg %> (<%= @company.reviews_received_count %> reviews)</strong>
+            <strong style="display: inline-flex; align-items: center; gap: 4px;">
+              <i data-lucide="star" style="width: 14px; height: 14px; fill: #F59E0B; stroke: #F59E0B;"></i>
+              <%= comp_avg %> (<%= @company.reviews_received_count %> reviews)
+            </strong>
           <% else %>
             <strong style="color: var(--text-secondary);">Unrated</strong>
           <% end %>
@@ -136,7 +141,10 @@
             <% Review.where(receiver: @company.user).order(created_at: :desc).each do |rev| %>
               <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 8px; font-size: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                  <span style="font-weight: 600; color: #FBBF24;">⭐️ <%= rev.rating %> / 5</span>
+                  <span style="font-weight: 600; color: #FBBF24; display: inline-flex; align-items: center; gap: 4px;">
+                    <i data-lucide="star" style="width: 12px; height: 12px; fill: #F59E0B; stroke: #F59E0B;"></i>
+                    <%= rev.rating %> / 5
+                  </span>
                   <span style="color: var(--text-muted); font-size: 10px;"><%= time_ago_in_words(rev.created_at) %> ago</span>
                 </div>
                 <p style="color: var(--text-secondary); line-height: 1.4;">"<%= rev.comment %>"</p>

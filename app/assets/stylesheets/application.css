@@ -603,3 +603,39 @@ a:hover {
   transform: translateY(-2px);
 }
 
+/* Authentication Links */
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+  font-size: 13px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.auth-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.auth-links a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.auth-card a:not(.btn) {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.auth-card a:not(.btn):hover {
+  color: white;
+  text-decoration: underline;
+}
+

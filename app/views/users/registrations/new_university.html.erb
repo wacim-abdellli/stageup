@@ -7,8 +7,9 @@
     </div>
 
     <% if flash[:alert] %>
-      <div class="flash-message flash-alert">
-        <span>⚠️</span> <%= flash[:alert] %>
+      <div class="flash-message flash-alert" style="display: flex; align-items: center; gap: 8px;">
+        <i data-lucide="alert-circle" style="width: 16px; height: 16px; stroke: #F87171; flex-shrink: 0;"></i>
+        <span><%= flash[:alert] %></span>
       </div>
     <% end %>
 
@@ -17,9 +18,12 @@
       <!-- Display Validation Errors -->
       <% errors = (@university_profile.errors.full_messages + @user.errors.full_messages).uniq %>
       <% if errors.any? %>
-        <div class="flash-message flash-alert" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-          <strong>Please fix the following errors:</strong>
-          <ul style="margin-left: 20px; font-size: 13px;">
+        <div class="flash-message flash-alert" style="flex-direction: column; align-items: flex-start; gap: 6px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <i data-lucide="alert-circle" style="width: 16px; height: 16px; stroke: #F87171; flex-shrink: 0;"></i>
+            <strong>Please resolve the following errors:</strong>
+          </div>
+          <ul style="margin-left: 24px; font-size: 13px; margin-top: 0; margin-bottom: 0;">
             <% errors.each do |msg| %>
               <li><%= msg %></li>
             <% end %>
