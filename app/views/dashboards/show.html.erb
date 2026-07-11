@@ -171,12 +171,14 @@
                     <th>Major</th>
                     <th>Graduation Year</th>
                     <th>Active Internship</th>
+                    <th>Agreement</th>
                     <th>Commitment Score</th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @students.each do |s| %>
                     <% active_sub = s.submissions.detect { |sub| %w[accepted completed].include?(sub.status) } %>
+                    <% agreement = active_sub&.internship_agreement %>
                     <tr>
                       <td><%= s.first_name %> <%= s.last_name %></td>
                       <td><%= s.major.presence || "—" %></td>
@@ -188,6 +190,20 @@
                           </span>
                         <% else %>
                           <span class="fs-12 text-muted">None</span>
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if active_sub && agreement %>
+                          <% if agreement.status == "fully_executed" %>
+                            <span class="badge-status badge-completed">✓ Signed</span>
+                          <% else %>
+                            <span class="badge-status badge-pending">Pending</span>
+                            <%= link_to "View & Sign", submission_internship_agreement_path(active_sub, agreement), class: "btn btn-primary btn-compact-sm", style: "margin-left: 6px;" %>
+                          <% end %>
+                        <% elsif active_sub %>
+                          <span class="fs-12 text-muted">—</span>
+                        <% else %>
+                          <span class="fs-12 text-muted">—</span>
                         <% end %>
                       </td>
                       <td>
@@ -231,15 +247,27 @@
                   </div>
                   <div>
                     <% if sub.status == "accepted" %>
-                      <div class="action-group">
-                        <% if sub.student_confirmed_completed %>
-                          <span class="badge-status badge-completion-pending">
-                            Waiting for Employer
-                          </span>
-                        <% else %>
-                          <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success" %>
-                          <%= button_to "Abandon", abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Are you sure you want to abandon this internship? Your commitment score will be penalized." } %>
-                        <% end %>
+                      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
+                        <div class="action-group">
+                          <% if sub.student_confirmed_completed %>
+                            <span class="badge-status badge-completion-pending">
+                              Waiting for Employer
+                            </span>
+                          <% else %>
+                            <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success" %>
+                            <%= button_to "Abandon", abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Are you sure you want to abandon this internship? Your commitment score will be penalized." } %>
+                          <% end %>
+                        </div>
+                        <div class="action-group">
+                          <% if sub.internship_agreement %>
+                            <% if sub.internship_agreement.status == "pending_signatures" %>
+                              <span class="badge-status badge-pending">Awaiting: <%= sub.internship_agreement.pending_signatories.join(", ") %></span>
+                            <% end %>
+                            <%= link_to "View & Sign Agreement", submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" %>
+                          <% else %>
+                            <%= link_to "Generate Convention de Stage", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
+                          <% end %>
+                        </div>
                       </div>
                     <% else %>
                       <span class="badge-status badge-completed" style="margin-right: 10px;">Completed</span>
@@ -324,15 +352,27 @@
                   </div>
                   <div>
                     <% if sub.status == "accepted" %>
-                      <div class="action-group">
-                        <% if sub.company_confirmed_completed %>
-                          <span class="badge-status badge-completion-pending">
-                            Waiting for Student
-                          </span>
-                        <% else %>
-                          <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success" %>
-                          <%= button_to "Cancel", cancel_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Cancel this internship? This will notify the student." } %>
-                        <% end %>
+                      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
+                        <div class="action-group">
+                          <% if sub.company_confirmed_completed %>
+                            <span class="badge-status badge-completion-pending">
+                              Waiting for Student
+                            </span>
+                          <% else %>
+                            <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success" %>
+                            <%= button_to "Cancel", cancel_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Cancel this internship? This will notify the student." } %>
+                          <% end %>
+                        </div>
+                        <div class="action-group">
+                          <% if sub.internship_agreement %>
+                            <% if sub.internship_agreement.status == "pending_signatures" %>
+                              <span class="badge-status badge-pending">Awaiting: <%= sub.internship_agreement.pending_signatories.join(", ") %></span>
+                            <% end %>
+                            <%= link_to "View & Sign Agreement", submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" %>
+                          <% else %>
+                            <%= link_to "Generate Convention de Stage", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
+                          <% end %>
+                        </div>
                       </div>
                     <% else %>
                       <span class="badge-status badge-completed" style="margin-right: 10px;">Completed</span>

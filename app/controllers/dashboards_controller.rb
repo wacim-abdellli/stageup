@@ -10,12 +10,12 @@ class DashboardsController < ApplicationController
 
     if @role_type == "StudentProfile"
       submissions = @profile.submissions.where(status: ["accepted", "completed"])
-      @active_internships = submissions.includes({ offer: :company_profile }, :reviews).order(created_at: :desc)
+      @active_internships = submissions.includes({ offer: :company_profile }, :reviews, :internship_agreement).order(created_at: :desc)
       @completed_internships_count = @profile.submissions.where(status: "completed").count
       @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc)
     elsif @role_type == "CompanyProfile"
       company_subs = @profile.submissions.where(status: ["accepted", "completed"])
-      @active_internships = company_subs.includes(:student_profile, :offer, :reviews).order(created_at: :desc)
+      @active_internships = company_subs.includes(:student_profile, :offer, :reviews, :internship_agreement).order(created_at: :desc)
       @completed_internships_count = @profile.submissions.where(status: "completed").count
       @offers_count = @profile.offers.count
 
@@ -31,7 +31,7 @@ class DashboardsController < ApplicationController
       @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc)
     elsif @role_type == "UniversityProfile"
       @university = @profile.university
-      @students = StudentProfile.where(university: @university).includes(:user, :submissions).order(last_name: :asc)
+      @students = StudentProfile.where(university: @university).includes(:user, submissions: :internship_agreement).order(last_name: :asc)
       @total_students_count = @students.size
       @active_internships_count = Submission.joins(:student_profile)
                                              .where(student_profiles: { university_id: @university.id })

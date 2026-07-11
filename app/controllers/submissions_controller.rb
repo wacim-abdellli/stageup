@@ -141,6 +141,11 @@ class SubmissionsController < ApplicationController
 
   # POST /submissions/:id/confirm_completion
   def confirm_completion
+    if @submission.internship_agreement.present? && @submission.internship_agreement.status == "pending_signatures"
+      redirect_to dashboard_path, alert: "You cannot mark this internship as completed until the Convention de Stage is fully signed by all three parties."
+      return
+    end
+
     role = current_user.profileable_type
     @submission.confirm_completion_by!(role)
 

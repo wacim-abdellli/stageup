@@ -3,6 +3,7 @@ class Submission < ApplicationRecord
   belongs_to :offer
   belongs_to :mission, optional: true
   has_many :reviews, dependent: :destroy
+  has_one :internship_agreement, dependent: :destroy
 
   validates :status, presence: true, inclusion: { in: %w[started submitted under_review accepted rejected completed abandoned expired cancelled] }
   validates :github_link, presence: true, if: :github_link_required?

@@ -1,0 +1,44 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <%= render "layouts/navbar_brand" %>
+      <h2 class="auth-title">Convention de Stage</h2>
+      <p class="auth-subtitle">Tunisian Three-Way Internship Agreement</p>
+    </div>
+
+    <% if @agreement.errors.any? %>
+      <div class="flash-message flash-alert flash-col">
+        <div class="flash-col-header">
+          <i data-lucide="alert-circle" class="icon-16 flex-shrink-0" style="stroke: #F87171;"></i>
+          <strong>Please resolve the following errors:</strong>
+        </div>
+        <ul class="error-list">
+          <% @agreement.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with model: [@submission, @agreement], local: true do |f| %>
+      <h3 class="section-heading-lg">Internship Dates</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="internship_agreement_start_date">Start Date</label>
+          <%= f.date_field :start_date, class: "form-control", required: true %>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="internship_agreement_end_date">End Date</label>
+          <%= f.date_field :end_date, class: "form-control", required: true %>
+        </div>
+      </div>
+
+      <div class="form-footer-row">
+        <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary" %>
+        <%= f.submit "Generate Agreement", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

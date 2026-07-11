@@ -1583,3 +1583,128 @@ a:hover {
   margin-bottom: 20px;
 }
 
+/* ============= INTERNSHIP AGREEMENT CSS ============= */
+
+.agreement-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.agreement-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 50px;
+  box-shadow: var(--shadow-lg);
+}
+
+.agreement-header {
+  text-align: center;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 25px;
+  margin-bottom: 30px;
+}
+
+.agreement-title {
+  font-size: 28px;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+
+.agreement-subtitle {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.agreement-article-title {
+  font-size: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  color: #818CF8;
+}
+
+.agreement-text {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.agreement-list {
+  color: var(--text-secondary);
+  line-height: 2;
+  font-size: 15px;
+  margin-left: 20px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.agreement-signatures-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.agreement-sign-box {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  text-align: center;
+}
+
+.agreement-sign-box-title {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.agreement-sign-box-name {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+.agreement-signed-badge {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+}
+
+.agreement-signed-label {
+  font-size: 12px;
+  color: #34D399;
+  font-weight: 600;
+}
+
+.agreement-signed-date {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.agreement-unsigned-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.agreement-back-row {
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 25px;
+}
+
+.agreement-back-link {
+  display: inline-flex;
+  width: auto;
+  padding: 10px 24px;
+}
+
+@media (max-width: 768px) {
+  .agreement-signatures-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

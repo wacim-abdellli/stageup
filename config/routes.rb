@@ -28,6 +28,11 @@ Rails.application.routes.draw do
       post :cancel
     end
     resources :reviews, only: [:new, :create]
+    resources :internship_agreements, only: [:new, :create, :show] do
+      member do
+        post :sign
+      end
+    end
   end
   root to: "home#index"
   get 'reputation_events', to: 'home#reputation_events'
