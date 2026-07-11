@@ -1,4 +1,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  # Disable default Devise signup actions (redirect to custom role selector)
+  def new
+    redirect_to select_role_path
+  end
+
+  def create
+    redirect_to select_role_path
+  end
+
   # GET /signup
   def select_role
     render :select_role
