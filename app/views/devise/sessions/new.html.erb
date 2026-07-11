@@ -1,0 +1,48 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <%= render "layouts/navbar_brand" %>
+      <h2 class="auth-title">Log in</h2>
+      <p class="auth-subtitle">Welcome back to StageUp</p>
+    </div>
+
+    <% if flash[:alert] %>
+      <div class="flash-message flash-alert">
+        <span>⚠️</span> <%= flash[:alert] %>
+      </div>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class="flash-message flash-notice">
+        <span>✅</span> <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group">
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "email@example.com", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, class: "form-label" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "••••••••", required: true %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+          <%= f.check_box :remember_me, style: "width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent);" %>
+          <%= f.label :remember_me, class: "form-label", style: "margin: 0; cursor: pointer;" %>
+        </div>
+      <% end %>
+
+      <div class="form-group" style="margin-top: 30px;">
+        <%= f.submit "Log in", class: "btn btn-accent", style: "width: 100%; cursor: pointer;" %>
+      </div>
+    <% end %>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; text-align: center; font-size: 14px; color: var(--text-secondary); border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
+      <%= link_to "Sign up", select_role_path, style: "font-weight: 500;" %>
+      <%= link_to "Forgot your password?", new_password_path(resource_name), style: "font-weight: 500; font-size: 13px;" %>
+    </div>
+  </div>
+</div>
