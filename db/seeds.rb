@@ -116,7 +116,7 @@ offer_2.update!(
   description: "Clean data, build models.",
   stage_type: "PFA",
   spots: 1,
-  location: "Remote",
+  location: "Tunis",
   work_mode: "remote",
   status: "active",
   deadline: 30.days.from_now

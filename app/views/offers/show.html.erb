@@ -32,22 +32,28 @@
           <h2 style="font-size: 26px; margin-bottom: 6px;"><%= @offer.title %></h2>
           <span style="font-size: 16px; color: var(--text-secondary);"><%= @company.name %></span>
         </div>
-        <span class="badge badge-info" style="font-size: 12px; padding: 4px 10px;"><%= @offer.stage_type.upcase %></span>
+        <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; text-transform: uppercase; padding: 4px 10px; font-size: 12px;"><%= @offer.stage_type %></span>
       </div>
 
-      <div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">
-        <span class="badge" style="background-color: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 4px 10px; font-size: 12px;">
-          📍 <%= @offer.location %>
+      <div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; align-items: center;">
+        <% if @offer.location.downcase != "remote" %>
+          <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 4px 10px; font-size: 12px;">
+            <i data-lucide="map-pin" style="width: 13px; height: 13px; stroke: var(--text-secondary);"></i>
+            <%= @offer.location %>
+          </span>
+        <% end %>
+        <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 4px 10px; font-size: 12px;">
+          <i data-lucide="monitor" style="width: 13px; height: 13px; stroke: var(--text-secondary);"></i>
+          <%= @offer.work_mode.capitalize %>
         </span>
-        <span class="badge" style="background-color: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 4px 10px; font-size: 12px;">
-          💻 <%= @offer.work_mode.capitalize %>
-        </span>
-        <span class="badge" style="background-color: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 4px 10px; font-size: 12px;">
-          👥 <%= pluralize(@offer.spots, 'spot') %> available
+        <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 4px 10px; font-size: 12px;">
+          <i data-lucide="users" style="width: 13px; height: 13px; stroke: var(--text-secondary);"></i>
+          <%= pluralize(@offer.spots, 'spot') %> available
         </span>
         <% if @offer.deadline %>
-          <span class="badge" style="background-color: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 4px 10px; font-size: 12px;">
-            📅 Deadline: <%= @offer.deadline.strftime("%b %d, %Y") %>
+          <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 4px 10px; font-size: 12px;">
+            <i data-lucide="calendar" style="width: 13px; height: 13px; stroke: var(--text-secondary);"></i>
+            Deadline: <%= @offer.deadline.strftime("%b %d, %Y") %>
           </span>
         <% end %>
       </div>
@@ -63,9 +69,13 @@
       <% if @mission %>
         <div style="background-color: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); padding: 30px; border-radius: var(--radius-md);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(99, 102, 241, 0.15); padding-bottom: 10px;">
-            <h3 style="font-size: 18px; color: #818CF8;">⚡ Attached Proof Mission</h3>
-            <span class="badge" style="background-color: rgba(99, 102, 241, 0.15); color: #818CF8; font-size: 11px;">
-              ⏱️ Est. Time: <%= @mission.estimated_duration_minutes %> mins
+            <h3 style="font-size: 18px; color: #818CF8; display: flex; align-items: center; gap: 6px;">
+              <i data-lucide="git-commit" style="width: 18px; height: 18px; stroke: #818CF8;"></i>
+              Attached Proof Mission
+            </h3>
+            <span class="badge-status" style="background-color: rgba(99, 102, 241, 0.15); color: #818CF8; border: 1px solid rgba(99, 102, 241, 0.3); font-size: 11px; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px;">
+              <i data-lucide="clock" style="width: 12px; height: 12px; stroke: #818CF8;"></i>
+              Est. Time: <%= @mission.estimated_duration_minutes %> mins
             </span>
           </div>
           <h4 style="font-size: 15px; margin-bottom: 8px;"><%= @mission.title %></h4>

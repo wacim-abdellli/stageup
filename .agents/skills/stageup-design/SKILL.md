@@ -160,3 +160,39 @@ To avoid generic-looking layouts, the agent must check all modifications against
 | **Overused Gradient Blobs** | Bright purple/pink neon circles competing with copy readability. | Keep background light sources dark and muted (`rgba(99, 102, 241, 0.06)`). Use hairline borders for structure. |
 | **Emoji Spam** | Emojis acting as indicators or structural navigation elements. | Use clean vector SVGs or Lucide icons. |
 | **Boxed Everything** | Nesting card containers within card containers, creating double-border clutter. | Use negative space, vertical divider lines, or varying background tones to divide content instead of border boxes. |
+
+---
+
+## 6. Advanced Brand Rules
+
+### 6.1 Icon Rules
+* **Semantic Uniqueness:** One icon = one concept, platform-wide. Before adding any icon, check: is this icon already used for something else? If yes, pick a different one.
+* **Muted Visuals:** Icons are muted by default, never decorative color: use `color: var(--text-secondary)` (gray) unless the icon is an explicit status indicator (success/danger/warning).
+* **Abstract Concepts:** No literal-object icons for abstract concepts. Emojis or icons like trophy, lightning, or graduation-cap are clip-art metaphors. Prefer structural icons (Lucide: `check-circle`, `git-commit`, `shield-check`) that feel like product UI, not a slide deck.
+* **Icon Labels:** Icons never carry meaning alone. Every icon pairs with a text label — never icon-only unless it's a universally understood control (close, menu).
+
+### 6.2 Badge Color Semantics Table
+A badge's color is looked up from this table by meaning, never assigned ad hoc per-component:
+
+| Meaning | Color Scheme | CSS / Tailored Class | Example |
+|---|---|---|---|
+| **Stage type** (neutral classification) | Gray outline, no fill | `border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent;` | PFA, PFE, Initiation |
+| **Requires action / extra step** | Indigo (brand primary) | `background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.2); color: #818CF8;` | Mission Attached |
+| **Simple / no extra step** | Gray, muted | `background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); color: var(--text-secondary);` | CV Only |
+| **Positive status** | Success green | `background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.2); color: #34D399;` | Completed, Verified |
+| **Negative/warning status** | Danger coral/red | `background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.2); color: #F87171;` | Expired, Rejected |
+| **Grace period / provisional** | Amber/Yellow | `background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.2); color: #FBBF24;` | Establishing Reputation |
+
+### 6.3 Spacing Rules
+* **Gaps:** All vertical section gaps must be one of: `32px` / `48px` / `64px` — nothing in between, nothing eyeballed.
+* **Visual Anchor:** Every section boundary needs either a hairline divider or a background shift — never just empty space with no visual anchor.
+
+---
+
+## 7. Pre-Ship Checklist
+Before presenting ANY UI work to the user, run through this checklist and report the findings explicitly:
+1. **[ ] Icon Duplicate Check:** Does any icon on this page duplicate an icon used elsewhere for a different concept?
+2. **[ ] Badge Semantics Check:** Does every badge's color match the semantics table above?
+3. **[ ] 8px Spacing Check:** Is every spacing value on the 8px scale?
+4. **[ ] Duplicate Info Check:** Are there two elements on the page showing the same information twice? (e.g. location vs work mode rendering duplicate text).
+5. **[ ] Listing Features Check:** If this is a listing/index page — does it have search/filter, or is that explicitly deferred?

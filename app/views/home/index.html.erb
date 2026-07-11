@@ -39,7 +39,7 @@
     <div class="bento-grid">
       <!-- Card 1: Proof of Work -->
       <div class="bento-card glass-card">
-        <div style="font-size: 24px; margin-bottom: 15px;">⚡</div>
+        <div style="margin-bottom: 15px;"><i data-lucide="git-commit" style="width: 24px; height: 24px; stroke: var(--text-secondary);"></i></div>
         <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Proof-of-Work Missions</h3>
         <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
           Skip the endless CV filtering. Recruiters attach hands-on 48-hour coding challenges. Students submit clean code solutions directly to unlock interviews.
@@ -48,7 +48,7 @@
 
       <!-- Card 2: Reputation Ledger -->
       <div class="bento-card glass-card">
-        <div style="font-size: 24px; margin-bottom: 15px;">🏆</div>
+        <div style="margin-bottom: 15px;"><i data-lucide="shield-check" style="width: 24px; height: 24px; stroke: var(--text-secondary);"></i></div>
         <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Reputation Ledger</h3>
         <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
           Verify reliability upfront. Our immutable scoring system penalizes ghosting or missed deadlines, and rewards verified completions on both sides.
@@ -57,7 +57,7 @@
 
       <!-- Card 3: University Verification -->
       <div class="bento-card glass-card">
-        <div style="font-size: 24px; margin-bottom: 15px;">🎓</div>
+        <div style="margin-bottom: 15px;"><i data-lucide="check-circle" style="width: 24px; height: 24px; stroke: var(--text-secondary);"></i></div>
         <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Academic Verification</h3>
         <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
           Official email domain tracking (e.g. <code>@isetsf.rnu.tn</code> or <code>@enis.tn</code>) instantly verifies student credentials and connects them to registered coordinators.
@@ -67,10 +67,13 @@
 
     <!-- Active Offers Section -->
     <% if @active_offers.any? %>
-      <div style="margin-top: 100px; border-top: 1px solid var(--border-color); padding-top: 60px; text-align: left; margin-bottom: 100px;">
+      <div style="margin-top: 48px; border-top: 1px solid var(--border-color); padding-top: 48px; text-align: left; margin-bottom: 64px;">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
           <div>
-            <h2 style="font-size: 24px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">⚡ Featured Opportunities</h2>
+            <h2 style="font-size: 24px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; display: inline-flex; align-items: center; gap: 8px;">
+              <i data-lucide="compass" style="width: 24px; height: 24px; stroke: var(--text-secondary);"></i>
+              Featured Opportunities
+            </h2>
             <p style="color: var(--text-secondary); font-size: 14px;">Browse active internship listings and take on their proof missions</p>
           </div>
           <%= link_to "View All Offers →", offers_path, style: "font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none;" %>
@@ -81,18 +84,31 @@
             <div class="glass-card" style="padding: 25px; border-radius: var(--radius-lg); display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; border: 1px solid var(--border-color); transition: var(--transition);">
               <div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                  <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;"><%= offer.stage_type %></span>
+                  <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; text-transform: uppercase; padding: 2px 8px; font-size: 10px;"><%= offer.stage_type %></span>
                   <% if offer.mission.present? %>
-                    <span style="background-color: rgba(249, 115, 22, 0.15); color: var(--accent); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">⚡ Mission Attached</span>
+                    <span class="badge-status" style="background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.2); color: #818CF8; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px; font-size: 10px;">
+                      <i data-lucide="git-commit" style="width: 12px; height: 12px; stroke: #818CF8;"></i>
+                      Mission Attached
+                    </span>
                   <% else %>
-                    <span style="background-color: rgba(67, 56, 202, 0.15); color: #818CF8; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 9999px;">📄 CV Only</span>
+                    <span class="badge-status" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px; font-size: 10px;">
+                      <i data-lucide="check-circle" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
+                      CV Only
+                    </span>
                   <% end %>
                 </div>
                 <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px;"><%= link_to offer.title, offer, style: "color: white; text-decoration: none;" %></h3>
                 <span style="font-size: 13px; color: var(--text-secondary); display: block; margin-bottom: 12px;"><%= offer.company_profile.name %></span>
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 15px; margin-top: 15px;">
-                <span style="font-size: 12px; color: var(--text-secondary);"><%= offer.location %> (<%= offer.work_mode.upcase %>)</span>
+                <span style="font-size: 12px; color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px;">
+                  <i data-lucide="map-pin" style="width: 13px; height: 13px; stroke: var(--text-secondary);"></i>
+                  <% if offer.location.downcase == "remote" %>
+                    Remote
+                  <% else %>
+                    <%= offer.location %> (<%= offer.work_mode.capitalize %>)
+                  <% end %>
+                </span>
                 <%= link_to "View details", offer, style: "font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none;" %>
               </div>
             </div>

@@ -22,14 +22,14 @@
   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;">
     <% if @offers.any? %>
       <% @offers.each do |offer| %>
-        <div class="profile-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 25px; transition: var(--transition); cursor: pointer;" onclick="window.location='<%= offer_path(offer) %>'">
+         <div class="profile-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 25px; transition: var(--transition); cursor: pointer;" onclick="window.location='<%= offer_path(offer) %>'">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
               <div>
                 <h3 style="font-size: 18px; margin-bottom: 4px;"><%= offer.title %></h3>
                 <span style="font-size: 14px; color: var(--text-secondary);"><%= offer.company_profile.name %></span>
               </div>
-              <span class="badge badge-info" style="font-size: 10px; padding: 3px 8px;"><%= offer.stage_type.upcase %></span>
+              <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; text-transform: uppercase;"><%= offer.stage_type %></span>
             </div>
 
             <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
@@ -38,16 +38,26 @@
           </div>
 
           <div style="border-top: 1px solid var(--border-color); padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-              <span class="badge" style="background-color: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-secondary); font-size: 10px; padding: 2px 6px;">
-                📍 <%= offer.location %>
-              </span>
-              <span class="badge" style="background-color: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-secondary); font-size: 10px; padding: 2px 6px;">
-                💻 <%= offer.work_mode.capitalize %>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+              <% if offer.location.downcase != "remote" %>
+                <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px;">
+                  <i data-lucide="map-pin" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
+                  <%= offer.location %>
+                </span>
+              <% end %>
+              <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px;">
+                <i data-lucide="monitor" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
+                <%= offer.work_mode.capitalize %>
               </span>
               <% if offer.mission %>
-                <span class="badge" style="background-color: rgba(168, 85, 247, 0.15); color: #C084FC; font-size: 10px; padding: 2px 6px;">
-                  ⚡ Mission Attached
+                <span class="badge-status" style="background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.2); color: #818CF8; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px;">
+                  <i data-lucide="git-commit" style="width: 12px; height: 12px; stroke: #818CF8;"></i>
+                  Mission Attached
+                </span>
+              <% else %>
+                <span class="badge-status" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px;">
+                  <i data-lucide="check-circle" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
+                  CV Only
                 </span>
               <% end %>
             </div>
