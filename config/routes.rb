@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # Redirect default Devise registration routes to our custom onboarding flow
+  get 'users/sign_up', to: redirect('/signup')
+  get 'users', to: redirect('/signup')
+
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
   devise_scope :user do
