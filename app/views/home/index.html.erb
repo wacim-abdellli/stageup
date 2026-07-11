@@ -10,20 +10,26 @@
 
     <!-- Centered Hero Title -->
     <h1 style="font-size: clamp(36px, 5vw, 64px); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; color: #FFFFFF;">
-      Verify Practical Skills.<br>
-      <span style="background: linear-gradient(135deg, #FFFFFF 30%, #94A3B8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Build Your Reputation.</span><br>
-      Hired Instantly.
+      Nobody pays a price for ghosting.<br>
+      <span style="background: linear-gradient(135deg, #FFFFFF 30%, #94A3B8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">We changed that.</span>
     </h1>
 
     <!-- Sub-headline -->
     <p style="font-size: clamp(15px, 2vw, 18px); color: var(--text-secondary); max-width: 650px; margin: 0 auto 40px; line-height: 1.6;">
-      The premier student-recruiter network for PFEs and PFAs in Tunisia. Verify development capabilities via targeted coding challenges, secure with university domains, and enforce commitment ledgers.
+      Every offer, mission, and no-show becomes a permanent public record. Tunisia's first internship market where reputation is earned, not claimed.
     </p>
 
     <!-- Call to Actions -->
-    <div style="display: flex; gap: 15px; justify-content: center; align-items: center; max-width: 450px; margin: 0 auto 80px; flex-wrap: wrap;">
+    <div style="display: flex; gap: 15px; justify-content: center; align-items: center; max-width: 450px; margin: 0 auto 40px; flex-wrap: wrap;">
       <%= link_to "Browse Internships", offers_path, class: "btn btn-accent", style: "flex: 1; min-width: 180px; text-decoration: none; padding: 14px 28px;" %>
       <%= link_to "Get Started", select_role_path, class: "btn glass-card", style: "flex: 1; min-width: 180px; text-decoration: none; padding: 14px 28px; color: white;" %>
+    </div>
+
+    <!-- Ticker Section -->
+    <div data-controller="ticker" style="width: 100%; overflow: hidden; margin-top: 40px; margin-bottom: 60px; padding: 15px 0; border-top: 1px dashed var(--border-color); border-bottom: 1px dashed var(--border-color); position: relative; background: rgba(255, 255, 255, 0.01);">
+      <div style="position: absolute; top: 0; left: 0; bottom: 0; width: 80px; background: linear-gradient(to right, #09090B, transparent); z-index: 2; pointer-events: none;"></div>
+      <div style="position: absolute; top: 0; right: 0; bottom: 0; width: 80px; background: linear-gradient(to left, #09090B, transparent); z-index: 2; pointer-events: none;"></div>
+      <div data-ticker-target="container"></div>
     </div>
 
     <!-- Bento Grid Section -->
@@ -96,3 +102,11 @@
     <% end %>
   </div>
 </div>
+
+<script type="module">
+  import { Application } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+  const application = Application.start()
+  
+  import TickerController from "<%= asset_path('controllers/ticker_controller.js') %>"
+  application.register("ticker", TickerController)
+</script>

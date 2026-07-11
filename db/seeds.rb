@@ -144,4 +144,69 @@ sub_2.update!(
 company_1_profile.recalculate_metrics!
 company_2_profile.recalculate_metrics!
 
+puts "Seeding Commitment Events..."
+CommitmentEvent.find_or_create_by!(
+  profileable: student_1_profile,
+  event_type: "student_completed_internship",
+  score_delta: 15.0,
+  description: "Completed Web Development PFE internship at DevCorp Sfax",
+  created_at: 2.days.ago
+)
+
+CommitmentEvent.find_or_create_by!(
+  profileable: company_1_profile,
+  event_type: "company_responded_on_time",
+  score_delta: 10.0,
+  description: "Evaluated mission submission within 12 hours",
+  created_at: 1.day.ago
+)
+
+CommitmentEvent.find_or_create_by!(
+  profileable: student_2_profile,
+  event_type: "student_completed_internship",
+  score_delta: 15.0,
+  description: "Completed Data Science PFE internship at AlphaTech Startups",
+  created_at: 3.days.ago
+)
+
+CommitmentEvent.find_or_create_by!(
+  profileable: student_1_profile,
+  event_type: "student_mission_expired",
+  score_delta: -10.0,
+  description: "Failed to submit Rails URL Shortener Task within 48h deadline",
+  created_at: 4.days.ago
+)
+
+CommitmentEvent.find_or_create_by!(
+  profileable: company_2_profile,
+  event_type: "company_ghosted_offer",
+  score_delta: -15.0,
+  description: "Failed to review student applications within 7 days",
+  created_at: 5.days.ago
+)
+
+CommitmentEvent.find_or_create_by!(
+  profileable: student_2_profile,
+  event_type: "student_completed_internship",
+  score_delta: 15.0,
+  description: "Completed React frontend challenge on time",
+  created_at: 6.days.ago
+)
+
+CommitmentEvent.find_or_create_by!(
+  profileable: company_1_profile,
+  event_type: "company_responded_late",
+  score_delta: -5.0,
+  description: "Delayed evaluation of candidate code challenge",
+  created_at: 7.days.ago
+)
+
+CommitmentEvent.find_or_create_by!(
+  profileable: student_1_profile,
+  event_type: "student_completed_internship",
+  score_delta: 10.0,
+  description: "Successfully solved ISET Sfax verification task",
+  created_at: 8.days.ago
+)
+
 puts "Database successfully seeded!"
