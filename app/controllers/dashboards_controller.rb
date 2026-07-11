@@ -11,6 +11,12 @@ class DashboardsController < ApplicationController
 
   def update_cv
     @profile = current_user.profileable
+    
+    if params[:student_profile].blank? || params[:student_profile][:cv].blank?
+      redirect_to dashboard_path, alert: "Please select a PDF file before clicking Upload."
+      return
+    end
+
     if @profile.update(cv_params)
       redirect_to dashboard_path, notice: "CV successfully uploaded!"
     else
