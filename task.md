@@ -1,8 +1,6 @@
-- `[x]` Update `config/routes.rb` to map `root` to `home#index`
-- `[x]` Create `app/controllers/home_controller.rb` with guest rendering and user dashboard redirect logic
-- `[x]` Update `app/controllers/offers_controller.rb` to skip authorization on `index` and `show`
-- `[x]` Update `app/assets/stylesheets/application.css` with Modern Dark color variables and radial glow animations
-- `[x]` Create `app/views/home/index.html.erb` containing the Centered Hero layout, CTAs, and Bento Grid features
-- `[x]` Update `app/views/offers/show.html.erb` to render authentication buttons for guest visitors
-- `[x]` Write routing and controller tests to verify guest access and user redirects
-- `[x]` Run the test suite and confirm 100% success
+- `[x]` Update `app/assets/stylesheets/application.css` with premium neutral zinc/slate CSS variables
+- `[x]` Refine `.profile-card`, button classes, list layouts, and badges in `application.css`
+- `[x]` Overhaul the role selection template `select_role.html.erb` to remove thick purple borders and use clean card borders
+- `[x]` Update the landing page `home/index.html.erb` with clean neutral styles and a soft radial glow
+- `[x]` Verify all dashboards, offers, and sign-up templates render cohesively and look highly polished
+- `[x]` Run the test suite to confirm no regressions

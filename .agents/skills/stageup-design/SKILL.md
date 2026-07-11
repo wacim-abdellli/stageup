@@ -59,9 +59,48 @@ Ensure these variable tokens are declared in `:root` and used across all stylesh
 
 ---
 
-## 3. UI Component Specifications
+## 3. Typography, Spacing, & Layout Rules
 
-### 3.1 Buttons
+### 3.1 Typography Scale
+* **Header Font Family:** `'Outfit'`, sans-serif. Always use tight tracking (`letter-spacing: -0.02em`) for bold headers to feel professional.
+* **Body Font Family:** `'Inter'`, sans-serif (clean, geometric, system-like).
+* **Sizes & Hierarchy:**
+  * **Hero Title:** `clamp(36px, 5vw, 64px)` (font-weight: 800, line-height: 1.1).
+  * **H1 (Page titles):** `32px` (font-weight: 700, line-height: 1.2).
+  * **H2 (Section titles):** `22px` (font-weight: 600, line-height: 1.3).
+  * **H3 (Card headers):** `16px` (font-weight: 600, line-height: 1.4).
+  * **Body (Regular text):** `14px` or `15px` (font-weight: 400, line-height: 1.5).
+  * **Muted / Labels:** `12px` (font-weight: 500, letter-spacing: 0.05em, text-transform: uppercase).
+
+### 3.2 Spacing Scale
+Never use arbitrary padding or margins. Stick strictly to this 8px increments scale:
+* `4px` (`--space-3xs`): Tiny adjustments, labels padding, elements gaps.
+* `8px` (`--space-2xs`): Tight spacing inside components.
+* `12px` (`--space-xs`): Standard badge/button padding.
+* `16px` (`--space-sm`): Default card inner elements spacing.
+* `24px` (`--space-md`): Standard card padding, grid gaps.
+* `32px` (`--space-lg`): Dashboard section spacing.
+* `48px` (`--space-xl`): Massive page margins / hero section spacing.
+* `64px` (`--space-2xl`): Outer wrapper spacing.
+
+### 3.3 Responsive Breakpoints
+Follow mobile-first style queries. Use these standardized screen widths:
+* **Mobile / Base viewport:** `< 640px` (sm)
+* **Tablet viewports:** `640px` to `1024px` (md)
+* **Desktop viewports:** `1024px` to `1280px` (lg)
+* **Wide monitors:** `> 1280px` (xl)
+
+---
+
+## 4. UI Component Specifications
+
+### 4.1 Icon Library (Lucide CDN)
+* Emojis (`🎓`, `💼`, `⚡`) are strictly banned as primary navigation or structural action graphics.
+* Use **Lucide Icons** loaded via CDN. Render icons using:
+  `<i data-lucide="icon-name" class="icon-class" style="width: 18px; height: 18px;"></i>`
+* Keep icon colors muted (`var(--text-secondary)` or `var(--text-muted)`) and only highlight on parent hover.
+
+### 4.2 Buttons
 * **Primary / Accent Button (`.btn-accent` or `.btn-primary`):**
   * Solid white background (`#FFFFFF`), dark text (`#09090B`), bold weight.
   * Thin border: `1px solid rgba(255, 255, 255, 0.15)`.
@@ -71,39 +110,23 @@ Ensure these variable tokens are declared in `:root` and used across all stylesh
   * Border: `1px solid var(--border-color)`.
   * Hover: `rgba(255, 255, 255, 0.06)`, border-color changes to `rgba(255, 255, 255, 0.15)`.
 
-### 3.2 Cards & Panels (`.profile-card`, `.bento-card`)
+### 4.3 Cards & Panels (`.profile-card`, `.bento-card`)
 * Background: `rgba(255, 255, 255, 0.02)` or `var(--bg-secondary)`.
 * Border: `1px solid var(--border-color)`.
 * Edge highlight: `box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05)`.
 * Hover state: `border-color: rgba(255, 255, 255, 0.18)` and `background-color: rgba(255, 255, 255, 0.04)`.
 * **NO** colored outlines or neon gradients on the cards.
 
-### 3.3 Form Inputs (`.form-control`)
-* Background: `var(--bg-primary)` (darker than container cards).
-* Border: `1px solid var(--border-color)`.
-* Focused state: border-color transitions to `var(--primary)` with a subtle indigo outer focus ring.
-
 ---
 
-## 4. Layout & Grid Structures
+## 5. Anti-"AI-Generated UI" Self-Checking Checklist
 
-### 4.1 Ambient Light Effect
-* Page headers or landing sections should use a very subtle radial gradient glow top highlight:
-  `background: radial-gradient(circle at top, rgba(99, 102, 241, 0.06) 0%, transparent 65%);`
-* Maintain transparency; do not combine with bright solid colors.
+To avoid generic-looking layouts, the agent must check all modifications against the following "AI tells" before presenting work to the user:
 
-### 4.2 Bento Grid Layout
-* Grid displays should use `display: grid` with multi-column structures on desktop (max-w 1000px) scaling down to 1-column on mobile viewports.
-* Gaps should be unified to `20px`.
-* Individual bento cells should align left, containing medium border radii (`--radius-lg: 16px`) and clear icons.
-
----
-
-## 5. Verification Checklist
-
-Whenever styling is updated, check:
-- [ ] No emojis are used as primary navigation or action icons (use SVG/Lucide).
-- [ ] Saturated purple background `#0F0F23` is completely absent.
-- [ ] Contrast ratios between text and background surfaces meet a minimum of 4.5:1.
-- [ ] Borders are thin (1px) and translucent rather than bright/thick.
-- [ ] Buttons use smooth transitions (`all 0.25s cubic-bezier(0.16, 1, 0.3, 1)`).
+| AI Tell | What to Avoid | Correct Premium Practice |
+|---------|---------------|--------------------------|
+| **Generic Centered Hero** | Simple centered column box with title + description + two buttons. | Use asymmetric grid layouts, offset columns, or lead with real interactive product mockups. |
+| **Bootstrap-y Spacing** | Standard repeating vertical gaps (e.g. all sections separated by `margin-bottom: 20px`). | Use varied depth scales (large margins between sections, tight grouped elements). Let layout breathe. |
+| **Overused Gradient Blobs** | Bright purple/pink neon circles competing with copy readability. | Keep background light sources dark and muted (`rgba(99, 102, 241, 0.06)`). Use hairline borders for structure. |
+| **Emoji Spam** | Emojis acting as indicators or structural navigation elements. | Use clean vector SVGs or Lucide icons. |
+| **Boxed Everything** | Nesting card containers within card containers, creating double-border clutter. | Use negative space, vertical divider lines, or varying background tones to divide content instead of border boxes. |
