@@ -1,16 +1,24 @@
 <nav class="navbar">
   <div class="navbar-inner">
     <div class="navbar-left">
-      <%= render "layouts/navbar_brand" %>
+      <%= link_to root_path, class: "logo-link", aria: { label: "StageUp Home" } do %>
+        <%= render "layouts/navbar_brand" %>
+      <% end %>
     </div>
-    <div class="navbar-right">
-      <%= link_to "Browse Offers", offers_path, class: "btn btn-secondary btn-header nowrap" %>
-      <%= link_to "My Dashboard", dashboard_path, class: "btn btn-secondary btn-header nowrap" %>
+    <button class="navbar-hamburger" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navbar-right" id="nav-menu">
+      <%= link_to "Browse Offers", offers_path, class: "btn btn-secondary btn-header nowrap #{current_page?(offers_path) ? 'nav-active' : ''}" %>
+      <%= link_to "My Dashboard", dashboard_path, class: "btn btn-secondary btn-header nowrap #{current_page?(dashboard_path) ? 'nav-active' : ''}" %>
       <% if current_user.profileable_type == "CompanyProfile" %>
         <%= link_to "Post an Offer", new_offer_path, class: "btn btn-accent text-decoration-none fs-13 btn-header-padded nowrap" %>
       <% end %>
       <%= render "layouts/notification_bell" %>
-      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-header m-0 nowrap" %>
+      <div class="nav-avatar" title="<%= current_user.email %>">
+        <%= current_user.email[0].upcase %>
+      </div>
+      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-nav-signout btn-header m-0 nowrap" %>
     </div>
   </div>
 </nav>

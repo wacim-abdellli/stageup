@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <% unread = current_user.notifications.unread.count %>
   <div class="notif-bell-container">
-    <button class="notif-bell-btn" onclick="event.preventDefault(); window.location='<%= notifications_path %>'" title="Notifications">
+    <button class="notif-bell-btn" id="notif-btn" aria-label="Notifications">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
         <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
@@ -10,5 +10,22 @@
         <span class="notif-bell-count"><%= unread > 99 ? "99+" : unread %></span>
       <% end %>
     </button>
+    <div class="notif-dropdown" id="notif-panel">
+      <div class="notif-dropdown-header">
+        <span class="notif-dropdown-title">Notifications</span>
+        <%= link_to "View All", notifications_path, class: "notif-mark-all-link" %>
+      </div>
+      <div class="notif-dropdown-list">
+        <% current_user.notifications.order(created_at: :desc).limit(5).each do |n| %>
+          <div class="notif-item <%= 'unread' unless n.read %>">
+            <%= n.message %>
+            <span class="notif-item-time"><%= time_ago_in_words(n.created_at) %> ago</span>
+          </div>
+        <% end %>
+        <% if current_user.notifications.empty? %>
+          <div class="notif-empty">No notifications yet</div>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>

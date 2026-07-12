@@ -23,6 +23,15 @@
     <script>
       document.addEventListener("turbo:load", function() {
         lucide.createIcons();
+        var t = document.getElementById('nav-toggle');
+        var m = document.getElementById('nav-menu');
+        if (t && m) t.addEventListener('click', function() { m.classList.toggle('open'); });
+        var b = document.getElementById('notif-btn');
+        var p = document.getElementById('notif-panel');
+        if (b && p) {
+          b.addEventListener('click', function(e) { e.stopPropagation(); p.classList.toggle('open'); });
+          document.addEventListener('click', function() { p.classList.remove('open'); });
+        }
       });
     </script>
   </head>
