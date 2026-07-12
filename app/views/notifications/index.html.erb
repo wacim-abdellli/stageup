@@ -1,0 +1,30 @@
+<div class="notif-page-container">
+  <div class="notif-page-header">
+    <h1 class="notif-page-title">Notifications</h1>
+    <% if @unread_count > 0 %>
+      <%= button_to "Mark All Read", read_all_notifications_path, method: :post, class: "btn btn-accent" %>
+    <% end %>
+  </div>
+
+  <% if @notifications.any? %>
+    <div class="notif-page-list">
+      <% @notifications.each do |notification| %>
+        <div class="notif-page-item <%= 'unread' unless notification.read %>">
+          <div>
+            <p class="notif-page-message"><%= notification.message %></p>
+            <span class="notif-page-time"><%= time_ago_in_words(notification.created_at) %> ago</span>
+          </div>
+          <% unless notification.read %>
+            <%= button_to "Mark Read", notification_path(notification), method: :patch, class: "btn btn-secondary btn-compact-sm" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state-card">
+      <div class="empty-state-icon"><i data-lucide="bell" class="icon-40"></i></div>
+      <h3 class="empty-state-title">No Notifications</h3>
+      <p class="empty-state-text">You're all caught up. Notifications about applications, agreements, and updates will appear here.</p>
+    </div>
+  <% end %>
+</div>

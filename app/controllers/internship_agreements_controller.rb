@@ -24,6 +24,26 @@ class InternshipAgreementsController < ApplicationController
 
   def sign
     @agreement.sign_by!(current_user.profileable_type)
+
+    unless @agreement.status == "fully_executed"
+      pending_users = []
+      student_user = @submission.student_profile.user
+      company_user = @submission.offer.company_profile.user
+
+      pending_users << student_user if @agreement.student_signed_at.nil? && student_user != current_user
+      pending_users << company_user if @agreement.company_signed_at.nil? && company_user != current_user
+
+      pending_users.uniq.each do |u|
+        Notification.trigger(
+          recipient: u,
+          action: "agreement_signature_requested",
+          message: "The Convention de Stage for #{@submission.offer.title} is ready for your signature.",
+          notifiable: @agreement
+        )
+        UserMailer.agreement_signature_requested_email(u, @agreement).deliver_later
+      end
+    end
+
     redirect_to submission_internship_agreement_path(@submission, @agreement),
                 notice: "Agreement signed successfully."
   end

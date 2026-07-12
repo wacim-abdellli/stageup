@@ -24,6 +24,13 @@ class ResolveExpiredSubmissionsJob < ApplicationJob
         )
 
         student.recalculate_commitment_score!
+
+        Notification.trigger(
+          recipient: student.user,
+          action: "mission_expired",
+          message: "Your proof mission for #{sub.offer.title} has expired. #{prior_expired_count > 0 ? 'A penalty has been applied.' : 'First-time warning (no penalty).'}",
+          notifiable: sub
+        )
       end
     end
 
@@ -43,6 +50,17 @@ class ResolveExpiredSubmissionsJob < ApplicationJob
         )
 
         sub.student_profile.recalculate_commitment_score!
+
+        company_user = sub.offer.company_profile.user
+        student_user = sub.student_profile.user
+        [student_user, company_user].each do |u|
+          Notification.trigger(
+            recipient: u,
+            action: "internship_auto_completed",
+            message: "Internship for #{sub.offer.title} has been auto-completed (7-day timeout).",
+            notifiable: sub
+          )
+        end
       end
     end
   end

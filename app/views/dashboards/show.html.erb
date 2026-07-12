@@ -9,6 +9,7 @@
       <% if @role_type == "CompanyProfile" %>
         <%= link_to "Post an Offer", new_offer_path, class: "btn btn-primary btn-header" %>
       <% end %>
+      <%= render "layouts/notification_bell" %>
       <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-header m-0" %>
     </div>
   </div>

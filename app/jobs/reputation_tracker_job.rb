@@ -22,6 +22,13 @@ class ReputationTrackerJob < ApplicationJob
 
         company.recalculate_metrics!
         company.recalculate_commitment_score!
+
+        Notification.trigger(
+          recipient: student.user,
+          action: "application_ghosted",
+          message: "The company did not respond to your application for #{sub.offer.title} within 14 days. It has been automatically expired.",
+          notifiable: sub
+        )
       end
     end
   end

@@ -10,6 +10,7 @@
         <% if current_user.profileable_type == "CompanyProfile" %>
           <%= link_to "Post an Offer", new_offer_path, class: "btn btn-accent text-decoration-none fs-13", style: "padding: 10px 20px;" %>
         <% end %>
+        <%= render "layouts/notification_bell" %>
         <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn glass-card fs-13", style: "padding: 10px 20px; margin: 0; color: #F87171;" %>
       <% else %>
         <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent text-decoration-none fs-13", style: "padding: 10px 20px;" %>

@@ -90,6 +90,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_12_110000) do
     t.index ["offer_id"], name: "index_missions_on_offer_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "action", null: false
+    t.datetime "created_at", null: false
+    t.string "message", null: false
+    t.bigint "notifiable_id", null: false
+    t.string "notifiable_type", null: false
+    t.boolean "read", default: false, null: false
+    t.bigint "recipient_id", null: false
+    t.string "recipient_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_notifications_on_created_at"
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["recipient_id", "recipient_type", "read"], name: "idx_on_recipient_id_recipient_type_read_f9827f957f"
+    t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
+  end
+
   create_table "offers", force: :cascade do |t|
     t.bigint "company_profile_id", null: false
     t.datetime "created_at", null: false

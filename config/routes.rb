@@ -34,6 +34,11 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :notifications, only: [:index, :update] do
+    collection do
+      post :read_all
+    end
+  end
   root to: "home#index"
   get 'reputation_events', to: 'home#reputation_events'
 

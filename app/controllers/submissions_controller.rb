@@ -26,6 +26,16 @@ class SubmissionsController < ApplicationController
     )
 
     if @submission.save
+      company_user = @offer.company_profile.user
+      student_name = "#{current_user.profileable.first_name} #{current_user.profileable.last_name}"
+      Notification.trigger(
+        recipient: company_user,
+        action: "application_received",
+        message: "#{student_name} applied to #{@offer.title}.",
+        notifiable: @submission
+      )
+      UserMailer.application_received_email(@submission.student_profile.user, @submission).deliver_later unless @offer.mission.present?
+
       notice_msg = if @offer.mission.present?
                      "Mission started! You have 48 hours to submit your solution."
                    else
@@ -69,6 +79,14 @@ class SubmissionsController < ApplicationController
         company = @submission.offer.company_profile
         company.recalculate_metrics!
         company.recalculate_commitment_score!
+        student_user = @submission.student_profile.user
+        Notification.trigger(
+          recipient: student_user,
+          action: "application_accepted",
+          message: "Your application for #{@submission.offer.title} has been accepted!",
+          notifiable: @submission
+        )
+        UserMailer.application_status_updated_email(student_user, @submission).deliver_later
         redirect_to dashboard_path, notice: "Application was successfully accepted! We logged your response."
       else
         redirect_to dashboard_path, alert: "Failed to accept application."
@@ -87,6 +105,14 @@ class SubmissionsController < ApplicationController
         company = @submission.offer.company_profile
         company.recalculate_metrics!
         company.recalculate_commitment_score!
+        student_user = @submission.student_profile.user
+        Notification.trigger(
+          recipient: student_user,
+          action: "application_rejected",
+          message: "Your application for #{@submission.offer.title} has been rejected.",
+          notifiable: @submission
+        )
+        UserMailer.application_status_updated_email(student_user, @submission).deliver_later
         redirect_to dashboard_path, notice: "Application was rejected. We logged your response."
       else
         redirect_to dashboard_path, alert: "Failed to reject application."
@@ -113,6 +139,14 @@ class SubmissionsController < ApplicationController
     )
     student.recalculate_commitment_score!
 
+    company_user = @submission.offer.company_profile.user
+    Notification.trigger(
+      recipient: company_user,
+      action: "internship_abandoned",
+      message: "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name} has abandoned the internship for #{@submission.offer.title}.",
+      notifiable: @submission
+    )
+
     redirect_to dashboard_path, notice: "You have abandoned the internship. A penalty has been applied to your commitment score."
   end
 
@@ -137,6 +171,14 @@ class SubmissionsController < ApplicationController
       student.recalculate_commitment_score!
     end
 
+    student_user = @submission.student_profile.user
+    Notification.trigger(
+      recipient: student_user,
+      action: "internship_cancelled",
+      message: "Your internship for #{@submission.offer.title} has been cancelled by the company.",
+      notifiable: @submission
+    )
+
     redirect_to dashboard_path, notice: "Internship has been cancelled and the student's commitment score has been adjusted."
   end
 
@@ -154,6 +196,16 @@ class SubmissionsController < ApplicationController
 
     role = current_user.profileable_type
     @submission.confirm_completion_by!(role)
+
+    if @submission.status == "completed"
+      other_party = role == "StudentProfile" ? @submission.offer.company_profile.user : @submission.student_profile.user
+      Notification.trigger(
+        recipient: other_party,
+        action: "internship_completed",
+        message: "Internship for #{@submission.offer.title} has been marked as completed by both parties!",
+        notifiable: @submission
+      )
+    end
 
     notice_msg = if @submission.status == "completed"
                    "Internship successfully completed! You can now leave a review."
