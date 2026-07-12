@@ -12,10 +12,12 @@ class StudentProfile < ApplicationRecord
   validate :validate_cv_format
 
   def recalculate_commitment_score!
-    base = 100.0
-    delta = commitment_events.sum(:score_delta)
-    new_score = (base + delta).clamp(0.0, 100.0)
-    update!(commitment_score: new_score)
+    with_lock do
+      base = 100.0
+      delta = commitment_events.sum(:score_delta)
+      new_score = (base + delta).clamp(0.0, 100.0)
+      update!(commitment_score: new_score)
+    end
   end
 
   def average_rating

@@ -40,7 +40,7 @@ class Submission < ApplicationRecord
       self.status = "completed"
       self.responded_at = Time.current
 
-      student_profile.commitment_events.build(
+      student_profile.commitment_events.create!(
         event_type: "student_completed_internship",
         score_delta: 15.0,
         description: "Internship successfully completed for '#{offer.title}'."

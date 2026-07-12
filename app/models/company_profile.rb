@@ -7,26 +7,30 @@ class CompanyProfile < ApplicationRecord
   validates :name, presence: true
 
   def recalculate_commitment_score!
-    base = 100.0
-    delta = commitment_events.sum(:score_delta)
-    new_score = (base + delta).clamp(0.0, 100.0)
-    update!(commitment_score: new_score)
+    with_lock do
+      base = 100.0
+      delta = commitment_events.sum(:score_delta)
+      new_score = (base + delta).clamp(0.0, 100.0)
+      update!(commitment_score: new_score)
+    end
   end
 
   def recalculate_metrics!
-    total_apps = submissions.where.not(status: ["started", "abandoned", "expired"])
-    responded_apps = total_apps.where.not(responded_at: nil)
-    
-    rate = total_apps.any? ? (responded_apps.count.to_f / total_apps.count * 100).round(1) : 100.0
-    
-    times = responded_apps.reject { |s| s.submitted_at.nil? }.map { |s| (s.responded_at - s.submitted_at) / 1.hour }
-    avg_time = times.any? ? (times.sum / times.size).round(1) : 0.0
+    with_lock do
+      total_apps = submissions.where.not(status: ["started", "abandoned", "expired"])
+      responded_apps = total_apps.where.not(responded_at: nil)
 
-    update!(
-      response_rate: rate,
-      avg_response_time_hours: avg_time,
-      offers_count: offers.count
-    )
+      rate = total_apps.any? ? (responded_apps.count.to_f / total_apps.count * 100).round(1) : 100.0
+
+      times = responded_apps.reject { |s| s.submitted_at.nil? }.map { |s| (s.responded_at - s.submitted_at) / 1.hour }
+      avg_time = times.any? ? (times.sum / times.size).round(1) : 0.0
+
+      update!(
+        response_rate: rate,
+        avg_response_time_hours: avg_time,
+        offers_count: offers.count
+      )
+    end
   end
 
   def average_rating
