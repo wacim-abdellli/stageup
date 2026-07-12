@@ -1,121 +1,113 @@
 <div class="dashboard-container">
-  <!-- Page Header -->
-  <div class="dashboard-header" style="margin-bottom: 32px; border-bottom: 1px solid var(--border-color); padding-bottom: 24px;">
+  <div class="dashboard-header">
     <div>
       <%= render "layouts/navbar_brand" %>
-      <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px;">Tunisia's first verified internship directory</p>
+      <p class="text-secondary fs-14 mt-6">Tunisia's first verified internship directory</p>
     </div>
-    <div style="display: flex; gap: 12px; align-items: center;">
+    <div class="flex-row gap-12 items-center">
       <% if current_user %>
-        <%= link_to "My Dashboard", dashboard_path, class: "btn glass-card", style: "text-decoration: none; color: white; padding: 10px 20px; font-size: 13px;" %>
+        <%= link_to "My Dashboard", dashboard_path, class: "btn glass-card text-decoration-none fs-13", style: "padding: 10px 20px;" %>
         <% if current_user.profileable_type == "CompanyProfile" %>
-          <%= link_to "Post an Offer", new_offer_path, class: "btn btn-accent", style: "text-decoration: none; padding: 10px 20px; font-size: 13px;" %>
+          <%= link_to "Post an Offer", new_offer_path, class: "btn btn-accent text-decoration-none fs-13", style: "padding: 10px 20px;" %>
         <% end %>
-        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn glass-card", style: "padding: 10px 20px; font-size: 13px; margin: 0; color: #F87171;" %>
+        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn glass-card fs-13", style: "padding: 10px 20px; margin: 0; color: #F87171;" %>
       <% else %>
-        <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent", style: "text-decoration: none; padding: 10px 20px; font-size: 13px;" %>
+        <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent text-decoration-none fs-13", style: "padding: 10px 20px;" %>
       <% end %>
     </div>
   </div>
 
-  <!-- Main Directory Layout -->
-  <div style="display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start;" class="offers-directory-layout">
+  <div class="offers-directory-layout items-start" style="display: grid; grid-template-columns: 280px 1fr; gap: 32px;">
     
-    <!-- Sidebar Filters -->
-    <div class="glass-card" style="padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); position: sticky; top: 20px;">
-      <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 20px; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
-        <i data-lucide="sliders-horizontal" style="width: 16px; height: 16px; stroke: var(--text-secondary);"></i>
+    <div class="glass-card sticky-top-20" style="padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+      <h3 class="fs-16 inline-flex-center-gap-8" style="font-weight: 700; margin-bottom: 20px; color: var(--text-primary);">
+        <i data-lucide="sliders-horizontal" class="icon-16 stroke-secondary"></i>
         Filter Offers
       </h3>
 
       <%= form_tag offers_path, method: :get, id: "filters-form" do %>
-        <!-- Search Input -->
         <div style="margin-bottom: 20px;">
-          <label style="display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Search keyword</label>
-          <div style="position: relative;">
-            <i data-lucide="search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: var(--text-muted);"></i>
-            <%= text_field_tag :query, params[:query], placeholder: "Search title, company...", style: "width: 100%; padding: 10px 12px 10px 36px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: white; font-size: 13px;" %>
+          <label class="label-sm">Search keyword</label>
+          <div class="pos-relative">
+            <i data-lucide="search" class="search-icon-abs stroke-muted" style="width: 14px; height: 14px;"></i>
+            <%= text_field_tag :query, params[:query], placeholder: "Search title, company...", class: "fs-13", style: "width: 100%; padding: 10px 12px 10px 36px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: white;" %>
           </div>
         </div>
 
-        <!-- Stage Type Filter -->
         <div style="margin-bottom: 20px;">
-          <label style="display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Stage Type</label>
-          <%= select_tag :stage_type, options_for_select([["All types", ""], ["PFE", "PFE"], ["PFA", "PFA"]], params[:stage_type]), onchange: "this.form.submit();", style: "width: 100%; padding: 10px 12px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: white; font-size: 13px; cursor: pointer;" %>
+          <label class="label-sm">Stage Type</label>
+          <%= select_tag :stage_type, options_for_select([["All types", ""], ["PFE", "PFE"], ["PFA", "PFA"]], params[:stage_type]), onchange: "this.form.submit();", class: "fs-13", style: "width: 100%; padding: 10px 12px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: white; cursor: pointer;" %>
         </div>
 
-        <!-- Work Mode Filter -->
         <div style="margin-bottom: 24px;">
-          <label style="display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Work Mode</label>
-          <%= select_tag :work_mode, options_for_select([["All modes", ""], ["Remote", "remote"], ["On-site", "onsite"], ["Hybrid", "hybrid"]], params[:work_mode]), onchange: "this.form.submit();", style: "width: 100%; padding: 10px 12px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: white; font-size: 13px; cursor: pointer;" %>
+          <label class="label-sm">Work Mode</label>
+          <%= select_tag :work_mode, options_for_select([["All modes", ""], ["Remote", "remote"], ["On-site", "onsite"], ["Hybrid", "hybrid"]], params[:work_mode]), onchange: "this.form.submit();", class: "fs-13", style: "width: 100%; padding: 10px 12px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: white; cursor: pointer;" %>
         </div>
 
-        <!-- Actions -->
-        <div style="display: flex; gap: 8px; flex-direction: column;">
-          <%= submit_tag "Apply Search", class: "btn btn-accent", style: "width: 100%; padding: 10px; font-size: 13px; cursor: pointer;" %>
+        <div class="flex-col gap-8">
+          <%= submit_tag "Apply Search", class: "btn btn-accent fs-13", style: "width: 100%; padding: 10px; cursor: pointer;" %>
           <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
-            <%= link_to "Reset Filters", offers_path, class: "btn glass-card", style: "width: 100%; text-decoration: none; color: white; padding: 10px; font-size: 13px; text-align: center;" %>
+            <%= link_to "Reset Filters", offers_path, class: "btn glass-card text-decoration-none fs-13", style: "width: 100%; padding: 10px; text-align: center;" %>
           <% end %>
         </div>
       <% end %>
     </div>
 
-    <!-- Listings Side -->
     <div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h2 style="font-size: 20px; font-weight: 700; color: white; margin: 0;">Available Internships</h2>
-        <span style="font-size: 13px; color: var(--text-secondary);"><%= pluralize(@offers.size, 'internship') %> found</span>
+      <div class="flex-row justify-between items-center" style="margin-bottom: 20px;">
+        <h2 class="fs-20" style="font-weight: 700; color: white; margin: 0;">Available Internships</h2>
+        <span class="fs-13 text-secondary"><%= pluralize(@offers.size, 'internship') %> found</span>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px;">
         <% if @offers.any? %>
           <% @offers.each do |offer| %>
-            <div class="glass-card" style="padding: 24px; border-radius: var(--radius-lg); display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; border: 1px solid var(--border-color); transition: var(--transition); cursor: pointer;" onclick="window.location='<%= offer_path(offer) %>'">
+            <div class="glass-card offer-card" onclick="window.location='<%= offer_path(offer) %>'">
               <div>
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                  <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; text-transform: uppercase; padding: 2px 8px; font-size: 10px;"><%= offer.stage_type %></span>
+                <div class="offer-card-header">
+                  <span class="offer-card-badge-stage"><%= offer.stage_type %></span>
                   
                   <% if offer.mission.present? %>
-                    <span class="badge-status" style="background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.2); color: #818CF8; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px; font-size: 10px;">
-                      <i data-lucide="git-commit" style="width: 12px; height: 12px; stroke: #818CF8;"></i>
+                    <span class="offer-card-badge-proof inline-flex-center">
+                      <i data-lucide="git-commit" class="icon-w-12 stroke-accent"></i>
                       Mission Attached
                     </span>
                   <% else %>
-                    <span class="badge-status" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px; font-size: 10px;">
-                      <i data-lucide="check-circle" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
+                    <span class="offer-card-badge-cv inline-flex-center">
+                      <i data-lucide="check-circle" class="icon-w-12 stroke-secondary"></i>
                       CV Only
                     </span>
                   <% end %>
                 </div>
 
-                <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 6px 0; color: white;"><%= offer.title %></h3>
-                <span style="font-size: 13px; color: var(--text-secondary); display: block; margin-bottom: 12px;"><%= offer.company_profile.name %></span>
+                <h3 class="offer-card-title"><%= offer.title %></h3>
+                <span class="offer-card-company"><%= offer.company_profile.name %></span>
                 
-                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5; margin: 0 0 16px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                <p class="offer-card-desc">
                   <%= offer.description %>
                 </p>
               </div>
 
-              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 12px;">
-                <span style="font-size: 12px; color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px;">
-                  <i data-lucide="map-pin" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
+              <div class="offer-card-footer">
+                <span class="offer-card-location">
+                  <i data-lucide="map-pin" class="icon-w-12 stroke-secondary"></i>
                   <% if offer.location.downcase == "remote" %>
                     Remote
                   <% else %>
                     <%= offer.location %> (<%= offer.work_mode.capitalize %>)
                   <% end %>
                 </span>
-                <span style="font-size: 12px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 4px;">
-                  Details <i data-lucide="arrow-right" style="width: 12px; height: 12px; stroke: var(--accent);"></i>
+                <span class="offer-card-action">
+                  Details <i data-lucide="arrow-right" class="icon-w-12 stroke-accent"></i>
                 </span>
               </div>
             </div>
           <% end %>
         <% else %>
-          <div class="glass-card" style="grid-column: 1 / -1; text-align: center; padding: 48px; border: 1px solid var(--border-color); border-radius: var(--radius-lg);">
-            <i data-lucide="search-code" style="width: 40px; height: 40px; stroke: var(--text-muted); margin-bottom: 12px; display: inline-block;"></i>
-            <h3 style="font-size: 16px; font-weight: 600; color: white; margin-bottom: 6px;">No offers match your criteria</h3>
-            <p style="color: var(--text-secondary); font-size: 13px; margin: 0;">Try broadening your query or clearing active filters.</p>
+          <div class="glass-card empty-state-icon" style="grid-column: 1 / -1; text-align: center; padding: 48px; border: 1px solid var(--border-color); border-radius: var(--radius-lg);">
+            <i data-lucide="search-code" style="width: 40px; height: 40px; margin-bottom: 12px; display: inline-block;"></i>
+            <h3 class="fs-16" style="font-weight: 600; color: white; margin-bottom: 6px;">No offers match your criteria</h3>
+            <p class="text-secondary fs-13" style="margin: 0;">Try broadening your query or clearing active filters.</p>
           </div>
         <% end %>
       </div>

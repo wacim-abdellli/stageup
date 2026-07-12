@@ -8,7 +8,7 @@
 
     <% if flash[:alert] %>
       <div class="flash-message flash-alert flash-row">
-        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0" style="stroke: #F87171;"></i>
+        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
         <span><%= flash[:alert] %></span>
       </div>
     <% end %>
@@ -20,7 +20,7 @@
       <% if errors.any? %>
         <div class="flash-message flash-alert flash-col">
           <div class="flash-col-header">
-            <i data-lucide="alert-circle" class="icon-16 flex-shrink-0" style="stroke: #F87171;"></i>
+            <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
             <strong>Please resolve the following errors:</strong>
           </div>
           <ul class="error-list">

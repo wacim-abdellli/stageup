@@ -7,14 +7,14 @@
     </div>
 
     <% if flash[:alert] %>
-      <div class="flash-message flash-alert" style="display: flex; align-items: center; gap: 8px;">
-        <i data-lucide="alert-circle" style="width: 16px; height: 16px; stroke: #F87171; flex-shrink: 0;"></i>
+      <div class="flash-message flash-alert flash-row">
+        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
         <span><%= flash[:alert] %></span>
       </div>
     <% end %>
     <% if flash[:notice] %>
-      <div class="flash-message flash-notice" style="display: flex; align-items: center; gap: 8px;">
-        <i data-lucide="check-circle" style="width: 16px; height: 16px; stroke: #34D399; flex-shrink: 0;"></i>
+      <div class="flash-message flash-notice flash-row">
+        <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
         <span><%= flash[:notice] %></span>
       </div>
     <% end %>
@@ -31,20 +31,20 @@
       </div>
 
       <% if devise_mapping.rememberable? %>
-        <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+        <div class="flex-row gap-8 align-center">
           <%= f.check_box :remember_me, style: "width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent);" %>
-          <%= f.label :remember_me, class: "form-label", style: "margin: 0; cursor: pointer;" %>
+          <%= f.label :remember_me, style: "margin: 0; cursor: pointer;" %>
         </div>
       <% end %>
 
-      <div class="form-group" style="margin-top: 30px;">
-        <%= f.submit "Log in", class: "btn btn-accent", style: "width: 100%; cursor: pointer;" %>
+      <div class="mt-30">
+        <%= f.submit "Log in", class: "btn btn-accent", style: "cursor: pointer;" %>
       </div>
     <% end %>
 
-    <div style="display: flex; flex-direction: column; gap: 8px; text-align: center; font-size: 14px; color: var(--text-secondary); border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
-      <%= link_to "Sign up", select_role_path, style: "font-weight: 500;" %>
-      <%= link_to "Forgot your password?", new_password_path(resource_name), style: "font-weight: 500; font-size: 13px;" %>
+    <div class="auth-links">
+      <%= link_to "Sign up", select_role_path %>
+      <%= link_to "Forgot your password?", new_password_path(resource_name), style: "font-size: 13px;" %>
     </div>
   </div>
 </div>
