@@ -3256,6 +3256,139 @@ a:hover {
   fill: none;
 }
 
+/* Commitment Ledger — Vertical Timeline */
+.ledger-timeline {
+  position: relative;
+  padding-left: 24px;
+}
+
+.ledger-event {
+  position: relative;
+  padding-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: background 0.2s;
+  border-radius: var(--radius-sm);
+  margin-left: -24px;
+  padding-left: 24px;
+}
+
+.ledger-event:last-child {
+  padding-bottom: 0;
+}
+
+.ledger-event:hover {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+/* Vertical connector line */
+.ledger-event-line {
+  position: absolute;
+  left: 7px;
+  top: 14px;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.ledger-event:last-child .ledger-event-line {
+  display: none;
+}
+
+/* Circular node */
+.ledger-event-node {
+  position: relative;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ledger-event:hover .ledger-event-node {
+  transform: scale(1.3);
+}
+
+.ledger-event-node.node-positive {
+  background: #34D399;
+  border: 3px solid rgba(52, 211, 153, 0.2);
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.08);
+}
+
+.ledger-event-node.node-neutral {
+  background: var(--text-muted);
+  border: 3px solid rgba(98, 103, 115, 0.2);
+  box-shadow: 0 0 0 3px rgba(98, 103, 115, 0.08);
+}
+
+.ledger-event-node.node-negative {
+  background: #F87171;
+  border: 3px solid rgba(248, 113, 113, 0.2);
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.08);
+}
+
+/* Event body */
+.ledger-event-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.ledger-event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.ledger-event-person {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.ledger-event-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.ledger-event-delta {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ledger-event-delta.delta-positive {
+  color: #34D399;
+}
+
+.ledger-event-delta.delta-negative {
+  color: #F87171;
+}
+
+.ledger-event-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 4px 0;
+}
+
+.ledger-event-time {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.ledger-empty {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 20px 0;
+}
+
 /* Unified Navbar */
 .navbar {
   position: sticky;

@@ -702,7 +702,7 @@
         <% end %>
       </div>
 
-      <!-- Reputation History Ledger -->
+      <!-- Reputation History Ledger / Commitment Timeline -->
       <% if @role_type == "UniversityProfile" %>
         <div class="profile-card p-25">
           <h3 class="metrics-card-title">
@@ -711,19 +711,21 @@
           </h3>
 
           <% if @recent_reputation_events.any? %>
-            <div class="ledger-list">
+            <div class="ledger-timeline">
               <% @recent_reputation_events.each do |event| %>
-                <div class="ledger-item">
-                  <div class="ledger-item-header">
-                    <span class="fs-12 fw-500 text-primary">
-                      <%= event.profileable.first_name %> <%= event.profileable.last_name %>
-                    </span>
-                    <span class="ledger-delta <%= event.score_delta > 0 ? 'text-success' : 'text-danger' %>">
-                      <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %>
-                    </span>
+                <div class="ledger-event">
+                  <div class="ledger-event-line"></div>
+                  <div class="ledger-event-node <%= event.score_delta > 0 ? 'node-positive' : (event.score_delta == 0 ? 'node-neutral' : 'node-negative') %>"></div>
+                  <div class="ledger-event-body">
+                    <div class="ledger-event-header">
+                      <span class="ledger-event-person"><%= event.profileable.first_name %> <%= event.profileable.last_name %></span>
+                      <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %>">
+                        <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %>
+                      </span>
+                    </div>
+                    <p class="ledger-event-desc"><%= event.description %></p>
+                    <span class="ledger-event-time"><%= time_ago_in_words(event.created_at) %> ago</span>
                   </div>
-                  <p class="lh-14 text-secondary"><%= event.description %></p>
-                  <span class="fs-10 text-muted"><%= time_ago_in_words(event.created_at) %> ago</span>
                 </div>
               <% end %>
             </div>
@@ -740,16 +742,21 @@
           </h3>
 
           <% if @commitment_ledger_events.any? %>
-            <div class="ledger-list">
+            <div class="ledger-timeline">
               <% @commitment_ledger_events.each do |event| %>
-                <div class="ledger-item">
-                  <div class="ledger-item-header">
-                    <span class="ledger-delta <%= event.score_delta > 0 ? 'text-success' : 'text-danger' %>">
-                      <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %>
-                    </span>
-                    <span class="fs-10 text-muted"><%= time_ago_in_words(event.created_at) %> ago</span>
+                <div class="ledger-event">
+                  <div class="ledger-event-line"></div>
+                  <div class="ledger-event-node <%= event.score_delta > 0 ? 'node-positive' : (event.score_delta == 0 ? 'node-neutral' : 'node-negative') %>"></div>
+                  <div class="ledger-event-body">
+                    <div class="ledger-event-header">
+                      <span class="ledger-event-title">Action</span>
+                      <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %>">
+                        <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %>
+                      </span>
+                    </div>
+                    <p class="ledger-event-desc"><%= event.description %></p>
+                    <span class="ledger-event-time"><%= time_ago_in_words(event.created_at) %> ago</span>
                   </div>
-                  <p class="lh-14 text-secondary"><%= event.description %></p>
                 </div>
               <% end %>
             </div>
