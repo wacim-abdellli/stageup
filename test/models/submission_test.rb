@@ -43,7 +43,7 @@ class SubmissionTest < ActiveSupport::TestCase
       github_link: "invalid-url"
     )
     assert_not sub.valid?
-    assert_includes sub.errors[:github_link], "must be a valid URL"
+    assert_includes sub.errors[:github_link], "must be a valid HTTP/HTTPS URL"
   end
 
   test "should be invalid with submitted status and no submitted_at" do

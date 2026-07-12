@@ -11,7 +11,16 @@ class VerifySubmissionJob < ApplicationJob
     begin
       FileUtils.mkdir_p(temp_folder)
 
-      stdout, stderr, status = Open3.capture3("git", "clone", "--depth", "1", submission.github_link.to_s, temp_folder.to_s)
+      url = submission.github_link.to_s
+      unless url.match?(/\Ahttps?:\/\/[^\s]+\z/)
+        submission.update!(
+          auto_verification_status: "failed",
+          auto_verification_log: "Invalid URL format."
+        )
+        return
+      end
+
+      stdout, stderr, status = Open3.capture3("git", "clone", "--depth", "1", "--", url, temp_folder.to_s)
 
       if !status.success?
         submission.update!(

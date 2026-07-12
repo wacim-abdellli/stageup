@@ -1,0 +1,13 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "de599a6b6a540bdd5b90248db64f824f5e8a21a5f403704b5781654d1306bbda",
+      "message": "Possible command injection",
+      "file": "app/jobs/verify_submission_job.rb",
+      "line": 23,
+      "note": "URL is validated against strict regex guard clause and passed as separate arguments with -- separator. No shell interpolation occurs."
+    }
+  ]
+}
