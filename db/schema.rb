@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_12_110001) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_12_110002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,6 +50,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_12_110001) do
     t.string "profileable_type", null: false
     t.float "score_delta", default: 0.0, null: false
     t.datetime "updated_at", null: false
+    t.index ["profileable_type", "profileable_id", "created_at"], name: "index_commitment_events_on_profile_and_created_at"
     t.index ["profileable_type", "profileable_id"], name: "index_commitment_events_on_profileable"
   end
 

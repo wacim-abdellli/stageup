@@ -39,11 +39,12 @@ class StudentProfile < ApplicationRecord
 
       if errors[:cv].none? && cv.byte_size > 0
         begin
-          header = cv.download.first(4)
-          unless header == "%PDF"
-            errors.add(:cv, "file is corrupted or not a valid PDF document")
+          cv.open do |file|
+            unless file.read(4) == "%PDF"
+              errors.add(:cv, "file is corrupted or not a valid PDF document")
+            end
           end
-        rescue ActiveStorage::FileNotFoundError
+        rescue ActiveStorage::FileNotFoundError, Errno::ENOENT
           # File not yet accessible during initial attachment; skip magic-byte check
         end
       end
