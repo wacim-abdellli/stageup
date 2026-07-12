@@ -56,6 +56,11 @@ class SubmissionsController < ApplicationController
 
   # PATCH/PUT /submissions/:id
   def update
+    unless @submission.status == "started"
+      redirect_to dashboard_path, alert: "This submission cannot be updated."
+      return
+    end
+
     @submission.assign_attributes(submission_params)
     @submission.status = "under_review"
     @submission.submitted_at = Time.current
