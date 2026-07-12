@@ -101,8 +101,8 @@ class OffersController < ApplicationController
   end
 
   def ensure_company!
-    unless current_user.profileable_type == "CompanyProfile"
-      redirect_to dashboard_path, alert: "Only registered employers can post internship offers."
+    unless current_user.profileable_type == "CompanyProfile" && current_user.profileable.verified?
+      redirect_to dashboard_path, alert: "Your account is pending verification by StageUp administrators. You cannot post internship offers yet."
     end
   end
 

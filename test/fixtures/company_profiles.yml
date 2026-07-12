@@ -4,7 +4,7 @@ one:
   name: MyString
   website: MyString
   description: MyText
-  verified: false
+  verified: true
   response_rate: 1.5
   avg_response_time_hours: 1.5
   offers_count: 1

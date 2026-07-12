@@ -34,7 +34,21 @@ class OffersControllerTest < ActionDispatch::IntegrationTest
     sign_in @student_user
     get edit_offer_url(@offer)
     assert_redirected_to dashboard_path
-    assert_equal "Only registered employers can post internship offers.", flash[:alert]
+    assert_equal "Your account is pending verification by StageUp administrators. You cannot post internship offers yet.", flash[:alert]
+  end
+
+  test "unverified company cannot access new offer form" do
+    sign_in users(:company_user_two)
+    get new_offer_url
+    assert_redirected_to dashboard_path
+    assert_equal "Your account is pending verification by StageUp administrators. You cannot post internship offers yet.", flash[:alert]
+  end
+
+  test "unverified company cannot create offer" do
+    sign_in users(:company_user_two)
+    post offers_url, params: { offer: { title: "Test", description: "Test", stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite" } }
+    assert_redirected_to dashboard_path
+    assert_equal "Your account is pending verification by StageUp administrators. You cannot post internship offers yet.", flash[:alert]
   end
 
   test "company user can update own offer" do
