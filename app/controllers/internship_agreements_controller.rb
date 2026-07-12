@@ -104,7 +104,7 @@ class InternshipAgreementsController < ApplicationController
     when "CompanyProfile"
       @submission.offer.company_profile == profile
     when "UniversityProfile"
-      @submission.student_profile.university_id == profile.university_id
+      profile.approved? && @submission.student_profile.university_id == profile.university_id
     else
       false
     end
