@@ -55,26 +55,26 @@ class InternshipAgreementsController < ApplicationController
       return
     end
 
-    @agreement.update!(
-      status: "declined",
-      rejection_reason: params[:rejection_reason]
-    )
+    if @agreement.update(status: "declined", rejection_reason: params[:rejection_reason])
+      student_user = @submission.student_profile.user
+      company_user = @submission.offer.company_profile.user
 
-    student_user = @submission.student_profile.user
-    company_user = @submission.offer.company_profile.user
+      [student_user, company_user].each do |u|
+        Notification.trigger(
+          recipient: u,
+          action: "agreement_declined",
+          message: "The Convention de Stage for #{@submission.offer.title} has been declined by the university. Reason: #{@agreement.rejection_reason}",
+          notifiable: @agreement
+        )
+        UserMailer.agreement_declined_email(u, @agreement).deliver_later
+      end
 
-    [student_user, company_user].each do |u|
-      Notification.trigger(
-        recipient: u,
-        action: "agreement_declined",
-        message: "The Convention de Stage for #{@submission.offer.title} has been declined by the university. Reason: #{@agreement.rejection_reason}",
-        notifiable: @agreement
-      )
-      UserMailer.agreement_declined_email(u, @agreement).deliver_later
+      redirect_to submission_internship_agreement_path(@submission, @agreement),
+                  notice: "Agreement has been declined. All parties have been notified."
+    else
+      flash.now[:alert] = "Failed to decline: #{@agreement.errors.full_messages.join(', ')}"
+      render :show
     end
-
-    redirect_to submission_internship_agreement_path(@submission, @agreement),
-                notice: "Agreement has been declined. All parties have been notified."
   end
 
   private
