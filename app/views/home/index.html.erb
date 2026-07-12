@@ -1,115 +1,104 @@
-<div style="position: relative; min-height: 100vh; overflow-x: hidden; padding: 40px 20px;">
-  <!-- Cinema glow ambient light blob -->
+<div class="landing-wrapper">
   <div class="cinema-glow-bg"></div>
 
-  <div style="max-width: 1000px; margin: 0 auto; position: relative; z-index: 10; text-align: center; padding-top: 60px;">
-    <!-- Logo Header -->
-    <div style="margin-bottom: 50px; display: inline-flex; justify-content: center;">
+  <div class="landing-inner">
+    <div class="landing-logo-row">
       <%= render "layouts/navbar_brand" %>
     </div>
 
-    <!-- Centered Hero Title -->
-    <h1 style="font-size: clamp(36px, 5vw, 64px); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; color: #FFFFFF;">
+    <h1 class="landing-hero-title">
       Nobody pays a price for ghosting.<br>
-      <span style="background: linear-gradient(135deg, #FFFFFF 30%, #94A3B8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">We changed that.</span>
+      <span class="landing-hero-gradient">We changed that.</span>
     </h1>
 
-    <!-- Sub-headline -->
-    <p style="font-size: clamp(15px, 2vw, 18px); color: var(--text-secondary); max-width: 650px; margin: 0 auto 40px; line-height: 1.6;">
+    <p class="landing-subhead">
       Every offer, mission, and no-show becomes a permanent public record. Tunisia's first internship market where reputation is earned, not claimed.
     </p>
 
-    <!-- Call to Actions -->
-    <div style="display: flex; gap: 15px; justify-content: center; align-items: center; max-width: 450px; margin: 0 auto 40px; flex-wrap: wrap;">
-      <%= link_to "Browse Internships", offers_path, class: "btn btn-accent", style: "flex: 1; min-width: 180px; text-decoration: none; padding: 14px 28px;" %>
-      <%= link_to "Get Started", select_role_path, class: "btn glass-card", style: "flex: 1; min-width: 180px; text-decoration: none; padding: 14px 28px; color: white;" %>
+    <div class="landing-cta-row">
+      <%= link_to "Browse Internships", offers_path, class: "btn btn-accent landing-cta-btn" %>
+      <%= link_to "Get Started", select_role_path, class: "btn glass-card landing-cta-btn" %>
     </div>
 
-    <!-- Ticker Section -->
-    <div data-controller="ticker" style="width: 100%; overflow: hidden; margin-top: 40px; margin-bottom: 60px; padding: 15px 0; border-top: 1px dashed var(--border-color); border-bottom: 1px dashed var(--border-color); position: relative; background: rgba(255, 255, 255, 0.01);">
-      <div style="position: absolute; top: 0; left: 0; bottom: 0; width: 80px; background: linear-gradient(to right, #09090B, transparent); z-index: 2; pointer-events: none;"></div>
-      <div style="position: absolute; top: 0; right: 0; bottom: 0; width: 80px; background: linear-gradient(to left, #09090B, transparent); z-index: 2; pointer-events: none;"></div>
+    <div data-controller="ticker" class="landing-ticker">
+      <div class="ticker-fade-left"></div>
+      <div class="ticker-fade-right"></div>
       <div data-ticker-target="container"></div>
     </div>
 
-    <!-- Bento Grid Section -->
-    <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary);">A Better Internship Loop</h2>
-    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 40px;">Verifiable trust replacing static, unverified resumes</p>
+    <h2 class="landing-section-title">A Better Internship Loop</h2>
+    <p class="landing-section-sub">Verifiable trust replacing static, unverified resumes</p>
 
     <div class="bento-grid">
-      <!-- Card 1: Proof of Work -->
       <div class="bento-card glass-card">
-        <div style="margin-bottom: 15px;"><i data-lucide="git-commit" style="width: 24px; height: 24px; stroke: var(--text-secondary);"></i></div>
-        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Proof-of-Work Missions</h3>
-        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+        <div class="bento-icon"><i data-lucide="git-commit"></i></div>
+        <h3 class="bento-card-title">Proof-of-Work Missions</h3>
+        <p class="bento-card-text">
           Skip the endless CV filtering. Recruiters attach hands-on 48-hour coding challenges. Students submit clean code solutions directly to unlock interviews.
         </p>
       </div>
 
-      <!-- Card 2: Reputation Ledger -->
       <div class="bento-card glass-card">
-        <div style="margin-bottom: 15px;"><i data-lucide="shield-check" style="width: 24px; height: 24px; stroke: var(--text-secondary);"></i></div>
-        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Reputation Ledger</h3>
-        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+        <div class="bento-icon"><i data-lucide="shield-check"></i></div>
+        <h3 class="bento-card-title">Reputation Ledger</h3>
+        <p class="bento-card-text">
           Verify reliability upfront. Our immutable scoring system penalizes ghosting or missed deadlines, and rewards verified completions on both sides.
         </p>
       </div>
 
-      <!-- Card 3: University Verification -->
       <div class="bento-card glass-card">
-        <div style="margin-bottom: 15px;"><i data-lucide="check-circle" style="width: 24px; height: 24px; stroke: var(--text-secondary);"></i></div>
-        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Academic Verification</h3>
-        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+        <div class="bento-icon"><i data-lucide="check-circle"></i></div>
+        <h3 class="bento-card-title">Academic Verification</h3>
+        <p class="bento-card-text">
           Official email domain tracking (e.g. <code>@isetsf.rnu.tn</code> or <code>@enis.tn</code>) instantly verifies student credentials and connects them to registered coordinators.
         </p>
       </div>
     </div>
 
-    <!-- Active Offers Section -->
     <% if @active_offers.any? %>
-      <div style="margin-top: 48px; border-top: 1px solid var(--border-color); padding-top: 48px; text-align: left; margin-bottom: 64px;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
+      <div class="featured-section">
+        <div class="featured-header-row">
           <div>
-            <h2 style="font-size: 24px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; display: inline-flex; align-items: center; gap: 8px;">
-              <i data-lucide="compass" style="width: 24px; height: 24px; stroke: var(--text-secondary);"></i>
+            <h2 class="featured-heading">
+              <i data-lucide="compass" class="featured-heading-icon"></i>
               Featured Opportunities
             </h2>
-            <p style="color: var(--text-secondary); font-size: 14px;">Browse active internship listings and take on their proof missions</p>
+            <p class="featured-sub">Browse active internship listings and take on their proof missions</p>
           </div>
-          <%= link_to "View All Offers →", offers_path, style: "font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none;" %>
+          <%= link_to "View All Offers →", offers_path, class: "featured-view-all" %>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        <div class="featured-grid">
           <% @active_offers.each do |offer| %>
-            <div class="glass-card" style="padding: 25px; border-radius: var(--radius-lg); display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; border: 1px solid var(--border-color); transition: var(--transition);">
+            <div class="glass-card featured-offer-card">
               <div>
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                  <span class="badge-status" style="border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent; text-transform: uppercase; padding: 2px 8px; font-size: 10px;"><%= offer.stage_type %></span>
+                <div class="featured-offer-top">
+                  <span class="featured-stage-badge"><%= offer.stage_type %></span>
                   <% if offer.mission.present? %>
-                    <span class="badge-status" style="background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.2); color: #818CF8; display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px; font-size: 10px;">
-                      <i data-lucide="git-commit" style="width: 12px; height: 12px; stroke: #818CF8;"></i>
+                    <span class="featured-mission-badge">
+                      <i data-lucide="git-commit" class="featured-badge-icon"></i>
                       Mission Attached
                     </span>
                   <% else %>
-                    <span class="badge-status" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px; text-transform: none; padding: 2px 8px; font-size: 10px;">
-                      <i data-lucide="check-circle" style="width: 12px; height: 12px; stroke: var(--text-secondary);"></i>
+                    <span class="featured-cv-badge">
+                      <i data-lucide="check-circle" class="featured-badge-icon stroke-secondary"></i>
                       CV Only
                     </span>
                   <% end %>
                 </div>
-                <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px;"><%= link_to offer.title, offer, style: "color: white; text-decoration: none;" %></h3>
-                <span style="font-size: 13px; color: var(--text-secondary); display: block; margin-bottom: 12px;"><%= offer.company_profile.name %></span>
+                <h3 class="featured-offer-title"><%= link_to offer.title, offer %></h3>
+                <span class="featured-offer-company"><%= offer.company_profile.name %></span>
               </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 15px; margin-top: 15px;">
-                <span style="font-size: 12px; color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px;">
-                  <i data-lucide="map-pin" style="width: 13px; height: 13px; stroke: var(--text-secondary);"></i>
+              <div class="featured-offer-footer">
+                <span class="featured-offer-location">
+                  <i data-lucide="map-pin" class="featured-location-icon"></i>
                   <% if offer.location.downcase == "remote" %>
                     Remote
                   <% else %>
                     <%= offer.location %> (<%= offer.work_mode.capitalize %>)
                   <% end %>
                 </span>
-                <%= link_to "View details", offer, style: "font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none;" %>
+                <%= link_to "View details", offer, class: "featured-offer-link" %>
               </div>
             </div>
           <% end %>

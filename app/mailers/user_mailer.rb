@@ -22,4 +22,13 @@ class UserMailer < ApplicationMailer
     @offer = @submission.offer
     mail(to: @user.email, subject: "Convention de Stage Ready for Signature – #{@offer.title}")
   end
+
+  def agreement_declined_email(user, agreement)
+    @user = user
+    @agreement = agreement
+    @submission = agreement.submission
+    @offer = @submission.offer
+    @reason = agreement.rejection_reason
+    mail(to: @user.email, subject: "Convention de Stage Declined – #{@offer.title}")
+  end
 end

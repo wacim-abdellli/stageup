@@ -71,6 +71,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_12_110000) do
     t.datetime "company_signed_at"
     t.datetime "created_at", null: false
     t.date "end_date", null: false
+    t.text "rejection_reason"
     t.date "start_date", null: false
     t.string "status", default: "pending_signatures", null: false
     t.datetime "student_signed_at"

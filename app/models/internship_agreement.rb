@@ -6,7 +6,8 @@ class InternshipAgreement < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validate :end_date_must_be_after_start_date
-  validates :status, presence: true, inclusion: { in: %w[pending_signatures fully_executed] }
+  validates :status, presence: true, inclusion: { in: %w[pending_signatures fully_executed declined] }
+  validates :rejection_reason, presence: true, if: -> { status == "declined" }
 
   def sign_by!(role)
     case role

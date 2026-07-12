@@ -132,4 +132,69 @@ class InternshipAgreementsControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal "You cannot mark this internship as completed until a Convention de Stage has been generated.", flash[:alert]
     assert_not_equal "You cannot mark this internship as completed until the Convention de Stage is fully signed by all three parties.", flash[:alert]
   end
+
+  test "cannot create agreement on non-accepted submission" do
+    sign_in @student_user
+    pending_sub = Submission.create!(
+      student_profile: @student_profile,
+      offer: Offer.create!(
+        company_profile: @company_profile,
+        title: "Pending Offer", description: "Test",
+        stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+      ),
+      status: "started"
+    )
+
+    get new_submission_internship_agreement_path(pending_sub)
+    assert_redirected_to dashboard_path
+    assert_equal "You can only generate an agreement for an accepted internship.", flash[:alert]
+
+    post submission_internship_agreements_path(pending_sub), params: {
+      internship_agreement: { start_date: Date.today, end_date: Date.today + 90 }
+    }
+    assert_redirected_to dashboard_path
+    assert_equal "You can only generate an agreement for an accepted internship.", flash[:alert]
+  end
+
+  test "university coordinator can decline agreement" do
+    sign_in @university_user
+    agreement = InternshipAgreement.create!(submission: @submission, start_date: Date.today, end_date: Date.today + 90)
+
+    post decline_submission_internship_agreement_path(@submission, agreement), params: {
+      rejection_reason: "The internship duration is too short for the required credits."
+    }
+
+    assert_redirected_to submission_internship_agreement_path(@submission, agreement)
+    agreement.reload
+    assert_equal "declined", agreement.status
+    assert_equal "The internship duration is too short for the required credits.", agreement.rejection_reason
+  end
+
+  test "non-coordinator cannot decline agreement" do
+    sign_in @student_user
+    agreement = InternshipAgreement.create!(submission: @submission, start_date: Date.today, end_date: Date.today + 90)
+
+    post decline_submission_internship_agreement_path(@submission, agreement), params: {
+      rejection_reason: "Not allowed."
+    }
+
+    assert_redirected_to dashboard_path
+    assert_equal "pending_signatures", agreement.reload.status
+  end
+
+  test "declining creates notifications for student and company" do
+    sign_in @university_user
+    agreement = InternshipAgreement.create!(submission: @submission, start_date: Date.today, end_date: Date.today + 90)
+
+    assert_difference "Notification.count", 2 do
+      post decline_submission_internship_agreement_path(@submission, agreement), params: {
+        rejection_reason: "Insufficient supervision details."
+      }
+    end
+
+    student_notif = @student_user.notifications.last
+    company_notif = @company_user.notifications.last
+    assert_equal "agreement_declined", student_notif.action
+    assert_equal "agreement_declined", company_notif.action
+  end
 end

@@ -1,0 +1,9 @@
+Convention de Stage Declined
+
+The internship agreement for <%= @offer.title %> has been declined by the university coordinator.
+
+Reason provided: <%= @reason %>
+
+You may generate a new agreement with corrected terms if needed.
+
+View Agreement: <%= submission_internship_agreement_url(@submission, @agreement) %>

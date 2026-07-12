@@ -2,7 +2,8 @@ class InternshipAgreementsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_submission
   before_action :authorize_user!
-  before_action :set_agreement, only: [:show, :sign]
+  before_action :set_agreement, only: [:show, :sign, :decline]
+  before_action :ensure_submission_accepted!, only: [:new, :create]
 
   def new
     @agreement = @submission.build_internship_agreement
@@ -48,6 +49,34 @@ class InternshipAgreementsController < ApplicationController
                 notice: "Agreement signed successfully."
   end
 
+  def decline
+    unless current_user.profileable_type == "UniversityProfile"
+      redirect_to dashboard_path, alert: "Only university coordinators can decline agreements."
+      return
+    end
+
+    @agreement.update!(
+      status: "declined",
+      rejection_reason: params[:rejection_reason]
+    )
+
+    student_user = @submission.student_profile.user
+    company_user = @submission.offer.company_profile.user
+
+    [student_user, company_user].each do |u|
+      Notification.trigger(
+        recipient: u,
+        action: "agreement_declined",
+        message: "The Convention de Stage for #{@submission.offer.title} has been declined by the university. Reason: #{@agreement.rejection_reason}",
+        notifiable: @agreement
+      )
+      UserMailer.agreement_declined_email(u, @agreement).deliver_later
+    end
+
+    redirect_to submission_internship_agreement_path(@submission, @agreement),
+                notice: "Agreement has been declined. All parties have been notified."
+  end
+
   private
 
   def set_submission
@@ -57,6 +86,12 @@ class InternshipAgreementsController < ApplicationController
   def set_agreement
     @agreement = @submission.internship_agreement
     redirect_to dashboard_path, alert: "Agreement not found." unless @agreement
+  end
+
+  def ensure_submission_accepted!
+    unless @submission.status == "accepted"
+      redirect_to dashboard_path, alert: "You can only generate an agreement for an accepted internship."
+    end
   end
 
   def authorize_user!

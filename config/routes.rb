@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :internship_agreements, only: [:new, :create, :show] do
       member do
         post :sign
+        post :decline
       end
     end
   end

@@ -272,12 +272,17 @@
                             <%= button_to "Abandon", abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Are you sure you want to abandon this internship? Your commitment score will be penalized." } %>
                           <% end %>
                         </div>
-                        <div class="action-group">
+                          <div class="action-group">
                           <% if sub.internship_agreement %>
                             <% if sub.internship_agreement.status == "pending_signatures" %>
                               <span class="badge-status badge-pending">Awaiting: <%= sub.internship_agreement.pending_signatories.join(", ") %></span>
+                            <% elsif sub.internship_agreement.status == "declined" %>
+                              <span class="badge-status badge-declined">Agreement Declined</span>
                             <% end %>
                             <%= link_to "View & Sign Agreement", submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" %>
+                            <% if sub.internship_agreement.status == "declined" %>
+                              <%= link_to "Generate New Agreement", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
+                            <% end %>
                           <% else %>
                             <%= link_to "Generate Convention de Stage", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
                           <% end %>
@@ -379,8 +384,13 @@
                           <% if sub.internship_agreement %>
                             <% if sub.internship_agreement.status == "pending_signatures" %>
                               <span class="badge-status badge-pending">Awaiting: <%= sub.internship_agreement.pending_signatories.join(", ") %></span>
+                            <% elsif sub.internship_agreement.status == "declined" %>
+                              <span class="badge-status badge-declined">Agreement Declined</span>
                             <% end %>
                             <%= link_to "View & Sign Agreement", submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" %>
+                            <% if sub.internship_agreement.status == "declined" %>
+                              <%= link_to "Generate New Agreement", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
+                            <% end %>
                           <% else %>
                             <%= link_to "Generate Convention de Stage", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
                           <% end %>

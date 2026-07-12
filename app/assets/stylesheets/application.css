@@ -2354,9 +2354,382 @@ a:hover {
   color: #FBBF24;
 }
 
+.d-none { display: none; }
+
 .match-badge-low {
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #F87171;
+}
+
+/* ============= LANDING PAGE (home/index) ============= */
+
+.landing-wrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 40px 20px;
+}
+
+.landing-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding-top: 60px;
+}
+
+.landing-logo-row {
+  margin-bottom: 50px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.landing-hero-title {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+  color: #FFFFFF;
+}
+
+.landing-hero-gradient {
+  background: linear-gradient(135deg, #FFFFFF 30%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.landing-subhead {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.landing-cta-row {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  max-width: 450px;
+  margin: 0 auto 40px;
+  flex-wrap: wrap;
+}
+
+.landing-cta-btn {
+  flex: 1;
+  min-width: 180px;
+  text-decoration: none;
+  padding: 14px 28px;
+}
+
+/* Ticker */
+.landing-ticker {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 40px;
+  margin-bottom: 60px;
+  padding: 15px 0;
+  border-top: 1px dashed var(--border-color);
+  border-bottom: 1px dashed var(--border-color);
+  position: relative;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.ticker-fade-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  background: linear-gradient(to right, #09090B, transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ticker-fade-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80px;
+  background: linear-gradient(to left, #09090B, transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Section headings */
+.landing-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.landing-section-sub {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+/* Bento card internals */
+.bento-icon {
+  margin-bottom: 15px;
+}
+
+.bento-icon i,
+.bento-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-secondary);
+}
+
+.bento-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.bento-card-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Featured opportunities section */
+.featured-section {
+  margin-top: 48px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 48px;
+  text-align: left;
+  margin-bottom: 64px;
+}
+
+.featured-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+
+.featured-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.featured-heading-icon {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-secondary);
+}
+
+.featured-sub {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.featured-view-all {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Featured offer cards */
+.featured-offer-card {
+  padding: 25px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.featured-offer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.featured-stage-badge {
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  background: transparent;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  font-size: 10px;
+}
+
+.featured-mission-badge {
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #818CF8;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: none;
+  padding: 2px 8px;
+  font-size: 10px;
+}
+
+.featured-cv-badge {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: none;
+  padding: 2px 8px;
+  font-size: 10px;
+}
+
+.featured-badge-icon {
+  width: 12px;
+  height: 12px;
+  stroke: #818CF8;
+}
+
+.featured-offer-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.featured-offer-title a {
+  color: white;
+  text-decoration: none;
+}
+
+.featured-offer-company {
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.featured-offer-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  padding-top: 15px;
+  margin-top: 15px;
+}
+
+.featured-offer-location {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.featured-location-icon {
+  width: 13px;
+  height: 13px;
+  stroke: var(--text-secondary);
+}
+
+.featured-offer-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Agreement decline banner */
+.agreement-declined-banner {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.agreement-declined-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #F87171;
+  margin-bottom: 4px;
+}
+
+.agreement-declined-reason {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.agreement-declined-by {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Decline form */
+.decline-form-wrapper {
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(239, 68, 68, 0.04);
+  border: 1px solid rgba(239, 68, 68, 0.12);
+  border-radius: var(--radius-sm);
+}
+
+.decline-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px 10px;
+  font-size: 13px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: white;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.decline-textarea:focus {
+  outline: none;
+  border-color: #F87171;
+}
+
+.decline-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* Agreement status pill variations */
+.pill-lg {
+  padding: 6px 18px;
+}
+
+.badge-declined {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #F87171;
+}
+
+.btn-decline-confirm {
+  border-color: var(--danger);
   color: #F87171;
 }
 

@@ -7,72 +7,78 @@
 
     <% if flash[:notice] %>
       <div class="flash-message flash-notice">
-        <i data-lucide="check-circle" class="icon-16 flex-shrink-0" style="stroke: #34D399;"></i>
+        <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
         <span><%= flash[:notice] %></span>
       </div>
     <% end %>
 
     <% if flash[:alert] %>
       <div class="flash-message flash-alert">
-        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0" style="stroke: #F87171;"></i>
+        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
         <span><%= flash[:alert] %></span>
       </div>
     <% end %>
 
-    <!-- Document Header -->
+    <% if @agreement.status == "declined" %>
+      <div class="agreement-declined-banner">
+        <p class="agreement-declined-title">✗ Agreement Declined</p>
+        <p class="agreement-declined-reason"><strong>Reason:</strong> <%= @agreement.rejection_reason %></p>
+        <p class="agreement-declined-by">Declined by <%= university&.name %> coordinator</p>
+      </div>
+    <% end %>
+
     <div class="agreement-header">
       <h1 class="agreement-title">CONVENTION DE STAGE</h1>
       <p class="agreement-subtitle">This agreement is made in accordance with Tunisian law governing internship programmes.</p>
     </div>
 
-    <!-- Agreement Status Badge -->
     <div class="text-center mb-30">
       <% if @agreement.status == "fully_executed" %>
-        <span class="badge-status badge-completed fs-14" style="padding: 6px 18px;">
+        <span class="badge-status badge-completed fs-14 pill-lg">
           ✓ FULLY EXECUTED — All parties have signed
         </span>
+      <% elsif @agreement.status == "declined" %>
+        <span class="badge-status badge-declined fs-14 pill-lg">
+          ✗ DECLINED — The university has rejected this agreement
+        </span>
       <% else %>
-        <span class="badge-status badge-pending fs-14" style="padding: 6px 18px;">
+        <span class="badge-status badge-pending fs-14 pill-lg">
           ⏳ PENDING SIGNATURES — Awaiting: <%= @agreement.pending_signatories.join(", ") %>
         </span>
       <% end %>
     </div>
 
-    <!-- Article 1: Parties -->
     <div class="mb-30">
       <h2 class="agreement-article-title">Article 1 — Parties</h2>
       <p class="agreement-text">
         This Convention de Stage is entered into between the following three parties:
       </p>
       <ul class="agreement-list">
-        <li><strong style="color: var(--text-primary);">The Student:</strong> <%= student.first_name %> <%= student.last_name %>, enrolled at <%= university&.name || "an affiliated university" %> (<%= student.major.presence || "No major specified" %>)</li>
-        <li><strong style="color: var(--text-primary);">The Employer:</strong> <%= company.name %>, registered in Tunisia</li>
-        <li><strong style="color: var(--text-primary);">The University:</strong> <%= university&.name || "Independent / Self-declared" %></li>
+        <li><strong class="text-primary">The Student:</strong> <%= student.first_name %> <%= student.last_name %>, enrolled at <%= university&.name || "an affiliated university" %> (<%= student.major.presence || "No major specified" %>)</li>
+        <li><strong class="text-primary">The Employer:</strong> <%= company.name %>, registered in Tunisia</li>
+        <li><strong class="text-primary">The University:</strong> <%= university&.name || "Independent / Self-declared" %></li>
       </ul>
     </div>
 
-    <!-- Article 2: Dates -->
     <div class="mb-30">
       <h2 class="agreement-article-title">Article 2 — Dates & Duration</h2>
       <p class="agreement-text">
-        The internship shall commence on <strong style="color: var(--text-primary);"><%= @agreement.start_date.strftime("%B %d, %Y") %></strong> 
-        and conclude on <strong style="color: var(--text-primary);"><%= @agreement.end_date.strftime("%B %d, %Y") %></strong>.
+        The internship shall commence on <strong class="text-primary"><%= @agreement.start_date.strftime("%B %d, %Y") %></strong> 
+        and conclude on <strong class="text-primary"><%= @agreement.end_date.strftime("%B %d, %Y") %></strong>.
       </p>
       <p class="agreement-text mt-8">
-        Total duration: <strong style="color: var(--text-primary);"><%= (@agreement.end_date - @agreement.start_date).to_i %> days</strong>.
+        Total duration: <strong class="text-primary"><%= (@agreement.end_date - @agreement.start_date).to_i %> days</strong>.
       </p>
     </div>
 
-    <!-- Article 3: Subject -->
     <div class="mb-30">
       <h2 class="agreement-article-title">Article 3 — Internship Subject</h2>
       <p class="agreement-text">
-        <%= student.first_name %> shall carry out an internship titled <strong style="color: var(--text-primary);">"<%= @agreement.submission.offer.title %>"</strong> 
+        <%= student.first_name %> shall carry out an internship titled <strong class="text-primary">"<%= @agreement.submission.offer.title %>"</strong> 
         at <%= company.name %> under the terms described in the original offer.
       </p>
     </div>
 
-    <!-- Signatures Panel -->
     <div class="border-top pt-30">
       <h2 class="agreement-article-title">Signatures</h2>
       <p class="text-muted fs-13 mb-25">
@@ -80,9 +86,8 @@
       </p>
 
       <div class="agreement-signatures-grid">
-        <!-- Student Signature Box -->
         <div class="agreement-sign-box">
-          <i data-lucide="graduation-cap" class="icon-20" style="stroke: var(--text-muted); margin-bottom: 8px;"></i>
+          <i data-lucide="graduation-cap" class="icon-20 mb-8 stroke-muted"></i>
           <h3 class="agreement-sign-box-title">Student</h3>
           <p class="agreement-sign-box-name"><%= student.first_name %> <%= student.last_name %></p>
           <% if @agreement.student_signed_at %>
@@ -91,7 +96,7 @@
               <p class="agreement-signed-date"><%= @agreement.student_signed_at.strftime("%B %d, %Y at %H:%M") %></p>
             </div>
           <% else %>
-            <% if current_user.profileable_type == "StudentProfile" && current_user.profileable == student %>
+            <% if current_user.profileable_type == "StudentProfile" && current_user.profileable == student && @agreement.status != "declined" %>
               <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact" %>
             <% else %>
               <span class="agreement-unsigned-label">Not signed yet</span>
@@ -99,9 +104,8 @@
           <% end %>
         </div>
 
-        <!-- Employer Signature Box -->
         <div class="agreement-sign-box">
-          <i data-lucide="briefcase" class="icon-20" style="stroke: var(--text-muted); margin-bottom: 8px;"></i>
+          <i data-lucide="briefcase" class="icon-20 mb-8 stroke-muted"></i>
           <h3 class="agreement-sign-box-title">Employer</h3>
           <p class="agreement-sign-box-name"><%= company.name %></p>
           <% if @agreement.company_signed_at %>
@@ -110,7 +114,7 @@
               <p class="agreement-signed-date"><%= @agreement.company_signed_at.strftime("%B %d, %Y at %H:%M") %></p>
             </div>
           <% else %>
-            <% if current_user.profileable_type == "CompanyProfile" && current_user.profileable == company %>
+            <% if current_user.profileable_type == "CompanyProfile" && current_user.profileable == company && @agreement.status != "declined" %>
               <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact" %>
             <% else %>
               <span class="agreement-unsigned-label">Not signed yet</span>
@@ -118,9 +122,8 @@
           <% end %>
         </div>
 
-        <!-- University Signature Box -->
         <div class="agreement-sign-box">
-          <i data-lucide="landmark" class="icon-20" style="stroke: var(--text-muted); margin-bottom: 8px;"></i>
+          <i data-lucide="landmark" class="icon-20 mb-8 stroke-muted"></i>
           <h3 class="agreement-sign-box-title">University Coordinator</h3>
           <p class="agreement-sign-box-name"><%= university&.name || "Independent" %></p>
           <% if @agreement.university_signed_at %>
@@ -129,17 +132,32 @@
               <p class="agreement-signed-date"><%= @agreement.university_signed_at.strftime("%B %d, %Y at %H:%M") %></p>
             </div>
           <% else %>
-            <% if current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id %>
+            <% if current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id && @agreement.status != "declined" %>
               <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact" %>
+              <div class="mt-10">
+                <button type="button" class="btn btn-secondary btn-compact" onclick="document.getElementById('decline-form').classList.toggle('d-none')">Decline Agreement</button>
+              </div>
             <% else %>
               <span class="agreement-unsigned-label">Not signed yet</span>
             <% end %>
           <% end %>
         </div>
       </div>
+
+      <% if current_user.profileable_type == "UniversityProfile" && @agreement.status == "pending_signatures" && @submission.student_profile.university_id == current_user.profileable.university_id %>
+        <div id="decline-form" class="decline-form-wrapper d-none">
+          <%= form_with model: [@submission, @agreement], url: decline_submission_internship_agreement_path(@submission, @agreement), method: :post, local: true do |f| %>
+            <label class="fs-12 text-secondary fw-600 mb-4 block">Reason for declining:</label>
+            <%= text_area_tag :rejection_reason, nil, placeholder: "Explain why this agreement is being declined...", class: "decline-textarea", required: true %>
+            <div class="decline-actions">
+              <button type="button" class="btn btn-secondary btn-compact-sm" onclick="document.getElementById('decline-form').classList.add('d-none')">Cancel</button>
+              <%= f.submit "Confirm Decline", class: "btn btn-secondary btn-compact-sm btn-decline-confirm" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
-    <!-- Back Button -->
     <div class="agreement-back-row">
       <%= link_to "← Back to Dashboard", dashboard_path, class: "btn btn-secondary agreement-back-link" %>
     </div>
