@@ -43,6 +43,17 @@ Rails.application.routes.draw do
   root to: "home#index"
   get 'reputation_events', to: 'home#reputation_events'
 
+  namespace :admin do
+    get 'dashboard', to: 'dashboards#index', as: :dashboard
+    resources :university_profiles, only: [] do
+      post :approve, on: :member
+      post :reject, on: :member
+    end
+    resources :company_profiles, only: [] do
+      post :verify, on: :member
+    end
+  end
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   get "up" => "rails/health#show", as: :rails_health_check
 end

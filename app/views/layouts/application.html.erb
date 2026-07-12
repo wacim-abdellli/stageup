@@ -30,6 +30,13 @@
   </head>
 
   <body>
+    <% if current_user&.admin? %>
+      <div class="admin-top-bar">
+        <i data-lucide="shield" class="icon-14 flex-shrink-0"></i>
+        <span>Admin Access</span>
+        <%= link_to "Admin Panel", admin_dashboard_path, class: "admin-top-link" %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

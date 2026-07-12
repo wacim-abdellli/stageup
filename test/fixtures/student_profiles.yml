@@ -17,3 +17,12 @@ cyrine:
   graduation_year: 2026
   bio: Data engineer
   commitment_score: 95.0
+
+admin_student:
+  first_name: System
+  last_name: Admin
+  phone: "+216 00 000 000"
+  major: Administration
+  graduation_year: 2030
+  bio: System administrator
+  commitment_score: 100.0

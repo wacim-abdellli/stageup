@@ -1,0 +1,95 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="dashboard-header-left">
+      <h1 class="fs-22 fw-700">Admin Panel</h1>
+      <p class="header-meta">Manage university coordinators and company verifications</p>
+    </div>
+    <div class="flex-row gap-10 align-center">
+      <%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-secondary btn-header" %>
+      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-header m-0" %>
+    </div>
+  </div>
+
+  <% if flash[:notice] %>
+    <div class="flash-message flash-notice">
+      <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
+      <span><%= flash[:notice] %></span>
+    </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <div class="flash-message flash-alert">
+      <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
+      <span><%= flash[:alert] %></span>
+    </div>
+  <% end %>
+
+  <div class="dashboard-grid">
+    <div>
+      <!-- Pending Coordinators -->
+      <div class="profile-card card-mb">
+        <h2 class="section-heading">
+          <i data-lucide="landmark" class="section-heading-icon"></i>
+          Pending Coordinators
+        </h2>
+
+        <% if @pending_coordinators.any? %>
+          <div class="inline-list-sm">
+            <% @pending_coordinators.each do |coord| %>
+              <div class="inline-list-sm-item">
+                <div>
+                  <strong class="inline-list-sm-title"><%= coord.admin_name %></strong>
+                  <span class="inline-list-sm-meta">
+                    <%= coord.user.email %> &middot; <%= coord.department %> &middot; <%= coord.university.name %>
+                  </span>
+                </div>
+                <div class="action-group-8">
+                  <%= button_to "Approve Coordinator", approve_admin_university_profile_path(coord), method: :post, class: "btn btn-primary btn-compact-sm" %>
+                  <%= button_to "Reject Coordinator", reject_admin_university_profile_path(coord), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Reject this coordinator? Their account will be removed." } %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="empty-state-card">
+            <div class="empty-state-icon"><i data-lucide="check-circle" class="icon-40"></i></div>
+            <h3 class="empty-state-title">All Clear</h3>
+            <p class="empty-state-text">No pending coordinator requests.</p>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Unverified Companies -->
+      <div class="profile-card card-mb">
+        <h2 class="section-heading">
+          <i data-lucide="briefcase" class="section-heading-icon"></i>
+          Unverified Companies
+        </h2>
+
+        <% if @unverified_companies.any? %>
+          <div class="inline-list-sm">
+            <% @unverified_companies.each do |company| %>
+              <div class="inline-list-sm-item">
+                <div>
+                  <strong class="inline-list-sm-title"><%= company.name %></strong>
+                  <span class="inline-list-sm-meta">
+                    <%= company.user.email %> &middot; <%= company.website.presence || "No website" %>
+                  </span>
+                </div>
+                <div class="action-group-8">
+                  <%= button_to "Verify Company", verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary btn-compact-sm" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="empty-state-card">
+            <div class="empty-state-icon"><i data-lucide="check-circle" class="icon-40"></i></div>
+            <h3 class="empty-state-title">All Clear</h3>
+            <p class="empty-state-text">No unverified company profiles.</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

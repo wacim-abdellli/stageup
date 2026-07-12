@@ -225,4 +225,20 @@ CommitmentEvent.find_or_create_by!(
   created_at: 8.days.ago
 )
 
+puts "Seeding Admin User..."
+admin_profile = StudentProfile.find_or_create_by!(first_name: "System", last_name: "Admin") do |p|
+  p.phone = "+216 00 000 000"
+  p.major = "Administration"
+  p.graduation_year = 2030
+  p.bio = "StageUp system administrator."
+  p.commitment_score = 100.0
+end
+
+User.find_or_create_by!(email: "admin@stageup.tn") do |u|
+  u.password = "password"
+  u.admin = true
+  u.profileable = admin_profile
+end
+puts "Admin user created (admin@stageup.tn / password)"
+
 puts "Database successfully seeded!"

@@ -259,6 +259,32 @@
                       <% end %>
                     </span>
                   </div>
+                  <div class="timeline-container">
+                    <div class="timeline-steps">
+                      <% submission_milestones(sub).each_with_index do |ms, idx| %>
+                        <div class="timeline-step-wrapper">
+                          <div class="timeline-tooltip">
+                            <% if ms[:timestamp] %>
+                              <%= ms[:timestamp].strftime("%b %d, %Y") %>
+                            <% else %>
+                              <%= ms[:complete] ? "Done" : "—" %>
+                            <% end %>
+                          </div>
+                          <div class="timeline-step <%= ms[:complete] ? 'completed' : 'pending' %>">
+                            <% if ms[:complete] %>
+                              <svg class="timeline-step-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            <% else %>
+                              <%= idx + 1 %>
+                            <% end %>
+                          </div>
+                          <% if idx < submission_milestones(sub).length - 1 %>
+                            <div class="timeline-line <%= ms[:complete] ? 'completed' : 'pending' %>"></div>
+                          <% end %>
+                          <span class="timeline-label <%= ms[:complete] ? 'completed' : '' %>"><%= ms[:label] %></span>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
                   <div>
                     <% if sub.status == "accepted" %>
                       <div class="flex-col gap-8 items-end">
@@ -366,6 +392,32 @@
                     <span class="inline-list-item-meta">
                       Role: <%= sub.offer.title %>
                     </span>
+                  </div>
+                  <div class="timeline-container">
+                    <div class="timeline-steps">
+                      <% submission_milestones(sub).each_with_index do |ms, idx| %>
+                        <div class="timeline-step-wrapper">
+                          <div class="timeline-tooltip">
+                            <% if ms[:timestamp] %>
+                              <%= ms[:timestamp].strftime("%b %d, %Y") %>
+                            <% else %>
+                              <%= ms[:complete] ? "Done" : "—" %>
+                            <% end %>
+                          </div>
+                          <div class="timeline-step <%= ms[:complete] ? 'completed' : 'pending' %>">
+                            <% if ms[:complete] %>
+                              <svg class="timeline-step-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            <% else %>
+                              <%= idx + 1 %>
+                            <% end %>
+                          </div>
+                          <% if idx < submission_milestones(sub).length - 1 %>
+                            <div class="timeline-line <%= ms[:complete] ? 'completed' : 'pending' %>"></div>
+                          <% end %>
+                          <span class="timeline-label <%= ms[:complete] ? 'completed' : '' %>"><%= ms[:label] %></span>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
                   <div>
                     <% if sub.status == "accepted" %>

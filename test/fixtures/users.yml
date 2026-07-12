@@ -22,3 +22,14 @@ pending_university_user:
   email: pending@enis.tn
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
   profileable: pending (UniversityProfile)
+
+company_user_two:
+  email: contact@companytwo.tn
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  profileable: two (CompanyProfile)
+
+admin_user:
+  email: admin@stageup.tn
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  admin: true
+  profileable: admin_student (StudentProfile)

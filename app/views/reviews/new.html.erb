@@ -1,16 +1,16 @@
 <div class="auth-container">
-  <div class="auth-card" style="max-width: 600px; padding: 45px;">
+  <div class="auth-card auth-card-md auth-card-padded-lg">
     <div class="auth-header">
       <%= render "layouts/navbar_brand" %>
       <h2 class="auth-title">Share Your Experience</h2>
       <p class="auth-subtitle">Leave a review for your recent internship</p>
     </div>
 
-    <div style="background-color: var(--bg-primary); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-sm); margin-bottom: 25px;">
-      <span style="font-size: 13px; color: var(--text-secondary); display: block;">Internship:</span>
-      <strong style="font-size: 15px; color: var(--text-primary);"><%= @submission.offer.title %></strong>
-      <span style="font-size: 13px; color: var(--text-secondary); display: block; margin-top: 10px;">With:</span>
-      <strong style="font-size: 15px; color: #818CF8;">
+    <div class="info-card">
+      <span class="info-label">Internship:</span>
+      <strong class="info-value"><%= @submission.offer.title %></strong>
+      <span class="info-label mt-10">With:</span>
+      <strong class="info-value-accent">
         <%= current_user == @submission.student_profile.user ? @submission.offer.company_profile.name : "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name}" %>
       </strong>
     </div>
@@ -18,12 +18,12 @@
     <%= form_with model: [@submission, @review], local: true do |f| %>
       
       <% if @review.errors.any? %>
-        <div class="flash-message flash-alert" style="flex-direction: column; align-items: flex-start; gap: 6px;">
-          <div style="display: flex; align-items: center; gap: 6px;">
-            <i data-lucide="alert-circle" style="width: 16px; height: 16px; stroke: #F87171; flex-shrink: 0;"></i>
+        <div class="flash-message flash-alert flash-alert-col">
+          <div class="error-header-row">
+            <i data-lucide="alert-circle" class="icon-16 stroke-danger flex-shrink-0"></i>
             <strong>Please resolve the following errors:</strong>
           </div>
-          <ul style="margin-left: 24px; font-size: 13px; margin-top: 0; margin-bottom: 0;">
+          <ul class="error-list">
             <% @review.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
             <% end %>
@@ -39,14 +39,14 @@
       <div class="form-group">
         <label class="form-label" for="comment">Detailed Feedback & Review</label>
         <%= f.text_area :comment, id: "comment", class: "form-control", rows: 5, placeholder: "Describe the collaboration, skills learned, professionalism, and any constructive comments...", required: true %>
-        <small style="display: block; font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+        <small class="form-hint">
           ⚠️ Reviews must be at least 10 characters long and cannot be edited once submitted.
         </small>
       </div>
 
-      <div style="display: flex; gap: 15px; margin-top: 25px;">
-        <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary", style: "width: auto; flex: 1;" %>
-        <%= f.submit "Submit Review", class: "btn btn-primary", style: "flex: 2;" %>
+      <div class="form-actions-row">
+        <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary btn-flex-1" %>
+        <%= f.submit "Submit Review", class: "btn btn-primary btn-flex-2" %>
       </div>
     <% end %>
   </div>

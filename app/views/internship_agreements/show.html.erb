@@ -37,6 +37,9 @@
         <span class="badge-status badge-completed fs-14 pill-lg">
           ✓ FULLY EXECUTED — All parties have signed
         </span>
+        <div class="mt-10 hide-on-print">
+          <button type="button" class="btn btn-secondary" onclick="window.print()">Print / Save PDF</button>
+        </div>
       <% elsif @agreement.status == "declined" %>
         <span class="badge-status badge-declined fs-14 pill-lg">
           ✗ DECLINED — The university has rejected this agreement

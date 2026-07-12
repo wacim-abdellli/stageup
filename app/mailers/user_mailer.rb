@@ -31,4 +31,16 @@ class UserMailer < ApplicationMailer
     @reason = agreement.rejection_reason
     mail(to: @user.email, subject: "Convention de Stage Declined – #{@offer.title}")
   end
+
+  def coordinator_approved_email(user, profile)
+    @user = user
+    @profile = profile
+    mail(to: @user.email, subject: "Your Coordinator Account Has Been Approved")
+  end
+
+  def company_verified_email(user, profile)
+    @user = user
+    @profile = profile
+    mail(to: @user.email, subject: "Your Company Account Has Been Verified")
+  end
 end
