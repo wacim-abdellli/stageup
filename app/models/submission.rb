@@ -17,7 +17,7 @@ class Submission < ApplicationRecord
   end
 
   def github_link_required?
-    mission_id.present? && status == "submitted"
+    mission_id.present? && %w[submitted under_review].include?(status)
   end
 
   def confirm_completion_by!(role)
