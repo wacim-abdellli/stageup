@@ -25,6 +25,17 @@ class UserRegistrationTest < ActionDispatch::IntegrationTest
     assert_redirected_to dashboard_path
   end
 
+  test "rejects email with trailing injection characters" do
+    assert_no_difference ["User.count", "StudentProfile.count"] do
+      post student_registration_path, params: {
+        user: { email: "student@gmail.com --hack", password: "password123", password_confirmation: "password123" },
+        student_profile: { first_name: "Test", last_name: "Student", major: "CS", graduation_year: 2027 }
+      }
+    end
+    assert_response :success
+    assert_select ".flash-alert", text: "Please fix the errors below to complete your registration."
+  end
+
   test "student registration succeeds with no matching university domain" do
     assert_difference ["User.count", "StudentProfile.count"], 1 do
       post student_registration_path, params: {

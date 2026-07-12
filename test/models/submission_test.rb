@@ -46,6 +46,42 @@ class SubmissionTest < ActiveSupport::TestCase
     assert_includes sub.errors[:github_link], "must be a valid HTTP/HTTPS URL"
   end
 
+  test "rejects github_link with trailing injection characters" do
+    sub = Submission.new(
+      student_profile: @student,
+      offer: @offer,
+      mission: @mission,
+      status: "submitted",
+      github_link: "https://github.com/repo --hack"
+    )
+    assert_not sub.valid?
+    assert_includes sub.errors[:github_link], "must be a valid HTTP/HTTPS URL"
+  end
+
+  test "rejects github_link with leading dashes" do
+    sub = Submission.new(
+      student_profile: @student,
+      offer: @offer,
+      mission: @mission,
+      status: "submitted",
+      github_link: "--option=http://evil.com"
+    )
+    assert_not sub.valid?
+    assert_includes sub.errors[:github_link], "must be a valid HTTP/HTTPS URL"
+  end
+
+  test "rejects github_link with shell metacharacters" do
+    sub = Submission.new(
+      student_profile: @student,
+      offer: @offer,
+      mission: @mission,
+      status: "submitted",
+      github_link: "https://github.com/repo;rm -rf /"
+    )
+    assert_not sub.valid?
+    assert_includes sub.errors[:github_link], "must be a valid HTTP/HTTPS URL"
+  end
+
   test "should be invalid with submitted status and no submitted_at" do
     sub = Submission.new(
       student_profile: @student,

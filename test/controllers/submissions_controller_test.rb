@@ -51,6 +51,51 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "You cannot apply to an inactive offer.", flash[:alert]
   end
 
+  test "cannot update submission if status is under_review" do
+    sign_in @student_user
+
+    offer = Offer.create!(
+      company_profile: @company_profile,
+      title: "Update Test Offer",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
+    sub = Submission.create!(
+      student_profile: @student_profile,
+      offer: offer,
+      status: "under_review",
+      submitted_at: Time.current
+    )
+
+    patch submission_path(sub), params: { submission: { github_link: "https://github.com/new" } }
+    assert_redirected_to dashboard_path
+    assert_equal "This submission cannot be updated.", flash[:alert]
+
+    sub.reload
+    assert_nil sub.github_link
+  end
+
+  test "cannot update submission if status is accepted" do
+    sign_in @student_user
+
+    offer = Offer.create!(
+      company_profile: @company_profile,
+      title: "Update Accepted Test",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
+    sub = Submission.create!(
+      student_profile: @student_profile,
+      offer: offer,
+      status: "accepted",
+      responded_at: Time.current
+    )
+
+    patch submission_path(sub), params: { submission: { submission_notes: "should not apply" } }
+    assert_redirected_to dashboard_path
+    assert_equal "This submission cannot be updated.", flash[:alert]
+  end
+
   test "cannot double-apply to same offer" do
     sign_in @student_user
 
