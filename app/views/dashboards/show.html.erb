@@ -78,6 +78,17 @@
             </p>
           </div>
 
+          <% if @profile.skills.any? %>
+            <div class="profile-detail">
+              <strong>Skills:</strong>
+              <div class="flex-row flex-wrap gap-4 mt-4">
+                <% @profile.skills.each do |skill| %>
+                  <span class="skill-tag"><%= skill.name %></span>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
           <div class="cv-section">
             <strong class="block mb-8">Resume / CV</strong>
             <% if @profile.cv.attached? %>
@@ -242,6 +253,10 @@
                     <strong class="inline-list-item-title"><%= sub.offer.title %></strong>
                     <span class="inline-list-item-meta">
                       Company: <%= sub.offer.company_profile.name %>
+                      <% match_pct = sub.offer.match_percentage_for(@profile) %>
+                      <% if match_pct < 100 %>
+                        <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>"><%= match_pct %>% Match</span>
+                      <% end %>
                     </span>
                   </div>
                   <div>

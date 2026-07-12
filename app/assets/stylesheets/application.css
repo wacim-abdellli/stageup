@@ -2191,3 +2191,172 @@ a:hover {
   margin-top: 4px;
 }
 
+/* ============= OFFERS DIRECTORY (index page) ============= */
+
+/* Header buttons */
+.btn-header-padded {
+  padding: 10px 20px;
+}
+
+.btn-sign-out-header {
+  padding: 10px 20px;
+  margin: 0;
+  color: #F87171;
+}
+
+/* Directory main grid */
+.offers-directory-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+}
+
+/* Sidebar filter card */
+.filter-sidebar-card {
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+/* Filter title */
+.filter-title {
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+/* Filter sections */
+.filter-section { margin-bottom: 20px; }
+.filter-section-last { margin-bottom: 24px; }
+
+/* Search icon 14x14 */
+.icon-14 { width: 14px; height: 14px; }
+
+/* Search input field */
+.form-search-field {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: white;
+}
+
+/* Filter select fields */
+.form-select-filter {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: white;
+  cursor: pointer;
+}
+
+/* Filter action buttons */
+.btn-filter-apply {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.btn-filter-reset {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Page heading "Available Internships" */
+.section-title-lg {
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+/* Offers card grid */
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+/* Empty state card (full-width) */
+.empty-state-full {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 48px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+/* Empty state icon large */
+.empty-state-icon-lg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+/* Empty state heading */
+.empty-state-heading {
+  font-weight: 600;
+  color: white;
+  margin-bottom: 6px;
+}
+
+/* ============= SKILL TAGS ============= */
+
+.skill-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 2px 4px 2px 0;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #818CF8;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+.skill-tag-sm {
+  display: inline-block;
+  padding: 1px 6px;
+  margin: 1px 3px 1px 0;
+  font-size: 10px;
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  color: #818CF8;
+  border-radius: 3px;
+  line-height: 1.3;
+}
+
+/* Match percentage badge */
+.match-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+.match-badge-high {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #34D399;
+}
+
+.match-badge-medium {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  color: #FBBF24;
+}
+
+.match-badge-low {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #F87171;
+}
+

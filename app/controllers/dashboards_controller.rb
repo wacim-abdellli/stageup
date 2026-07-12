@@ -26,7 +26,7 @@ class DashboardsController < ApplicationController
       processed = Submission.where(offer_id: offer_ids).where(status: ["accepted", "rejected", "completed"])
       @processed_submissions = processed.includes(:student_profile, :offer).order(responded_at: :desc).limit(10)
 
-      @company_offers = @profile.offers.order(created_at: :desc)
+      @company_offers = @profile.offers.includes(:skills).order(created_at: :desc)
 
       @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc)
     elsif @role_type == "UniversityProfile"

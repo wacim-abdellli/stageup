@@ -3,6 +3,7 @@ class StudentProfile < ApplicationRecord
   has_one :user, as: :profileable, dependent: :destroy
   has_many :submissions, dependent: :destroy
   has_many :commitment_events, as: :profileable, dependent: :destroy
+  has_and_belongs_to_many :skills
   has_one_attached :cv
 
   validates :first_name, presence: true

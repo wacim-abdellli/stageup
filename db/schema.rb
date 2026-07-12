@@ -122,6 +122,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_12_110000) do
     t.index ["status"], name: "index_offers_on_status"
   end
 
+  create_table "offers_skills", id: false, force: :cascade do |t|
+    t.bigint "offer_id", null: false
+    t.bigint "skill_id", null: false
+    t.index ["offer_id", "skill_id"], name: "index_offers_skills_on_offer_id_and_skill_id", unique: true
+    t.index ["offer_id"], name: "index_offers_skills_on_offer_id"
+    t.index ["skill_id"], name: "index_offers_skills_on_skill_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.bigint "author_id", null: false
     t.text "comment", null: false
@@ -134,6 +142,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_12_110000) do
     t.index ["receiver_id"], name: "index_reviews_on_receiver_id"
     t.index ["submission_id", "author_id"], name: "index_reviews_on_submission_id_and_author_id", unique: true
     t.index ["submission_id"], name: "index_reviews_on_submission_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_skills_on_name", unique: true
+  end
+
+  create_table "skills_student_profiles", id: false, force: :cascade do |t|
+    t.bigint "skill_id", null: false
+    t.bigint "student_profile_id", null: false
+    t.index ["skill_id"], name: "index_skills_student_profiles_on_skill_id"
+    t.index ["student_profile_id", "skill_id"], name: "idx_on_student_profile_id_skill_id_3ee3308497", unique: true
+    t.index ["student_profile_id"], name: "index_skills_student_profiles_on_student_profile_id"
   end
 
   create_table "student_profiles", force: :cascade do |t|
@@ -214,9 +237,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_12_110000) do
   add_foreign_key "internship_agreements", "submissions"
   add_foreign_key "missions", "offers"
   add_foreign_key "offers", "company_profiles"
+  add_foreign_key "offers_skills", "offers"
+  add_foreign_key "offers_skills", "skills"
   add_foreign_key "reviews", "submissions"
   add_foreign_key "reviews", "users", column: "author_id"
   add_foreign_key "reviews", "users", column: "receiver_id"
+  add_foreign_key "skills_student_profiles", "skills"
+  add_foreign_key "skills_student_profiles", "student_profiles"
   add_foreign_key "student_profiles", "universities"
   add_foreign_key "submissions", "missions"
   add_foreign_key "submissions", "offers"

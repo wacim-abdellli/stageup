@@ -32,7 +32,14 @@
       <div class="offer-header-row">
         <div>
           <h2 class="offer-title-lg"><%= @offer.title %></h2>
-          <span class="offer-company"><%= @company.name %></span>
+          <span class="offer-company"><%= @company.name %>
+            <% if current_user&.profileable_type == "StudentProfile" %>
+              <% match_pct = @offer.match_percentage_for(current_user.profileable) %>
+              <% if match_pct < 100 %>
+                <span class="match-badge ml-8 <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>"><%= match_pct %>% Match</span>
+              <% end %>
+            <% end %>
+          </span>
         </div>
         <span class="badge-status offer-stage-badge"><%= @offer.stage_type %></span>
       </div>
@@ -59,6 +66,14 @@
           </span>
         <% end %>
       </div>
+
+      <% if @offer.skills.any? %>
+        <div class="offer-tags mb-20">
+          <% @offer.skills.each do |skill| %>
+            <span class="skill-tag"><%= skill.name %></span>
+          <% end %>
+        </div>
+      <% end %>
 
       <div class="mb-35">
         <h3 class="fs-18 mb-12 border-bottom pb-8">Role Description</h3>

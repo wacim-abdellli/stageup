@@ -22,7 +22,7 @@ class OffersController < ApplicationController
       @offers = @offers.where(work_mode: params[:work_mode])
     end
 
-    @offers = @offers.order(created_at: :desc)
+    @offers = @offers.includes(:skills).order(created_at: :desc)
   end
 
   # GET /offers/:id
@@ -107,7 +107,7 @@ class OffersController < ApplicationController
   end
 
   def set_offer
-    @offer = Offer.find(params[:id])
+    @offer = Offer.includes(:skills).find(params[:id])
   end
 
   def ensure_offer_owner!
