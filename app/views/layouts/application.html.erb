@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "App" %></title>
+    <title><%= content_for(:title) || "StageUp – Verified Internships in Tunisia" %></title>
+    <meta name="description" content="StageUp – Tunisia's first verified internship platform. Proof-of-work missions, reputation scoring, and official agreements.">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -23,16 +24,28 @@
       document.addEventListener("turbo:load", function() {
         lucide.createIcons();
       });
-      document.addEventListener("DOMContentLoaded", function() {
-        lucide.createIcons();
-      });
     </script>
   </head>
 
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <% if current_user %>
       <%= render "layouts/navbar" %>
     <% end %>
-    <%= yield %>
+    <div style="max-width:1200px;margin:16px auto 0;padding:0 20px;">
+      <% if flash[:notice] %>
+        <div class="flash-message flash-notice">
+          <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
+          <span><%= flash[:notice] %></span>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="flash-message flash-alert">
+          <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
+          <span><%= flash[:alert] %></span>
+        </div>
+      <% end %>
+    </div>
+    <main id="main-content"><%= yield %></main>
   </body>
 </html>

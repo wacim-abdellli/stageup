@@ -1,21 +1,8 @@
+<% content_for :title, "#{@offer.title} – StageUp" %>
 <div class="dashboard-container">
   <div class="dashboard-header">
     <p class="header-meta">Internship Opportunity Details</p>
   </div>
-
-  <% if flash[:alert] %>
-    <div class="flash-message flash-alert">
-      <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
-      <span><%= flash[:alert] %></span>
-    </div>
-  <% end %>
-
-  <% if flash[:notice] %>
-    <div class="flash-message flash-notice">
-      <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
-      <span><%= flash[:notice] %></span>
-    </div>
-  <% end %>
 
   <div class="offer-grid">
     
