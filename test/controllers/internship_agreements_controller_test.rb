@@ -182,6 +182,44 @@ class InternshipAgreementsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "pending_signatures", agreement.reload.status
   end
 
+  test "unapproved coordinator cannot sign agreement" do
+    pending_coord = users(:pending_university_user)
+    sign_in pending_coord
+
+    agreement = InternshipAgreement.create!(submission: @submission, start_date: Date.today, end_date: Date.today + 90)
+
+    post sign_submission_internship_agreement_path(@submission, agreement)
+    assert_redirected_to dashboard_path
+    assert_equal "You are not authorized to manage this agreement.", flash[:alert]
+    assert_nil agreement.reload.university_signed_at
+  end
+
+  test "unapproved coordinator cannot decline agreement" do
+    pending_coord = users(:pending_university_user)
+    sign_in pending_coord
+
+    agreement = InternshipAgreement.create!(submission: @submission, start_date: Date.today, end_date: Date.today + 90)
+
+    post decline_submission_internship_agreement_path(@submission, agreement), params: {
+      rejection_reason: "Some reason."
+    }
+    assert_redirected_to dashboard_path
+    assert_equal "pending_signatures", agreement.reload.status
+  end
+
+  test "declining with empty rejection_reason shows validation error instead of 500" do
+    sign_in @university_user
+    agreement = InternshipAgreement.create!(submission: @submission, start_date: Date.today, end_date: Date.today + 90)
+
+    post decline_submission_internship_agreement_path(@submission, agreement), params: {
+      rejection_reason: ""
+    }
+
+    assert_response :success
+    assert_match /Failed to decline/, response.body
+    assert_equal "pending_signatures", agreement.reload.status
+  end
+
   test "declining creates notifications for student and company" do
     sign_in @university_user
     agreement = InternshipAgreement.create!(submission: @submission, start_date: Date.today, end_date: Date.today + 90)
