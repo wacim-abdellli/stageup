@@ -48,6 +48,6 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     @student_user.notifications.destroy_all
     get notifications_path
     assert_response :success
-    assert_select "h3", text: "No Notifications"
+    assert_select "h3", text: "All Caught Up"
   end
 end
