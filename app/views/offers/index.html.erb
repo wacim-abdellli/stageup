@@ -8,35 +8,39 @@
 
   <div class="offers-directory-grid items-start">
     
-    <div class="glass-card sticky-top-20 filter-sidebar-card">
-      <h3 class="fs-16 inline-flex-center-gap-8 filter-title">
+    <div class="filter-sidebar-card">
+      <h3 class="filter-title">
         <i data-lucide="sliders-horizontal" class="icon-16 stroke-secondary"></i>
         Filter Offers
       </h3>
 
       <%= form_tag offers_path, method: :get, id: "filters-form" do %>
         <div class="filter-section">
-          <label class="label-sm">Search keyword</label>
+          <label class="filter-label">Search keyword</label>
           <div class="pos-relative">
             <i data-lucide="search" class="search-icon-abs stroke-muted icon-14"></i>
-            <%= text_field_tag :query, params[:query], placeholder: "Search title, company...", class: "fs-13 form-search-field" %>
+            <%= text_field_tag :query, params[:query], placeholder: "Search title, company...", class: "filter-input" %>
           </div>
         </div>
 
         <div class="filter-section">
-          <label class="label-sm">Stage Type</label>
-          <%= select_tag :stage_type, options_for_select([["All types", ""], ["PFE", "PFE"], ["PFA", "PFA"]], params[:stage_type]), onchange: "this.form.submit();", class: "fs-13 form-select-filter" %>
+          <label class="filter-label">Stage Type</label>
+          <div class="select-wrap">
+            <%= select_tag :stage_type, options_for_select([["All types", ""], ["PFE", "PFE"], ["PFA", "PFA"]], params[:stage_type]), onchange: "this.form.submit();", class: "filter-select" %>
+          </div>
         </div>
 
         <div class="filter-section-last">
-          <label class="label-sm">Work Mode</label>
-          <%= select_tag :work_mode, options_for_select([["All modes", ""], ["Remote", "remote"], ["On-site", "onsite"], ["Hybrid", "hybrid"]], params[:work_mode]), onchange: "this.form.submit();", class: "fs-13 form-select-filter" %>
+          <label class="filter-label">Work Mode</label>
+          <div class="select-wrap">
+            <%= select_tag :work_mode, options_for_select([["All modes", ""], ["Remote", "remote"], ["On-site", "onsite"], ["Hybrid", "hybrid"]], params[:work_mode]), onchange: "this.form.submit();", class: "filter-select" %>
+          </div>
         </div>
 
         <div class="flex-col gap-8">
           <%= submit_tag "Apply Search", class: "btn btn-accent fs-13 btn-filter-apply" %>
           <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
-            <%= link_to "Reset Filters", offers_path, class: "btn glass-card text-decoration-none fs-13 btn-filter-reset" %>
+            <%= link_to "Reset Filters", offers_path, class: "btn-filter-reset" %>
           <% end %>
         </div>
       <% end %>
@@ -51,7 +55,7 @@
       <div class="offers-grid">
         <% if @offers.any? %>
           <% @offers.each do |offer| %>
-            <div class="glass-card offer-card" onclick="window.location='<%= offer_path(offer) %>'">
+            <div class="offer-card" onclick="window.location='<%= offer_path(offer) %>'">
               <div>
                 <div class="offer-card-header">
                   <span class="offer-card-badge-stage"><%= offer.stage_type %></span>
@@ -70,16 +74,24 @@
                 </div>
 
                 <h3 class="offer-card-title"><%= offer.title %></h3>
-                <span class="offer-card-company"><%= offer.company_profile.name %></span>
+                <span class="offer-card-company">
+                  <%= offer.company_profile.name %>
+                  <% if current_user&.profileable_type == "StudentProfile" %>
+                    <% match_pct = offer.match_percentage_for(current_user.profileable) %>
+                    <% if match_pct < 100 %>
+                      <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>"><%= match_pct %>% Match</span>
+                    <% end %>
+                  <% end %>
+                </span>
                 
                 <p class="offer-card-desc">
                   <%= offer.description %>
                 </p>
 
                 <% if offer.skills.any? %>
-                  <div class="flex-row flex-wrap gap-4 mt-8">
+                  <div class="flex-row flex-wrap gap-4 mt-10">
                     <% offer.skills.each do |skill| %>
-                      <span class="skill-tag-sm"><%= skill.name %></span>
+                      <span class="skill-tag"><%= skill.name %></span>
                     <% end %>
                   </div>
                 <% end %>
@@ -94,14 +106,8 @@
                     <%= offer.location %> (<%= offer.work_mode.capitalize %>)
                   <% end %>
                 </span>
-                <span class="offer-card-action flex-row gap-4 items-center">
+                <span class="offer-card-action">
                   Details <i data-lucide="arrow-right" class="icon-w-12 stroke-accent"></i>
-                  <% if current_user&.profileable_type == "StudentProfile" %>
-                    <% match_pct = offer.match_percentage_for(current_user.profileable) %>
-                    <% if match_pct < 100 %>
-                      <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>"><%= match_pct %>% Match</span>
-                    <% end %>
-                  <% end %>
                 </span>
               </div>
             </div>

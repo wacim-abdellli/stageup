@@ -1853,17 +1853,20 @@ a:hover {
 .offer-card {
   padding: 24px;
   border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 220px;
-  transition: var(--transition);
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
   cursor: pointer;
 }
 
 .offer-card:hover {
   border-color: rgba(255, 255, 255, 0.18);
-  background-color: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.04);
   transform: translateY(-2px);
 }
 
@@ -1917,7 +1920,9 @@ a:hover {
 .offer-card-company {
   font-size: 13px;
   color: var(--text-secondary);
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 12px;
 }
 
@@ -2215,20 +2220,29 @@ a:hover {
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 32px;
+  align-items: start;
 }
 
 /* Sidebar filter card */
 .filter-sidebar-card {
-  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
+  padding: 24px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: sticky;
+  top: 88px;
 }
 
 /* Filter title */
 .filter-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   margin-bottom: 20px;
   color: var(--text-primary);
+  font-size: 16px;
 }
 
 /* Filter sections */
@@ -2238,25 +2252,80 @@ a:hover {
 /* Search icon 14x14 */
 .icon-14 { width: 14px; height: 14px; }
 
-/* Search input field */
-.form-search-field {
+/* Filter label */
+.filter-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Filter search input */
+.filter-input {
   width: 100%;
   padding: 10px 12px 10px 36px;
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
-  color: white;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Filter select fields */
-.form-select-filter {
+.filter-input:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.06);
+}
+
+.filter-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Custom select wrapper */
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--text-muted);
+  pointer-events: none;
+}
+
+/* Filter select */
+.filter-select {
   width: 100%;
-  padding: 10px 12px;
+  padding: 10px 32px 10px 12px;
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
-  color: white;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: inherit;
   cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.06);
 }
 
 /* Filter action buttons */
@@ -2270,6 +2339,22 @@ a:hover {
   width: 100%;
   padding: 10px;
   text-align: center;
+  display: block;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+
+.btn-filter-reset:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
 }
 
 /* Page heading "Available Internships" */
@@ -2314,15 +2399,14 @@ a:hover {
 
 .skill-tag {
   display: inline-block;
-  padding: 2px 8px;
-  margin: 2px 4px 2px 0;
+  padding: 2px 10px;
   font-size: 11px;
   font-weight: 500;
   background: rgba(99, 102, 241, 0.08);
   border: 1px solid rgba(99, 102, 241, 0.2);
   color: #818CF8;
-  border-radius: 4px;
-  line-height: 1.4;
+  border-radius: 999px;
+  line-height: 1.5;
 }
 
 .skill-tag-sm {
