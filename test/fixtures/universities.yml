@@ -9,3 +9,8 @@ enis:
   name: ENIS
   email_domain: enis.tn
   approved: true
+
+unapproved:
+  name: Unapproved University
+  email_domain: unapproved.tn
+  approved: false

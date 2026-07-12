@@ -29,12 +29,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.email.present?
       domain = @user.email.split('@').last.to_s.downcase
       matched_uni = University.find_by(email_domain: domain)
-      if matched_uni
-        if matched_uni.approved?
-          @student_profile.university = matched_uni
-        else
-          @user.errors.add(:email, "domain '#{domain}' belongs to a university that is not yet approved on StageUp")
-        end
+      if matched_uni && matched_uni.approved?
+        @student_profile.university = matched_uni
       end
     end
 

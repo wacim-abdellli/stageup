@@ -19,7 +19,7 @@ class CompanyProfile < ApplicationRecord
     
     rate = total_apps.any? ? (responded_apps.count.to_f / total_apps.count * 100).round(1) : 100.0
     
-    times = responded_apps.map { |s| (s.responded_at - s.submitted_at) / 1.hour }
+    times = responded_apps.reject { |s| s.submitted_at.nil? }.map { |s| (s.responded_at - s.submitted_at) / 1.hour }
     avg_time = times.any? ? (times.sum / times.size).round(1) : 0.0
 
     update!(

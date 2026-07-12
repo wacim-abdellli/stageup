@@ -70,6 +70,11 @@ class SubmissionsController < ApplicationController
 
   # POST /submissions/:id/accept
   def accept
+    unless %w[submitted under_review].include?(@submission.status)
+      redirect_to dashboard_path, alert: "This submission cannot be accepted in its current state."
+      return
+    end
+
     @submission.status = "accepted"
     @submission.responded_at = Time.current
 
@@ -96,6 +101,11 @@ class SubmissionsController < ApplicationController
 
   # POST /submissions/:id/reject
   def reject
+    unless %w[submitted under_review].include?(@submission.status)
+      redirect_to dashboard_path, alert: "This submission cannot be rejected in its current state."
+      return
+    end
+
     @submission.status = "rejected"
     @submission.responded_at = Time.current
 
