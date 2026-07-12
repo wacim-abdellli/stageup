@@ -1,5 +1,6 @@
 require "open3"
 require "ostruct"
+require "timeout"
 
 class VerifySubmissionJob < ApplicationJob
   queue_as :default
@@ -20,7 +21,17 @@ class VerifySubmissionJob < ApplicationJob
         return
       end
 
-      stdout, stderr, status = Open3.capture3("git", "clone", "--depth", "1", "--", url, temp_folder.to_s)
+      begin
+        stdout, stderr, status = Timeout.timeout(30) do
+          Open3.capture3("git", "clone", "--depth", "1", "--", url, temp_folder.to_s)
+        end
+      rescue Timeout::Error
+        submission.update!(
+          auto_verification_status: "failed",
+          auto_verification_log: "Git clone timed out after 30 seconds."
+        )
+        return
+      end
 
       if !status.success?
         submission.update!(
