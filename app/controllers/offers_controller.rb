@@ -7,19 +7,20 @@ class OffersController < ApplicationController
   before_action :ensure_offer_owner!, only: [:edit, :update, :destroy]
 
   def index
+    per_page = 20
+    page = [(params[:page] || 1).to_i, 1].max
     @offers = Offer.where(status: "active")
     if params[:query].present?
       q_val = "%#{params[:query]}%"
       @offers = @offers.joins(:company_profile)
                        .where("offers.title ILIKE :q OR offers.description ILIKE :q OR company_profiles.name ILIKE :q", q: q_val)
     end
-    if params[:stage_type].present?
-      @offers = @offers.where(stage_type: params[:stage_type])
-    end
-    if params[:work_mode].present?
-      @offers = @offers.where(work_mode: params[:work_mode])
-    end
-    @offers = @offers.includes(:skills).order(created_at: :desc)
+    @offers = @offers.where(stage_type: params[:stage_type]) if params[:stage_type].present?
+    @offers = @offers.where(work_mode: params[:work_mode]) if params[:work_mode].present?
+    @total_count = @offers.count
+    @total_pages = (@total_count.to_f / per_page).ceil
+    @current_page = page
+    @offers = @offers.includes(:skills, :company_profile).order(created_at: :desc).limit(per_page).offset((page - 1) * per_page)
   end
 
   def show

@@ -33,8 +33,16 @@ class DashboardsController < ApplicationController
       @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc).limit(50)
     elsif @role_type == "UniversityProfile"
       @university = @profile.university
-      @students = StudentProfile.where(university: @university).includes(:user, submissions: :internship_agreement).order(last_name: :asc)
-      @total_students_count = @students.count
+      per_page = 50
+      @student_page = [(params[:student_page] || 1).to_i, 1].max
+      @students_total = StudentProfile.where(university: @university).count
+      @total_students_count = @students_total
+      @student_total_pages = (@students_total.to_f / per_page).ceil
+      @students = StudentProfile.where(university: @university)
+                    .includes(:user, submissions: :internship_agreement)
+                    .order(last_name: :asc)
+                    .limit(per_page)
+                    .offset((@student_page - 1) * per_page)
       @active_internships_count = Submission.joins(:student_profile)
                                              .where(student_profiles: { university_id: @university.id })
                                              .where(status: ["accepted", "completed"])
