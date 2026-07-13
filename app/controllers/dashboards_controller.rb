@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_approved_coordinator!
@@ -12,7 +14,7 @@ class DashboardsController < ApplicationController
       submissions = @profile.submissions.where(status: ["accepted", "completed"])
       @active_internships = submissions.includes({ offer: :company_profile }, :reviews, :internship_agreement).order(created_at: :desc)
       @completed_internships_count = @profile.submissions.where(status: "completed").count
-      @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc)
+      @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc).limit(50)
     elsif @role_type == "CompanyProfile"
       company_subs = @profile.submissions.where(status: ["accepted", "completed"])
       @active_internships = company_subs.includes(:student_profile, :offer, :reviews, :internship_agreement).order(created_at: :desc)
@@ -28,11 +30,11 @@ class DashboardsController < ApplicationController
 
       @company_offers = @profile.offers.includes(:skills).order(created_at: :desc)
 
-      @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc)
+      @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc).limit(50)
     elsif @role_type == "UniversityProfile"
       @university = @profile.university
       @students = StudentProfile.where(university: @university).includes(:user, submissions: :internship_agreement).order(last_name: :asc)
-      @total_students_count = @students.size
+      @total_students_count = @students.count
       @active_internships_count = Submission.joins(:student_profile)
                                              .where(student_profiles: { university_id: @university.id })
                                              .where(status: ["accepted", "completed"])
@@ -49,7 +51,7 @@ class DashboardsController < ApplicationController
 
   def update_cv
     @profile = current_user.profileable
-    
+
     if params[:student_profile].blank? || params[:student_profile][:cv].blank?
       redirect_to dashboard_path, alert: "Please select a PDF file before clicking Upload."
       return
@@ -69,9 +71,10 @@ class DashboardsController < ApplicationController
   end
 
   def ensure_student!
-    unless current_user.profileable_type == "StudentProfile"
-      redirect_to dashboard_path, alert: "Only students can upload CVs."
-    end
+    return if current_user.profileable_type == "StudentProfile"
+
+    redirect_to dashboard_path, alert: "Only students can upload CVs."
+    throw(:abort)
   end
 
   def ensure_approved_coordinator!
