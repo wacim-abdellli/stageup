@@ -2,10 +2,8 @@ reputation_tracker:
   class: ReputationTrackerJob
   schedule: "0 0 * * *"
   queue: default
-  args: []
 
 resolve_expired_submissions:
   class: ResolveExpiredSubmissionsJob
   schedule: "0 * * * *"
   queue: default
-  args: []
