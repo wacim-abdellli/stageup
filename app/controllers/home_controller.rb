@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!, only: :reputation_events
+
   def index
     if user_signed_in?
       redirect_to dashboard_path
