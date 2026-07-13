@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+executed:
+  submission: accepted
+  start_date: 2026-07-10
+  end_date: 2026-10-10
+  status: fully_executed
+  student_signed_at: 2026-07-08 12:00:00
+  company_signed_at: 2026-07-08 14:00:00
+  university_signed_at: 2026-07-09 09:00:00

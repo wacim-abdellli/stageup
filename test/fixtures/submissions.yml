@@ -17,3 +17,17 @@ two:
   feedback: Great work!
   submitted_at: 2026-07-11 05:18:53
   responded_at: 2026-07-11 05:18:53
+
+accepted:
+  student_profile: mohamed
+  offer: one
+  status: accepted
+  submitted_at: 2026-07-01 10:00:00
+  responded_at: 2026-07-05 10:00:00
+
+completed:
+  student_profile: mohamed
+  offer: one
+  status: completed
+  submitted_at: 2026-07-01 10:00:00
+  responded_at: 2026-07-05 10:00:00
