@@ -4,6 +4,8 @@ class CompanyProfile < ApplicationRecord
   has_many :submissions, through: :offers
   has_many :commitment_events, as: :profileable, dependent: :destroy
 
+  include Rateable
+
   validates :name, presence: true
 
   def recalculate_commitment_score!
@@ -33,14 +35,4 @@ class CompanyProfile < ApplicationRecord
     end
   end
 
-  def average_rating
-    return nil unless user
-    reviews = Review.where(receiver: user)
-    reviews.any? ? (reviews.average(:rating).to_f).round(1) : nil
-  end
-
-  def reviews_received_count
-    return 0 unless user
-    Review.where(receiver: user).count
-  end
 end
