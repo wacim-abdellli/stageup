@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StudentProfile < ApplicationRecord
   belongs_to :university, optional: true
   has_one :user, as: :profileable, dependent: :destroy
@@ -25,26 +27,27 @@ class StudentProfile < ApplicationRecord
   private
 
   def validate_cv_format
-    if cv.attached?
-      unless cv.content_type.in?(%w[application/pdf])
-        errors.add(:cv, "must be a PDF document")
-      end
-
-      if errors[:cv].none? && cv.byte_size > 0
-        begin
-          cv.open do |file|
-            unless file.read(4) == "%PDF"
-              errors.add(:cv, "file is corrupted or not a valid PDF document")
-            end
-          end
-        rescue ActiveStorage::FileNotFoundError, Errno::ENOENT
-          # File not yet accessible during initial attachment; skip magic-byte check
+    return unless cv.attached?
+    # Check file size first (fast check before anything else)
+    if cv.byte_size > 5.megabytes
+      errors.add(:cv, "size must be less than 5MB")
+      return
+    end
+    # Check MIME type
+    unless cv.content_type.in?(%w[application/pdf])
+      errors.add(:cv, "must be a PDF document")
+      return
+    end
+    # Check PDF magic bytes (only runs if MIME passed)
+    begin
+      cv.open do |file|
+        unless file.read(4) == "%PDF"
+          errors.add(:cv, "file is corrupted or not a valid PDF document")
         end
       end
-
-      if cv.byte_size > 5.megabytes
-        errors.add(:cv, "size must be less than 5MB")
-      end
+    rescue ActiveStorage::FileNotFoundError, Errno::ENOENT => e
+      Rails.logger.warn("[StudentProfile] CV magic-byte check skipped: #{e.message}")
+      errors.add(:cv, "could not be verified — please try uploading again")
     end
   end
 end
