@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OffersController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :ensure_company!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   before_action :ensure_offer_owner!, only: [:edit, :update, :destroy]

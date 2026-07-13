@@ -1,4 +1,18 @@
+# frozen_string_literal: true
 class ApplicationController < ActionController::Base
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
+  # Block legacy browsers but show a message instead of a blank page
+  allow_browser versions: :modern, block: -> {
+    render plain: "Your browser is not supported. Please upgrade to a modern browser (Chrome, Firefox, Safari, Edge).",
+           status: :not_acceptable
+  }
+  # Default: all controllers require authentication.
+  # Public controllers (HomeController, OffersController public actions) must use:
+  #   skip_before_action :authenticate_user!, only: [...]
+  before_action :authenticate_user!
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to root_path, alert: "The requested resource was not found."
+  end
+  rescue_from ActionController::ParameterMissing do |e|
+    redirect_to root_path, alert: "Missing required parameter: #{e.param}"
+  end
 end
