@@ -43,9 +43,7 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
       - name: Audit dependencies
-        run: |
-          gem install bundler-audit
-          bundle-audit check --update
+        run: bundle exec bundle-audit check --update
   test:
     name: Test Suite
     runs-on: ubuntu-latest

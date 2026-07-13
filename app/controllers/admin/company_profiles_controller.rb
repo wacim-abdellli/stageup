@@ -18,7 +18,7 @@ module Admin
       @profile.update!(verified: false)
       Notification.trigger(
         recipient: @profile.user,
-        action: "company_verified",
+        action: "company_unverified",
         message: "Your company account verification has been revoked by StageUp administrators. Please contact support.",
         notifiable: @profile
       )

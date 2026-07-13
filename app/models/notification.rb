@@ -8,8 +8,8 @@ class Notification < ApplicationRecord
     application_received application_accepted application_rejected
     application_status_updated agreement_signature_requested
     agreement_declined coordinator_approved company_verified
-    internship_abandoned internship_cancelled internship_completed
-    internship_auto_completed mission_expired
+    company_unverified internship_abandoned internship_cancelled
+    internship_completed internship_auto_completed mission_expired
   ].freeze
 
   validates :action, presence: true, inclusion: { in: VALID_ACTIONS }
