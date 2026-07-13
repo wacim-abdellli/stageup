@@ -2,7 +2,10 @@ class ResolveExpiredSubmissionsJob < ApplicationJob
   queue_as :default
 
   def perform
-    Submission.where(status: "started").where("created_at < ?", 48.hours.ago).find_each do |sub|
+    Submission.where(status: "started")
+          .where("created_at < ?", 48.hours.ago)
+          .includes(offer: :company_profile, student_profile: [:user, :commitment_events])
+          .find_each do |sub|
       ActiveRecord::Base.transaction do
         sub.update_columns(status: "expired", updated_at: Time.current)
 
@@ -34,7 +37,10 @@ class ResolveExpiredSubmissionsJob < ApplicationJob
       end
     end
 
-    Submission.where(status: "accepted").where("first_completion_confirmed_at < ?", 7.days.ago).find_each do |sub|
+    Submission.where(status: "accepted")
+          .where("first_completion_confirmed_at < ?", 7.days.ago)
+          .includes(:offer, offer: :company_profile, student_profile: :user)
+          .find_each do |sub|
       ActiveRecord::Base.transaction do
         sub.update_columns(
           status: "completed",
