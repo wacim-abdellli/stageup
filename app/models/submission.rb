@@ -1,23 +1,28 @@
+# frozen_string_literal: true
+
 class Submission < ApplicationRecord
+  VALID_STATUSES = %w[started submitted under_review accepted rejected completed abandoned expired cancelled].freeze
+  VALID_AUTO_VERIFICATION_STATUSES = %w[pending checking passed failed].freeze
+
   belongs_to :student_profile
   belongs_to :offer
   belongs_to :mission, optional: true
   has_many :reviews, dependent: :destroy
   has_one :internship_agreement, dependent: :destroy
 
-  validates :status, presence: true, inclusion: { in: %w[started submitted under_review accepted rejected completed abandoned expired cancelled] }
+  validates :status, presence: true, inclusion: { in: VALID_STATUSES }
   validates :github_link, presence: true, if: :github_link_required?
   validates :github_link, format: { with: /\Ahttps?:\/\/[^\s]+\z/, message: "must be a valid HTTP/HTTPS URL" }, allow_blank: true
   validates :submitted_at, presence: true, if: :submitted?
   validates :student_profile_id, uniqueness: { scope: :offer_id, message: "has already applied to this offer" }
-  validates :auto_verification_status, inclusion: { in: %w[pending checking passed failed] }, allow_nil: true
+  validates :auto_verification_status, inclusion: { in: VALID_AUTO_VERIFICATION_STATUSES }, allow_nil: true
 
   def submitted?
     status == "submitted"
   end
 
   def github_link_required?
-    mission_id.present? && %w[submitted under_review].include?(status)
+    mission_id.present? && status.in?(%w[submitted under_review])
   end
 
   def confirm_completion_by!(role)
