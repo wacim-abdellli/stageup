@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resource :dashboard, only: [:show] do
-    patch :update_cv, on: :member
+    patch :update_cv
   end
   resources :offers
   resources :submissions, only: [:create, :edit, :update] do
