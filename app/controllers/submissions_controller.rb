@@ -30,7 +30,7 @@ class SubmissionsController < ApplicationController
         message: "#{student_name} applied to #{@offer.title}.",
         notifiable: @submission
       )
-      UserMailer.application_received_email(@submission.student_profile.user, @submission).deliver_later unless @offer.mission.present?
+      UserMailer.application_received_email(company_user, @submission).deliver_later unless @offer.mission.present?
       notice_msg = if @offer.mission.present?
                      "Mission started! You have 48 hours to submit your solution."
                    else
