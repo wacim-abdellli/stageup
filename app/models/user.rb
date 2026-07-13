@@ -5,7 +5,8 @@ class User < ApplicationRecord
   validates :profileable, presence: true
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :lockable, :timeoutable
 
   validate :email_domain_must_be_approved, on: :create
 
