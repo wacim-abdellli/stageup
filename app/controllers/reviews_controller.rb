@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_submission
@@ -35,18 +37,21 @@ class ReviewsController < ApplicationController
 
     unless [student_user, company_user].include?(current_user)
       redirect_to dashboard_path, alert: "You are not authorized to review this internship."
+      throw(:abort)
     end
   end
 
   def ensure_completed!
     unless @submission.status == "completed"
       redirect_to dashboard_path, alert: "This internship has not been marked as completed yet."
+      throw(:abort)
     end
   end
 
   def ensure_not_already_reviewed!
     if @submission.reviews.exists?(author: current_user)
       redirect_to dashboard_path, alert: "You have already submitted a review for this internship."
+      throw(:abort)
     end
   end
 
