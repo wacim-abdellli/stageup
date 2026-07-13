@@ -20,6 +20,9 @@ gem "jbuilder"
 # User authentication [https://github.com/heartcombo/devise]
 gem "devise"
 
+# Rate limiting for brute-force and abuse protection
+gem "rack-attack"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
