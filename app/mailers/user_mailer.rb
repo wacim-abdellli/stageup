@@ -11,6 +11,7 @@ class UserMailer < ApplicationMailer
     @user = user
     @submission = submission
     @offer = submission.offer
+    @company = submission.offer.company_profile
     @status = submission.status
     mail(to: @user.email, subject: "Application #{@status.humanize} – #{@offer.title}")
   end
