@@ -82,6 +82,7 @@ class DashboardsController < ApplicationController
       @user = current_user
       @profile = current_user.profileable
       render "dashboards/pending_approval"
+      throw(:abort)
     end
   end
 end
