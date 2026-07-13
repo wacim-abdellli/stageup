@@ -5,6 +5,8 @@ require "timeout"
 class VerifySubmissionJob < ApplicationJob
   queue_as :default
 
+  ALLOWED_GIT_HOSTS = %w[github.com gitlab.com bitbucket.org].freeze
+
   def perform(submission)
     temp_folder = Rails.root.join("tmp", "sandboxes", "submission_#{submission.id}")
     submission.update!(auto_verification_status: "checking")
@@ -13,11 +15,7 @@ class VerifySubmissionJob < ApplicationJob
       FileUtils.mkdir_p(temp_folder)
 
       url = submission.github_link.to_s
-      unless url.match?(/\Ahttps?:\/\/[^\s]+\z/)
-        submission.update!(
-          auto_verification_status: "failed",
-          auto_verification_log: "Invalid URL format."
-        )
+      unless validate_url!(url, submission)
         return
       end
 
@@ -57,9 +55,31 @@ class VerifySubmissionJob < ApplicationJob
       end
     ensure
       FileUtils.rm_rf(temp_folder)
-      if submission.auto_verification_status != "pending"
+      if %w[passed failed].include?(submission.reload.auto_verification_status)
         submission.update!(status: "submitted", submitted_at: Time.current)
       end
     end
+  end
+
+  private
+
+  def validate_url!(url, submission)
+    begin
+      uri = URI.parse(url)
+      unless uri.scheme == "https" && ALLOWED_GIT_HOSTS.include?(uri.host&.downcase)
+        submission.update!(
+          auto_verification_status: "failed",
+          auto_verification_log: "Only HTTPS URLs from GitHub, GitLab, or Bitbucket are accepted. Got: #{uri.host}"
+        )
+        return false
+      end
+    rescue URI::InvalidURIError
+      submission.update!(
+        auto_verification_status: "failed",
+        auto_verification_log: "Invalid URL format."
+      )
+      return false
+    end
+    true
   end
 end
