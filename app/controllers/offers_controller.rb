@@ -4,28 +4,22 @@ class OffersController < ApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   before_action :ensure_offer_owner!, only: [:edit, :update, :destroy]
 
-  # GET /offers
   def index
     @offers = Offer.where(status: "active")
-
     if params[:query].present?
       q_val = "%#{params[:query]}%"
       @offers = @offers.joins(:company_profile)
                        .where("offers.title ILIKE :q OR offers.description ILIKE :q OR company_profiles.name ILIKE :q", q: q_val)
     end
-
     if params[:stage_type].present?
       @offers = @offers.where(stage_type: params[:stage_type])
     end
-
     if params[:work_mode].present?
       @offers = @offers.where(work_mode: params[:work_mode])
     end
-
     @offers = @offers.includes(:skills).order(created_at: :desc)
   end
 
-  # GET /offers/:id
   def show
     if @offer.status == "draft"
       unless current_user && current_user.profileable_type == "CompanyProfile" && @offer.company_profile == current_user.profileable
@@ -33,27 +27,21 @@ class OffersController < ApplicationController
         return
       end
     end
-
     @company = @offer.company_profile
     @mission = @offer.mission
-
     if current_user && current_user.profileable_type == "StudentProfile"
       @submission = current_user.profileable.submissions.find_by(offer: @offer)
     end
   end
 
-  # GET /offers/new
   def new
     @offer = current_user.profileable.offers.build
     @offer.build_mission
   end
 
-  # POST /offers
-  # GET /offers/:id/edit
   def edit
   end
 
-  # PATCH /offers/:id
   def update
     if @offer.update(offer_params)
       redirect_to dashboard_path, notice: "Offer was successfully updated."
@@ -62,7 +50,6 @@ class OffersController < ApplicationController
     end
   end
 
-  # DELETE /offers/:id
   def destroy
     if @offer.submissions.none?
       @offer.destroy
@@ -75,8 +62,7 @@ class OffersController < ApplicationController
 
   def create
     @offer = current_user.profileable.offers.build(offer_params)
-    
-    # Track when they post their first offer for the grace period check
+
     company = current_user.profileable
     if company.first_offer_posted_at.nil?
       company.update!(first_offer_posted_at: Time.current)
@@ -85,7 +71,6 @@ class OffersController < ApplicationController
     if @offer.save
       redirect_to dashboard_path, notice: "Internship offer was successfully posted!"
     else
-      # If they didn't fill out the mission fields but specified some, rebuild it to show errors
       @offer.build_mission if @offer.mission.nil?
       render :new, status: :unprocessable_entity
     end
@@ -101,10 +86,12 @@ class OffersController < ApplicationController
   end
 
   def ensure_company!
-    if current_user.profileable_type == "StudentProfile"
-      redirect_to dashboard_path, alert: "Only verified recruiters can manage internship offers."
+    if current_user.profileable_type == "CompanyProfile" && current_user.profileable.verified?
+      return
     elsif current_user.profileable_type == "CompanyProfile" && !current_user.profileable.verified?
       redirect_to dashboard_path, alert: "Your account is pending verification by StageUp administrators. You cannot post internship offers yet."
+    elsif current_user.profileable_type == "StudentProfile"
+      redirect_to dashboard_path, alert: "Only verified recruiters can manage internship offers."
     else
       redirect_to dashboard_path, alert: "You are not authorized to perform this action."
     end
