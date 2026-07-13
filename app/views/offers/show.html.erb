@@ -132,11 +132,11 @@
 
         <div class="emp-rating-row">
           <span class="emp-stat-label">Average Rating</span>
-          <% comp_avg = @company.average_rating %>
-          <% if comp_avg %>
+          <% if @reviews.any? %>
+            <% comp_avg = (@reviews.sum(&:rating).to_f / @reviews.size).round(1) %>
             <strong class="emp-rating-inner">
               <i data-lucide="star" class="star-icon"></i>
-              <%= comp_avg %> (<%= @company.reviews_received_count %> reviews)
+              <%= comp_avg %> (<%= @reviews.size %> reviews)
             </strong>
           <% else %>
             <strong class="text-secondary">Unrated</strong>
@@ -145,11 +145,11 @@
       </div>
 
       <!-- Employer Reviews List -->
-      <% if @company.reviews_received_count > 0 %>
+      <% if @reviews.any? %>
         <div class="profile-card p-25 mb-20">
           <h3 class="employer-card-title">Candidate Reviews</h3>
           <div class="review-list">
-            <% Review.where(receiver: @company.user).order(created_at: :desc).each do |rev| %>
+            <% @reviews.each do |rev| %>
               <div class="review-item">
                 <div class="review-header">
                   <span class="review-rating">

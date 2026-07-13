@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OffersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :ensure_company!, only: [:new, :create, :edit, :update, :destroy]
@@ -32,6 +34,7 @@ class OffersController < ApplicationController
     if current_user && current_user.profileable_type == "StudentProfile"
       @submission = current_user.profileable.submissions.find_by(offer: @offer)
     end
+    @reviews = Review.where(receiver: @company.user).order(created_at: :desc).to_a if @company.user
   end
 
   def new
