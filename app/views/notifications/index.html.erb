@@ -47,4 +47,22 @@
       </p>
     </div>
   <% end %>
+
+  <% if @total_pages > 1 %>
+    <div class="pagination-nav">
+      <% if @current_page > 1 %>
+        <%= link_to "← Previous", notifications_path(page: @current_page - 1), class: "pagination-link" %>
+      <% else %>
+        <span class="pagination-link pagination-link-disabled">← Previous</span>
+      <% end %>
+
+      <span class="pagination-info">Page <%= @current_page %> of <%= @total_pages %></span>
+
+      <% if @current_page < @total_pages %>
+        <%= link_to "Next →", notifications_path(page: @current_page + 1), class: "pagination-link" %>
+      <% else %>
+        <span class="pagination-link pagination-link-disabled">Next →</span>
+      <% end %>
+    </div>
+  <% end %>
 </div>

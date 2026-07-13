@@ -1,9 +1,16 @@
+# frozen_string_literal: true
+
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
+  PER_PAGE = 20
+
   def index
-    @notifications = current_user.notifications.recent
+    page = (params[:page] || 1).to_i.clamp(1, Float::INFINITY)
+    @notifications = current_user.notifications.recent.limit(PER_PAGE).offset((page - 1) * PER_PAGE)
     @unread_count = current_user.notifications.unread.count
+    @current_page = page
+    @total_pages = (current_user.notifications.count.to_f / PER_PAGE).ceil
   end
 
   def update

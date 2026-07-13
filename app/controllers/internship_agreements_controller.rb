@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 class InternshipAgreementsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_submission
   before_action :authorize_user!
   before_action :set_agreement, only: [:show, :sign, :decline]
   before_action :ensure_submission_accepted!, only: [:new, :create]
+  before_action :ensure_signable!, only: [:sign]
 
   def new
     @agreement = @submission.build_internship_agreement
@@ -85,12 +88,45 @@ class InternshipAgreementsController < ApplicationController
 
   def set_agreement
     @agreement = @submission.internship_agreement
-    redirect_to dashboard_path, alert: "Agreement not found." unless @agreement
+    return if @agreement
+
+    redirect_to dashboard_path, alert: "Agreement not found."
+    throw(:abort)
   end
 
   def ensure_submission_accepted!
-    unless @submission.status == "accepted"
-      redirect_to dashboard_path, alert: "You can only generate an agreement for an accepted internship."
+    return if @submission.status == "accepted"
+
+    redirect_to dashboard_path, alert: "You can only generate an agreement for an accepted internship."
+    throw(:abort)
+  end
+
+  def ensure_signable!
+    if @agreement.status == "fully_executed"
+      redirect_to submission_internship_agreement_path(@submission, @agreement),
+                  alert: "This agreement is already fully executed and cannot be signed again."
+      throw(:abort)
+    end
+
+    if @agreement.status == "declined"
+      redirect_to submission_internship_agreement_path(@submission, @agreement),
+                  alert: "This agreement has been declined and cannot be signed."
+      throw(:abort)
+    end
+
+    if already_signed?
+      redirect_to submission_internship_agreement_path(@submission, @agreement),
+                  alert: "You have already signed this agreement."
+      throw(:abort)
+    end
+  end
+
+  def already_signed?
+    case current_user.profileable_type
+    when "StudentProfile" then @agreement.student_signed_at.present?
+    when "CompanyProfile" then @agreement.company_signed_at.present?
+    when "UniversityProfile" then @agreement.university_signed_at.present?
+    else false
     end
   end
 
@@ -109,9 +145,10 @@ class InternshipAgreementsController < ApplicationController
       false
     end
 
-    unless authorized
-      redirect_to dashboard_path, alert: "You are not authorized to manage this agreement."
-    end
+    return if authorized
+
+    redirect_to dashboard_path, alert: "You are not authorized to manage this agreement."
+    throw(:abort)
   end
 
   def agreement_params

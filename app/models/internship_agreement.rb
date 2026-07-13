@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InternshipAgreement < ApplicationRecord
   belongs_to :submission
   has_one :student_profile, through: :submission
@@ -10,12 +12,34 @@ class InternshipAgreement < ApplicationRecord
   validates :rejection_reason, presence: true, if: -> { status == "declined" }
 
   def sign_by!(role)
+    if status == "fully_executed"
+      errors.add(:base, "Agreement is already fully executed")
+      raise ActiveRecord::RecordInvalid, self
+    end
+
+    if status == "declined"
+      errors.add(:base, "Agreement has been declined")
+      raise ActiveRecord::RecordInvalid, self
+    end
+
     case role
     when "StudentProfile"
+      if student_signed_at.present?
+        errors.add(:base, "Student has already signed this agreement")
+        raise ActiveRecord::RecordInvalid, self
+      end
       self.student_signed_at = Time.current
     when "CompanyProfile"
+      if company_signed_at.present?
+        errors.add(:base, "Company has already signed this agreement")
+        raise ActiveRecord::RecordInvalid, self
+      end
       self.company_signed_at = Time.current
     when "UniversityProfile"
+      if university_signed_at.present?
+        errors.add(:base, "University coordinator has already signed this agreement")
+        raise ActiveRecord::RecordInvalid, self
+      end
       self.university_signed_at = Time.current
     end
 
