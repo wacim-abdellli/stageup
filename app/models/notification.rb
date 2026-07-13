@@ -17,5 +17,11 @@ class Notification < ApplicationRecord
       message: message,
       notifiable: notifiable
     )
+  rescue ActiveRecord::RecordInvalid, StandardError => e
+    Rails.logger.error(
+      "[Notification::TriggerFailed] action=#{action} recipient=#{recipient&.id} " \
+      "notifiable=#{notifiable&.class}##{notifiable&.id} error=#{e.message}"
+    )
+    nil
   end
 end
