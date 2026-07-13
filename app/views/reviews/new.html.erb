@@ -43,7 +43,7 @@
         <%= f.hidden_field :rating, id: "rv" %>
         <span id="sh" class="form-hint">Click a star to rate</span>
       </div>
-      <script>
+      <%= javascript_tag nonce: true do %>
         var labels = ['Poor','Below Average','Average','Good','Excellent'];
         function pickStar(v) {
           document.getElementById('rv').value = v;
@@ -61,7 +61,7 @@
             a.forEach(function(x,j) { x.style.color = j < v ? '#F59E0B' : 'var(--text-muted)'; });
           });
         });
-      </script>
+      <% end %>
 
       <div class="form-group">
         <label class="form-label" for="comment">Detailed Feedback & Review</label>
@@ -71,10 +71,10 @@
           <span id="cc" style="font-size:11px;color:var(--text-muted);">0 / min 10</span>
         </div>
       </div>
-      <script>
+      <%= javascript_tag nonce: true do %>
         function updateCC(el) { var n=el.value.length; var c=document.getElementById('cc');
           c.textContent=n+' / min 10'; c.style.color=n>=10?'#10B981':'var(--text-muted)'; }
-      </script>
+      <% end %>
 
       <div class="form-actions-row">
         <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary btn-flex-1" %>

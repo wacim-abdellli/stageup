@@ -7,6 +7,7 @@ class InternshipAgreementsController < ApplicationController
   before_action :set_agreement, only: [:show, :sign, :decline]
   before_action :ensure_submission_accepted!, only: [:new, :create]
   before_action :ensure_signable!, only: [:sign]
+  before_action :ensure_no_existing_agreement!, only: [:new, :create]
 
   def new
     @agreement = @submission.build_internship_agreement
@@ -58,6 +59,12 @@ class InternshipAgreementsController < ApplicationController
       return
     end
 
+    if @agreement.status == "fully_executed"
+      redirect_to submission_internship_agreement_path(@submission, @agreement),
+                  alert: "Fully executed agreements cannot be declined."
+      return
+    end
+
     if @agreement.update(status: "declined", rejection_reason: params[:rejection_reason])
       student_user = @submission.student_profile.user
       company_user = @submission.offer.company_profile.user
@@ -98,6 +105,13 @@ class InternshipAgreementsController < ApplicationController
     return if @submission.status == "accepted"
 
     redirect_to dashboard_path, alert: "You can only generate an agreement for an accepted internship."
+    throw(:abort)
+  end
+
+  def ensure_no_existing_agreement!
+    return unless @submission.internship_agreement.present?
+    redirect_to submission_internship_agreement_path(@submission, @submission.internship_agreement),
+                alert: "An agreement already exists for this internship."
     throw(:abort)
   end
 

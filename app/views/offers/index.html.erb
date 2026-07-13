@@ -30,7 +30,7 @@
         <div class="filter-section">
           <label class="filter-label">Stage Type</label>
           <div class="select-wrap">
-            <%= select_tag :stage_type, options_for_select([["All types", ""], ["PFE", "PFE"], ["PFA", "PFA"]], params[:stage_type]), onchange: "this.form.submit();", class: "filter-select" %>
+            <%= select_tag :stage_type, options_for_select([["All types", ""], ["PFE", "PFE"], ["PFA", "PFA"], ["Initiation / Observation", "initiation"], ["Free / Skill-Building", "free"]], params[:stage_type]), onchange: "this.form.submit();", class: "filter-select" %>
           </div>
         </div>
 
@@ -140,7 +140,7 @@
   }
 </style>
 
-<script>
+<%= javascript_tag nonce: true do %>
   (function() {
     var inp = document.querySelector('#filters-form input[name="query"]');
     if (!inp) return;
@@ -150,4 +150,4 @@
       t = setTimeout(function() { document.getElementById('filters-form').submit(); }, 600);
     });
   })();
-</script>
+<% end %>

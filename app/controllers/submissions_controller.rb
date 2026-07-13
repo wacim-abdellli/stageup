@@ -136,15 +136,19 @@ class SubmissionsController < ApplicationController
       redirect_to dashboard_path, alert: "You can only abandon an active internship."
       return
     end
-    @submission.update!(status: "abandoned", responded_at: Time.current)
-    student = @submission.student_profile
-    student.commitment_events.create!(
-      event_type: "student_abandoned_mission",
-      score_delta: -25.0,
-      description: "Abandoned internship '#{@submission.offer.title}' at #{@submission.offer.company_profile.name}."
-    )
-    student.recalculate_commitment_score!
-    company_user = @submission.offer.company_profile.user
+    student = nil
+    company_user = nil
+    ActiveRecord::Base.transaction do
+      @submission.update!(status: "abandoned", responded_at: Time.current)
+      student = @submission.student_profile
+      student.commitment_events.create!(
+        event_type: "student_abandoned_mission",
+        score_delta: -25.0,
+        description: "Abandoned internship '#{@submission.offer.title}' at #{@submission.offer.company_profile.name}."
+      )
+      student.recalculate_commitment_score!
+      company_user = @submission.offer.company_profile.user
+    end
     Notification.trigger(
       recipient: company_user,
       action: "internship_abandoned",

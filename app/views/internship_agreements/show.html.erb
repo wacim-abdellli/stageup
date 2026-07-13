@@ -6,7 +6,7 @@
 <div class="agreement-container">
   <div class="hide-on-print" style="display:flex;justify-content:flex-end;margin-bottom:16px;gap:12px;">
     <%= link_to dashboard_path, class: "btn btn-secondary btn-sm" do %>← Dashboard<% end %>
-    <button onclick="window.print()" class="btn btn-secondary btn-sm">
+    <button id="print-btn" class="btn btn-secondary btn-sm">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <polyline points="6 9 6 2 18 2 18 9"/>
         <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
@@ -36,7 +36,7 @@
           ✓ FULLY EXECUTED — All parties have signed
         </span>
         <div class="mt-10 hide-on-print">
-          <button type="button" class="btn btn-secondary" onclick="window.print()">Print / Save PDF</button>
+          <button type="button" id="print-btn-2" class="btn btn-secondary">Print / Save PDF</button>
         </div>
       <% elsif @agreement.status == "declined" %>
         <span class="badge-status badge-declined fs-14 pill-lg">
@@ -164,3 +164,7 @@
     </div>
   </div>
 </div>
+<%= javascript_tag nonce: true do %>
+  document.getElementById('print-btn')?.addEventListener('click', function() { window.print(); });
+  document.getElementById('print-btn-2')?.addEventListener('click', function() { window.print(); });
+<% end %>
