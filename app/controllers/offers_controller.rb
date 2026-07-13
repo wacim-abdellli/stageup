@@ -66,9 +66,10 @@ class OffersController < ApplicationController
   def create
     @offer = current_user.profileable.offers.build(offer_params)
 
-    company = current_user.profileable
-    if company.first_offer_posted_at.nil?
-      company.update!(first_offer_posted_at: Time.current)
+    current_user.profileable.with_lock do
+      if current_user.profileable.first_offer_posted_at.nil?
+        current_user.profileable.update!(first_offer_posted_at: Time.current)
+      end
     end
 
     if @offer.save
