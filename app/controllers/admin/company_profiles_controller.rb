@@ -14,6 +14,17 @@ module Admin
       redirect_to admin_dashboard_path, notice: "#{@profile.name} has been verified."
     end
 
+    def unverify
+      @profile.update!(verified: false)
+      Notification.trigger(
+        recipient: @profile.user,
+        action: "company_verified",
+        message: "Your company account verification has been revoked by StageUp administrators. Please contact support.",
+        notifiable: @profile
+      )
+      redirect_to admin_dashboard_path, notice: "#{@profile.name} has been unverified."
+    end
+
     private
 
     def set_profile

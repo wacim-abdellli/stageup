@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     end
     resources :company_profiles, only: [] do
       post :verify, on: :member
+      post :unverify, on: :member
     end
   end
 

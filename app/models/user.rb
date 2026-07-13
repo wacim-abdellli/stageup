@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :lockable, :timeoutable
+         :lockable, :timeoutable, :trackable
 
   validate :email_domain_must_be_approved
 

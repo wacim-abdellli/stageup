@@ -109,10 +109,7 @@
   </div>
 </div>
 
-<script type="module">
-  import { Application } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
-  const application = Application.start()
-  
+<%= javascript_tag nonce: true do %>
   import TickerController from "<%= asset_path('controllers/ticker_controller.js') %>"
-  application.register("ticker", TickerController)
-</script>
+  window.Stimulus?.register("ticker", TickerController)
+<% end %>

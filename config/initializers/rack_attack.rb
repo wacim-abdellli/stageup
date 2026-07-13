@@ -23,6 +23,17 @@ class Rack::Attack
     req.ip if req.path == "/users/password" && req.post?
   end
 
+  ### Throttle registration attempts by IP ###
+  throttle("signup/student/ip", limit: 5, period: 1.hour) do |req|
+    req.ip if req.path == "/signup/student" && req.post?
+  end
+  throttle("signup/company/ip", limit: 5, period: 1.hour) do |req|
+    req.ip if req.path == "/signup/company" && req.post?
+  end
+  throttle("signup/university/ip", limit: 3, period: 1.hour) do |req|
+    req.ip if req.path == "/signup/university" && req.post?
+  end
+
   ### Return 429 with a JSON body for throttled requests ###
   self.throttled_responder = lambda do |env|
     retry_after = (env["rack.attack.match_data"] || {})[:period]
