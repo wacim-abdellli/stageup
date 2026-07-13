@@ -1,14 +1,21 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   belongs_to :profileable, polymorphic: true
   has_many :notifications, as: :recipient, dependent: :destroy
 
   validates :profileable, presence: true
+  validates :profileable_type,
+    inclusion: { in: %w[StudentProfile CompanyProfile UniversityProfile],
+                 message: "is not a valid profile type" }
+
+  attr_readonly :admin
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :lockable, :timeoutable
 
-  validate :email_domain_must_be_approved, on: :create
+  validate :email_domain_must_be_approved
 
   private
 
