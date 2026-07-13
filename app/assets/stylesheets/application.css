@@ -203,48 +203,54 @@ a:hover {
 }
 
 /* Buttons */
+/* Buttons styling with premium tactile feedback */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 12px 24px;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
   border-radius: var(--radius-md);
   border: none;
   cursor: pointer;
-  transition: var(--transition);
   gap: 8px;
   width: 100%;
+  position: relative;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              background-color 0.2s var(--transition),
+              border-color 0.2s var(--transition),
+              box-shadow 0.2s var(--transition);
 }
-
 .btn-primary {
   background-color: #FFFFFF;
   color: #09090B;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.08),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
-
 .btn-primary:hover {
-  background-color: #E4E4E7;
+  background-color: #F4F4F5;
   transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.12);
 }
-
 .btn-primary:active {
-  transform: translateY(0);
+  transform: scale(0.97) translateY(0);
 }
-
 .btn-secondary {
   background-color: rgba(255, 255, 255, 0.02);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
-
 .btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+.btn-secondary:active {
+  transform: scale(0.97) translateY(0);
 }
 
 /* Role Selector Grid */
@@ -2292,10 +2298,10 @@ a:hover {
   border: 2px solid var(--bg-secondary);
 }
 
+/* Notifications dropdown panel with elastic entry */
 .notif-dropdown {
-  display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);
   right: 0;
   width: 340px;
   background-color: var(--bg-secondary);
@@ -2304,11 +2310,29 @@ a:hover {
   box-shadow: var(--shadow-lg);
   z-index: 1000;
   overflow: hidden;
-}
 
-.notif-bell-container:hover .notif-dropdown,
+  /* Initial hidden state */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.96);
+  transform-origin: top right;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.25s;
+}
 .notif-dropdown.open {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+/* Remove hover trigger to prevent competing mouse states */
+.notif-bell-container:hover .notif-dropdown {
+  opacity: 0;
+  visibility: hidden;
+}
+.notif-bell-container .notif-dropdown.open {
+  opacity: 1;
+  visibility: visible;
 }
 
 .notif-dropdown-header {
@@ -3676,13 +3700,14 @@ a:hover {
   border-radius: 2px;
 }
 
+/* Mobile responsive navigation transitions */
 @media (max-width: 900px) {
   .navbar-hamburger {
     display: flex;
   }
 
   .navbar-right {
-    display: none;
+    display: flex; /* keep flex structure */
     position: absolute;
     top: 64px;
     left: 0;
@@ -3693,10 +3718,19 @@ a:hover {
     padding: 16px;
     gap: 8px;
     z-index: 99;
-  }
 
+    /* Initial hidden state */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.25s;
+  }
   .navbar-right.open {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   .navbar-right .btn {
