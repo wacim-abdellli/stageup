@@ -5,20 +5,6 @@
       <h2 class="auth-title">Forgot your password?</h2>
       <p class="auth-subtitle">We will send you password reset instructions</p>
     </div>
-
-    <% if flash[:alert] %>
-      <div class="flash-message flash-alert">
-        <i data-lucide="alert-circle" class="icon-16 stroke-danger flex-shrink-0"></i>
-        <span><%= flash[:alert] %></span>
-      </div>
-    <% end %>
-    <% if flash[:notice] %>
-      <div class="flash-message flash-notice">
-        <i data-lucide="check-circle" class="icon-16 stroke-success flex-shrink-0"></i>
-        <span><%= flash[:notice] %></span>
-      </div>
-    <% end %>
-
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
       <% errors = resource.errors.full_messages %>
       <% if errors.any? %>

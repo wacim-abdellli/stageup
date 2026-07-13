@@ -9,7 +9,7 @@
       <span></span><span></span><span></span>
     </button>
     <div class="navbar-right" id="nav-menu">
-      <%= link_to "Browse Offers", offers_path, class: "btn btn-secondary btn-header nowrap #{current_page?(offers_path) ? 'nav-active' : ''}" %>
+      <%= link_to "Browse Offers", offers_path, class: "btn btn-secondary btn-header nowrap #{request.path.start_with?(offers_path) ? 'nav-active' : ''}" %>
       <%= link_to "My Dashboard", dashboard_path, class: "btn btn-secondary btn-header nowrap #{current_page?(dashboard_path) ? 'nav-active' : ''}" %>
       <% if current_user.profileable_type == "CompanyProfile" %>
         <%= link_to "Post an Offer", new_offer_path, class: "btn btn-accent text-decoration-none fs-13 btn-header-padded nowrap" %>

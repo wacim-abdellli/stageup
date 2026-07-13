@@ -10,7 +10,7 @@ module SubmissionsHelper
 
     milestones << {
       label: "Checked",
-      complete: sub.auto_verification_status == "passed",
+      complete: sub.offer.mission.nil? || sub.auto_verification_status == "passed",
       timestamp: nil
     }
 

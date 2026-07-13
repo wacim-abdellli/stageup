@@ -4,21 +4,18 @@
 <% university = @agreement.university %>
 
 <div class="agreement-container">
+  <div class="hide-on-print" style="display:flex;justify-content:flex-end;margin-bottom:16px;gap:12px;">
+    <%= link_to dashboard_path, class: "btn btn-secondary btn-sm" do %>← Dashboard<% end %>
+    <button onclick="window.print()" class="btn btn-secondary btn-sm">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 6 2 18 2 18 9"/>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+        <rect x="6" y="14" width="12" height="8"/>
+      </svg>
+      Print / Save as PDF
+    </button>
+  </div>
   <div class="agreement-card">
-
-    <% if flash[:notice] %>
-      <div class="flash-message flash-notice">
-        <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
-        <span><%= flash[:notice] %></span>
-      </div>
-    <% end %>
-
-    <% if flash[:alert] %>
-      <div class="flash-message flash-alert">
-        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
-        <span><%= flash[:alert] %></span>
-      </div>
-    <% end %>
 
     <% if @agreement.status == "declined" %>
       <div class="agreement-declined-banner">
@@ -90,7 +87,7 @@
       </p>
 
       <div class="agreement-signatures-grid">
-        <div class="agreement-sign-box">
+        <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.student_signed_at && current_user.profileable_type == "StudentProfile" && current_user.profileable == student && @agreement.status != "declined" %>">
           <i data-lucide="graduation-cap" class="icon-20 mb-8 stroke-muted"></i>
           <h3 class="agreement-sign-box-title">Student</h3>
           <p class="agreement-sign-box-name"><%= student.first_name %> <%= student.last_name %></p>
@@ -108,7 +105,7 @@
           <% end %>
         </div>
 
-        <div class="agreement-sign-box">
+        <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.company_signed_at && current_user.profileable_type == "CompanyProfile" && current_user.profileable == company && @agreement.status != "declined" %>">
           <i data-lucide="briefcase" class="icon-20 mb-8 stroke-muted"></i>
           <h3 class="agreement-sign-box-title">Employer</h3>
           <p class="agreement-sign-box-name"><%= company.name %></p>
@@ -126,7 +123,7 @@
           <% end %>
         </div>
 
-        <div class="agreement-sign-box">
+        <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.university_signed_at && current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id && @agreement.status != "declined" %>">
           <i data-lucide="landmark" class="icon-20 mb-8 stroke-muted"></i>
           <h3 class="agreement-sign-box-title">University Coordinator</h3>
           <p class="agreement-sign-box-name"><%= university&.name || "Independent" %></p>

@@ -21,18 +21,44 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
-      document.addEventListener("turbo:load", function() {
-        lucide.createIcons();
-        var t = document.getElementById('nav-toggle');
-        var m = document.getElementById('nav-menu');
-        if (t && m) t.addEventListener('click', function() { m.classList.toggle('open'); });
-        var b = document.getElementById('notif-btn');
-        var p = document.getElementById('notif-panel');
-        if (b && p) {
-          b.addEventListener('click', function(e) { e.stopPropagation(); p.classList.toggle('open'); });
-          document.addEventListener('click', function() { p.classList.remove('open'); });
+      (function() {
+        function initInteractiveElements() {
+          var t = document.getElementById('nav-toggle');
+          var m = document.getElementById('nav-menu');
+          if (t && m) {
+            t.removeEventListener('click', toggleMenu);
+            t.addEventListener('click', toggleMenu);
+          }
+
+          var b = document.getElementById('notif-btn');
+          var p = document.getElementById('notif-panel');
+          if (b && p) {
+            b.removeEventListener('click', toggleNotif);
+            b.addEventListener('click', toggleNotif);
+          }
         }
-      });
+
+        function toggleMenu() {
+          var m = document.getElementById('nav-menu');
+          if (m) m.classList.toggle('open');
+        }
+
+        function toggleNotif(e) {
+          e.stopPropagation();
+          var p = document.getElementById('notif-panel');
+          if (p) p.classList.toggle('open');
+        }
+
+        document.addEventListener("click", function() {
+          var p = document.getElementById('notif-panel');
+          if (p) p.classList.remove('open');
+        });
+
+        document.addEventListener("turbo:load", function() {
+          lucide.createIcons();
+          initInteractiveElements();
+        });
+      })();
     </script>
   </head>
 

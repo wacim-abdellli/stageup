@@ -6,19 +6,6 @@
       <p class="auth-subtitle">Welcome back to StageUp</p>
     </div>
 
-    <% if flash[:alert] %>
-      <div class="flash-message flash-alert flash-row">
-        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
-        <span><%= flash[:alert] %></span>
-      </div>
-    <% end %>
-    <% if flash[:notice] %>
-      <div class="flash-message flash-notice flash-row">
-        <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
-        <span><%= flash[:notice] %></span>
-      </div>
-    <% end %>
-
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
         <%= f.label :email, class: "form-label" %>
@@ -27,7 +14,14 @@
 
       <div class="form-group">
         <%= f.label :password, class: "form-label" %>
-        <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "••••••••", required: true %>
+        <div class="pw-wrap">
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "••••••••", required: true %>
+          <button type="button" class="pw-toggle"
+            onclick="var i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';"
+            aria-label="Toggle password visibility">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
       </div>
 
       <% if devise_mapping.rememberable? %>

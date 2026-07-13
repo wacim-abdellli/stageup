@@ -1,5 +1,12 @@
 <% content_for :title, "My Dashboard – StageUp" %>
 <div class="dashboard-container">
+  <div class="dash-welcome">
+    <h1 class="dash-welcome-title">
+      Welcome back<% if @profile.respond_to?(:first_name) && @profile.first_name.present? %>,
+      <%= @profile.first_name %><% end %> 👋
+    </h1>
+    <p class="dash-welcome-sub">Here's your StageUp activity overview</p>
+  </div>
   <div class="dashboard-grid">
     
     <!-- Left Column: Primary Details -->
@@ -16,6 +23,7 @@
               <span class="badge badge-university">University Admin</span>
             <% end %>
           </div>
+          <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-secondary btn-compact-sm" %>
         </div>
 
         <!-- Student Details -->
@@ -602,6 +610,7 @@
                 <span class="score-label">Commitment</span>
               </div>
             </div>
+            <p class="score-caption">Reliability score based on your internship history</p>
             
             <% student_avg = @profile.average_rating %>
             <% if student_avg %>

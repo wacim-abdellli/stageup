@@ -190,6 +190,12 @@ a:hover {
   color: var(--text-muted);
 }
 
+.pw-wrap { position:relative; }
+.pw-wrap .form-control { padding-right:44px; }
+.pw-toggle { position:absolute; right:12px; top:50%; transform:translateY(-50%);
+  background:none; border:none; cursor:pointer; color:var(--text-muted); padding:0; }
+.pw-toggle:hover { color:var(--text-primary); }
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -289,6 +295,16 @@ a:hover {
   background-color: rgba(255, 255, 255, 0.06);
 }
 
+.role-card-student:hover { border-color:rgba(59,130,246,0.3); }
+.role-card-student .role-icon { background:rgba(59,130,246,0.08); border-color:rgba(59,130,246,0.15); }
+.role-card-student .role-icon i, .role-card-student .role-icon svg { stroke:#60A5FA; }
+.role-card-company:hover { border-color:rgba(16,185,129,0.3); }
+.role-card-company .role-icon { background:rgba(16,185,129,0.08); border-color:rgba(16,185,129,0.15); }
+.role-card-company .role-icon i, .role-card-company .role-icon svg { stroke:#34D399; }
+.role-card-university:hover { border-color:rgba(168,85,247,0.3); }
+.role-card-university .role-icon { background:rgba(168,85,247,0.08); border-color:rgba(168,85,247,0.15); }
+.role-card-university .role-icon i, .role-card-university .role-icon svg { stroke:#C084FC; }
+
 .role-title {
   font-size: 16px;
   font-weight: 600;
@@ -329,6 +345,10 @@ a:hover {
   margin: 30px auto;
   padding: 0 20px;
 }
+
+.dash-welcome { margin-bottom:28px; border-bottom:1px solid var(--border-color); padding-bottom:20px; }
+.dash-welcome-title { font-size:24px; font-weight:700; margin-bottom:4px; }
+.dash-welcome-sub { font-size:14px; color:var(--text-secondary); margin:0; }
 
 .dashboard-header {
   display: flex;
@@ -417,6 +437,8 @@ a:hover {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+.score-caption { font-size:11px; color:var(--text-muted); text-align:center; margin-top:8px; }
 
 /* Rating Display */
 .rating-display {
@@ -1103,8 +1125,9 @@ a:hover {
 
 /* Application group card */
 .app-group-card {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-tertiary);
   border: 1px solid var(--border-color);
+  border-left: 3px solid rgba(99,102,241,0.4);
   border-radius: var(--radius-md);
   padding: 20px;
 }
@@ -1664,7 +1687,7 @@ a:hover {
 }
 
 .btn-mt {
-  margin-top: 10px;
+  margin-top: 24px;
 }
 
 .form-group-mt {
@@ -1674,8 +1697,8 @@ a:hover {
 /* Role icon override */
 .role-icon svg,
 .role-icon i {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   stroke: var(--text-secondary);
 }
 
@@ -1860,13 +1883,19 @@ a:hover {
   text-align: center;
 }
 
+@keyframes pulse-border {
+  0%,100% { border-color:rgba(99,102,241,0.2); }
+  50% { border-color:rgba(99,102,241,0.5); box-shadow:0 0 0 3px rgba(99,102,241,0.06); }
+}
+.agreement-sign-box.awaiting-mine { animation: pulse-border 2.5s ease infinite; }
+
 .agreement-sign-box-title {
   font-size: 14px;
   margin-bottom: 4px;
 }
 
 .agreement-sign-box-name {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-secondary);
   margin-bottom: 15px;
 }
@@ -1879,7 +1908,7 @@ a:hover {
 }
 
 .agreement-signed-label {
-  font-size: 12px;
+  font-size: 13px;
   color: #34D399;
   font-weight: 600;
 }
@@ -2056,6 +2085,8 @@ a:hover {
   min-height: 220px;
   transition: border-color 0.25s, background 0.25s, transform 0.25s;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .offer-card:hover {
@@ -2126,6 +2157,8 @@ a:hover {
   line-height: 1.5;
   margin: 0 0 16px 0;
 }
+
+.line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 
 .offer-card-footer {
   display: flex;
@@ -3362,6 +3395,9 @@ a:hover {
   white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: 0.4px;
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .timeline-label.completed {
@@ -3668,4 +3704,12 @@ a:hover {
     justify-content: center;
   }
 }
+
+@media (max-width: 1024px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .right-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+}
+@media (max-width: 640px) { .right-col { grid-template-columns: 1fr; } }
+
+.sticky-sidebar { position: sticky; top: 84px; }
 

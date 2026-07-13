@@ -14,19 +14,26 @@
 
   <% if @notifications.any? %>
     <div class="notif-list-card">
-      <% @notifications.each do |notification| %>
-        <div class="notif-list-item <%= 'unread' unless notification.read %>">
-          <div class="notif-item-icon <%= action_icon_color(notification.action) %>">
-            <i data-lucide="<%= notification_icon(notification.action) %>" class="icon-18"></i>
-          </div>
-          <div class="notif-item-content">
-            <p class="notif-item-message"><%= notification.message %></p>
-            <span class="notif-item-time"><%= time_ago_in_words(notification.created_at) %> ago</span>
-          </div>
-          <% unless notification.read %>
-            <%= button_to "Mark Read", notification_path(notification), method: :patch, class: "btn btn-secondary btn-compact-sm notif-mark-btn" %>
-          <% end %>
+      <% @notifications.group_by { |n| n.created_at.to_date }.each do |date, notifs| %>
+        <div style="padding:10px 20px 4px;">
+          <span style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;">
+            <%= date == Date.today ? "Today" : date == Date.yesterday ? "Yesterday" : date.strftime("%B %d, %Y") %>
+          </span>
         </div>
+        <% notifs.each do |notification| %>
+          <div class="notif-list-item <%= 'unread' unless notification.read %>">
+            <div class="notif-item-icon <%= action_icon_color(notification.action) %>">
+              <i data-lucide="<%= notification_icon(notification.action) %>" class="icon-18"></i>
+            </div>
+            <div class="notif-item-content">
+              <p class="notif-item-message"><%= notification.message %></p>
+              <span class="notif-item-time"><%= time_ago_in_words(notification.created_at) %> ago</span>
+            </div>
+            <% unless notification.read %>
+              <%= button_to "Mark Read", notification_path(notification), method: :patch, class: "btn btn-secondary btn-compact-sm notif-mark-btn" %>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   <% else %>

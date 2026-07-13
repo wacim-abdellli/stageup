@@ -1,9 +1,12 @@
 <% content_for :title, "Browse Internships – StageUp" %>
 <div class="dashboard-container">
   <div class="dashboard-header">
-    <p class="text-secondary fs-14 mt-6">Tunisia's first verified internship directory</p>
+    <div>
+      <h1 style="font-size:28px;font-weight:800;margin:0 0 4px;">Internship Directory</h1>
+      <p class="text-secondary fs-14">Tunisia's first verified internship directory</p>
+    </div>
     <% unless current_user %>
-      <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent text-decoration-none fs-13 btn-header-padded" %>
+      <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent fs-13 btn-header-padded" %>
     <% end %>
   </div>
 
@@ -56,7 +59,7 @@
       <div class="offers-grid">
         <% if @offers.any? %>
           <% @offers.each do |offer| %>
-            <div class="offer-card" onclick="window.location='<%= offer_path(offer) %>'">
+            <%= link_to offer_path(offer), class: "offer-card" do %>
               <div>
                 <div class="offer-card-header">
                   <span class="offer-card-badge-stage"><%= offer.stage_type %></span>
@@ -72,20 +75,20 @@
                       CV Only
                     </span>
                   <% end %>
-                </div>
-
-                <h3 class="offer-card-title"><%= offer.title %></h3>
-                <span class="offer-card-company">
-                  <%= offer.company_profile.name %>
                   <% if current_user&.profileable_type == "StudentProfile" %>
                     <% match_pct = offer.match_percentage_for(current_user.profileable) %>
                     <% if match_pct < 100 %>
                       <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>"><%= match_pct %>% Match</span>
                     <% end %>
                   <% end %>
+                </div>
+
+                <h3 class="offer-card-title"><%= offer.title %></h3>
+                <span class="offer-card-company">
+                  <%= offer.company_profile.name %>
                 </span>
                 
-                <p class="offer-card-desc">
+                <p class="offer-card-desc line-clamp-3">
                   <%= offer.description %>
                 </p>
 
@@ -111,13 +114,16 @@
                   Details <i data-lucide="arrow-right" class="icon-w-12 stroke-accent"></i>
                 </span>
               </div>
-            </div>
+            <% end %>
           <% end %>
         <% else %>
           <div class="glass-card empty-state-full">
             <i data-lucide="search-code" class="empty-state-icon-lg"></i>
             <h3 class="fs-16 empty-state-heading">No offers match your criteria</h3>
             <p class="text-secondary fs-13 m-0">Try broadening your query or clearing active filters.</p>
+            <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
+              <%= link_to "Clear All Filters", offers_path, class: "btn btn-secondary btn-compact-empty mt-10" %>
+            <% end %>
           </div>
         <% end %>
       </div>
@@ -133,3 +139,15 @@
     }
   }
 </style>
+
+<script>
+  (function() {
+    var inp = document.querySelector('#filters-form input[name="query"]');
+    if (!inp) return;
+    var t;
+    inp.addEventListener('input', function() {
+      clearTimeout(t);
+      t = setTimeout(function() { document.getElementById('filters-form').submit(); }, 600);
+    });
+  })();
+</script>

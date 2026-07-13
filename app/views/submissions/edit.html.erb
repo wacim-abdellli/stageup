@@ -32,10 +32,15 @@
 
       <div class="form-group">
         <label class="form-label" for="github_link">Solution URL (GitHub, Figma, Google Drive)</label>
-        <%= f.url_field :github_link, id: "github_link", class: "form-control", placeholder: "https://github.com/myusername/myrepo", required: true %>
-        <small class="form-hint">
-          ⚠️ Double check that your link is public so recruiters can review your submission!
-        </small>
+        <%= f.url_field :github_link, id: "github_link", class: "form-control", placeholder: "https://github.com/myusername/myrepo", required: true, oninput: "valURL(this)" %>
+        <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);
+                    border-radius:var(--radius-sm);padding:10px 12px;font-size:12px;color:#FBBF24;
+                    display:flex;align-items:flex-start;gap:8px;margin-top:6px;line-height:1.5;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"
+               style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Make sure your link is <strong>publicly accessible</strong>. Private repos will fail auto-check.
+        </div>
       </div>
 
       <div class="form-group">
@@ -50,3 +55,11 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  function valURL(el) {
+    var ok=/^https?:\/\/.+/.test(el.value.trim());
+    el.style.borderColor=(el.value&&!ok)?'#EF4444':'';
+    el.style.boxShadow=(el.value&&!ok)?'0 0 0 3px rgba(239,68,68,0.1)':'';
+  }
+</script>

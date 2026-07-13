@@ -1,8 +1,9 @@
 <% content_for :title, "#{@offer.title} – StageUp" %>
 <div class="dashboard-container">
-  <div class="dashboard-header">
-    <p class="header-meta">Internship Opportunity Details</p>
-  </div>
+  <nav style="margin-bottom:20px;">
+    <%= link_to "← Back to Offers", offers_path,
+        style: "font-size:13px;color:var(--text-secondary);text-decoration:none;" %>
+  </nav>
 
   <div class="offer-grid">
     
@@ -83,11 +84,18 @@
     </div>
 
     <!-- Right Column: Recruiter Stats & Application Button -->
-    <div class="flex-col gap-20">
+    <div class="flex-col gap-20 sticky-sidebar">
       
       <!-- Recruiter Transparency Card -->
       <div class="profile-card employer-card">
-        <h3 class="employer-card-title">Employer Reputation</h3>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:15px;border-bottom:1px solid var(--border-color);padding-bottom:15px;">
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(99,102,241,0.1);
+                      border:1px solid rgba(99,102,241,0.2);display:flex;align-items:center;
+                      justify-content:center;font-size:18px;font-weight:700;color:#818CF8;flex-shrink:0;">
+            <%= @company.name[0].upcase %>
+          </div>
+          <h3 style="font-size:16px;margin:0;"><%= @company.name %></h3>
+        </div>
         
         <!-- Grace Period Check -->
         <% in_grace_period = @company.first_offer_posted_at.nil? || @company.first_offer_posted_at > 30.days.ago %>

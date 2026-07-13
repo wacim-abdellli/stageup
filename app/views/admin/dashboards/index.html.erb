@@ -10,20 +10,6 @@
     </div>
   </div>
 
-  <% if flash[:notice] %>
-    <div class="flash-message flash-notice">
-      <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
-      <span><%= flash[:notice] %></span>
-    </div>
-  <% end %>
-
-  <% if flash[:alert] %>
-    <div class="flash-message flash-alert">
-      <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
-      <span><%= flash[:alert] %></span>
-    </div>
-  <% end %>
-
   <div class="dashboard-grid">
     <div>
       <!-- Pending Coordinators -->
