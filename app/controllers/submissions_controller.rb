@@ -83,6 +83,9 @@ class SubmissionsController < ApplicationController
     @submission.status = "accepted"
     @submission.responded_at = Time.current
 
+    success = false
+    student_user = nil
+
     ActiveRecord::Base.transaction do
       if @submission.save
         log_company_response_event(@submission)
@@ -96,11 +99,15 @@ class SubmissionsController < ApplicationController
           message: "Your application for #{@submission.offer.title} has been accepted!",
           notifiable: @submission
         )
-        UserMailer.application_status_updated_email(student_user, @submission).deliver_later
-        redirect_to dashboard_path, notice: "Application was successfully accepted! We logged your response."
-      else
-        redirect_to dashboard_path, alert: "Failed to accept application."
+        success = true
       end
+    end
+
+    if success
+      UserMailer.application_status_updated_email(student_user, @submission).deliver_later
+      redirect_to dashboard_path, notice: "Application was successfully accepted! We logged your response."
+    else
+      redirect_to dashboard_path, alert: "Failed to accept application."
     end
   end
 
@@ -113,6 +120,9 @@ class SubmissionsController < ApplicationController
 
     @submission.status = "rejected"
     @submission.responded_at = Time.current
+
+    success = false
+    student_user = nil
 
     ActiveRecord::Base.transaction do
       if @submission.save
@@ -127,11 +137,15 @@ class SubmissionsController < ApplicationController
           message: "Your application for #{@submission.offer.title} has been rejected.",
           notifiable: @submission
         )
-        UserMailer.application_status_updated_email(student_user, @submission).deliver_later
-        redirect_to dashboard_path, notice: "Application was rejected. We logged your response."
-      else
-        redirect_to dashboard_path, alert: "Failed to reject application."
+        success = true
       end
+    end
+
+    if success
+      UserMailer.application_status_updated_email(student_user, @submission).deliver_later
+      redirect_to dashboard_path, notice: "Application was rejected. We logged your response."
+    else
+      redirect_to dashboard_path, alert: "Failed to reject application."
     end
   end
 
