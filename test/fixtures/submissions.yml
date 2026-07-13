@@ -31,3 +31,9 @@ completed:
   status: completed
   submitted_at: 2026-07-01 10:00:00
   responded_at: 2026-07-05 10:00:00
+
+submitted_submission:
+  student_profile: cyrine
+  offer: no_mission
+  status: submitted
+  submitted_at: 2026-07-01 10:00:00

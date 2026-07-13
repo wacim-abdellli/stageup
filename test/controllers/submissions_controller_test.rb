@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class SubmissionsControllerTest < ActionDispatch::IntegrationTest
@@ -146,5 +148,56 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
 
     @student_profile.reload
     assert_equal 90.0, @student_profile.commitment_score
+  end
+
+  test "student can create a submission for an active offer without mission" do
+    sign_in users(:mohamed_user)
+    offer = offers(:no_mission)
+    assert_difference "Submission.count", 1 do
+      post submissions_path, params: { offer_id: offer.id }
+    end
+    assert_redirected_to offer_path(offer)
+  end
+
+  test "student cannot apply to an inactive offer" do
+    sign_in users(:mohamed_user)
+    offer = offers(:draft)
+    assert_no_difference "Submission.count" do
+      post submissions_path, params: { offer_id: offer.id }
+    end
+    assert_redirected_to offer_path(offer)
+    assert_match /inactive/, flash[:alert]
+  end
+
+  test "company can accept a submitted application" do
+    sign_in users(:company_user)
+    submission = submissions(:submitted_submission)
+    post accept_submission_path(submission)
+    assert_redirected_to dashboard_path
+    assert_equal "accepted", submission.reload.status
+  end
+
+  test "student cannot accept a submission" do
+    sign_in users(:mohamed_user)
+    submission = submissions(:submitted_submission)
+    post accept_submission_path(submission)
+    assert_redirected_to dashboard_path
+    assert_match /Only companies/, flash[:alert]
+  end
+
+  test "company can reject a submitted application" do
+    sign_in users(:company_user)
+    submission = submissions(:submitted_submission)
+    post reject_submission_path(submission)
+    assert_redirected_to dashboard_path
+    assert_equal "rejected", submission.reload.status
+  end
+
+  test "company cannot accept another company's submission" do
+    sign_in users(:company_user_two)
+    submission = submissions(:submitted_submission)
+    assert_raises(ActiveRecord::RecordNotFound) do
+      post accept_submission_path(submission)
+    end
   end
 end
