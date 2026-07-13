@@ -1,9 +1,9 @@
 class SubmissionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_student!, only: [:create, :edit, :update]
-  before_action :ensure_company!, only: [:accept, :reject]
-  before_action :set_submission_for_student, only: [:edit, :update]
-  before_action :set_submission_for_company, only: [:accept, :reject]
+  before_action :ensure_student!, only: [:create, :edit, :update, :abandon]
+  before_action :ensure_company!, only: [:accept, :reject, :cancel]
+  before_action :set_submission_for_student, only: [:edit, :update, :abandon]
+  before_action :set_submission_for_company, only: [:accept, :reject, :cancel]
   before_action :set_submission_for_completion, only: [:confirm_completion]
 
   # POST /submissions
@@ -137,8 +137,6 @@ class SubmissionsController < ApplicationController
 
   # POST /submissions/:id/abandon
   def abandon
-    @submission = current_user.profileable.submissions.find(params[:id])
-
     unless @submission.status == "accepted"
       redirect_to dashboard_path, alert: "You can only abandon an active internship."
       return
@@ -167,8 +165,6 @@ class SubmissionsController < ApplicationController
 
   # POST /submissions/:id/cancel
   def cancel
-    @submission = Submission.joins(:offer).where(offers: { company_profile_id: current_user.profileable_id }).find(params[:id])
-
     unless @submission.status == "accepted"
       redirect_to dashboard_path, alert: "You can only cancel an active internship."
       return
