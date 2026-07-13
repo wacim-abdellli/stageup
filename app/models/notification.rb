@@ -1,6 +1,19 @@
+# frozen_string_literal: true
+
 class Notification < ApplicationRecord
   belongs_to :recipient, polymorphic: true
   belongs_to :notifiable, polymorphic: true
+
+  VALID_ACTIONS = %w[
+    application_received application_accepted application_rejected
+    application_status_updated agreement_signature_requested
+    agreement_declined coordinator_approved company_verified
+    internship_abandoned internship_cancelled internship_completed
+    internship_auto_completed mission_expired
+  ].freeze
+
+  validates :action, presence: true, inclusion: { in: VALID_ACTIONS }
+  validates :message, presence: true, length: { maximum: 500 }
 
   scope :unread, -> { where(read: false) }
   scope :recent, -> { order(created_at: :desc) }
@@ -17,7 +30,7 @@ class Notification < ApplicationRecord
       message: message,
       notifiable: notifiable
     )
-  rescue ActiveRecord::RecordInvalid, StandardError => e
+  rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error(
       "[Notification::TriggerFailed] action=#{action} recipient=#{recipient&.id} " \
       "notifiable=#{notifiable&.class}##{notifiable&.id} error=#{e.message}"
