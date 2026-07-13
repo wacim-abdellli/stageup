@@ -46,6 +46,10 @@ gem "kamal", require: false
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
+# Error monitoring [https://sentry.io]
+gem "sentry-ruby"
+gem "sentry-rails"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -58,6 +62,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # Dependency vulnerability scanner [https://github.com/rubysec/bundler-audit]
+  gem "bundler-audit", require: false
 end
 
 group :development do
