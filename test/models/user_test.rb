@@ -43,8 +43,9 @@ class UserTest < ActiveSupport::TestCase
   test "admin attribute is read-only" do
     user = users(:mohamed_user)
     assert_not user.admin?
-    user.update(admin: true)
-    assert_not user.reload.admin?
+    assert_raises(ActiveRecord::ReadonlyAttributeError) do
+      user.update(admin: true)
+    end
   end
 
   test "student with unapproved university domain is blocked" do

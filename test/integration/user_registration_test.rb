@@ -6,7 +6,7 @@ class UserRegistrationTest < ActionDispatch::IntegrationTest
   test "student registration fails with unapproved university domain" do
     assert_no_difference ["User.count", "StudentProfile.count"] do
       post student_registration_path, params: {
-        user: { email: "student@unapproved.tn", password: "password123", password_confirmation: "password123" },
+        user: { email: "student@unapproved.tn", password: "password12345", password_confirmation: "password12345" },
         student_profile: { first_name: "Test", last_name: "Student", major: "CS", graduation_year: 2027 }
       }
     end
@@ -18,7 +18,7 @@ class UserRegistrationTest < ActionDispatch::IntegrationTest
   test "student registration succeeds with approved university domain" do
     assert_difference ["User.count", "StudentProfile.count"], 1 do
       post student_registration_path, params: {
-        user: { email: "student@isetsf.rnu.tn", password: "password123", password_confirmation: "password123" },
+        user: { email: "student@isetsf.rnu.tn", password: "password12345", password_confirmation: "password12345" },
         student_profile: { first_name: "Test", last_name: "Student", major: "CS", graduation_year: 2027 }
       }
     end
@@ -28,7 +28,7 @@ class UserRegistrationTest < ActionDispatch::IntegrationTest
   test "rejects email with trailing injection characters" do
     assert_no_difference ["User.count", "StudentProfile.count"] do
       post student_registration_path, params: {
-        user: { email: "student@gmail.com --hack", password: "password123", password_confirmation: "password123" },
+        user: { email: "student@gmail.com --hack", password: "password12345", password_confirmation: "password12345" },
         student_profile: { first_name: "Test", last_name: "Student", major: "CS", graduation_year: 2027 }
       }
     end
@@ -39,7 +39,7 @@ class UserRegistrationTest < ActionDispatch::IntegrationTest
   test "student registration succeeds with no matching university domain" do
     assert_difference ["User.count", "StudentProfile.count"], 1 do
       post student_registration_path, params: {
-        user: { email: "student@gmail.com", password: "password123", password_confirmation: "password123" },
+        user: { email: "student@gmail.com", password: "password12345", password_confirmation: "password12345" },
         student_profile: { first_name: "Test", last_name: "Student", major: "CS", graduation_year: 2027 }
       }
     end

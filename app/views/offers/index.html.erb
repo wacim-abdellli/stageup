@@ -143,11 +143,27 @@
 <%= javascript_tag nonce: true do %>
   (function() {
     var inp = document.querySelector('#filters-form input[name="query"]');
-    if (!inp) return;
+    var grid = document.querySelector('.offers-grid');
+    if (!inp || !grid) return;
     var t;
+    
     inp.addEventListener('input', function() {
+      // Clear timeout first
       clearTimeout(t);
-      t = setTimeout(function() { document.getElementById('filters-form').submit(); }, 600);
+      
+      // Instantly inject shimmering skeleton cards and fade the grid slightly
+      grid.style.opacity = '0.7';
+      grid.innerHTML = Array(3).fill(
+        '<div class="glass-card skeleton-card">' +
+          '<div class="skeleton-title skeleton-shimmer"></div>' +
+          '<div class="skeleton-meta skeleton-shimmer"></div>' +
+          '<div class="skeleton-text skeleton-shimmer"></div>' +
+        '</div>'
+      ).join('');
+
+      t = setTimeout(function() { 
+        document.getElementById('filters-form').submit(); 
+      }, 600);
     });
   })();
 <% end %>

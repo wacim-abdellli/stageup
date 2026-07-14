@@ -82,7 +82,6 @@ class DashboardsController < ApplicationController
     return if current_user.profileable_type == "StudentProfile"
 
     redirect_to dashboard_path, alert: "Only students can upload CVs."
-    throw(:abort)
   end
 
   def ensure_approved_coordinator!
@@ -90,7 +89,6 @@ class DashboardsController < ApplicationController
       @user = current_user
       @profile = current_user.profileable
       render "dashboards/pending_approval"
-      throw(:abort)
     end
   end
 end

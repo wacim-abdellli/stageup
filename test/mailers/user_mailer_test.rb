@@ -17,7 +17,7 @@ class UserMailerTest < ActionMailer::TestCase
   test "application_received_email renders correctly" do
     mail = UserMailer.application_received_email(@company_user, @submission)
     assert_equal "New Application Received – #{@offer.title}", mail.subject
-    assert_equal [@company_user.email], mail.to
+    assert_equal [@submission.offer.company_profile.user.email], mail.to
     assert_match @offer.title, mail.body.encoded
   end
 

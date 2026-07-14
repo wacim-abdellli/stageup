@@ -98,40 +98,37 @@ class InternshipAgreementsController < ApplicationController
     return if @agreement
 
     redirect_to dashboard_path, alert: "Agreement not found."
-    throw(:abort)
   end
 
   def ensure_submission_accepted!
     return if @submission.status == "accepted"
 
     redirect_to dashboard_path, alert: "You can only generate an agreement for an accepted internship."
-    throw(:abort)
   end
 
   def ensure_no_existing_agreement!
     return unless @submission.internship_agreement.present?
     redirect_to submission_internship_agreement_path(@submission, @submission.internship_agreement),
                 alert: "An agreement already exists for this internship."
-    throw(:abort)
   end
 
   def ensure_signable!
     if @agreement.status == "fully_executed"
       redirect_to submission_internship_agreement_path(@submission, @agreement),
                   alert: "This agreement is already fully executed and cannot be signed again."
-      throw(:abort)
+      return
     end
 
     if @agreement.status == "declined"
       redirect_to submission_internship_agreement_path(@submission, @agreement),
                   alert: "This agreement has been declined and cannot be signed."
-      throw(:abort)
+      return
     end
 
     if already_signed?
       redirect_to submission_internship_agreement_path(@submission, @agreement),
                   alert: "You have already signed this agreement."
-      throw(:abort)
+      return
     end
   end
 
@@ -162,7 +159,6 @@ class InternshipAgreementsController < ApplicationController
     return if authorized
 
     redirect_to dashboard_path, alert: "You are not authorized to manage this agreement."
-    throw(:abort)
   end
 
   def agreement_params

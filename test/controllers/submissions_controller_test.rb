@@ -196,8 +196,8 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
   test "company cannot accept another company's submission" do
     sign_in users(:company_user_two)
     submission = submissions(:submitted_submission)
-    assert_raises(ActiveRecord::RecordNotFound) do
-      post accept_submission_path(submission)
-    end
+    post accept_submission_path(submission)
+    assert_redirected_to root_path
+    assert_equal "The requested resource was not found.", flash[:alert]
   end
 end

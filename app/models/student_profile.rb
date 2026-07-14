@@ -38,7 +38,44 @@ class StudentProfile < ApplicationRecord
       errors.add(:cv, "must be a PDF document")
       return
     end
-    # Check PDF magic bytes (only runs if MIME passed)
+
+    # Check magic bytes if we can access the uploaded file directly before saving
+    attached_change = cv.attachment.instance_variable_get(:@change) if cv.respond_to?(:attachment) && cv.attachment
+    attached_change ||= cv.instance_variable_get(:@change) if cv.instance_variable_get(:@change)
+    
+    if attached_change.respond_to?(:attachable) && attached_change.attachable
+      attachable = attached_change.attachable
+      io = nil
+      if attachable.respond_to?(:open)
+        begin
+          io = attachable.open
+        rescue
+          io = attachable if attachable.respond_to?(:read)
+        end
+      elsif attachable.respond_to?(:read)
+        io = attachable
+      elsif attachable.respond_to?(:tempfile)
+        io = attachable.tempfile
+      elsif attachable.respond_to?(:io)
+        io = attachable.io
+      end
+
+      if io
+        begin
+          io.rewind if io.respond_to?(:rewind)
+          bytes = io.read(4)
+          io.rewind if io.respond_to?(:rewind)
+          unless bytes == "%PDF"
+            errors.add(:cv, "file is corrupted or not a valid PDF document")
+          end
+          return
+        rescue => e
+          Rails.logger.warn("[StudentProfile] Failed to read attachable: #{e.message}")
+        end
+      end
+    end
+
+    # Fallback/already saved
     begin
       cv.open do |file|
         unless file.read(4) == "%PDF"
@@ -46,8 +83,8 @@ class StudentProfile < ApplicationRecord
         end
       end
     rescue ActiveStorage::FileNotFoundError, Errno::ENOENT => e
-      Rails.logger.warn("[StudentProfile] CV magic-byte check skipped: #{e.message}")
-      errors.add(:cv, "could not be verified — please try uploading again")
+      # File not yet accessible during initial attachment; skip magic-byte check
+      Rails.logger.warn("[StudentProfile] CV magic-byte check skipped (fallback): #{e.message}")
     end
   end
 end

@@ -6,7 +6,7 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "student registration with unapproved university domain is rejected" do
     assert_no_difference ["User.count", "StudentProfile.count"] do
       post student_registration_path, params: {
-        user: { email: "student@unapproved.tn", password: "password123", password_confirmation: "password123" },
+        user: { email: "student@unapproved.tn", password: "password12345", password_confirmation: "password12345" },
         student_profile: { first_name: "Test", last_name: "Student", major: "CS", graduation_year: 2027 }
       }
     end
@@ -17,7 +17,7 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "student registration with approved university domain succeeds" do
     assert_difference ["User.count", "StudentProfile.count"], 1 do
       post student_registration_path, params: {
-        user: { email: "student@isetsf.rnu.tn", password: "password123", password_confirmation: "password123" },
+        user: { email: "student@isetsf.rnu.tn", password: "password12345", password_confirmation: "password12345" },
         student_profile: { first_name: "Test", last_name: "Student", major: "CS", graduation_year: 2027 }
       }
     end
@@ -27,7 +27,7 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "student registration with no university domain succeeds" do
     assert_difference ["User.count", "StudentProfile.count"], 1 do
       post student_registration_path, params: {
-        user: { email: "student@gmail.com", password: "password123", password_confirmation: "password123" },
+        user: { email: "student@gmail.com", password: "password12345", password_confirmation: "password12345" },
         student_profile: { first_name: "Test", last_name: "Student", major: "CS", graduation_year: 2027 }
       }
     end

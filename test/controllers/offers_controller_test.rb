@@ -34,7 +34,7 @@ class OffersControllerTest < ActionDispatch::IntegrationTest
     sign_in @student_user
     get edit_offer_url(@offer)
     assert_redirected_to dashboard_path
-    assert_equal "Your account is pending verification by StageUp administrators. You cannot post internship offers yet.", flash[:alert]
+    assert_equal "Only verified recruiters can manage internship offers.", flash[:alert]
   end
 
   test "unverified company cannot access new offer form" do

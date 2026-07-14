@@ -20,14 +20,14 @@ two:
 
 accepted:
   student_profile: mohamed
-  offer: one
+  offer: two
   status: accepted
   submitted_at: 2026-07-01 10:00:00
   responded_at: 2026-07-05 10:00:00
 
 completed:
   student_profile: mohamed
-  offer: one
+  offer: completed_offer
   status: completed
   submitted_at: 2026-07-01 10:00:00
   responded_at: 2026-07-05 10:00:00

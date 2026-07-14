@@ -39,3 +39,13 @@ draft:
   location: Sfax
   work_mode: onsite
   status: draft
+
+completed_offer:
+  company_profile: one
+  title: Completed Offer
+  description: Fully completed internship.
+  stage_type: PFE
+  spots: 1
+  location: Sfax
+  work_mode: onsite
+  status: active

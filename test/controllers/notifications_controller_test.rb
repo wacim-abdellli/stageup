@@ -8,7 +8,7 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     @submission = submissions(:one)
     @notification = Notification.trigger(
       recipient: @student_user,
-      action: "test_action",
+      action: "application_received",
       message: "You have a test notification.",
       notifiable: @submission
     )
@@ -35,7 +35,7 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
 
   test "read_all marks all notifications as read" do
     sign_in @student_user
-    Notification.trigger(recipient: @student_user, action: "b", message: "Second", notifiable: @submission)
+    Notification.trigger(recipient: @student_user, action: "application_accepted", message: "Second", notifiable: @submission)
     assert_equal 2, @student_user.notifications.unread.count
 
     post read_all_notifications_path

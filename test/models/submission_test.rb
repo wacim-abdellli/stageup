@@ -181,8 +181,8 @@ class SubmissionTest < ActiveSupport::TestCase
     company = company_profiles(:one)
     offer = offers(:one)
     
-    # Clear preexisting submissions
-    offer.submissions.destroy_all
+    # Clear preexisting submissions for this company
+    Submission.where(offer_id: company.offers.select(:id)).destroy_all
     
     # Create an active application
     sub = Submission.create!(

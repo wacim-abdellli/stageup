@@ -228,7 +228,6 @@ class SubmissionsController < ApplicationController
       @submission = Submission.joins(:offer).where(offers: { company_profile_id: current_user.profileable_id }).find(params[:id])
     else
       redirect_to dashboard_path, alert: "Not authorized."
-      throw(:abort)
     end
   end
 
@@ -240,14 +239,12 @@ class SubmissionsController < ApplicationController
     return if current_user.profileable_type == "StudentProfile"
 
     redirect_to dashboard_path, alert: "Only students can apply or submit proof of work."
-    throw(:abort)
   end
 
   def ensure_company!
     return if current_user.profileable_type == "CompanyProfile"
 
     redirect_to dashboard_path, alert: "Only companies can review or accept/reject applications."
-    throw(:abort)
   end
 
   def log_company_response_event(submission)

@@ -6,8 +6,8 @@ class RegistrationTest < ActionDispatch::IntegrationTest
       post student_registration_path, params: {
         user: {
           email: "newstudent@iset.tn",
-          password: "password123",
-          password_confirmation: "password123"
+          password: "password12345",
+          password_confirmation: "password12345"
         },
         student_profile: {
           first_name: "Test",
@@ -33,8 +33,8 @@ class RegistrationTest < ActionDispatch::IntegrationTest
       post company_registration_path, params: {
         user: {
           email: "recruiter@innovate.tn",
-          password: "password123",
-          password_confirmation: "password123"
+          password: "password12345",
+          password_confirmation: "password12345"
         },
         company_profile: {
           name: "Innovate Tech",

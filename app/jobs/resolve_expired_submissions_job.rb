@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResolveExpiredSubmissionsJob < ApplicationJob
   queue_as :default
 
