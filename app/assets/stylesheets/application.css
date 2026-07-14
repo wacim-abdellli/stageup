@@ -3785,3 +3785,51 @@ p, .offer-desc-text, .bento-card-text {
   line-height: 1.6;
 }
 
+/* ============= LANDING PAGE ANIMATIONS ============= */
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+
+.animate-in {
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-in.visible {
+  animation-name: fadeSlideUp;
+}
+
+.animate-in.visible.animate-down {
+  animation-name: fadeSlideDown;
+}
+
+.cinema-glow-bg {
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in { opacity: 1; animation: none !important; }
+  .cinema-glow-bg { animation: none; }
+}
+

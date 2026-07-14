@@ -1,22 +1,22 @@
 <% content_for :title, "StageUp – Verified Internships in Tunisia" %>
 <div class="landing-wrapper">
-  <div class="cinema-glow-bg"></div>
+  <div class="cinema-glow-bg animate-in visible" style="animation:glowPulse 6s ease-in-out infinite;"></div>
 
   <div class="landing-inner">
-    <div class="landing-logo-row">
+    <div class="landing-logo-row animate-in visible stagger-1">
       <%= render "layouts/navbar_brand" %>
     </div>
 
-    <h1 class="landing-hero-title">
+    <h1 class="landing-hero-title animate-in visible stagger-2">
       Nobody pays a price for ghosting.<br>
       <span class="landing-hero-gradient">We changed that.</span>
     </h1>
 
-    <p class="landing-subhead">
+    <p class="landing-subhead animate-in visible stagger-3">
       Every offer, mission, and no-show becomes a permanent public record. Tunisia's first internship market where reputation is earned, not claimed.
     </p>
 
-    <div class="landing-cta-row">
+    <div class="landing-cta-row animate-in visible stagger-4">
       <%= link_to "Browse Internships", offers_path, class: "btn btn-accent landing-cta-btn" %>
       <%= link_to "Get Started", select_role_path, class: "btn glass-card landing-cta-btn" %>
     </div>
@@ -27,11 +27,11 @@
       <div data-ticker-target="container"></div>
     </div>
 
-    <h2 class="landing-section-title">A Better Internship Loop</h2>
-    <p class="landing-section-sub">Verifiable trust replacing static, unverified resumes</p>
+    <h2 class="landing-section-title animate-in stagger-5">A Better Internship Loop</h2>
+    <p class="landing-section-sub animate-in stagger-6">Verifiable trust replacing static, unverified resumes</p>
 
     <div class="bento-grid">
-      <div class="bento-card glass-card">
+      <div class="bento-card glass-card animate-in stagger-1">
         <div class="bento-icon"><i data-lucide="git-commit"></i></div>
         <h3 class="bento-card-title">Proof-of-Work Missions</h3>
         <p class="bento-card-text">
@@ -39,7 +39,7 @@
         </p>
       </div>
 
-      <div class="bento-card glass-card">
+      <div class="bento-card glass-card animate-in stagger-2">
         <div class="bento-icon"><i data-lucide="shield-check"></i></div>
         <h3 class="bento-card-title">Reputation Ledger</h3>
         <p class="bento-card-text">
@@ -47,7 +47,7 @@
         </p>
       </div>
 
-      <div class="bento-card glass-card">
+      <div class="bento-card glass-card animate-in stagger-3">
         <div class="bento-icon"><i data-lucide="check-circle"></i></div>
         <h3 class="bento-card-title">Academic Verification</h3>
         <p class="bento-card-text">
@@ -57,7 +57,7 @@
     </div>
 
     <% if @active_offers.any? %>
-      <div class="featured-section">
+      <div class="featured-section animate-in stagger-5">
         <div class="featured-header-row">
           <div>
             <h2 class="featured-heading">
@@ -70,8 +70,8 @@
         </div>
 
         <div class="featured-grid">
-          <% @active_offers.each do |offer| %>
-            <div class="glass-card featured-offer-card">
+          <% @active_offers.each_with_index do |offer, idx| %>
+            <div class="glass-card featured-offer-card animate-in stagger-<%= [idx + 1, 6].min %>">
               <div>
                 <div class="featured-offer-top">
                   <span class="featured-stage-badge"><%= offer.stage_type %></span>
@@ -112,4 +112,16 @@
 <%= javascript_tag nonce: true do %>
   import TickerController from "<%= asset_path('controllers/ticker_controller.js') %>"
   window.Stimulus?.register("ticker", TickerController)
+
+  (function() {
+    var els = document.querySelectorAll('.animate-in:not(.visible)');
+    if (els.length) {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      els.forEach(function(el) { obs.observe(el); });
+    }
+  })();
 <% end %>
