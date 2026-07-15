@@ -36,4 +36,4 @@ submitted_submission:
   student_profile: cyrine
   offer: no_mission
   status: submitted
-  submitted_at: 2026-07-01 10:00:00
+  submitted_at: <%= 1.day.ago %>

@@ -3,33 +3,114 @@
   <div class="cinema-glow-bg animate-in visible" style="animation:glowPulse 6s ease-in-out infinite;"></div>
 
   <div class="landing-inner">
-    <div class="landing-logo-row animate-in visible stagger-1">
-      <%= render "layouts/navbar_brand" %>
+    
+    <!-- Hero Grid: Asymmetric 2-Column Layout -->
+    <div class="landing-hero-grid">
+      
+      <!-- Left Column: Branding, Announcement, and CTAs -->
+      <div class="hero-left-col text-left">
+        
+        <!-- Vercel Announcement Badge -->
+        <div class="landing-badge-container animate-in visible stagger-1">
+          <div class="landing-announcement-badge">
+            <span class="badge-new-tag">New</span>
+            <span class="badge-text">Tunisia's First Proof-of-Work Registry</span>
+            <i data-lucide="arrow-right" class="badge-arrow"></i>
+          </div>
+        </div>
+
+        <div class="landing-logo-row animate-in visible stagger-1" style="justify-content: flex-start; margin-bottom: 24px;">
+          <%= render "layouts/navbar_brand" %>
+        </div>
+
+        <h1 class="landing-hero-title animate-in visible stagger-2" style="text-align: left; font-size: clamp(34px, 4.5vw, 56px); margin-bottom: 16px;">
+          Nobody pays a price for ghosting.<br>
+          <span class="landing-hero-gradient">We changed that.</span>
+        </h1>
+
+        <p class="landing-subhead animate-in visible stagger-3" style="text-align: left; margin-left: 0; margin-bottom: 32px; max-width: 580px;">
+          Every offer, mission, and no-show becomes a permanent public record. Tunisia's first internship market where reputation is earned, not claimed.
+        </p>
+
+        <div class="landing-cta-row animate-in visible stagger-4" style="justify-content: flex-start; margin-left: 0; margin-bottom: 0;">
+          <%= link_to "Browse Internships", offers_path, class: "btn btn-accent landing-cta-btn" %>
+          <%= link_to "Get Started", select_role_path, class: "btn btn-secondary landing-cta-btn" %>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Product Mockup -->
+      <div class="hero-right-col animate-in visible stagger-3">
+        <div class="glass-card hero-mockup-card">
+          <div class="mockup-header">
+            <div class="mockup-header-left">
+              <span class="mockup-pulse-dot"></span>
+              <span class="mockup-header-title">Live Reputation Ledger</span>
+            </div>
+            <span class="mockup-header-badge">Mainnet</span>
+          </div>
+
+          <div class="mockup-body">
+            <div class="mockup-row animate-in visible stagger-4">
+              <div class="mockup-row-left">
+                <div class="mockup-avatar avatar-purple">C</div>
+                <div class="mockup-row-info">
+                  <span class="mockup-user-name">Cyrine (Student)</span>
+                  <span class="mockup-action-text">Submitted code solution to ISET</span>
+                </div>
+              </div>
+              <span class="mockup-score score-plus">+10 pts</span>
+            </div>
+
+            <div class="mockup-row animate-in visible stagger-5">
+              <div class="mockup-row-left">
+                <div class="mockup-avatar avatar-blue">V</div>
+                <div class="mockup-row-info">
+                  <span class="mockup-user-name">Vortech Startups</span>
+                  <span class="mockup-action-text">Missed review deadline (Grace ended)</span>
+                </div>
+              </div>
+              <span class="mockup-score score-minus">-15 pts</span>
+            </div>
+
+            <div class="mockup-row animate-in visible stagger-6">
+              <div class="mockup-row-left">
+                <div class="mockup-avatar avatar-green">M</div>
+                <div class="mockup-row-info">
+                  <span class="mockup-user-name">Mohamed (Student)</span>
+                  <span class="mockup-action-text">Completed verified PFE agreement</span>
+                </div>
+              </div>
+              <span class="mockup-score score-plus">+30 pts</span>
+            </div>
+
+            <div class="mockup-row animate-in visible stagger-6">
+              <div class="mockup-row-left">
+                <div class="mockup-avatar avatar-red">S</div>
+                <div class="mockup-row-info">
+                  <span class="mockup-user-name">SmartCorp-Sfax</span>
+                  <span class="mockup-action-text">Unverified coordinator attempt flagged</span>
+                </div>
+              </div>
+              <span class="mockup-score score-alert">Flagged</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <h1 class="landing-hero-title animate-in visible stagger-2">
-      Nobody pays a price for ghosting.<br>
-      <span class="landing-hero-gradient">We changed that.</span>
-    </h1>
-
-    <p class="landing-subhead animate-in visible stagger-3">
-      Every offer, mission, and no-show becomes a permanent public record. Tunisia's first internship market where reputation is earned, not claimed.
-    </p>
-
-    <div class="landing-cta-row animate-in visible stagger-4">
-      <%= link_to "Browse Internships", offers_path, class: "btn btn-accent landing-cta-btn" %>
-      <%= link_to "Get Started", select_role_path, class: "btn glass-card landing-cta-btn" %>
-    </div>
-
+    <!-- Ticker Section -->
     <div data-controller="ticker" class="landing-ticker">
       <div class="ticker-fade-left"></div>
       <div class="ticker-fade-right"></div>
       <div data-ticker-target="container"></div>
     </div>
 
+    <!-- Core Benefits Title -->
     <h2 class="landing-section-title animate-in stagger-5">A Better Internship Loop</h2>
     <p class="landing-section-sub animate-in stagger-6">Verifiable trust replacing static, unverified resumes</p>
 
+    <!-- Bento Grid Section -->
     <div class="bento-grid">
       <div class="bento-card glass-card animate-in stagger-1">
         <div class="bento-icon"><i data-lucide="git-commit"></i></div>
@@ -56,6 +137,7 @@
       </div>
     </div>
 
+    <!-- Featured Opportunities Section -->
     <% if @active_offers.any? %>
       <div class="featured-section animate-in stagger-5">
         <div class="featured-header-row">
@@ -109,16 +191,24 @@
   </div>
 </div>
 
-<%= javascript_tag nonce: true do %>
+<%= javascript_tag nonce: true, type: "module" do %>
+  import { Application } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
   import TickerController from "<%= asset_path('controllers/ticker_controller.js') %>"
-  window.Stimulus?.register("ticker", TickerController)
+  
+  if (!window.Stimulus) {
+    window.Stimulus = Application.start()
+  }
+  window.Stimulus.register("ticker", TickerController)
 
   (function() {
     var els = document.querySelectorAll('.animate-in:not(.visible)');
     if (els.length) {
       var obs = new IntersectionObserver(function(entries) {
         entries.forEach(function(e) {
-          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+          if (e.isIntersecting) { 
+            e.target.classList.add('visible'); 
+            obs.unobserve(e.target); 
+          }
         });
       }, { threshold: 0.15 });
       els.forEach(function(el) { obs.observe(el); });

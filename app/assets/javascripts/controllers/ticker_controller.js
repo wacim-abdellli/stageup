@@ -17,7 +17,7 @@ export default class extends Controller {
 
   async loadEvents() {
     try {
-      const response = await fetch("/reputation_events")
+      const response = await fetch(`/reputation_events?t=${Date.now()}`)
       if (response.ok) {
         this.events = await response.json()
         if (this.events.length > 0) {
