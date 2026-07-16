@@ -2956,6 +2956,23 @@ a:hover {
   border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
+.window-controls {
+  display: flex;
+  gap: 6px;
+  margin-right: 12px;
+}
+
+.win-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-close { background-color: #FF5F56; }
+.dot-minimize { background-color: #FFBD2E; }
+.dot-expand { background-color: #27C93F; }
+
 .mockup-body {
   padding: 20px;
   display: flex;
@@ -3096,6 +3113,10 @@ a:hover {
   justify-content: center;
   margin-bottom: 20px;
   color: #818CF8;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s,
+              border-color 0.25s,
+              color 0.25s;
 }
 
 .bento-icon i,
@@ -3103,6 +3124,29 @@ a:hover {
   width: 20px;
   height: 20px;
   stroke: currentColor;
+}
+
+/* Specific Bento Card Hover Upgrade */
+.bento-card {
+  transition: border-color 0.3s var(--transition),
+              background-color 0.3s var(--transition),
+              box-shadow 0.3s var(--transition),
+              transform 0.3s var(--transition);
+}
+
+.bento-card:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+  background-color: rgba(99, 102, 241, 0.02);
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px) scale(1.01);
+}
+
+.bento-card:hover .bento-icon {
+  transform: scale(1.1);
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: #A5B4FC;
 }
 
 /* Vercel-style announcement badge */
@@ -3244,7 +3288,19 @@ a:hover {
   justify-content: space-between;
   min-height: 200px;
   border: 1px solid var(--border-color);
-  transition: var(--transition);
+  background: rgba(255, 255, 255, 0.01);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: border-color 0.3s var(--transition),
+              background-color 0.3s var(--transition),
+              box-shadow 0.3s var(--transition),
+              transform 0.3s var(--transition);
+}
+
+.featured-offer-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  background-color: rgba(99, 102, 241, 0.02);
+  box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px);
 }
 
 .featured-offer-top {
