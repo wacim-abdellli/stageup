@@ -53,6 +53,6 @@ class Submission < ApplicationRecord
     end
 
     save!
-    student_profile.recalculate_commitment_score! if status == "completed"
+    student_profile.recalculate_commitment_score! if saved_change_to_status?(from: "accepted", to: "completed")
   end
 end
