@@ -34,6 +34,16 @@ class Rack::Attack
     req.ip if req.path == "/signup/university" && req.post?
   end
 
+  ### Global rate limit per IP for all authenticated requests ###
+  throttle("req/ip", limit: 300, period: 5.minutes) do |req|
+    req.ip unless req.path.start_with?("/assets", "/packs")
+  end
+
+  ### Throttle submission verification endpoint ###
+  throttle("verify_submission/ip", limit: 10, period: 10.minutes) do |req|
+    req.ip if req.path.match?(%r{/submissions/\d+/update}) && req.patch?
+  end
+
   ### Return 429 with a JSON body for throttled requests ###
   self.throttled_responder = lambda do |env|
     retry_after = (env["rack.attack.match_data"] || {})[:period]
