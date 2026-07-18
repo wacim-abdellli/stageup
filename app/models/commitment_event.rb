@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommitmentEvent < ApplicationRecord
   belongs_to :profileable, polymorphic: true
 
@@ -9,6 +11,7 @@ class CommitmentEvent < ApplicationRecord
     company_responded_on_time
     company_responded_late
     company_ghosted_offer
+    company_cancelled_internship
   ].freeze
 
   validates :event_type, presence: true, inclusion: { in: EVENT_TYPES }

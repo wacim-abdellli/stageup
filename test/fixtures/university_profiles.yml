@@ -9,3 +9,9 @@ pending:
   admin_name: Prof. Pending User
   department: Science Department
   approved: false
+
+other_approved:
+  university: enis
+  admin_name: Prof. Other Coordinator
+  department: Science Department
+  approved: true

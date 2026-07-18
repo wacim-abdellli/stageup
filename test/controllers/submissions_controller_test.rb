@@ -119,7 +119,7 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to offer_path(offer)
   end
 
-  test "cancel changes status to abandoned and penalizes student score via ghosting" do
+  test "cancel changes status to cancelled and penalizes student score" do
     sign_in @company_user
 
     offer = Offer.create!(
@@ -135,16 +135,16 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
       responded_at: Time.current
     )
 
-    assert_difference -> { @student_profile.commitment_events.where(event_type: "student_ghosted_offer").count }, 1 do
+    assert_difference -> { @student_profile.commitment_events.where(event_type: "company_cancelled_internship").count }, 1 do
       post cancel_submission_path(sub)
     end
 
     sub.reload
-    assert_equal "abandoned", sub.status
+    assert_equal "cancelled", sub.status
 
-    student_event = @student_profile.commitment_events.where(event_type: "student_ghosted_offer").last
+    student_event = @student_profile.commitment_events.where(event_type: "company_cancelled_internship").last
     assert_equal(-15.0, student_event.score_delta)
-    assert_includes student_event.description, "Ghosted employer on active internship for"
+    assert_includes student_event.description, "cancelled by the company"
 
     @student_profile.reload
     assert_equal 90.0, @student_profile.commitment_score
@@ -199,5 +199,67 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
     post accept_submission_path(submission)
     assert_redirected_to root_path
     assert_equal "The requested resource was not found.", flash[:alert]
+  end
+
+  test "student cannot call cancel" do
+    sign_in @student_user
+
+    offer = Offer.create!(
+      company_profile: @company_profile,
+      title: "Cancel By Student Test",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
+    sub = Submission.create!(
+      student_profile: @student_profile,
+      offer: offer,
+      status: "accepted",
+      responded_at: Time.current
+    )
+
+    post cancel_submission_path(sub)
+    assert_redirected_to dashboard_path
+    assert_match /Only companies/, flash[:alert]
+  end
+
+  test "company cannot call abandon" do
+    sign_in @company_user
+
+    offer = Offer.create!(
+      company_profile: @company_profile,
+      title: "Abandon By Company Test",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
+    sub = Submission.create!(
+      student_profile: @student_profile,
+      offer: offer,
+      status: "accepted",
+      responded_at: Time.current
+    )
+
+    post abandon_submission_path(sub)
+    assert_redirected_to dashboard_path
+    assert_match /Only students/, flash[:alert]
+  end
+
+  test "university user cannot confirm_completion for other university's submission" do
+    sign_in users(:other_university_user)
+    offer = Offer.create!(
+      company_profile: @company_profile,
+      title: "Completion Test Offer",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
+    sub = Submission.create!(
+      student_profile: @student_profile,
+      offer: offer,
+      status: "accepted",
+      responded_at: Time.current
+    )
+
+    post confirm_completion_submission_path(sub)
+    assert_redirected_to dashboard_path
+    assert_match /Not authorized/, flash[:alert]
   end
 end

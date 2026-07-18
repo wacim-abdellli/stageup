@@ -28,6 +28,11 @@ company_user_two:
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
   profileable: two (CompanyProfile)
 
+other_university_user:
+  email: other.coordinator@enis.tn
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  profileable: other_approved (UniversityProfile)
+
 admin_user:
   email: admin@stageup.tn
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
