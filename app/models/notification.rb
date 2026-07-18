@@ -15,6 +15,7 @@ class Notification < ApplicationRecord
 
   validates :action, presence: true, inclusion: { in: VALID_ACTIONS }
   validates :message, presence: true, length: { maximum: 500 }
+  before_validation :strip_html_from_message
 
   scope :unread, -> { where(read: false) }
   scope :recent, -> { order(created_at: :desc) }
@@ -37,5 +38,11 @@ class Notification < ApplicationRecord
       "notifiable=#{notifiable&.class}##{notifiable&.id} error=#{e.message}"
     )
     nil
+  end
+
+  private
+
+  def strip_html_from_message
+    self.message = ActionController::Base.helpers.strip_tags(message.to_s).strip
   end
 end
