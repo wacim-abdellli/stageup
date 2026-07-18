@@ -118,4 +118,16 @@ class OffersControllerTest < ActionDispatch::IntegrationTest
     @offer.reload
     assert_equal "archived", @offer.status
   end
+
+  test "failed offer creation does not write first_offer_posted_at" do
+    sign_in @company_user
+    company = company_profiles(:one)
+    company.update_columns(first_offer_posted_at: nil)
+
+    assert_no_difference("Offer.count") do
+      post offers_url, params: { offer: { title: "", description: "" } }
+    end
+
+    assert_nil company.reload.first_offer_posted_at
+  end
 end

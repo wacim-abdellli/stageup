@@ -67,13 +67,19 @@ class OffersController < ApplicationController
   def create
     @offer = current_user.profileable.offers.build(offer_params)
 
-    current_user.profileable.with_lock do
-      if current_user.profileable.first_offer_posted_at.nil?
-        current_user.profileable.update!(first_offer_posted_at: Time.current)
+    saved = false
+    ActiveRecord::Base.transaction do
+      if @offer.save
+        saved = true
+        current_user.profileable.with_lock do
+          if current_user.profileable.first_offer_posted_at.nil?
+            current_user.profileable.update!(first_offer_posted_at: Time.current)
+          end
+        end
       end
     end
 
-    if @offer.save
+    if saved
       redirect_to dashboard_path, notice: "Internship offer was successfully posted!"
     else
       @offer.build_mission if @offer.mission.nil?
