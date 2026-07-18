@@ -22,7 +22,15 @@ class VerifySubmissionJob < ApplicationJob
 
       begin
         stdout, stderr, status = Timeout.timeout(30) do
-          Open3.capture3("git", "clone", "--depth", "1", "--", url, temp_folder.to_s)
+          env = {
+            "GIT_SSH_COMMAND" => "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null",
+            "GIT_TERMINAL_PROMPT" => "0",
+            "GIT_ASKPASS" => "echo",
+            "GIT_CONFIG_NOSYSTEM" => "1",
+            "HOME" => "/dev/null"
+          }
+          Open3.capture3(env, "git", "clone", "--depth", "1", "--no-tags",
+                         "--config", "credential.helper=", "--", url, temp_folder.to_s)
         end
       rescue Timeout::Error
         submission.update!(
