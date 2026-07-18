@@ -19,18 +19,24 @@ class CompanyProfile < ApplicationRecord
 
   def recalculate_metrics!
     with_lock do
-      total_apps = submissions.where.not(status: ["started", "abandoned", "expired"])
+      total_apps = submissions.where.not(status: %w[started abandoned expired])
       responded_apps = total_apps.where.not(responded_at: nil)
 
-      rate = total_apps.any? ? (responded_apps.count.to_f / total_apps.count * 100).round(1) : 100.0
+      rate = if total_apps.any?
+               (responded_apps.count.to_f / total_apps.count * 100).round(1)
+             else
+               100.0
+             end
 
-      times = responded_apps.reject { |s| s.submitted_at.nil? }.map { |s| (s.responded_at - s.submitted_at) / 1.hour }
-      avg_time = times.any? ? (times.sum / times.size).round(1) : 0.0
+      avg_time = responded_apps
+                   .where.not(submitted_at: nil)
+                   .pick("AVG(EXTRACT(EPOCH FROM (responded_at - submitted_at)) / 3600.0)")
+                   &.round(1) || 0.0
 
       update!(
         response_rate: rate,
         avg_response_time_hours: avg_time,
-        offers_count: offers.count
+        offers_count: offers.where(status: "active").count
       )
     end
   end
