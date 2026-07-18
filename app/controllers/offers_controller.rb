@@ -2,7 +2,7 @@
 
 class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :ensure_company!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ensure_company!, only: [:new, :create, :edit, :update, :destroy, :publish]
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   before_action :ensure_offer_owner!, only: [:edit, :update, :destroy]
 
@@ -66,6 +66,7 @@ class OffersController < ApplicationController
 
   def create
     @offer = current_user.profileable.offers.build(offer_params)
+    @offer.status = "draft"
 
     saved = false
     ActiveRecord::Base.transaction do
@@ -80,11 +81,21 @@ class OffersController < ApplicationController
     end
 
     if saved
-      redirect_to dashboard_path, notice: "Internship offer was successfully posted!"
+      redirect_to dashboard_path, notice: "Internship offer draft saved! Publish it when ready."
     else
       @offer.build_mission if @offer.mission.nil?
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def publish
+    @offer = current_user.profileable.offers.find(params[:id])
+    unless @offer.status == "draft"
+      redirect_to dashboard_path, alert: "Only draft offers can be published."
+      return
+    end
+    @offer.update!(status: "active")
+    redirect_to dashboard_path, notice: "Internship offer is now live!"
   end
 
   private

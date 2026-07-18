@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   resource :dashboard, only: [:show] do
     patch :update_cv
   end
-  resources :offers
+  resources :offers do
+    member do
+      post :publish
+    end
+  end
   resources :submissions, only: [:create, :edit, :update] do
     member do
       post :accept
