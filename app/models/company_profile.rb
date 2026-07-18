@@ -17,6 +17,18 @@ class CompanyProfile < ApplicationRecord
     end
   end
 
+  def apply_commitment_event!(event_type:, score_delta:, description:)
+    with_lock do
+      commitment_events.create!(
+        event_type: event_type,
+        score_delta: score_delta,
+        description: description
+      )
+      new_score = (commitment_score + score_delta).clamp(0.0, 100.0)
+      update_columns(commitment_score: new_score)
+    end
+  end
+
   def recalculate_metrics!
     with_lock do
       total_apps = submissions.where.not(status: %w[started abandoned expired])

@@ -4,6 +4,7 @@ class StudentProfile < ApplicationRecord
   belongs_to :university, optional: true
   has_one :user, as: :profileable, dependent: :destroy
   has_many :submissions, dependent: :destroy
+  has_many :active_submissions, -> { where(status: %w[accepted completed]) }, class_name: "Submission"
   has_many :commitment_events, as: :profileable, dependent: :destroy
   has_and_belongs_to_many :skills
   has_one_attached :cv
@@ -21,6 +22,18 @@ class StudentProfile < ApplicationRecord
       delta = commitment_events.sum(:score_delta)
       new_score = (base + delta).clamp(0.0, 100.0)
       update!(commitment_score: new_score)
+    end
+  end
+
+  def apply_commitment_event!(event_type:, score_delta:, description:)
+    with_lock do
+      commitment_events.create!(
+        event_type: event_type,
+        score_delta: score_delta,
+        description: description
+      )
+      new_score = (commitment_score + score_delta).clamp(0.0, 100.0)
+      update_columns(commitment_score: new_score)
     end
   end
 

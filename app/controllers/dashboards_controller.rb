@@ -39,7 +39,7 @@ class DashboardsController < ApplicationController
       @total_students_count = @students_total
       @student_total_pages = (@students_total.to_f / per_page).ceil
       @students = StudentProfile.where(university: @university)
-                    .includes(:user, submissions: :internship_agreement)
+                    .includes(:user, active_submissions: :internship_agreement)
                     .order(last_name: :asc)
                     .limit(per_page)
                     .offset((@student_page - 1) * per_page)
