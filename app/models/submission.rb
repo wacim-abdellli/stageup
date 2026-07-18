@@ -16,7 +16,7 @@ class Submission < ApplicationRecord
   validates :submitted_at, presence: true, if: :submitted?
   validates :student_profile_id, uniqueness: {
     scope: :offer_id,
-    conditions: -> { where.not(status: %w[expired abandoned rejected cancelled]) },
+    conditions: -> { where.not(status: %w[expired abandoned rejected]) },
     message: "has already applied to this offer"
   }
   validates :auto_verification_status, inclusion: { in: VALID_AUTO_VERIFICATION_STATUSES }, allow_nil: true

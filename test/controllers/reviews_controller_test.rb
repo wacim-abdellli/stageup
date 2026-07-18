@@ -25,14 +25,13 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
   test "non-participant cannot view new review form" do
     sign_in @third_user
     get new_submission_review_path(@submission)
-    assert_redirected_to dashboard_path
-    assert_match /not authorized/, flash[:alert]
+    assert_redirected_to root_path
   end
 
   test "non-participant cannot create review" do
     sign_in @third_user
     post submission_reviews_path(@submission), params: { review: { rating: 5, comment: "Great internship experience!" } }
-    assert_redirected_to dashboard_path
+    assert_redirected_to root_path
   end
 
   test "cannot review a non-completed submission" do
