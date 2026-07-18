@@ -10,6 +10,9 @@ class User < ApplicationRecord
                  message: "is not a valid profile type" }
 
   attr_readonly :admin
+  attr_accessor :allow_admin_creation
+
+  validate :admin_cannot_be_set_on_create, on: :create
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -28,5 +31,11 @@ class User < ApplicationRecord
     return if matched_uni.approved?
 
     errors.add(:email, "domain '#{domain}' belongs to a university that is not yet approved on StageUp")
+  end
+
+  def admin_cannot_be_set_on_create
+    if admin? && !allow_admin_creation
+      errors.add(:admin, "cannot be set to true on registration")
+    end
   end
 end

@@ -65,4 +65,28 @@ class UserTest < ActiveSupport::TestCase
     user.email = "new_address@#{universities(:iset_sfax).email_domain}"
     assert user.valid?
   end
+
+  test "cannot create a user with admin true by default" do
+    user = User.new(
+      email: "new_admin@test.com",
+      password: "securepassword123",
+      password_confirmation: "securepassword123",
+      profileable: student_profiles(:mohamed),
+      admin: true
+    )
+    assert_not user.valid?
+    assert_includes user.errors[:admin], "cannot be set to true on registration"
+  end
+
+  test "can create a user with admin true if explicitly allowed" do
+    user = User.new(
+      email: "new_admin@test.com",
+      password: "securepassword123",
+      password_confirmation: "securepassword123",
+      profileable: student_profiles(:mohamed),
+      admin: true
+    )
+    user.allow_admin_creation = true
+    assert user.valid?
+  end
 end

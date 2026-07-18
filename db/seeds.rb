@@ -236,6 +236,7 @@ end
 
 User.find_or_create_by!(email: "admin@stageup.tn") do |u|
   u.password = "password"
+  u.allow_admin_creation = true
   u.admin = true
   u.profileable = admin_profile
 end
