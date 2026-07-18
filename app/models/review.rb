@@ -1,4 +1,6 @@
 class Review < ApplicationRecord
+  after_save :recalculate_receiver_rating
+  after_destroy :recalculate_receiver_rating
   belongs_to :submission
   belongs_to :author, class_name: "User"
   belongs_to :receiver, class_name: "User"
@@ -11,6 +13,11 @@ class Review < ApplicationRecord
   validate :author_and_receiver_must_be_participants
 
   private
+
+  def recalculate_receiver_rating
+    profile = receiver.profileable
+    profile.recalculate_average_rating! if profile.respond_to?(:recalculate_average_rating!)
+  end
 
   def submission_must_be_completed
     if submission && submission.status != "completed"
