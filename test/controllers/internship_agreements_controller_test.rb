@@ -102,8 +102,8 @@ class InternshipAgreementsControllerTest < ActionDispatch::IntegrationTest
     agreement = InternshipAgreement.create!(submission: @submission, start_date: Date.today, end_date: Date.today + 90)
 
     get submission_internship_agreement_path(@submission, agreement)
-    assert_redirected_to dashboard_path
-    assert_equal "You are not authorized to manage this agreement.", flash[:alert]
+    assert_redirected_to root_path
+    assert_equal "The requested resource was not found.", flash[:alert]
   end
 
   test "completion is blocked if agreement is pending" do
@@ -189,8 +189,8 @@ class InternshipAgreementsControllerTest < ActionDispatch::IntegrationTest
     agreement = InternshipAgreement.create!(submission: @submission, start_date: Date.today, end_date: Date.today + 90)
 
     post sign_submission_internship_agreement_path(@submission, agreement)
-    assert_redirected_to dashboard_path
-    assert_equal "You are not authorized to manage this agreement.", flash[:alert]
+    assert_redirected_to root_path
+    assert_equal "The requested resource was not found.", flash[:alert]
     assert_nil agreement.reload.university_signed_at
   end
 
@@ -203,7 +203,8 @@ class InternshipAgreementsControllerTest < ActionDispatch::IntegrationTest
     post decline_submission_internship_agreement_path(@submission, agreement), params: {
       rejection_reason: "Some reason."
     }
-    assert_redirected_to dashboard_path
+    assert_redirected_to root_path
+    assert_equal "The requested resource was not found.", flash[:alert]
     assert_equal "pending_signatures", agreement.reload.status
   end
 

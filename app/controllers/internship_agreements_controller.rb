@@ -90,7 +90,22 @@ class InternshipAgreementsController < ApplicationController
   private
 
   def set_submission
-    @submission = Submission.find(params[:submission_id])
+    @submission = case current_user.profileable_type
+    when "StudentProfile"
+      current_user.profileable.submissions.find(params[:submission_id])
+    when "CompanyProfile"
+      Submission.joins(:offer)
+                .where(offers: { company_profile_id: current_user.profileable_id })
+                .find(params[:submission_id])
+    when "UniversityProfile"
+      profile = current_user.profileable
+      raise ActiveRecord::RecordNotFound unless profile.approved? && profile.university_id.present?
+      Submission.joins(:student_profile)
+                .where(student_profiles: { university_id: profile.university_id })
+                .find(params[:submission_id])
+    else
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def set_agreement
