@@ -227,7 +227,7 @@ class SubmissionsController < ApplicationController
     elsif current_user.profileable_type == "CompanyProfile"
       @submission = Submission.joins(:offer).where(offers: { company_profile_id: current_user.profileable_id }).find(params[:id])
     else
-      redirect_to dashboard_path, alert: "Not authorized."
+      redirect_to dashboard_path, alert: "Not authorized." and return
     end
   end
 
