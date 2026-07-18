@@ -64,8 +64,17 @@ class VerifySubmissionJob < ApplicationJob
       end
     ensure
       FileUtils.rm_rf(temp_folder)
-      if %w[passed failed].include?(submission.reload.auto_verification_status)
-        submission.update!(status: "submitted", submitted_at: Time.current)
+      submission.reload
+      if %w[passed failed].include?(submission.auto_verification_status)
+        submission.update_columns(status: "submitted", submitted_at: Time.current)
+        if submission.auto_verification_status == "passed"
+          Notification.trigger(
+            recipient: submission.offer.company_profile.user,
+            action: "application_received",
+            message: "#{submission.student_profile.first_name}'s proof mission for #{submission.offer.title} has been verified.",
+            notifiable: submission
+          )
+        end
       end
     end
   end

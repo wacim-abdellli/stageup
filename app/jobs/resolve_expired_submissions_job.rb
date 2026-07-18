@@ -40,7 +40,7 @@ class ResolveExpiredSubmissionsJob < ApplicationJob
     end
 
     Submission.where(status: "accepted")
-          .where("first_completion_confirmed_at < ?", 7.days.ago)
+          .where("COALESCE(first_completion_confirmed_at, responded_at) < ?", 7.days.ago)
           .includes(:offer, offer: :company_profile, student_profile: :user)
           .find_each do |sub|
       ActiveRecord::Base.transaction do
