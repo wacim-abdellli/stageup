@@ -72,25 +72,22 @@ class SubmissionsController < ApplicationController
     end
     @submission.status = "accepted"
     @submission.responded_at = Time.current
-    success = false
     student_user = nil
-    ActiveRecord::Base.transaction do
-      if @submission.save
-        log_company_response_event(@submission)
-        company = @submission.offer.company_profile
-        company.recalculate_metrics!
-        company.recalculate_commitment_score!
-        student_user = @submission.student_profile.user
-        Notification.trigger(
-          recipient: student_user,
-          action: "application_accepted",
-          message: "Your application for #{@submission.offer.title} has been accepted!",
-          notifiable: @submission
-        )
-        success = true
-      end
+    succeeded = with_submission_transaction do
+      @submission.save!
+      @submission.log_company_response_event!
+      company = @submission.offer.company_profile
+      company.recalculate_metrics!
+      company.recalculate_commitment_score!
+      student_user = @submission.student_profile.user
+      Notification.trigger(
+        recipient: student_user,
+        action: "application_accepted",
+        message: "Your application for #{@submission.offer.title} has been accepted!",
+        notifiable: @submission
+      )
     end
-    if success
+    if succeeded
       UserMailer.application_status_updated_email(student_user, @submission).deliver_later
       redirect_to dashboard_path, notice: "Application was successfully accepted! We logged your response."
     else
@@ -105,25 +102,22 @@ class SubmissionsController < ApplicationController
     end
     @submission.status = "rejected"
     @submission.responded_at = Time.current
-    success = false
     student_user = nil
-    ActiveRecord::Base.transaction do
-      if @submission.save
-        log_company_response_event(@submission)
-        company = @submission.offer.company_profile
-        company.recalculate_metrics!
-        company.recalculate_commitment_score!
-        student_user = @submission.student_profile.user
-        Notification.trigger(
-          recipient: student_user,
-          action: "application_rejected",
-          message: "Your application for #{@submission.offer.title} has been rejected.",
-          notifiable: @submission
-        )
-        success = true
-      end
+    succeeded = with_submission_transaction do
+      @submission.save!
+      @submission.log_company_response_event!
+      company = @submission.offer.company_profile
+      company.recalculate_metrics!
+      company.recalculate_commitment_score!
+      student_user = @submission.student_profile.user
+      Notification.trigger(
+        recipient: student_user,
+        action: "application_rejected",
+        message: "Your application for #{@submission.offer.title} has been rejected.",
+        notifiable: @submission
+      )
     end
-    if success
+    if succeeded
       UserMailer.application_status_updated_email(student_user, @submission).deliver_later
       redirect_to dashboard_path, notice: "Application was rejected. We logged your response."
     else
@@ -218,6 +212,18 @@ class SubmissionsController < ApplicationController
 
   private
 
+  def with_submission_transaction
+    success = false
+    ActiveRecord::Base.transaction do
+      yield
+      success = true
+    end
+    success
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => e
+    Rails.logger.error("[SubmissionsController] Transaction failed: #{e.message}")
+    false
+  end
+
   def set_submission_for_student
     @submission = current_user.profileable.submissions.find(params[:id])
   end
@@ -252,17 +258,4 @@ class SubmissionsController < ApplicationController
     redirect_to dashboard_path, alert: "Only companies can review or accept/reject applications."
   end
 
-  def log_company_response_event(submission)
-    company = submission.offer.company_profile
-    submitted = submission.submitted_at || submission.created_at
-    late = submitted < 14.days.ago
-    event_type = late ? "company_responded_late" : "company_responded_on_time"
-    delta = late ? -5.0 : +1.0
-    desc = late ? "Responded late (over 14 days) to application for '#{submission.offer.title}'" : "Responded on time (within 14 days) to application for '#{submission.offer.title}'"
-    company.commitment_events.create!(
-      event_type: event_type,
-      score_delta: delta,
-      description: desc
-    )
-  end
 end

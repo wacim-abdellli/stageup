@@ -108,14 +108,13 @@ class OffersController < ApplicationController
   end
 
   def ensure_company!
-    if current_user.profileable_type == "CompanyProfile" && current_user.profileable.verified?
-      return
-    elsif current_user.profileable_type == "CompanyProfile" && !current_user.profileable.verified?
-      redirect_to dashboard_path, alert: "Your account is pending verification by StageUp administrators. You cannot post internship offers yet."
-    elsif current_user.profileable_type == "StudentProfile"
+    unless current_user.profileable_type == "CompanyProfile"
       redirect_to dashboard_path, alert: "Only verified recruiters can manage internship offers."
-    else
-      redirect_to dashboard_path, alert: "You are not authorized to perform this action."
+      return
+    end
+
+    unless current_user.profileable.verified?
+      redirect_to dashboard_path, alert: "Your account is pending verification by StageUp administrators. You cannot post internship offers yet."
     end
   end
 

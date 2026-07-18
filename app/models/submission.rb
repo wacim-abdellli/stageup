@@ -29,6 +29,20 @@ class Submission < ApplicationRecord
     mission_id.present? && status.in?(%w[submitted under_review])
   end
 
+  def log_company_response_event!
+    company = offer.company_profile
+    submitted = submitted_at || created_at
+    late = submitted < 14.days.ago
+    event_type = late ? "company_responded_late" : "company_responded_on_time"
+    delta = late ? -5.0 : +1.0
+    desc = late ? "Responded late (over 14 days) to application for '#{offer.title}'" : "Responded on time (within 14 days) to application for '#{offer.title}'"
+    company.commitment_events.create!(
+      event_type: event_type,
+      score_delta: delta,
+      description: desc
+    )
+  end
+
   def confirm_completion_by!(role)
     unless status == "accepted"
       errors.add(:base, "Only accepted internships can be marked as completed.")
