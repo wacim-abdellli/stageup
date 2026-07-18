@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CompanyProfile < ApplicationRecord
   has_one :user, as: :profileable, dependent: :destroy
   has_many :offers, dependent: :destroy

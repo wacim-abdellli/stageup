@@ -14,7 +14,11 @@ class Submission < ApplicationRecord
   validates :github_link, presence: true, if: :github_link_required?
   validates :github_link, format: { with: /\Ahttps?:\/\/[^\s]+\z/, message: "must be a valid HTTP/HTTPS URL" }, allow_blank: true
   validates :submitted_at, presence: true, if: :submitted?
-  validates :student_profile_id, uniqueness: { scope: :offer_id, message: "has already applied to this offer" }
+  validates :student_profile_id, uniqueness: {
+    scope: :offer_id,
+    conditions: -> { where.not(status: %w[expired abandoned rejected cancelled]) },
+    message: "has already applied to this offer"
+  }
   validates :auto_verification_status, inclusion: { in: VALID_AUTO_VERIFICATION_STATUSES }, allow_nil: true
 
   def submitted?

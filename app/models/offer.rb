@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Offer < ApplicationRecord
   belongs_to :company_profile
   has_one :mission, dependent: :destroy

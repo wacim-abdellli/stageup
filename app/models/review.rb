@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Review < ApplicationRecord
   after_save :recalculate_receiver_rating
   after_destroy :recalculate_receiver_rating

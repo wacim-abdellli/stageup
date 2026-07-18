@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UniversityProfile < ApplicationRecord
   belongs_to :university
   has_one :user, as: :profileable, dependent: :destroy
