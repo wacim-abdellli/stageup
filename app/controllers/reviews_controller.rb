@@ -28,7 +28,14 @@ class ReviewsController < ApplicationController
   private
 
   def set_submission
-    @submission = Submission.find(params[:submission_id])
+    @submission = Submission.joins(:student_profile, offer: :company_profile)
+                            .where(
+                                student_profiles: { user_id: current_user.id }
+                            ).or(
+                              Submission.joins(:student_profile, offer: :company_profile)
+                                        .where(offers: { company_profiles: { user_id: current_user.id } })
+                            )
+                            .find(params[:submission_id])
   end
 
   def ensure_participant!
