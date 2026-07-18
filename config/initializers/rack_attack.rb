@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Rack::Attack
+  ### Safelist local/loopback IPs for development and testing ###
+  safelist("allow from localhost") do |req|
+    req.ip == "127.0.0.1" || req.ip == "::1" || req.ip == "0.0.0.0"
+  end
+
   ### Throttle signup attempts by IP ###
   throttle("signup/ip", limit: 5, period: 1.hour) do |req|
     req.ip if req.path.start_with?("/signup") && req.post?
@@ -46,7 +51,8 @@ class Rack::Attack
 
   ### Return 429 with a JSON body for throttled requests ###
   self.throttled_responder = lambda do |env|
-    retry_after = (env["rack.attack.match_data"] || {})[:period]
+    match_data = env.respond_to?(:[]) ? env["rack.attack.match_data"] : nil
+    retry_after = (match_data || {})[:period]
     [
       429,
       {
