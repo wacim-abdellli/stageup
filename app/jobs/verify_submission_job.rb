@@ -10,7 +10,7 @@ class VerifySubmissionJob < ApplicationJob
 
   def perform(submission)
     temp_folder = Rails.root.join("tmp", "sandboxes", "submission_#{submission.id}")
-    submission.update!(auto_verification_status: "checking")
+    submission.update_columns(auto_verification_status: "checking")
 
     begin
       FileUtils.mkdir_p(temp_folder)
@@ -33,7 +33,7 @@ class VerifySubmissionJob < ApplicationJob
                          "--config", "credential.helper=", "--", url, temp_folder.to_s)
         end
       rescue Timeout::Error
-        submission.update!(
+        submission.update_columns(
           auto_verification_status: "failed",
           auto_verification_log: "Git clone timed out after 30 seconds."
         )
@@ -41,7 +41,7 @@ class VerifySubmissionJob < ApplicationJob
       end
 
       if !status.success?
-        submission.update!(
+        submission.update_columns(
           auto_verification_status: "failed",
           auto_verification_log: "Git clone failed: #{(stdout + stderr).strip.truncate(500)}"
         )
@@ -52,12 +52,12 @@ class VerifySubmissionJob < ApplicationJob
       found = project_files.any? { |f| File.exist?(temp_folder.join(f)) }
 
       if found
-        submission.update!(
+        submission.update_columns(
           auto_verification_status: "passed",
           auto_verification_log: "Repository successfully cloned and verified."
         )
       else
-        submission.update!(
+        submission.update_columns(
           auto_verification_status: "failed",
           auto_verification_log: "Repository cloned, but failed validation: missing README.md or configuration files."
         )
@@ -85,14 +85,14 @@ class VerifySubmissionJob < ApplicationJob
     begin
       uri = URI.parse(url)
       unless uri.scheme == "https" && ALLOWED_GIT_HOSTS.include?(uri.host&.downcase)
-        submission.update!(
+        submission.update_columns(
           auto_verification_status: "failed",
           auto_verification_log: "Only HTTPS URLs from GitHub, GitLab, or Bitbucket are accepted. Got: #{uri.host}"
         )
         return false
       end
     rescue URI::InvalidURIError
-      submission.update!(
+      submission.update_columns(
         auto_verification_status: "failed",
         auto_verification_log: "Invalid URL format."
       )

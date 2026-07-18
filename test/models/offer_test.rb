@@ -42,4 +42,38 @@ class OfferTest < ActiveSupport::TestCase
     # 1/3 = 33.33... -> 33
     assert_equal 33, @offer.match_percentage_for(@student)
   end
+
+  test "rejects invalid stage_type" do
+    offer = Offer.new(
+      company_profile: company_profiles(:one),
+      title: "Invalid Stage",
+      description: "Test",
+      stage_type: "invalid_type",
+      spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
+    assert_not offer.valid?
+    assert_includes offer.errors[:stage_type], "is not included in the list"
+  end
+
+  test "rejects invalid work_mode" do
+    offer = Offer.new(
+      company_profile: company_profiles(:one),
+      title: "Invalid Work Mode",
+      description: "Test",
+      stage_type: "PFE",
+      spots: 1, location: "Sfax", work_mode: "invalid", status: "active"
+    )
+    assert_not offer.valid?
+    assert_includes offer.errors[:work_mode], "is not included in the list"
+  end
+
+  test "status defaults to active in the database" do
+    offer = Offer.create!(
+      company_profile: company_profiles(:one),
+      title: "Status Test",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite"
+    )
+    assert_equal "active", offer.reload.status
+  end
 end

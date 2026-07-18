@@ -95,4 +95,40 @@ class VerifySubmissionJobTest < ActiveJob::TestCase
 
     assert_not Dir.exist?(temp_folder)
   end
+
+  test "rejects file:// URLs" do
+    sub = create_test_submission
+    sub.update_columns(github_link: "file:///etc/passwd")
+    VerifySubmissionJob.perform_now(sub)
+    sub.reload
+    assert_equal "failed", sub.auto_verification_status
+    assert_includes sub.auto_verification_log, "Only HTTPS URLs"
+  end
+
+  test "rejects non-allowlisted hosts" do
+    sub = create_test_submission
+    sub.update_columns(github_link: "https://attacker.com/repo")
+    VerifySubmissionJob.perform_now(sub)
+    sub.reload
+    assert_equal "failed", sub.auto_verification_status
+    assert_includes sub.auto_verification_log, "Only HTTPS URLs"
+  end
+
+  test "rejects git:// scheme" do
+    sub = create_test_submission
+    sub.update_columns(github_link: "git://github.com/repo")
+    VerifySubmissionJob.perform_now(sub)
+    sub.reload
+    assert_equal "failed", sub.auto_verification_status
+    assert_includes sub.auto_verification_log, "Only HTTPS URLs"
+  end
+
+  test "rejects empty URL" do
+    sub = create_test_submission
+    sub.update_columns(github_link: "")
+    VerifySubmissionJob.perform_now(sub)
+    sub.reload
+    assert_equal "failed", sub.auto_verification_status
+    assert_includes sub.auto_verification_log, "Only HTTPS URLs"
+  end
 end

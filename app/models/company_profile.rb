@@ -42,7 +42,7 @@ class CompanyProfile < ApplicationRecord
 
       avg_time = responded_apps
                    .where.not(submitted_at: nil)
-                   .pick("AVG(EXTRACT(EPOCH FROM (responded_at - submitted_at)) / 3600.0)")
+                   .pick(Arel.sql("AVG(EXTRACT(EPOCH FROM (responded_at - submitted_at)) / 3600.0)"))
                    &.round(1) || 0.0
 
       update!(

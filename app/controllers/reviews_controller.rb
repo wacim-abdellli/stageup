@@ -28,14 +28,11 @@ class ReviewsController < ApplicationController
   private
 
   def set_submission
-    @submission = Submission.joins(:student_profile, offer: :company_profile)
-                            .where(
-                                student_profiles: { user_id: current_user.id }
-                            ).or(
-                              Submission.joins(:student_profile, offer: :company_profile)
-                                        .where(offers: { company_profiles: { user_id: current_user.id } })
-                            )
-                            .find(params[:submission_id])
+    @submission = Submission.find(params[:submission_id])
+    unless @submission.student_profile.user == current_user ||
+           @submission.offer.company_profile.user == current_user
+      redirect_to dashboard_path, alert: "You are not authorized to review this internship." and return
+    end
   end
 
   def ensure_participant!

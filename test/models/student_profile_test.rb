@@ -111,6 +111,7 @@ class StudentProfileTest < ActiveSupport::TestCase
       comment: "Excellent work on second project."
     )
 
+    profile.reload
     assert_equal 4.5, profile.average_rating
     assert_equal 2, profile.reviews_received_count
   end

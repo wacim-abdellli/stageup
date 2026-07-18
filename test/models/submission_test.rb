@@ -236,6 +236,25 @@ class SubmissionTest < ActiveSupport::TestCase
     assert_equal 15.0, @student.commitment_events.last.score_delta
   end
 
+  test "company-first completion confirmation flow works" do
+    sub = Submission.create!(
+      student_profile: @student,
+      offer: @offer,
+      status: "accepted",
+      responded_at: Time.current
+    )
+
+    sub.confirm_completion_by!("CompanyProfile")
+    assert sub.company_confirmed_completed
+    assert_not sub.student_confirmed_completed
+    assert_equal "accepted", sub.status
+    assert_not_nil sub.first_completion_confirmed_at
+
+    sub.confirm_completion_by!("StudentProfile")
+    assert sub.student_confirmed_completed
+    assert_equal "completed", sub.status
+  end
+
   test "should reject duplicate application to same offer" do
     other_offer = Offer.create!(
       company_profile: company_profiles(:one),

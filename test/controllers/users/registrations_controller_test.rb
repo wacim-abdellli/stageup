@@ -3,6 +3,14 @@ require "test_helper"
 class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
+  setup do
+    Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
+  end
+
+  teardown do
+    Rack::Attack.cache.store.clear
+  end
+
   test "student registration with unapproved university domain is rejected" do
     assert_no_difference ["User.count", "StudentProfile.count"] do
       post student_registration_path, params: {
