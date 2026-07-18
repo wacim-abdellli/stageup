@@ -45,7 +45,9 @@ class Admin::DashboardsControllerTest < ActionDispatch::IntegrationTest
     coord = university_profiles(:pending)
 
     assert_difference "UniversityProfile.count", -1 do
-      post reject_admin_university_profile_path(coord)
+      assert_difference "User.count", -1 do
+        post reject_admin_university_profile_path(coord)
+      end
     end
 
     assert_redirected_to admin_dashboard_path
