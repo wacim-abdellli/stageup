@@ -23,7 +23,7 @@ default: &default
 development:
   <<: *default
   database: <%= ENV.fetch("DEV_DB_NAME", "stageup_development") %>
-  host: <%= ENV.fetch("POSTGRES_HOST", "localhost") %>
+  host: <%= ENV.fetch("POSTGRES_HOST", "127.0.0.1") %>
   port: <%= ENV.fetch("POSTGRES_PORT", "5439") %>
   username: <%= ENV.fetch("POSTGRES_USER", "postgres") %>
   password: <%= ENV.fetch("POSTGRES_PASSWORD", "postgres") %>
@@ -31,7 +31,7 @@ development:
 test:
   <<: *default
   database: <%= ENV.fetch("TEST_DB_NAME", "stageup_test") %>
-  host: <%= ENV.fetch("POSTGRES_HOST", "localhost") %>
+  host: <%= ENV.fetch("POSTGRES_HOST", "127.0.0.1") %>
   port: <%= ENV.fetch("POSTGRES_PORT", "5439") %>
   username: <%= ENV.fetch("POSTGRES_USER", "postgres") %>
   password: <%= ENV.fetch("POSTGRES_PASSWORD", "postgres") %>
