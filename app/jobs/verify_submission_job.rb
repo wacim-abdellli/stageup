@@ -68,12 +68,14 @@ class VerifySubmissionJob < ApplicationJob
       if %w[passed failed].include?(submission.auto_verification_status)
         submission.update_columns(status: "submitted", submitted_at: Time.current)
         if submission.auto_verification_status == "passed"
+          company_user = submission.offer.company_profile.user
           Notification.trigger(
-            recipient: submission.offer.company_profile.user,
+            recipient: company_user,
             action: "application_received",
             message: "#{submission.student_profile.first_name}'s proof mission for #{submission.offer.title} has been verified.",
             notifiable: submission
           )
+          UserMailer.application_received_email(company_user, submission).deliver_later
         end
       end
     end

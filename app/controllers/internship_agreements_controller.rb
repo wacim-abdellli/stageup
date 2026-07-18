@@ -30,7 +30,18 @@ class InternshipAgreementsController < ApplicationController
   def sign
     @agreement.sign_by!(current_user.profileable_type)
 
-    unless @agreement.status == "fully_executed"
+    if @agreement.status == "fully_executed"
+      student_user = @submission.student_profile.user
+      company_user = @submission.offer.company_profile.user
+      [student_user, company_user].each do |u|
+        Notification.trigger(
+          recipient: u,
+          action: "coordinator_approved",
+          message: "The Convention de Stage for #{@submission.offer.title} has been fully signed by all parties!",
+          notifiable: @agreement
+        )
+      end
+    else
       pending_users = []
       student_user = @submission.student_profile.user
       company_user = @submission.offer.company_profile.user
