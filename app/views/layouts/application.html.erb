@@ -19,7 +19,7 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest" nonce="<%= content_security_policy_nonce %>"></script>
     <script nonce="<%= content_security_policy_nonce %>">
       (function() {
         function initInteractiveElements() {

@@ -10,7 +10,7 @@ Rails.application.configure do
     policy.font_src    :self, :https, :data
     policy.img_src     :self, :https, :data
     policy.object_src  :none
-    policy.script_src  :self, "https://unpkg.com"
+    policy.script_src  :self, :nonce, "https://unpkg.com"
     policy.style_src   :self, :unsafe_inline
     policy.base_uri    :self
     policy.form_action :self
