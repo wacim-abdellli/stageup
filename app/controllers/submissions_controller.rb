@@ -169,12 +169,12 @@ class SubmissionsController < ApplicationController
       return
     end
     ActiveRecord::Base.transaction do
-      @submission.update!(status: "abandoned", responded_at: Time.current)
+      @submission.update!(status: "cancelled", responded_at: Time.current)
       student = @submission.student_profile
       student.commitment_events.create!(
-        event_type: "student_ghosted_offer",
+        event_type: "company_cancelled_internship",
         score_delta: -15.0,
-        description: "Ghosted employer on active internship for '#{@submission.offer.title}'."
+        description: "Internship for '#{@submission.offer.title}' was cancelled by the company."
       )
       student.recalculate_commitment_score!
     end
