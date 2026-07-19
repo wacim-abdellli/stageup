@@ -54,9 +54,34 @@
           if (p) p.classList.remove('open');
         });
 
+        function initFlashMessages() {
+          var flashes = document.querySelectorAll('.flash-message');
+          flashes.forEach(function(flash) {
+            var dismissTimeout = setTimeout(function() {
+              dismissFlash(flash);
+            }, 4000);
+
+            var closeBtn = flash.querySelector('.flash-close');
+            if (closeBtn) {
+              closeBtn.addEventListener('click', function() {
+                clearTimeout(dismissTimeout);
+                dismissFlash(flash);
+              });
+            }
+          });
+        }
+
+        function dismissFlash(flash) {
+          flash.classList.add('fade-out');
+          flash.addEventListener('transitionend', function() {
+            flash.remove();
+          });
+        }
+
         document.addEventListener("turbo:load", function() {
           lucide.createIcons();
           initInteractiveElements();
+          initFlashMessages();
         });
       })();
     </script>
@@ -72,12 +97,18 @@
         <div class="flash-message flash-notice">
           <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
           <span><%= flash[:notice] %></span>
+          <button type="button" class="flash-close" aria-label="Dismiss alert">
+            <i data-lucide="x" class="icon-16"></i>
+          </button>
         </div>
       <% end %>
       <% if flash[:alert] %>
         <div class="flash-message flash-alert">
           <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
           <span><%= flash[:alert] %></span>
+          <button type="button" class="flash-close" aria-label="Dismiss alert">
+            <i data-lucide="x" class="icon-16"></i>
+          </button>
         </div>
       <% end %>
     </div>

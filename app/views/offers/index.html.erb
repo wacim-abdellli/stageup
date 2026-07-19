@@ -1,169 +1,208 @@
 <% content_for :title, "Browse Internships – StageUp" %>
-<div class="dashboard-container">
-  <div class="dashboard-header">
+
+<div class="dir-page">
+
+  <%# ─── Page Header ─────────────────────────────────────────── %>
+  <div class="dir-header">
     <div>
-      <h1 style="font-size:28px;font-weight:800;margin:0 0 4px;">Internship Directory</h1>
-      <p class="text-secondary fs-14">Tunisia's first verified internship directory</p>
+      <h1 class="dir-heading">Internship Directory</h1>
+      <p class="dir-sub">Tunisia's first verified internship platform &mdash; <%= pluralize(@offers.size, 'active listing') %></p>
     </div>
     <% unless current_user %>
       <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent fs-13 btn-header-padded" %>
     <% end %>
   </div>
 
-  <div class="offers-directory-grid items-start">
-    
-    <div class="filter-sidebar-card">
-      <h3 class="filter-title">
-        <i data-lucide="sliders-horizontal" class="icon-16 stroke-secondary"></i>
-        Filter Offers
-      </h3>
+  <div class="dir-body">
+
+    <%# ─── Filter Sidebar ──────────────────────────────────────── %>
+    <aside class="dir-sidebar">
+      <div class="sidebar-header">
+        <i data-lucide="sliders-horizontal" class="icon-16 stroke-muted"></i>
+        <span class="sidebar-title">Filters</span>
+      </div>
 
       <%= form_tag offers_path, method: :get, id: "filters-form" do %>
-        <div class="filter-section">
-          <label class="filter-label">Search keyword</label>
+        <div class="sidebar-field">
+          <label class="filter-label">Search</label>
           <div class="pos-relative">
             <i data-lucide="search" class="search-icon-abs stroke-muted icon-14"></i>
-            <%= text_field_tag :query, params[:query], placeholder: "Search title, company...", class: "filter-input" %>
+            <%= text_field_tag :query, params[:query],
+                placeholder: "Title, company…",
+                class: "filter-input",
+                autocomplete: "off" %>
           </div>
         </div>
 
-        <div class="filter-section">
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-field">
           <label class="filter-label">Stage Type</label>
           <div class="select-wrap">
-            <%= select_tag :stage_type, options_for_select([["All types", ""], ["PFE", "PFE"], ["PFA", "PFA"], ["Initiation / Observation", "initiation"], ["Free / Skill-Building", "free"]], params[:stage_type]), onchange: "this.form.submit();", class: "filter-select" %>
+            <%= select_tag :stage_type,
+                options_for_select([
+                  ["All types", ""],
+                  ["PFE", "PFE"],
+                  ["PFA", "PFA"],
+                  ["Initiation / Observation", "initiation"],
+                  ["Free / Skill-Building", "free"]
+                ], params[:stage_type]),
+                onchange: "this.form.submit();",
+                class: "filter-select" %>
           </div>
         </div>
 
-        <div class="filter-section-last">
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-field">
           <label class="filter-label">Work Mode</label>
           <div class="select-wrap">
-            <%= select_tag :work_mode, options_for_select([["All modes", ""], ["Remote", "remote"], ["On-site", "onsite"], ["Hybrid", "hybrid"]], params[:work_mode]), onchange: "this.form.submit();", class: "filter-select" %>
+            <%= select_tag :work_mode,
+                options_for_select([
+                  ["All modes", ""],
+                  ["Remote", "remote"],
+                  ["On-site", "onsite"],
+                  ["Hybrid", "hybrid"]
+                ], params[:work_mode]),
+                onchange: "this.form.submit();",
+                class: "filter-select" %>
           </div>
         </div>
 
-        <div class="flex-col gap-8">
+        <div class="sidebar-actions">
           <%= submit_tag "Apply Search", class: "btn btn-accent fs-13 btn-filter-apply" %>
           <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
-            <%= link_to "Reset Filters", offers_path, class: "btn-filter-reset" %>
+            <%= link_to "Reset", offers_path, class: "btn-filter-reset" %>
           <% end %>
         </div>
       <% end %>
-    </div>
+    </aside>
 
-    <div>
-      <div class="flex-row justify-between items-center mb-20">
-        <h2 class="fs-20 section-title-lg">Available Internships</h2>
-        <span class="fs-13 text-secondary"><%= pluralize(@offers.size, 'internship') %> found</span>
+    <%# ─── Main Content ─────────────────────────────────────────── %>
+    <div class="dir-main">
+
+      <div class="dir-list-header">
+        <h2 class="dir-list-title">Available Internships</h2>
+        <div class="dir-list-meta">
+          <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
+            <span class="filter-active-pill">
+              <i data-lucide="filter" class="icon-12"></i>
+              Filters active
+            </span>
+          <% end %>
+          <span class="dir-count-badge"><%= @offers.size %> found</span>
+        </div>
       </div>
 
-      <div class="offers-grid">
-        <% if @offers.any? %>
+      <% if @offers.any? %>
+        <div class="offers-grid">
           <% @offers.each do |offer| %>
-            <%= link_to offer_path(offer), class: "offer-card" do %>
-              <div>
-                <div class="offer-card-header">
-                  <span class="offer-card-badge-stage"><%= offer.stage_type %></span>
-                  
-                  <% if offer.mission.present? %>
-                    <span class="offer-card-badge-proof inline-flex-center">
-                      <i data-lucide="git-commit" class="icon-w-12 stroke-accent"></i>
-                      Mission Attached
-                    </span>
-                  <% else %>
-                    <span class="offer-card-badge-cv inline-flex-center">
-                      <i data-lucide="check-circle" class="icon-w-12 stroke-secondary"></i>
-                      CV Only
-                    </span>
-                  <% end %>
-                  <% if current_user&.profileable_type == "StudentProfile" %>
-                    <% match_pct = offer.match_percentage_for(current_user.profileable) %>
-                    <% if match_pct < 100 %>
-                      <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>"><%= match_pct %>% Match</span>
-                    <% end %>
-                  <% end %>
-                </div>
+            <%= link_to offer_path(offer), class: "offer-card", aria: { label: offer.title } do %>
 
-                <h3 class="offer-card-title"><%= offer.title %></h3>
-                <span class="offer-card-company">
-                  <%= offer.company_profile.name %>
-                </span>
-                
-                <p class="offer-card-desc line-clamp-3">
-                  <%= offer.description %>
-                </p>
-
-                <% if offer.skills.any? %>
-                  <div class="flex-row flex-wrap gap-4 mt-10">
-                    <% offer.skills.each do |skill| %>
-                      <span class="skill-tag"><%= skill.name %></span>
-                    <% end %>
+              <%# Top row: avatar + title + active dot %>
+              <div class="ocard-top">
+                <div class="ocard-company-row">
+                  <div class="ocard-avatar" aria-hidden="true">
+                    <%= offer.company_profile.name[0..1].upcase %>
                   </div>
+                  <div class="ocard-company-info">
+                    <h3 class="offer-card-title"><%= offer.title %></h3>
+                    <span class="offer-card-company"><%= offer.company_profile.name %></span>
+                  </div>
+                </div>
+                <span class="ocard-live-dot" title="Active listing"></span>
+              </div>
+
+              <%# Badges row %>
+              <div class="ocard-badges">
+                <span class="offer-card-badge-stage"><%= offer.stage_type.upcase %></span>
+                <% if offer.mission.present? %>
+                  <span class="offer-card-badge-proof">
+                    <i data-lucide="git-commit" class="icon-w-12"></i>
+                    Mission
+                  </span>
+                <% else %>
+                  <span class="offer-card-badge-cv">
+                    <i data-lucide="paperclip" class="icon-w-12"></i>
+                    CV Only
+                  </span>
+                <% end %>
+                <% if current_user&.profileable_type == "StudentProfile" %>
+                  <% match_pct = offer.match_percentage_for(current_user.profileable) %>
+                  <% if match_pct < 100 %>
+                    <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>">
+                      <%= match_pct %>% match
+                    </span>
+                  <% end %>
                 <% end %>
               </div>
 
+              <%# Description %>
+              <p class="offer-card-desc line-clamp-2"><%= offer.description %></p>
+
+              <%# Skills %>
+              <% if offer.skills.any? %>
+                <div class="ocard-skills">
+                  <% offer.skills.first(3).each do |skill| %>
+                    <span class="skill-tag"><%= skill.name %></span>
+                  <% end %>
+                  <% if offer.skills.size > 3 %>
+                    <span class="skill-tag skill-tag-more">+<%= offer.skills.size - 3 %></span>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <%# Footer: location + CTA %>
               <div class="offer-card-footer">
                 <span class="offer-card-location">
-                  <i data-lucide="map-pin" class="icon-w-12 stroke-secondary"></i>
+                  <i data-lucide="map-pin" class="icon-w-12 stroke-muted"></i>
                   <% if offer.location.downcase == "remote" %>
                     Remote
                   <% else %>
-                    <%= offer.location %> (<%= offer.work_mode.capitalize %>)
+                    <%= offer.location %> &middot; <%= offer.work_mode.capitalize %>
                   <% end %>
                 </span>
                 <span class="offer-card-action">
-                  Details <i data-lucide="arrow-right" class="icon-w-12 stroke-accent"></i>
+                  View <i data-lucide="arrow-right" class="icon-w-12 stroke-accent"></i>
                 </span>
               </div>
+
             <% end %>
           <% end %>
-        <% else %>
-          <div class="glass-card empty-state-full">
-            <i data-lucide="search-code" class="empty-state-icon-lg"></i>
-            <h3 class="fs-16 empty-state-heading">No offers match your criteria</h3>
-            <p class="text-secondary fs-13 m-0">Try broadening your query or clearing active filters.</p>
-            <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
-              <%= link_to "Clear All Filters", offers_path, class: "btn btn-secondary btn-compact-empty mt-10" %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+        </div>
 
-<style>
-  @media (max-width: 992px) {
-    .offers-directory-grid {
-      grid-template-columns: 1fr !important;
-      gap: 24px !important;
-    }
-  }
-</style>
+      <% else %>
+        <div class="dir-empty">
+          <div class="dir-empty-icon">
+            <i data-lucide="search-x" style="width:28px;height:28px;stroke:var(--text-muted)"></i>
+          </div>
+          <h3 class="dir-empty-title">No offers match your criteria</h3>
+          <p class="dir-empty-sub">Try broadening your search or clearing active filters.</p>
+          <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
+            <%= link_to "Clear All Filters", offers_path, class: "btn btn-secondary" %>
+          <% end %>
+        </div>
+      <% end %>
+
+    </div><%# /dir-main %>
+  </div><%# /dir-body %>
+</div><%# /dir-page %>
 
 <%= javascript_tag nonce: true do %>
   (function() {
     var inp = document.querySelector('#filters-form input[name="query"]');
     var grid = document.querySelector('.offers-grid');
-    if (!inp || !grid) return;
+    if (!inp) return;
     var t;
-    
     inp.addEventListener('input', function() {
-      // Clear timeout first
       clearTimeout(t);
-      
-      // Instantly inject shimmering skeleton cards and fade the grid slightly
-      grid.style.opacity = '0.7';
-      grid.innerHTML = Array(3).fill(
-        '<div class="glass-card skeleton-card">' +
-          '<div class="skeleton-title skeleton-shimmer"></div>' +
-          '<div class="skeleton-meta skeleton-shimmer"></div>' +
-          '<div class="skeleton-text skeleton-shimmer"></div>' +
-        '</div>'
-      ).join('');
-
-      t = setTimeout(function() { 
-        document.getElementById('filters-form').submit(); 
-      }, 600);
+      if (grid) {
+        grid.style.opacity = '0.5';
+        grid.style.pointerEvents = 'none';
+      }
+      t = setTimeout(function() {
+        document.getElementById('filters-form').submit();
+      }, 550);
     });
   })();
 <% end %>
