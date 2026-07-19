@@ -33,7 +33,7 @@ class Review < ApplicationRecord
     student_user = submission.student_profile.user
     company_user = submission.offer.company_profile.user
 
-    allowed_participants = [student_user, company_user]
+    allowed_participants = [ student_user, company_user ]
 
     unless allowed_participants.include?(author)
       errors.add(:author, "must be either the student or the employer for this internship")

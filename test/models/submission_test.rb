@@ -180,10 +180,10 @@ class SubmissionTest < ActiveSupport::TestCase
   test "should recalculate company metrics correctly" do
     company = company_profiles(:one)
     offer = offers(:one)
-    
+
     # Clear preexisting submissions for this company
     Submission.where(offer_id: company.offers.select(:id)).destroy_all
-    
+
     # Create an active application
     sub = Submission.create!(
       student_profile: @student,
@@ -195,7 +195,7 @@ class SubmissionTest < ActiveSupport::TestCase
     )
 
     company.recalculate_metrics!
-    
+
     # Total apps = 1, responded = 0 -> response_rate = 0%
     assert_equal 0.0, company.response_rate
     assert_equal 0.0, company.avg_response_time_hours
@@ -205,9 +205,9 @@ class SubmissionTest < ActiveSupport::TestCase
       status: "accepted",
       responded_at: Time.current
     )
-    
+
     company.recalculate_metrics!
-    
+
     # Total apps = 1, responded = 1 -> response_rate = 100%
     assert_equal 100.0, company.response_rate
     # Avg response time should be ~2 hours
@@ -217,7 +217,7 @@ class SubmissionTest < ActiveSupport::TestCase
   test "should require double confirmation to mark completed" do
     sub = submissions(:one)
     sub.update_columns(status: "accepted", student_confirmed_completed: false, company_confirmed_completed: false)
-    
+
     # 1. Student confirms completion
     sub.confirm_completion_by!("StudentProfile")
     assert sub.student_confirmed_completed
@@ -229,7 +229,7 @@ class SubmissionTest < ActiveSupport::TestCase
     sub.confirm_completion_by!("CompanyProfile")
     assert sub.company_confirmed_completed
     assert_equal "completed", sub.status
-    
+
     # Assert score was bumped for mohamed
     @student.reload
     assert_equal "student_completed_internship", @student.commitment_events.last.event_type

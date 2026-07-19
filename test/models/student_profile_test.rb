@@ -26,8 +26,8 @@ class StudentProfileTest < ActiveSupport::TestCase
 
   test "should parse domain and match university correctly" do
     email = "student@isetsf.rnu.tn"
-    domain = email.split('@').last.to_s.downcase
-    
+    domain = email.split("@").last.to_s.downcase
+
     matched_uni = University.find_by(email_domain: domain)
     assert_not_nil matched_uni
     assert_equal "ISET Sfax", matched_uni.name
@@ -82,7 +82,7 @@ class StudentProfileTest < ActiveSupport::TestCase
       rating: 4,
       comment: "Good internship cooperation."
     )
-    
+
     assert_equal 4.0, profile.average_rating
     assert_equal 1, profile.reviews_received_count
 

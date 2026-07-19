@@ -4,10 +4,10 @@ class InternshipAgreementsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_submission
   before_action :authorize_user!
-  before_action :set_agreement, only: [:show, :sign, :decline]
-  before_action :ensure_submission_accepted!, only: [:new, :create]
-  before_action :ensure_signable!, only: [:sign]
-  before_action :ensure_no_existing_agreement!, only: [:new, :create]
+  before_action :set_agreement, only: [ :show, :sign, :decline ]
+  before_action :ensure_submission_accepted!, only: [ :new, :create ]
+  before_action :ensure_signable!, only: [ :sign ]
+  before_action :ensure_no_existing_agreement!, only: [ :new, :create ]
 
   def new
     @agreement = @submission.build_internship_agreement
@@ -33,7 +33,7 @@ class InternshipAgreementsController < ApplicationController
     if @agreement.status == "fully_executed"
       student_user = @submission.student_profile.user
       company_user = @submission.offer.company_profile.user
-      [student_user, company_user].each do |u|
+      [ student_user, company_user ].each do |u|
         Notification.trigger(
           recipient: u,
           action: "coordinator_approved",
@@ -80,7 +80,7 @@ class InternshipAgreementsController < ApplicationController
       student_user = @submission.student_profile.user
       company_user = @submission.offer.company_profile.user
 
-      [student_user, company_user].each do |u|
+      [ student_user, company_user ].each do |u|
         Notification.trigger(
           recipient: u,
           action: "agreement_declined",
@@ -154,7 +154,7 @@ class InternshipAgreementsController < ApplicationController
     if already_signed?
       redirect_to submission_internship_agreement_path(@submission, @agreement),
                   alert: "You have already signed this agreement."
-      return
+      nil
     end
   end
 

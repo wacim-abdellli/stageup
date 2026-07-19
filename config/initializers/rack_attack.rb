@@ -59,7 +59,7 @@ class Rack::Attack
         "Content-Type" => "application/json",
         "Retry-After" => retry_after.to_s
       },
-      [{ error: "Too many requests. Please try again later." }.to_json]
+      [ { error: "Too many requests. Please try again later." }.to_json ]
     ]
   end
 end

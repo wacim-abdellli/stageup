@@ -2,11 +2,11 @@
 
 class SubmissionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_student!, only: [:create, :edit, :update, :abandon]
-  before_action :ensure_company!, only: [:accept, :reject, :cancel]
-  before_action :set_submission_for_student, only: [:edit, :update, :abandon]
-  before_action :set_submission_for_company, only: [:accept, :reject, :cancel]
-  before_action :set_submission_for_completion, only: [:confirm_completion]
+  before_action :ensure_student!, only: [ :create, :edit, :update, :abandon ]
+  before_action :ensure_company!, only: [ :accept, :reject, :cancel ]
+  before_action :set_submission_for_student, only: [ :edit, :update, :abandon ]
+  before_action :set_submission_for_company, only: [ :accept, :reject, :cancel ]
+  before_action :set_submission_for_completion, only: [ :confirm_completion ]
 
   def create
     @offer = Offer.find(params[:offer_id])
@@ -33,9 +33,9 @@ class SubmissionsController < ApplicationController
       UserMailer.application_received_email(company_user, @submission).deliver_later unless @offer.mission.present?
       notice_msg = if @offer.mission.present?
                      "Mission started! You have 48 hours to submit your solution."
-                   else
+      else
                      "Application successfully submitted with your CV."
-                   end
+      end
       redirect_to offer_path(@offer), notice: notice_msg
     else
       redirect_to offer_path(@offer), alert: "Unable to start application: #{@submission.errors.full_messages.join(', ')}"
@@ -45,7 +45,7 @@ class SubmissionsController < ApplicationController
   def edit
     unless @submission.status == "started"
       redirect_to offer_path(@submission.offer), alert: "This application has already been submitted."
-      return
+      nil
     end
   end
 
@@ -204,9 +204,9 @@ class SubmissionsController < ApplicationController
     end
     notice_msg = if @submission.status == "completed"
                    "Internship successfully completed! You can now leave a review."
-                 else
+    else
                    "Your completion confirmation has been logged. Waiting for the other side to confirm."
-                 end
+    end
     redirect_to dashboard_path, notice: notice_msg
   end
 
@@ -257,5 +257,4 @@ class SubmissionsController < ApplicationController
 
     redirect_to dashboard_path, alert: "Only companies can review or accept/reject applications."
   end
-
 end

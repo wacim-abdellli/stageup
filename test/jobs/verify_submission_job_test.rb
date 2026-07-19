@@ -7,7 +7,7 @@ class VerifySubmissionJobTest < ActiveJob::TestCase
 
   def stub_open3_success
     original = Open3.method(:capture3)
-    Open3.define_singleton_method(:capture3) { |*_args| ["", "", OpenStruct.new(success?: true)] }
+    Open3.define_singleton_method(:capture3) { |*_args| [ "", "", OpenStruct.new(success?: true) ] }
     yield
   ensure
     Open3.define_singleton_method(:capture3, original)
@@ -16,7 +16,7 @@ class VerifySubmissionJobTest < ActiveJob::TestCase
   def stub_open3_failure(output = "fatal: repository not found")
     original = Open3.method(:capture3)
     status = OpenStruct.new(success?: false, exitstatus: 128)
-    Open3.define_singleton_method(:capture3) { |*_args| ["", output, status] }
+    Open3.define_singleton_method(:capture3) { |*_args| [ "", output, status ] }
     yield
   ensure
     Open3.define_singleton_method(:capture3, original)

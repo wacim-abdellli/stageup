@@ -10,7 +10,7 @@ class ReviewTest < ActiveSupport::TestCase
   test "should be invalid if submission is not completed" do
     # Submission :one has status 'started', so it is not completed
     assert_not_equal "completed", @submission.status
-    
+
     review = Review.new(
       submission: @submission,
       author: @student_user,
@@ -24,7 +24,7 @@ class ReviewTest < ActiveSupport::TestCase
 
   test "should be valid if submission is completed and params are good" do
     @submission.update_columns(status: "completed")
-    
+
     review = Review.new(
       submission: @submission,
       author: @student_user,

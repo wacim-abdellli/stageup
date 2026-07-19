@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
   before_action :set_submission
   before_action :ensure_participant!
   before_action :ensure_completed!
-  before_action :ensure_not_already_reviewed!, only: [:new, :create]
+  before_action :ensure_not_already_reviewed!, only: [ :new, :create ]
 
   # GET /submissions/:submission_id/reviews/new
   def new
@@ -43,7 +43,7 @@ class ReviewsController < ApplicationController
     student_user = @submission.student_profile.user
     company_user = @submission.offer.company_profile.user
 
-    unless [student_user, company_user].include?(current_user)
+    unless [ student_user, company_user ].include?(current_user)
       redirect_to dashboard_path, alert: "You are not authorized to review this internship."
     end
   end

@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class OffersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :ensure_company!, only: [:new, :create, :edit, :update, :destroy, :publish]
-  before_action :set_offer, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_offer_owner!, only: [:edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [ :index, :show ]
+  before_action :ensure_company!, only: [ :new, :create, :edit, :update, :destroy, :publish ]
+  before_action :set_offer, only: [ :show, :edit, :update, :destroy ]
+  before_action :ensure_offer_owner!, only: [ :edit, :update, :destroy ]
 
   def index
     per_page = 20
-    page = [(params[:page] || 1).to_i, 1].max
+    page = [ (params[:page] || 1).to_i, 1 ].max
     @offers = Offer.where(status: "active")
     if params[:query].present?
       q_val = "%#{params[:query]}%"
@@ -103,7 +103,7 @@ class OffersController < ApplicationController
   def offer_params
     params.require(:offer).permit(
       :title, :description, :stage_type, :spots, :location, :work_mode,
-      mission_attributes: [:id, :title, :instructions, :estimated_duration_minutes]
+      mission_attributes: [ :id, :title, :instructions, :estimated_duration_minutes ]
     )
   end
 

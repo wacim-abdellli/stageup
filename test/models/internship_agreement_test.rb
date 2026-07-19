@@ -101,13 +101,13 @@ class InternshipAgreementTest < ActiveSupport::TestCase
     agreement = valid_agreement
     agreement.save!
 
-    assert_equal ["Student", "Employer", "University Coordinator"], agreement.pending_signatories
+    assert_equal [ "Student", "Employer", "University Coordinator" ], agreement.pending_signatories
 
     agreement.sign_by!("StudentProfile")
-    assert_equal ["Employer", "University Coordinator"], agreement.reload.pending_signatories
+    assert_equal [ "Employer", "University Coordinator" ], agreement.reload.pending_signatories
 
     agreement.sign_by!("CompanyProfile")
-    assert_equal ["University Coordinator"], agreement.reload.pending_signatories
+    assert_equal [ "University Coordinator" ], agreement.reload.pending_signatories
 
     agreement.sign_by!("UniversityProfile")
     assert_equal [], agreement.reload.pending_signatories

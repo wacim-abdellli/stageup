@@ -40,6 +40,6 @@ class NotificationTest < ActiveSupport::TestCase
     first = Notification.trigger(recipient: @student_user, action: "application_received", message: "First", notifiable: @submission)
     second = Notification.trigger(recipient: @student_user, action: "application_accepted", message: "Second", notifiable: @submission)
 
-    assert_equal [second, first], Notification.recent.to_a
+    assert_equal [ second, first ], Notification.recent.to_a
   end
 end

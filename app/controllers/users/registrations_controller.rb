@@ -27,7 +27,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # University Domain Auto-Verification
     if @user.email.present?
-      domain = @user.email.split('@').last.to_s.downcase
+      domain = @user.email.split("@").last.to_s.downcase
       matched_uni = University.find_by(email_domain: domain)
       if matched_uni && matched_uni.approved?
         @student_profile.university = matched_uni

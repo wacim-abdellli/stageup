@@ -6,7 +6,7 @@ class ResolveExpiredSubmissionsJob < ApplicationJob
   def perform
     Submission.where(status: "started")
           .where("created_at < ?", 48.hours.ago)
-          .includes(offer: :company_profile, student_profile: [:user, :commitment_events])
+          .includes(offer: :company_profile, student_profile: [ :user, :commitment_events ])
           .find_each do |sub|
       ActiveRecord::Base.transaction do
         sub.update_columns(status: "expired", updated_at: Time.current)
@@ -61,7 +61,7 @@ class ResolveExpiredSubmissionsJob < ApplicationJob
 
         company_user = sub.offer.company_profile.user
         student_user = sub.student_profile.user
-        [student_user, company_user].each do |u|
+        [ student_user, company_user ].each do |u|
           Notification.trigger(
             recipient: u,
             action: "internship_auto_completed",

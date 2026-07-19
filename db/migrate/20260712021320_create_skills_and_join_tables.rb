@@ -10,12 +10,12 @@ class CreateSkillsAndJoinTables < ActiveRecord::Migration[7.1]
       t.references :student_profile, null: false, foreign_key: true
       t.references :skill, null: false, foreign_key: true
     end
-    add_index :skills_student_profiles, [:student_profile_id, :skill_id], unique: true
+    add_index :skills_student_profiles, [ :student_profile_id, :skill_id ], unique: true
 
     create_table :offers_skills, id: false do |t|
       t.references :offer, null: false, foreign_key: true
       t.references :skill, null: false, foreign_key: true
     end
-    add_index :offers_skills, [:offer_id, :skill_id], unique: true
+    add_index :offers_skills, [ :offer_id, :skill_id ], unique: true
   end
 end

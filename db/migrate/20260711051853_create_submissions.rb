@@ -14,6 +14,6 @@ class CreateSubmissions < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :submissions, [:student_profile_id, :offer_id], unique: true
+    add_index :submissions, [ :student_profile_id, :offer_id ], unique: true
   end
 end

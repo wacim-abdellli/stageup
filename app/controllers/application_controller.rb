@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   # Block legacy browsers but show a message instead of a blank page
   allow_browser versions: :modern, block: -> {

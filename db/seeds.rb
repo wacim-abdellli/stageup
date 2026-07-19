@@ -97,16 +97,16 @@ skill_names = %w[Ruby\ on\ Rails React Data\ Science Python SQL Docker JavaScrip
 skills = skill_names.map { |name| Skill.find_or_create_by!(name: name) }
 
 # Associate skills with student 1 (Mohamed — Rails/JS/CSS/SQL/Git)
-student_1_profile.skills << [skills[0], skills[6], skills[7], skills[4], skills[8]] # Rails, JS, CSS, SQL, Git
+student_1_profile.skills << [ skills[0], skills[6], skills[7], skills[4], skills[8] ] # Rails, JS, CSS, SQL, Git
 
 # Associate skills with student 2 (Cyrine — Data Science/Python/SQL)
-student_2_profile.skills << [skills[2], skills[3], skills[4]] # Data Science, Python, SQL
+student_2_profile.skills << [ skills[2], skills[3], skills[4] ] # Data Science, Python, SQL
 
 # Associate skills with offer 1 (Full Stack Rails — Rails/React/SQL/Docker/JS/CSS/Git)
-offer_1.skills << [skills[0], skills[1], skills[4], skills[5], skills[6], skills[7], skills[8]] # Rails, React, SQL, Docker, JS, CSS, Git
+offer_1.skills << [ skills[0], skills[1], skills[4], skills[5], skills[6], skills[7], skills[8] ] # Rails, React, SQL, Docker, JS, CSS, Git
 
 # Associate skills with offer 2 (Data Science Intern — Python/SQL/Data Science)
-offer_2.skills << [skills[2], skills[3], skills[4]] # Data Science, Python, SQL
+offer_2.skills << [ skills[2], skills[3], skills[4] ] # Data Science, Python, SQL
 
 puts "Seeding Offers & Missions..."
 offer_1 = Offer.find_or_initialize_by(title: "Full Stack Rails Intern", company_profile: company_1_profile)

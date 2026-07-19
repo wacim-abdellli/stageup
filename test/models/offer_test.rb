@@ -21,23 +21,23 @@ class OfferTest < ActiveSupport::TestCase
   end
 
   test "match_percentage_for returns correct percentage for partial match" do
-    @offer.skills << [@rails, @react, @sql, @js]
-    @student.skills << [@rails, @sql, @python]
+    @offer.skills << [ @rails, @react, @sql, @js ]
+    @student.skills << [ @rails, @sql, @python ]
 
     # Student matches 2 of 4 offer skills: 2/4 = 50%
     assert_equal 50, @offer.match_percentage_for(@student)
   end
 
   test "match_percentage_for returns 100 for perfect match" do
-    @offer.skills << [@rails, @react, @sql, @js]
-    @student.skills << [@rails, @react, @sql, @js]
+    @offer.skills << [ @rails, @react, @sql, @js ]
+    @student.skills << [ @rails, @react, @sql, @js ]
 
     assert_equal 100, @offer.match_percentage_for(@student)
   end
 
   test "match_percentage_for rounds to nearest integer" do
-    @offer.skills << [@rails, @react, @sql]
-    @student.skills << [@rails]
+    @offer.skills << [ @rails, @react, @sql ]
+    @student.skills << [ @rails ]
 
     # 1/3 = 33.33... -> 33
     assert_equal 33, @offer.match_percentage_for(@student)

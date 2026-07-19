@@ -38,9 +38,9 @@ class CompanyProfile < ApplicationRecord
 
       rate = if total_apps.any?
                (responded_apps.count.to_f / total_apps.count * 100).round(1)
-             else
+      else
                100.0
-             end
+      end
 
       avg_time = responded_apps
                    .where.not(submitted_at: nil)
@@ -54,5 +54,4 @@ class CompanyProfile < ApplicationRecord
       )
     end
   end
-
 end
