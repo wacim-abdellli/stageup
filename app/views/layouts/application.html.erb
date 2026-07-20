@@ -22,67 +22,97 @@
     <script src="https://unpkg.com/lucide@latest" nonce="<%= content_security_policy_nonce %>"></script>
     <script nonce="<%= content_security_policy_nonce %>">
       (function() {
-        function initInteractiveElements() {
-          var t = document.getElementById('nav-toggle');
-          var m = document.getElementById('nav-menu');
-          if (t && m) {
-            t.removeEventListener('click', toggleMenu);
-            t.addEventListener('click', toggleMenu);
-          }
 
-          var b = document.getElementById('notif-btn');
-          var p = document.getElementById('notif-panel');
-          if (b && p) {
-            b.removeEventListener('click', toggleNotif);
-            b.addEventListener('click', toggleNotif);
-          }
+        /* ── Helpers ── */
+        function $(id) { return document.getElementById(id); }
+
+        /* ── Hamburger / mobile menu ── */
+        function initHamburger() {
+          var btn = $('nav-toggle');
+          var menu = $('nav-mobile-menu');
+          if (!btn || !menu) return;
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var open = menu.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open);
+            menu.setAttribute('aria-hidden', !open);
+          });
         }
 
-        function toggleMenu() {
-          var m = document.getElementById('nav-menu');
-          if (m) m.classList.toggle('open');
+        /* ── Notification bell ── */
+        function initNotifBell() {
+          var btn = $('notif-btn');
+          var panel = $('notif-panel');
+          if (!btn || !panel) return;
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var open = panel.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open);
+            // close avatar dropdown if open
+            var ad = $('nav-user-dropdown');
+            if (ad) ad.classList.remove('open');
+          });
         }
 
-        function toggleNotif(e) {
-          e.stopPropagation();
-          var p = document.getElementById('notif-panel');
-          if (p) p.classList.toggle('open');
+        /* ── User avatar dropdown ── */
+        function initAvatarDropdown() {
+          var btn = $('nav-avatar-toggle');
+          var dd  = $('nav-user-dropdown');
+          if (!btn || !dd) return;
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var open = dd.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open);
+            // close notif panel if open
+            var np = $('notif-panel');
+            if (np) np.classList.remove('open');
+          });
         }
 
-        document.addEventListener("click", function() {
-          var p = document.getElementById('notif-panel');
-          if (p) p.classList.remove('open');
-        });
-
-        function initFlashMessages() {
-          var flashes = document.querySelectorAll('.flash-message');
-          flashes.forEach(function(flash) {
-            var dismissTimeout = setTimeout(function() {
-              dismissFlash(flash);
-            }, 3000);
-
-            var closeBtn = flash.querySelector('.flash-close');
-            if (closeBtn) {
-              closeBtn.addEventListener('click', function() {
-                clearTimeout(dismissTimeout);
-                dismissFlash(flash);
-              });
+        /* ── Close all on outside click ── */
+        function initOutsideClose() {
+          document.addEventListener('click', function() {
+            var np = $('notif-panel');
+            var dd = $('nav-user-dropdown');
+            var mm = $('nav-mobile-menu');
+            var hb = $('nav-toggle');
+            if (np) np.classList.remove('open');
+            if (dd) dd.classList.remove('open');
+            if (mm && mm.classList.contains('open')) {
+              mm.classList.remove('open');
+              mm.setAttribute('aria-hidden', 'true');
+              if (hb) hb.setAttribute('aria-expanded', 'false');
             }
           });
         }
 
-        function dismissFlash(flash) {
-          flash.classList.add('fade-out');
-          flash.addEventListener('transitionend', function() {
-            flash.remove();
+        /* ── Flash auto-dismiss ── */
+        function initFlashMessages() {
+          document.querySelectorAll('.flash-message').forEach(function(flash) {
+            var timer = setTimeout(function() { dismissFlash(flash); }, 4000);
+            var btn = flash.querySelector('.flash-close');
+            if (btn) btn.addEventListener('click', function() {
+              clearTimeout(timer);
+              dismissFlash(flash);
+            });
           });
         }
 
-        document.addEventListener("turbo:load", function() {
+        function dismissFlash(el) {
+          el.classList.add('fade-out');
+          el.addEventListener('transitionend', function() { el.remove(); });
+        }
+
+        /* ── Boot on every Turbo page load ── */
+        document.addEventListener('turbo:load', function() {
           lucide.createIcons();
-          initInteractiveElements();
+          initHamburger();
+          initNotifBell();
+          initAvatarDropdown();
+          initOutsideClose();
           initFlashMessages();
         });
+
       })();
     </script>
   </head>
