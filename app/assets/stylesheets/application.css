@@ -4455,6 +4455,32 @@ p, .offer-desc-text, .bento-card-text {
   border-bottom: 1px solid var(--border-color);
 }
 
+.dir-signin-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #09090B;
+  background: #FFFFFF;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  width: auto;
+  flex-shrink: 0;
+}
+.dir-signin-cta:hover {
+  background: #F4F4F5;
+  color: #09090B;
+  box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+}
+.dir-signin-cta i, .dir-signin-cta svg {
+  width: 14px; height: 14px; stroke: #09090B;
+}
+
 .dir-heading {
   font-size: 28px;
   font-weight: 800;

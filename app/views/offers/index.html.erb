@@ -9,7 +9,10 @@
       <p class="dir-sub">Tunisia's first verified internship platform &mdash; <%= pluralize(@offers.size, 'active listing') %></p>
     </div>
     <% unless current_user %>
-      <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent fs-13 btn-header-padded" %>
+      <%= link_to new_user_session_path, class: "dir-signin-cta" do %>
+        <i data-lucide="log-in"></i>
+        Sign In / Register
+      <% end %>
     <% end %>
   </div>
 
