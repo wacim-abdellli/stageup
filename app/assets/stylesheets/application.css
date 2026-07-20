@@ -4670,8 +4670,12 @@ input[type="checkbox"] {
 }
 
 /* Clamp Line Length for comfortable reading measure */
-p, .offer-desc-text, .bento-card-text {
-  max-width: 65ch; /* 65 characters per line max */
+.reading-text,
+.offer-desc-text,
+.bento-card-text,
+.landing-subhead,
+.agreement-text {
+  max-width: 65ch;
   line-height: 1.6;
 }
 
