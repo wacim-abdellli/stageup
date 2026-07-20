@@ -30,17 +30,17 @@
     <div>
       <div class="profile-card card-mb">
         <div class="section-heading-row">
-          <h2 class="fs-22">My Profile</h2>
-          <div>
+          <h2 class="fs-18">My Profile</h2>
+          <div class="section-heading-row-right">
             <% if @role_type == "StudentProfile" %>
               <span class="badge badge-info">Student</span>
             <% elsif @role_type == "CompanyProfile" %>
-              <span class="badge badge-success">Company</span>
+              <span class="badge badge-info">Company</span>
             <% else %>
-              <span class="badge badge-university">University Admin</span>
+              <span class="badge badge-info">University</span>
             <% end %>
+            <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-secondary btn-compact" %>
           </div>
-          <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-secondary btn-compact-sm" %>
         </div>
 
         <!-- Student Details -->
