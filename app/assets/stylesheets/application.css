@@ -2573,16 +2573,18 @@ input[type="checkbox"] {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 6px;
+  border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   position: relative;
   color: var(--text-secondary);
-  transition: var(--transition);
+  transition: color 0.2s ease, background 0.2s ease;
 }
 
 .notif-bell-btn:hover {
   color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
 }
 
 .notif-bell-dot {
@@ -4286,7 +4288,7 @@ input[type="checkbox"] {
   left: 12px;
   right: 12px;
   height: 2px;
-  background: var(--primary);
+  background: rgba(255,255,255,0.5);
   border-radius: 2px 2px 0 0;
 }
 
@@ -4350,17 +4352,23 @@ input[type="checkbox"] {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: rgba(99, 102, 241, 0.12);
-  border: 1.5px solid rgba(99, 102, 241, 0.3);
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.14);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.nav-avatar-btn:hover .nav-avatar-ring {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.22);
 }
 
 .nav-avatar-initial {
   font-size: 12px;
   font-weight: 700;
-  color: #818CF8;
+  color: var(--text-primary);
   font-family: 'Outfit', sans-serif;
 }
 
