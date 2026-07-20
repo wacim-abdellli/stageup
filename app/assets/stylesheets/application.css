@@ -750,8 +750,8 @@ input[type="checkbox"] {
 }
 
 .empty-state-icon {
-  font-size: 40px;
-  margin-bottom: 5px;
+  display: inline-block;
+  margin-bottom: 8px;
 }
 
 .empty-state-title {
@@ -1253,11 +1253,6 @@ input[type="checkbox"] {
 /* Action groups */
 .action-group { display: flex; gap: 6px; }
 .action-group-8 { display: flex; gap: 8px; }
-
-/* Empty state icon */
-.empty-state-icon {
-  margin-bottom: 5px;
-}
 
 /* CV section */
 .cv-section {
@@ -2026,13 +2021,6 @@ input[type="checkbox"] {
   gap: 6px;
 }
 
-.error-list {
-  margin-left: 24px;
-  font-size: 13px;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
 .auth-footer {
   text-align: center;
   font-size: 14px;
@@ -2360,13 +2348,6 @@ input[type="checkbox"] {
   color: #F87171;
 }
 
-.logo-lockup {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  vertical-align: middle;
-}
-
 .logo-lockup-text {
   font-family: 'Outfit', sans-serif;
   font-size: 22px;
@@ -2434,18 +2415,6 @@ input[type="checkbox"] {
   padding: 24px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
-}
-
-/* Offer card */
-.offer-card {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 220px;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
 }
 
 .offer-card-header {
