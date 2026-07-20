@@ -1522,6 +1522,62 @@ input[type="checkbox"] {
   font-size: 12px;
 }
 
+.offer-breadcrumb {
+  margin-bottom: 24px;
+}
+.offer-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.offer-back-link:hover { color: var(--text-primary); }
+.offer-back-link i, .offer-back-link svg { width: 14px; height: 14px; stroke: currentColor; }
+
+.employer-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+.employer-avatar {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 800;
+  color: #818CF8;
+  font-family: 'Outfit', sans-serif;
+  flex-shrink: 0;
+}
+.employer-card-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.badge-grace-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 9999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #FBBF24;
+  margin-bottom: 12px;
+}
+
 .offer-tags {
   display: flex;
   gap: 10px;
@@ -1531,15 +1587,20 @@ input[type="checkbox"] {
 }
 
 .offer-tag {
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  background: transparent;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  text-transform: none;
-  padding: 4px 10px;
+  gap: 5px;
+  padding: 5px 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
   font-size: 12px;
+  font-weight: 500;
+  transition: border-color 0.2s ease;
+}
+.offer-tag:hover {
+  border-color: rgba(255,255,255,0.16);
 }
 
 .offer-tag-icon {
