@@ -4495,6 +4495,11 @@ p, .offer-desc-text, .bento-card-text {
   margin: 0;
 }
 
+.dir-sub a, .dir-sub u, .dir-sub ins {
+  color: inherit;
+  text-decoration: none;
+}
+
 .dir-body {
   display: grid;
   grid-template-columns: 256px 1fr;
