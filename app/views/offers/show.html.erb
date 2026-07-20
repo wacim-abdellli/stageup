@@ -1,5 +1,5 @@
 <% content_for :title, "#{@offer.title} – StageUp" %>
-<div class="dashboard-container">
+<div class="offer-detail-page">
   <nav class="offer-breadcrumb">
     <%= link_to offers_path, class: "offer-back-link" do %>
       <i data-lucide="arrow-left"></i>
@@ -42,9 +42,18 @@
           <%= pluralize(@offer.spots, 'spot') %> available
         </span>
         <% if @offer.deadline %>
-          <span class="offer-tag">
+          <% days_left = (@offer.deadline.to_date - Date.today).to_i %>
+          <span class="offer-tag <%= days_left <= 3 ? 'offer-tag-urgent' : (days_left <= 7 ? 'offer-tag-warning' : '') %>">
             <i data-lucide="calendar" class="offer-tag-icon"></i>
-            Deadline: <%= @offer.deadline.strftime("%b %d, %Y") %>
+            <% if days_left <= 0 %>
+              Deadline passed
+            <% elsif days_left == 1 %>
+              1 day left
+            <% elsif days_left <= 7 %>
+              <%= days_left %> days left
+            <% else %>
+              <%= @offer.deadline.strftime("%b %d, %Y") %>
+            <% end %>
           </span>
         <% end %>
       </div>

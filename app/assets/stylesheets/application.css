@@ -1586,6 +1586,12 @@ input[type="checkbox"] {
   align-items: center;
 }
 
+.offer-detail-page {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 0 24px 64px;
+}
+
 .offer-tag {
   display: inline-flex;
   align-items: center;
@@ -1601,6 +1607,17 @@ input[type="checkbox"] {
 }
 .offer-tag:hover {
   border-color: rgba(255,255,255,0.16);
+}
+
+.offer-tag-urgent {
+  background: rgba(239,68,68,0.06);
+  border-color: rgba(239,68,68,0.25);
+  color: #F87171;
+}
+.offer-tag-warning {
+  background: rgba(245,158,11,0.06);
+  border-color: rgba(245,158,11,0.25);
+  color: #FBBF24;
 }
 
 .offer-tag-icon {
