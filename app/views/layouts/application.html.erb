@@ -122,26 +122,30 @@
     <% if current_user %>
       <%= render "layouts/navbar" %>
     <% end %>
-    <div style="max-width:1200px;margin:16px auto 0;padding:0 20px;">
-      <% if flash[:notice] %>
-        <div class="flash-message flash-notice">
-          <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
-          <span><%= flash[:notice] %></span>
-          <button type="button" class="flash-close" aria-label="Dismiss alert">
-            <i data-lucide="x" class="icon-16"></i>
-          </button>
+    <main id="main-content">
+      <% if flash[:notice] || flash[:alert] %>
+        <div class="flash-portal">
+          <% if flash[:notice] %>
+            <div class="flash-message flash-notice">
+              <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
+              <span><%= flash[:notice] %></span>
+              <button type="button" class="flash-close" aria-label="Dismiss alert">
+                <i data-lucide="x" class="icon-16"></i>
+              </button>
+            </div>
+          <% end %>
+          <% if flash[:alert] %>
+            <div class="flash-message flash-alert">
+              <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
+              <span><%= flash[:alert] %></span>
+              <button type="button" class="flash-close" aria-label="Dismiss alert">
+                <i data-lucide="x" class="icon-16"></i>
+              </button>
+            </div>
+          <% end %>
         </div>
       <% end %>
-      <% if flash[:alert] %>
-        <div class="flash-message flash-alert">
-          <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
-          <span><%= flash[:alert] %></span>
-          <button type="button" class="flash-close" aria-label="Dismiss alert">
-            <i data-lucide="x" class="icon-16"></i>
-          </button>
-        </div>
-      <% end %>
-    </div>
-    <main id="main-content"><%= yield %></main>
+      <%= yield %>
+    </main>
   </body>
 </html>
