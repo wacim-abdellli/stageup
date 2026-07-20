@@ -99,37 +99,48 @@ a:hover {
   justify-content: center;
   min-height: 100vh;
   padding: 40px 20px;
-  background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.12), transparent 40%),
-              radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.08), transparent 30%),
-              var(--bg-primary);
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(99,102,241,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(168,85,247,0.12) 0%, transparent 50%),
+    var(--bg-primary);
+  position: relative;
+}
+
+/* Add subtle grid */
+.auth-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .auth-card {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: rgba(15, 16, 21, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.09);
   border-radius: var(--radius-lg);
-  padding: 40px;
+  padding: 48px 44px;
   width: 100%;
-  max-width: 500px;
-  box-shadow: var(--shadow-lg);
+  max-width: 440px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
   position: relative;
-  overflow: hidden;
-}
-
-/* Glassmorphism accent on card top */
-.auth-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.15);
+  z-index: 1;
 }
 
 .auth-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 36px;
+}
+
+.auth-header .logo-lockup {
+  justify-content: center;
+  margin-bottom: 24px;
 }
 
 .auth-logo {
@@ -145,13 +156,41 @@ a:hover {
 }
 
 .auth-title {
-  font-size: 24px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   margin-bottom: 6px;
+  color: var(--text-primary);
 }
 
 .auth-subtitle {
   color: var(--text-secondary);
   font-size: 14px;
+}
+
+/* Custom checkbox */
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.04);
+  cursor: pointer;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+}
+
+.auth-remember-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+.auth-remember-row label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin: 0;
 }
 
 /* Forms */

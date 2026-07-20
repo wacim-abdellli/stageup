@@ -25,9 +25,9 @@
       </div>
 
       <% if devise_mapping.rememberable? %>
-        <div class="flex-row gap-8 align-center">
-          <%= f.check_box :remember_me, style: "width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent);" %>
-          <%= f.label :remember_me, style: "margin: 0; cursor: pointer;" %>
+        <div class="auth-remember-row">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
         </div>
       <% end %>
 
