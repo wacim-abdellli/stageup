@@ -1,11 +1,28 @@
 <% content_for :title, "My Dashboard – StageUp" %>
 <div class="dashboard-container">
   <div class="dash-welcome">
-    <h1 class="dash-welcome-title">
-      Welcome back<% if @profile.respond_to?(:first_name) && @profile.first_name.present? %>,
-      <%= @profile.first_name %><% end %> 👋
-    </h1>
-    <p class="dash-welcome-sub">Here's your StageUp activity overview</p>
+    <div class="dash-welcome-inner">
+      <div>
+        <h1 class="dash-welcome-title">
+          Welcome back<% if @profile.respond_to?(:first_name) && @profile.first_name.present? %>, <%= @profile.first_name %><% end %>
+        </h1>
+        <p class="dash-welcome-sub">
+          <% if @role_type == "StudentProfile" %>
+            Manage your applications and track your reputation score.
+          <% elsif @role_type == "CompanyProfile" %>
+            Review applicants and manage your active offers.
+          <% else %>
+            Monitor your institution's internship agreements.
+          <% end %>
+        </p>
+      </div>
+      <div class="dash-welcome-meta">
+        <span class="dash-date-pill">
+          <i data-lucide="calendar" style="width:12px;height:12px;stroke:var(--text-muted)"></i>
+          <%= Date.today.strftime("%B %d, %Y") %>
+        </span>
+      </div>
+    </div>
   </div>
   <div class="dashboard-grid">
     

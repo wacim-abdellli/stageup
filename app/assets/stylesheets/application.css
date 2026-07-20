@@ -456,9 +456,51 @@ input[type="checkbox"] {
   padding: 0 20px;
 }
 
-.dash-welcome { margin-bottom:28px; border-bottom:1px solid var(--border-color); padding-bottom:20px; }
-.dash-welcome-title { font-size:24px; font-weight:700; margin-bottom:4px; }
-.dash-welcome-sub { font-size:14px; color:var(--text-secondary); margin:0; }
+.dash-welcome {
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 24px;
+}
+
+.dash-welcome-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.dash-welcome-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.dash-welcome-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.dash-welcome-meta {
+  flex-shrink: 0;
+}
+
+.dash-date-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-color);
+  padding: 5px 12px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
 
 .dashboard-header {
   display: flex;
