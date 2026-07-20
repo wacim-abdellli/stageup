@@ -612,38 +612,48 @@
     <div class="right-col">
       
       <!-- Metrics Card -->
-      <div class="profile-card p-25">
-        <h3 class="metrics-card-title">
-          Reputation Metrics
-        </h3>
-        
-        <% if @role_type == "StudentProfile" %>
-          <div class="text-center py-15">
-            <div class="flex-center mb-12">
-              <% score = @profile.commitment_score.round(0) %>
-              <div class="score-pill">
-                <span class="dot <%= score >= 90 ? 'dot-success' : (score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
-                <strong><%= score %></strong>
-                <span class="score-label">Commitment</span>
-              </div>
-            </div>
-            <p class="score-caption">Reliability score based on your internship history</p>
-            
-            <% student_avg = @profile.average_rating %>
-            <% if student_avg %>
-              <div class="flex-center mt-15">
-                <div class="rating-display">
-                  <i data-lucide="star"></i>
-                  <strong><%= student_avg %></strong>
-                  <span class="rating-count">(<%= @profile.reviews_received_count %> reviews)</span>
-                </div>
-              </div>
-            <% else %>
-              <div class="unrated-text">Unrated (No reviews yet)</div>
-            <% end %>
+      <% if @role_type == "StudentProfile" %>
+        <div class="profile-card rep-metrics-card">
+          <div class="rep-metrics-header">
+            <h3 class="rep-metrics-title">Reputation</h3>
+            <span class="rep-metrics-sub">Public · Verified</span>
           </div>
 
-        <% elsif @role_type == "CompanyProfile" %>
+          <div class="rep-score-row">
+            <div class="rep-score-main">
+              <% score = (@profile.commitment_score.round(0) rescue 100) %>
+              <span class="rep-score-number <%= score >= 90 ? 'score-color-high' : (score >= 70 ? 'score-color-mid' : 'score-color-low') %>">
+                <%= score %>
+              </span>
+              <span class="rep-score-label">/ 100</span>
+            </div>
+            <span class="rep-score-desc">Commitment Score</span>
+          </div>
+
+          <div class="rep-divider"></div>
+
+          <div class="rep-rating-row">
+            <div class="rep-rating-left">
+              <i data-lucide="star" style="width:14px;height:14px;fill:#F59E0B;stroke:#F59E0B;flex-shrink:0;"></i>
+              <span class="rep-rating-label">Avg. Rating</span>
+            </div>
+            <span class="rep-rating-value">
+              <% student_avg = @profile.respond_to?(:average_rating) ? @profile.average_rating : (defined?(@avg_rating) ? @avg_rating : nil) %>
+              <% if student_avg %>
+                <%= student_avg.round(1) rescue student_avg %> / 5
+              <% else %>
+                Unrated
+              <% end %>
+            </span>
+          </div>
+        </div>
+      <% else %>
+        <div class="profile-card p-25">
+          <h3 class="metrics-card-title">
+            Reputation Metrics
+          </h3>
+
+          <% if @role_type == "CompanyProfile" %>
           <% if @completed_internships_count < 3 %>
             <div class="flex-center mb-12">
               <div class="badge-grace" title="Commitment score is protected during your first 3 internships to help you get established.">
