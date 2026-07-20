@@ -459,8 +459,8 @@ input[type="checkbox"] {
 /* Dashboard styles */
 .dashboard-container {
   max-width: 1200px;
-  margin: 30px auto;
-  padding: 0 20px;
+  margin: 40px auto;
+  padding: 0 24px 64px;
 }
 
 .dash-welcome {
@@ -1149,7 +1149,7 @@ input[type="checkbox"] {
 .dashboard-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 30px;
+  gap: 32px;
   align-items: start;
 }
 
@@ -4731,8 +4731,8 @@ p, .offer-desc-text, .bento-card-text {
 
 .dir-page {
   max-width: 1200px;
-  margin: 32px auto;
-  padding: 0 24px 64px;
+  margin: 40px auto;
+  padding: 0 24px 80px;
 }
 
 .dir-header {
@@ -5150,4 +5150,15 @@ p, .offer-desc-text, .bento-card-text {
   font-size: 13px;
   color: var(--text-secondary);
   margin-bottom: 20px;
+}
+
+/* Dashboard responsive breakpoints */
+@media (max-width: 1024px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .right-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+}
+
+@media (max-width: 640px) {
+  .right-col { grid-template-columns: 1fr; }
+  .dashboard-container { margin: 24px auto; padding: 0 16px 48px; }
 }
