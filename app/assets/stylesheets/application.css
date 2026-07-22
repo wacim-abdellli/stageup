@@ -8,8 +8,8 @@
   --text-secondary: #9FA3AF;
   --text-muted: #626773;
   
-  --primary: #4F46E5;
-  --primary-hover: #6366F1;
+  --primary: #6366F1;        /* mid indigo for proper dark-mode contrast */
+  --primary-hover: #818CF8;
   --primary-light: rgba(99, 102, 241, 0.08);
   
   --accent: #FFFFFF;
@@ -83,13 +83,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: var(--primary);
+  color: #818CF8;
   text-decoration: none;
   transition: var(--transition);
 }
 
 a:hover {
-  color: var(--primary-hover);
+  color: #A5B4FC;
 }
 
 /* Auth Pages Container */
@@ -150,9 +150,10 @@ a:hover {
   color: var(--text-primary);
   margin-bottom: 8px;
   display: inline-block;
-  background: linear-gradient(135deg, #FFF 30%, var(--primary) 100%);
+  background: linear-gradient(135deg, #FFF 40%, #A5B4FC 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .auth-title {
@@ -611,7 +612,8 @@ textarea.form-control {
 }
 
 .badge-success {
-  background-color: rgba(16, 185, 129, 0.15);
+  background-color: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   color: #34D399;
 }
 
@@ -1966,7 +1968,10 @@ textarea.form-control {
 
 /* Compact inline list item for offers management */
 .offer-mgmt-link {
-  color: var(--primary);
+  color: #818CF8;
+}
+.offer-mgmt-link:hover {
+  color: #A5B4FC;
 }
 
 /* Danger button variant */
@@ -2137,7 +2142,7 @@ textarea.form-control {
   margin-bottom: 15px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 6px;
-  color: #818CF8;
+  color: var(--text-primary);
 }
 
 .form-footer-row {
@@ -2261,7 +2266,7 @@ textarea.form-control {
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 8px;
   margin-bottom: 15px;
-  color: #818CF8;
+  color: var(--text-primary);
 }
 
 .agreement-text {
