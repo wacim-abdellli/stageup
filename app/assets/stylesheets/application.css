@@ -2722,21 +2722,25 @@ input[type="checkbox"] {
 
 /* Notification page styles */
 .notif-page-wrap {
-  max-width: 700px;
-  margin: 30px auto;
-  padding: 0 20px;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 24px 80px;
 }
 
 .notif-page-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .notif-page-title {
-  font-size: 22px;
-  margin: 0 0 4px 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 4px;
 }
 
 .notif-page-subtitle {
@@ -2744,6 +2748,66 @@ input[type="checkbox"] {
   color: var(--text-secondary);
   margin: 0;
 }
+
+/* Date group label */
+.notif-date-group-label {
+  padding: 12px 20px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  border-top: 1px solid var(--border-color);
+}
+
+.notif-date-group-label:first-child {
+  border-top: none;
+}
+
+/* Pagination */
+.pagination-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.pagination-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.pagination-link:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.pagination-link-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: default;
+}
+
+.pagination-info {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
 
 /* Notification list card */
 .notif-list-card {

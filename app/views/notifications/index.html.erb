@@ -15,10 +15,8 @@
   <% if @notifications.any? %>
     <div class="notif-list-card">
       <% @notifications.group_by { |n| n.created_at.to_date }.each do |date, notifs| %>
-        <div style="padding:10px 20px 4px;">
-          <span style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;">
-            <%= date == Date.today ? "Today" : date == Date.yesterday ? "Yesterday" : date.strftime("%B %d, %Y") %>
-          </span>
+        <div class="notif-date-group-label">
+          <%= date == Date.today ? "Today" : date == Date.yesterday ? "Yesterday" : date.strftime("%B %d, %Y") %>
         </div>
         <% notifs.each do |notification| %>
           <div class="notif-list-item <%= 'unread' unless notification.read %>">
