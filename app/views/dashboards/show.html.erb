@@ -766,9 +766,13 @@
         </div>
       <% else %>
         <div class="profile-card p-25">
-          <h3 class="metrics-card-title">
-            Commitment Ledger
-          </h3>
+          <div class="ledger-card-header">
+            <div class="ledger-card-title-row">
+              <i data-lucide="activity"></i>
+              <h3 class="ledger-card-title">Commitment Ledger</h3>
+            </div>
+            <span class="ledger-card-sub">Score history</span>
+          </div>
 
           <% if @commitment_ledger_events.any? %>
             <div class="ledger-timeline">
@@ -778,7 +782,7 @@
                   <div class="ledger-event-node <%= event.score_delta > 0 ? 'node-positive' : (event.score_delta == 0 ? 'node-neutral' : 'node-negative') %>"></div>
                   <div class="ledger-event-body">
                     <div class="ledger-event-header">
-                      <span class="ledger-event-title">Action</span>
+                      <span class="ledger-event-title"><%= (event.respond_to?(:event_type) && event.event_type.present?) ? event.event_type.humanize : "Event" %></span>
                       <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %>">
                         <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %>
                       </span>
@@ -790,9 +794,10 @@
               <% end %>
             </div>
           <% else %>
-            <p class="ledger-empty">
-              No reputation events logged yet.
-            </p>
+            <div class="ledger-empty-state">
+              <i data-lucide="shield"></i>
+              <p>No events yet. Complete internships to build your score history.</p>
+            </div>
           <% end %>
         </div>
       <% end %>
