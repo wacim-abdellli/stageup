@@ -3566,6 +3566,52 @@ input[type="checkbox"] {
   z-index: 1;
 }
 
+.landing-section-header {
+  margin-bottom: 40px;
+}
+
+.landing-section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #818CF8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.landing-section-eyebrow i,
+.landing-section-eyebrow svg {
+  width: 12px; height: 12px; stroke: #818CF8;
+}
+
+.landing-section-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.landing-section-sub {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 0;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* Differentiated bento icon colors per card */
+.bento-card-1 .bento-icon { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818CF8; }
+.bento-card-2 .bento-icon { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.2); color: #34D399; }
+.bento-card-3 .bento-icon { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); color: #FBBF24; }
+
+.bento-card-1:hover { border-color: rgba(99,102,241,0.3); }
+.bento-card-2:hover { border-color: rgba(16,185,129,0.25); }
+.bento-card-3:hover { border-color: rgba(245,158,11,0.25); }
+
 .bento-card-title {
   font-size: 16px;
   font-weight: 600;
@@ -3576,8 +3622,9 @@ input[type="checkbox"] {
 .bento-card-text {
   font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.65;
 }
+
 
 /* Featured opportunities section */
 .featured-section {
