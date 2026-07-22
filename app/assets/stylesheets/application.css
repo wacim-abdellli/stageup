@@ -5848,13 +5848,13 @@ textarea.form-control {
 
 
 /* Agreement Action Bar */
-.agreement-action-bar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
+
+/* Icon size & color utilities */
+.icon-amber { stroke: #FBBF24; flex-shrink: 0; }
+.icon-amber-fill { stroke: #F59E0B; fill: #F59E0B; flex-shrink: 0; }
+.icon-muted { stroke: var(--text-muted); }
+.icon-28 { width: 28px; height: 28px; }
+
 
 
 
