@@ -5478,9 +5478,53 @@ input[type="checkbox"] {
   gap: 10px;
 }
 
-.featured-heading-icon {
-  width: 20px; height: 20px;
-  stroke: var(--text-muted);
+
+.rep-metrics-grace {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #FBBF24;
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.2);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
+
+.rep-metrics-grace i,
+.rep-metrics-grace svg {
+  width: 11px; height: 11px; stroke: #FBBF24;
+}
+
+.rep-rating-left i,
+.rep-rating-left svg {
+  width: 14px; height: 14px; fill: #F59E0B; stroke: #F59E0B; flex-shrink: 0;
+}
+
+.rep-stat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.rep-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.rep-stat-label { color: var(--text-secondary); }
+
+.rep-stat-value {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
 
 

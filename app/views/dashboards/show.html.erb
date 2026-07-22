@@ -648,79 +648,90 @@
           </div>
         </div>
       <% else %>
-        <div class="profile-card p-25">
-          <h3 class="metrics-card-title">
-            Reputation Metrics
-          </h3>
-
-          <% if @role_type == "CompanyProfile" %>
-          <% if @completed_internships_count < 3 %>
-            <div class="flex-center mb-12">
-              <div class="badge-grace" title="Commitment score is protected during your first 3 internships to help you get established.">
-                <i data-lucide="sparkles"></i>
-                <span>New Recruiter (Grace Period)</span>
-              </div>
-            </div>
-          <% end %>
-
-          <% company_score = @profile.commitment_score.round(0) %>
-          <div class="flex-center mb-15">
-            <div class="score-pill">
-              <span class="dot <%= company_score >= 90 ? 'dot-success' : (company_score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
-              <strong><%= company_score %></strong>
-              <span class="score-label">Commitment</span>
-            </div>
-          </div>
-
-          <div class="metrics-list">
-            <div class="metrics-row">
-              <span class="metrics-label">Response Rate:</span>
-              <strong class="metrics-value-success"><%= @profile.response_rate %>%</strong>
-            </div>
-            <div class="metrics-row">
-              <span class="metrics-label">Avg. Decision Time:</span>
-              <strong><%= @profile.avg_response_time_hours %> hours</strong>
-            </div>
-            <div class="metrics-row">
-              <span class="metrics-label">Active Offers:</span>
-              <strong><%= @offers_count %></strong>
-            </div>
-            <div class="metrics-rating-row">
-              <span class="metrics-label">Average Rating:</span>
-              <% company_avg = @profile.average_rating %>
-              <% if company_avg %>
-                <div class="rating-display">
-                  <i data-lucide="star"></i>
-                  <strong><%= company_avg %></strong>
-                  <span class="rating-count">(<%= @profile.reviews_received_count %> reviews)</span>
-                </div>
+        <% if @role_type == "CompanyProfile" %>
+          <div class="profile-card rep-metrics-card">
+            <div class="rep-metrics-header">
+              <h3 class="rep-metrics-title">Reputation</h3>
+              <% if @completed_internships_count < 3 %>
+                <span class="rep-metrics-grace">
+                  <i data-lucide="clock"></i>
+                  Grace Period
+                </span>
               <% else %>
-                <strong class="text-secondary">Unrated</strong>
+                <span class="rep-metrics-sub">Public · Verified</span>
               <% end %>
             </div>
-          </div>
 
+            <% company_score = @profile.commitment_score.round(0) %>
+            <div class="rep-score-row">
+              <div class="rep-score-main">
+                <span class="rep-score-number <%= company_score >= 90 ? 'score-color-high' : (company_score >= 70 ? 'score-color-mid' : 'score-color-low') %>">
+                  <%= company_score %>
+                </span>
+                <span class="rep-score-label">/ 100</span>
+              </div>
+              <span class="rep-score-desc">Commitment Score</span>
+            </div>
+
+            <div class="rep-divider"></div>
+
+            <div class="rep-stat-list">
+              <div class="rep-stat-row">
+                <span class="rep-stat-label">Response Rate</span>
+                <strong class="rep-stat-value text-success"><%= @profile.response_rate %>%</strong>
+              </div>
+              <div class="rep-stat-row">
+                <span class="rep-stat-label">Avg. Decision</span>
+                <strong class="rep-stat-value"><%= @profile.avg_response_time_hours %>h</strong>
+              </div>
+              <div class="rep-stat-row">
+                <span class="rep-stat-label">Active Offers</span>
+                <strong class="rep-stat-value"><%= @offers_count %></strong>
+              </div>
+            </div>
+
+            <div class="rep-divider"></div>
+
+            <div class="rep-rating-row">
+              <div class="rep-rating-left">
+                <i data-lucide="star"></i>
+                <span class="rep-rating-label">Avg. Rating</span>
+              </div>
+              <% company_avg = @profile.average_rating %>
+              <span class="rep-rating-value">
+                <% if company_avg %>
+                  <%= company_avg %> <span class="text-muted fs-11">(<%= @profile.reviews_received_count %> reviews)</span>
+                <% else %>
+                  Unrated
+                <% end %>
+              </span>
+            </div>
+          </div>
         <% elsif @role_type == "UniversityProfile" %>
-          <div class="metrics-list">
-            <div class="metrics-row">
-              <span class="metrics-label">Students Registered:</span>
-              <strong><%= @total_students_count %></strong>
-            </div>
-            <div class="metrics-row">
-              <span class="metrics-label">Active/Completed Internships:</span>
-              <strong><%= @active_internships_count %></strong>
-            </div>
-            <div class="metrics-rating-row">
-              <span class="metrics-label">Avg Commitment Score:</span>
-              <div class="score-pill">
-                <span class="dot <%= @avg_student_score >= 90 ? 'dot-success' : (@avg_student_score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
-                <strong><%= @avg_student_score %></strong>
+          <div class="profile-card p-25">
+            <h3 class="metrics-card-title">
+              Reputation Metrics
+            </h3>
+            <div class="metrics-list">
+              <div class="metrics-row">
+                <span class="metrics-label">Students Registered:</span>
+                <strong><%= @total_students_count %></strong>
+              </div>
+              <div class="metrics-row">
+                <span class="metrics-label">Active/Completed Internships:</span>
+                <strong><%= @active_internships_count %></strong>
+              </div>
+              <div class="metrics-rating-row">
+                <span class="metrics-label">Avg Commitment Score:</span>
+                <div class="score-pill">
+                  <span class="dot <%= @avg_student_score >= 90 ? 'dot-success' : (@avg_student_score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
+                  <strong><%= @avg_student_score %></strong>
+                </div>
               </div>
             </div>
           </div>
         <% end %>
-      </div>
-    <% end %>
+      <% end %>
 
       <!-- Reputation History Ledger / Commitment Timeline -->
       <% if @role_type == "UniversityProfile" %>
