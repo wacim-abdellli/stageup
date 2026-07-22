@@ -738,35 +738,51 @@ input[type="checkbox"] {
 /* Empty States CSS */
 .empty-state-card {
   text-align: center;
-  padding: 40px 30px;
-  background-color: rgba(30, 41, 59, 0.3);
-  border: 1px dashed var(--border-color);
+  padding: 48px 32px;
+  background: rgba(255,255,255,0.01);
+  border: 1px dashed rgba(255,255,255,0.08);
   border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .empty-state-icon {
-  display: inline-block;
-  margin-bottom: 8px;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.empty-state-icon i,
+.empty-state-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-muted);
 }
 
 .empty-state-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-primary);
+  margin: 0;
 }
 
 .empty-state-text {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.5;
-  max-width: 400px;
+  line-height: 1.6;
+  max-width: 360px;
   margin: 0 auto;
 }
+
 
 /* Premium Accent Button */
 .btn-accent {
