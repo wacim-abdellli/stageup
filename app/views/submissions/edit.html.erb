@@ -1,65 +1,69 @@
 <% content_for :title, "Submit Proof of Work – StageUp" %>
-<div class="auth-container">
-  <div class="auth-card auth-card-md">
-    <div class="auth-header">
-      <%= render "layouts/navbar_brand" %>
-      <h2 class="auth-title">Submit Proof of Work</h2>
-      <p class="auth-subtitle">Paste your solution URL and notes below</p>
+<div class="form-page form-page-narrow">
+
+  <div class="form-page-header">
+    <h1 class="form-page-title">Submit Proof of Work</h1>
+    <p class="form-page-subtitle">Paste your solution URL and any explanation notes below.</p>
+  </div>
+
+  <div class="form-page-body">
+
+    <div class="review-context-card">
+      <div class="review-context-row">
+        <i data-lucide="briefcase"></i>
+        <div>
+          <span class="review-context-label">Offer</span>
+          <strong class="review-context-value"><%= @submission.offer.title %></strong>
+        </div>
+      </div>
+      <div class="review-context-row">
+        <i data-lucide="git-commit"></i>
+        <div>
+          <span class="review-context-label">Mission</span>
+          <strong class="review-context-value"><%= @submission.mission.title %></strong>
+        </div>
+      </div>
     </div>
 
-    <div class="info-card">
-      <span class="info-label">Internship Offer:</span>
-      <strong class="info-value"><%= @submission.offer.title %></strong>
-      <span class="info-label mt-10">Mission Task:</span>
-      <strong class="info-value-accent"><%= @submission.mission.title %></strong>
-    </div>
+    <% if @submission.errors.any? %>
+      <div class="flash-message flash-alert mb-20">
+        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
+        <span><%= @submission.errors.full_messages.first %></span>
+      </div>
+    <% end %>
 
     <%= form_with model: @submission, local: true do |f| %>
-      
-      <% if @submission.errors.any? %>
-        <div class="flash-message flash-alert flash-alert-col">
-          <div class="error-header-row">
-            <i data-lucide="alert-circle" class="icon-16 stroke-danger flex-shrink-0"></i>
-            <strong>Please resolve the following errors:</strong>
-          </div>
-          <ul class="error-list">
-            <% @submission.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
 
       <div class="form-group">
         <label class="form-label" for="github_link">Solution URL (GitHub, Figma, Google Drive)</label>
-        <%= f.url_field :github_link, id: "github_link", class: "form-control", placeholder: "https://github.com/myusername/myrepo", required: true, oninput: "valURL(this)" %>
-        <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);
-                    border-radius:var(--radius-sm);padding:10px 12px;font-size:12px;color:#FBBF24;
-                    display:flex;align-items:flex-start;gap:8px;margin-top:6px;line-height:1.5;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"
-               style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <%= f.url_field :github_link, id: "github_link", class: "form-control",
+            placeholder: "https://github.com/myusername/myrepo",
+            required: true, oninput: "valURL(this)" %>
+        <div class="inline-warning-box">
+          <i data-lucide="alert-triangle"></i>
           Make sure your link is <strong>publicly accessible</strong>. Private repos will fail auto-check.
         </div>
       </div>
 
       <div class="form-group">
         <label class="form-label" for="submission_notes">Notes / Explanation</label>
-        <%= f.text_area :submission_notes, id: "submission_notes", class: "form-control", rows: 4, placeholder: "Describe your solution, installation instructions, or technical choices..." %>
+        <%= f.text_area :submission_notes, id: "submission_notes", class: "form-control", rows: 4,
+            placeholder: "Describe your solution, installation instructions, or technical choices..." %>
       </div>
 
-      <div class="form-actions-row">
-        <%= link_to "Cancel", offer_path(@submission.offer), class: "btn btn-secondary btn-flex-1" %>
-        <%= f.submit "Submit Proof of Work", class: "btn btn-primary btn-flex-2" %>
+      <div class="form-footer">
+        <%= link_to "Cancel", offer_path(@submission.offer), class: "btn btn-secondary btn-cancel" %>
+        <%= f.submit "Submit Proof of Work", class: "btn btn-primary btn-submit" %>
       </div>
+
     <% end %>
   </div>
 </div>
 
-<script>
+<%= javascript_tag nonce: true do %>
   function valURL(el) {
-    var ok=/^https?:\/\/.+/.test(el.value.trim());
-    el.style.borderColor=(el.value&&!ok)?'#EF4444':'';
-    el.style.boxShadow=(el.value&&!ok)?'0 0 0 3px rgba(239,68,68,0.1)':'';
+    var ok = /^https?:\/\/.+/.test(el.value.trim());
+    el.classList.toggle('form-control-error', el.value && !ok);
   }
-</script>
+<% end %>
+
