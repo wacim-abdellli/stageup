@@ -2838,6 +2838,36 @@ textarea.form-control {
   border-top: 1px solid var(--border-color);
 }
 
+.review-context-row + .review-context-row {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 560px) {
+  .form-page-body {
+    padding: 24px 20px;
+    border-radius: var(--radius-md);
+  }
+
+  .form-page {
+    padding: 0 16px 64px;
+    margin: 24px auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-footer {
+    flex-direction: column;
+  }
+
+  .form-footer .btn-cancel,
+  .form-footer .btn-submit {
+    flex: none;
+    width: 100%;
+  }
+}
+
 .pagination-link {
   display: inline-flex;
   align-items: center;
@@ -3694,6 +3724,7 @@ textarea.form-control {
 }
 
 .landing-section-header {
+  margin-top: 72px;
   margin-bottom: 40px;
 }
 
