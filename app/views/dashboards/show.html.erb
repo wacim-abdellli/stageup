@@ -272,74 +272,72 @@
           <% if @active_internships.any? %>
             <div class="inline-list">
               <% @active_internships.each do |sub| %>
-                <div class="inline-list-item">
-                  <div>
-                    <strong class="inline-list-item-title"><%= sub.offer.title %></strong>
-                    <span class="inline-list-item-meta">
+                <div class="internship-item">
+                  <div class="internship-item-left">
+                    <strong class="internship-item-title"><%= sub.offer.title %></strong>
+                    <span class="internship-item-meta">
                       Company: <%= sub.offer.company_profile.name %>
+                      <span class="badge-status <%= "badge-#{sub.status}" %> ml-8"><%= sub.status.humanize %></span>
                       <% match_pct = sub.offer.match_percentage_for(@profile) %>
                       <% if match_pct < 100 %>
-                        <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>"><%= match_pct %>% Match</span>
+                        <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %> ml-4"><%= match_pct %>% Match</span>
                       <% end %>
                     </span>
-                  </div>
-                  <div class="timeline-container">
-                    <div class="timeline-steps">
-                      <% submission_milestones(sub).each_with_index do |ms, idx| %>
-                        <div class="timeline-step-wrapper">
-                          <div class="timeline-tooltip">
-                            <% if ms[:timestamp] %>
-                              <%= ms[:timestamp].strftime("%b %d, %Y") %>
-                            <% else %>
-                              <%= ms[:complete] ? "Done" : "—" %>
+
+                    <div class="timeline-container">
+                      <div class="timeline-steps">
+                        <% submission_milestones(sub).each_with_index do |ms, idx| %>
+                          <div class="timeline-step-wrapper">
+                            <div class="timeline-tooltip">
+                              <% if ms[:timestamp] %>
+                                <%= ms[:timestamp].strftime("%b %d, %Y") %>
+                              <% else %>
+                                <%= ms[:complete] ? "Done" : "—" %>
+                              <% end %>
+                            </div>
+                            <div class="timeline-step <%= ms[:complete] ? 'completed' : 'pending' %>">
+                              <% if ms[:complete] %>
+                                <svg class="timeline-step-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                              <% else %>
+                                <%= idx + 1 %>
+                              <% end %>
+                            </div>
+                            <% if idx < submission_milestones(sub).length - 1 %>
+                              <div class="timeline-line <%= ms[:complete] ? 'completed' : 'pending' %>"></div>
                             <% end %>
+                            <span class="timeline-label <%= ms[:complete] ? 'completed' : '' %>"><%= ms[:label] %></span>
                           </div>
-                          <div class="timeline-step <%= ms[:complete] ? 'completed' : 'pending' %>">
-                            <% if ms[:complete] %>
-                              <svg class="timeline-step-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                            <% else %>
-                              <%= idx + 1 %>
-                            <% end %>
-                          </div>
-                          <% if idx < submission_milestones(sub).length - 1 %>
-                            <div class="timeline-line <%= ms[:complete] ? 'completed' : 'pending' %>"></div>
-                          <% end %>
-                          <span class="timeline-label <%= ms[:complete] ? 'completed' : '' %>"><%= ms[:label] %></span>
-                        </div>
-                      <% end %>
+                        <% end %>
+                      </div>
                     </div>
                   </div>
-                  <div>
+
+                  <div class="internship-item-actions">
                     <% if sub.status == "accepted" %>
-                      <div class="flex-col gap-8 items-end">
-                        <div class="action-group">
-                          <% if sub.student_confirmed_completed %>
-                            <span class="badge-status badge-completion-pending">
-                              Waiting for Employer
-                            </span>
-                          <% else %>
-                            <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success" %>
-                            <%= button_to "Abandon", abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Are you sure you want to abandon this internship? Your commitment score will be penalized." } %>
-                          <% end %>
-                        </div>
-                          <div class="action-group">
-                          <% if sub.internship_agreement %>
-                            <% if sub.internship_agreement.status == "pending_signatures" %>
-                              <span class="badge-status badge-pending">Awaiting: <%= sub.internship_agreement.pending_signatories.join(", ") %></span>
-                            <% elsif sub.internship_agreement.status == "declined" %>
-                              <span class="badge-status badge-declined">Agreement Declined</span>
-                            <% end %>
-                            <%= link_to "View & Sign Agreement", submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" %>
-                            <% if sub.internship_agreement.status == "declined" %>
-                              <%= link_to "Generate New Agreement", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
-                            <% end %>
-                          <% else %>
-                            <%= link_to "Generate Convention de Stage", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
-                          <% end %>
-                        </div>
-                      </div>
+                      <% if sub.student_confirmed_completed %>
+                        <span class="badge-status badge-completion-pending">
+                          Waiting for Employer
+                        </span>
+                      <% else %>
+                        <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success" %>
+                        <%= button_to "Abandon", abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Are you sure you want to abandon this internship? Your commitment score will be penalized." } %>
+                      <% end %>
+
+                      <% if sub.internship_agreement %>
+                        <% if sub.internship_agreement.status == "pending_signatures" %>
+                          <span class="badge-status badge-pending">Awaiting: <%= sub.internship_agreement.pending_signatories.join(", ") %></span>
+                        <% elsif sub.internship_agreement.status == "declined" %>
+                          <span class="badge-status badge-declined">Agreement Declined</span>
+                        <% end %>
+                        <%= link_to "View & Sign Agreement", submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" %>
+                        <% if sub.internship_agreement.status == "declined" %>
+                          <%= link_to "Generate New Agreement", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to "Generate Convention de Stage", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
+                      <% end %>
                     <% else %>
-                      <span class="badge-status badge-completed mr-10">Completed</span>
+                      <span class="badge-status badge-completed">Completed</span>
                       <% my_review = sub.reviews.detect { |r| r.author_id == current_user.id } %>
                       <% if my_review.nil? %>
                         <%= link_to "Leave Review", new_submission_review_path(sub), class: "btn btn-primary w-auto fs-12 btn-review" %>
