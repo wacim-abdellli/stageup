@@ -201,6 +201,21 @@
         </div>
       </div>
     <% end %>
+
+    <% unless current_user %>
+      <div class="landing-cta-section animate-in stagger-6">
+        <div class="landing-cta-inner">
+          <div class="landing-cta-text">
+            <h2 class="landing-cta-title">Ready to build your reputation?</h2>
+            <p class="landing-cta-desc">Join Tunisia's first verified internship platform. Your track record starts here.</p>
+          </div>
+          <div class="landing-cta-actions">
+            <%= link_to "Create an Account", select_role_path, class: "btn btn-primary" %>
+            <%= link_to "Browse Offers", offers_path, class: "btn btn-secondary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
