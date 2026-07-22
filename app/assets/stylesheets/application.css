@@ -2118,32 +2118,6 @@ textarea.form-control {
 }
 
 /* Offer form specific */
-.auth-card-wide {
-  max-width: 700px;
-  padding: 45px;
-}
-
-.auth-container-compact {
-  min-height: auto;
-  padding: 60px 20px;
-}
-
-/* Section headings in forms */
-.section-heading-lg {
-  font-size: 18px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 6px;
-}
-
-.section-heading-mission {
-  font-size: 18px;
-  margin-top: 35px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 6px;
-  color: var(--text-primary);
-}
 
 .form-footer-row {
   display: flex;
@@ -2160,12 +2134,7 @@ textarea.form-control {
   flex: 2;
 }
 
-.mission-info-text {
-  color: var(--text-secondary);
-  font-size: 13px;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
+
 
 /* Pending approval page */
 .pending-lock-icon {
@@ -2362,34 +2331,7 @@ textarea.form-control {
 
 /* ============= LAYOUT UTILITIES ============= */
 
-.auth-container-edit {
-  min-height: auto;
-  padding: 60px 20px;
-}
 
-.auth-card-edit {
-  max-width: 700px;
-  padding: 45px;
-}
-
-.section-heading-edit {
-  margin-bottom: 15px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 6px;
-}
-
-.section-heading-mission-edit {
-  margin-top: 35px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 6px;
-  color: #818CF8;
-}
-
-.mission-desc-edit {
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
 
 .btn-flex-1 { width: auto; flex: 1; }
 .btn-flex-2 { flex: 2; }
