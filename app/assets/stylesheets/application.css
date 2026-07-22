@@ -39,9 +39,9 @@
 }
 
 :focus-visible {
-  outline: 2px solid #FFFFFF;
-  outline-offset: 4px;
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4);
+  outline: 2px solid rgba(99,102,241,0.7);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
   border-radius: var(--radius-sm);
 }
 
@@ -1066,24 +1066,20 @@ textarea.form-control {
 .auth-links {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  text-align: center;
-  font-size: 13px;
-  border-top: 1px solid var(--border-color);
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
   padding-top: 20px;
-  margin-top: 20px;
+  border-top: 1px solid var(--border-color);
 }
 
 .auth-links a {
+  font-size: 13px;
   color: var(--text-secondary);
-  text-decoration: none;
-  font-weight: 500;
-  transition: var(--transition);
 }
 
 .auth-links a:hover {
-  color: white;
-  text-decoration: underline;
+  color: var(--text-primary);
 }
 
 .auth-card a:not(.btn):not(.role-card) {
@@ -3764,10 +3760,15 @@ textarea.form-control {
 }
 
 .featured-view-all {
+  color: #818CF8;
   font-size: 13px;
   font-weight: 600;
-  color: var(--accent);
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.featured-view-all:hover {
+  color: #A5B4FC;
 }
 
 .featured-grid {
@@ -5847,9 +5848,15 @@ textarea.form-control {
   box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
 }
 
-.dot-muted {
-  background: var(--text-muted);
+
+.nav-cta-btn {
+  color: #09090B;
 }
+
+.nav-cta-btn:hover {
+  color: #09090B;
+}
+
 
 
 
