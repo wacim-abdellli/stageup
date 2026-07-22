@@ -5826,7 +5826,31 @@ textarea.form-control {
 .icon-amber { stroke: #FBBF24; flex-shrink: 0; }
 .icon-amber-fill { stroke: #F59E0B; fill: #F59E0B; flex-shrink: 0; }
 .icon-muted { stroke: var(--text-muted); }
-.icon-28 { width: 28px; height: 28px; }
+
+/* Offer Management Status Dots */
+.offer-mgmt-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.offer-mgmt-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.dot-success {
+  background: var(--success);
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+}
+
+.dot-muted {
+  background: var(--text-muted);
+}
+
 
 
 

@@ -373,18 +373,23 @@
             <div class="inline-list-sm">
               <% @company_offers.each do |offer| %>
                 <div class="inline-list-sm-item">
-                  <div>
-                    <strong class="inline-list-sm-title"><%= link_to offer.title, offer_path(offer), class: "offer-mgmt-link" %></strong>
-                    <span class="inline-list-sm-meta">
-                      <%= offer.status.humanize %> &middot; <%= offer.submissions.count %> applicant(s)
-                    </span>
+                  <div class="offer-mgmt-left">
+                    <span class="offer-mgmt-status-dot <%= offer.draft? ? 'dot-muted' : 'dot-success' %>"></span>
+                    <div>
+                      <strong class="inline-list-sm-title">
+                        <%= link_to offer.title, offer_path(offer), class: "offer-mgmt-link" %>
+                      </strong>
+                      <span class="inline-list-sm-meta">
+                        <%= offer.draft? ? "Draft" : offer.status.humanize %> &middot; <%= offer.submissions.count %> applicant(s)
+                      </span>
+                    </div>
                   </div>
                   <div class="action-group-8">
-                    <%= link_to "Edit", edit_offer_path(offer), class: "btn btn-primary btn-compact-sm" %>
+                    <%= link_to "Edit", edit_offer_path(offer), class: "btn btn-secondary btn-compact-sm" %>
                     <% if offer.draft? %>
                       <%= button_to "Delete", offer_path(offer), method: :delete, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Permanently delete this draft?" } %>
                     <% else %>
-                      <%= button_to "Archive", offer_path(offer), method: :delete, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Archive this offer? It will no longer be visible to students." } %>
+                      <%= button_to "Archive", offer_path(offer), method: :delete, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Archive this offer?" } %>
                     <% end %>
                   </div>
                 </div>
