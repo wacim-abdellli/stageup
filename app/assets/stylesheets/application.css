@@ -3190,27 +3190,34 @@ input[type="checkbox"] {
 
 .landing-logo-row {
   display: flex;
+  justify-content: flex-start;
   margin-bottom: 24px;
 }
 
 .landing-hero-title {
-  font-size: clamp(34px, 4.5vw, 56px);
+  font-size: clamp(34px, 4.5vw, 58px);
   font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
   color: #FFFFFF;
+  margin-bottom: 16px;
+  text-align: left;
 }
 
 .landing-hero-gradient {
-  background: linear-gradient(135deg, #FFFFFF 30%, #818CF8 100%);
+  background: linear-gradient(135deg, #FFFFFF 50%, #818CF8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .landing-subhead {
   font-size: clamp(15px, 2vw, 17px);
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
+  max-width: 520px;
+  margin-bottom: 32px;
+  text-align: left;
 }
 
 .landing-cta-row {
@@ -3218,14 +3225,33 @@ input[type="checkbox"] {
   gap: 16px;
   flex-wrap: wrap;
   width: 100%;
+  justify-content: flex-start;
 }
 
 .landing-cta-btn {
-  flex: 0 1 auto;
-  min-width: 170px;
+  flex: 0 0 auto;
   text-decoration: none;
-  padding: 12px 28px;
+  padding: 13px 28px;
+  font-size: 15px;
 }
+
+.landing-cta-btn.btn-secondary {
+  padding: 13px 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.hero-right-col {
+  max-width: 420px;
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .hero-right-col {
+    max-width: 100%;
+  }
+}
+
 
 /* Mockup Reputation Ledger Card */
 .hero-mockup-card {

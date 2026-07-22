@@ -19,20 +19,22 @@
           </div>
         </div>
 
-        <div class="landing-logo-row animate-in visible stagger-1" style="justify-content: flex-start; margin-bottom: 24px;">
-          <%= render "layouts/navbar_brand" %>
-        </div>
+        <% unless current_user %>
+          <div class="landing-logo-row animate-in visible stagger-1">
+            <%= render "layouts/navbar_brand" %>
+          </div>
+        <% end %>
 
-        <h1 class="landing-hero-title animate-in visible stagger-2" style="text-align: left; font-size: clamp(34px, 4.5vw, 56px); margin-bottom: 16px;">
+        <h1 class="landing-hero-title animate-in visible stagger-2">
           Nobody pays a price for ghosting.<br>
           <span class="landing-hero-gradient">We changed that.</span>
         </h1>
 
-        <p class="landing-subhead animate-in visible stagger-3" style="text-align: left; margin-left: 0; margin-bottom: 32px; max-width: 580px;">
+        <p class="landing-subhead animate-in visible stagger-3">
           Every offer, mission, and no-show becomes a permanent public record. Tunisia's first internship market where reputation is earned, not claimed.
         </p>
 
-        <div class="landing-cta-row animate-in visible stagger-4" style="justify-content: flex-start; margin-left: 0; margin-bottom: 0;">
+        <div class="landing-cta-row animate-in visible stagger-4">
           <%= link_to "Browse Internships", offers_path, class: "btn btn-accent landing-cta-btn" %>
           <%= link_to "Get Started", select_role_path, class: "btn btn-secondary landing-cta-btn" %>
         </div>
