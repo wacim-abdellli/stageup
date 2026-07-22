@@ -1,87 +1,92 @@
 <% content_for :title, "Edit Account — StageUp" %>
-<div class="auth-container">
-  <div class="auth-card auth-card-wide">
-    <div class="auth-header">
-      <%= render "layouts/navbar_brand" %>
-      <h2 class="auth-title">Edit Account</h2>
-      <p class="auth-subtitle">Update your email or password</p>
-    </div>
+<div class="form-page">
+  <div class="form-page-header">
+    <h1 class="form-page-title">Account Settings</h1>
+    <p class="form-page-subtitle">Update your email address or change your password.</p>
+  </div>
+  <div class="form-page-body">
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <% if resource.errors.any? %>
-        <div class="flash-message flash-alert flash-col mb-20">
-          <div class="flash-col-header">
-            <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
-            <strong>Please resolve the following errors:</strong>
-          </div>
-          <ul class="error-list">
-            <% resource.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <div class="form-group">
-        <%= f.label :email, class: "form-label" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "email@example.com" %>
+    <% if resource.errors.any? %>
+      <div class="flash-message flash-alert mb-20">
+        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
+        <span><%= resource.errors.full_messages.first %> (<%= resource.errors.count %> error(s))</span>
       </div>
-
-      <div class="section-heading-lg">Change Password <span class="text-muted fs-12 fw-500" style="text-transform:none;letter-spacing:0;">(leave blank if not changing)</span></div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <%= f.label :password, class: "form-label" %>
-          <div class="pw-wrap">
-            <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "••••••••" %>
-            <button type="button" class="pw-toggle"
-              onclick="var i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';"
-              aria-label="Toggle password visibility">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :password_confirmation, class: "form-label" %>
-          <div class="pw-wrap">
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "••••••••" %>
-            <button type="button" class="pw-toggle"
-              onclick="var i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';"
-              aria-label="Toggle password visibility">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-heading-lg">Confirm Changes</div>
-
-      <div class="form-group">
-        <%= f.label :current_password, class: "form-label" %>
-        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", placeholder: "Enter current password to confirm changes", required: true %>
-        <small class="hint-text">We need your current password to confirm any changes</small>
-      </div>
-
-      <%= f.submit "Update Account", class: "btn btn-accent btn-mt", style: "cursor: pointer;" %>
     <% end %>
 
-    <div class="auth-links">
-      <%= link_to "Back", :back %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+      <div class="form-section">
+        <div class="form-section-title">
+          <i data-lucide="user"></i>
+          Account Details
+        </div>
+        <div class="form-group">
+          <%= f.label :email, class: "form-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "email@example.com" %>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">
+          <i data-lucide="key"></i>
+          Change Password <span class="text-muted fw-500 text-normal-case">(leave blank if not changing)</span>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <%= f.label :password, class: "form-label" %>
+            <div class="pw-wrap">
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "••••••••" %>
+              <button type="button" class="pw-toggle"
+                onclick="var i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';"
+                aria-label="Toggle password visibility">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password_confirmation, class: "form-label" %>
+            <div class="pw-wrap">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "••••••••" %>
+              <button type="button" class="pw-toggle"
+                onclick="var i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';"
+                aria-label="Toggle password visibility">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">
+          <i data-lucide="shield-check"></i>
+          Confirm Changes
+        </div>
+        <div class="form-group">
+          <%= f.label :current_password, class: "form-label" %>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", placeholder: "Enter current password to confirm changes", required: true %>
+          <small class="hint-text">We need your current password to confirm any changes</small>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <%= link_to "Back", :back, class: "btn btn-secondary btn-cancel" %>
+        <%= f.submit "Update Account", class: "btn btn-primary btn-submit" %>
+      </div>
+    <% end %>
+
+    <div class="danger-zone">
+      <div class="danger-zone-text">
+        <div class="danger-zone-label">Delete Account</div>
+        <div class="danger-zone-desc">This action is irreversible and removes all your data.</div>
+      </div>
+      <%= button_to "Delete Account", registration_path(resource_name),
+            data: { confirm: "Permanently delete your account?" },
+            method: :delete,
+            class: "btn btn-secondary btn-danger-outline" %>
     </div>
 
-    <div class="border-top mt-25 pt-20">
-      <div class="flex-between align-center">
-        <div>
-          <div class="fs-14 fw-600" style="color: var(--danger);">Delete Account</div>
-          <div class="fs-12 text-muted mt-4">This action is irreversible.</div>
-        </div>
-        <%= button_to "Cancel my account", registration_path(resource_name),
-              data: { confirm: "Are you sure? This will permanently delete your account and all associated data." },
-              method: :delete,
-              class: "btn btn-secondary",
-              style: "width: auto; padding: 8px 16px; font-size: 13px; border-color: var(--danger); color: #F87171;" %>
-      </div>
-    </div>
   </div>
 </div>
+

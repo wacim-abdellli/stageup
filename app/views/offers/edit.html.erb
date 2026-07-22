@@ -1,98 +1,98 @@
-<div class="auth-container auth-container-edit">
-  <div class="auth-card auth-card-edit">
-    <div class="auth-header">
-      <%= render "layouts/navbar_brand" %>
-      <h2 class="auth-title">Edit Internship Offer</h2>
-      <p class="auth-subtitle">Update the details and/or proof mission for this offer</p>
-    </div>
+<% content_for :title, "Edit Internship Offer – StageUp" %>
+<div class="form-page">
+
+  <div class="form-page-header">
+    <h1 class="form-page-title">Edit Internship Offer</h1>
+    <p class="form-page-subtitle">Update the details or proof mission for this offer.</p>
+  </div>
+
+  <div class="form-page-body">
+
+    <% if @offer.errors.any? %>
+      <div class="flash-message flash-alert mb-20">
+        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
+        <span><%= @offer.errors.full_messages.first %> (<%= @offer.errors.count %> error(s))</span>
+      </div>
+    <% end %>
 
     <%= form_with model: @offer, local: true do |f| %>
-      
-      <% if @offer.errors.any? %>
-        <div class="flash-message flash-alert flash-col">
-          <div class="flash-col-header">
-            <i data-lucide="alert-circle" class="icon-16 stroke-danger flex-shrink-0"></i>
-            <strong>Please resolve the following errors:</strong>
+
+      <div class="form-section">
+        <div class="form-section-title">
+          <i data-lucide="briefcase"></i>
+          Internship Details
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="offer_title">Internship Title</label>
+          <%= f.text_field :title, id: "offer_title", class: "form-control", placeholder: "e.g. Front-End Web Developer Intern", required: true %>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="offer_description">Description & Requirements</label>
+          <%= f.text_area :description, id: "offer_description", class: "form-control", rows: 5, placeholder: "Describe the tasks, tools, and profile you're looking for...", required: true %>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="offer_stage_type">Stage Type</label>
+            <%= f.select :stage_type, [["PFE (Graduation)", "PFE"], ["PFA (Mid-Study)", "PFA"], ["Initiation / Observation", "initiation"], ["Free / Skill-Building", "free"]], { prompt: "Select type" }, { id: "offer_stage_type", class: "form-control", required: true } %>
           </div>
-          <ul class="error-list">
-            <% @offer.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
+          <div class="form-group">
+            <label class="form-label" for="offer_spots">Available Spots</label>
+            <%= f.number_field :spots, id: "offer_spots", class: "form-control", min: 1, required: true %>
+          </div>
         </div>
-      <% end %>
 
-      <h3 class="section-heading-edit">
-        1. Internship Details
-      </h3>
-
-      <div class="form-group">
-        <label class="form-label" for="offer_title">Internship Title</label>
-        <%= f.text_field :title, id: "offer_title", class: "form-control", placeholder: "e.g. Front-End Web Developer Intern", required: true %>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="offer_description">Detailed Description & Requirements</label>
-        <%= f.text_area :description, id: "offer_description", class: "form-control", rows: 5, placeholder: "Describe the tasks, tools, and profile you are looking for...", required: true %>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label" for="offer_stage_type">Stage Type</label>
-          <%= f.select :stage_type, [["PFE (Graduation)", "PFE"], ["PFA (Mid-Study)", "PFA"], ["Initiation / Observation", "initiation"], ["Free / Skill-Building", "free"]], { prompt: "Select Stage Type" }, { id: "offer_stage_type", class: "form-control", required: true } %>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="offer_location">Location</label>
+            <%= f.text_field :location, id: "offer_location", class: "form-control", placeholder: "e.g. Sfax", required: true %>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="offer_work_mode">Work Mode</label>
+            <%= f.select :work_mode, [["On-Site", "onsite"], ["Remote", "remote"], ["Hybrid", "hybrid"]], {}, { id: "offer_work_mode", class: "form-control", required: true } %>
+          </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="offer_spots">Available Spots</label>
-          <%= f.number_field :spots, id: "offer_spots", class: "form-control", min: 1, required: true %>
+          <label class="form-label" for="offer_deadline">Application Deadline <span class="text-muted fw-500 text-normal-case">(optional)</span></label>
+          <%= f.date_field :deadline, id: "offer_deadline", class: "form-control" %>
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label" for="offer_location">Location (Tunisia)</label>
-          <%= f.text_field :location, id: "offer_location", class: "form-control", placeholder: "e.g. Sfax", required: true %>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="offer_work_mode">Work Mode</label>
-          <%= f.select :work_mode, [["On-Site", "onsite"], ["Remote", "remote"], ["Hybrid", "hybrid"]], {}, { id: "offer_work_mode", class: "form-control", required: true } %>
+      <div class="form-section">
+        <div class="form-section-mission">
+          <div class="form-section-title">
+            <i data-lucide="git-commit"></i>
+            Proof of Work Mission <span class="text-muted fw-500 text-normal-case fs-12">(optional)</span>
+          </div>
+          <p class="fs-13 text-secondary mb-20 lh-15">
+            Attach a small hands-on test (30–90 min) to filter candidates by real skill. Leave blank for standard CV-only applications.
+          </p>
+          <%= f.fields_for :mission do |m| %>
+            <div class="form-group">
+              <label class="form-label" for="mission_title">Mission Title</label>
+              <%= m.text_field :title, id: "mission_title", class: "form-control", placeholder: "e.g. Build a Responsive Navigation Bar" %>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="mission_instructions">Instructions & Rubric</label>
+              <%= m.text_area :instructions, id: "mission_instructions", class: "form-control", rows: 4, placeholder: "Goal, specs, resources, and evaluation details..." %>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="mission_duration">Estimated Time (minutes)</label>
+              <%= m.number_field :estimated_duration_minutes, id: "mission_duration", class: "form-control", placeholder: "e.g. 60" %>
+            </div>
+          <% end %>
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label" for="offer_deadline">Application Deadline (Optional)</label>
-        <%= f.date_field :deadline, id: "offer_deadline", class: "form-control" %>
+      <div class="form-footer">
+        <%= link_to "Cancel", offer_path(@offer), class: "btn btn-secondary btn-cancel" %>
+        <%= f.submit "Update Offer", class: "btn btn-primary btn-submit" %>
       </div>
 
-      <h3 class="section-heading-mission">
-        2. Proof of Work Mission (Optional)
-      </h3>
-      <p class="mission-desc-edit text-secondary fs-13">
-        Update the small test that candidates complete to prove their capability.
-      </p>
-
-      <%= f.fields_for :mission do |m| %>
-        <div class="form-group">
-          <label class="form-label" for="mission_title">Mission Title</label>
-          <%= m.text_field :title, id: "mission_title", class: "form-control", placeholder: "e.g. Build a Responsive Navigation Bar" %>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="mission_instructions">Mission Instructions & Rubric</label>
-          <%= m.text_area :instructions, id: "mission_instructions", class: "form-control", rows: 4, placeholder: "Provide the goal, specifications, resources, and evaluation details..." %>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="mission_duration">Estimated Completion Time (Minutes)</label>
-          <%= m.number_field :estimated_duration_minutes, id: "mission_duration", class: "form-control", placeholder: "e.g. 60" %>
-        </div>
-      <% end %>
-
-      <div class="flex-row mt-30 gap-15">
-        <%= link_to "Cancel", offer_path(@offer), class: "btn btn-secondary btn-flex-1" %>
-        <%= f.submit "Update Offer", class: "btn btn-primary btn-flex-2" %>
-      </div>
     <% end %>
   </div>
 </div>
+
