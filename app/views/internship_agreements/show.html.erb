@@ -4,14 +4,13 @@
 <% university = @agreement.university %>
 
 <div class="agreement-container">
-  <div class="hide-on-print" style="display:flex;justify-content:flex-end;margin-bottom:16px;gap:12px;">
-    <%= link_to dashboard_path, class: "btn btn-secondary btn-sm" do %>← Dashboard<% end %>
-    <button id="print-btn" class="btn btn-secondary btn-sm">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="6 9 6 2 18 2 18 9"/>
-        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-        <rect x="6" y="14" width="12" height="8"/>
-      </svg>
+  <div class="agreement-action-bar hide-on-print">
+    <%= link_to dashboard_path, class: "btn btn-secondary" do %>
+      <i data-lucide="arrow-left"></i>
+      Dashboard
+    <% end %>
+    <button id="print-btn" class="btn btn-secondary">
+      <i data-lucide="printer"></i>
       Print / Save as PDF
     </button>
   </div>
@@ -19,7 +18,10 @@
 
     <% if @agreement.status == "declined" %>
       <div class="agreement-declined-banner">
-        <p class="agreement-declined-title">✗ Agreement Declined</p>
+        <p class="agreement-declined-title">
+          <i data-lucide="x-circle" class="icon-16 stroke-danger"></i>
+          Agreement Declined
+        </p>
         <p class="agreement-declined-reason"><strong>Reason:</strong> <%= @agreement.rejection_reason %></p>
         <p class="agreement-declined-by">Declined by <%= university&.name %> coordinator</p>
       </div>
@@ -33,18 +35,18 @@
     <div class="text-center mb-30">
       <% if @agreement.status == "fully_executed" %>
         <span class="badge-status badge-completed fs-14 pill-lg">
-          ✓ FULLY EXECUTED — All parties have signed
+          FULLY EXECUTED — All parties have signed
         </span>
         <div class="mt-10 hide-on-print">
           <button type="button" id="print-btn-2" class="btn btn-secondary">Print / Save PDF</button>
         </div>
       <% elsif @agreement.status == "declined" %>
         <span class="badge-status badge-declined fs-14 pill-lg">
-          ✗ DECLINED — The university has rejected this agreement
+          DECLINED — University rejected this agreement
         </span>
       <% else %>
         <span class="badge-status badge-pending fs-14 pill-lg">
-          ⏳ PENDING SIGNATURES — Awaiting: <%= @agreement.pending_signatories.join(", ") %>
+          PENDING SIGNATURES — Awaiting: <%= @agreement.pending_signatories.join(", ") %>
         </span>
       <% end %>
     </div>
@@ -93,7 +95,7 @@
           <p class="agreement-sign-box-name"><%= student.first_name %> <%= student.last_name %></p>
           <% if @agreement.student_signed_at %>
             <div class="agreement-signed-badge">
-              <span class="agreement-signed-label">✓ Signed</span>
+              <span class="agreement-signed-label">Signed</span>
               <p class="agreement-signed-date"><%= @agreement.student_signed_at.strftime("%B %d, %Y at %H:%M") %></p>
             </div>
           <% else %>
@@ -111,7 +113,7 @@
           <p class="agreement-sign-box-name"><%= company.name %></p>
           <% if @agreement.company_signed_at %>
             <div class="agreement-signed-badge">
-              <span class="agreement-signed-label">✓ Signed</span>
+              <span class="agreement-signed-label">Signed</span>
               <p class="agreement-signed-date"><%= @agreement.company_signed_at.strftime("%B %d, %Y at %H:%M") %></p>
             </div>
           <% else %>
@@ -129,7 +131,7 @@
           <p class="agreement-sign-box-name"><%= university&.name || "Independent" %></p>
           <% if @agreement.university_signed_at %>
             <div class="agreement-signed-badge">
-              <span class="agreement-signed-label">✓ Signed</span>
+              <span class="agreement-signed-label">Signed</span>
               <p class="agreement-signed-date"><%= @agreement.university_signed_at.strftime("%B %d, %Y at %H:%M") %></p>
             </div>
           <% else %>

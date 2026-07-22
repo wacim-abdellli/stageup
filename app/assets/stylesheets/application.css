@@ -5846,11 +5846,16 @@ textarea.form-control {
   box-shadow: 0 0 0 3px rgba(239,68,68,0.08);
 }
 
-.review-context-row + .review-context-row {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border-color);
+
+/* Agreement Action Bar */
+.agreement-action-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
+
 
 
 
