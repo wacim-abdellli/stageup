@@ -1242,7 +1242,7 @@ textarea.form-control {
 }
 
 .auth-card a:not(.btn):not(.role-card):hover {
-  color: white;
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
@@ -4705,12 +4705,12 @@ textarea.form-control {
 }
 
 .nav-link:hover {
-  color: #FFFFFF;
+  color: var(--text-primary);
   background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-link-active {
-  color: #FFFFFF;
+  color: var(--text-primary);
   font-weight: 600;
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.12);
@@ -4917,7 +4917,7 @@ textarea.form-control {
 }
 
 .nav-dropdown-item:hover {
-  color: #FFFFFF;
+  color: var(--text-primary);
   background: rgba(255, 255, 255, 0.06);
 }
 
@@ -6302,4 +6302,15 @@ textarea.form-control {
 [data-theme="light"] .mockup-row {
   background: rgba(15, 23, 42, 0.02);
   border-color: rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .role-card:hover .role-title,
+[data-theme="light"] .role-card:hover .role-arrow,
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-dropdown-item:hover {
+  color: #0F172A;
+}
+
+[data-theme="light"] .role-card:hover .role-desc {
+  color: #475569;
 }
