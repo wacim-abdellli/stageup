@@ -62,7 +62,8 @@
             <%= current_user.email[0].upcase %>
           </span>
           <span class="nav-avatar-name">
-            <%= (current_user.profile.respond_to?(:first_name) && current_user.profile.first_name.present?) ? current_user.profile.first_name : current_user.email.split('@').first %>
+            <% prof = current_user.profileable %>
+            <%= (prof.respond_to?(:first_name) && prof.first_name.present?) ? prof.first_name : ((prof.respond_to?(:name) && prof.name.present?) ? prof.name : current_user.email.split('@').first) %>
           </span>
           <svg class="nav-avatar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m6 9 6 6 6-6"/>
