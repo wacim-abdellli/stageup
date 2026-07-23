@@ -1,6 +1,6 @@
 <% content_for :title, "Create Account – StageUp" %>
 <div class="auth-container">
-  <div class="auth-card">
+  <div class="auth-card auth-card-md">
     <div class="auth-header">
       <%= render "layouts/navbar_brand" %>
       <h2 class="auth-title">Create your account</h2>
@@ -9,38 +9,41 @@
 
     <div class="role-grid">
       <%= link_to new_student_registration_path, class: "role-card role-card-student" do %>
-        <div class="role-icon">
-          <i data-lucide="graduation-cap"></i>
+        <div class="role-icon icon-indigo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
         </div>
-        <div>
+        <div class="role-info">
           <h3 class="role-title">I am a Student</h3>
           <p class="role-desc">Browse internships, prove your skills with missions, and build a verified career profile.</p>
         </div>
+        <svg class="role-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       <% end %>
 
       <%= link_to new_company_registration_path, class: "role-card role-card-company" do %>
-        <div class="role-icon">
-          <i data-lucide="briefcase"></i>
+        <div class="role-icon icon-emerald">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         </div>
-        <div>
+        <div class="role-info">
           <h3 class="role-title">I am a Company / Startup</h3>
           <p class="role-desc">Post internship offers, attach proof-of-work missions, and hire reliable talent.</p>
         </div>
+        <svg class="role-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       <% end %>
 
       <%= link_to new_university_registration_path, class: "role-card role-card-university" do %>
-        <div class="role-icon">
-          <i data-lucide="landmark"></i>
+        <div class="role-icon icon-amber">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h4"/><path d="M18 9h2a2 2 0 0 1 2 2v11h-4"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
         </div>
-        <div>
+        <div class="role-info">
           <h3 class="role-title">I am a University Coordinator</h3>
           <p class="role-desc">Verify student profiles, endorse trusted companies, and simplify internship agreements.</p>
         </div>
+        <svg class="role-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       <% end %>
     </div>
 
     <div class="auth-footer">
-      Already have an account? <%= link_to "Sign In", new_user_session_path, class: "fw-500" %>
+      Already have an account? <%= link_to "Sign In", new_user_session_path, class: "auth-signin-link" %>
     </div>
   </div>
 </div>

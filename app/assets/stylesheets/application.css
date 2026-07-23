@@ -6213,6 +6213,52 @@ textarea.form-control {
   color: #FFFFFF;
 }
 
+[data-theme="light"] .auth-container {
+  background-color: #F8FAFC;
+}
+
+[data-theme="light"] .auth-card {
+  background: #FFFFFF;
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .auth-title,
+[data-theme="light"] .role-title,
+[data-theme="light"] .form-label {
+  color: #0F172A;
+}
+
+[data-theme="light"] .auth-subtitle,
+[data-theme="light"] .role-desc,
+[data-theme="light"] .auth-remember-row label,
+[data-theme="light"] .auth-footer {
+  color: #475569;
+}
+
+[data-theme="light"] .role-card {
+  background: #F8FAFC;
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .role-card:hover {
+  background: #FFFFFF;
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .form-control {
+  background: #F8FAFC;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #0F172A;
+}
+
+[data-theme="light"] .form-control:focus {
+  background: #FFFFFF;
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
 [data-theme="light"] .landing-hero-title {
   color: #0F172A;
 }
