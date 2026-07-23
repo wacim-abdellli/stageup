@@ -1,35 +1,72 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-primary: #07080A;
-  --bg-secondary: #0F1015;
-  --bg-tertiary: #17181F;
-  --text-primary: #F4F4F6;
-  --text-secondary: #9FA3AF;
-  --text-muted: #626773;
-  
-  --primary: #6366F1;        /* mid indigo for proper dark-mode contrast */
+  /* Surfaces */
+  --bg-primary: #090A0F;
+  --bg-secondary: #11131A;
+  --bg-tertiary: #191C26;
+
+  /* Typography */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+
+  /* Primary Brand (Indigo) */
+  --primary: #6366F1;
   --primary-hover: #818CF8;
   --primary-light: rgba(99, 102, 241, 0.08);
-  
+
+  /* Accents */
   --accent: #FFFFFF;
   --accent-hover: #E4E4E7;
-  
+  --accent-indigo: #6366F1;
+  --accent-emerald: #10B981;
+  --accent-amber: #F59E0B;
+  --accent-purple: #A855F7;
+  --accent-cyan: #06B6D4;
+  --accent-rose: #F43F5E;
+
+  /* Status Colors */
   --success: #10B981;
   --danger: #EF4444;
   --warning: #F59E0B;
-  
+
+  /* Borders & Shadows */
   --border-color: rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(99, 102, 241, 0.4);
+  --border-hover: rgba(255, 255, 255, 0.16);
+  --border-focus: rgba(99, 102, 241, 0.45);
   
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.25);
   --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Light Theme Overrides */
+[data-theme="light"], body.light-theme {
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F1F5F9;
+
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+
+  --accent: #0F172A;
+  --accent-hover: #1E293B;
+
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.16);
+  --border-focus: rgba(99, 102, 241, 0.5);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
 }
 
 * {
