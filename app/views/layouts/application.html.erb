@@ -132,7 +132,9 @@
         /* ── Flash auto-dismiss ── */
         function initFlashMessages() {
           document.querySelectorAll('.flash-message').forEach(function(flash) {
-            var timer = setTimeout(function() { dismissFlash(flash); }, 4000);
+            if (flash.dataset.initialized) return;
+            flash.dataset.initialized = 'true';
+            var timer = setTimeout(function() { dismissFlash(flash); }, 3500);
             var btn = flash.querySelector('.flash-close');
             if (btn) btn.addEventListener('click', function(e) {
               e.stopPropagation();
@@ -148,11 +150,17 @@
           function removeEl() {
             if (!removed) {
               removed = true;
-              el.remove();
+              if (el.parentNode) el.parentNode.removeChild(el);
             }
           }
           el.addEventListener('transitionend', removeEl);
-          setTimeout(removeEl, 500);
+          setTimeout(removeEl, 400);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initFlashMessages);
+        } else {
+          initFlashMessages();
         }
 
         /* ── Boot on every Turbo page load ── */
