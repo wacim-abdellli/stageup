@@ -67,7 +67,10 @@
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 Phone
               </span>
-              <span class="bento-value"><%= @profile.phone_number.presence || "Not specified" %></span>
+              <span class="bento-value">
+                <% student_phone = @profile.respond_to?(:phone) ? @profile.phone : (@profile.respond_to?(:phone_number) ? @profile.phone_number : nil) %>
+                <%= student_phone.presence || "Not specified" %>
+              </span>
             </div>
 
             <div class="profile-bento-item">
@@ -75,7 +78,10 @@
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                 Major
               </span>
-              <span class="bento-value"><%= @profile.field_of_study.presence || "Not specified" %></span>
+              <span class="bento-value">
+                <% student_major = @profile.respond_to?(:major) ? @profile.major : (@profile.respond_to?(:field_of_study) ? @profile.field_of_study : nil) %>
+                <%= student_major.presence || "Not specified" %>
+              </span>
             </div>
 
             <div class="profile-bento-item">
@@ -92,7 +98,7 @@
                 University
               </span>
               <span class="bento-value">
-                <% if @profile.university %>
+                <% if @profile.respond_to?(:university) && @profile.university %>
                   <%= @profile.university.name %>
                 <% else %>
                   <span class="text-muted italic">Self-declared / Unassociated</span>
@@ -106,7 +112,7 @@
                 Skills
               </span>
               <span class="bento-value">
-                <% if @profile.skills.any? %>
+                <% if @profile.respond_to?(:skills) && @profile.skills.any? %>
                   <%= @profile.skills.map(&:name).join(", ") %>
                 <% else %>
                   <span class="text-muted italic">None added</span>
@@ -119,7 +125,7 @@
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                 Bio
               </span>
-              <span class="bento-value"><%= @profile.bio.presence || "No bio provided yet." %></span>
+              <span class="bento-value"><%= (@profile.respond_to?(:bio) && @profile.bio.present?) ? @profile.bio : "No bio provided yet." %></span>
             </div>
 
           <% elsif @role_type == "CompanyProfile" %>
@@ -128,34 +134,30 @@
               <span class="bento-value"><%= @profile.name %></span>
             </div>
             <div class="profile-bento-item">
-              <span class="bento-label">Industry</span>
-              <span class="bento-value"><%= @profile.industry.presence || "Not specified" %></span>
-            </div>
-            <div class="profile-bento-item">
-              <span class="bento-label">Location</span>
-              <span class="bento-value"><%= @profile.location.presence || "Not specified" %></span>
+              <span class="bento-label">Website</span>
+              <span class="bento-value"><%= (@profile.respond_to?(:website) && @profile.website.present?) ? @profile.website : "Not specified" %></span>
             </div>
             <div class="profile-bento-item">
               <span class="bento-label">Verification Status</span>
-              <span class="bento-value"><%= @profile.verified? ? "Verified Recruiter" : "Pending Verification" %></span>
+              <span class="bento-value"><%= (@profile.respond_to?(:verified?) && @profile.verified?) ? "Verified Recruiter" : "Pending Verification" %></span>
             </div>
             <div class="profile-bento-item bento-full-width">
               <span class="bento-label">Description</span>
-              <span class="bento-value"><%= @profile.description.presence || "No description provided." %></span>
+              <span class="bento-value"><%= (@profile.respond_to?(:description) && @profile.description.present?) ? @profile.description : "No description provided." %></span>
             </div>
 
           <% elsif @role_type == "UniversityProfile" %>
             <div class="profile-bento-item">
+              <span class="bento-label">Admin Name</span>
+              <span class="bento-value"><%= @profile.admin_name %></span>
+            </div>
+            <div class="profile-bento-item">
+              <span class="bento-label">Department</span>
+              <span class="bento-value"><%= @profile.department %></span>
+            </div>
+            <div class="profile-bento-item">
               <span class="bento-label">Institution Name</span>
-              <span class="bento-value"><%= @profile.name %></span>
-            </div>
-            <div class="profile-bento-item">
-              <span class="bento-label">Location</span>
-              <span class="bento-value"><%= @profile.location.presence || "Not specified" %></span>
-            </div>
-            <div class="profile-bento-item">
-              <span class="bento-label">Associated Students</span>
-              <span class="bento-value"><%= @profile.student_profiles.count %> registered</span>
+              <span class="bento-value"><%= @profile.university ? @profile.university.name : "University Partner" %></span>
             </div>
           <% end %>
         </div>
