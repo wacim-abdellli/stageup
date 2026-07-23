@@ -11,6 +11,9 @@
   --text-secondary: #94A3B8;
   --text-muted: #64748B;
 
+  /* Links */
+  --text-link: #818CF8;
+
   /* Primary Brand (Indigo) */
   --primary: #6366F1;
   --primary-hover: #818CF8;
@@ -48,6 +51,7 @@
 }
 /* Light Theme Overrides */
 [data-theme="light"] {
+  --text-link: #4F46E5;
   --bg-primary: #F8FAFC;
   --bg-secondary: #FFFFFF;
   --bg-tertiary: #F1F5F9;
@@ -119,7 +123,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: #818CF8;
+  color: var(--text-link);
   text-decoration: none;
   transition: var(--transition);
 }
@@ -698,14 +702,14 @@ textarea.form-control {
   border-radius: 7px;
   background: rgba(99, 102, 241, 0.1);
   border: 1px solid rgba(99, 102, 241, 0.2);
-  color: #818CF8;
+  color: var(--text-link);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.bento-icon-badge.indigo  { background: rgba(99, 102, 241, 0.12); border-color: rgba(99, 102, 241, 0.25); color: #818CF8; }
+.bento-icon-badge.indigo  { background: rgba(99, 102, 241, 0.12); border-color: rgba(99, 102, 241, 0.25); color: var(--text-link); }
 .bento-icon-badge.emerald { background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.25); color: #34D399; }
 .bento-icon-badge.amber   { background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.25); color: #FBBF24; }
 .bento-icon-badge.purple  { background: rgba(168, 85, 247, 0.12); border-color: rgba(168, 85, 247, 0.25); color: #C084FC; }
@@ -736,7 +740,7 @@ textarea.form-control {
 .bento-skill-pill {
   font-size: 12px;
   font-weight: 600;
-  color: #818CF8;
+  color: var(--text-link);
   background: rgba(99, 102, 241, 0.08);
   border: 1px solid rgba(99, 102, 241, 0.2);
   padding: 3px 10px;
@@ -865,7 +869,7 @@ textarea.form-control {
 .badge-progress {
   background-color: rgba(99, 102, 241, 0.06);
   border-color: rgba(99, 102, 241, 0.2);
-  color: #818CF8;
+  color: var(--text-link);
 }
 
 .badge-review {
@@ -1547,7 +1551,7 @@ textarea.form-control {
 }
 
 /* Application link styles */
-.cv-link a { font-weight: 600; color: #818CF8; }
+.cv-link a { font-weight: 600; color: var(--text-link); }
 .solution-link a { font-weight: 500; }
 
 /* Submission notes */
@@ -1859,7 +1863,7 @@ textarea.form-control {
   border: 1px solid rgba(99,102,241,0.18);
   display: flex; align-items: center; justify-content: center;
   font-size: 16px; font-weight: 800;
-  color: #818CF8;
+  color: var(--text-link);
   font-family: 'Outfit', sans-serif;
   flex-shrink: 0;
 }
@@ -1958,7 +1962,7 @@ textarea.form-control {
 
 .mission-title {
   font-size: 18px;
-  color: #818CF8;
+  color: var(--text-link);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1972,7 +1976,7 @@ textarea.form-control {
 
 .mission-duration-tag {
   background-color: rgba(99, 102, 241, 0.15);
-  color: #818CF8;
+  color: var(--text-link);
   border: 1px solid rgba(99, 102, 241, 0.3);
   font-size: 11px;
   display: inline-flex;
@@ -2116,7 +2120,7 @@ textarea.form-control {
 
 /* Compact inline list item for offers management */
 .offer-mgmt-link {
-  color: #818CF8;
+  color: var(--text-link);
 }
 .offer-mgmt-link:hover {
   color: #A5B4FC;
@@ -2589,7 +2593,7 @@ textarea.form-control {
 .offer-card-badge-proof {
   background: rgba(99, 102, 241, 0.06);
   border: 1px solid rgba(99, 102, 241, 0.2);
-  color: #818CF8;
+  color: var(--text-link);
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -2847,7 +2851,7 @@ textarea.form-control {
 .notif-mark-all-link {
   font-size: 12px;
   font-weight: 600;
-  color: #818CF8;
+  color: var(--text-link);
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -3383,7 +3387,7 @@ textarea.form-control {
   font-weight: 500;
   background: rgba(99, 102, 241, 0.08);
   border: 1px solid rgba(99, 102, 241, 0.2);
-  color: #818CF8;
+  color: var(--text-link);
   border-radius: 999px;
   line-height: 1.5;
 }
@@ -3395,7 +3399,7 @@ textarea.form-control {
   font-size: 10px;
   background: rgba(99, 102, 241, 0.06);
   border: 1px solid rgba(99, 102, 241, 0.15);
-  color: #818CF8;
+  color: var(--text-link);
   border-radius: 3px;
   line-height: 1.3;
 }
@@ -3636,7 +3640,7 @@ textarea.form-control {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  color: #818CF8;
+  color: var(--text-link);
   background: rgba(99, 102, 241, 0.1);
   padding: 2px 8px;
   border-radius: 9999px;
@@ -3692,7 +3696,7 @@ textarea.form-control {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.avatar-purple { background: rgba(129, 140, 248, 0.1); color: #818CF8; }
+.avatar-purple { background: rgba(129, 140, 248, 0.1); color: var(--text-link); }
 .avatar-blue { background: rgba(96, 165, 250, 0.1); color: #60A5FA; }
 .avatar-green { background: rgba(52, 211, 153, 0.1); color: #34D399; }
 .avatar-red { background: rgba(248, 113, 113, 0.1); color: #F87171; }
@@ -3799,7 +3803,7 @@ textarea.form-control {
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  color: #818CF8;
+  color: var(--text-link);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               background-color 0.25s,
               border-color 0.25s,
@@ -3864,7 +3868,7 @@ textarea.form-control {
 
 .badge-new-tag {
   background: rgba(99, 102, 241, 0.15);
-  color: #818CF8;
+  color: var(--text-link);
   padding: 1px 6px;
   border-radius: 9999px;
   font-weight: 600;
@@ -3914,7 +3918,7 @@ textarea.form-control {
   gap: 8px;
   font-size: 11px;
   font-weight: 700;
-  color: #818CF8;
+  color: var(--text-link);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 12px;
@@ -3942,7 +3946,7 @@ textarea.form-control {
 }
 
 /* Differentiated bento icon colors per card */
-.bento-card-1 .bento-icon { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818CF8; }
+.bento-card-1 .bento-icon { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: var(--text-link); }
 .bento-card-2 .bento-icon { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.2); color: #34D399; }
 .bento-card-3 .bento-icon { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); color: #FBBF24; }
 
@@ -4002,7 +4006,7 @@ textarea.form-control {
 }
 
 .featured-view-all {
-  color: #818CF8;
+  color: var(--text-link);
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
@@ -4062,7 +4066,7 @@ textarea.form-control {
 .featured-mission-badge {
   background: rgba(99, 102, 241, 0.06);
   border: 1px solid rgba(99, 102, 241, 0.2);
-  color: #818CF8;
+  color: var(--text-link);
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -4265,7 +4269,7 @@ textarea.form-control {
 
 .info-value-accent {
   font-size: 15px;
-  color: #818CF8;
+  color: var(--text-link);
 }
 
 .form-hint {
@@ -5028,7 +5032,7 @@ textarea.form-control {
 }
 
 .mobile-nav-cta {
-  color: #818CF8;
+  color: var(--text-link);
   background: rgba(99,102,241,0.06);
   border: 1px solid rgba(99,102,241,0.15);
   margin-top: 4px;
@@ -5354,7 +5358,7 @@ textarea.form-control {
   gap: 5px;
   font-size: 11px;
   font-weight: 600;
-  color: #818CF8;
+  color: var(--text-link);
   background: rgba(99,102,241,0.08);
   border: 1px solid rgba(99,102,241,0.2);
   padding: 3px 10px;
@@ -5496,7 +5500,7 @@ textarea.form-control {
 .offer-card-badge-proof {
   background: rgba(99,102,241,0.06);
   border: 1px solid rgba(99,102,241,0.2);
-  color: #818CF8;
+  color: var(--text-link);
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -5575,7 +5579,7 @@ textarea.form-control {
 .offer-card-action {
   font-size: 12px;
   font-weight: 700;
-  color: #818CF8;
+  color: var(--text-link);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -5699,7 +5703,7 @@ textarea.form-control {
 }
 
 .form-section-mission .form-section-title {
-  color: #818CF8;
+  color: var(--text-link);
   border-bottom-color: rgba(99,102,241,0.15);
 }
 

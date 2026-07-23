@@ -51,7 +51,7 @@ class DashboardsController < ApplicationController
       @recent_reputation_events = CommitmentEvent
                                    .where(profileable_type: "StudentProfile",
                                           profileable_id: StudentProfile.where(university_id: @university.id).select(:id))
-                                   .includes(:profileable)
+                                   .includes(profileable: [:user, :university])
                                    .order(created_at: :desc)
                                    .limit(20)
     end
