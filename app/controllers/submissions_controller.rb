@@ -14,8 +14,19 @@ class SubmissionsController < ApplicationController
       redirect_to offer_path(@offer), alert: "You cannot apply to an inactive offer."
       return
     end
+
+    student = current_user.profileable
+    if params[:custom_cv_url].present?
+      student.update(cv_url: params[:custom_cv_url])
+    end
+
+    if @offer.mission.nil? && student.cv_url.blank?
+      redirect_to offer_path(@offer), alert: "Please provide a valid CV URL before submitting your application."
+      return
+    end
+
     @mission = params[:mission_id].present? ? Mission.find(params[:mission_id]) : nil
-    @submission = current_user.profileable.submissions.build(
+    @submission = student.submissions.build(
       offer: @offer,
       mission: @mission,
       status: @offer.mission.present? ? "started" : "submitted",

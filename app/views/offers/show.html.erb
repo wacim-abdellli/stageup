@@ -185,27 +185,31 @@
           <p class="fs-13 text-secondary mb-20 lh-15">
             You must be logged in as a student to apply or take on the proof-of-work mission.
           </p>
-          <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent text-decoration-none" %>
+          <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent text-decoration-none w-100 text-center" %>
         <% elsif current_user.profileable_type == "StudentProfile" %>
           <% if @submission.nil? %>
             <% if @offer.mission %>
               <p class="fs-13 text-secondary mb-20 lh-15">
                 This offer has an attached task. Clicking below starts a <strong>48-hour window</strong> to complete the mission and submit your work.
               </p>
-              <%= button_to "Start Proof Mission", submissions_path(offer_id: @offer.id, mission_id: @offer.mission.id), class: "btn btn-primary", onclick: "return confirm('Starting this mission begins a 48-hour timer. Failing to submit within 48 hours will impact your reputation score. Are you sure you want to proceed?');" %>
+              <button type="button" class="btn btn-primary w-100" id="btn-open-mission-modal">
+                Start Proof Mission
+              </button>
             <% else %>
               <p class="fs-13 text-secondary mb-20 lh-15">
-                This offer accepts standard applications. Clicking below will instantly submit your CV.
+                This offer accepts standard CV applications. Click below to review your CV link and submit.
               </p>
-              <%= button_to "Apply with CV", submissions_path(offer_id: @offer.id), class: "btn btn-primary" %>
+              <button type="button" class="btn btn-primary w-100" id="btn-open-cv-modal">
+                Apply with CV
+              </button>
             <% end %>
           
           <% elsif @submission.status == "started" %>
-            <div class="mission-started-box">
+            <div class="mission-started-box mb-16">
               <span class="mission-started-title">Mission In Progress</span>
-              <span class="mission-started-text">You started this mission. Don't forget to submit your code link before the deadline!</span>
+              <span class="mission-started-text">You started this mission. Don't forget to submit your code link before the 48h deadline!</span>
             </div>
-            <%= link_to "Paste Solution URL", edit_submission_path(@submission), class: "btn btn-primary" %>
+            <%= link_to "Submit Solution URL →", edit_submission_path(@submission), class: "btn btn-primary w-100 text-center text-decoration-none" %>
 
           <% else %>
             <div class="app-status-center">
@@ -215,7 +219,7 @@
               </span>
               <% if @submission.github_link.present? %>
                 <div class="mt-15 fs-13">
-                  <%= link_to "View My Submission Link", @submission.github_link, target: "_blank" %>
+                  <%= link_to "View My Submission Link", @submission.github_link, target: "_blank", class: "text-accent" %>
                 </div>
               <% end %>
             </div>
@@ -233,3 +237,106 @@
   </div>
 
 </div>
+
+<%# ─── Custom Modal: Mission Start Confirmation ──────────────── %>
+<% if current_user&.profileable_type == "StudentProfile" && @submission.nil? && @offer.mission %>
+  <div class="modal-backdrop" id="mission-modal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-icon-wrap icon-amber-bg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h3 class="modal-title">Start 48-Hour Proof Mission</h3>
+        <button type="button" class="modal-close-btn" class="close-modal-trigger">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">
+          You are about to start the proof-of-work mission for <strong><%= @offer.title %></strong>.
+        </p>
+        <div class="modal-info-box">
+          <div class="info-row">
+            <span class="info-label">Timer Window:</span>
+            <strong>48 Hours</strong>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Success Reward:</span>
+            <strong class="text-success">+10 Commitment Score</strong>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Missed Deadline:</span>
+            <strong class="text-danger">-15 Commitment Penalty</strong>
+          </div>
+        </div>
+        <p class="modal-subtext">Are you sure you have time to start this challenge right now?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close-modal-trigger">Cancel</button>
+        <%= button_to "Confirm & Start Mission", submissions_path(offer_id: @offer.id, mission_id: @offer.mission.id), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%# ─── Custom Modal: CV Application ─────────────────────────── %>
+<% if current_user&.profileable_type == "StudentProfile" && @submission.nil? && @offer.mission.nil? %>
+  <div class="modal-backdrop" id="cv-modal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-icon-wrap icon-indigo-bg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <h3 class="modal-title">Apply with CV</h3>
+        <button type="button" class="modal-close-btn" class="close-modal-trigger">&times;</button>
+      </div>
+      <%= form_with url: submissions_path, method: :post, local: true do |f| %>
+        <%= f.hidden_field :offer_id, value: @offer.id %>
+        <div class="modal-body">
+          <p class="modal-desc">
+            You are applying to <strong><%= @offer.title %></strong> at <%= @company.name %>.
+          </p>
+          
+          <div class="form-group mb-16">
+            <label class="form-label" for="custom_cv_url">CV Link / Document URL</label>
+            <%= f.url_field :custom_cv_url, value: current_user.profileable.cv_url, class: "form-control",
+                placeholder: "https://drive.google.com/your-cv.pdf", required: true %>
+            <span class="fs-12 text-muted mt-4 display-block">
+              Paste a public Google Drive, Dropbox, LinkedIn, or PDF link to your resume.
+            </span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary close-modal-trigger">Cancel</button>
+          <%= f.submit "Confirm & Submit CV", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<script nonce="<%= content_security_policy_nonce %>">
+  document.addEventListener('DOMContentLoaded', function() {
+    function setupModal(triggerId, modalId) {
+      var btn = document.getElementById(triggerId);
+      var modal = document.getElementById(modalId);
+      if (!btn || !modal) return;
+
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        modal.style.display = 'flex';
+      });
+
+      modal.querySelectorAll('.close-modal-trigger').forEach(function(c) {
+        c.addEventListener('click', function() {
+          modal.style.display = 'none';
+        });
+      });
+
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) modal.style.display = 'none';
+      });
+    }
+
+    setupModal('btn-open-mission-modal', 'mission-modal');
+    setupModal('btn-open-cv-modal', 'cv-modal');
+  });
+</script>
