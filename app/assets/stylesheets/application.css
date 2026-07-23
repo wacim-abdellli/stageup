@@ -2569,6 +2569,7 @@ textarea.form-control {
 }
 
 /* Notifications bell dropdown */
+/* Notifications bell dropdown */
 .notif-bell-container {
   position: relative;
   display: inline-flex;
@@ -2576,38 +2577,29 @@ textarea.form-control {
 }
 
 .notif-bell-btn {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer;
-  padding: 6px;
-  border-radius: var(--radius-sm);
+  padding: 8px;
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   color: var(--text-secondary);
-  transition: color 0.2s ease, background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .notif-bell-btn:hover {
   color: var(--text-primary);
-  background: rgba(255,255,255,0.05);
-}
-
-.notif-bell-dot {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 8px;
-  height: 8px;
-  background-color: #F87171;
-  border-radius: 50%;
-  border: 2px solid var(--bg-secondary);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .notif-bell-count {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: -2px;
+  right: -2px;
   min-width: 16px;
   height: 16px;
   background-color: #EF4444;
@@ -2619,57 +2611,74 @@ textarea.form-control {
   align-items: center;
   justify-content: center;
   padding: 0 4px;
-  border: 2px solid var(--bg-secondary);
+  border: 2px solid #09090B;
 }
 
-/* Notifications dropdown panel with elastic entry */
+/* Notifications dropdown panel */
 .notif-dropdown {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 10px);
   right: 0;
-  width: 340px;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  z-index: 1000;
+  width: 320px;
+  background: rgba(13, 14, 18, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  z-index: 500;
   overflow: hidden;
 
-  /* Initial hidden state */
+  /* Initial state */
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px) scale(0.96);
   transform-origin: top right;
-  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.25s;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.2s;
 }
+
 .notif-dropdown.open {
   opacity: 1;
   visibility: visible;
   transform: translateY(0) scale(1);
-}
-/* Remove hover trigger to prevent competing mouse states */
-.notif-bell-container:hover .notif-dropdown {
-  opacity: 0;
-  visibility: hidden;
-}
-.notif-bell-container .notif-dropdown.open {
-  opacity: 1;
-  visibility: visible;
 }
 
 .notif-dropdown-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border-color);
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.notif-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
 }
 
 .notif-dropdown-title {
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.notif-mark-all-link {
+  font-size: 12px;
   font-weight: 600;
+  color: #818CF8;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.notif-mark-all-link:hover {
+  color: #A5B4FC;
 }
 
 .notif-dropdown-list {
@@ -2679,20 +2688,29 @@ textarea.form-control {
 
 .notif-item {
   padding: 12px 16px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.4;
-  transition: var(--transition);
+  transition: background 0.15s ease;
+}
+
+.notif-item:last-child {
+  border-bottom: none;
 }
 
 .notif-item:hover {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
 .notif-item.unread {
-  border-left: 3px solid var(--primary);
+  border-left: 3px solid #818CF8;
   color: var(--text-primary);
+  background-color: rgba(99, 102, 241, 0.04);
+}
+
+.notif-item-text {
+  display: block;
 }
 
 .notif-item-time {
@@ -2702,21 +2720,15 @@ textarea.form-control {
   display: block;
 }
 
-.notif-dropdown-footer {
-  padding: 10px 16px;
-  border-top: 1px solid var(--border-color);
+.notif-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 32px 16px;
   text-align: center;
-}
-
-.notif-mark-all-link {
-  font-size: 12px;
-  color: var(--primary);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.notif-mark-all-link:hover {
-  color: var(--primary-hover);
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
 .notif-empty {
@@ -4382,14 +4394,20 @@ textarea.form-control {
    NAVBAR  (layouts/_navbar)
    ============================================================ */
 
+/* Unified Navbar */
+/* ============================================================
+   NAVBAR  (layouts/_navbar)
+   ============================================================ */
+
 .navbar {
   position: sticky;
   top: 0;
   z-index: 200;
-  background: rgba(7, 8, 10, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-color);
+  background: rgba(9, 9, 11, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-inner {
@@ -4399,7 +4417,7 @@ textarea.form-control {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  height: 60px;
+  height: 64px;
   gap: 24px;
 }
 
@@ -4415,25 +4433,34 @@ textarea.form-control {
 
 .logo-lockup-text {
   font-family: 'Outfit', sans-serif;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: -0.03em;
 }
 
-/* ── Centre links ── */
-.navbar-links {
+/* ── Segmented Pill Navigation ── */
+.navbar-center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.nav-pill-container {
+  display: inline-flex;
+  align-items: center;
   gap: 4px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 9999px;
 }
 
 .nav-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
+  padding: 6px 16px;
   font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
@@ -4441,33 +4468,35 @@ textarea.form-control {
   border-radius: 9999px;
   text-decoration: none;
   transition: all 0.2s ease;
-  position: relative;
+  white-space: nowrap;
 }
 
 .nav-link-icon {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   stroke: currentColor;
   flex-shrink: 0;
   opacity: 0.85;
 }
 
 .nav-link:hover {
-  color: var(--text-primary);
+  color: #FFFFFF;
   background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-link-active {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
 
-/* ── Right cluster ── */
+/* ── Right Cluster ── */
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 /* ── CTA Button: Post an Offer ── */
@@ -4475,21 +4504,21 @@ textarea.form-control {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 14px;
+  padding: 7px 16px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   color: #09090B;
   background: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
   text-decoration: none;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
   white-space: nowrap;
 }
 
 .nav-cta-btn:hover {
-  background: var(--accent-hover);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  background: #F4F4F5;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
   color: #09090B;
 }
 
@@ -4500,7 +4529,7 @@ textarea.form-control {
   flex-shrink: 0;
 }
 
-/* ── User avatar button ── */
+/* ── User Avatar Trigger Pill ── */
 .nav-user-menu {
   position: relative;
 }
@@ -4508,39 +4537,38 @@ textarea.form-control {
 .nav-avatar-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: none;
-  border: none;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer;
-  padding: 4px;
-  border-radius: var(--radius-sm);
-  transition: background 0.2s ease;
+  padding: 4px 12px 4px 4px;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
 }
 
-.nav-avatar-btn:hover { background: rgba(255, 255, 255, 0.04); }
+.nav-avatar-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+}
 
-.nav-avatar-ring {
-  width: 30px;
-  height: 30px;
+.nav-avatar-circle {
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: 1.5px solid rgba(255,255,255,0.14);
+  background: linear-gradient(135deg, #6366F1, #818CF8);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.nav-avatar-btn:hover .nav-avatar-ring {
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(255,255,255,0.22);
-}
-
-.nav-avatar-initial {
   font-size: 12px;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-weight: 800;
+  color: #FFFFFF;
   font-family: 'Outfit', sans-serif;
+}
+
+.nav-avatar-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .nav-avatar-chevron {
@@ -4554,24 +4582,25 @@ textarea.form-control {
   transform: rotate(180deg);
 }
 
-/* ── Avatar dropdown ── */
+/* ── Levelled-Up Dropdown ── */
 .nav-user-dropdown {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 10px);
   right: 0;
-  width: 220px;
-  background: rgba(15, 16, 21, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-md);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  width: 240px;
+  background: rgba(13, 14, 18, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 6px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px) scale(0.96);
   transform-origin: top right;
   transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
-  z-index: 300;
+  z-index: 500;
 }
 
 .nav-user-dropdown.open {
@@ -4580,37 +4609,59 @@ textarea.form-control {
   transform: translateY(0) scale(1);
 }
 
-.nav-dropdown-header {
-  padding: 14px 16px 10px;
+.nav-dropdown-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+.nav-dropdown-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366F1, #818CF8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #FFFFFF;
+  font-family: 'Outfit', sans-serif;
+  flex-shrink: 0;
+}
+
+.nav-dropdown-info {
+  overflow: hidden;
 }
 
 .nav-dropdown-email {
   display: block;
   font-size: 12px;
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.nav-dropdown-role {
+.nav-dropdown-role-badge {
   display: inline-block;
-  margin-top: 4px;
-  font-size: 10px;
-  font-weight: 700;
+  margin-top: 3px;
+  font-size: 9px;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #818CF8;
-  background: rgba(99,102,241,0.08);
-  border: 1px solid rgba(99,102,241,0.2);
+  letter-spacing: 0.07em;
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   padding: 1px 7px;
   border-radius: 9999px;
 }
 
 .nav-dropdown-divider {
   height: 1px;
-  background: var(--border-color);
+  background: rgba(255, 255, 255, 0.06);
   margin: 4px 0;
 }
 
@@ -4626,34 +4677,42 @@ textarea.form-control {
   align-items: center;
   gap: 10px;
   width: 100%;
-  padding: 9px 16px;
+  padding: 10px 12px;
   font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
   text-decoration: none;
   background: none;
-  border: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
-  transition: color 0.15s ease, background 0.15s ease;
+  transition: all 0.15s ease;
   text-align: left;
 }
 
 .nav-dropdown-item:hover {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .nav-dropdown-icon {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   stroke: currentColor;
   flex-shrink: 0;
 }
 
-.nav-dropdown-signout:hover {
+.nav-dropdown-signout {
   color: #F87171;
-  background: rgba(239, 68, 68, 0.05);
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+.nav-dropdown-signout:hover {
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
 }
 
 /* ── Hamburger (mobile) ── */

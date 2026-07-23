@@ -8,78 +8,118 @@
       <% end %>
     </div>
 
-    <%# ─── Desktop centre links ─────────── %>
-    <div class="navbar-links" id="nav-links">
-      <%= link_to offers_path,
-            class: "nav-link #{'nav-link-active' if request.path.start_with?(offers_path)}",
-            aria: { current: (request.path.start_with?(offers_path) ? "page" : nil) } do %>
-        <i data-lucide="compass" class="nav-link-icon"></i>
-        Browse Offers
-      <% end %>
-      <%= link_to dashboard_path,
-            class: "nav-link #{'nav-link-active' if current_page?(dashboard_path)}",
-            aria: { current: (current_page?(dashboard_path) ? "page" : nil) } do %>
-        <i data-lucide="layout-dashboard" class="nav-link-icon"></i>
-        Dashboard
-      <% end %>
+    <%# ─── Desktop Segmented Pill Navigation ─────────── %>
+    <div class="navbar-center">
+      <div class="nav-pill-container" id="nav-links">
+        <%= link_to offers_path,
+              class: "nav-link #{'nav-link-active' if request.path.start_with?(offers_path)}",
+              aria: { current: (request.path.start_with?(offers_path) ? "page" : nil) } do %>
+          <svg class="nav-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+          </svg>
+          <span>Browse Offers</span>
+        <% end %>
+
+        <%= link_to dashboard_path,
+              class: "nav-link #{'nav-link-active' if current_page?(dashboard_path)}",
+              aria: { current: (current_page?(dashboard_path) ? "page" : nil) } do %>
+          <svg class="nav-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="9" x="3" y="3" rx="1"/>
+            <rect width="7" height="5" x="14" y="3" rx="1"/>
+            <rect width="7" height="9" x="14" y="12" rx="1"/>
+            <rect width="7" height="5" x="3" y="14" rx="1"/>
+          </svg>
+          <span>Dashboard</span>
+        <% end %>
+      </div>
     </div>
 
-    <%# ─── Right cluster ─────────────────── %>
+    <%# ─── Right Cluster ─────────────────── %>
     <div class="navbar-right" id="nav-menu">
 
       <%# Company CTA %>
       <% if current_user.profileable_type == "CompanyProfile" %>
         <%= link_to new_offer_path, class: "nav-cta-btn" do %>
-          <i data-lucide="plus" class="nav-cta-icon"></i>
-          Post an Offer
+          <svg class="nav-cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/>
+            <path d="M12 5v14"/>
+          </svg>
+          <span>Post an Offer</span>
         <% end %>
       <% end %>
 
       <%# Notification bell %>
       <%= render "layouts/notification_bell" %>
 
-      <%# User avatar + dropdown %>
+      <%# User Avatar + Dropdown %>
       <div class="nav-user-menu" id="nav-user-menu">
         <button class="nav-avatar-btn" id="nav-avatar-toggle"
                 aria-label="User menu"
                 aria-expanded="false"
                 aria-haspopup="true">
-          <span class="nav-avatar-ring">
-            <span class="nav-avatar-initial"><%= current_user.email[0].upcase %></span>
+          <span class="nav-avatar-circle">
+            <%= current_user.email[0].upcase %>
           </span>
-          <i data-lucide="chevron-down" class="nav-avatar-chevron"></i>
+          <span class="nav-avatar-name">
+            <%= (current_user.profile.respond_to?(:first_name) && current_user.profile.first_name.present?) ? current_user.profile.first_name : current_user.email.split('@').first %>
+          </span>
+          <svg class="nav-avatar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
         </button>
 
         <div class="nav-user-dropdown" id="nav-user-dropdown" role="menu">
-          <div class="nav-dropdown-header">
-            <span class="nav-dropdown-email"><%= current_user.email %></span>
-            <span class="nav-dropdown-role">
-              <% role_label = case current_user.profileable_type
-                              when "StudentProfile" then "Student"
-                              when "CompanyProfile" then "Company"
-                              when "UniversityProfile" then "University"
-                              else "User"
-                              end %>
-              <%= role_label %>
-            </span>
+          <% role_label = case current_user.profileable_type
+                          when "StudentProfile" then "Student"
+                          when "CompanyProfile" then "Company"
+                          when "UniversityProfile" then "University"
+                          else "User"
+                          end %>
+
+          <div class="nav-dropdown-profile">
+            <div class="nav-dropdown-avatar">
+              <%= current_user.email[0].upcase %>
+            </div>
+            <div class="nav-dropdown-info">
+              <span class="nav-dropdown-email" title="<%= current_user.email %>"><%= current_user.email %></span>
+              <span class="nav-dropdown-role-badge"><%= role_label %></span>
+            </div>
           </div>
+
           <div class="nav-dropdown-divider"></div>
+
           <%= link_to dashboard_path, class: "nav-dropdown-item", role: "menuitem" do %>
-            <i data-lucide="layout-dashboard" class="nav-dropdown-icon"></i>
-            My Dashboard
+            <svg class="nav-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="7" height="9" x="3" y="3" rx="1"/>
+              <rect width="7" height="5" x="14" y="3" rx="1"/>
+              <rect width="7" height="9" x="14" y="12" rx="1"/>
+              <rect width="7" height="5" x="3" y="14" rx="1"/>
+            </svg>
+            <span>My Dashboard</span>
           <% end %>
+
           <%= link_to offers_path, class: "nav-dropdown-item", role: "menuitem" do %>
-            <i data-lucide="compass" class="nav-dropdown-icon"></i>
-            Browse Offers
+            <svg class="nav-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+            </svg>
+            <span>Browse Offers</span>
           <% end %>
+
           <div class="nav-dropdown-divider"></div>
+
           <%= button_to destroy_user_session_path,
                 method: :delete,
                 class: "nav-dropdown-item nav-dropdown-signout",
                 role: "menuitem",
                 form: { "data-turbo": false } do %>
-            <i data-lucide="log-out" class="nav-dropdown-icon"></i>
-            Sign Out
+            <svg class="nav-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" x2="9" y1="12" y2="12"/>
+            </svg>
+            <span>Sign Out</span>
           <% end %>
         </div>
       </div>
@@ -94,23 +134,37 @@
     </div>
   </div>
 
-  <%# ─── Mobile slide-down menu ─────────── %>
+  <%# ─── Mobile Slide-Down Menu ─────────── %>
   <div class="navbar-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
-    <%= link_to "Browse Offers", offers_path,
-          class: "mobile-nav-link #{'mobile-nav-link-active' if request.path.start_with?(offers_path)}" %>
-    <%= link_to "My Dashboard", dashboard_path,
-          class: "mobile-nav-link #{'mobile-nav-link-active' if current_page?(dashboard_path)}" %>
-    <% if current_user.profileable_type == "CompanyProfile" %>
-      <%= link_to "Post an Offer", new_offer_path, class: "mobile-nav-link mobile-nav-cta" %>
+    <%= link_to offers_path, class: "mobile-nav-link #{'mobile-nav-link-active' if request.path.start_with?(offers_path)}" do %>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+      <span>Browse Offers</span>
     <% end %>
+
+    <%= link_to dashboard_path, class: "mobile-nav-link #{'mobile-nav-link-active' if current_page?(dashboard_path)}" do %>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="14" rx="1"/></svg>
+      <span>My Dashboard</span>
+    <% end %>
+
+    <% if current_user.profileable_type == "CompanyProfile" %>
+      <%= link_to new_offer_path, class: "mobile-nav-link mobile-nav-cta" do %>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        <span>Post an Offer</span>
+      <% end %>
+    <% end %>
+
     <div class="mobile-nav-divider"></div>
-    <span class="mobile-nav-user-email"><%= current_user.email %></span>
+
+    <div class="mobile-nav-user-info">
+      <span class="mobile-nav-email"><%= current_user.email %></span>
+    </div>
+
     <%= button_to destroy_user_session_path,
           method: :delete,
           class: "mobile-nav-signout",
           form: { "data-turbo": false } do %>
-      <i data-lucide="log-out" class="nav-dropdown-icon"></i>
-      Sign Out
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+      <span>Sign Out</span>
     <% end %>
   </div>
 </nav>
