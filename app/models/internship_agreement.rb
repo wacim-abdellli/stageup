@@ -12,42 +12,44 @@ class InternshipAgreement < ApplicationRecord
   validates :rejection_reason, presence: true, if: -> { status == "declined" }
 
   def sign_by!(role)
-    if status == "fully_executed"
-      errors.add(:base, "Agreement is already fully executed")
-      raise ActiveRecord::RecordInvalid, self
-    end
-
-    if status == "declined"
-      errors.add(:base, "Agreement has been declined")
-      raise ActiveRecord::RecordInvalid, self
-    end
-
-    case role
-    when "StudentProfile"
-      if student_signed_at.present?
-        errors.add(:base, "Student has already signed this agreement")
+    with_lock do
+      if status == "fully_executed"
+        errors.add(:base, "Agreement is already fully executed")
         raise ActiveRecord::RecordInvalid, self
       end
-      self.student_signed_at = Time.current
-    when "CompanyProfile"
-      if company_signed_at.present?
-        errors.add(:base, "Company has already signed this agreement")
+
+      if status == "declined"
+        errors.add(:base, "Agreement has been declined")
         raise ActiveRecord::RecordInvalid, self
       end
-      self.company_signed_at = Time.current
-    when "UniversityProfile"
-      if university_signed_at.present?
-        errors.add(:base, "University coordinator has already signed this agreement")
-        raise ActiveRecord::RecordInvalid, self
+
+      case role
+      when "StudentProfile"
+        if student_signed_at.present?
+          errors.add(:base, "Student has already signed this agreement")
+          raise ActiveRecord::RecordInvalid, self
+        end
+        self.student_signed_at = Time.current
+      when "CompanyProfile"
+        if company_signed_at.present?
+          errors.add(:base, "Company has already signed this agreement")
+          raise ActiveRecord::RecordInvalid, self
+        end
+        self.company_signed_at = Time.current
+      when "UniversityProfile"
+        if university_signed_at.present?
+          errors.add(:base, "University coordinator has already signed this agreement")
+          raise ActiveRecord::RecordInvalid, self
+        end
+        self.university_signed_at = Time.current
       end
-      self.university_signed_at = Time.current
-    end
 
-    if student_signed_at.present? && company_signed_at.present? && university_signed_at.present?
-      self.status = "fully_executed"
-    end
+      if student_signed_at.present? && company_signed_at.present? && university_signed_at.present?
+        self.status = "fully_executed"
+      end
 
-    save!
+      save!
+    end
   end
 
   def pending_signatories

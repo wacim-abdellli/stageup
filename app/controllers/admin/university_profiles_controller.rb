@@ -16,10 +16,11 @@ module Admin
 
     def reject
       ActiveRecord::Base.transaction do
+        @profile.user&.destroy!
         @profile.destroy!
       end
       redirect_to admin_dashboard_path, notice: "Coordinator profile has been rejected and removed."
-    rescue ActiveRecord::RecordNotDestroyed => e
+    rescue ActiveRecord::RecordNotDestroyed, ActiveRecord::RecordInvalid => e
       redirect_to admin_dashboard_path, alert: "Failed to reject coordinator: #{e.message}"
     end
 
