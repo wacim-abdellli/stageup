@@ -5,13 +5,17 @@
   <%# ─── Page Header ─────────────────────────────────────────── %>
   <div class="dir-header">
     <div>
+      <div class="dir-eyebrow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>VERIFIED OPPORTUNITIES</span>
+      </div>
       <h1 class="dir-heading">Internship Directory</h1>
       <p class="dir-sub">Tunisia's first verified internship platform &mdash; <%= pluralize(@offers.size, 'active listing') %></p>
     </div>
     <% unless current_user %>
       <%= link_to new_user_session_path, class: "dir-signin-cta" do %>
-        <i data-lucide="log-in"></i>
-        Sign In / Register
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+        <span>Sign In / Register</span>
       <% end %>
     <% end %>
   </div>
@@ -21,7 +25,7 @@
     <%# ─── Filter Sidebar ──────────────────────────────────────── %>
     <aside class="dir-sidebar">
       <div class="sidebar-header">
-        <i data-lucide="sliders-horizontal" class="icon-16 stroke-muted"></i>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><line x1="4" x2="20" y1="21" y2="21"/><line x1="4" x2="20" y1="14" y2="14"/><line x1="4" x2="20" y1="7" y2="7"/><circle cx="8" cy="14" r="2"/><circle cx="16" cy="7" r="2"/><circle cx="12" cy="21" r="2"/></svg>
         <span class="sidebar-title">Filters</span>
       </div>
 
@@ -29,7 +33,7 @@
         <div class="sidebar-field">
           <label class="filter-label">Search</label>
           <div class="pos-relative">
-            <i data-lucide="search" class="search-icon-abs stroke-muted icon-14"></i>
+            <svg class="search-icon-abs" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             <%= text_field_tag :query, params[:query],
                 placeholder: "Title, company…",
                 class: "filter-input",
@@ -75,7 +79,7 @@
         <div class="sidebar-actions">
           <%= submit_tag "Apply Search", class: "btn btn-accent fs-13 btn-filter-apply" %>
           <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
-            <%= link_to "Reset", offers_path, class: "btn-filter-reset" %>
+            <%= link_to "Reset Filters", offers_path, class: "btn-filter-reset" %>
           <% end %>
         </div>
       <% end %>
@@ -89,8 +93,8 @@
         <div class="dir-list-meta">
           <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
             <span class="filter-active-pill">
-              <i data-lucide="filter" class="icon-12"></i>
-              Filters active
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+              <span>Filters active</span>
             </span>
           <% end %>
           <span class="dir-count-badge"><%= @offers.size %> found</span>
@@ -121,17 +125,17 @@
                 <span class="offer-card-badge-stage"><%= offer.stage_type.upcase %></span>
                 <% if offer.mission.present? %>
                   <span class="offer-card-badge-proof">
-                    <i data-lucide="git-commit" class="icon-w-12"></i>
-                    Mission
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
+                    <span>Mission</span>
                   </span>
                 <% else %>
                   <span class="offer-card-badge-cv">
-                    <i data-lucide="paperclip" class="icon-w-12"></i>
-                    CV Only
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                    <span>CV Only</span>
                   </span>
                 <% end %>
                 <% if current_user&.profileable_type == "StudentProfile" %>
-                  <% match_pct = offer.match_percentage_for(current_user.profileable) %>
+                  <% match_pct = offer.match_percentage_for(current_user.profileable) rescue 100 %>
                   <% if match_pct < 100 %>
                     <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>">
                       <%= match_pct %>% match
@@ -158,15 +162,18 @@
               <%# Footer: location + CTA %>
               <div class="offer-card-footer">
                 <span class="offer-card-location">
-                  <i data-lucide="map-pin" class="icon-w-12 stroke-muted"></i>
-                  <% if offer.location.downcase == "remote" %>
-                    Remote
-                  <% else %>
-                    <%= offer.location %> &middot; <%= offer.work_mode.capitalize %>
-                  <% end %>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>
+                    <% if offer.location.downcase == "remote" %>
+                      Remote
+                    <% else %>
+                      <%= offer.location %> &middot; <%= offer.work_mode.capitalize %>
+                    <% end %>
+                  </span>
                 </span>
                 <span class="offer-card-action">
-                  View <i data-lucide="arrow-right" class="icon-w-12 stroke-accent"></i>
+                  <span>View</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </span>
               </div>
 
@@ -177,19 +184,19 @@
       <% else %>
         <div class="dir-empty">
           <div class="dir-empty-icon">
-            <i data-lucide="search-x" class="icon-28 icon-muted"></i>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="8" x2="14" y1="8" y2="14"/><line x1="14" x2="8" y1="8" y2="14"/></svg>
           </div>
           <h3 class="dir-empty-title">No offers match your criteria</h3>
-          <p class="dir-empty-sub">Try broadening your search or clearing active filters.</p>
+          <p class="dir-empty-sub">Try broadening your search query or clearing active filters.</p>
           <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
             <%= link_to "Clear All Filters", offers_path, class: "btn btn-secondary" %>
           <% end %>
         </div>
       <% end %>
 
-    </div><%# /dir-main %>
-  </div><%# /dir-body %>
-</div><%# /dir-page %>
+    </div>
+  </div>
+</div>
 
 <%= javascript_tag nonce: true do %>
   (function() {

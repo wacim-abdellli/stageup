@@ -1,36 +1,45 @@
-<% content_for :title, "My Dashboard – StageUp" %>
+<% content_for :title, "Dashboard – StageUp" %>
+
 <div class="dashboard-container">
+
+  <%# ─── Dashboard Welcome Hero ───────────────────────────────────── %>
   <div class="dash-welcome">
     <div class="dash-welcome-inner">
       <div>
         <h1 class="dash-welcome-title">
-          Welcome back<% if @profile.respond_to?(:first_name) && @profile.first_name.present? %>, <%= @profile.first_name %><% end %>
+          Welcome back<% if @profile.respond_to?(:first_name) && @profile.first_name.present? %>, <%= @profile.first_name %><% elsif @profile.respond_to?(:name) && @profile.name.present? %>, <%= @profile.name %><% end %>
         </h1>
         <p class="dash-welcome-sub">
           <% if @role_type == "StudentProfile" %>
-            Manage your applications and track your reputation score.
+            Manage your applications, track internship progress, and build your commitment score.
           <% elsif @role_type == "CompanyProfile" %>
-            Review applicants and manage your active offers.
+            Review student applicants, publish proof missions, and manage active internship offers.
           <% else %>
-            Monitor your institution's internship agreements.
+            Monitor student internship agreements and track university partner commitments.
           <% end %>
         </p>
       </div>
       <div class="dash-welcome-meta">
         <span class="dash-date-pill">
-          <i data-lucide="calendar" class="icon-12 icon-muted"></i>
-          <%= Date.today.strftime("%B %d, %Y") %>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          <span><%= Date.today.strftime("%B %d, %Y") %></span>
         </span>
       </div>
     </div>
   </div>
+
   <div class="dashboard-grid">
-    
-    <!-- Left Column: Primary Details -->
-    <div>
-      <div class="profile-card card-mb">
+
+    <%# ─── Left Main Column ───────────────────────────────────────── %>
+    <div class="left-col">
+
+      <%# ─── Profile Bento Card ────────────────────────────────────── %>
+      <div class="profile-card mb-30">
         <div class="section-heading-row">
-          <h2 class="fs-18">My Profile</h2>
+          <div class="section-title-left">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <h2>My Profile</h2>
+          </div>
           <div class="section-heading-row-right">
             <% if @role_type == "StudentProfile" %>
               <span class="badge badge-info">Student</span>
@@ -43,232 +52,127 @@
           </div>
         </div>
 
-        <!-- Student Details -->
-        <% if @role_type == "StudentProfile" %>
-          <div class="profile-grid-bento">
+        <div class="profile-bento-grid">
+          <% if @role_type == "StudentProfile" %>
             <div class="profile-bento-item">
-              <span class="bento-label">Full Name</span>
+              <span class="bento-label">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Full Name
+              </span>
               <span class="bento-value"><%= @profile.first_name %> <%= @profile.last_name %></span>
             </div>
+
             <div class="profile-bento-item">
-              <span class="bento-label">Phone</span>
-              <span class="bento-value"><%= @profile.phone.presence || "Not specified" %></span>
+              <span class="bento-label">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Phone
+              </span>
+              <span class="bento-value"><%= @profile.phone_number.presence || "Not specified" %></span>
             </div>
+
             <div class="profile-bento-item">
-              <span class="bento-label">Major</span>
-              <span class="bento-value"><%= @profile.major.presence || "Not specified" %></span>
+              <span class="bento-label">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                Major
+              </span>
+              <span class="bento-value"><%= @profile.field_of_study.presence || "Not specified" %></span>
             </div>
+
             <div class="profile-bento-item">
-              <span class="bento-label">Graduation Year</span>
+              <span class="bento-label">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                Graduation Year
+              </span>
               <span class="bento-value"><%= @profile.graduation_year.presence || "Not specified" %></span>
             </div>
+
             <div class="profile-bento-item">
-              <span class="bento-label">University</span>
+              <span class="bento-label">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                University
+              </span>
               <span class="bento-value">
                 <% if @profile.university %>
                   <%= @profile.university.name %>
-                  <% if @profile.university.approved? %>
-                    <span class="badge badge-success badge-verified">Verified Partner</span>
-                  <% end %>
                 <% else %>
-                  <em class="text-muted">Self-declared / Unassociated</em>
+                  <span class="text-muted italic">Self-declared / Unassociated</span>
                 <% end %>
               </span>
             </div>
+
             <div class="profile-bento-item">
-              <span class="bento-label">Skills</span>
+              <span class="bento-label">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                Skills
+              </span>
               <span class="bento-value">
                 <% if @profile.skills.any? %>
-                  <div class="flex-row flex-wrap gap-4">
-                    <% @profile.skills.each do |skill| %>
-                      <span class="skill-tag"><%= skill.name %></span>
-                    <% end %>
-                  </div>
+                  <%= @profile.skills.map(&:name).join(", ") %>
                 <% else %>
-                  <em class="text-muted">None added</em>
+                  <span class="text-muted italic">None added</span>
                 <% end %>
               </span>
             </div>
-          </div>
 
-          <div class="profile-bio-section">
-            <span class="bento-label">Bio</span>
-            <div class="bio-card">
-              <p><%= @profile.bio.presence || "No bio added yet." %></p>
+            <div class="profile-bento-item bento-full-width">
+              <span class="bento-label">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Bio
+              </span>
+              <span class="bento-value"><%= @profile.bio.presence || "No bio provided yet." %></span>
             </div>
-          </div>
 
-          <div class="profile-cv-section">
-            <span class="bento-label">Resume / CV</span>
-            <div class="cv-dropzone">
-              <div class="cv-dropzone-icon">
-                <i data-lucide="file-text" class="icon-32 stroke-secondary"></i>
-              </div>
-              <% if @profile.cv.attached? %>
-                <div class="cv-dropzone-file">
-                  <span class="cv-dropzone-filename"><%= @profile.cv.filename.to_s %></span>
-                  <span class="cv-dropzone-size"><%= number_to_human_size(@profile.cv.byte_size) %></span>
-                  <%= link_to "Download", rails_blob_path(@profile.cv, disposition: "attachment"), target: "_blank", class: "btn btn-accent btn-compact-sm" %>
-                </div>
-              <% else %>
-                <p class="cv-dropzone-empty">No CV uploaded yet. Recruiter applications will be blank without one.</p>
-              <% end %>
-              <%= form_with model: @profile, url: update_cv_dashboard_path, method: :patch, local: true, multipart: true, class: "cv-dropzone-form" do |f| %>
-                <%= f.file_field :cv, accept: "application/pdf", id: "cv-file-input", class: "cv-file-input" %>
-                <label for="cv-file-input" class="cv-file-label">
-                  <i data-lucide="upload" class="icon-14"></i>
-                  Choose PDF
-                </label>
-                <%= f.submit "Upload", class: "btn btn-primary btn-compact-sm" %>
-              <% end %>
-            </div>
-          </div>
-
-        <!-- Company Details -->
-        <% elsif @role_type == "CompanyProfile" %>
-          <div class="profile-grid-bento">
-            <div class="profile-bento-item w-full">
+          <% elsif @role_type == "CompanyProfile" %>
+            <div class="profile-bento-item">
               <span class="bento-label">Company Name</span>
-              <span class="bento-value">
-                <%= @profile.name %>
-                <% if @profile.verified? %>
-                  <span class="badge badge-success badge-verified">Verified Partner</span>
-                <% end %>
-              </span>
-            </div>
-            <div class="profile-bento-item w-full">
-              <span class="bento-label">Website</span>
-              <span class="bento-value">
-                <% if @profile.website.present? %>
-                  <%= link_to @profile.website, @profile.website, target: "_blank" %>
-                <% else %>
-                  <em class="text-muted">No website listed</em>
-                <% end %>
-              </span>
-            </div>
-          </div>
-          <div class="profile-bio-section">
-            <span class="bento-label">Description</span>
-            <div class="bio-card">
-              <p><%= @profile.description.presence || "No company description added yet." %></p>
-            </div>
-          </div>
-
-        <!-- University Coordinator Details -->
-        <% elsif @role_type == "UniversityProfile" %>
-          <div class="profile-grid-bento">
-            <div class="profile-bento-item">
-              <span class="bento-label">Coordinator Name</span>
-              <span class="bento-value"><%= @profile.admin_name %></span>
+              <span class="bento-value"><%= @profile.name %></span>
             </div>
             <div class="profile-bento-item">
-              <span class="bento-label">University</span>
-              <span class="bento-value"><%= @profile.university.name %></span>
+              <span class="bento-label">Industry</span>
+              <span class="bento-value"><%= @profile.industry.presence || "Not specified" %></span>
             </div>
             <div class="profile-bento-item">
-              <span class="bento-label">Department</span>
-              <span class="bento-value"><%= @profile.department %></span>
+              <span class="bento-label">Location</span>
+              <span class="bento-value"><%= @profile.location.presence || "Not specified" %></span>
             </div>
-          </div>
+            <div class="profile-bento-item">
+              <span class="bento-label">Verification Status</span>
+              <span class="bento-value"><%= @profile.verified? ? "Verified Recruiter" : "Pending Verification" %></span>
+            </div>
+            <div class="profile-bento-item bento-full-width">
+              <span class="bento-label">Description</span>
+              <span class="bento-value"><%= @profile.description.presence || "No description provided." %></span>
+            </div>
 
-          <div class="overview-grid">
-            <div class="profile-card overview-stat-card">
-              <div class="fs-12 text-secondary mb-6">Total Students Enrolled</div>
-              <strong class="fs-26"><%= @total_students_count %></strong>
+          <% elsif @role_type == "UniversityProfile" %>
+            <div class="profile-bento-item">
+              <span class="bento-label">Institution Name</span>
+              <span class="bento-value"><%= @profile.name %></span>
             </div>
-            <div class="profile-card overview-stat-card">
-              <div class="fs-12 text-secondary mb-6">Active &amp; Completed Internships</div>
-              <strong class="fs-26"><%= @active_internships_count %></strong>
+            <div class="profile-bento-item">
+              <span class="bento-label">Location</span>
+              <span class="bento-value"><%= @profile.location.presence || "Not specified" %></span>
             </div>
-            <div class="profile-card overview-stat-card">
-              <div class="fs-12 text-secondary mb-6">Avg Student Commitment</div>
-              <div class="flex-center">
-                <div class="score-pill fs-12">
-                  <span class="dot <%= @avg_student_score >= 90 ? 'dot-success' : (@avg_student_score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
-                  <strong><%= @avg_student_score %></strong>
-                  <span class="score-label">Avg</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <h2 class="section-heading mt-25">
-            <i data-lucide="users" class="section-heading-icon"></i>
-            Student Directory
-          </h2>
-          <% if @students.any? %>
-            <div class="overflow-x-auto">
-              <table class="processed-table w-100">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Major</th>
-                    <th>Graduation Year</th>
-                    <th>Active Internship</th>
-                    <th>Agreement</th>
-                    <th>Commitment Score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @students.each do |s| %>
-                    <% active_sub = s.submissions.detect { |sub| %w[accepted completed].include?(sub.status) } %>
-                    <% agreement = active_sub&.internship_agreement %>
-                    <tr>
-                      <td><%= s.first_name %> <%= s.last_name %></td>
-                      <td><%= s.major.presence || "—" %></td>
-                      <td><%= s.graduation_year.presence || "—" %></td>
-                      <td>
-                        <% if active_sub %>
-                          <span class="badge-status <%= active_sub.status == 'completed' ? 'badge-completed' : 'badge-accepted' %>">
-                            <%= active_sub.offer.title.truncate(24) %>
-                          </span>
-                        <% else %>
-                          <span class="fs-12 text-muted">None</span>
-                        <% end %>
-                      </td>
-                      <td>
-                        <% if active_sub && agreement %>
-                          <% if agreement.status == "fully_executed" %>
-                            <span class="badge-status badge-completed">✓ Signed</span>
-                          <% else %>
-                            <span class="badge-status badge-pending">Pending</span>
-                            <%= link_to "View & Sign", submission_internship_agreement_path(active_sub, agreement), class: "btn btn-primary btn-compact-sm ml-8" %>
-                          <% end %>
-                        <% elsif active_sub %>
-                          <span class="fs-12 text-muted">—</span>
-                        <% else %>
-                          <span class="fs-12 text-muted">—</span>
-                        <% end %>
-                      </td>
-                      <td>
-                        <% student_score = s.commitment_score.round(0) %>
-                        <div class="score-pill score-pill-sm">
-                          <span class="dot <%= student_score >= 90 ? 'dot-success' : (student_score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
-                          <strong><%= student_score %></strong>
-                        </div>
-                      </td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-          <% else %>
-            <div class="empty-state-card">
-              <div class="empty-state-icon"><i data-lucide="users"></i></div>
-              <h3 class="empty-state-title">No Students Yet</h3>
-              <p class="empty-state-text">Registered students from your university will appear here once they sign up.</p>
+            <div class="profile-bento-item">
+              <span class="bento-label">Associated Students</span>
+              <span class="bento-value"><%= @profile.student_profiles.count %> registered</span>
             </div>
           <% end %>
-        <% end %>
+        </div>
       </div>
 
-      <!-- Student Internships Panel -->
+      <%# ─── Role-Specific Primary Section ──────────────────────────── %>
       <% if @role_type == "StudentProfile" %>
-        <div class="profile-card card-mb">
-          <h2 class="section-heading">
-            <i data-lucide="briefcase" class="section-heading-icon"></i>
-            My Internships
-          </h2>
+
+        <%# Active Internships & Milestones %>
+        <div class="profile-card mb-30">
+          <div class="section-heading-row">
+            <div class="section-title-left">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <h2>Active Internships & Milestone Progress</h2>
+            </div>
+          </div>
+
           <% if @active_internships.any? %>
             <div class="inline-list">
               <% @active_internships.each do |sub| %>
@@ -278,12 +182,13 @@
                     <span class="internship-item-meta">
                       Company: <%= sub.offer.company_profile.name %>
                       <span class="badge-status <%= "badge-#{sub.status}" %> ml-8"><%= sub.status.humanize %></span>
-                      <% match_pct = sub.offer.match_percentage_for(@profile) %>
+                      <% match_pct = sub.offer.match_percentage_for(@profile) rescue 100 %>
                       <% if match_pct < 100 %>
                         <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %> ml-4"><%= match_pct %>% Match</span>
                       <% end %>
                     </span>
 
+                    <%# Milestone Tracker %>
                     <div class="timeline-container">
                       <div class="timeline-steps">
                         <% submission_milestones(sub).each_with_index do |ms, idx| %>
@@ -297,7 +202,7 @@
                             </div>
                             <div class="timeline-step <%= ms[:complete] ? 'completed' : 'pending' %>">
                               <% if ms[:complete] %>
-                                <svg class="timeline-step-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                <svg class="timeline-step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
                               <% else %>
                                 <%= idx + 1 %>
                               <% end %>
@@ -325,14 +230,11 @@
 
                       <% if sub.internship_agreement %>
                         <% if sub.internship_agreement.status == "pending_signatures" %>
-                          <span class="badge-status badge-pending">Awaiting: <%= sub.internship_agreement.pending_signatories.join(", ") %></span>
+                          <span class="badge-status badge-pending">Awaiting Signatures</span>
                         <% elsif sub.internship_agreement.status == "declined" %>
                           <span class="badge-status badge-declined">Agreement Declined</span>
                         <% end %>
                         <%= link_to "View & Sign Agreement", submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" %>
-                        <% if sub.internship_agreement.status == "declined" %>
-                          <%= link_to "Generate New Agreement", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
-                        <% end %>
                       <% else %>
                         <%= link_to "Generate Convention de Stage", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
                       <% end %>
@@ -351,24 +253,30 @@
             </div>
           <% else %>
             <div class="empty-state-card">
-              <div class="empty-state-icon"><i data-lucide="briefcase"></i></div>
-              <h3 class="empty-state-title">No Internships Yet</h3>
+              <div class="empty-state-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <h3 class="empty-state-title">No Active Internships</h3>
               <p class="empty-state-text">
-                You haven't started or completed any internships on StageUp. Go search for active offers, apply, and complete your proof mission!
+                You haven't started any internships on StageUp yet. Search for active offers, apply, and complete your proof mission!
               </p>
-              <%= link_to "Browse Internship Offers", offers_path, class: "btn btn-primary btn-compact-empty" %>
+              <%= link_to "Browse Active Offers", offers_path, class: "btn btn-primary btn-compact" %>
             </div>
           <% end %>
         </div>
-      <% end %>
 
-      <!-- Recruiter Submissions Panel (Hiring Hub) & Active Internships -->
-      <% if @role_type == "CompanyProfile" %>
-        <div class="profile-card card-mb">
-          <h2 class="section-heading">
-            <i data-lucide="megaphone" class="section-heading-icon"></i>
-            My Offers
-          </h2>
+      <% elsif @role_type == "CompanyProfile" %>
+
+        <%# Active Offers Management %>
+        <div class="profile-card mb-30">
+          <div class="section-heading-row">
+            <div class="section-title-left">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              <h2>My Internship Offers</h2>
+            </div>
+            <%= link_to "Post New Offer", new_offer_path, class: "btn btn-primary btn-compact" %>
+          </div>
+
           <% if @company_offers.any? %>
             <div class="inline-list-sm">
               <% @company_offers.each do |offer| %>
@@ -397,226 +305,26 @@
             </div>
           <% else %>
             <div class="empty-state-card">
-              <div class="empty-state-icon"><i data-lucide="megaphone"></i></div>
-              <h3 class="empty-state-title">No Offers Yet</h3>
-              <p class="empty-state-text">You haven't posted any internship offers yet. Create your first one to attract candidates.</p>
+              <div class="empty-state-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              </div>
+              <h3 class="empty-state-title">No Offers Posted Yet</h3>
+              <p class="empty-state-text">Publish your first internship offer to attract candidate talent and receive proof mission submissions.</p>
               <%= link_to "Post an Offer", new_offer_path, class: "btn btn-primary btn-compact-empty" %>
             </div>
           <% end %>
         </div>
 
-        <div class="profile-card card-mb">
-          <h2 class="section-heading">
-            <i data-lucide="briefcase" class="section-heading-icon"></i>
-            Active & Past Internships
-          </h2>
-          <% if @active_internships.any? %>
-            <div class="inline-list">
-              <% @active_internships.each do |sub| %>
-                <div class="inline-list-item">
-                  <div>
-                    <strong class="inline-list-item-title"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></strong>
-                    <span class="inline-list-item-meta">
-                      Role: <%= sub.offer.title %>
-                    </span>
-                  </div>
-                  <div class="timeline-container">
-                    <div class="timeline-steps">
-                      <% submission_milestones(sub).each_with_index do |ms, idx| %>
-                        <div class="timeline-step-wrapper">
-                          <div class="timeline-tooltip">
-                            <% if ms[:timestamp] %>
-                              <%= ms[:timestamp].strftime("%b %d, %Y") %>
-                            <% else %>
-                              <%= ms[:complete] ? "Done" : "—" %>
-                            <% end %>
-                          </div>
-                          <div class="timeline-step <%= ms[:complete] ? 'completed' : 'pending' %>">
-                            <% if ms[:complete] %>
-                              <svg class="timeline-step-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                            <% else %>
-                              <%= idx + 1 %>
-                            <% end %>
-                          </div>
-                          <% if idx < submission_milestones(sub).length - 1 %>
-                            <div class="timeline-line <%= ms[:complete] ? 'completed' : 'pending' %>"></div>
-                          <% end %>
-                          <span class="timeline-label <%= ms[:complete] ? 'completed' : '' %>"><%= ms[:label] %></span>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                  <div>
-                    <% if sub.status == "accepted" %>
-                      <div class="flex-col gap-8 items-end">
-                        <div class="action-group">
-                          <% if sub.company_confirmed_completed %>
-                            <span class="badge-status badge-completion-pending">
-                              Waiting for Student
-                            </span>
-                          <% else %>
-                            <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success" %>
-                            <%= button_to "Cancel", cancel_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Cancel this internship? This will notify the student." } %>
-                          <% end %>
-                        </div>
-                        <div class="action-group">
-                          <% if sub.internship_agreement %>
-                            <% if sub.internship_agreement.status == "pending_signatures" %>
-                              <span class="badge-status badge-pending">Awaiting: <%= sub.internship_agreement.pending_signatories.join(", ") %></span>
-                            <% elsif sub.internship_agreement.status == "declined" %>
-                              <span class="badge-status badge-declined">Agreement Declined</span>
-                            <% end %>
-                            <%= link_to "View & Sign Agreement", submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" %>
-                            <% if sub.internship_agreement.status == "declined" %>
-                              <%= link_to "Generate New Agreement", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
-                            <% end %>
-                          <% else %>
-                            <%= link_to "Generate Convention de Stage", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
-                          <% end %>
-                        </div>
-                      </div>
-                    <% else %>
-                      <span class="badge-status badge-completed mr-10">Completed</span>
-                      <% my_review = sub.reviews.detect { |r| r.author_id == current_user.id } %>
-                      <% if my_review.nil? %>
-                        <%= link_to "Leave Review", new_submission_review_path(sub), class: "btn btn-primary w-auto fs-12 btn-review" %>
-                      <% else %>
-                        <span class="fs-12 text-muted">Review Submitted</span>
-                      <% end %>
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% else %>
-            <div class="empty-state-card">
-              <div class="empty-state-icon"><i data-lucide="briefcase"></i></div>
-              <h3 class="empty-state-title">No Active Internships</h3>
-              <p class="empty-state-text">
-                Once you review student submissions, accept their work, and start working together, your active student list will appear here.
-              </p>
-            </div>
-          <% end %>
-        </div>
-
-        <div class="profile-card">
-          <h2 class="section-heading">
-            <i data-lucide="inbox" class="section-heading-icon"></i>
-            Incoming Applications
-          </h2>
-
-          <% if @pending_submissions.any? || @processed_submissions.any? %>
-            <div class="flex-col gap-20">
-              <% @pending_submissions.group_by(&:offer).each do |offer, pending_subs| %>
-                <div class="app-group-card">
-                  <h3 class="app-group-title">
-                    <%= offer.title %> (<%= pending_subs.size %> pending)
-                  </h3>
-                  
-                  <div class="flex-col gap-15">
-                    <% pending_subs.each do |sub| %>
-                        <div class="app-item">
-                          <div>
-                            <strong class="fs-14 fw-600 text-primary">
-                              <%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>
-                            </strong>
-                            <span class="block fs-12 text-secondary mt-4">
-                              Major: <%= sub.student_profile.major %> | Class of <%= sub.student_profile.graduation_year %>
-                            </span>
-                            <span class="block fs-12 text-secondary mt-4">
-                              Submitted: <%= time_ago_in_words(sub.submitted_at) %> ago
-                            </span>
-                            
-                            <% if sub.student_profile.cv.attached? %>
-                              <div class="cv-link mt-8 fs-13">
-                                📄 <%= link_to "Download Candidate CV", rails_blob_path(sub.student_profile.cv, disposition: "attachment"), target: "_blank" %>
-                              </div>
-                            <% else %>
-                              <div class="mt-8 fs-12 text-muted">
-                                ⚠️ No CV attached (candidate hasn't uploaded one).
-                              </div>
-                            <% end %>
-
-                            <% if sub.github_link.present? %>
-                              <div class="solution-link mt-8 fs-13">
-                                🔗 <%= link_to "View Proof Solution", sub.github_link, target: "_blank" %>
-                                <% if sub.auto_verification_status == "checking" || sub.auto_verification_status == "pending" %>
-                                  <span class="badge-status badge-pending ml-8">Checking URL...</span>
-                                <% elsif sub.auto_verification_status == "passed" %>
-                                  <span class="badge-status badge-completed ml-8">✓ Passed Auto-Check</span>
-                                <% elsif sub.auto_verification_status == "failed" %>
-                                  <span class="badge-status badge-rejected ml-8" title="<%= sub.auto_verification_log %>">✗ Failed Auto-Check</span>
-                                <% end %>
-                              </div>
-                            <% end %>
-
-                            <% if sub.submission_notes.present? %>
-                              <p class="sub-notes">
-                                "<%= sub.submission_notes %>"
-                              </p>
-                            <% end %>
-                          </div>
-
-                          <div class="flex-row gap-8">
-                            <%= button_to "Accept", accept_submission_path(sub), method: :post, class: "btn btn-primary w-auto fs-12 btn-review-accept" %>
-                            <%= button_to "Reject", reject_submission_path(sub), method: :post, class: "btn btn-secondary w-auto fs-12 btn-review-reject" %>
-                          </div>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                <% end %>
-
-              <% if @processed_submissions.any? %>
-                <div class="mt-15">
-                  <h4 class="fs-14 text-secondary mb-10">Processed History</h4>
-                  <table class="processed-table">
-                    <thead>
-                      <tr>
-                        <th>Student</th>
-                        <th>Offer</th>
-                        <th>Status</th>
-                        <th>Actioned</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% @processed_submissions.each do |sub| %>
-                        <tr>
-                          <td><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></td>
-                          <td><%= sub.offer.title %></td>
-                          <td>
-                            <span class="badge-status <%= sub.status == 'accepted' ? 'badge-accepted' : (sub.status == 'completed' ? 'badge-completed' : 'badge-rejected') %>">
-                              <%= sub.status %>
-                            </span>
-                          </td>
-                          <td><%= sub.responded_at ? time_ago_in_words(sub.responded_at) + " ago" : "N/A" %></td>
-                        </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
-                </div>
-              <% end %>
-            </div>
-          <% else %>
-            <div class="empty-state-card">
-              <div class="empty-state-icon"><i data-lucide="inbox"></i></div>
-              <h3 class="empty-state-title">No Applications Yet</h3>
-              <p class="empty-state-text">
-                You haven't received any student applications yet. Keep posting offers to attract more candidate talent.
-              </p>
-              <%= link_to "Post a New Offer", new_offer_path, class: "btn btn-primary btn-compact-empty" %>
-            </div>
-          <% end %>
-        </div>
       <% end %>
+
     </div>
 
-    <!-- Right Column: Reputation Metrics & Event History -->
+    <%# ─── Right Column: Reputation Metrics & Ledger ──────────────── %>
     <div class="right-col">
-      
-      <!-- Metrics Card -->
+
+      <%# Reputation Metrics Card %>
       <% if @role_type == "StudentProfile" %>
-        <div class="profile-card rep-metrics-card">
+        <div class="profile-card rep-metrics-card mb-24">
           <div class="rep-metrics-header">
             <h3 class="rep-metrics-title">Reputation</h3>
             <span class="rep-metrics-sub">Public · Verified</span>
@@ -624,7 +332,7 @@
 
           <div class="rep-score-row">
             <div class="rep-score-main">
-              <% score = (@profile.commitment_score.round(0) rescue 100) %>
+              <% score = @commitment_score.round(0) rescue 100 %>
               <span class="rep-score-number <%= score >= 90 ? 'score-color-high' : (score >= 70 ? 'score-color-mid' : 'score-color-low') %>">
                 <%= score %>
               </span>
@@ -637,153 +345,59 @@
 
           <div class="rep-rating-row">
             <div class="rep-rating-left">
-              <i data-lucide="star" class="icon-14 icon-amber-fill"></i>
+              <svg class="icon-14 icon-amber-fill" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               <span class="rep-rating-label">Avg. Rating</span>
             </div>
             <span class="rep-rating-value">
-              <% student_avg = @profile.respond_to?(:average_rating) ? @profile.average_rating : (defined?(@avg_rating) ? @avg_rating : nil) %>
-              <% if student_avg %>
-                <%= student_avg.round(1) rescue student_avg %> / 5
+              <% if defined?(@avg_rating) && @avg_rating %>
+                <%= @avg_rating.round(1) %> / 5
               <% else %>
                 Unrated
               <% end %>
             </span>
           </div>
         </div>
+
       <% else %>
-        <% if @role_type == "CompanyProfile" %>
-          <div class="profile-card rep-metrics-card">
-            <div class="rep-metrics-header">
-              <h3 class="rep-metrics-title">Reputation</h3>
-              <% if @completed_internships_count < 3 %>
-                <span class="rep-metrics-grace">
-                  <i data-lucide="clock"></i>
-                  Grace Period
-                </span>
-              <% else %>
-                <span class="rep-metrics-sub">Public · Verified</span>
-              <% end %>
-            </div>
-
-            <% company_score = @profile.commitment_score.round(0) %>
-            <div class="rep-score-row">
-              <div class="rep-score-main">
-                <span class="rep-score-number <%= company_score >= 90 ? 'score-color-high' : (company_score >= 70 ? 'score-color-mid' : 'score-color-low') %>">
-                  <%= company_score %>
-                </span>
-                <span class="rep-score-label">/ 100</span>
-              </div>
-              <span class="rep-score-desc">Commitment Score</span>
-            </div>
-
-            <div class="rep-divider"></div>
-
+        <div class="profile-card p-25 mb-24">
+          <h3 class="metrics-card-title">Reputation Metrics</h3>
+          <% if @role_type == "CompanyProfile" %>
             <div class="rep-stat-list">
               <div class="rep-stat-row">
-                <span class="rep-stat-label">Response Rate</span>
-                <strong class="rep-stat-value text-success"><%= @profile.response_rate %>%</strong>
-              </div>
-              <div class="rep-stat-row">
-                <span class="rep-stat-label">Avg. Decision</span>
-                <strong class="rep-stat-value"><%= @profile.avg_response_time_hours %>h</strong>
-              </div>
-              <div class="rep-stat-row">
                 <span class="rep-stat-label">Active Offers</span>
-                <strong class="rep-stat-value"><%= @offers_count %></strong>
+                <strong><%= @company_offers.count %></strong>
+              </div>
+              <div class="rep-stat-row">
+                <span class="rep-stat-label">Verification</span>
+                <span class="rep-metrics-sub"><%= @profile.verified? ? "Verified" : "Grace Period" %></span>
               </div>
             </div>
-
-            <div class="rep-divider"></div>
-
-            <div class="rep-rating-row">
-              <div class="rep-rating-left">
-                <i data-lucide="star"></i>
-                <span class="rep-rating-label">Avg. Rating</span>
-              </div>
-              <% company_avg = @profile.average_rating %>
-              <span class="rep-rating-value">
-                <% if company_avg %>
-                  <%= company_avg %> <span class="text-muted fs-11">(<%= @profile.reviews_received_count %> reviews)</span>
-                <% else %>
-                  Unrated
-                <% end %>
-              </span>
-            </div>
-          </div>
-        <% elsif @role_type == "UniversityProfile" %>
-          <div class="profile-card p-25">
-            <h3 class="metrics-card-title">
-              Reputation Metrics
-            </h3>
-            <div class="metrics-list">
-              <div class="metrics-row">
-                <span class="metrics-label">Students Registered:</span>
-                <strong><%= @total_students_count %></strong>
-              </div>
-              <div class="metrics-row">
-                <span class="metrics-label">Active/Completed Internships:</span>
-                <strong><%= @active_internships_count %></strong>
-              </div>
-              <div class="metrics-rating-row">
-                <span class="metrics-label">Avg Commitment Score:</span>
-                <div class="score-pill">
-                  <span class="dot <%= @avg_student_score >= 90 ? 'dot-success' : (@avg_student_score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
-                  <strong><%= @avg_student_score %></strong>
-                </div>
+          <% elsif @role_type == "UniversityProfile" %>
+            <div class="rep-stat-list">
+              <div class="rep-stat-row">
+                <span class="rep-stat-label">Associated Students</span>
+                <strong><%= @profile.student_profiles.count %></strong>
               </div>
             </div>
-          </div>
-        <% end %>
-      <% end %>
-
-      <!-- Reputation History Ledger / Commitment Timeline -->
-      <% if @role_type == "UniversityProfile" %>
-        <div class="profile-card p-25">
-          <h3 class="metrics-card-title">
-            <i data-lucide="activity" class="icon-16 stroke-secondary v-align-middle mr-4"></i>
-            University Reputation Feed
-          </h3>
-
-          <% if @recent_reputation_events.any? %>
-            <div class="ledger-timeline">
-              <% @recent_reputation_events.each do |event| %>
-                <div class="ledger-event">
-                  <div class="ledger-event-line"></div>
-                  <div class="ledger-event-node <%= event.score_delta > 0 ? 'node-positive' : (event.score_delta == 0 ? 'node-neutral' : 'node-negative') %>"></div>
-                  <div class="ledger-event-body">
-                    <div class="ledger-event-header">
-                      <span class="ledger-event-person"><%= event.profileable.first_name %> <%= event.profileable.last_name %></span>
-                      <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %>">
-                        <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %>
-                      </span>
-                    </div>
-                    <p class="ledger-event-desc"><%= event.description %></p>
-                    <span class="ledger-event-time"><%= time_ago_in_words(event.created_at) %> ago</span>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% else %>
-            <p class="ledger-empty">
-              No reputation events logged yet for your university.
-            </p>
           <% end %>
         </div>
-      <% else %>
+      <% end %>
+
+      <%# Commitment Ledger History %>
+      <% if @role_type == "StudentProfile" %>
         <div class="profile-card p-25">
           <div class="ledger-card-header">
             <div class="ledger-card-title-row">
-              <i data-lucide="activity"></i>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               <h3 class="ledger-card-title">Commitment Ledger</h3>
             </div>
-            <span class="ledger-card-sub">Score history</span>
+            <span class="ledger-card-sub">Score History</span>
           </div>
 
-          <% if @commitment_ledger_events.any? %>
+          <% if @commitment_ledger_events.present? && @commitment_ledger_events.any? %>
             <div class="ledger-timeline">
               <% @commitment_ledger_events.each do |event| %>
-                <div class="ledger-event">
-                  <div class="ledger-event-line"></div>
+                <div class="ledger-event-item">
                   <div class="ledger-event-node <%= event.score_delta > 0 ? 'node-positive' : (event.score_delta == 0 ? 'node-neutral' : 'node-negative') %>"></div>
                   <div class="ledger-event-body">
                     <div class="ledger-event-header">
@@ -800,8 +414,8 @@
             </div>
           <% else %>
             <div class="ledger-empty-state">
-              <i data-lucide="shield"></i>
-              <p>No events yet. Complete internships to build your score history.</p>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <p>No reputation events logged yet. Complete internships to build your score history.</p>
             </div>
           <% end %>
         </div>
