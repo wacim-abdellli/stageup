@@ -24,6 +24,10 @@ class OffersController < ApplicationController
   end
 
   def show
+    unless user_signed_in?
+      redirect_to new_user_session_path, alert: "Please sign in or create an account to view full mission details and submit solutions."
+      return
+    end
     if @offer.status == "draft"
       unless current_user && current_user.profileable_type == "CompanyProfile" && @offer.company_profile == current_user.profileable
         redirect_to dashboard_path, alert: "Offer not found or not yet active."

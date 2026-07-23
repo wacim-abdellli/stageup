@@ -4096,8 +4096,34 @@ textarea.form-control {
 }
 
 .featured-offer-title a {
-  color: white;
+  color: var(--text-primary);
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.featured-offer-title a:hover {
+  color: var(--primary);
+}
+
+.link-locked {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #F59E0B;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.link-locked:hover {
+  background: rgba(245, 158, 11, 0.16);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #F59E0B;
 }
 
 .featured-offer-company {
@@ -6313,4 +6339,16 @@ textarea.form-control {
 
 [data-theme="light"] .role-card:hover .role-desc {
   color: #475569;
+}
+
+[data-theme="light"] .featured-offer-title a {
+  color: #0F172A;
+}
+
+[data-theme="light"] .featured-offer-title a:hover {
+  color: #6366F1;
+}
+
+[data-theme="light"] .featured-view-all {
+  color: #6366F1;
 }
