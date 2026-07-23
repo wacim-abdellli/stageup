@@ -449,14 +449,16 @@ textarea.form-control {
 }
 
 /* Flash alerts */
+/* Flash alerts */
 .flash-portal {
   position: fixed;
-  top: 72px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 80px;
+  right: 24px;
+  left: auto;
+  transform: none;
   z-index: 500;
   width: max-content;
-  max-width: min(480px, calc(100vw - 40px));
+  max-width: min(400px, calc(100vw - 32px));
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -464,17 +466,17 @@ textarea.form-control {
 }
 .flash-portal .flash-message {
   pointer-events: all;
-  min-width: 300px;
+  min-width: 280px;
 }
 
 .flash-message {
-  padding: 14px 18px;
+  padding: 12px 16px;
   border-radius: var(--radius-md);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -482,7 +484,7 @@ textarea.form-control {
   /* Animation & transitions */
   animation: toastSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transition: opacity 0.3s ease, transform 0.3s ease, margin-bottom 0.3s ease, padding 0.3s ease, height 0.3s ease;
-  transform-origin: top;
+  transform-origin: top right;
   overflow: hidden;
 }
 
@@ -3487,13 +3489,13 @@ textarea.form-control {
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.035em;
-  color: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 16px;
   text-align: left;
 }
 
 .landing-hero-gradient {
-  background: linear-gradient(135deg, #FFFFFF 50%, #818CF8 100%);
+  background: linear-gradient(135deg, var(--text-primary) 40%, #818CF8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -6162,4 +6164,49 @@ textarea.form-control {
 [data-theme="light"] .nav-cta-btn:hover {
   background: #1E293B;
   color: #FFFFFF;
+}
+
+[data-theme="light"] .landing-hero-title {
+  color: #0F172A;
+}
+
+[data-theme="light"] .landing-hero-gradient {
+  background: linear-gradient(135deg, #0F172A 40%, #6366F1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .hero-mockup-card,
+[data-theme="light"] .bento-card {
+  background: #FFFFFF;
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .mockup-header {
+  background: #F8FAFC;
+  border-bottom-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .mockup-header-title,
+[data-theme="light"] .mockup-user-name,
+[data-theme="light"] .bento-card-title,
+[data-theme="light"] .landing-section-title,
+[data-theme="light"] .featured-heading,
+[data-theme="light"] .landing-cta-title {
+  color: #0F172A;
+}
+
+[data-theme="light"] .mockup-action-text,
+[data-theme="light"] .bento-card-text,
+[data-theme="light"] .landing-section-sub,
+[data-theme="light"] .featured-sub,
+[data-theme="light"] .landing-cta-desc {
+  color: #475569;
+}
+
+[data-theme="light"] .mockup-row {
+  background: rgba(15, 23, 42, 0.02);
+  border-color: rgba(15, 23, 42, 0.06);
 }

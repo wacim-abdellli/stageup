@@ -4,12 +4,8 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :reputation_events ]
 
   def index
-    if user_signed_in?
-      redirect_to dashboard_path
-    else
-      @active_offers = Offer.where(status: "active").order(created_at: :desc).limit(3)
-      render :index
-    end
+    @active_offers = Offer.where(status: "active").order(created_at: :desc).limit(3)
+    render :index
   end
 
   def reputation_events

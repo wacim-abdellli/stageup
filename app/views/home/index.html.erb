@@ -36,7 +36,11 @@
 
         <div class="landing-cta-row animate-in visible stagger-4">
           <%= link_to "Browse Internships", offers_path, class: "btn btn-accent landing-cta-btn" %>
-          <%= link_to "Get Started", select_role_path, class: "btn btn-secondary landing-cta-btn" %>
+          <% if user_signed_in? %>
+            <%= link_to "Go to Dashboard", dashboard_path, class: "btn btn-primary landing-cta-btn" %>
+          <% else %>
+            <%= link_to "Get Started", select_role_path, class: "btn btn-secondary landing-cta-btn" %>
+          <% end %>
         </div>
       </div>
 
