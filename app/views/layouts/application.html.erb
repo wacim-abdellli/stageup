@@ -26,72 +26,94 @@
         /* ── Helpers ── */
         function $(id) { return document.getElementById(id); }
 
-        /* ── Hamburger / mobile menu ── */
-        function initHamburger() {
-          var btn = $('nav-toggle');
-          var menu = $('nav-mobile-menu');
-          if (!btn || !menu) return;
-          btn.addEventListener('click', function(e) {
+        /* ── Event Delegation for all Nav/UI toggles ── */
+        document.addEventListener('click', function(e) {
+          // 1. Mobile Menu Hamburger Toggle
+          var toggleBtn = e.target.closest('#nav-toggle');
+          if (toggleBtn) {
             e.stopPropagation();
-            var open = menu.classList.toggle('open');
-            btn.setAttribute('aria-expanded', open);
-            menu.setAttribute('aria-hidden', !open);
-          });
-        }
+            var menu = $('nav-mobile-menu');
+            if (menu) {
+              var open = menu.classList.toggle('open');
+              toggleBtn.setAttribute('aria-expanded', open);
+              menu.setAttribute('aria-hidden', !open);
+            }
+            return;
+          }
 
-        /* ── Notification bell ── */
-        function initNotifBell() {
-          var btn = $('notif-btn');
-          var panel = $('notif-panel');
-          if (!btn || !panel) return;
-          btn.addEventListener('click', function(e) {
+          // 2. Notification Bell Panel Toggle
+          var notifBtn = e.target.closest('#notif-btn');
+          if (notifBtn) {
             e.stopPropagation();
-            var open = panel.classList.toggle('open');
-            btn.setAttribute('aria-expanded', open);
-            // close avatar dropdown if open
-            var ad = $('nav-user-dropdown');
-            if (ad) ad.classList.remove('open');
-          });
-        }
+            var panel = $('notif-panel');
+            if (panel) {
+              var open = panel.classList.toggle('open');
+              notifBtn.setAttribute('aria-expanded', open);
+              // Close user dropdown if open
+              var dd = $('nav-user-dropdown');
+              var ab = $('nav-avatar-toggle');
+              if (dd) dd.classList.remove('open');
+              if (ab) ab.setAttribute('aria-expanded', 'false');
+            }
+            return;
+          }
 
-        /* ── User avatar dropdown ── */
-        function initAvatarDropdown() {
-          var btn = $('nav-avatar-toggle');
-          var dd  = $('nav-user-dropdown');
-          if (!btn || !dd) return;
-          btn.addEventListener('click', function(e) {
+          // 3. User Avatar Dropdown Toggle
+          var avatarBtn = e.target.closest('#nav-avatar-toggle');
+          if (avatarBtn) {
             e.stopPropagation();
-            var open = dd.classList.toggle('open');
-            btn.setAttribute('aria-expanded', open);
-            // close notif panel if open
-            var np = $('notif-panel');
-            if (np) np.classList.remove('open');
-          });
-        }
-
-        /* ── Close all on outside click ── */
-        function initOutsideClose() {
-          document.addEventListener('click', function() {
-            var np = $('notif-panel');
             var dd = $('nav-user-dropdown');
+            if (dd) {
+              var open = dd.classList.toggle('open');
+              avatarBtn.setAttribute('aria-expanded', open);
+              // Close notification panel if open
+              var panel = $('notif-panel');
+              var nb = $('notif-btn');
+              if (panel) panel.classList.remove('open');
+              if (nb) nb.setAttribute('aria-expanded', 'false');
+            }
+            return;
+          }
+
+          // 4. Click Outside to Close Panels
+          var insideDropdown = e.target.closest('#nav-user-dropdown') || e.target.closest('#nav-user-menu');
+          var insideNotif = e.target.closest('#notif-panel') || e.target.closest('#notif-btn');
+          var insideMobile = e.target.closest('#nav-mobile-menu') || e.target.closest('#nav-toggle');
+
+          if (!insideDropdown) {
+            var dd = $('nav-user-dropdown');
+            var ab = $('nav-avatar-toggle');
+            if (dd && dd.classList.contains('open')) {
+              dd.classList.remove('open');
+              if (ab) ab.setAttribute('aria-expanded', 'false');
+            }
+          }
+          if (!insideNotif) {
+            var panel = $('notif-panel');
+            var nb = $('notif-btn');
+            if (panel && panel.classList.contains('open')) {
+              panel.classList.remove('open');
+              if (nb) nb.setAttribute('aria-expanded', 'false');
+            }
+          }
+          if (!insideMobile) {
             var mm = $('nav-mobile-menu');
             var hb = $('nav-toggle');
-            if (np) np.classList.remove('open');
-            if (dd) dd.classList.remove('open');
             if (mm && mm.classList.contains('open')) {
               mm.classList.remove('open');
               mm.setAttribute('aria-hidden', 'true');
               if (hb) hb.setAttribute('aria-expanded', 'false');
             }
-          });
-        }
+          }
+        });
 
         /* ── Flash auto-dismiss ── */
         function initFlashMessages() {
           document.querySelectorAll('.flash-message').forEach(function(flash) {
             var timer = setTimeout(function() { dismissFlash(flash); }, 4000);
             var btn = flash.querySelector('.flash-close');
-            if (btn) btn.addEventListener('click', function() {
+            if (btn) btn.addEventListener('click', function(e) {
+              e.stopPropagation();
               clearTimeout(timer);
               dismissFlash(flash);
             });
@@ -120,10 +142,6 @@
               console.error("Lucide icons failed:", e);
             }
           }
-          try { initHamburger(); } catch (e) { console.error(e); }
-          try { initNotifBell(); } catch (e) { console.error(e); }
-          try { initAvatarDropdown(); } catch (e) { console.error(e); }
-          try { initOutsideClose(); } catch (e) { console.error(e); }
           try { initFlashMessages(); } catch (e) { console.error(e); }
         });
 

@@ -4557,18 +4557,20 @@ textarea.form-control {
 /* ── Avatar dropdown ── */
 .nav-user-dropdown {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 8px);
   right: 0;
   width: 220px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
+  background: rgba(15, 16, 21, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.05);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-6px) scale(0.98);
+  transform: translateY(-8px) scale(0.96);
   transform-origin: top right;
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
   z-index: 300;
 }
 
@@ -4610,6 +4612,13 @@ textarea.form-control {
   height: 1px;
   background: var(--border-color);
   margin: 4px 0;
+}
+
+.nav-user-dropdown form {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-dropdown-item {
