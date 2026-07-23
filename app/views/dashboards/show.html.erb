@@ -55,18 +55,22 @@
         <div class="profile-bento-grid">
           <% if @role_type == "StudentProfile" %>
             <div class="profile-bento-item">
-              <span class="bento-label">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Full Name
-              </span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge indigo">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+                <span class="bento-label">Full Name</span>
+              </div>
               <span class="bento-value"><%= @profile.first_name %> <%= @profile.last_name %></span>
             </div>
 
             <div class="profile-bento-item">
-              <span class="bento-label">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                Phone
-              </span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge emerald">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </span>
+                <span class="bento-label">Phone</span>
+              </div>
               <span class="bento-value">
                 <% student_phone = @profile.respond_to?(:phone) ? @profile.phone : (@profile.respond_to?(:phone_number) ? @profile.phone_number : nil) %>
                 <%= student_phone.presence || "Not specified" %>
@@ -74,10 +78,12 @@
             </div>
 
             <div class="profile-bento-item">
-              <span class="bento-label">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                Major
-              </span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge amber">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                </span>
+                <span class="bento-label">Major</span>
+              </div>
               <span class="bento-value">
                 <% student_major = @profile.respond_to?(:major) ? @profile.major : (@profile.respond_to?(:field_of_study) ? @profile.field_of_study : nil) %>
                 <%= student_major.presence || "Not specified" %>
@@ -85,18 +91,22 @@
             </div>
 
             <div class="profile-bento-item">
-              <span class="bento-label">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                Graduation Year
-              </span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge purple">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                </span>
+                <span class="bento-label">Graduation Year</span>
+              </div>
               <span class="bento-value"><%= @profile.graduation_year.presence || "Not specified" %></span>
             </div>
 
             <div class="profile-bento-item">
-              <span class="bento-label">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                University
-              </span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge cyan">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                </span>
+                <span class="bento-label">University</span>
+              </div>
               <span class="bento-value">
                 <% if @profile.respond_to?(:university) && @profile.university %>
                   <%= @profile.university.name %>
@@ -107,56 +117,85 @@
             </div>
 
             <div class="profile-bento-item">
-              <span class="bento-label">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                Skills
-              </span>
-              <span class="bento-value">
+              <div class="bento-header-row">
+                <span class="bento-icon-badge indigo">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </span>
+                <span class="bento-label">Skills</span>
+              </div>
+              <div class="bento-value">
                 <% if @profile.respond_to?(:skills) && @profile.skills.any? %>
-                  <%= @profile.skills.map(&:name).join(", ") %>
+                  <div class="bento-skills-list">
+                    <% @profile.skills.each do |skill| %>
+                      <span class="bento-skill-pill"><%= skill.name %></span>
+                    <% end %>
+                  </div>
                 <% else %>
                   <span class="text-muted italic">None added</span>
                 <% end %>
-              </span>
+              </div>
             </div>
 
             <div class="profile-bento-item bento-full-width">
-              <span class="bento-label">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-                Bio
-              </span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge emerald">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </span>
+                <span class="bento-label">Bio</span>
+              </div>
               <span class="bento-value"><%= (@profile.respond_to?(:bio) && @profile.bio.present?) ? @profile.bio : "No bio provided yet." %></span>
             </div>
 
           <% elsif @role_type == "CompanyProfile" %>
             <div class="profile-bento-item">
-              <span class="bento-label">Company Name</span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge indigo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M19 21v-4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/></svg></span>
+                <span class="bento-label">Company Name</span>
+              </div>
               <span class="bento-value"><%= @profile.name %></span>
             </div>
             <div class="profile-bento-item">
-              <span class="bento-label">Website</span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge cyan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/></svg></span>
+                <span class="bento-label">Website</span>
+              </div>
               <span class="bento-value"><%= (@profile.respond_to?(:website) && @profile.website.present?) ? @profile.website : "Not specified" %></span>
             </div>
             <div class="profile-bento-item">
-              <span class="bento-label">Verification Status</span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge emerald"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                <span class="bento-label">Verification Status</span>
+              </div>
               <span class="bento-value"><%= (@profile.respond_to?(:verified?) && @profile.verified?) ? "Verified Recruiter" : "Pending Verification" %></span>
             </div>
             <div class="profile-bento-item bento-full-width">
-              <span class="bento-label">Description</span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge purple"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg></span>
+                <span class="bento-label">Description</span>
+              </div>
               <span class="bento-value"><%= (@profile.respond_to?(:description) && @profile.description.present?) ? @profile.description : "No description provided." %></span>
             </div>
 
           <% elsif @role_type == "UniversityProfile" %>
             <div class="profile-bento-item">
-              <span class="bento-label">Admin Name</span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge indigo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                <span class="bento-label">Admin Name</span>
+              </div>
               <span class="bento-value"><%= @profile.admin_name %></span>
             </div>
             <div class="profile-bento-item">
-              <span class="bento-label">Department</span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg></span>
+                <span class="bento-label">Department</span>
+              </div>
               <span class="bento-value"><%= @profile.department %></span>
             </div>
             <div class="profile-bento-item">
-              <span class="bento-label">Institution Name</span>
+              <div class="bento-header-row">
+                <span class="bento-icon-badge cyan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg></span>
+                <span class="bento-label">Institution Name</span>
+              </div>
               <span class="bento-value"><%= @profile.university ? @profile.university.name : "University Partner" %></span>
             </div>
           <% end %>

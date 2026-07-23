@@ -596,6 +596,115 @@ textarea.form-control {
   padding: 30px;
 }
 
+/* True Bento Grid Layout */
+.profile-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 20px;
+}
+
+@media (max-width: 680px) {
+  .profile-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profile-bento-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-md);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-bento-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.4) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.profile-bento-item:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.profile-bento-item:hover::before {
+  opacity: 1;
+}
+
+.bento-full-width {
+  grid-column: 1 / -1;
+}
+
+.bento-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bento-icon-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #818CF8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bento-icon-badge.indigo  { background: rgba(99, 102, 241, 0.12); border-color: rgba(99, 102, 241, 0.25); color: #818CF8; }
+.bento-icon-badge.emerald { background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.25); color: #34D399; }
+.bento-icon-badge.amber   { background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.25); color: #FBBF24; }
+.bento-icon-badge.purple  { background: rgba(168, 85, 247, 0.12); border-color: rgba(168, 85, 247, 0.25); color: #C084FC; }
+.bento-icon-badge.cyan    { background: rgba(6, 182, 212, 0.12); border-color: rgba(6, 182, 212, 0.25); color: #22D3EE; }
+
+.bento-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.bento-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.bento-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bento-skill-pill {
+  font-size: 12px;
+  font-weight: 600;
+  color: #818CF8;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
 .profile-detail {
   margin-bottom: 15px;
   font-size: 15px;
