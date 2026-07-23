@@ -4426,20 +4426,21 @@ textarea.form-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 4px;
 }
 
 .nav-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
+  gap: 8px;
+  padding: 6px 14px;
   font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
-  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  border-radius: 9999px;
   text-decoration: none;
-  transition: color 0.2s ease, background 0.2s ease;
+  transition: all 0.2s ease;
   position: relative;
 }
 
@@ -4448,27 +4449,18 @@ textarea.form-control {
   height: 14px;
   stroke: currentColor;
   flex-shrink: 0;
+  opacity: 0.85;
 }
 
 .nav-link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-link-active {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.nav-link-active::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 12px;
-  right: 12px;
-  height: 2px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 2px 2px 0 0;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* ── Right cluster ── */
