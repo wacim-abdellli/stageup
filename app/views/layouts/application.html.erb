@@ -17,14 +17,6 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <script nonce="<%= content_security_policy_nonce %>">
-      (function() {
-        if (localStorage.getItem('stageup-theme') === 'light') {
-          document.documentElement.setAttribute('data-theme', 'light');
-        }
-      })();
-    </script>
-
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <script src="https://unpkg.com/lucide@latest" nonce="<%= content_security_policy_nonce %>"></script>
@@ -36,20 +28,6 @@
 
         /* ── Event Delegation for all Nav/UI toggles ── */
         document.addEventListener('click', function(e) {
-          // 0. Theme Switcher Toggle
-          var themeBtn = e.target.closest('#theme-toggle-btn');
-          if (themeBtn) {
-            e.stopPropagation();
-            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
-            var nextTheme = isLight ? 'dark' : 'light';
-            if (nextTheme === 'light') {
-              document.documentElement.setAttribute('data-theme', 'light');
-            } else {
-              document.documentElement.removeAttribute('data-theme');
-            }
-            localStorage.setItem('stageup-theme', nextTheme);
-            return;
-          }
           // 1. Mobile Menu Hamburger Toggle
           var toggleBtn = e.target.closest('#nav-toggle');
           if (toggleBtn) {
