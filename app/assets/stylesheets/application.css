@@ -428,29 +428,31 @@ textarea.form-control {
 }
 .flash-portal .flash-message {
   pointer-events: all;
-  min-width: 280px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  min-width: 300px;
 }
 
 .flash-message {
-  padding: 12px 16px;
+  padding: 14px 18px;
   border-radius: var(--radius-md);
-  margin-bottom: 20px;
   font-size: 14px;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
   /* Animation & transitions */
-  animation: slideDownFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  transition: opacity 0.4s ease, transform 0.4s ease, margin-bottom 0.4s ease, padding 0.4s ease, height 0.4s ease;
+  animation: toastSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: opacity 0.3s ease, transform 0.3s ease, margin-bottom 0.3s ease, padding 0.3s ease, height 0.3s ease;
   transform-origin: top;
   overflow: hidden;
 }
 
 .flash-message.fade-out {
   opacity: 0;
-  transform: translateY(-20px) scale(0.95);
+  transform: translateY(-16px) scale(0.95);
   padding-top: 0;
   padding-bottom: 0;
   margin-bottom: 0;
@@ -460,13 +462,14 @@ textarea.form-control {
 
 .flash-message .flash-close {
   margin-left: auto;
-  background: none;
-  border: none;
-  padding: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   color: inherit;
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
+  opacity: 0.8;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -474,12 +477,14 @@ textarea.form-control {
 
 .flash-message .flash-close:hover {
   opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-@keyframes slideDownFadeIn {
+@keyframes toastSlideIn {
   from {
     opacity: 0;
-    transform: translateY(-20px) scale(0.95);
+    transform: translateY(-24px) scale(0.95);
   }
   to {
     opacity: 1;
@@ -488,14 +493,14 @@ textarea.form-control {
 }
 
 .flash-notice {
-  background-color: rgba(16, 185, 129, 0.15);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background-color: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.25);
   color: #34D399;
 }
 
 .flash-alert {
-  background-color: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  background-color: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.25);
   color: #F87171;
 }
 

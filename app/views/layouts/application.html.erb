@@ -100,17 +100,31 @@
 
         function dismissFlash(el) {
           el.classList.add('fade-out');
-          el.addEventListener('transitionend', function() { el.remove(); });
+          var removed = false;
+          function removeEl() {
+            if (!removed) {
+              removed = true;
+              el.remove();
+            }
+          }
+          el.addEventListener('transitionend', removeEl);
+          setTimeout(removeEl, 500);
         }
 
         /* ── Boot on every Turbo page load ── */
         document.addEventListener('turbo:load', function() {
-          lucide.createIcons();
-          initHamburger();
-          initNotifBell();
-          initAvatarDropdown();
-          initOutsideClose();
-          initFlashMessages();
+          if (typeof lucide !== 'undefined') {
+            try {
+              lucide.createIcons();
+            } catch (e) {
+              console.error("Lucide icons failed:", e);
+            }
+          }
+          try { initHamburger(); } catch (e) { console.error(e); }
+          try { initNotifBell(); } catch (e) { console.error(e); }
+          try { initAvatarDropdown(); } catch (e) { console.error(e); }
+          try { initOutsideClose(); } catch (e) { console.error(e); }
+          try { initFlashMessages(); } catch (e) { console.error(e); }
         });
 
       })();
