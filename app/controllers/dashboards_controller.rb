@@ -15,6 +15,8 @@ class DashboardsController < ApplicationController
       @active_internships = submissions.includes({ offer: :company_profile }, :reviews, :internship_agreement).order(created_at: :desc)
       @completed_internships_count = @profile.submissions.where(status: "completed").count
       @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc).limit(50)
+      @commitment_score = @profile.commitment_score
+      @avg_rating = @profile.cached_average_rating
     elsif @role_type == "CompanyProfile"
       company_subs = @profile.submissions.where(status: [ "accepted", "completed" ])
       @active_internships = company_subs.includes(:student_profile, :offer, :reviews, :internship_agreement).order(created_at: :desc)
