@@ -247,7 +247,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
         <h3 class="modal-title">Start 48-Hour Proof Mission</h3>
-        <button type="button" class="modal-close-btn" class="close-modal-trigger">&times;</button>
+        <button type="button" class="modal-close-btn close-modal-trigger">&times;</button>
       </div>
       <div class="modal-body">
         <p class="modal-desc">
@@ -271,7 +271,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary close-modal-trigger">Cancel</button>
-        <%= button_to "Confirm & Start Mission", submissions_path(offer_id: @offer.id, mission_id: @offer.mission.id), class: "btn btn-primary" %>
+        <%= button_to "Confirm & Start Mission", submissions_path(offer_id: @offer.id, mission_id: @offer.mission.id), class: "btn btn-primary", data: { disable_with: "Starting…" } %>
       </div>
     </div>
   </div>
@@ -286,7 +286,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
         </div>
         <h3 class="modal-title">Apply with CV</h3>
-        <button type="button" class="modal-close-btn" class="close-modal-trigger">&times;</button>
+        <button type="button" class="modal-close-btn close-modal-trigger">&times;</button>
       </div>
       <%= form_with url: submissions_path, method: :post, local: true do |f| %>
         <%= f.hidden_field :offer_id, value: @offer.id %>
@@ -306,7 +306,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary close-modal-trigger">Cancel</button>
-          <%= f.submit "Confirm & Submit CV", class: "btn btn-primary" %>
+          <%= f.submit "Confirm & Submit CV", class: "btn btn-primary", data: { disable_with: "Submitting…" } %>
         </div>
       <% end %>
     </div>
@@ -314,7 +314,7 @@
 <% end %>
 
 <script nonce="<%= content_security_policy_nonce %>">
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('turbo:load', function() {
     function setupModal(triggerId, modalId) {
       var btn = document.getElementById(triggerId);
       var modal = document.getElementById(modalId);

@@ -58,7 +58,7 @@
 
       <div class="form-footer flex-between">
         <%= link_to "Cancel", offer_path(@submission.offer), class: "btn btn-secondary btn-cancel" %>
-        <%= f.submit "Submit Proof Solution →", class: "btn btn-primary btn-submit" %>
+        <%= f.submit "Submit Proof Solution →", class: "btn btn-primary btn-submit", data: { disable_with: "Submitting…" } %>
       </div>
 
     <% end %>

@@ -25,4 +25,8 @@ class Offer < ApplicationRecord
   validates :location, presence: true
   validates :work_mode, presence: true, inclusion: { in: %w[onsite remote hybrid] }
   validates :status, presence: true, inclusion: { in: %w[draft active filled archived] }
+
+  def draft?
+    status == "draft"
+  end
 end
