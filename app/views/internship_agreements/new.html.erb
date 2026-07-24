@@ -37,7 +37,7 @@
 
       <div class="form-footer-row">
         <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary" %>
-        <%= f.submit "Generate Agreement", class: "btn btn-primary" %>
+        <%= f.submit "Generate Agreement", class: "btn btn-primary", data: { disable_with: "Generating…" } %>
       </div>
     <% end %>
   </div>

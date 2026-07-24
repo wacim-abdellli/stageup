@@ -30,7 +30,7 @@
                   </span>
                 </div>
                 <div class="action-group-8">
-                  <%= button_to "Approve Coordinator", approve_admin_university_profile_path(coord), method: :post, class: "btn btn-primary btn-compact-sm" %>
+                  <%= button_to "Approve Coordinator", approve_admin_university_profile_path(coord), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: "Approving…" } %>
                   <%= button_to "Reject Coordinator", reject_admin_university_profile_path(coord), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Reject this coordinator? Their account will be removed." } %>
                 </div>
               </div>
@@ -63,7 +63,7 @@
                   </span>
                 </div>
                 <div class="action-group-8">
-                  <%= button_to "Verify Company", verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary btn-compact-sm" %>
+                  <%= button_to "Verify Company", verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: "Verifying…" } %>
                 </div>
               </div>
             <% end %>

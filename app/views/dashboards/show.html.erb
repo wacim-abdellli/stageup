@@ -265,8 +265,8 @@
                           Waiting for Employer
                         </span>
                       <% else %>
-                        <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success" %>
-                        <%= button_to "Abandon", abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Are you sure you want to abandon this internship? Your commitment score will be penalized." } %>
+                        <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success", data: { disable_with: "Completing…" } %>
+                        <%= button_to "Abandon", abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Are you sure you want to abandon this internship? Your commitment score will be penalized.", disable_with: "Abandoning…" } %>
                       <% end %>
 
                       <% if sub.internship_agreement %>

@@ -100,7 +100,7 @@
             </div>
           <% else %>
             <% if current_user.profileable_type == "StudentProfile" && current_user.profileable == student && @agreement.status != "declined" %>
-              <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact" %>
+              <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: "Signing…" } %>
             <% else %>
               <span class="agreement-unsigned-label">Not signed yet</span>
             <% end %>
@@ -118,7 +118,7 @@
             </div>
           <% else %>
             <% if current_user.profileable_type == "CompanyProfile" && current_user.profileable == company && @agreement.status != "declined" %>
-              <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact" %>
+              <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: "Signing…" } %>
             <% else %>
               <span class="agreement-unsigned-label">Not signed yet</span>
             <% end %>
@@ -136,7 +136,7 @@
             </div>
           <% else %>
             <% if current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id && @agreement.status != "declined" %>
-              <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact" %>
+              <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: "Signing…" } %>
               <div class="mt-10">
                 <button type="button" class="btn btn-secondary btn-compact" onclick="document.getElementById('decline-form').classList.toggle('d-none')">Decline Agreement</button>
               </div>
@@ -154,7 +154,7 @@
             <%= text_area_tag :rejection_reason, nil, placeholder: "Explain why this agreement is being declined...", class: "decline-textarea", required: true %>
             <div class="decline-actions">
               <button type="button" class="btn btn-secondary btn-compact-sm" onclick="document.getElementById('decline-form').classList.add('d-none')">Cancel</button>
-              <%= f.submit "Confirm Decline", class: "btn btn-secondary btn-compact-sm btn-decline-confirm" %>
+              <%= f.submit "Confirm Decline", class: "btn btn-secondary btn-compact-sm btn-decline-confirm", data: { disable_with: "Declining…" } %>
             </div>
           <% end %>
         </div>
