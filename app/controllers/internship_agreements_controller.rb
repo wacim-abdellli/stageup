@@ -28,7 +28,9 @@ class InternshipAgreementsController < ApplicationController
   end
 
   def sign
-    @agreement.sign_by!(current_user.profileable_type)
+    @agreement.with_lock do
+      @agreement.sign_by!(current_user.profileable_type)
+    end
 
     if @agreement.status == "fully_executed"
       student_user = @submission.student_profile.user
