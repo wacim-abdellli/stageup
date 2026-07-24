@@ -17,7 +17,13 @@ class SubmissionsController < ApplicationController
 
     student = current_user.profileable
     if params[:custom_cv_url].present?
-      student.update(cv_url: params[:custom_cv_url])
+      url = params[:custom_cv_url].to_s.strip
+      if url.match?(/\Ahttps?:\/\/.+/)
+        student.update(cv_url: url)
+      else
+        redirect_to offer_path(@offer), alert: "Invalid CV URL format."
+        return
+      end
     end
 
     if @offer.mission.nil? && student.cv_url.blank?
