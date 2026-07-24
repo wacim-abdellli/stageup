@@ -48,6 +48,15 @@ class VerifySubmissionJob < ApplicationJob
         return
       end
 
+      dir_size_mb = `du -sm #{temp_folder}`.split.first.to_i rescue 0
+      if dir_size_mb > 100
+        submission.update_columns(
+          auto_verification_status: "failed",
+          auto_verification_log: "Repository too large (#{dir_size_mb}MB). Maximum allowed size is 100MB."
+        )
+        return
+      end
+
       project_files = %w[Gemfile package.json README.md .git]
       found = project_files.any? { |f| File.exist?(temp_folder.join(f)) }
 
@@ -66,7 +75,8 @@ class VerifySubmissionJob < ApplicationJob
       FileUtils.rm_rf(temp_folder)
       submission.reload
       if %w[passed failed].include?(submission.auto_verification_status)
-        submission.update_columns(status: "submitted", submitted_at: Time.current)
+        Submission.where(id: submission.id, status: "started")
+                  .update_all(status: "submitted", submitted_at: Time.current)
         if submission.auto_verification_status == "passed"
           company_user = submission.offer.company_profile.user
           Notification.trigger(
