@@ -15,8 +15,8 @@ class HomeController < ApplicationController
                             .includes(:profileable)
     render json: events.map { |event|
       {
-        entity_name: event.profileable&.name || "Anonymous",
-        description: event.description,
+        entity_name: "Verified Employer",
+        description: event.event_type.humanize,
         score_delta: event.score_delta,
         event_type: event.event_type,
         created_at: event.created_at
