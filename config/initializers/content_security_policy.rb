@@ -21,5 +21,5 @@ Rails.application.configure do
   config.content_security_policy_nonce_generator = ->(request) { SecureRandom.base64(16) }
   config.content_security_policy_nonce_directives = %w[script-src style-src]
 
-  config.content_security_policy_report_only = !Rails.env.production?
+  config.content_security_policy_report_only = Rails.env.development? || Rails.env.test?
 end
