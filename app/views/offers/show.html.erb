@@ -314,13 +314,16 @@
 <% end %>
 
 <script nonce="<%= content_security_policy_nonce %>">
-  document.addEventListener('turbo:load', function() {
+  (function() {
     function setupModal(triggerId, modalId) {
       var btn = document.getElementById(triggerId);
       var modal = document.getElementById(modalId);
       if (!btn || !modal) return;
 
-      btn.addEventListener('click', function(e) {
+      var clone = btn.cloneNode(true);
+      btn.parentNode.replaceChild(clone, btn);
+
+      clone.addEventListener('click', function(e) {
         e.preventDefault();
         modal.style.display = 'flex';
       });
@@ -338,5 +341,5 @@
 
     setupModal('btn-open-mission-modal', 'mission-modal');
     setupModal('btn-open-cv-modal', 'cv-modal');
-  });
+  })();
 </script>
