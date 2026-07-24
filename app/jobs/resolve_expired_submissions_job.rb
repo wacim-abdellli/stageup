@@ -9,7 +9,8 @@ class ResolveExpiredSubmissionsJob < ApplicationJob
           .includes(offer: :company_profile, student_profile: [ :user, :commitment_events ])
           .find_each do |sub|
       ActiveRecord::Base.transaction do
-        sub.update_columns(status: "expired", updated_at: Time.current)
+        updated = Submission.where(id: sub.id, status: "started").update_all(status: "expired", updated_at: Time.current)
+        next if updated == 0
 
         student = sub.student_profile
         prior_expired_count = student.commitment_events.where(event_type: "student_mission_expired").count
@@ -44,12 +45,15 @@ class ResolveExpiredSubmissionsJob < ApplicationJob
           .includes(:offer, offer: :company_profile, student_profile: :user)
           .find_each do |sub|
       ActiveRecord::Base.transaction do
-        sub.update_columns(
-          status: "completed",
-          student_confirmed_completed: true,
-          company_confirmed_completed: true,
-          responded_at: Time.current
-        )
+        updated = Submission.where(id: sub.id, status: "accepted")
+                    .update_all(
+                      status: "completed",
+                      student_confirmed_completed: true,
+                      company_confirmed_completed: true,
+                      responded_at: Time.current,
+                      updated_at: Time.current
+                    )
+        next if updated == 0
 
         sub.student_profile.commitment_events.create!(
           event_type: "student_completed_internship",
