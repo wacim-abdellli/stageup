@@ -9,11 +9,7 @@ class SubmissionsController < ApplicationController
   before_action :set_submission_for_completion, only: [ :confirm_completion ]
 
   def create
-    @offer = Offer.find(params[:offer_id])
-    unless @offer.status == "active"
-      redirect_to offer_path(@offer), alert: "You cannot apply to an inactive offer."
-      return
-    end
+    @offer = Offer.where(status: "active").find(params[:offer_id])
 
     student = current_user.profileable
     if params[:custom_cv_url].present?
@@ -159,13 +155,13 @@ class SubmissionsController < ApplicationController
       )
       student.recalculate_commitment_score!
       company_user = @submission.offer.company_profile.user
+      Notification.trigger(
+        recipient: company_user,
+        action: "internship_abandoned",
+        message: "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name} has abandoned the internship for #{@submission.offer.title}.",
+        notifiable: @submission
+      )
     end
-    Notification.trigger(
-      recipient: company_user,
-      action: "internship_abandoned",
-      message: "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name} has abandoned the internship for #{@submission.offer.title}.",
-      notifiable: @submission
-    )
     redirect_to dashboard_path, notice: "You have abandoned the internship. A penalty has been applied to your commitment score."
   end
 
@@ -188,14 +184,14 @@ class SubmissionsController < ApplicationController
         description: "Internship for '#{@submission.offer.title}' was cancelled by the company."
       )
       student.recalculate_commitment_score!
+      student_user = @submission.student_profile.user
+      Notification.trigger(
+        recipient: student_user,
+        action: "internship_cancelled",
+        message: "Your internship for #{@submission.offer.title} has been cancelled by the company.",
+        notifiable: @submission
+      )
     end
-    student_user = @submission.student_profile.user
-    Notification.trigger(
-      recipient: student_user,
-      action: "internship_cancelled",
-      message: "Your internship for #{@submission.offer.title} has been cancelled by the company.",
-      notifiable: @submission
-    )
     redirect_to dashboard_path, notice: "Internship has been cancelled and the student's commitment score has been adjusted."
   end
 
