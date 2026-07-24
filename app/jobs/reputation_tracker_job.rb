@@ -9,7 +9,9 @@ class ReputationTrackerJob < ApplicationJob
           .includes(offer: :company_profile, student_profile: :user)
           .find_each do |sub|
       ActiveRecord::Base.transaction do
-        sub.update_columns(status: "expired", responded_at: Time.current, updated_at: Time.current)
+        updated = Submission.where(id: sub.id, status: "submitted")
+                    .update_all(status: "expired", responded_at: Time.current, updated_at: Time.current)
+        next if updated == 0
 
         company = sub.offer.company_profile
         company.commitment_events.create!(
