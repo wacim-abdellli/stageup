@@ -12,7 +12,7 @@ class DashboardsController < ApplicationController
 
     if @role_type == "StudentProfile"
       submissions = @profile.submissions.where(status: [ "accepted", "completed" ])
-      @active_internships = submissions.includes({ offer: :company_profile }, :reviews, :internship_agreement).order(created_at: :desc)
+      @active_internships = submissions.includes({ offer: [:company_profile, :mission] }, :reviews, :internship_agreement).order(created_at: :desc)
       @completed_internships_count = @profile.submissions.where(status: "completed").count
       @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc).limit(50)
       @commitment_score = @profile.commitment_score
@@ -30,7 +30,7 @@ class DashboardsController < ApplicationController
       processed = Submission.where(offer_id: offer_ids).where(status: [ "accepted", "rejected", "completed" ])
       @processed_submissions = processed.includes(:student_profile, :offer).order(responded_at: :desc).limit(10)
 
-      @company_offers = @profile.offers.includes(:skills).order(created_at: :desc)
+      @company_offers = @profile.offers.includes(:skills, :submissions).order(created_at: :desc)
 
       @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc).limit(50)
     elsif @role_type == "UniversityProfile"
