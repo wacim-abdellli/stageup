@@ -20,8 +20,8 @@ module Admin
         @profile.destroy!
       end
       redirect_to admin_dashboard_path, notice: "Coordinator profile has been rejected and removed."
-    rescue ActiveRecord::RecordNotDestroyed, ActiveRecord::RecordInvalid => e
-      redirect_to admin_dashboard_path, alert: "Failed to reject coordinator: #{e.message}"
+    rescue ActiveRecord::RecordNotDestroyed, ActiveRecord::RecordInvalid
+      redirect_to admin_dashboard_path, alert: "Failed to reject coordinator. Please try again or contact support."
     end
 
     private
