@@ -186,7 +186,7 @@
     <% end %>
     <main id="main-content">
       <% if flash[:notice] || flash[:alert] %>
-        <div class="flash-portal">
+        <div class="flash-portal" aria-live="polite" role="status">
           <% if flash[:notice] %>
             <div class="flash-message flash-notice">
               <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>

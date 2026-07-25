@@ -48,6 +48,11 @@
   --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.7);
   --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.25);
   --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+  --success-light: rgba(16, 185, 129, 0.06);
+  --danger-light: rgba(239, 68, 68, 0.06);
+  --warning-light: rgba(245, 158, 11, 0.06);
+  --disabled-opacity: 0.45;
 }
 /* Light Theme Overrides */
 [data-theme="light"] {
@@ -273,6 +278,13 @@ input[type="checkbox"] {
 .form-control::placeholder {
   color: var(--text-muted);
 }
+.form-control:disabled,
+.form-control[disabled],
+.form-control.disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+  background-color: rgba(255,255,255,0.01);
+}
 
 /* Select elements — custom arrow everywhere */
 select.form-control {
@@ -312,6 +324,53 @@ textarea.form-control {
   line-height: 1.6;
 }
 
+
+.btn:disabled,
+.btn[disabled],
+.btn.disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+}
+
+/* Autofill override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgba(15, 23, 42, 0.95) inset !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+  caret-color: var(--text-primary);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.16);
+}
+
+/* Selection */
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: var(--text-primary);
+}
 
 .pw-wrap { position:relative; }
 .pw-wrap .form-control { padding-right:44px; }
@@ -368,6 +427,14 @@ textarea.form-control {
 .btn-primary:active {
   transform: scale(0.97) translateY(0);
 }
+.btn-primary:disabled,
+.btn-primary[disabled],
+.btn-primary.disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+}
 .btn-secondary {
   background-color: rgba(255, 255, 255, 0.02);
   color: var(--text-primary);
@@ -381,6 +448,14 @@ textarea.form-control {
 }
 .btn-secondary:active {
   transform: scale(0.97) translateY(0);
+}
+.btn-secondary:disabled,
+.btn-secondary[disabled],
+.btn-secondary.disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
 }
 
 /* Role Selector Grid */
@@ -6485,4 +6560,22 @@ textarea.form-control {
 [data-theme="light"] .modal-info-box {
   background: #F8FAFC;
   border-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] input:-webkit-autofill,
+[data-theme="light"] input:-webkit-autofill:hover,
+[data-theme="light"] input:-webkit-autofill:focus,
+[data-theme="light"] textarea:-webkit-autofill,
+[data-theme="light"] textarea:-webkit-autofill:hover,
+[data-theme="light"] textarea:-webkit-autofill:focus,
+[data-theme="light"] select:-webkit-autofill,
+[data-theme="light"] select:-webkit-autofill:hover,
+[data-theme="light"] select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: #0F172A !important;
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(99, 102, 241, 0.2);
+  color: #0F172A;
 }
