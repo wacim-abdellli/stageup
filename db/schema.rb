@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_18_064429) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_18_064430) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -172,6 +172,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_18_064429) do
     t.string "last_name", null: false
     t.string "major"
     t.string "phone"
+    t.string "cv_url"
     t.bigint "university_id"
     t.datetime "updated_at", null: false
     t.index ["university_id"], name: "index_student_profiles_on_university_id"
