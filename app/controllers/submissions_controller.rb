@@ -34,24 +34,28 @@ class SubmissionsController < ApplicationController
       status: @offer.mission.present? ? "started" : "submitted",
       submitted_at: @offer.mission.present? ? nil : Time.current
     )
-    if @submission.save
-      company_user = @offer.company_profile.user
-      student_name = "#{current_user.profileable.first_name} #{current_user.profileable.last_name}"
-      Notification.trigger(
-        recipient: company_user,
-        action: "application_received",
-        message: "#{student_name} applied to #{@offer.title}.",
-        notifiable: @submission
-      )
-      UserMailer.application_received_email(company_user, @submission).deliver_later unless @offer.mission.present?
-      notice_msg = if @offer.mission.present?
-                     "Mission started! You have 48 hours to submit your solution."
+    begin
+      if @submission.save
+        company_user = @offer.company_profile.user
+        student_name = "#{current_user.profileable.first_name} #{current_user.profileable.last_name}"
+        Notification.trigger(
+          recipient: company_user,
+          action: "application_received",
+          message: "#{student_name} applied to #{@offer.title}.",
+          notifiable: @submission
+        )
+        UserMailer.application_received_email(company_user, @submission).deliver_later unless @offer.mission.present?
+        notice_msg = if @offer.mission.present?
+                       "Mission started! You have 48 hours to submit your solution."
+        else
+                       "Application successfully submitted with your CV."
+        end
+        redirect_to offer_path(@offer), notice: notice_msg
       else
-                     "Application successfully submitted with your CV."
+        redirect_to offer_path(@offer), alert: "Unable to start application: #{@submission.errors.full_messages.join(', ')}"
       end
-      redirect_to offer_path(@offer), notice: notice_msg
-    else
-      redirect_to offer_path(@offer), alert: "Unable to start application: #{@submission.errors.full_messages.join(', ')}"
+    rescue ActiveRecord::RecordNotUnique
+      redirect_to offer_path(@offer), alert: "You have already applied to this offer."
     end
   end
 
