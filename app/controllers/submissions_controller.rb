@@ -205,7 +205,9 @@ class SubmissionsController < ApplicationController
       return
     end
     role = current_user.profileable_type
-    @submission.confirm_completion_by!(role)
+    @submission.with_lock do
+      @submission.confirm_completion_by!(role)
+    end
     if @submission.status == "completed"
       other_party = role == "StudentProfile" ? @submission.offer.company_profile.user : @submission.student_profile.user
       Notification.trigger(
