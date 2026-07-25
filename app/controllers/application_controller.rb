@@ -14,8 +14,8 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to root_path, alert: "The requested resource was not found."
   end
-  rescue_from ActionController::ParameterMissing do |e|
-    redirect_to root_path, alert: "Missing required parameter: #{e.param}"
+  rescue_from ActionController::ParameterMissing do
+    redirect_to root_path, alert: "A required parameter was missing."
   end
 
   private
