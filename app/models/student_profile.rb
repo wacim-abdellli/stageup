@@ -25,18 +25,6 @@ class StudentProfile < ApplicationRecord
     end
   end
 
-  def apply_commitment_event!(event_type:, score_delta:, description:)
-    with_lock do
-      commitment_events.create!(
-        event_type: event_type,
-        score_delta: score_delta,
-        description: description
-      )
-      new_score = (commitment_score + score_delta).clamp(0.0, 100.0)
-      update_columns(commitment_score: new_score)
-    end
-  end
-
   private
 
   def validate_cv_format
