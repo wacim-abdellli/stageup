@@ -329,7 +329,7 @@
                         <%= link_to offer.title, offer_path(offer), class: "offer-mgmt-link" %>
                       </strong>
                       <span class="inline-list-sm-meta">
-                        <%= offer.draft? ? "Draft" : offer.status.humanize %> &middot; <%= offer.submissions.count %> applicant(s)
+                        <%= offer.draft? ? "Draft" : offer.status.humanize %> &middot; <%= offer.submissions.size %> applicant(s)
                       </span>
                     </div>
                   </div>
