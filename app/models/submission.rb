@@ -9,6 +9,7 @@ class Submission < ApplicationRecord
   belongs_to :mission, optional: true
   has_many :reviews, dependent: :destroy
   has_one :internship_agreement, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
   validates :github_link, presence: true, if: :github_link_required?

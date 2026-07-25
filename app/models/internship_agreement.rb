@@ -4,6 +4,7 @@ class InternshipAgreement < ApplicationRecord
   belongs_to :submission
   has_one :student_profile, through: :submission
   has_one :university, through: :student_profile
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :start_date, presence: true
   validates :end_date, presence: true
