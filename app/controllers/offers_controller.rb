@@ -59,13 +59,16 @@ class OffersController < ApplicationController
   end
 
   def destroy
-    if @offer.submissions.none?
-      @offer.destroy
-      redirect_to dashboard_path, notice: "Offer was permanently deleted."
-    else
-      @offer.update!(status: "archived")
-      redirect_to dashboard_path, alert: "Offer has applications and cannot be deleted. It has been archived instead."
+    @offer.with_lock do
+      if @offer.submissions.none?
+        @offer.destroy
+        flash[:notice] = "Offer was permanently deleted."
+      else
+        @offer.update!(status: "archived")
+        flash[:alert] = "Offer has applications and cannot be deleted. It has been archived instead."
+      end
     end
+    redirect_to dashboard_path
   end
 
   def create
