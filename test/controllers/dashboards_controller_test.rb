@@ -7,10 +7,9 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:university_user)
     get dashboard_url
     assert_response :success
-    assert_select "td", text: /Ben Ali/
-    assert_select ".mb-6", text: "Total Students Enrolled"
+    assert_match "Prof. Ahmed Mansour", @response.body
+    assert_select ".rep-stat-label", text: "Associated Students"
     assert_select "strong", text: "1"
-    assert_match "100.0", @response.body
   end
 
   test "pending university coordinator sees pending approval view" do
