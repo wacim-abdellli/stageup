@@ -1,25 +1,31 @@
-<div class="nav-locale-switcher" aria-label="Language Selector" style="display: inline-flex; flex-direction: row; align-items: center; gap: 6px; background: var(--bg-tertiary, rgba(255, 255, 255, 0.04)); border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)); border-radius: 9999px; padding: 3px 5px 3px 8px; height: 34px; box-sizing: border-box; vertical-align: middle;">
-  <span class="nav-locale-globe" aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; color: var(--text-muted, #94a3b8);">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<div class="lang-dropdown-wrapper">
+  <button type="button" class="lang-icon-btn" id="lang-btn" aria-label="Select Language" aria-expanded="false" title="Language: <%= I18n.locale.to_s.upcase %>">
+    <svg class="lang-globe-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/>
       <line x1="2" x2="22" y1="12" y2="12"/>
       <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
     </svg>
-  </span>
-  <span class="nav-locale-group" style="display: inline-flex; flex-direction: row; align-items: center; gap: 2px;">
-    <% [[:fr, "FR"], [:en, "EN"], [:ar, "AR"]].each do |loc, label| %>
+    <span class="lang-badge-text"><%= I18n.locale.to_s.upcase %></span>
+  </button>
+
+  <div class="lang-floating-menu" id="lang-menu" role="menu">
+    <% [
+      [:fr, "Français", "FR"],
+      [:en, "English", "EN"],
+      [:ar, "العربية", "AR"]
+    ].each do |loc, full_name, short_code| %>
       <% is_active = (I18n.locale == loc) %>
-      <% if is_active %>
-        <span class="nav-locale-item active" style="display: inline-flex; align-items: center; justify-content: center; background: var(--primary, #6366f1); color: #ffffff !important; font-weight: 700; font-size: 11px; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 9999px; line-height: 1; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4); cursor: default;">
-          <%= label %>
-        </span>
-      <% else %>
-        <%= link_to label,
-            url_for(request.query_parameters.merge(locale: loc)),
-            class: "nav-locale-item",
-            style: "display: inline-flex; align-items: center; justify-content: center; color: var(--text-muted, #94a3b8); font-weight: 600; font-size: 11px; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 9999px; text-decoration: none; line-height: 1; transition: all 0.2s ease;",
-            title: "Switch to #{label}" %>
+      <%= link_to url_for(request.query_parameters.merge(locale: loc)),
+          class: "lang-menu-option #{'active' if is_active}",
+          role: "menuitem" do %>
+        <div class="lang-option-left">
+          <span class="lang-option-name"><%= full_name %></span>
+          <span class="lang-option-code"><%= short_code %></span>
+        </div>
+        <% if is_active %>
+          <svg class="lang-check-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <% end %>
       <% end %>
     <% end %>
-  </span>
+  </div>
 </div>
