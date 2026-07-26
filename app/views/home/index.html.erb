@@ -205,7 +205,7 @@
                     <%= link_to offer.title, new_user_session_path, title: "Sign in to view offer details" %>
                   <% end %>
                 </h3>
-                <span class="featured-offer-company"><%= offer.company_profile.name %></span>
+                <span class="featured-offer-company"><%= offer.company_profile&.name || "Unknown Company" %></span>
               </div>
 
               <div class="featured-offer-footer">

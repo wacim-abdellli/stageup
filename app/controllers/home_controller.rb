@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :reputation_events ]
 
   def index
-    @active_offers = Offer.where(status: "active").order(created_at: :desc).limit(3)
+    @active_offers = Offer.where(status: "active").includes(:company_profile).order(created_at: :desc).limit(3)
     render :index
   end
 
