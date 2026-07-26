@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_26_201000) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_26_201100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -197,13 +197,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_26_201000) do
     t.text "submission_notes"
     t.datetime "submitted_at"
     t.datetime "updated_at", null: false
+    t.index ["first_completion_confirmed_at"], name: "index_submissions_on_first_completion_confirmed_at"
     t.index ["mission_id"], name: "index_submissions_on_mission_id"
     t.index ["offer_id", "status"], name: "index_submissions_on_offer_id_and_status"
     t.index ["offer_id"], name: "index_submissions_on_offer_id"
+    t.index ["responded_at"], name: "index_submissions_on_responded_at"
     t.index ["status"], name: "index_submissions_on_status"
     t.index ["student_profile_id", "offer_id"], name: "index_submissions_on_student_profile_id_and_offer_id", unique: true
     t.index ["student_profile_id", "status"], name: "index_submissions_on_student_profile_id_and_status"
     t.index ["student_profile_id"], name: "index_submissions_on_student_profile_id"
+    t.index ["submitted_at"], name: "idx_submissions_submitted_at_pending", where: "((status)::text = ANY ((ARRAY['submitted'::character varying, 'under_review'::character varying])::text[]))"
+    t.index ["submitted_at"], name: "index_submissions_on_submitted_at"
   end
 
   create_table "universities", force: :cascade do |t|
