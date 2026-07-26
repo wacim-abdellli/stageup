@@ -7016,43 +7016,81 @@ select:-webkit-autofill:focus {
   color: var(--text-muted);
 }
 
-/* Locale Switcher Styles */
+/* Modern Segmented Locale Switcher */
 .locale-switcher {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  padding: 3px 4px;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 3px 5px;
+  height: 34px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .locale-switcher:hover {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.1);
+}
+
+.locale-globe-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  padding-left: 3px;
+}
+
+.locale-segmented {
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .locale-btn {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  color: rgba(255, 255, 255, 0.3);
-  padding: 5px 11px;
-  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
   text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1;
+  transition: all 0.15s ease-in-out;
 }
 
 .locale-btn:hover {
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .locale-btn-active {
-  color: #FFFFFF;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  background: var(--primary) !important;
+  box-shadow: 0 1px 4px rgba(79, 70, 229, 0.4);
+}
+
+[data-theme="light"] .locale-switcher {
+  background: #F1F5F9;
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="light"] .locale-btn {
+  color: #64748B;
+}
+
+[data-theme="light"] .locale-btn:hover {
+  color: #0F172A;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .locale-btn-active {
+  color: #FFFFFF !important;
+  background: var(--primary) !important;
+  box-shadow: 0 1px 4px rgba(79, 70, 229, 0.3);
 }
 
 /* ============= RTL OVERRIDES ============= */

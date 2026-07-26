@@ -1,6 +1,16 @@
-<div class="locale-switcher">
-  <% [:fr, :en, :ar].each do |loc| %>
-    <%= link_to loc.to_s.upcase, url_for(locale: (loc == I18n.default_locale ? nil : loc)),
-        class: "locale-btn #{'locale-btn-active' if I18n.locale == loc}" %>
-  <% end %>
+<div class="locale-switcher" aria-label="Language Selector">
+  <span class="locale-globe-icon" aria-hidden="true">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="2" x2="22" y1="12" y2="12"/>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </svg>
+  </span>
+  <div class="locale-segmented">
+    <% [[:fr, "FR"], [:en, "EN"], [:ar, "AR"]].each do |loc, label| %>
+      <%= link_to label, url_for(locale: (loc == I18n.default_locale ? nil : loc)),
+          class: "locale-btn #{'locale-btn-active' if I18n.locale == loc}",
+          title: "Switch to #{label}" %>
+    <% end %>
+  </div>
 </div>
