@@ -281,6 +281,12 @@
                       <% end %>
                     <% else %>
                       <span class="badge-status badge-completed">Completed</span>
+                      <% if sub.internship_agreement&.verification_token.present? %>
+                        <%= link_to "View Certificate",
+                            verify_certificate_path(token: sub.internship_agreement.verification_token),
+                            class: "btn btn-secondary btn-compact",
+                            target: "_blank" %>
+                      <% end %>
                       <% my_review = sub.reviews.detect { |r| r.author_id == current_user.id } %>
                       <% if my_review.nil? %>
                         <%= link_to "Leave Review", new_submission_review_path(sub), class: "btn btn-primary w-auto fs-12 btn-review" %>

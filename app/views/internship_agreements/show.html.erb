@@ -32,6 +32,22 @@
       <p class="agreement-subtitle">This agreement is made in accordance with Tunisian law governing internship programmes.</p>
     </div>
 
+    <% if @agreement.status == "fully_executed" && @agreement.verification_token.present? %>
+      <div class="cert-banner hide-on-print mb-24">
+        <div class="cert-banner-left">
+          <svg class="icon-18 icon-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <div>
+            <strong class="cert-banner-title">Certificate Available</strong>
+            <p class="cert-banner-sub">This internship is fully executed and publicly verifiable.</p>
+          </div>
+        </div>
+        <%= link_to "Open Public Certificate →",
+            verify_certificate_path(token: @agreement.verification_token),
+            class: "btn btn-primary btn-compact",
+            target: "_blank" %>
+      </div>
+    <% end %>
+
     <div class="text-center mb-30">
       <% if @agreement.status == "fully_executed" %>
         <span class="badge-status badge-completed fs-14 pill-lg">
