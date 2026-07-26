@@ -100,10 +100,36 @@
             return;
           }
 
+          // 3.5. Locale Switcher Dropdown Toggle
+          var localeBtn = e.target.closest('#locale-trigger-btn');
+          if (localeBtn) {
+            e.stopPropagation();
+            var lmenu = $('locale-dropdown-menu');
+            if (lmenu) {
+              var open = lmenu.classList.toggle('open');
+              localeBtn.setAttribute('aria-expanded', open);
+              var dd = $('nav-user-dropdown');
+              var panel = $('notif-panel');
+              if (dd) dd.classList.remove('open');
+              if (panel) panel.classList.remove('open');
+            }
+            return;
+          }
+
           // 4. Click Outside to Close Panels
           var insideDropdown = e.target.closest('#nav-user-dropdown') || e.target.closest('#nav-user-menu');
           var insideNotif = e.target.closest('#notif-panel') || e.target.closest('#notif-btn');
+          var insideLocale = e.target.closest('#locale-dropdown-menu') || e.target.closest('#locale-trigger-btn');
           var insideMobile = e.target.closest('#nav-mobile-menu') || e.target.closest('#nav-toggle');
+
+          if (!insideLocale) {
+            var lmenu = $('locale-dropdown-menu');
+            var lb = $('locale-trigger-btn');
+            if (lmenu && lmenu.classList.contains('open')) {
+              lmenu.classList.remove('open');
+              if (lb) lb.setAttribute('aria-expanded', 'false');
+            }
+          }
 
           if (!insideDropdown) {
             var dd = $('nav-user-dropdown');

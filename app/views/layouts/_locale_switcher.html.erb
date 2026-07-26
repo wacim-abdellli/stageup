@@ -1,16 +1,28 @@
-<div class="locale-switcher" aria-label="Language Selector">
-  <span class="locale-globe-icon" aria-hidden="true">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<div class="locale-switcher-wrap" id="locale-switcher-wrap">
+  <button type="button" class="locale-trigger-btn" id="locale-trigger-btn" aria-label="Select Language" aria-expanded="false">
+    <svg class="locale-icon-globe" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/>
       <line x1="2" x2="22" y1="12" y2="12"/>
       <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
     </svg>
-  </span>
-  <div class="locale-segmented">
-    <% [[:fr, "FR"], [:en, "EN"], [:ar, "AR"]].each do |loc, label| %>
-      <%= link_to label, url_for(locale: (loc == I18n.default_locale ? nil : loc)),
-          class: "locale-btn #{'locale-btn-active' if I18n.locale == loc}",
-          title: "Switch to #{label}" %>
+    <span class="locale-current-code"><%= I18n.locale.to_s.upcase %></span>
+    <svg class="locale-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+
+  <div class="locale-dropdown-menu" id="locale-dropdown-menu">
+    <% [
+      [:fr, "Français", "FR"],
+      [:en, "English", "EN"],
+      [:ar, "العربية", "AR"]
+    ].each do |loc, full_name, short_code| %>
+      <%= link_to url_for(locale: (loc == I18n.default_locale ? nil : loc)),
+          class: "locale-menu-item #{'active' if I18n.locale == loc}" do %>
+        <span class="locale-item-name"><%= full_name %></span>
+        <span class="locale-item-code"><%= short_code %></span>
+        <% if I18n.locale == loc %>
+          <svg class="locale-check-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 </div>
