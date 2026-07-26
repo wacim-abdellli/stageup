@@ -9,7 +9,11 @@ class SubmissionsController < ApplicationController
   before_action :set_submission_for_completion, only: [ :confirm_completion ]
 
   def create
-    @offer = Offer.where(status: "active").find(params[:offer_id])
+    @offer = Offer.find(params[:offer_id])
+    unless @offer.status == "active"
+      redirect_to offer_path(@offer), alert: "You cannot apply to an inactive offer."
+      return
+    end
 
     student = current_user.profileable
     if params[:custom_cv_url].present?
@@ -83,6 +87,11 @@ class SubmissionsController < ApplicationController
   end
 
   def accept
+    unless @submission.offer.company_profile == current_user.profileable
+      redirect_to dashboard_path, alert: "Not authorized."
+      return
+    end
+
     unless %w[submitted under_review].include?(@submission.status)
       redirect_to dashboard_path, alert: "This submission cannot be accepted in its current state."
       return
@@ -113,6 +122,11 @@ class SubmissionsController < ApplicationController
   end
 
   def reject
+    unless @submission.offer.company_profile == current_user.profileable
+      redirect_to dashboard_path, alert: "Not authorized."
+      return
+    end
+
     unless %w[submitted under_review].include?(@submission.status)
       redirect_to dashboard_path, alert: "This submission cannot be rejected in its current state."
       return

@@ -201,6 +201,25 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "The requested resource was not found.", flash[:alert]
   end
 
+  test "company cannot cancel another company's submission" do
+    sign_in users(:company_user_two)
+    offer_one = Offer.create!(
+      company_profile: @company_profile,
+      title: "Company One Offer",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
+    sub = Submission.create!(
+      student_profile: @student_profile,
+      offer: offer_one,
+      status: "accepted",
+      responded_at: Time.current
+    )
+
+    post cancel_submission_path(sub)
+    assert_response :redirect
+  end
+
   test "student cannot call cancel" do
     sign_in @student_user
 
