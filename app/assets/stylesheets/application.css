@@ -6803,30 +6803,20 @@ select:-webkit-autofill:focus {
   border-top: 1px solid var(--border-color);
 }
 
-.cert-qr-box {
-  width: 140px;
-  height: 140px;
-  padding: 12px;
-  background: #FFFFFF;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cert-qr-placeholder {
+.cert-qr-block {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  color: #64748B;
-  font-size: 10px;
-  font-weight: 600;
-  text-align: center;
+  gap: 8px;
+  padding: 24px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
 }
 
-.cert-qr-subtext {
-  font-size: 12px;
+.cert-qr-label {
+  font-size: 11px;
   color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }

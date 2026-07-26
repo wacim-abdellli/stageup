@@ -80,13 +80,18 @@
         </div>
 
         <div class="cert-qr-wrap">
-          <div class="cert-qr-box" id="cert-qr-container">
-            <div class="cert-qr-placeholder">
-              <svg class="icon-32 icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              <span>Scan to Verify</span>
-            </div>
+          <% qr_url = verify_certificate_url(token: @agreement.verification_token) %>
+          <% qr = RQRCode::QRCode.new(qr_url) %>
+          <div class="cert-qr-block">
+            <%= qr.as_svg(
+              offset: 0,
+              color: "F4F4F6",
+              shape_rendering: "crispEdges",
+              module_size: 4,
+              standalone: true
+            ).html_safe %>
+            <p class="cert-qr-label">Scan to verify authenticity</p>
           </div>
-          <p class="cert-qr-subtext">Scan this QR code with any mobile camera to verify authenticity on StageUp.</p>
         </div>
 
       </div>

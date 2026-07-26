@@ -44,11 +44,7 @@ Rails.application.routes.draw do
       post :read_all
     end
   end
-  resources :certificates, only: [] do
-    collection do
-      get "verify/:token", to: "certificates#verify", as: :verify_certificate
-    end
-  end
+  get "certificates/verify/:token", to: "certificates#verify", as: :verify_certificate
 
   root to: "home#index"
   get "reputation_events", to: "home#reputation_events"
