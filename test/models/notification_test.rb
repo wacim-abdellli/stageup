@@ -42,4 +42,15 @@ class NotificationTest < ActiveSupport::TestCase
 
     assert_equal [ second, first ], Notification.recent.to_a
   end
+
+  test "broadcasts to ActionCable recipient stream on creation" do
+    assert_broadcasts("notifications:user_#{@student_user.id}", 1) do
+      Notification.trigger(
+        recipient: @student_user,
+        action: "application_accepted",
+        message: "Your submission has been accepted!",
+        notifiable: @submission
+      )
+    end
+  end
 end

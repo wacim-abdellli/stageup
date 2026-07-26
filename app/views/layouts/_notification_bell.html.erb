@@ -1,14 +1,12 @@
 <% if user_signed_in? %>
   <% unread = current_user.notifications.unread.count %>
   <div class="notif-bell-container">
-    <button class="notif-bell-btn" id="notif-btn" aria-label="Notifications">
+    <button class="notif-bell-btn" id="notif-btn" aria-label="Notifications" data-notifications-target="bell">
       <svg class="notif-bell-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
         <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
       </svg>
-      <% if unread > 0 %>
-        <span class="notif-bell-count"><%= unread > 99 ? "99+" : unread %></span>
-      <% end %>
+      <span class="notif-bell-count notif-bell-badge" style="<%= 'display: none;' if unread == 0 %>"><%= unread > 99 ? "99+" : unread %></span>
     </button>
 
     <div class="notif-dropdown" id="notif-panel">

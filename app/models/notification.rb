@@ -4,6 +4,8 @@ class Notification < ApplicationRecord
   belongs_to :recipient, polymorphic: true
   belongs_to :notifiable, polymorphic: true
 
+  after_create_commit :broadcast_to_recipient
+
   VALID_ACTIONS = %w[
     application_received application_accepted application_rejected
     application_status_updated agreement_signature_requested
@@ -41,6 +43,28 @@ class Notification < ApplicationRecord
   end
 
   private
+
+  def broadcast_to_recipient
+    target_user_id = if recipient.respond_to?(:user_id) && recipient.user_id.present?
+      recipient.user_id
+    elsif recipient.is_a?(User)
+      recipient.id
+    elsif recipient.respond_to?(:user) && recipient.user.present?
+      recipient.user.id
+    else
+      recipient_id
+    end
+
+    ActionCable.server.broadcast(
+      "notifications:user_#{target_user_id}",
+      {
+        id:         id,
+        action:     action,
+        message:    message,
+        created_at: created_at.iso8601
+      }
+    )
+  end
 
   def strip_html_from_message
     self.message = ActionController::Base.helpers.strip_tags(message.to_s).strip
