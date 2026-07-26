@@ -6993,171 +6993,59 @@ select:-webkit-autofill:focus {
   color: var(--text-muted);
 }
 
-/* ==========================================================================
-   Vercel / GitHub Style Language Globe Dropdown Component
-   ========================================================================== */
-.lang-dropdown-wrapper {
-  position: relative;
-  display: inline-block;
+/* Simple Native Language Select Dropdown */
+.nav-locale-select-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   vertical-align: middle;
 }
 
-.lang-icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  height: 36px;
-  padding: 0 10px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.nav-locale-select {
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.04));
   color: var(--text-secondary, #94a3b8);
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  user-select: none;
-}
-
-.lang-icon-btn:hover,
-.lang-icon-btn[aria-expanded="true"] {
-  color: var(--text-primary, #ffffff);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: 0 0 14px rgba(99, 102, 241, 0.15);
-}
-
-.lang-globe-icon {
-  color: var(--text-muted, #94a3b8);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
-}
-
-.lang-icon-btn:hover .lang-globe-icon {
-  color: var(--primary-hover, #818cf8);
-  transform: rotate(20deg);
-}
-
-.lang-badge-text {
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: 9999px;
+  padding: 4px 10px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  outline: none;
+  height: 34px;
+  line-height: 1;
+  transition: all 0.2s ease;
 }
 
-/* Floating Glass Menu Card */
-.lang-floating-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 150px;
-  background: var(--bg-secondary, #0e1117);
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-  border-radius: var(--radius-md, 12px);
-  padding: 5px;
-  box-shadow: var(--shadow-lg, 0 12px 32px rgba(0, 0, 0, 0.5));
-  z-index: 1000;
-  backdrop-filter: blur(16px);
-}
-
-.lang-floating-menu.open {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  animation: langMenuEntrance 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes langMenuEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(-6px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.lang-menu-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  border-radius: var(--radius-sm, 8px);
-  color: var(--text-secondary, #94a3b8);
-  text-decoration: none !important;
-  font-size: 12px;
-  font-weight: 500;
-  transition: all 0.15s ease-in-out;
-}
-
-.lang-menu-option:hover {
-  background: var(--primary-light, rgba(99, 102, 241, 0.08));
+.nav-locale-select:hover,
+.nav-locale-select:focus {
   color: var(--text-primary, #ffffff);
+  border-color: rgba(99, 102, 241, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
 }
 
-.lang-menu-option.active {
-  color: var(--primary-hover, #818cf8);
-  font-weight: 700;
-  background: rgba(99, 102, 241, 0.12);
+.nav-locale-select option {
+  background: #121318;
+  color: #F4F4F6;
+  font-weight: 600;
+  padding: 6px 10px;
 }
 
-.lang-option-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.lang-option-name {
-  font-size: 13px;
-}
-
-.lang-option-code {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--text-muted, #64748b);
-  opacity: 0.7;
-}
-
-.lang-check-svg {
-  color: var(--primary-hover, #818cf8);
-}
-
-/* Light Mode Support */
-[data-theme="light"] .lang-icon-btn {
-  background: rgba(15, 23, 42, 0.04);
-  border-color: rgba(15, 23, 42, 0.12);
+[data-theme="light"] .nav-locale-select {
+  background: #F1F5F9;
   color: #334155;
+  border-color: rgba(15, 23, 42, 0.12);
 }
 
-[data-theme="light"] .lang-icon-btn:hover {
-  background: rgba(15, 23, 42, 0.08);
+[data-theme="light"] .nav-locale-select:hover {
+  background: #E2E8F0;
   color: #0F172A;
 }
 
-[data-theme="light"] .lang-floating-menu {
+[data-theme="light"] .nav-locale-select option {
   background: #FFFFFF;
-  border-color: rgba(15, 23, 42, 0.12);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
-}
-
-[data-theme="light"] .lang-menu-option {
-  color: #334155;
-}
-
-[data-theme="light"] .lang-menu-option:hover {
-  background: #F8FAFC;
   color: #0F172A;
-}
-
-[data-theme="light"] .lang-menu-option.active {
-  background: rgba(99, 102, 241, 0.08);
-  color: var(--primary, #6366f1);
-}
-
-/* RTL Adjustment */
-html[dir="rtl"] .lang-floating-menu {
-  right: auto;
-  left: 0;
 }
 
 /* ============= RTL OVERRIDES ============= */

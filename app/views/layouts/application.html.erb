@@ -79,38 +79,11 @@
               var ab = $('nav-avatar-toggle');
               if (dd) dd.classList.remove('open');
               if (ab) ab.setAttribute('aria-expanded', 'false');
-              // Close lang menu if open
-              var lm = $('lang-menu');
-              var lb = $('lang-btn');
-              if (lm) {
-                lm.style.display = 'none';
-                lm.classList.remove('open');
-              }
-              if (lb) lb.setAttribute('aria-expanded', 'false');
-            }
-            return;
-          }
-
-          // 2.5. Language Switcher Dropdown Toggle
-          var langBtn = e.target.closest('#lang-btn');
-          if (langBtn) {
-            e.stopPropagation();
-            var langMenu = $('lang-menu');
-            if (langMenu) {
-              var isHidden = (langMenu.style.display === 'none' || !langMenu.classList.contains('open'));
-              if (isHidden) {
-                langMenu.style.display = 'flex';
-                langMenu.classList.add('open');
-                langBtn.setAttribute('aria-expanded', 'true');
-              } else {
-                langMenu.style.display = 'none';
-                langMenu.classList.remove('open');
-                langBtn.setAttribute('aria-expanded', 'false');
-              }
+              // Close user dropdown if open
               var dd = $('nav-user-dropdown');
-              var panel = $('notif-panel');
+              var ab = $('nav-avatar-toggle');
               if (dd) dd.classList.remove('open');
-              if (panel) panel.classList.remove('open');
+              if (ab) ab.setAttribute('aria-expanded', 'false');
             }
             return;
           }
@@ -135,18 +108,7 @@
           // 4. Click Outside to Close Panels
           var insideDropdown = e.target.closest('#nav-user-dropdown') || e.target.closest('#nav-user-menu');
           var insideNotif = e.target.closest('#notif-panel') || e.target.closest('#notif-btn');
-          var insideLang = e.target.closest('#lang-menu') || e.target.closest('#lang-btn');
           var insideMobile = e.target.closest('#nav-mobile-menu') || e.target.closest('#nav-toggle');
-
-          if (!insideLang) {
-            var lm = $('lang-menu');
-            var lb = $('lang-btn');
-            if (lm) {
-              lm.style.display = 'none';
-              lm.classList.remove('open');
-              if (lb) lb.setAttribute('aria-expanded', 'false');
-            }
-          }
 
           if (!insideDropdown) {
             var dd = $('nav-user-dropdown');
