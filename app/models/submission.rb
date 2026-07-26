@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Submission < ApplicationRecord
+  include BroadcastableSubmission
+
   VALID_STATUSES = %w[started submitted under_review accepted rejected completed abandoned expired cancelled].freeze
   VALID_AUTO_VERIFICATION_STATUSES = %w[pending checking passed failed].freeze
 
