@@ -61,11 +61,6 @@ class Submission < ApplicationRecord
     end
 
     if student_confirmed_completed && company_confirmed_completed
-      unless internship_agreement&.status == "fully_executed"
-        errors.add(:base, "The internship agreement must be fully executed before completion can be confirmed.")
-        raise ActiveRecord::RecordInvalid, self
-      end
-
       self.status = "completed"
       self.responded_at = Time.current
 

@@ -22,8 +22,8 @@ accepted:
   student_profile: mohamed
   offer: two
   status: accepted
-  submitted_at: 2026-07-15 10:00:00
-  responded_at: 2026-07-16 10:00:00
+  submitted_at: <%= 2.days.ago %>
+  responded_at: <%= 2.days.ago %>
 
 completed:
   student_profile: mohamed
