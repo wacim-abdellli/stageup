@@ -9,11 +9,7 @@ class SubmissionsController < ApplicationController
   before_action :set_submission_for_completion, only: [ :confirm_completion ]
 
   def create
-    @offer = Offer.find(params[:offer_id])
-    unless @offer.status == "active"
-      redirect_to offer_path(@offer), alert: "You cannot apply to an inactive offer."
-      return
-    end
+    @offer = Offer.where(status: "active").find(params[:offer_id])
 
     student = current_user.profileable
     if params[:custom_cv_url].present?

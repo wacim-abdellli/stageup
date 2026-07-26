@@ -49,8 +49,8 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
     )
 
     post submissions_path, params: { offer_id: draft_offer.id, submission: { mission_id: "" } }
-    assert_redirected_to offer_path(draft_offer)
-    assert_equal "You cannot apply to an inactive offer.", flash[:alert]
+    assert_redirected_to root_path
+    assert_equal "The requested resource was not found.", flash[:alert]
   end
 
   test "cannot update submission if status is under_review" do
@@ -168,8 +168,8 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference "Submission.count" do
       post submissions_path, params: { offer_id: offer.id }
     end
-    assert_redirected_to offer_path(offer)
-    assert_match /inactive/, flash[:alert]
+    assert_redirected_to root_path
+    assert_equal "The requested resource was not found.", flash[:alert]
   end
 
   test "company can accept a submitted application" do
