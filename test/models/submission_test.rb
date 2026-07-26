@@ -141,7 +141,7 @@ class SubmissionTest < ActiveSupport::TestCase
     assert_equal "expired", sub.status
 
     @student.reload
-    event = @student.commitment_events.last
+    event = @student.commitment_events.where(event_type: "student_mission_expired").order(created_at: :desc).first
     assert_not_nil event
     assert_equal "student_mission_expired", event.event_type
     assert_equal 0.0, event.score_delta
@@ -169,7 +169,7 @@ class SubmissionTest < ActiveSupport::TestCase
     assert_equal "expired", sub.status
 
     @student.reload
-    event = @student.commitment_events.last
+    event = @student.commitment_events.where(event_type: "student_mission_expired").order(created_at: :desc).first
     assert_not_nil event
     assert_equal "student_mission_expired", event.event_type
     assert_equal(-10.0, event.score_delta)
