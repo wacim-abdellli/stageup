@@ -52,7 +52,7 @@ class VerifySubmissionJobTest < ActiveJob::TestCase
     sub.reload
     assert_equal "passed", sub.auto_verification_status
     assert_equal "Repository successfully cloned and verified.", sub.auto_verification_log
-    assert_equal "submitted", sub.status
+    assert_equal "under_review", sub.status
     assert_not Dir.exist?(temp_folder)
   end
 
@@ -68,7 +68,7 @@ class VerifySubmissionJobTest < ActiveJob::TestCase
     sub.reload
     assert_equal "failed", sub.auto_verification_status
     assert_includes sub.auto_verification_log, "missing README.md or configuration files"
-    assert_equal "submitted", sub.status
+    assert_equal "under_review", sub.status
     assert_not Dir.exist?(temp_folder)
   end
 
@@ -82,7 +82,7 @@ class VerifySubmissionJobTest < ActiveJob::TestCase
     sub.reload
     assert_equal "failed", sub.auto_verification_status
     assert_includes sub.auto_verification_log, "Git clone failed"
-    assert_equal "submitted", sub.status
+    assert_equal "under_review", sub.status
   end
 
   test "cleans up temp folder in ensure block" do

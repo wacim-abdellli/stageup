@@ -99,10 +99,6 @@ class VerifySubmissionJob < ApplicationJob
   def finalize_submission(submission, passed)
     submission.reload
     return unless %w[passed failed].include?(submission.auto_verification_status)
-
-    Submission.where(id: submission.id, status: "started")
-              .update_all(status: "submitted", submitted_at: Time.current)
-
     return unless passed
 
     company_user = submission.offer.company_profile.user
