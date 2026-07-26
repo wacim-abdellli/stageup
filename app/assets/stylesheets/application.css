@@ -6220,8 +6220,12 @@ select:-webkit-autofill:focus {
 /* Agreement Action Bar */
 
 /* Icon size & color utilities */
-.icon-amber { stroke: #FBBF24; flex-shrink: 0; }
-.icon-amber-fill { stroke: #F59E0B; fill: #F59E0B; flex-shrink: 0; }
+.icon-indigo  { color: var(--primary-hover); }
+.icon-success { color: var(--success); }
+.icon-danger  { color: var(--danger); }
+.icon-warning { color: var(--warning); }
+.icon-amber   { color: var(--warning); stroke: currentColor; flex-shrink: 0; }
+.icon-amber-fill { color: var(--warning); stroke: currentColor; fill: currentColor; flex-shrink: 0; }
 .icon-muted { stroke: var(--text-muted); }
 
 /* Offer Management Status Dots */

@@ -3,7 +3,7 @@
 
   <div class="form-page-header">
     <div class="step-eyebrow">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
+      <svg class="icon-indigo" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
       <span>STEP 2 OF 2 · PROOF SUBMISSION</span>
     </div>
     <h1 class="form-page-title">Submit Proof of Work</h1>
@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="review-context-row">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
+        <svg class="icon-indigo" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
         <div>
           <span class="review-context-label">Attached Mission</span>
             <strong class="review-context-value"><%= @submission.mission&.title || "No mission attached" %></strong>
@@ -31,7 +31,7 @@
 
     <% if @submission.errors.any? %>
       <div class="flash-message flash-alert mb-20">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <svg class="icon-danger" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span><%= @submission.errors.full_messages.first %></span>
       </div>
     <% end %>
@@ -45,7 +45,7 @@
             required: true, oninput: "valURL(this)" %>
         
         <div class="inline-warning-box mt-10">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <svg class="icon-amber" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           <span>Ensure your URL is <strong>publicly accessible</strong> so recruiters can verify your work.</span>
         </div>
       </div>
