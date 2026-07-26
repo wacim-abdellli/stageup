@@ -119,7 +119,7 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to offer_path(offer)
   end
 
-  test "cancel changes status to cancelled and penalizes student score" do
+  test "cancel changes status to cancelled and penalizes company score" do
     sign_in @company_user
 
     offer = Offer.create!(
@@ -135,19 +135,22 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
       responded_at: Time.current
     )
 
-    assert_difference -> { @student_profile.commitment_events.where(event_type: "company_cancelled_internship").count }, 1 do
+    assert_difference -> { @company_profile.commitment_events.where(event_type: "company_cancelled_internship").count }, 1 do
       post cancel_submission_path(sub)
     end
 
     sub.reload
     assert_equal "cancelled", sub.status
 
-    student_event = @student_profile.commitment_events.where(event_type: "company_cancelled_internship").last
-    assert_equal(-15.0, student_event.score_delta)
-    assert_includes student_event.description, "cancelled by the company"
+    company_event = @company_profile.commitment_events.where(event_type: "company_cancelled_internship").last
+    assert_equal(-15.0, company_event.score_delta)
+    assert_includes company_event.description, "cancelled by company"
+
+    @company_profile.reload
+    assert_equal 85.0, @company_profile.commitment_score
 
     @student_profile.reload
-    assert_equal 90.0, @student_profile.commitment_score
+    assert_equal 100.0, @student_profile.commitment_score
   end
 
   test "student can create a submission for an active offer without mission" do

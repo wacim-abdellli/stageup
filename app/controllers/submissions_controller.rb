@@ -195,13 +195,13 @@ class SubmissionsController < ApplicationController
     end
     ActiveRecord::Base.transaction do
       @submission.update!(status: "cancelled", responded_at: Time.current)
-      student = @submission.student_profile
-      student.commitment_events.create!(
+      company = @submission.offer.company_profile
+      company.commitment_events.create!(
         event_type: "company_cancelled_internship",
         score_delta: -15.0,
-        description: "Internship for '#{@submission.offer.title}' was cancelled by the company."
+        description: "Internship for '#{@submission.offer.title}' cancelled by company '#{company.name}'."
       )
-      student.recalculate_commitment_score!
+      company.recalculate_commitment_score!
       student_user = @submission.student_profile.user
       Notification.trigger(
         recipient: student_user,
