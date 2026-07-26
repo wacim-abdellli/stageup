@@ -14,9 +14,9 @@ class OffersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "guest user should get show of offer" do
+  test "guest user should be redirected to login on show offer" do
     get offer_url(@offer)
-    assert_response :success
+    assert_redirected_to new_user_session_path
   end
 
   test "guest user cannot access edit" do

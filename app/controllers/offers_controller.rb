@@ -4,6 +4,7 @@ class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
   before_action :ensure_company!, only: [ :new, :create, :edit, :update, :destroy, :publish ]
   before_action :set_offer, only: [ :show, :edit, :update, :destroy ]
+  before_action :require_auth_for_show!, only: [ :show ]
   before_action :ensure_offer_owner!, only: [ :edit, :update, :destroy ]
 
   def index
@@ -24,10 +25,6 @@ class OffersController < ApplicationController
   end
 
   def show
-    unless user_signed_in?
-      redirect_to new_user_session_path, alert: "Please sign in or create an account to view full mission details and submit solutions."
-      return
-    end
     if @offer.status == "draft"
       unless current_user && current_user.profileable_type == "CompanyProfile" && @offer.company_profile == current_user.profileable
         redirect_to dashboard_path, alert: "Offer not found or not yet active."
@@ -133,5 +130,11 @@ class OffersController < ApplicationController
     unless @offer.company_profile == current_user.profileable
       redirect_to dashboard_path, alert: "You can only manage your own offers."
     end
+  end
+
+  def require_auth_for_show!
+    return if user_signed_in?
+
+    redirect_to new_user_session_path, alert: "Please sign in to view full offer details."
   end
 end
