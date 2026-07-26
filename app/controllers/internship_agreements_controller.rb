@@ -28,7 +28,13 @@ class InternshipAgreementsController < ApplicationController
   end
 
   def sign
-    @agreement.sign_by!(current_user.profileable_type)
+    begin
+      @agreement.sign_by!(current_user.profileable_type)
+    rescue ActiveRecord::RecordInvalid => e
+      redirect_to submission_internship_agreement_path(@submission, @agreement),
+                  alert: "Could not sign agreement: #{e.record.errors.full_messages.join(', ')}"
+      return
+    end
 
     if @agreement.status == "fully_executed"
       student_user = @submission.student_profile.user
@@ -154,7 +160,7 @@ class InternshipAgreementsController < ApplicationController
     if already_signed?
       redirect_to submission_internship_agreement_path(@submission, @agreement),
                   alert: "You have already signed this agreement."
-      nil
+      return
     end
   end
 
