@@ -135,10 +135,15 @@
                   </span>
                 <% end %>
                 <% if current_user&.profileable_type == "StudentProfile" %>
-                  <% match_pct = offer.match_percentage_for(current_user.profileable) rescue 100 %>
-                  <% if match_pct < 100 %>
-                    <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>">
-                      <%= match_pct %>% match
+                  <% breakdown = offer.match_breakdown_for(current_user.profileable) rescue nil %>
+                  <% if breakdown && breakdown[:total] < 100 %>
+                    <span class="match-badge match-badge-tooltip-wrapper <%= breakdown[:total] >= 70 ? 'match-badge-high' : (breakdown[:total] >= 40 ? 'match-badge-medium' : 'match-badge-low') %>">
+                      <%= breakdown[:total] %>% match
+                      <span class="match-tooltip">
+                        <span class="match-tooltip-row">Skills: <%= breakdown[:skill].round %>pt</span>
+                        <span class="match-tooltip-row">Major: <%= breakdown[:major].round %>pt</span>
+                        <span class="match-tooltip-row">Score: <%= breakdown[:readiness].round %>pt</span>
+                      </span>
                     </span>
                   <% end %>
                 <% end %>

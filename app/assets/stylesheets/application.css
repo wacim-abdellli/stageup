@@ -6955,3 +6955,38 @@ select:-webkit-autofill:focus {
 .kanban-card-link:hover {
   text-decoration: underline;
 }
+
+/* Match Score Breakdown Tooltip */
+.match-badge-tooltip-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.match-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  white-space: nowrap;
+  font-size: 11px;
+  color: var(--text-secondary);
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+}
+
+.match-badge-tooltip-wrapper:hover .match-tooltip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.match-tooltip-row {
+  font-size: 11px;
+  color: var(--text-muted);
+}
