@@ -25,5 +25,9 @@ module StageUp
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.middleware.use Rack::Attack
+
+    config.i18n.available_locales = [:en, :fr, :ar]
+    config.i18n.default_locale = :fr
+    config.i18n.fallbacks = [:en]
   end
 end

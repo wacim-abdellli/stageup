@@ -9,8 +9,14 @@ class ApplicationController < ActionController::Base
   # Default: all controllers require authentication.
   # Public controllers (HomeController, OffersController public actions) must use:
   #   skip_before_action :authenticate_user!, only: [...]
+  before_action :set_locale
   before_action :authenticate_user!
   before_action :ensure_valid_profile!, if: :user_signed_in?
+
+  def default_url_options
+    { locale: (I18n.locale == I18n.default_locale ? nil : I18n.locale) }
+  end
+
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to root_path, alert: "The requested resource was not found."
   end
@@ -19,6 +25,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_locale
+    loc = params[:locale]&.to_sym
+    I18n.locale = loc.in?(I18n.available_locales) ? loc : (session[:locale]&.to_sym || I18n.default_locale)
+    session[:locale] = I18n.locale
+  end
 
   def ensure_valid_profile!
     if current_user.profileable.nil?

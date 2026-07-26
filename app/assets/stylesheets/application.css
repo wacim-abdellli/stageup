@@ -6990,3 +6990,33 @@ select:-webkit-autofill:focus {
   font-size: 11px;
   color: var(--text-muted);
 }
+
+/* Locale Switcher Styles */
+.locale-switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2px;
+}
+
+.locale-btn {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.locale-btn:hover {
+  color: var(--text-primary);
+}
+
+.locale-btn-active {
+  background: var(--primary-light);
+  color: var(--primary-hover);
+}

@@ -20,4 +20,16 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get root_url
     assert_response :success
   end
+
+  test "sets english locale when locale=en parameter is passed" do
+    get root_url(locale: "en")
+    assert_response :success
+    assert_select "html[lang='en'][dir='ltr']"
+  end
+
+  test "sets arabic locale with rtl direction when locale=ar parameter is passed" do
+    get root_url(locale: "ar")
+    assert_response :success
+    assert_select "html[lang='ar'][dir='rtl']"
+  end
 end

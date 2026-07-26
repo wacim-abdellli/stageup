@@ -1,0 +1,11 @@
+fr:
+  errors:
+    messages:
+      inclusion: "is not included in the list"
+  home:
+    tagline: "Personne ne paie pour le ghosting."
+    subtitle: "StageUp est la première plateforme tunisienne de stages vérifiés."
+    browse_offers: "Parcourir les offres"
+  nav:
+    dashboard: "Tableau de bord"
+    sign_out: "Déconnexion"

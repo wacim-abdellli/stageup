@@ -1,0 +1,6 @@
+<div class="locale-switcher">
+  <% [:fr, :en, :ar].each do |loc| %>
+    <%= link_to loc.to_s.upcase, url_for(locale: (loc == I18n.default_locale ? nil : loc)),
+        class: "locale-btn #{'locale-btn-active' if I18n.locale == loc}" %>
+  <% end %>
+</div>
