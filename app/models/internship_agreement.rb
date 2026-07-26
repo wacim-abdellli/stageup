@@ -11,6 +11,9 @@ class InternshipAgreement < ApplicationRecord
   validate :end_date_must_be_after_start_date
   validates :status, presence: true, inclusion: { in: %w[pending_signatures fully_executed declined] }
   validates :rejection_reason, presence: true, if: -> { status == "declined" }
+  validates :verification_token, uniqueness: true, allow_nil: true
+
+  before_create :generate_verification_token
 
   def sign_by!(role)
     with_lock do
@@ -62,6 +65,10 @@ class InternshipAgreement < ApplicationRecord
   end
 
   private
+
+  def generate_verification_token
+    self.verification_token ||= SecureRandom.urlsafe_base64(16)
+  end
 
   def end_date_must_be_after_start_date
     return unless start_date.present? && end_date.present?

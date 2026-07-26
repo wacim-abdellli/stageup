@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_26_201100) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_26_210000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -80,7 +80,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_26_201100) do
     t.bigint "submission_id", null: false
     t.datetime "university_signed_at"
     t.datetime "updated_at", null: false
+    t.string "verification_token"
     t.index ["submission_id"], name: "index_internship_agreements_on_submission_id", unique: true
+    t.index ["verification_token"], name: "index_internship_agreements_on_verification_token", unique: true
   end
 
   create_table "missions", force: :cascade do |t|

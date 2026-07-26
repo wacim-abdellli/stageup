@@ -112,4 +112,26 @@ class InternshipAgreementTest < ActiveSupport::TestCase
     agreement.sign_by!("UniversityProfile")
     assert_equal [], agreement.reload.pending_signatories
   end
+
+  test "generates a non-nil verification_token on create" do
+    agreement = valid_agreement
+    agreement.save!
+    assert_not_nil agreement.verification_token
+    assert_operator agreement.verification_token.length, :>=, 16
+  end
+
+  test "enforces uniqueness of verification_token" do
+    agreement1 = valid_agreement
+    agreement1.save!
+
+    sub2 = submissions(:two)
+    agreement2 = InternshipAgreement.new(
+      submission: sub2,
+      start_date: Date.today,
+      end_date: Date.today + 90,
+      verification_token: agreement1.verification_token
+    )
+    assert_not agreement2.valid?
+    assert_includes agreement2.errors[:verification_token], "has already been taken"
+  end
 end
