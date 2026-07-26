@@ -27,9 +27,17 @@ class ApplicationController < ActionController::Base
   private
 
   def set_locale
-    loc = params[:locale]&.to_sym
-    I18n.locale = loc.in?(I18n.available_locales) ? loc : (session[:locale]&.to_sym || I18n.default_locale)
-    session[:locale] = I18n.locale
+    if params[:locale].present?
+      loc = params[:locale].to_sym
+      if loc.in?(I18n.available_locales)
+        I18n.locale = loc
+        session[:locale] = loc
+      end
+    elsif session[:locale].present? && session[:locale].to_sym.in?(I18n.available_locales)
+      I18n.locale = session[:locale].to_sym
+    else
+      I18n.locale = I18n.default_locale
+    end
   end
 
   def ensure_valid_profile!

@@ -6993,73 +6993,117 @@ select:-webkit-autofill:focus {
   color: var(--text-muted);
 }
 
-/* Segmented Language Switcher Pill */
-.nav-locale-pill {
+/* ==========================================================================
+   Modern Animated Language Switcher Component (Vercel / Linear Aesthetic)
+   ========================================================================== */
+.nav-locale-switcher {
   display: inline-flex !important;
   flex-direction: row !important;
   align-items: center !important;
-  gap: 3px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 6px;
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.035));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
   border-radius: 9999px;
-  padding: 3px 4px;
-  height: 34px;
+  padding: 3px 4px 3px 8px;
+  height: 36px;
   box-sizing: border-box;
   vertical-align: middle;
-  transition: border-color 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(12px);
+  user-select: none;
 }
 
-.nav-locale-pill:hover {
-  border-color: rgba(99, 102, 241, 0.4);
+.nav-locale-switcher:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.12);
 }
 
-.nav-locale-btn {
+.nav-locale-globe {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--text-muted, #94a3b8);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
+}
+
+.nav-locale-switcher:hover .nav-locale-globe {
+  color: var(--primary-hover, #818cf8);
+  transform: rotate(25deg);
+}
+
+.nav-locale-group {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 2px;
+}
+
+.nav-locale-item {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 4px 8px;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
   border-radius: 9999px;
   text-decoration: none !important;
   line-height: 1;
-  transition: all 0.15s ease-in-out;
-}
-
-.nav-locale-btn:not(.active) {
   color: var(--text-muted, #94a3b8) !important;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-locale-btn:not(.active):hover {
-  color: #FFFFFF !important;
-  background: rgba(255, 255, 255, 0.08);
+.nav-locale-item:hover:not(.active) {
+  color: var(--text-primary, #ffffff) !important;
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
 }
 
-.nav-locale-btn.active {
+.nav-locale-item.active {
   background: var(--primary, #6366f1) !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   font-weight: 700;
-  box-shadow: 0 1px 4px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: pulseScale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-theme="light"] .nav-locale-pill {
+@keyframes pulseScale {
+  0% { transform: scale(0.92); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] .nav-locale-switcher {
   background: #F1F5F9;
   border-color: rgba(15, 23, 42, 0.12);
 }
 
-[data-theme="light"] .nav-locale-btn:not(.active) {
+[data-theme="light"] .nav-locale-switcher:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  background: #E2E8F0;
+}
+
+[data-theme="light"] .nav-locale-item:not(.active) {
   color: #64748B !important;
 }
 
-[data-theme="light"] .nav-locale-btn:not(.active):hover {
+[data-theme="light"] .nav-locale-item:not(.active):hover {
   color: #0F172A !important;
   background: rgba(0, 0, 0, 0.05);
 }
 
-[data-theme="light"] .nav-locale-btn.active {
+[data-theme="light"] .nav-locale-item.active {
   background: var(--primary, #6366f1) !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+}
+
+/* RTL Adjustments */
+html[dir="rtl"] .nav-locale-switcher {
+  padding: 3px 8px 3px 4px;
 }
 
 /* ============= RTL OVERRIDES ============= */
