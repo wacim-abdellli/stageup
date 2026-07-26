@@ -24,7 +24,7 @@ class DashboardsController < ApplicationController
       @offers_count = @profile.offers.count
 
       offer_ids = @profile.offers.select(:id)
-      pending = Submission.where(offer_id: offer_ids).where(status: "submitted")
+      pending = Submission.where(offer_id: offer_ids).where(status: %w[submitted under_review])
       @pending_submissions = pending.includes(:offer, student_profile: { cv_attachment: :blob }).order(created_at: :desc)
 
       processed = Submission.where(offer_id: offer_ids).where(status: [ "accepted", "rejected", "completed" ])

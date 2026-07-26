@@ -24,4 +24,29 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     get dashboard_url
     assert_redirected_to new_user_session_path
   end
+
+  test "company can see under_review submissions in dashboard" do
+    company_user = users(:company_user)
+    company_profile = company_profiles(:one)
+    new_offer = Offer.create!(
+      company_profile: company_profile,
+      title: "Under Review Test Offer",
+      description: "Test",
+      stage_type: "PFE", spots: 1, location: "Sfax", work_mode: "onsite", status: "active"
+    )
+
+    submission = Submission.create!(
+      student_profile: student_profiles(:mohamed),
+      offer: new_offer,
+      status: "under_review",
+      submitted_at: Time.current,
+      github_link: "https://github.com/test/repo"
+    )
+
+    sign_in company_user
+    get dashboard_url
+    assert_response :success
+    pending_subs = @controller.instance_variable_get(:@pending_submissions)
+    assert_includes pending_subs, submission
+  end
 end
