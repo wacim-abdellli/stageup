@@ -26,8 +26,8 @@ module StageUp
 
     config.middleware.use Rack::Attack
 
-    config.i18n.available_locales = [:en, :fr, :ar]
+    config.i18n.available_locales = [ :en, :fr, :ar ]
     config.i18n.default_locale = :fr
-    config.i18n.fallbacks = [:en]
+    config.i18n.fallbacks = [ :en ]
   end
 end
