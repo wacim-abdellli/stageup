@@ -214,11 +214,12 @@ class SubmissionsController < ApplicationController
   end
 
   def confirm_completion
-    if @submission.internship_agreement.nil?
+    agreement = @submission.internship_agreement
+    if agreement.nil?
       redirect_to dashboard_path, alert: "You cannot mark this internship as completed until a Convention de Stage has been generated."
       return
     end
-    unless @submission.internship_agreement.status == "fully_executed"
+    unless agreement.status == "fully_executed"
       redirect_to dashboard_path, alert: "You cannot mark this internship as completed until the Convention de Stage is fully signed by all three parties."
       return
     end
