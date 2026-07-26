@@ -66,7 +66,28 @@
             return;
           }
 
-          // 2. Notification Bell Panel Toggle
+          // 2. Language Dropdown Toggle
+          var langBtn = e.target.closest('#lang-btn');
+          if (langBtn) {
+            e.stopPropagation();
+            var menu = $('lang-menu');
+            if (menu) {
+              var open = menu.classList.toggle('open');
+              langBtn.setAttribute('aria-expanded', open);
+              // Close other open panels
+              var panel = $('notif-panel');
+              var nb = $('notif-btn');
+              if (panel) panel.classList.remove('open');
+              if (nb) nb.setAttribute('aria-expanded', 'false');
+              var dd = $('nav-user-dropdown');
+              var ab = $('nav-avatar-toggle');
+              if (dd) dd.classList.remove('open');
+              if (ab) ab.setAttribute('aria-expanded', 'false');
+            }
+            return;
+          }
+
+          // 3. Notification Bell Panel Toggle
           var notifBtn = e.target.closest('#notif-btn');
           if (notifBtn) {
             e.stopPropagation();
@@ -74,21 +95,20 @@
             if (panel) {
               var open = panel.classList.toggle('open');
               notifBtn.setAttribute('aria-expanded', open);
-              // Close user dropdown if open
+              // Close user dropdown and lang menu if open
               var dd = $('nav-user-dropdown');
               var ab = $('nav-avatar-toggle');
               if (dd) dd.classList.remove('open');
               if (ab) ab.setAttribute('aria-expanded', 'false');
-              // Close user dropdown if open
-              var dd = $('nav-user-dropdown');
-              var ab = $('nav-avatar-toggle');
-              if (dd) dd.classList.remove('open');
-              if (ab) ab.setAttribute('aria-expanded', 'false');
+              var lm = $('lang-menu');
+              var lb = $('lang-btn');
+              if (lm) lm.classList.remove('open');
+              if (lb) lb.setAttribute('aria-expanded', 'false');
             }
             return;
           }
 
-          // 3. User Avatar Dropdown Toggle
+          // 4. User Avatar Dropdown Toggle
           var avatarBtn = e.target.closest('#nav-avatar-toggle');
           if (avatarBtn) {
             e.stopPropagation();
@@ -96,20 +116,33 @@
             if (dd) {
               var open = dd.classList.toggle('open');
               avatarBtn.setAttribute('aria-expanded', open);
-              // Close notification panel if open
+              // Close notification panel and lang menu if open
               var panel = $('notif-panel');
               var nb = $('notif-btn');
               if (panel) panel.classList.remove('open');
               if (nb) nb.setAttribute('aria-expanded', 'false');
+              var lm = $('lang-menu');
+              var lb = $('lang-btn');
+              if (lm) lm.classList.remove('open');
+              if (lb) lb.setAttribute('aria-expanded', 'false');
             }
             return;
           }
 
-          // 4. Click Outside to Close Panels
+          // 5. Click Outside to Close Panels
+          var insideLang = e.target.closest('#lang-menu') || e.target.closest('#lang-btn');
           var insideDropdown = e.target.closest('#nav-user-dropdown') || e.target.closest('#nav-user-menu');
           var insideNotif = e.target.closest('#notif-panel') || e.target.closest('#notif-btn');
           var insideMobile = e.target.closest('#nav-mobile-menu') || e.target.closest('#nav-toggle');
 
+          if (!insideLang) {
+            var lm = $('lang-menu');
+            var lb = $('lang-btn');
+            if (lm && lm.classList.contains('open')) {
+              lm.classList.remove('open');
+              if (lb) lb.setAttribute('aria-expanded', 'false');
+            }
+          }
           if (!insideDropdown) {
             var dd = $('nav-user-dropdown');
             var ab = $('nav-avatar-toggle');
