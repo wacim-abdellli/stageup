@@ -82,7 +82,10 @@
               // Close lang menu if open
               var lm = $('lang-menu');
               var lb = $('lang-btn');
-              if (lm) lm.classList.remove('open');
+              if (lm) {
+                lm.style.display = 'none';
+                lm.classList.remove('open');
+              }
               if (lb) lb.setAttribute('aria-expanded', 'false');
             }
             return;
@@ -94,8 +97,16 @@
             e.stopPropagation();
             var langMenu = $('lang-menu');
             if (langMenu) {
-              var open = langMenu.classList.toggle('open');
-              langBtn.setAttribute('aria-expanded', open);
+              var isHidden = (langMenu.style.display === 'none' || !langMenu.classList.contains('open'));
+              if (isHidden) {
+                langMenu.style.display = 'flex';
+                langMenu.classList.add('open');
+                langBtn.setAttribute('aria-expanded', 'true');
+              } else {
+                langMenu.style.display = 'none';
+                langMenu.classList.remove('open');
+                langBtn.setAttribute('aria-expanded', 'false');
+              }
               var dd = $('nav-user-dropdown');
               var panel = $('notif-panel');
               if (dd) dd.classList.remove('open');
@@ -130,7 +141,8 @@
           if (!insideLang) {
             var lm = $('lang-menu');
             var lb = $('lang-btn');
-            if (lm && lm.classList.contains('open')) {
+            if (lm) {
+              lm.style.display = 'none';
               lm.classList.remove('open');
               if (lb) lb.setAttribute('aria-expanded', 'false');
             }
