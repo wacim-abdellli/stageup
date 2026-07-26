@@ -6588,3 +6588,245 @@ select:-webkit-autofill:focus {
   background: rgba(99, 102, 241, 0.2);
   color: #0F172A;
 }
+
+/* Public Digital Certificate Styles */
+.cert-page {
+  padding: 40px 20px 80px;
+  background: var(--bg-primary);
+  min-height: 100vh;
+}
+
+.cert-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cert-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.cert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #34D399;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.cert-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.cert-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.cert-card {
+  position: relative;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.cert-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  font-size: 100px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.02);
+  letter-spacing: 0.15em;
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.cert-body {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.cert-recipient-label {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.cert-student-name {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.cert-fulfillment {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 36px;
+}
+
+.cert-fulfillment strong {
+  color: var(--text-primary);
+}
+
+.cert-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.cert-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cert-detail-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.cert-detail-value {
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.cert-token-code {
+  font-family: monospace;
+  letter-spacing: 0.05em;
+  color: var(--primary-hover);
+}
+
+.cert-signatures-section {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.cert-section-heading {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.cert-signatures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.cert-signature-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.cert-sig-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--primary-light);
+  flex-shrink: 0;
+}
+
+.cert-sig-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.cert-sig-role {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.cert-sig-name {
+  font-size: 13px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cert-sig-date {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.cert-qr-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.cert-qr-box {
+  width: 140px;
+  height: 140px;
+  padding: 12px;
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cert-qr-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #64748B;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.cert-qr-subtext {
+  font-size: 12px;
+  color: var(--text-muted);
+}

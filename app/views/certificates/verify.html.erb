@@ -1,0 +1,96 @@
+<% content_for :title, "Verified Certificate – #{@student.first_name} #{@student.last_name}" %>
+
+<div class="cert-page">
+  <div class="cert-container">
+
+    <div class="cert-header">
+      <div class="cert-badge">
+        <svg class="icon-16 icon-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <span>OFFICIALLY VERIFIED INTERNSHIP CERTIFICATE</span>
+      </div>
+      <h1 class="cert-title">Certificate of Completion</h1>
+      <p class="cert-sub">Verified & Authenticated via StageUp Trust Ledger</p>
+    </div>
+
+    <div class="cert-card glass-card">
+      <div class="cert-watermark">STAGEUP</div>
+
+      <div class="cert-body">
+        <p class="cert-recipient-label">This certifies that</p>
+        <h2 class="cert-student-name"><%= @student.first_name %> <%= @student.last_name %></h2>
+        <p class="cert-fulfillment">
+          has successfully completed an official internship as <strong><%= @offer.title %></strong> at <strong><%= @company.name %></strong>.
+        </p>
+
+        <div class="cert-details-grid">
+          <div class="cert-detail-item">
+            <span class="cert-detail-label">Institution</span>
+            <strong class="cert-detail-value"><%= @student.university&.name || "Academic Partner" %></strong>
+          </div>
+          <div class="cert-detail-item">
+            <span class="cert-detail-label">Duration</span>
+            <strong class="cert-detail-value"><%= @agreement.start_date.strftime("%B %d, %Y") %> &ndash; <%= @agreement.end_date.strftime("%B %d, %Y") %></strong>
+          </div>
+          <div class="cert-detail-item">
+            <span class="cert-detail-label">Stage Type</span>
+            <strong class="cert-detail-value"><%= @offer.stage_type %></strong>
+          </div>
+          <div class="cert-detail-item">
+            <span class="cert-detail-label">Verification ID</span>
+            <strong class="cert-detail-value cert-token-code"><%= @agreement.verification_token %></strong>
+          </div>
+        </div>
+
+        <div class="cert-signatures-section">
+          <h3 class="cert-section-heading">Digital Signatures & Legal Verification</h3>
+          <div class="cert-signatures-grid">
+            <div class="cert-signature-card">
+              <div class="cert-sig-icon">
+                <svg class="icon-16 icon-indigo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div class="cert-sig-meta">
+                <span class="cert-sig-role">Student</span>
+                <strong class="cert-sig-name"><%= @student.first_name %> <%= @student.last_name %></strong>
+                <span class="cert-sig-date">Signed: <%= @agreement.student_signed_at&.strftime("%b %d, %Y at %H:%M UTC") || "Signed" %></span>
+              </div>
+            </div>
+
+            <div class="cert-signature-card">
+              <div class="cert-sig-icon">
+                <svg class="icon-16 icon-indigo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/></svg>
+              </div>
+              <div class="cert-sig-meta">
+                <span class="cert-sig-role">Employer</span>
+                <strong class="cert-sig-name"><%= @company.name %></strong>
+                <span class="cert-sig-date">Signed: <%= @agreement.company_signed_at&.strftime("%b %d, %Y at %H:%M UTC") || "Signed" %></span>
+              </div>
+            </div>
+
+            <div class="cert-signature-card">
+              <div class="cert-sig-icon">
+                <svg class="icon-16 icon-indigo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </div>
+              <div class="cert-sig-meta">
+                <span class="cert-sig-role">University Coordinator</span>
+                <strong class="cert-sig-name"><%= @student.university&.name || "University Coordinator" %></strong>
+                <span class="cert-sig-date">Signed: <%= @agreement.university_signed_at&.strftime("%b %d, %Y at %H:%M UTC") || "Signed" %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cert-qr-wrap">
+          <div class="cert-qr-box" id="cert-qr-container">
+            <div class="cert-qr-placeholder">
+              <svg class="icon-32 icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span>Scan to Verify</span>
+            </div>
+          </div>
+          <p class="cert-qr-subtext">Scan this QR code with any mobile camera to verify authenticity on StageUp.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

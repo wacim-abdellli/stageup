@@ -8,3 +8,11 @@ executed:
   student_signed_at: 2026-07-08 12:00:00
   company_signed_at: 2026-07-08 14:00:00
   university_signed_at: 2026-07-09 09:00:00
+  verification_token: cert_token_executed_12345
+
+pending_agreement:
+  submission: two
+  start_date: 2026-08-01
+  end_date: 2026-11-01
+  status: pending_signatures
+  verification_token: cert_token_pending_67890
