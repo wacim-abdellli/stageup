@@ -6993,142 +6993,73 @@ select:-webkit-autofill:focus {
   color: var(--text-muted);
 }
 
-/* Modern Language Selector Component */
-.locale-switcher-wrap {
-  position: relative;
-  display: inline-block;
+/* Segmented Language Switcher Pill */
+.nav-locale-pill {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 3px 4px;
+  height: 34px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  transition: border-color 0.2s ease;
 }
 
-.locale-trigger-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 36px;
-  padding: 0 10px;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  user-select: none;
-}
-
-.locale-trigger-btn:hover,
-.locale-trigger-btn[aria-expanded="true"] {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.07);
+.nav-locale-pill:hover {
   border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.12);
 }
 
-.locale-icon-globe {
-  color: var(--text-muted);
-  transition: color 0.2s ease;
+.nav-locale-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  text-decoration: none !important;
+  line-height: 1;
+  transition: all 0.15s ease-in-out;
 }
 
-.locale-trigger-btn:hover .locale-icon-globe {
-  color: var(--primary-hover);
+.nav-locale-btn:not(.active) {
+  color: var(--text-muted, #94a3b8) !important;
 }
 
-.locale-current-code {
-  font-family: var(--font-sans);
+.nav-locale-btn:not(.active):hover {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.locale-chevron {
-  color: var(--text-muted);
-  transition: transform 0.2s ease;
-}
-
-.locale-trigger-btn[aria-expanded="true"] .locale-chevron {
-  transform: rotate(180deg);
-}
-
-/* Floating Dropdown Card */
-.locale-dropdown-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 140px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 6px;
-  box-shadow: var(--shadow-lg);
-  z-index: 1000;
-  backdrop-filter: blur(12px);
-}
-
-.locale-dropdown-menu.open {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  animation: fadeInDown 0.15s ease-out;
-}
-
-.locale-menu-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 10px;
-  border-radius: var(--radius-sm);
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
-  transition: all 0.15s ease;
-}
-
-.locale-menu-item:hover {
-  background: var(--primary-light);
-  color: var(--text-primary);
-}
-
-.locale-menu-item.active {
-  color: var(--primary-hover);
+.nav-locale-btn.active {
+  background: var(--primary, #6366f1) !important;
+  color: #FFFFFF !important;
   font-weight: 700;
-  background: rgba(99, 102, 241, 0.08);
+  box-shadow: 0 1px 4px rgba(79, 70, 229, 0.4);
 }
 
-.locale-item-code {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-}
-
-.locale-check-icon {
-  color: var(--primary-hover);
-}
-
-[data-theme="light"] .locale-trigger-btn {
+[data-theme="light"] .nav-locale-pill {
   background: #F1F5F9;
   border-color: rgba(15, 23, 42, 0.12);
-  color: #334155;
 }
 
-[data-theme="light"] .locale-trigger-btn:hover {
-  background: #E2E8F0;
-  color: #0F172A;
+[data-theme="light"] .nav-locale-btn:not(.active) {
+  color: #64748B !important;
 }
 
-[data-theme="light"] .locale-dropdown-menu {
-  background: #FFFFFF;
-  border-color: rgba(15, 23, 42, 0.12);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+[data-theme="light"] .nav-locale-btn:not(.active):hover {
+  color: #0F172A !important;
+  background: rgba(0, 0, 0, 0.05);
 }
 
-[data-theme="light"] .locale-menu-item {
-  color: #334155;
-}
-
-[data-theme="light"] .locale-menu-item:hover {
-  background: #F8FAFC;
-  color: #0F172A;
+[data-theme="light"] .nav-locale-btn.active {
+  background: var(--primary, #6366f1) !important;
+  color: #FFFFFF !important;
 }
 
 /* ============= RTL OVERRIDES ============= */
