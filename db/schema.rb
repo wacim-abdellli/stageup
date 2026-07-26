@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_18_064431) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_26_201000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -249,6 +249,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_18_064431) do
     t.index ["profileable_type", "profileable_id"], name: "index_users_on_profileable"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+    t.check_constraint "profileable_type::text = ANY (ARRAY['StudentProfile'::character varying, 'CompanyProfile'::character varying, 'UniversityProfile'::character varying]::text[])", name: "check_profileable_type"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
