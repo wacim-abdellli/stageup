@@ -11,36 +11,48 @@ class OfferTest < ActiveSupport::TestCase
     @python = Skill.create!(name: "Python")
   end
 
-  test "match_percentage_for returns 100 when offer has no skills" do
-    assert_equal 100, @offer.match_percentage_for(@student)
-  end
-
-  test "match_percentage_for returns 0 when student has no skills" do
-    @offer.skills << @rails
-    assert_equal 0, @offer.match_percentage_for(@student)
-  end
-
-  test "match_percentage_for returns correct percentage for partial match" do
-    @offer.skills << [ @rails, @react, @sql, @js ]
-    @student.skills << [ @rails, @sql, @python ]
-
-    # Student matches 2 of 4 offer skills: 2/4 = 50%
-    assert_equal 50, @offer.match_percentage_for(@student)
-  end
-
-  test "match_percentage_for returns 100 for perfect match" do
-    @offer.skills << [ @rails, @react, @sql, @js ]
-    @student.skills << [ @rails, @react, @sql, @js ]
+  test "match_percentage_for returns 100 for perfect match with all skills, major, and high score" do
+    @offer.stage_type = "PFE"
+    @offer.skills << [ @rails, @react ]
+    @student.major = "Software Engineering"
+    @student.commitment_score = 100.0
+    @student.skills << [ @rails, @react ]
 
     assert_equal 100, @offer.match_percentage_for(@student)
   end
 
-  test "match_percentage_for rounds to nearest integer" do
-    @offer.skills << [ @rails, @react, @sql ]
-    @student.skills << [ @rails ]
+  test "match_percentage_for returns > 0 when student has 0 skills due to major and readiness" do
+    @offer.stage_type = "PFE"
+    @offer.skills << [ @rails ]
+    @student.skills.clear
+    @student.major = "Computer Science"
+    @student.commitment_score = 80.0
 
-    # 1/3 = 33.33... -> 33
-    assert_equal 33, @offer.match_percentage_for(@student)
+    # Skills: 0, Major: 25, Readiness: 15 -> Total: 40
+    score = @offer.match_percentage_for(@student)
+    assert_operator score, :>, 0
+    assert_equal 40, score
+  end
+
+  test "commitment_readiness_score scales proportionally for score under 80" do
+    @student.commitment_score = 40.0
+    breakdown = @offer.match_breakdown_for(@student)
+
+    # 40 / 80 * 15 = 7.5
+    assert_equal 7.5, breakdown[:readiness]
+    assert_operator breakdown[:readiness], :<, 15.0
+  end
+
+  test "match_breakdown_for returns structured breakdown hash" do
+    @offer.stage_type = "initiation"
+    @student.commitment_score = 80.0
+    breakdown = @offer.match_breakdown_for(@student)
+
+    assert_kind_of Hash, breakdown
+    assert_includes breakdown.keys, :skill
+    assert_includes breakdown.keys, :major
+    assert_includes breakdown.keys, :readiness
+    assert_includes breakdown.keys, :total
   end
 
   test "rejects invalid stage_type" do
