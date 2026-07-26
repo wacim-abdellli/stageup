@@ -160,7 +160,7 @@ class InternshipAgreementsController < ApplicationController
     if already_signed?
       redirect_to submission_internship_agreement_path(@submission, @agreement),
                   alert: "You have already signed this agreement."
-      return
+      nil
     end
   end
 
