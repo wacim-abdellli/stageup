@@ -240,7 +240,7 @@
 
 <%# ─── Custom Modal: Mission Start Confirmation ──────────────── %>
 <% if current_user&.profileable_type == "StudentProfile" && @submission.nil? && @offer.mission %>
-  <div class="modal-backdrop" id="mission-modal" style="display: none;">
+  <div class="modal-backdrop" id="mission-modal">
     <div class="modal-card">
       <div class="modal-header">
         <div class="modal-icon-wrap icon-amber-bg">
@@ -279,7 +279,7 @@
 
 <%# ─── Custom Modal: CV Application ─────────────────────────── %>
 <% if current_user&.profileable_type == "StudentProfile" && @submission.nil? && @offer.mission.nil? %>
-  <div class="modal-backdrop" id="cv-modal" style="display: none;">
+  <div class="modal-backdrop" id="cv-modal">
     <div class="modal-card">
       <div class="modal-header">
         <div class="modal-icon-wrap icon-indigo-bg">
@@ -325,17 +325,17 @@
 
       clone.addEventListener('click', function(e) {
         e.preventDefault();
-        modal.style.display = 'flex';
+        modal.classList.add('open');
       });
 
       modal.querySelectorAll('.close-modal-trigger').forEach(function(c) {
         c.addEventListener('click', function() {
-          modal.style.display = 'none';
+          modal.classList.remove('open');
         });
       });
 
       modal.addEventListener('click', function(e) {
-        if (e.target === modal) modal.style.display = 'none';
+        if (e.target === modal) modal.classList.remove('open');
       });
     }
 
