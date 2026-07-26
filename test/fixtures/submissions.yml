@@ -15,8 +15,8 @@ two:
   github_link: https://github.com/test/solution
   submission_notes: Here is my solution
   feedback: Great work!
-  submitted_at: 2026-07-11 05:18:53
-  responded_at: 2026-07-11 05:18:53
+  submitted_at: <%= 1.day.ago %>
+  responded_at: <%= 1.day.ago %>
 
 accepted:
   student_profile: mohamed

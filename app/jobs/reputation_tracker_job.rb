@@ -4,12 +4,12 @@ class ReputationTrackerJob < ApplicationJob
   queue_as :default
 
   def perform
-    Submission.where(status: "submitted")
+    Submission.where(status: %w[submitted under_review])
           .where("submitted_at < ?", 14.days.ago)
           .includes(offer: :company_profile, student_profile: :user)
           .find_each do |sub|
       ActiveRecord::Base.transaction do
-        updated = Submission.where(id: sub.id, status: "submitted")
+        updated = Submission.where(id: sub.id, status: %w[submitted under_review])
                     .update_all(status: "expired", responded_at: Time.current, updated_at: Time.current)
         next if updated == 0
 

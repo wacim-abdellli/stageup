@@ -329,4 +329,20 @@ class SubmissionTest < ActiveSupport::TestCase
     assert_equal 95.0, @student.commitment_score
     assert_equal "student_completed_internship", @student.commitment_events.last.event_type
   end
+
+  test "under_review submission older than 14 days is ghosted by job" do
+    sub = Submission.create!(
+      student_profile: @student,
+      offer: @offer,
+      mission: @mission,
+      status: "under_review",
+      github_link: "https://github.com/test/repo",
+      submitted_at: 15.days.ago
+    )
+
+    ReputationTrackerJob.perform_now
+
+    sub.reload
+    assert_equal "expired", sub.status
+  end
 end
