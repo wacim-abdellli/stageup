@@ -50,28 +50,22 @@ class Submission < ApplicationRecord
       raise ActiveRecord::RecordInvalid, self
     end
 
-    if role == "StudentProfile"
-      self.student_confirmed_completed = true
-    elsif role == "CompanyProfile"
-      self.company_confirmed_completed = true
-    end
-
-    if first_completion_confirmed_at.nil?
-      self.first_completion_confirmed_at = Time.current
-    end
+    self.student_confirmed_completed = true if role == "StudentProfile"
+    self.company_confirmed_completed = true if role == "CompanyProfile"
+    self.first_completion_confirmed_at ||= Time.current
 
     if student_confirmed_completed && company_confirmed_completed
       self.status = "completed"
       self.responded_at = Time.current
-
+      save!
       student_profile.commitment_events.create!(
         event_type: "student_completed_internship",
         score_delta: 15.0,
         description: "Internship successfully completed for '#{offer.title}'."
       )
+      student_profile.recalculate_commitment_score!
+    else
+      save!
     end
-
-    save!
-    student_profile.recalculate_commitment_score! if saved_change_to_status?(from: "accepted", to: "completed")
   end
 end
