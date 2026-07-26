@@ -170,8 +170,8 @@ class SubmissionsController < ApplicationController
   end
 
   def cancel
-    unless current_user.profileable_type == "CompanyProfile"
-      redirect_to dashboard_path, alert: "Only companies can cancel internships."
+    unless @submission.offer.company_profile == current_user.profileable
+      redirect_to dashboard_path, alert: "Not authorized."
       return
     end
 

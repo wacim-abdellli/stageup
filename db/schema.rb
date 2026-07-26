@@ -105,8 +105,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_18_064431) do
     t.datetime "updated_at", null: false
     t.index ["created_at"], name: "index_notifications_on_created_at"
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
-    t.index ["recipient_id", "recipient_type", "read"], name: "idx_on_recipient_id_recipient_type_read_f9827f957f"
     t.index ["recipient_id", "recipient_type", "created_at"], name: "idx_on_recipient_id_recipient_type_created_at"
+    t.index ["recipient_id", "recipient_type", "read"], name: "idx_on_recipient_id_recipient_type_read_f9827f957f"
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
   end
 
@@ -122,8 +122,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_18_064431) do
     t.string "title", null: false
     t.datetime "updated_at", null: false
     t.string "work_mode", default: "onsite", null: false
-    t.index ["company_profile_id"], name: "index_offers_on_company_profile_id"
     t.index ["company_profile_id", "status"], name: "index_offers_on_company_profile_id_and_status"
+    t.index ["company_profile_id"], name: "index_offers_on_company_profile_id"
     t.index ["status"], name: "index_offers_on_status"
   end
 
@@ -169,12 +169,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_18_064431) do
     t.float "cached_average_rating"
     t.float "commitment_score", default: 100.0, null: false
     t.datetime "created_at", null: false
+    t.string "cv_url"
     t.string "first_name", null: false
     t.integer "graduation_year"
     t.string "last_name", null: false
     t.string "major"
     t.string "phone"
-    t.string "cv_url"
     t.bigint "university_id"
     t.datetime "updated_at", null: false
     t.index ["university_id"], name: "index_student_profiles_on_university_id"
