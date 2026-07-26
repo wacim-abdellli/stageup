@@ -1,0 +1,139 @@
+<%# ─── Real-Time Drag-and-Drop Kanban Board ───────────────────────── %>
+<div class="kanban-board">
+
+  <%# Column 1: Submitted & Under Review %>
+  <div class="kanban-col kanban-drop-zone" data-target-status="pending">
+    <div class="kanban-col-header flex-between">
+      <span>Under Review</span>
+      <span class="kanban-col-count"><%= (pending_submissions || []).count %></span>
+    </div>
+    <div class="kanban-card-list">
+      <% (pending_submissions || []).each do |sub| %>
+        <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
+          <div class="kanban-card-top flex-between">
+            <span class="kanban-student-name"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></span>
+            <span class="score-pill-sm">
+              <span class="dot dot-success"></span>
+              <strong><%= sub.student_profile.commitment_score.round(0) rescue 100 %></strong>
+            </span>
+          </div>
+          <div class="kanban-card-title"><%= sub.offer.title %></div>
+          <div class="kanban-card-footer flex-between">
+            <span class="kanban-card-date"><%= sub.created_at.strftime("%b %d") %></span>
+            <% if sub.github_link.present? %>
+              <%= link_to "View Proof", sub.github_link, target: "_blank", class: "kanban-card-link" %>
+            <% elsif sub.student_profile.cv_url.present? %>
+              <%= link_to "View CV", sub.student_profile.cv_url, target: "_blank", class: "kanban-card-link" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%# Column 2: Accepted %>
+  <div class="kanban-col kanban-drop-zone" data-target-status="accept">
+    <div class="kanban-col-header flex-between">
+      <span>Accepted</span>
+      <span class="kanban-col-count"><%= (active_internships || []).count %></span>
+    </div>
+    <div class="kanban-card-list">
+      <% (active_internships || []).each do |sub| %>
+        <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
+          <div class="kanban-card-top flex-between">
+            <span class="kanban-student-name"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></span>
+            <span class="badge-status badge-accepted">Accepted</span>
+          </div>
+          <div class="kanban-card-title"><%= sub.offer.title %></div>
+          <div class="kanban-card-footer flex-between">
+            <span class="kanban-card-date"><%= sub.responded_at&.strftime("%b %d") || sub.created_at.strftime("%b %d") %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%# Column 3: Rejected %>
+  <div class="kanban-col kanban-drop-zone" data-target-status="reject">
+    <div class="kanban-col-header flex-between">
+      <span>Rejected</span>
+      <span class="kanban-col-count"><%= (processed_submissions || []).select { |s| s.status == "rejected" }.count rescue 0 %></span>
+    </div>
+    <div class="kanban-card-list">
+      <% (processed_submissions || []).select { |s| s.status == "rejected" }.each do |sub| %>
+        <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
+          <div class="kanban-card-top flex-between">
+            <span class="kanban-student-name"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></span>
+            <span class="badge-status badge-rejected">Rejected</span>
+          </div>
+          <div class="kanban-card-title"><%= sub.offer.title %></div>
+          <div class="kanban-card-footer flex-between">
+            <span class="kanban-card-date"><%= sub.responded_at&.strftime("%b %d") || sub.created_at.strftime("%b %d") %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+<script nonce="<%= content_security_policy_nonce %>">
+  (function() {
+    function initKanban() {
+      var dragged = null;
+
+      document.querySelectorAll('.kanban-card').forEach(function(card) {
+        card.addEventListener('dragstart', function(e) {
+          dragged = card;
+          card.classList.add('dragging');
+        });
+        card.addEventListener('dragend', function() {
+          card.classList.remove('dragging');
+          dragged = null;
+        });
+      });
+
+      document.querySelectorAll('.kanban-drop-zone').forEach(function(zone) {
+        zone.addEventListener('dragover', function(e) {
+          e.preventDefault();
+          zone.classList.add('drag-over');
+        });
+        zone.addEventListener('dragleave', function() {
+          zone.classList.remove('drag-over');
+        });
+        zone.addEventListener('drop', function(e) {
+          e.preventDefault();
+          zone.classList.remove('drag-over');
+          if (!dragged) return;
+
+          var targetStatus = zone.dataset.targetStatus;
+          var submissionId = dragged.dataset.submissionId;
+          if (!targetStatus || !submissionId || targetStatus === 'pending') return;
+
+          var csrfToken = document.querySelector('meta[name="csrf-token"]');
+          var tokenVal = csrfToken ? csrfToken.content : '';
+
+          fetch('/submissions/' + submissionId + '/' + targetStatus, {
+            method: 'POST',
+            headers: {
+              'X-CSRF-Token': tokenVal,
+              'Accept': 'text/vnd.turbo-stream.html, text/html, application/json'
+            }
+          }).then(function(r) {
+            if (r.ok) {
+              window.location.reload();
+            }
+          }).catch(function(err) {
+            console.error('Kanban drag error:', err);
+          });
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initKanban);
+    } else {
+      initKanban();
+    }
+  })();
+</script>

@@ -314,6 +314,21 @@
 
       <% elsif @role_type == "CompanyProfile" %>
 
+        <%# Applications Pipeline (Kanban Board) %>
+        <div class="profile-card mb-30">
+          <div class="section-heading-row">
+            <div class="section-title-left">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+              <h2>Applications Pipeline</h2>
+            </div>
+          </div>
+
+          <%= render "dashboards/kanban_board",
+              pending_submissions: @pending_submissions,
+              active_internships: @active_internships,
+              processed_submissions: @processed_submissions %>
+        </div>
+
         <%# Active Offers Management %>
         <div class="profile-card mb-30">
           <div class="section-heading-row">
