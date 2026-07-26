@@ -3,7 +3,7 @@
 
     <%# ─── Logo ─────────────────────────── %>
     <div class="navbar-left">
-      <%= link_to root_path, class: "logo-link", aria: { label: "StageUp Home" } do %>
+      <%= link_to root_path, class: "logo-link", aria: { label: t('nav.home') } do %>
         <%= render "layouts/navbar_brand" %>
       <% end %>
     </div>
@@ -18,7 +18,7 @@
             <circle cx="12" cy="12" r="10"/>
             <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
           </svg>
-          <span>Browse Offers</span>
+          <span><%= t('nav.browse_offers') %></span>
         <% end %>
 
         <%= link_to dashboard_path,
@@ -30,7 +30,7 @@
             <rect width="7" height="9" x="14" y="12" rx="1"/>
             <rect width="7" height="5" x="3" y="14" rx="1"/>
           </svg>
-          <span>Dashboard</span>
+          <span><%= t('nav.dashboard') %></span>
         <% end %>
       </div>
     </div>
@@ -45,7 +45,7 @@
             <path d="M5 12h14"/>
             <path d="M12 5v14"/>
           </svg>
-          <span>Post an Offer</span>
+          <span><%= t('nav.post_offer') %></span>
         <% end %>
       <% end %>
 
@@ -81,10 +81,10 @@
 
         <div class="nav-user-dropdown" id="nav-user-dropdown" role="menu">
           <% role_label = case current_user.profileable_type
-                          when "StudentProfile" then "Student"
-                          when "CompanyProfile" then "Company"
-                          when "UniversityProfile" then "University"
-                          else "User"
+                          when "StudentProfile" then t('nav.student')
+                          when "CompanyProfile" then t('nav.company')
+                          when "UniversityProfile" then t('nav.university')
+                          else t('nav.user')
                           end %>
 
           <div class="nav-dropdown-profile">
@@ -106,7 +106,7 @@
               <rect width="7" height="9" x="14" y="12" rx="1"/>
               <rect width="7" height="5" x="3" y="14" rx="1"/>
             </svg>
-            <span>My Dashboard</span>
+            <span><%= t('nav.my_dashboard') %></span>
           <% end %>
 
           <%= link_to offers_path, class: "nav-dropdown-item", role: "menuitem" do %>
@@ -114,7 +114,7 @@
               <circle cx="12" cy="12" r="10"/>
               <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
             </svg>
-            <span>Browse Offers</span>
+            <span><%= t('nav.browse_offers') %></span>
           <% end %>
 
           <div class="nav-dropdown-divider"></div>
@@ -129,7 +129,7 @@
               <polyline points="16 17 21 12 16 7"/>
               <line x1="21" x2="9" y1="12" y2="12"/>
             </svg>
-            <span>Sign Out</span>
+            <span><%= t('nav.sign_out') %></span>
           <% end %>
         </div>
       </div>
@@ -148,18 +148,18 @@
   <div class="navbar-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
     <%= link_to offers_path, class: "mobile-nav-link #{'mobile-nav-link-active' if request.path.start_with?(offers_path)}" do %>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-      <span>Browse Offers</span>
+      <span><%= t('nav.browse_offers') %></span>
     <% end %>
 
     <%= link_to dashboard_path, class: "mobile-nav-link #{'mobile-nav-link-active' if current_page?(dashboard_path)}" do %>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="14" rx="1"/></svg>
-      <span>My Dashboard</span>
+      <span><%= t('nav.my_dashboard') %></span>
     <% end %>
 
     <% if current_user.profileable_type == "CompanyProfile" %>
       <%= link_to new_offer_path, class: "mobile-nav-link mobile-nav-cta" do %>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-        <span>Post an Offer</span>
+        <span><%= t('nav.post_offer') %></span>
       <% end %>
     <% end %>
 
@@ -174,7 +174,7 @@
           class: "mobile-nav-signout",
           form: { "data-turbo": false } do %>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
-      <span>Sign Out</span>
+      <span><%= t('nav.sign_out') %></span>
     <% end %>
   </div>
 </nav>

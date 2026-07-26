@@ -4,7 +4,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   test "guest user should get index landing page" do
-    get root_url
+    get root_url(locale: "en")
     assert_response :success
     assert_select "h1", /Nobody pays a price for ghosting/
   end

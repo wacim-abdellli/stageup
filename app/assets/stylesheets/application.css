@@ -6993,30 +6993,83 @@ select:-webkit-autofill:focus {
 
 /* Locale Switcher Styles */
 .locale-switcher {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 2px;
-  background: var(--bg-tertiary);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 2px;
+  border-radius: 9999px;
+  padding: 2px 4px;
 }
 
 .locale-btn {
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   color: var(--text-muted);
   padding: 4px 8px;
-  border-radius: var(--radius-sm);
+  border-radius: 9999px;
   text-decoration: none;
   transition: var(--transition);
 }
 
 .locale-btn:hover {
   color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .locale-btn-active {
-  background: var(--primary-light);
-  color: var(--primary-hover);
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ============= RTL OVERRIDES ============= */
+html[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+html[dir="rtl"] .mockup-row {
+  flex-direction: row;
+}
+
+html[dir="rtl"] .mockup-score {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+html[dir="rtl"] .featured-view-all svg:last-child,
+html[dir="rtl"] .landing-announcement-badge svg:last-child,
+html[dir="rtl"] .offer-card-action svg:last-child,
+html[dir="rtl"] .featured-offer-link svg:last-child {
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .badge-arrow {
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .landing-announcement-badge:hover .badge-arrow {
+  transform: translateX(-2px) scaleX(-1);
+}
+
+html[dir="rtl"] .landing-hero-title,
+html[dir="rtl"] .landing-subhead {
+  text-align: right;
+}
+
+html[dir="rtl"] .landing-cta-row {
+  justify-content: flex-start;
+}
+
+html[dir="rtl"] .landing-logo-row {
+  justify-content: flex-start;
+}
+
+html[dir="rtl"] .hero-left-col {
+  text-align: right;
+}
+
+html[dir="rtl"] .landing-announcement-badge svg {
+  order: -1;
 }

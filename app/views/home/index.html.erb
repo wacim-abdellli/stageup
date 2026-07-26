@@ -1,4 +1,4 @@
-<% content_for :title, "StageUp – Verified Internships in Tunisia" %>
+<% content_for :title, t('home.title', default: "StageUp – Verified Internships in Tunisia") %>
 <div class="landing-wrapper">
   <div class="cinema-glow-bg"></div>
 
@@ -13,7 +13,7 @@
         <div class="landing-badge-container animate-in visible stagger-1">
           <div class="landing-announcement-badge">
             <span class="badge-new-tag">New</span>
-            <span class="badge-text">Tunisia's First Proof-of-Work Registry</span>
+            <span class="badge-text"><%= t('home.announcement_badge') %></span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </div>
         </div>
@@ -25,20 +25,19 @@
         <% end %>
 
         <h1 class="landing-hero-title animate-in visible stagger-2">
-          Nobody pays a price for ghosting.<br>
-          <span class="landing-hero-gradient">We changed that.</span>
+          <%= t('home.hero_title_html') %>
         </h1>
 
         <p class="landing-subhead animate-in visible stagger-3">
-          Every offer, mission, and no-show becomes a permanent public record. Tunisia's first internship market where reputation is earned, not claimed.
+          <%= t('home.hero_subtitle') %>
         </p>
 
         <div class="landing-cta-row animate-in visible stagger-4">
-          <%= link_to "Browse Internships", offers_path, class: "btn btn-accent landing-cta-btn" %>
+          <%= link_to t('home.browse_btn'), offers_path, class: "btn btn-accent landing-cta-btn" %>
           <% if user_signed_in? %>
-            <%= link_to "Go to Dashboard", dashboard_path, class: "btn btn-primary landing-cta-btn" %>
+            <%= link_to t('home.dashboard_btn'), dashboard_path, class: "btn btn-primary landing-cta-btn" %>
           <% else %>
-            <%= link_to "Get Started", select_role_path, class: "btn btn-secondary landing-cta-btn" %>
+            <%= link_to t('home.get_started_btn'), select_role_path, class: "btn btn-secondary landing-cta-btn" %>
           <% end %>
         </div>
       </div>
@@ -54,9 +53,9 @@
                 <span class="win-dot dot-expand"></span>
               </div>
               <span class="mockup-pulse-dot"></span>
-              <span class="mockup-header-title">Live Reputation Ledger</span>
+              <span class="mockup-header-title"><%= t('home.mockup_header') %></span>
             </div>
-            <span class="mockup-header-badge">Mainnet</span>
+            <span class="mockup-header-badge"><%= t('home.mockup_header_badge') %></span>
           </div>
 
           <div class="mockup-body">
@@ -64,33 +63,33 @@
               <div class="mockup-row-left">
                 <div class="mockup-avatar avatar-purple">C</div>
                 <div class="mockup-row-info">
-                  <span class="mockup-user-name">Cyrine (Student)</span>
-                  <span class="mockup-action-text">Submitted code solution to ISET</span>
+                  <span class="mockup-user-name"><%= t('home.mockup_row1_name') %></span>
+                  <span class="mockup-action-text"><%= t('home.mockup_row1_action') %></span>
                 </div>
               </div>
-              <span class="mockup-score score-plus">+10 pts</span>
+              <span class="mockup-score score-plus"><%= t('home.mockup_row1_score', pts: t('home.pts')) %></span>
             </div>
 
             <div class="mockup-row animate-in visible stagger-5">
               <div class="mockup-row-left">
                 <div class="mockup-avatar avatar-blue">V</div>
                 <div class="mockup-row-info">
-                  <span class="mockup-user-name">Vortech Startups</span>
-                  <span class="mockup-action-text">Missed review deadline (Grace ended)</span>
+                  <span class="mockup-user-name"><%= t('home.mockup_row2_name') %></span>
+                  <span class="mockup-action-text"><%= t('home.mockup_row2_action') %></span>
                 </div>
               </div>
-              <span class="mockup-score score-minus">-15 pts</span>
+              <span class="mockup-score score-minus"><%= t('home.mockup_row2_score', pts: t('home.pts')) %></span>
             </div>
 
             <div class="mockup-row animate-in visible stagger-6">
               <div class="mockup-row-left">
                 <div class="mockup-avatar avatar-green">M</div>
                 <div class="mockup-row-info">
-                  <span class="mockup-user-name">Mohamed (Student)</span>
-                  <span class="mockup-action-text">Completed verified PFE agreement</span>
+                  <span class="mockup-user-name"><%= t('home.mockup_row3_name') %></span>
+                  <span class="mockup-action-text"><%= t('home.mockup_row3_action') %></span>
                 </div>
               </div>
-              <span class="mockup-score score-plus">+30 pts</span>
+              <span class="mockup-score score-plus"><%= t('home.mockup_row3_score', pts: t('home.pts')) %></span>
             </div>
           </div>
         </div>
@@ -102,17 +101,17 @@
     <div class="landing-stats-bar animate-in visible stagger-4">
       <div class="landing-stat-item">
         <span class="stat-number">100%</span>
-        <span class="stat-label">Proof-of-Work Verification</span>
+        <span class="stat-label"><%= t('home.stat_verification') %></span>
       </div>
       <div class="landing-stat-divider"></div>
       <div class="landing-stat-item">
         <span class="stat-number">0</span>
-        <span class="stat-label">Ghosting Tolerance</span>
+        <span class="stat-label"><%= t('home.stat_ghosting') %></span>
       </div>
       <div class="landing-stat-divider"></div>
       <div class="landing-stat-item">
         <span class="stat-number">5.0</span>
-        <span class="stat-label">Immutable Reputation Scale</span>
+        <span class="stat-label"><%= t('home.stat_reputation') %></span>
       </div>
     </div>
 
@@ -120,10 +119,10 @@
     <div class="landing-section-header animate-in visible stagger-5">
       <div class="landing-section-eyebrow">
         <svg class="icon-indigo" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-        <span>HOW IT WORKS</span>
+        <span><%= t('home.how_it_works') %></span>
       </div>
-      <h2 class="landing-section-title">A Better Internship Loop</h2>
-      <p class="landing-section-sub">Verifiable trust replacing static, unverified resumes</p>
+      <h2 class="landing-section-title"><%= t('home.how_it_works_title') %></h2>
+      <p class="landing-section-sub"><%= t('home.how_it_works_sub') %></p>
     </div>
 
     <%# ─── Bento Grid Section ───────────────────────────────────── %>
@@ -132,9 +131,9 @@
         <div class="bento-icon">
           <svg class="icon-indigo" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
         </div>
-        <h3 class="bento-card-title">Proof-of-Work Missions</h3>
+        <h3 class="bento-card-title"><%= t('home.bento_mission_title') %></h3>
         <p class="bento-card-text">
-          Skip endless CV filtering. Recruiters attach hands-on challenges. Students submit code directly to unlock interviews.
+          <%= t('home.bento_mission_text') %>
         </p>
       </div>
 
@@ -142,9 +141,9 @@
         <div class="bento-icon">
           <svg class="icon-success" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
         </div>
-        <h3 class="bento-card-title">Reputation Ledger</h3>
+        <h3 class="bento-card-title"><%= t('home.bento_reputation_title') %></h3>
         <p class="bento-card-text">
-          Verify reliability upfront. Our scoring system penalizes no-shows and rewards verified completions on both sides.
+          <%= t('home.bento_reputation_text') %>
         </p>
       </div>
 
@@ -152,9 +151,9 @@
         <div class="bento-icon">
           <svg class="icon-amber" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
         </div>
-        <h3 class="bento-card-title">Academic Verification</h3>
+        <h3 class="bento-card-title"><%= t('home.bento_academic_title') %></h3>
         <p class="bento-card-text">
-          Official email tracking (e.g. <code>@isetsf.rnu.tn</code>) instantly verifies student credentials and connects coordinators.
+          <%= t('home.bento_academic_text') %>
         </p>
       </div>
     </div>
@@ -166,17 +165,17 @@
           <div>
             <h2 class="featured-heading">
               <svg class="icon-indigo" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-              <span>Featured Opportunities</span>
+              <span><%= t('home.featured_heading') %></span>
             </h2>
             <p class="featured-sub">
               <% if user_signed_in? %>
-                Browse active internship listings and take on their proof missions
+                <%= t('home.featured_sub_signed_in') %>
               <% else %>
-                Preview active opportunities — Sign in to view full mission details and submit solutions
+                <%= t('home.featured_sub_signed_out') %>
               <% end %>
             </p>
           </div>
-          <%= link_to "View All Offers →", offers_path, class: "featured-view-all" %>
+          <%= link_to t('home.featured_view_all'), offers_path, class: "featured-view-all" %>
         </div>
 
         <div class="featured-grid">
@@ -202,7 +201,7 @@
                   <% if user_signed_in? %>
                     <%= link_to offer.title, offer %>
                   <% else %>
-                    <%= link_to offer.title, new_user_session_path, title: "Sign in to view offer details" %>
+                    <%= link_to offer.title, new_user_session_path, title: t('nav.unlock') %>
                   <% end %>
                 </h3>
                 <span class="featured-offer-company"><%= offer.company_profile&.name || "Unknown Company" %></span>
@@ -222,13 +221,13 @@
 
                 <% if user_signed_in? %>
                   <%= link_to offer, class: "featured-offer-link" do %>
-                    <span>View details</span>
+                    <span><%= t('nav.view_offer') %></span>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                   <% end %>
                 <% else %>
                   <%= link_to new_user_session_path, class: "featured-offer-link link-locked" do %>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                    <span>Sign in to unlock</span>
+                    <span><%= t('nav.unlock') %></span>
                   <% end %>
                 <% end %>
               </div>
@@ -243,12 +242,12 @@
       <div class="landing-cta-section animate-in visible stagger-6">
         <div class="landing-cta-inner">
           <div class="landing-cta-text">
-            <h2 class="landing-cta-title">Ready to build your verified reputation?</h2>
-            <p class="landing-cta-desc">Join Tunisia's first verified internship platform. Your track record starts here.</p>
+            <h2 class="landing-cta-title"><%= t('home.cta_title') %></h2>
+            <p class="landing-cta-desc"><%= t('home.cta_desc') %></p>
           </div>
           <div class="landing-cta-actions">
-            <%= link_to "Create an Account", select_role_path, class: "btn btn-primary" %>
-            <%= link_to "Sign In", new_user_session_path, class: "btn btn-secondary" %>
+            <%= link_to t('home.cta_account'), select_role_path, class: "btn btn-primary" %>
+            <%= link_to t('home.cta_signin'), new_user_session_path, class: "btn btn-secondary" %>
           </div>
         </div>
       </div>
