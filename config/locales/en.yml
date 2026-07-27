@@ -95,6 +95,13 @@ en:
         title: "About the Company"
         website: "Website"
         verified: "Verified Partner"
+        grace_period: "New Recruiter · Grace Period"
+        grace_text: "This employer recently started posting on StageUp. Detailed response rate metrics are hidden during their 30-day grace period."
+        response_rate: "Response Rate"
+        avg_decision_time: "Avg. Decision Time"
+        verified_recruiter: "Verified Recruiter"
+        commitment: "Commitment"
+        avg_rating: "Average Rating"
       details:
         stage_type: "Stage Type"
         spots: "Spots Available"
@@ -112,6 +119,29 @@ en:
         desc: "Create an account or sign in to submit your solution to this mission."
         sign_up: "Create Account"
         sign_in: "Sign In"
+      reviews:
+        title: "Candidate Reviews"
+      application:
+        title: "Application"
+        must_sign_in: "You must be logged in as a student to apply or take on the proof-of-work mission."
+        mission_prompt: "This offer has an attached task. Clicking below starts a <strong>48-hour window</strong> to complete the mission and submit your work."
+        start_mission: "Start Proof Mission"
+        cv_prompt: "This offer accepts standard CV applications. Click below to review your CV link and submit."
+        apply_cv: "Apply with CV"
+        mission_in_progress: "Mission In Progress"
+        mission_deadline_warning: "You started this mission. Don't forget to submit your code link before the 48h deadline!"
+        submit_solution: "Submit Solution URL →"
+        status_label: "Application Status:"
+        view_submission: "View My Submission Link"
+        students_only: "Only logged-in students can apply to internships."
+      deadline:
+        passed: "Deadline passed"
+        one_day: "1 day left"
+        days_left: "%{count} days left"
+      match_breakdown:
+        skills: "Skills"
+        major: "Major"
+        readiness: "Score"
 
     new:
       title: "Post New Internship"

@@ -73,8 +73,8 @@
         </div>
       <% end %>
 
-      <div class="mb-35">
-        <h3 class="fs-18 mb-12 border-bottom pb-8">Role Description</h3>
+<div class="mb-35">
+        <h3 class="fs-18 mb-12 border-bottom pb-8"><%= t('offers.show.details.role_description') %></h3>
         <p class="offer-desc-text">
           <%= @offer.description %>
         </p>
@@ -86,11 +86,11 @@
           <div class="mission-header">
             <h3 class="mission-title">
               <i data-lucide="git-commit" class="mission-title-icon"></i>
-              Attached Proof Mission
+              <%= t('offers.show.mission.title') %>
             </h3>
             <span class="badge-status mission-duration-tag">
               <i data-lucide="clock" class="mission-duration-icon"></i>
-              Est. Time: <%= @mission.estimated_duration_minutes %> mins
+              <%= t('offers.show.mission.duration', minutes: @mission.estimated_duration_minutes) %>
             </span>
           </div>
           <h4 class="mission-name"><%= @mission.title %></h4>
@@ -119,24 +119,24 @@
           <div class="grace-box">
             <div class="badge-grace-box">
               <i data-lucide="clock" class="icon-13 icon-amber"></i>
-              <span>New Recruiter · Grace Period</span>
+              <span><%= t('offers.show.company.grace_period') %></span>
             </div>
             <p class="grace-text">
-              This employer recently started posting on StageUp. Detailed response rate metrics are hidden during their 30-day grace period.
+              <%= t('offers.show.company.grace_text') %>
             </p>
           </div>
         <% else %>
           <div class="emp-stat-row">
-            <span class="emp-stat-label">Response Rate</span>
+            <span class="emp-stat-label"><%= t('offers.show.company.response_rate') %></span>
             <strong class="text-success"><%= @company.response_rate %>%</strong>
           </div>
           <div class="emp-stat-row">
-            <span class="emp-stat-label">Avg. Decision Time</span>
-            <strong><%= @company.avg_response_time_hours %> hours</strong>
+            <span class="emp-stat-label"><%= t('offers.show.company.avg_decision_time') %></span>
+            <strong><%= @company.avg_response_time_hours %> <%= t('common.hours', default: 'hours') %></strong>
           </div>
           <div class="emp-stat-row">
-            <span class="emp-stat-label">Verified Recruiter</span>
-            <strong><%= @company.verified? ? "Yes" : "No" %></strong>
+            <span class="emp-stat-label"><%= t('offers.show.company.verified_recruiter') %></span>
+            <strong><%= @company.verified? ? t('common.yes', default: 'Yes') : t('common.no', default: 'No') %></strong>
           </div>
         <% end %>
 
@@ -145,20 +145,20 @@
           <div class="score-pill fs-12">
             <span class="dot <%= company_score >= 90 ? 'dot-success' : (company_score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
             <strong><%= company_score %></strong>
-            <span class="score-label">Commitment</span>
+            <span class="score-label"><%= t('offers.show.company.commitment') %></span>
           </div>
         </div>
 
         <div class="emp-rating-row">
-          <span class="emp-stat-label">Average Rating</span>
+          <span class="emp-stat-label"><%= t('offers.show.company.avg_rating') %></span>
           <% if @reviews.any? %>
             <% comp_avg = (@reviews.sum(&:rating).to_f / @reviews.size).round(1) %>
             <strong class="emp-rating-inner">
               <i data-lucide="star" class="star-icon"></i>
-              <%= comp_avg %> (<%= @reviews.size %> reviews)
+              <%= comp_avg %> (<%= @reviews.size %> <%= t('common.reviews', default: 'reviews') %>)
             </strong>
           <% else %>
-            <strong class="text-secondary">Unrated</strong>
+            <strong class="text-secondary"><%= t('common.unrated', default: 'Unrated') %></strong>
           <% end %>
         </div>
       </div>
@@ -166,7 +166,7 @@
       <!-- Employer Reviews List -->
       <% if @reviews.any? %>
         <div class="profile-card p-25 mb-20">
-          <h3 class="employer-card-title">Candidate Reviews</h3>
+          <h3 class="employer-card-title"><%= t('offers.show.reviews.title') %></h3>
           <div class="review-list">
             <% @reviews.each do |rev| %>
               <div class="review-item">
@@ -175,7 +175,7 @@
                     <i data-lucide="star" class="star-icon"></i>
                     <%= rev.rating %> / 5
                   </span>
-                  <span class="fs-10 text-muted"><%= time_ago_in_words(rev.created_at) %> ago</span>
+                  <span class="fs-10 text-muted"><%= time_ago_in_words(rev.created_at) %> <%= t('common.ago', default: 'ago') %></span>
                 </div>
                 <p class="review-comment">"<%= rev.comment %>"</p>
               </div>
@@ -186,47 +186,47 @@
 
       <!-- Application Status / Actions -->
       <div class="profile-card p-25">
-        <h3 class="employer-card-title">Application</h3>
+        <h3 class="employer-card-title"><%= t('offers.show.application.title') %></h3>
 
         <% if current_user.nil? %>
           <p class="fs-13 text-secondary mb-20 lh-15">
-            You must be logged in as a student to apply or take on the proof-of-work mission.
+            <%= t('offers.show.application.must_sign_in') %>
           </p>
-          <%= link_to "Sign In / Register", new_user_session_path, class: "btn btn-accent text-decoration-none w-100 text-center" %>
+          <%= link_to t('nav.sign_in'), new_user_session_path, class: "btn btn-accent text-decoration-none w-100 text-center" %>
         <% elsif current_user.profileable_type == "StudentProfile" %>
           <% if @submission.nil? %>
             <% if @offer.mission %>
               <p class="fs-13 text-secondary mb-20 lh-15">
-                This offer has an attached task. Clicking below starts a <strong>48-hour window</strong> to complete the mission and submit your work.
+                <%= t('offers.show.application.mission_prompt') %>
               </p>
               <button type="button" class="btn btn-primary w-100" id="btn-open-mission-modal">
-                Start Proof Mission
+                <%= t('offers.show.application.start_mission') %>
               </button>
             <% else %>
               <p class="fs-13 text-secondary mb-20 lh-15">
-                This offer accepts standard CV applications. Click below to review your CV link and submit.
+                <%= t('offers.show.application.cv_prompt') %>
               </p>
               <button type="button" class="btn btn-primary w-100" id="btn-open-cv-modal">
-                Apply with CV
+                <%= t('offers.show.application.apply_cv') %>
               </button>
             <% end %>
-          
+           
           <% elsif @submission.status == "started" %>
             <div class="mission-started-box mb-16">
-              <span class="mission-started-title">Mission In Progress</span>
-              <span class="mission-started-text">You started this mission. Don't forget to submit your code link before the 48h deadline!</span>
+              <span class="mission-started-title"><%= t('offers.show.application.mission_in_progress') %></span>
+              <span class="mission-started-text"><%= t('offers.show.application.mission_deadline_warning') %></span>
             </div>
-            <%= link_to "Submit Solution URL →", edit_submission_path(@submission), class: "btn btn-primary w-100 text-center text-decoration-none" %>
+            <%= link_to t('offers.show.application.submit_solution'), edit_submission_path(@submission), class: "btn btn-primary w-100 text-center text-decoration-none" %>
 
           <% else %>
             <div class="app-status-center">
-              <p class="fs-14 text-secondary mb-8">Application Status:</p>
+              <p class="fs-14 text-secondary mb-8"><%= t('offers.show.application.status_label') %></p>
               <span class="badge badge-success fs-12">
                 <%= @submission.status.upcase.gsub('_', ' ') %>
               </span>
               <% if @submission.github_link.present? %>
                 <div class="mt-15 fs-13">
-                  <%= link_to "View My Submission Link", @submission.github_link, target: "_blank", class: "text-accent" %>
+                  <%= link_to t('offers.show.application.view_submission'), @submission.github_link, target: "_blank", class: "text-accent" %>
                 </div>
               <% end %>
             </div>
@@ -234,7 +234,7 @@
 
         <% else %>
           <p class="fs-13 text-muted text-center p-10">
-            Only logged-in students can apply to internships.
+            <%= t('offers.show.application.students_only') %>
           </p>
         <% end %>
       </div>

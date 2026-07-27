@@ -95,6 +95,13 @@ fr:
         title: "À Propos de l'Entreprise"
         website: "Site Web"
         verified: "Partenaire Vérifié"
+        grace_period: "Nouveau Recruteur · Période de Grâce"
+        grace_text: "Cet employeur a récemment commencé à publier sur StageUp. Les métriques détaillées de taux de réponse sont masquées pendant leur période de grâce de 30 jours."
+        response_rate: "Taux de Réponse"
+        avg_decision_time: "Temps Moyen de Décision"
+        verified_recruiter: "Recruteur Vérifié"
+        commitment: "Engagement"
+        avg_rating: "Note Moyenne"
       details:
         stage_type: "Type de Stage"
         spots: "Places Disponibles"
@@ -112,6 +119,29 @@ fr:
         desc: "Créez un compte ou connectez-vous pour soumettre votre solution à cette mission."
         sign_up: "Créer un Compte"
         sign_in: "Se Connecter"
+      reviews:
+        title: "Avis des Candidats"
+      application:
+        title: "Candidature"
+        must_sign_in: "Vous devez être connecté en tant qu'étudiant pour postuler ou prendre en charge la mission de preuve de travail."
+        mission_prompt: "Cette offre a une tâche attachée. Cliquer ci-dessous démarre une <strong>fenêtre de 48 heures</strong> pour compléter la mission et soumettre votre travail."
+        start_mission: "Commencer la Mission de Preuve"
+        cv_prompt: "Cette offre accepte les candidatures CV standard. Cliquez ci-dessous pour revoir votre lien CV et soumettre."
+        apply_cv: "Postuler avec CV"
+        mission_in_progress: "Mission en Cours"
+        mission_deadline_warning: "Vous avez commencé cette mission. N'oubliez pas de soumettre votre lien de code avant la limite de 48h !"
+        submit_solution: "Soumettre l'URL de la Solution →"
+        status_label: "Statut de la Candidature :"
+        view_submission: "Voir Mon Lien de Soumission"
+        students_only: "Seuls les étudiants connectés peuvent postuler aux stages."
+      deadline:
+        passed: "Date limite dépassée"
+        one_day: "1 jour restant"
+        days_left: "%{count} jours restants"
+      match_breakdown:
+        skills: "Compétences"
+        major: "Filière"
+        readiness: "Score"
 
     new:
       title: "Publier un Nouveau Stage"
