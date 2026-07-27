@@ -45,17 +45,33 @@
 
         <div class="sidebar-field">
           <label class="filter-label"><%= t('offers.index.filters.stage_type') %></label>
-          <div class="select-wrap">
-            <%= select_tag :stage_type,
-                options_for_select([
-                  [t('offers.index.filters.all_types'), ""],
-                  ["PFE", "PFE"],
-                  ["PFA", "PFA"],
-                  [t('common.stage_types.initiation'), "initiation"],
-                  [t('common.stage_types.free'), "free"]
-                ], params[:stage_type]),
-                onchange: "this.form.submit();",
-                class: "filter-select" %>
+          <div class="custom-filter-dropdown" id="filter-stage-type-dropdown">
+            <input type="hidden" name="stage_type" value="<%= params[:stage_type] %>">
+            <% 
+              stage_types = [
+                ["", t('offers.index.filters.all_types')],
+                ["PFE", "PFE"],
+                ["PFA", "PFA"],
+                ["initiation", t('common.stage_types.initiation')],
+                ["free", t('common.stage_types.free')]
+              ]
+              current_stage_label = stage_types.find { |val, _| val == params[:stage_type].to_s }&.last || t('offers.index.filters.all_types')
+            %>
+            <button type="button" class="custom-filter-btn" aria-haspopup="true" aria-expanded="false">
+              <span class="custom-filter-val"><%= current_stage_label %></span>
+              <svg class="custom-filter-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="custom-filter-menu" role="listbox">
+              <% stage_types.each do |val, label| %>
+                <% is_sel = (params[:stage_type].to_s == val) %>
+                <div class="custom-filter-option <%= 'active' if is_sel %>" data-value="<%= val %>">
+                  <span><%= label %></span>
+                  <% if is_sel %>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
 
@@ -63,16 +79,32 @@
 
         <div class="sidebar-field">
           <label class="filter-label"><%= t('offers.index.filters.work_mode') %></label>
-          <div class="select-wrap">
-            <%= select_tag :work_mode,
-                options_for_select([
-                  [t('offers.index.filters.all_modes'), ""],
-                  [t('common.work_modes.remote'), "remote"],
-                  [t('common.work_modes.on_site'), "onsite"],
-                  [t('common.work_modes.hybrid'), "hybrid"]
-                ], params[:work_mode]),
-                onchange: "this.form.submit();",
-                class: "filter-select" %>
+          <div class="custom-filter-dropdown" id="filter-work-mode-dropdown">
+            <input type="hidden" name="work_mode" value="<%= params[:work_mode] %>">
+            <% 
+              work_modes = [
+                ["", t('offers.index.filters.all_modes')],
+                ["remote", t('common.work_modes.remote')],
+                ["onsite", t('common.work_modes.on_site')],
+                ["hybrid", t('common.work_modes.hybrid')]
+              ]
+              current_mode_label = work_modes.find { |val, _| val == params[:work_mode].to_s }&.last || t('offers.index.filters.all_modes')
+            %>
+            <button type="button" class="custom-filter-btn" aria-haspopup="true" aria-expanded="false">
+              <span class="custom-filter-val"><%= current_mode_label %></span>
+              <svg class="custom-filter-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="custom-filter-menu" role="listbox">
+              <% work_modes.each do |val, label| %>
+                <% is_sel = (params[:work_mode].to_s == val) %>
+                <div class="custom-filter-option <%= 'active' if is_sel %>" data-value="<%= val %>">
+                  <span><%= label %></span>
+                  <% if is_sel %>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
 
