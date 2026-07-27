@@ -6999,23 +6999,32 @@ select:-webkit-autofill:focus {
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
+  flex: 0 0 auto;
 }
 
 .lang-icon-btn {
-  display: flex;
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  justify-content: center;
+  gap: 4px;
+  min-width: 68px;
+  height: 34px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-color);
   border-radius: 9999px;
-  padding: 6px 10px;
+  padding: 0 8px;
   color: var(--text-secondary);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
   outline: none;
-  transition: all 0.2s ease;
   line-height: 1;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .lang-icon-btn:hover,
@@ -7023,10 +7032,20 @@ select:-webkit-autofill:focus {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.16);
   color: var(--text-primary);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.lang-icon-btn:focus-visible {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .lang-globe-icon {
-  stroke: var(--text-secondary);
+  width: 15px;
+  height: 15px;
+  display: block;
+  color: currentColor;
+  stroke: currentColor;
   flex-shrink: 0;
   transition: stroke 0.2s ease;
 }
@@ -7037,19 +7056,27 @@ select:-webkit-autofill:focus {
 }
 
 .lang-badge-text {
+  display: inline-block;
+  min-width: 16px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
+  text-align: center;
 }
 
 .lang-chevron-icon {
-  stroke: var(--text-muted);
+  width: 10px;
+  height: 10px;
+  display: block;
+  color: currentColor;
+  stroke: currentColor;
   flex-shrink: 0;
-  transition: transform 0.2s ease, stroke 0.2s ease;
+  opacity: 0.65;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .lang-icon-btn[aria-expanded="true"] .lang-chevron-icon {
   transform: rotate(180deg);
-  stroke: var(--text-primary);
+  opacity: 1;
 }
 
 .lang-floating-menu {

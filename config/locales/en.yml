@@ -38,6 +38,7 @@ en:
     mockup_row3_name: "Mohamed (Student)"
     mockup_row3_action: "Completed verified PFE agreement"
     mockup_row3_score: "+30 %{pts}"
+
   nav:
     browse_offers: "Browse Offers"
     dashboard: "Dashboard"
@@ -52,3 +53,455 @@ en:
     company: "Company"
     university: "University"
     user: "User"
+
+  offers:
+    index:
+      title: "Available Internships"
+      subtitle: "Browse and apply to verified internship opportunities"
+      filters:
+        title: "Filters"
+        search_placeholder: "Search by title, company, skills..."
+        stage_type: "Stage Type"
+        work_mode: "Work Mode"
+        all_types: "All Types"
+        all_modes: "All Modes"
+        clear_filters: "Reset Filters"
+      no_results: "No internships match your filters"
+      no_results_hint: "Try adjusting your search or filters"
+      card:
+        mission_attached: "Mission Attached"
+        cv_only: "CV Only"
+        view_details: "View Details"
+        sign_in_to_unlock: "Sign in to unlock"
+      stats:
+        total_offers: "offers available"
+
+    show:
+      title: "Internship Details"
+      apply_now: "Apply Now"
+      sign_in_to_apply: "Sign In to Apply"
+      mission:
+        title: "Proof-of-Work Mission"
+        subtitle: "Complete this challenge to unlock your application"
+        duration: "Estimated time: %{minutes} minutes"
+        submit_solution: "Submit Solution"
+        solution_placeholder: "GitHub repo, Figma link, Google Drive..."
+        notes_placeholder: "Brief technical explanation (optional)"
+        submit_btn: "Submit Solution"
+        submitting: "Submitting..."
+      company:
+        title: "About the Company"
+        website: "Website"
+        verified: "Verified Partner"
+      details:
+        stage_type: "Stage Type"
+        spots: "Spots Available"
+        work_mode: "Work Mode"
+        deadline: "Application Deadline"
+        location: "Location"
+        remote: "Remote"
+        posted: "Posted %{time} ago"
+      apply:
+        cta_title: "Ready to start your mission?"
+        cta_desc: "Submit your solution to the proof-of-work challenge and get reviewed directly by the team."
+        btn: "Start Mission"
+      auth_prompt:
+        title: "Sign In to Apply"
+        desc: "Create an account or sign in to submit your solution for this mission."
+        sign_up: "Create Account"
+        sign_in: "Sign In"
+
+    new:
+      title: "Post a New Internship"
+      subtitle: "Create a verified internship opportunity with an optional proof-of-work mission"
+      form:
+        basic_info: "Basic Information"
+        title: "Internship Title"
+        title_placeholder: "e.g. Front-End Web Developer Intern"
+        stage_type: "Stage Type"
+        stage_type_pfe: "PFE (Final Year Project)"
+        stage_type_stage: "Summer Internship"
+        stage_type_alternance: "Work-Study (Alternance)"
+        spots: "Available Spots"
+        work_mode: "Work Mode"
+        work_mode_on_site: "On-site"
+        work_mode_remote: "Remote"
+        work_mode_hybrid: "Hybrid"
+        location: "Location"
+        location_placeholder: "e.g. Tunis, Tunisia"
+        deadline: "Application Deadline (optional)"
+        description: "Description"
+        description_placeholder: "Describe the role, responsibilities, and what the intern will learn..."
+        mission_section: "Proof-of-Work Mission (Optional)"
+        mission_title: "Mission Title"
+        mission_title_placeholder: "e.g. Build a Responsive Navigation Bar"
+        mission_duration: "Estimated Duration (minutes)"
+        mission_description: "Mission Description"
+        mission_description_placeholder: "Describe the challenge, expected deliverables, and evaluation criteria..."
+        submit: "Post Internship"
+        submitting: "Posting..."
+      preview:
+        title: "Preview"
+        mission_attached: "Mission Attached"
+        cv_only: "CV Only"
+
+    edit:
+      title: "Edit Internship"
+      subtitle: "Update your internship details"
+      form:
+        submit: "Update Internship"
+        submitting: "Updating..."
+        delete: "Delete"
+        deleting: "Deleting..."
+        delete_confirm: "Are you sure? This action cannot be undone."
+
+    form:
+      title: "Internship Title"
+      stage_type: "Stage Type"
+      spots: "Available Spots"
+      work_mode: "Work Mode"
+      location: "Location"
+      deadline: "Application Deadline"
+      description: "Description"
+      mission_title: "Mission Title"
+      mission_duration: "Mission Duration"
+      mission_description: "Mission Description"
+
+  dashboard:
+    title: "Dashboard"
+    welcome_back: "Welcome back, %{name}"
+    today_is: "Today is %{date}"
+    quick_stats:
+      title: "Quick Stats"
+      active_applications: "Active Applications"
+      completed_internships: "Completed Internships"
+      reputation_score: "Reputation Score"
+      pending_reviews: "Pending Reviews"
+    tabs:
+      applications: "My Applications"
+      offers: "My Offers"
+      agreements: "Agreements"
+      reputation: "Reputation"
+      reviews: "Reviews"
+    kanban:
+      title: "Application Tracker"
+      columns:
+        applied: "Applied"
+        mission: "Mission"
+        review: "Under Review"
+        accepted: "Accepted"
+        completed: "Completed"
+      empty: "No applications in this stage"
+    applications:
+      title: "My Applications"
+      empty: "You haven't applied to any internships yet"
+      browse_offers: "Browse Offers"
+      status:
+        pending: "Pending"
+        mission_pending: "Mission Pending"
+        in_review: "Under Review"
+        accepted: "Accepted"
+        rejected: "Rejected"
+        completed: "Completed"
+      actions:
+        view_mission: "View Mission"
+        submit_solution: "Submit Solution"
+        view_agreement: "View Agreement"
+        withdraw: "Withdraw"
+      mission_status:
+        not_started: "Not Started"
+        in_progress: "In Progress"
+        submitted: "Submitted"
+        graded: "Graded"
+    offers:
+      title: "My Internship Offers"
+      empty: "You haven't posted any internships yet"
+      post_offer: "Post New Offer"
+      status:
+        draft: "Draft"
+        published: "Published"
+        closed: "Closed"
+      actions:
+        edit: "Edit"
+        view_applications: "View Applications"
+        close: "Close"
+    agreements:
+      title: "Internship Agreements"
+      empty: "No agreements yet"
+      status:
+        pending_signatures: "Pending Signatures"
+        signed: "Fully Signed"
+        declined: "Declined"
+        expired: "Expired"
+      actions:
+        view: "View Agreement"
+        sign: "Sign"
+    reputation:
+      title: "Reputation Ledger"
+      current_score: "Current Score"
+      score_label: "Commitment Score"
+      history_title: "Score History"
+      empty: "No reputation events yet"
+      events:
+        applied: "Applied to internship"
+        mission_submitted: "Submitted mission solution"
+        mission_approved: "Mission approved"
+        mission_rejected: "Mission rejected"
+        agreement_signed: "Signed agreement"
+        review_received: "Received review"
+        no_show: "No-show penalty"
+      delta:
+        positive: "+%{points}"
+        negative: "%{points}"
+    reviews:
+      title: "Reviews"
+      empty: "No reviews yet"
+      given: "Given"
+      received: "Received"
+      write_review: "Write Review"
+      rating:
+        excellent: "Excellent"
+        good: "Good"
+        average: "Average"
+        poor: "Poor"
+      placeholder: "Share your experience..."
+
+  pending_approval:
+    title: "Account Pending Approval"
+    subtitle: "Your university coordinator account is under review"
+    description: "Our team is verifying your credentials. You'll receive an email once approved."
+    contact_support: "Questions? Contact support"
+
+  notifications:
+    title: "Notifications"
+    mark_all_read: "Mark All Read"
+    empty: "No notifications yet"
+    empty_desc: "You're all caught up!"
+    types:
+      application_received: "New Application"
+      application_accepted: "Application Accepted"
+      application_rejected: "Application Rejected"
+      mission_submitted: "Mission Submitted"
+      mission_graded: "Mission Graded"
+      agreement_ready: "Agreement Ready to Sign"
+      agreement_signed: "Agreement Signed"
+      review_received: "New Review"
+      review_requested: "Review Requested"
+    actions:
+      view: "View"
+      dismiss: "Dismiss"
+
+  submissions:
+    edit:
+      title: "Submit Solution"
+      subtitle: "Complete the proof-of-work mission for %{offer_title}"
+      form:
+        github_link: "Solution URL"
+        github_link_placeholder: "GitHub repo, Figma file, Google Drive link..."
+        notes: "Technical Notes (Optional)"
+        notes_placeholder: "Explain your approach, tech stack, challenges..."
+        submit: "Submit Solution"
+        submitting: "Submitting..."
+        cancel: "Cancel"
+      instructions:
+        title: "Submission Guidelines"
+        item1: "Provide a working link to your solution (GitHub, Figma, Drive, etc.)"
+        item2: "Ensure the link is publicly accessible or shared with the reviewer"
+        item3: "Include a brief technical explanation in the notes field"
+        item4: "You can update your submission before the deadline"
+
+  registrations:
+    select_role:
+      title: "Choose Your Role"
+      subtitle: "Select how you'll use StageUp to get started"
+      student:
+        title: "Student"
+        desc: "Find verified internships, build your reputation, get hired"
+      company:
+        title: "Company"
+        desc: "Post internships, evaluate talent with proof-of-work missions"
+      university:
+        title: "University Coordinator"
+        desc: "Verify students, track agreements, manage academic partnerships"
+      already_account: "Already have an account? %{link}"
+      sign_in: "Sign In"
+    new_student:
+      title: "Student Registration"
+      subtitle: "Create your verified student profile"
+      form:
+        first_name: "First Name"
+        last_name: "Last Name"
+        phone: "Phone Number"
+        university: "University / Institute"
+        university_placeholder: "Select your institution"
+        major: "Major / Field of Study"
+        graduation_year: "Graduation Year"
+        bio: "Short Bio"
+        bio_placeholder: "Tell us about yourself, your skills, and interests..."
+        email: "University Email"
+        email_hint: "Use your official university email (e.g. @isetsf.rnu.tn) for instant verification"
+        password: "Password"
+        password_confirmation: "Confirm Password"
+        submit: "Create Account"
+        submitting: "Creating..."
+      back: "Go Back"
+    new_company:
+      title: "Company Registration"
+      subtitle: "Create your verified company profile"
+      form:
+        name: "Company Name"
+        name_placeholder: "Your Startup"
+        website: "Website (Optional)"
+        description: "Company Description"
+        description_placeholder: "What does your company do? Tech stack, mission, culture..."
+        email: "Work Email"
+        password: "Password"
+        password_confirmation: "Confirm Password"
+        submit: "Create Account"
+        submitting: "Creating..."
+      back: "Go Back"
+    new_university:
+      title: "University Coordinator Registration"
+      subtitle: "Register as an academic coordinator"
+      form:
+        university: "University"
+        university_placeholder: "Select your institution"
+        admin_name: "Coordinator Full Name"
+        admin_name_placeholder: "Prof. Ahmed Mansour"
+        department: "Department / Faculty"
+        email: "Official University Email"
+        email_hint: "Must be an official @university.tn or @institute.rnu.tn address"
+        password: "Password"
+        password_confirmation: "Confirm Password"
+        submit: "Register Coordinator"
+        submitting: "Registering..."
+      back: "Go Back"
+
+  sessions:
+    new:
+      title: "Sign In"
+      subtitle: "Access your dashboard"
+      email: "Email"
+      password: "Password"
+      remember_me: "Remember me"
+      forgot_password: "Forgot password?"
+      submit: "Sign In"
+      submitting: "Signing in..."
+      no_account: "Don't have an account? %{link}"
+      sign_up: "Sign Up"
+      role_select: "Sign in as %{role}"
+
+  admin:
+    dashboard:
+      title: "Admin Dashboard"
+      subtitle: "Platform oversight and moderation"
+      stats:
+        total_users: "Total Users"
+        total_offers: "Total Offers"
+        pending_coordinators: "Pending Coordinators"
+        pending_companies: "Pending Companies"
+      sections:
+        coordinators: "University Coordinators"
+        companies: "Companies"
+      coordinators:
+        title: "Pending Coordinators"
+        empty: "No pending coordinators"
+        approve: "Approve"
+        reject: "Reject"
+        reject_confirm: "Reject this coordinator? Their account will be removed."
+      companies:
+        title: "Pending Companies"
+        empty: "No pending companies"
+        verify: "Verify"
+        reject: "Reject"
+        reject_confirm: "Reject this company? Their account will be removed."
+
+  internship_agreements:
+    show:
+      title: "Convention de Stage"
+      subtitle: "Three-party internship agreement"
+      status:
+        pending: "Pending Signatures"
+        signed: "Fully Signed"
+        declined: "Declined"
+      parties:
+        student: "Student"
+        company: "Company Supervisor"
+        university: "University Coordinator"
+      actions:
+        sign: "Sign Agreement"
+        download: "Download PDF"
+        decline: "Decline"
+        decline_reason: "Reason for declining"
+        decline_confirm: "Are you sure? This cannot be undone."
+      details:
+        start_date: "Start Date"
+        end_date: "End Date"
+        work_mode: "Work Mode"
+        location: "Location"
+        description: "Mission Description"
+      signatures:
+        signed_by: "Signed by %{name} on %{date}"
+        pending: "Pending signature"
+        your_turn: "Your turn to sign"
+    new:
+      title: "Generate Convention de Stage"
+      subtitle: "Create the official three-party internship agreement"
+      form:
+        start_date: "Start Date"
+        end_date: "End Date"
+        work_mode: "Work Mode"
+        location: "Location"
+        description: "Mission Description"
+        description_placeholder: "Describe the internship mission, objectives, and deliverables..."
+        generate: "Generate Agreement"
+        generating: "Generating..."
+
+  common:
+    save: "Save"
+    cancel: "Cancel"
+    delete: "Delete"
+    edit: "Edit"
+    view: "View"
+    back: "Back"
+    next: "Next"
+    previous: "Previous"
+    submit: "Submit"
+    confirm: "Confirm"
+    close: "Close"
+    loading: "Loading..."
+    error: "An error occurred"
+    success: "Success!"
+    required: "Required"
+    optional: "Optional"
+    search: "Search"
+    filter: "Filter"
+    sort: "Sort"
+    date_format: "%B %d, %Y"
+    time_ago:
+      just_now: "Just now"
+      minutes_ago: "%{count} minutes ago"
+      hours_ago: "%{count} hours ago"
+      days_ago: "%{count} days ago"
+      weeks_ago: "%{count} weeks ago"
+      months_ago: "%{count} months ago"
+      years_ago: "%{count} years ago"
+    status:
+      active: "Active"
+      inactive: "Inactive"
+      pending: "Pending"
+      approved: "Approved"
+      rejected: "Rejected"
+      draft: "Draft"
+      published: "Published"
+      closed: "Closed"
+      completed: "Completed"
+      expired: "Expired"
+    work_modes:
+      on_site: "On-site"
+      remote: "Remote"
+      hybrid: "Hybrid"
+    stage_types:
+      pfe: "PFE (Final Year Project)"
+      stage: "Summer Internship"
+      alternance: "Work-Study (Alternance)"

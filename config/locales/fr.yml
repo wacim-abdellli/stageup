@@ -38,6 +38,7 @@ fr:
     mockup_row3_name: "Mohamed (Étudiant)"
     mockup_row3_action: "A complété une convention de PFE vérifiée"
     mockup_row3_score: "+30 %{pts}"
+
   nav:
     browse_offers: "Parcourir les offres"
     dashboard: "Tableau de bord"
@@ -52,3 +53,455 @@ fr:
     company: "Entreprise"
     university: "Université"
     user: "Utilisateur"
+
+  offers:
+    index:
+      title: "Offres de Stage Disponibles"
+      subtitle: "Parcourez et postulez aux opportunités de stage vérifiées"
+      filters:
+        title: "Filtres"
+        search_placeholder: "Rechercher par titre, entreprise, compétences..."
+        stage_type: "Type de Stage"
+        work_mode: "Mode de Travail"
+        all_types: "Tous les Types"
+        all_modes: "Tous les Modes"
+        clear_filters: "Réinitialiser"
+      no_results: "Aucun stage ne correspond à vos filtres"
+      no_results_hint: "Essayez de modifier votre recherche ou vos filtres"
+      card:
+        mission_attached: "Mission Incluse"
+        cv_only: "CV Uniquement"
+        view_details: "Voir les Détails"
+        sign_in_to_unlock: "Connectez-vous pour débloquer"
+      stats:
+        total_offers: "offres disponibles"
+
+    show:
+      title: "Détails du Stage"
+      apply_now: "Postuler Maintenant"
+      sign_in_to_apply: "Connectez-vous pour Postuler"
+      mission:
+        title: "Mission de Preuve de Travail"
+        subtitle: "Complétez ce défi pour débloquer votre candidature"
+        duration: "Temps estimé : %{minutes} minutes"
+        submit_solution: "Soumettre la Solution"
+        solution_placeholder: "Repo GitHub, lien Figma, Google Drive..."
+        notes_placeholder: "Explication technique brève (optionnel)"
+        submit_btn: "Soumettre la Solution"
+        submitting: "Envoi en cours..."
+      company:
+        title: "À Propos de l'Entreprise"
+        website: "Site Web"
+        verified: "Partenaire Vérifié"
+      details:
+        stage_type: "Type de Stage"
+        spots: "Places Disponibles"
+        work_mode: "Mode de Travail"
+        deadline: "Date Limite de Candidature"
+        location: "Lieu"
+        remote: "À Distance"
+        posted: "Publié il y a %{time}"
+      apply:
+        cta_title: "Prêt à commencer votre mission ?"
+        cta_desc: "Soumettez votre solution au défi de preuve de travail et soyez évalué directement par l'équipe."
+        btn: "Commencer la Mission"
+      auth_prompt:
+        title: "Connectez-vous pour Postuler"
+        desc: "Créez un compte ou connectez-vous pour soumettre votre solution à cette mission."
+        sign_up: "Créer un Compte"
+        sign_in: "Se Connecter"
+
+    new:
+      title: "Publier un Nouveau Stage"
+      subtitle: "Créez une opportunité de stage vérifiée avec une mission de preuve de travail optionnelle"
+      form:
+        basic_info: "Informations de Base"
+        title: "Titre du Stage"
+        title_placeholder: "ex. Développeur Front-End Junior"
+        stage_type: "Type de Stage"
+        stage_type_pfe: "PFE (Projet de Fin d'Études)"
+        stage_type_stage: "Stage d'Été"
+        stage_type_alternance: "Alternance"
+        spots: "Places Disponibles"
+        work_mode: "Mode de Travail"
+        work_mode_on_site: "Présentiel"
+        work_mode_remote: "À Distance"
+        work_mode_hybrid: "Hybride"
+        location: "Lieu"
+        location_placeholder: "ex. Tunis, Tunisie"
+        deadline: "Date Limite (Optionnel)"
+        description: "Description"
+        description_placeholder: "Décrivez le rôle, les responsabilités et ce que l'apprenant apprendra..."
+        mission_section: "Mission de Preuve de Travail (Optionnel)"
+        mission_title: "Titre de la Mission"
+        mission_title_placeholder: "ex. Construire une Barre de Navigation Responsive"
+        mission_duration: "Durée Estimée (minutes)"
+        mission_description: "Description de la Mission"
+        mission_description_placeholder: "Décrivez le défi, les livrables attendus et les critères d'évaluation..."
+        submit: "Publier le Stage"
+        submitting: "Publication..."
+      preview:
+        title: "Aperçu"
+        mission_attached: "Mission Incluse"
+        cv_only: "CV Uniquement"
+
+    edit:
+      title: "Modifier le Stage"
+      subtitle: "Mettez à jour les détails de votre stage"
+      form:
+        submit: "Mettre à Jour"
+        submitting: "Mise à jour..."
+        delete: "Supprimer"
+        deleting: "Suppression..."
+        delete_confirm: "Êtes-vous sûr ? Cette action est irréversible."
+
+    form:
+      title: "Titre du Stage"
+      stage_type: "Type de Stage"
+      spots: "Places Disponibles"
+      work_mode: "Mode de Travail"
+      location: "Lieu"
+      deadline: "Date Limite"
+      description: "Description"
+      mission_title: "Titre de la Mission"
+      mission_duration: "Durée de la Mission"
+      mission_description: "Description de la Mission"
+
+  dashboard:
+    title: "Tableau de Bord"
+    welcome_back: "Bon retour, %{name}"
+    today_is: "Aujourd'hui, nous sommes le %{date}"
+    quick_stats:
+      title: "Statistiques Rapides"
+      active_applications: "Candidatures Actives"
+      completed_internships: "Stages Terminés"
+      reputation_score: "Score de Réputation"
+      pending_reviews: "Avis en Attente"
+    tabs:
+      applications: "Mes Candidatures"
+      offers: "Mes Offres"
+      agreements: "Conventions"
+      reputation: "Réputation"
+      reviews: "Avis"
+    kanban:
+      title: "Suivi des Candidatures"
+      columns:
+        applied: "Candidature Envoyée"
+        mission: "Mission"
+        review: "En Évaluation"
+        accepted: "Accepté"
+        completed: "Terminé"
+      empty: "Aucune candidature dans cette étape"
+    applications:
+      title: "Mes Candidatures"
+      empty: "Vous n'avez pas encore postulé à des stages"
+      browse_offers: "Parcourir les Offres"
+      status:
+        pending: "En Attente"
+        mission_pending: "Mission en Attente"
+        in_review: "En Évaluation"
+        accepted: "Accepté"
+        rejected: "Rejeté"
+        completed: "Terminé"
+      actions:
+        view_mission: "Voir la Mission"
+        submit_solution: "Soumettre la Solution"
+        view_agreement: "Voir la Convention"
+        withdraw: "Retirer"
+      mission_status:
+        not_started: "Non Commencé"
+        in_progress: "En Cours"
+        submitted: "Soumis"
+        graded: "Évalué"
+    offers:
+      title: "Mes Offres de Stage"
+      empty: "Vous n'avez pas encore publié de stages"
+      post_offer: "Publier une Offre"
+      status:
+        draft: "Brouillon"
+        published: "Publié"
+        closed: "Fermé"
+      actions:
+        edit: "Modifier"
+        view_applications: "Voir les Candidatures"
+        close: "Fermer"
+    agreements:
+      title: "Conventions de Stage"
+      empty: "Aucune convention pour le moment"
+      status:
+        pending_signatures: "Signatures en Attente"
+        signed: "Entièrement Signée"
+        declined: "Refusée"
+        expired: "Expirée"
+      actions:
+        view: "Voir la Convention"
+        sign: "Signer"
+    reputation:
+      title: "Registre de Réputation"
+      current_score: "Score Actuel"
+      score_label: "Score d'Engagement"
+      history_title: "Historique du Score"
+      empty: "Aucun événement de réputation pour l'instant"
+      events:
+        applied: "Candidature envoyée"
+        mission_submitted: "Solution de mission soumise"
+        mission_approved: "Mission approuvée"
+        mission_rejected: "Mission rejetée"
+        agreement_signed: "Convention signée"
+        review_received: "Avis reçu"
+        no_show: "Pénalité d'absence"
+      delta:
+        positive: "+%{points}"
+        negative: "%{points}"
+    reviews:
+      title: "Avis"
+      empty: "Aucun avis pour l'instant"
+      given: "Donnés"
+      received: "Reçus"
+      write_review: "Rédiger un Avis"
+      rating:
+        excellent: "Excellent"
+        good: "Bien"
+        average: "Moyen"
+        poor: "Faible"
+      placeholder: "Partagez votre expérience..."
+
+  pending_approval:
+    title: "Compte en Attente d'Approbation"
+    subtitle: "Votre compte coordinateur universitaire est en cours de vérification"
+    description: "Notre équipe vérifie vos identifiants. Vous recevrez un email une fois approuvé."
+    contact_support: "Des questions ? Contactez le support"
+
+  notifications:
+    title: "Notifications"
+    mark_all_read: "Tout Marquer comme Lu"
+    empty: "Aucune notification"
+    empty_desc: "Vous êtes à jour !"
+    types:
+      application_received: "Nouvelle Candidature"
+      application_accepted: "Candidature Acceptée"
+      application_rejected: "Candidature Rejetée"
+      mission_submitted: "Mission Soumise"
+      mission_graded: "Mission Évaluée"
+      agreement_ready: "Convention Prête à Signer"
+      agreement_signed: "Convention Signée"
+      review_received: "Nouvel Avis"
+      review_requested: "Avis Demandé"
+    actions:
+      view: "Voir"
+      dismiss: "Ignorer"
+
+  submissions:
+    edit:
+      title: "Soumettre la Solution"
+      subtitle: "Complétez la mission de preuve de travail pour %{offer_title}"
+      form:
+        github_link: "Lien vers la Solution"
+        github_link_placeholder: "Repo GitHub, fichier Figma, lien Google Drive..."
+        notes: "Notes Techniques (Optionnel)"
+        notes_placeholder: "Expliquez votre approche, stack technique, défis..."
+        submit: "Soumettre la Solution"
+        submitting: "Envoi en cours..."
+        cancel: "Annuler"
+      instructions:
+        title: "Consignes de Soumission"
+        item1: "Fournissez un lien fonctionnel vers votre solution (GitHub, Figma, Drive, etc.)"
+        item2: "Assurez-vous que le lien est accessible publiquement ou partagé avec l'évaluateur"
+        item3: "Incluez une brève explication technique dans le champ notes"
+        item4: "Vous pouvez mettre à jour votre soumission avant la date limite"
+
+  registrations:
+    select_role:
+      title: "Choisissez Votre Rôle"
+      subtitle: "Sélectionnez comment vous utiliserez StageUp pour commencer"
+      student:
+        title: "Étudiant"
+        desc: "Trouvez des stages vérifiés, bâtissez votre réputation, soyez embauché"
+      company:
+        title: "Entreprise"
+        desc: "Publiez des stages, évaluez les talents avec des missions de preuve de travail"
+      university:
+        title: "Coordinateur Universitaire"
+        desc: "Vérifiez les étudiants, suivez les conventions, gérez les partenariats académiques"
+      already_account: "Vous avez déjà un compte ? %{link}"
+      sign_in: "Se Connecter"
+    new_student:
+      title: "Inscription Étudiant"
+      subtitle: "Créez votre profil étudiant vérifié"
+      form:
+        first_name: "Prénom"
+        last_name: "Nom"
+        phone: "Numéro de Téléphone"
+        university: "Université / Institut"
+        university_placeholder: "Sélectionnez votre établissement"
+        major: "Filière / Spécialité"
+        graduation_year: "Année de Diplôme"
+        bio: "Bio Courte"
+        bio_placeholder: "Parlez de vous, vos compétences, vos centres d'intérêt..."
+        email: "Email Universitaire"
+        email_hint: "Utilisez votre email universitaire officiel (ex. @isetsf.rnu.tn) pour une vérification instantanée"
+        password: "Mot de Passe"
+        password_confirmation: "Confirmer le Mot de Passe"
+        submit: "Créer le Compte"
+        submitting: "Création..."
+      back: "Retour"
+    new_company:
+      title: "Inscription Entreprise"
+      subtitle: "Créez votre profil d'entreprise vérifié"
+      form:
+        name: "Nom de l'Entreprise"
+        name_placeholder: "Votre Startup"
+        website: "Site Web (Optionnel)"
+        description: "Description de l'Entreprise"
+        description_placeholder: "Que fait votre entreprise ? Stack technique, mission, culture..."
+        email: "Email Professionnel"
+        password: "Mot de Passe"
+        password_confirmation: "Confirmer le Mot de Passe"
+        submit: "Créer le Compte"
+        submitting: "Création..."
+      back: "Retour"
+    new_university:
+      title: "Inscription Coordinateur Universitaire"
+      subtitle: "Inscrivez-vous comme coordinateur académique"
+      form:
+        university: "Université"
+        university_placeholder: "Sélectionnez votre établissement"
+        admin_name: "Nom Complet du Coordinateur"
+        admin_name_placeholder: "Pr. Ahmed Mansour"
+        department: "Département / Faculté"
+        email: "Email Universitaire Officiel"
+        email_hint: "Doit être une adresse officielle @université.tn ou @institut.rnu.tn"
+        password: "Mot de Passe"
+        password_confirmation: "Confirmer le Mot de Passe"
+        submit: "Enregistrer le Coordinateur"
+        submitting: "Enregistrement..."
+      back: "Retour"
+
+  sessions:
+    new:
+      title: "Connexion"
+      subtitle: "Accédez à votre tableau de bord"
+      email: "Email"
+      password: "Mot de Passe"
+      remember_me: "Se souvenir de moi"
+      forgot_password: "Mot de passe oublié ?"
+      submit: "Se Connecter"
+      submitting: "Connexion..."
+      no_account: "Pas de compte ? %{link}"
+      sign_up: "S'inscrire"
+      role_select: "Se connecter en tant que %{role}"
+
+  admin:
+    dashboard:
+      title: "Tableau de Bord Admin"
+      subtitle: "Supervision et modération de la plateforme"
+      stats:
+        total_users: "Utilisateurs Totaux"
+        total_offers: "Offres Totales"
+        pending_coordinators: "Coordinateurs en Attente"
+        pending_companies: "Entreprises en Attente"
+      sections:
+        coordinators: "Coordinateurs Universitaires"
+        companies: "Entreprises"
+      coordinators:
+        title: "Coordinateurs en Attente"
+        empty: "Aucun coordinateur en attente"
+        approve: "Approuver"
+        reject: "Rejeter"
+        reject_confirm: "Rejeter ce coordinateur ? Son compte sera supprimé."
+      companies:
+        title: "Entreprises en Attente"
+        empty: "Aucune entreprise en attente"
+        verify: "Vérifier"
+        reject: "Rejeter"
+        reject_confirm: "Rejeter cette entreprise ? Son compte sera supprimé."
+
+  internship_agreements:
+    show:
+      title: "Convention de Stage"
+      subtitle: "Convention de stage tripartite"
+      status:
+        pending: "Signatures en Attente"
+        signed: "Entièrement Signée"
+        declined: "Refusée"
+      parties:
+        student: "Étudiant"
+        company: "Superviseur Entreprise"
+        university: "Coordinateur Universitaire"
+      actions:
+        sign: "Signer la Convention"
+        download: "Télécharger PDF"
+        decline: "Refuser"
+        decline_reason: "Motif du refus"
+        decline_confirm: "Êtes-vous sûr ? Cette action est irréversible."
+      details:
+        start_date: "Date de Début"
+        end_date: "Date de Fin"
+        work_mode: "Mode de Travail"
+        location: "Lieu"
+        description: "Description de la Mission"
+      signatures:
+        signed_by: "Signé par %{name} le %{date}"
+        pending: "Signature en attente"
+        your_turn: "C'est à vous de signer"
+    new:
+      title: "Générer la Convention de Stage"
+      subtitle: "Créez la convention officielle tripartite"
+      form:
+        start_date: "Date de Début"
+        end_date: "Date de Fin"
+        work_mode: "Mode de Travail"
+        location: "Lieu"
+        description: "Description de la Mission"
+        description_placeholder: "Décrivez la mission, les objectifs et les livrables..."
+        generate: "Générer la Convention"
+        generating: "Génération..."
+
+  common:
+    save: "Enregistrer"
+    cancel: "Annuler"
+    delete: "Supprimer"
+    edit: "Modifier"
+    view: "Voir"
+    back: "Retour"
+    next: "Suivant"
+    previous: "Précédent"
+    submit: "Soumettre"
+    confirm: "Confirmer"
+    close: "Fermer"
+    loading: "Chargement..."
+    error: "Une erreur s'est produite"
+    success: "Succès !"
+    required: "Requis"
+    optional: "Optionnel"
+    search: "Rechercher"
+    filter: "Filtrer"
+    sort: "Trier"
+    date_format: "%d/%m/%Y"
+    time_ago:
+      just_now: "À l'instant"
+      minutes_ago: "Il y a %{count} minutes"
+      hours_ago: "Il y a %{count} heures"
+      days_ago: "Il y a %{count} jours"
+      weeks_ago: "Il y a %{count} semaines"
+      months_ago: "Il y a %{count} mois"
+      years_ago: "Il y a %{count} ans"
+    status:
+      active: "Actif"
+      inactive: "Inactif"
+      pending: "En Attente"
+      approved: "Approuvé"
+      rejected: "Rejeté"
+      draft: "Brouillon"
+      published: "Publié"
+      closed: "Fermé"
+      completed: "Terminé"
+      expired: "Expiré"
+    work_modes:
+      on_site: "Présentiel"
+      remote: "À Distance"
+      hybrid: "Hybride"
+    stage_types:
+      pfe: "PFE (Projet de Fin d'Études)"
+      stage: "Stage d'Été"
+      alternance: "Alternance"

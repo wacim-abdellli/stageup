@@ -1,5 +1,12 @@
 <div class="lang-dropdown-wrapper">
-  <button type="button" class="lang-icon-btn" id="lang-btn" aria-label="Select Language" aria-expanded="false" title="Language: <%= I18n.locale.to_s.upcase %>">
+  <button type="button"
+          class="lang-icon-btn"
+          id="lang-btn"
+          aria-label="Select language"
+          aria-haspopup="true"
+          aria-controls="lang-menu"
+          aria-expanded="false"
+          title="Language: <%= I18n.locale.to_s.upcase %>">
     <svg class="lang-globe-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/>
       <line x1="2" x2="22" y1="12" y2="12"/>
@@ -9,7 +16,7 @@
     <svg class="lang-chevron-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
   </button>
 
-  <div class="lang-floating-menu" id="lang-menu" role="menu">
+  <div class="lang-floating-menu" id="lang-menu" role="menu" aria-label="Language selector">
     <% [
       [:fr, "Français", "FR"],
       [:en, "English", "EN"],
