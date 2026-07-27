@@ -1,4 +1,4 @@
-<% content_for :title, "Browse Internships – StageUp" %>
+<% content_for :title, t('offers.index.title', default: "Available Internships – StageUp") %>
 
 <div class="dir-page">
 
@@ -9,13 +9,13 @@
         <svg class="icon-indigo" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         <span>VERIFIED OPPORTUNITIES</span>
       </div>
-      <h1 class="dir-heading">Internship Directory</h1>
-      <p class="dir-sub">Tunisia's first verified internship platform &mdash; <%= pluralize(@offers.size, 'active listing') %></p>
+      <h1 class="dir-heading"><%= t('offers.index.title') %></h1>
+      <p class="dir-sub"><%= t('offers.index.subtitle') %> &mdash; <%= pluralize(@offers.size, t('common.offer', default: 'active listing')) %></p>
     </div>
     <% unless current_user %>
       <%= link_to new_user_session_path, class: "dir-signin-cta" do %>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
-        <span>Sign In / Register</span>
+        <span><%= t('nav.sign_in') %></span>
       <% end %>
     <% end %>
   </div>
@@ -31,11 +31,11 @@
 
       <%= form_tag offers_path, method: :get, id: "filters-form" do %>
         <div class="sidebar-field">
-          <label class="filter-label">Search</label>
+          <label class="filter-label"><%= t('offers.index.filters.search_placeholder') %></label>
           <div class="pos-relative">
             <svg class="search-icon-abs" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             <%= text_field_tag :query, params[:query],
-                placeholder: "Title, company…",
+                placeholder: t('offers.index.filters.search_placeholder'),
                 class: "filter-input",
                 autocomplete: "off" %>
           </div>
@@ -44,15 +44,15 @@
         <div class="sidebar-divider"></div>
 
         <div class="sidebar-field">
-          <label class="filter-label">Stage Type</label>
+          <label class="filter-label"><%= t('offers.index.filters.stage_type') %></label>
           <div class="select-wrap">
             <%= select_tag :stage_type,
                 options_for_select([
-                  ["All types", ""],
+                  [t('offers.index.filters.all_types'), ""],
                   ["PFE", "PFE"],
                   ["PFA", "PFA"],
-                  ["Initiation / Observation", "initiation"],
-                  ["Free / Skill-Building", "free"]
+                  [t('common.stage_types.initiation'), "initiation"],
+                  [t('common.stage_types.free'), "free"]
                 ], params[:stage_type]),
                 onchange: "this.form.submit();",
                 class: "filter-select" %>
@@ -62,14 +62,14 @@
         <div class="sidebar-divider"></div>
 
         <div class="sidebar-field">
-          <label class="filter-label">Work Mode</label>
+          <label class="filter-label"><%= t('offers.index.filters.work_mode') %></label>
           <div class="select-wrap">
             <%= select_tag :work_mode,
                 options_for_select([
-                  ["All modes", ""],
-                  ["Remote", "remote"],
-                  ["On-site", "onsite"],
-                  ["Hybrid", "hybrid"]
+                  [t('offers.index.filters.all_modes'), ""],
+                  [t('common.work_modes.remote'), "remote"],
+                  [t('common.work_modes.on_site'), "onsite"],
+                  [t('common.work_modes.hybrid'), "hybrid"]
                 ], params[:work_mode]),
                 onchange: "this.form.submit();",
                 class: "filter-select" %>
@@ -77,9 +77,9 @@
         </div>
 
         <div class="sidebar-actions">
-          <%= submit_tag "Apply Search", class: "btn btn-accent fs-13 btn-filter-apply" %>
+          <%= submit_tag t('common.search'), class: "btn btn-accent fs-13 btn-filter-apply" %>
           <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
-            <%= link_to "Reset Filters", offers_path, class: "btn-filter-reset" %>
+            <%= link_to t('offers.index.filters.clear_filters'), offers_path, class: "btn-filter-reset" %>
           <% end %>
         </div>
       <% end %>
@@ -89,15 +89,15 @@
     <div class="dir-main">
 
       <div class="dir-list-header">
-        <h2 class="dir-list-title">Available Internships</h2>
+        <h2 class="dir-list-title"><%= t('offers.index.title') %></h2>
         <div class="dir-list-meta">
           <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
             <span class="filter-active-pill">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-              <span>Filters active</span>
+              <span><%= t('offers.index.filters.filters_active', default: 'Filters active') %></span>
             </span>
           <% end %>
-          <span class="dir-count-badge"><%= @offers.size %> found</span>
+          <span class="dir-count-badge"><%= t('offers.index.stats.total_offers', count: @offers.size) %></span>
         </div>
       </div>
 
@@ -126,12 +126,12 @@
                 <% if offer.mission.present? %>
                   <span class="offer-card-badge-proof">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
-                    <span>Mission</span>
+                    <span><%= t('offers.index.card.mission_attached') %></span>
                   </span>
                 <% else %>
                   <span class="offer-card-badge-cv">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-                    <span>CV Only</span>
+                    <span><%= t('offers.index.card.cv_only') %></span>
                   </span>
                 <% end %>
                 <% if current_user&.profileable_type == "StudentProfile" %>
@@ -170,14 +170,14 @@
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                   <span>
                     <% if offer.location.downcase == "remote" %>
-                      Remote
+                      <%= t('common.work_modes.remote') %>
                     <% else %>
-                      <%= offer.location %> &middot; <%= offer.work_mode.capitalize %>
+                      <%= offer.location %> &middot; <%= t("common.work_modes.#{offer.work_mode}", default: offer.work_mode.capitalize) %>
                     <% end %>
                   </span>
                 </span>
                 <span class="offer-card-action">
-                  <span>View</span>
+                  <span><%= t('offers.index.card.view_details') %></span>
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </span>
               </div>
@@ -191,10 +191,10 @@
           <div class="dir-empty-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="8" x2="14" y1="8" y2="14"/><line x1="14" x2="8" y1="8" y2="14"/></svg>
           </div>
-          <h3 class="dir-empty-title">No offers match your criteria</h3>
-          <p class="dir-empty-sub">Try broadening your search query or clearing active filters.</p>
+          <h3 class="dir-empty-title"><%= t('offers.index.no_results') %></h3>
+          <p class="dir-empty-sub"><%= t('offers.index.no_results_hint') %></p>
           <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
-            <%= link_to "Clear All Filters", offers_path, class: "btn btn-secondary" %>
+            <%= link_to t('common.clear_filters'), offers_path, class: "btn btn-secondary" %>
           <% end %>
         </div>
       <% end %>
@@ -206,18 +206,21 @@
 <%= javascript_tag nonce: true do %>
   (function() {
     var inp = document.querySelector('#filters-form input[name="query"]');
-    var grid = document.querySelector('.offers-grid');
     if (!inp) return;
-    var t;
+
     inp.addEventListener('input', function() {
-      clearTimeout(t);
-      if (grid) {
-        grid.style.opacity = '0.5';
-        grid.style.pointerEvents = 'none';
-      }
-      t = setTimeout(function() {
-        document.getElementById('filters-form').submit();
-      }, 550);
+      var q = inp.value.trim().toLowerCase();
+      var cards = document.querySelectorAll('.offers-grid .offer-card');
+      if (!cards.length) return;
+
+      cards.forEach(function(card) {
+        if (!q) {
+          card.style.display = '';
+        } else {
+          var text = card.textContent.toLowerCase();
+          card.style.display = text.includes(q) ? '' : 'none';
+        }
+      });
     });
   })();
 <% end %>

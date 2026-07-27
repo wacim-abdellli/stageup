@@ -3,7 +3,7 @@
   <nav class="offer-breadcrumb">
     <%= link_to offers_path, class: "offer-back-link" do %>
       <i data-lucide="arrow-left"></i>
-      Back to Offers
+      <%= t('common.back_to', default: 'Back to %{page}', page: t('offers.index.title')) %>
     <% end %>
   </nav>
 

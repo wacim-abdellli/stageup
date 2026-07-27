@@ -38,6 +38,7 @@ ar:
     mockup_row3_name: "محمد (طالب)"
     mockup_row3_action: "أكمل اتفاقية PFE موثقة"
     mockup_row3_score: "+30 %{pts}"
+
   nav:
     browse_offers: "تصفح العروض"
     dashboard: "لوحة التحكم"
@@ -52,3 +53,458 @@ ar:
     company: "شركة"
     university: "جامعة"
     user: "مستخدم"
+
+  offers:
+    index:
+      title: "التربصات المتاحة"
+      subtitle: "تصفح وقدم على فرص التربصات الموثقة"
+      filters:
+        title: "الفلاتر"
+        search_placeholder: "ابحث بالعنوان، الشركة، المهارات..."
+        stage_type: "نوع التربص"
+        work_mode: "وضع العمل"
+        all_types: "كل الأنواع"
+        all_modes: "كل الأوضاع"
+        clear_filters: "إعادة تعيين الفلاتر"
+      no_results: "لا توجد تربصات تطابق فلاترك"
+      no_results_hint: "حاول تعديل بحثك أو فلاترك"
+      card:
+        mission_attached: "مهمة مرفقة"
+        cv_only: "سيرة ذاتية فقط"
+        view_details: "عرض التفاصيل"
+        sign_in_to_unlock: "سجل الدخول للفتح"
+      stats:
+        total_offers: "عروض متاحة"
+
+    show:
+      title: "تفاصيل التربص"
+      apply_now: "قدم الآن"
+      sign_in_to_apply: "سجل الدخول للتقديم"
+      mission:
+        title: "مهمة إثبات العمل"
+        subtitle: "أكمل هذا التحدي لفتح طلبك"
+        duration: "الوقت المقدر: %{minutes} دقيقة"
+        submit_solution: "تقديم الحل"
+        solution_placeholder: "مستودع GitHub، رابط Figma، Google Drive..."
+        notes_placeholder: "تفسير تقني مختصر (اختياري)"
+        submit_btn: "تقديم الحل"
+        submitting: "جاري الإرسال..."
+      company:
+        title: "حول الشركة"
+        website: "الموقع الإلكتروني"
+        verified: "شريك موثق"
+      details:
+        stage_type: "نوع التربص"
+        spots: "الأماكن المتاحة"
+        work_mode: "وضع العمل"
+        deadline: "الموعد النهائي للتقديم"
+        location: "الموقع"
+        remote: "عن بعد"
+        posted: "نُشر منذ %{time}"
+      apply:
+        cta_title: "مستعد لبدء مهمتك؟"
+        cta_desc: "قدم حلّك لتحدي إثبات العمل واحصل على مراجعة مباشرة من الفريق."
+        btn: "ابدأ المهمة"
+      auth_prompt:
+        title: "سجل الدخول للتقديم"
+        desc: "أنشئ حساباً أو سجل الدخول لتقديم حلك لهذه المهمة."
+        sign_up: "إنشاء حساب"
+        sign_in: "تسجيل الدخول"
+
+    new:
+      title: "نشر تربص جديد"
+      subtitle: "أنشئ فرصة تربص موثقة مع مهمة إثبات عمل اختيارية"
+      form:
+        basic_info: "معلومات أساسية"
+        title: "عنوان التربص"
+        title_placeholder: "مثلاً: مطور ويب متدرب"
+        stage_type: "نوع التربص"
+        stage_type_pfe: "مشروع تخرج (PFE)"
+        stage_type_stage: "تربص صيفي"
+        stage_type_alternance: "التعليم بالتناوب"
+        spots: "الأماكن المتاحة"
+        work_mode: "وضع العمل"
+        work_mode_on_site: "حضوري"
+        work_mode_remote: "عن بعد"
+        work_mode_hybrid: "هجين"
+        location: "الموقع"
+        location_placeholder: "مثلاً: تونس، تونس"
+        deadline: "الموعد النهائي للتقديم (اختياري)"
+        description: "الوصف"
+        description_placeholder: "صف الدور والمسؤوليات وما سيتعلمه المتدرب..."
+        mission_section: "مهمة إثبات العمل (اختياري)"
+        mission_title: "عنوان المهمة"
+        mission_title_placeholder: "مثلاً: بناء شريط تنقل متجاوب"
+        mission_duration: "المدة المقدرة (بالدقائق)"
+        mission_description: "وصف المهمة"
+        mission_description_placeholder: "صف التحدي والمخرجات المتوقعة ومعايير التقييم..."
+        submit: "نشر التربص"
+        submitting: "جاري النشر..."
+      preview:
+        title: "معاينة"
+        mission_attached: "مهمة مرفقة"
+        cv_only: "سيرة ذاتية فقط"
+
+    edit:
+      title: "تعديل التربص"
+      subtitle: "حدّث تفاصيل التربص الخاص بك"
+      form:
+        submit: "تحديث التربص"
+        submitting: "جاري التحديث..."
+        delete: "حذف"
+        deleting: "جاري الحذف..."
+        delete_confirm: "هل أنت متأكد؟ هذا الإجراء لا يمكن التراجع عنه."
+
+    form:
+      title: "عنوان التربص"
+      stage_type: "نوع التربص"
+      spots: "الأماكن المتاحة"
+      work_mode: "وضع العمل"
+      location: "الموقع"
+      deadline: "الموعد النهائي"
+      description: "الوصف"
+      mission_title: "عنوان المهمة"
+      mission_duration: "مدة المهمة"
+      mission_description: "وصف المهمة"
+
+  dashboard:
+    title: "لوحة التحكم"
+    welcome_back: "مرحباً بعودتك، %{name}"
+    today_is: "اليوم هو %{date}"
+    quick_stats:
+      title: "إحصائيات سريعة"
+      active_applications: "الطلبات النشطة"
+      completed_internships: "التربصات المكتملة"
+      reputation_score: "نقاط السمعة"
+      pending_reviews: "التقييمات المعلقة"
+    tabs:
+      applications: "طلباتي"
+      offers: "عروضي"
+      agreements: "الاتفاقيات"
+      reputation: "السمعة"
+      reviews: "التقييمات"
+    kanban:
+      title: "متتبع الطلبات"
+      columns:
+        applied: "تم التقديم"
+        mission: "مهمة"
+        review: "قيد المراجعة"
+        accepted: "مقبول"
+        completed: "مكتمل"
+      empty: "لا توجد طلبات في هذه المرحلة"
+    applications:
+      title: "طلباتي"
+      empty: "لم تتقدم لأي تربص بعد"
+      browse_offers: "تصفح العروض"
+      status:
+        pending: "معلق"
+        mission_pending: "مهمة معلقة"
+        in_review: "قيد المراجعة"
+        accepted: "مقبول"
+        rejected: "مرفوض"
+        completed: "مكتمل"
+      actions:
+        view_mission: "عرض المهمة"
+        submit_solution: "تقديم الحل"
+        view_agreement: "عرض الاتفاقية"
+        withdraw: "سحب"
+      mission_status:
+        not_started: "لم تبدأ"
+        in_progress: "قيد التنفيذ"
+        submitted: "مقدم"
+        graded: "مقيم"
+    offers:
+      title: "عروضي للتربصات"
+      empty: "لم تنشر أي تربصات بعد"
+      post_offer: "نشر عرض جديد"
+      status:
+        draft: "مسودة"
+        published: "منشور"
+        closed: "مغلق"
+      actions:
+        edit: "تعديل"
+        view_applications: "عرض الطلبات"
+        close: "إغلاق"
+    agreements:
+      title: "اتفاقيات التربص"
+      empty: "لا توجد اتفاقيات بعد"
+      status:
+        pending_signatures: "بانتظار التوقيعات"
+        signed: "موقعة بالكامل"
+        declined: "مرفوضة"
+        expired: "منتهية الصلاحية"
+      actions:
+        view: "عرض الاتفاقية"
+        sign: "توقيع"
+    reputation:
+      title: "سجل السمعة"
+      current_score: "النقاط الحالية"
+      score_label: "نقاط الالتزام"
+      history_title: "تاريخ النقاط"
+      empty: "لا توجد أحداث سمعة بعد"
+      events:
+        applied: "تقدم لتربص"
+        mission_submitted: "قدم حل مهمة"
+        mission_approved: "تمت الموافقة على المهمة"
+        mission_rejected: "تم رفض المهمة"
+        agreement_signed: "وقّع الاتفاقية"
+        review_received: "تلقى تقييماً"
+        no_show: "عقوبة تغيب"
+      delta:
+        positive: "+%{points}"
+        negative: "%{points}"
+    reviews:
+      title: "التقييمات"
+      empty: "لا توجد تقييمات بعد"
+      given: "مقدمة"
+      received: "مستلمة"
+      write_review: "كتابة تقييم"
+      rating:
+        excellent: "ممتاز"
+        good: "جيد"
+        average: "مقبول"
+        poor: "ضعيف"
+      placeholder: "شارك تجربتك..."
+
+  pending_approval:
+    title: "الحساب قيد الموافقة"
+    subtitle: "حسابك كمنسق جامعي قيد المراجعة"
+    description: "فريقنا يتحقق من بياناتك. ستتلقى بريداً إلكترونياً عند الموافقة."
+    contact_support: "لديك أسئلة؟ تواصل مع الدعم"
+
+  notifications:
+    title: "الإشعارات"
+    mark_all_read: "تحديد الكل كمقروء"
+    empty: "لا توجد إشعارات"
+    empty_desc: "أنت على اطلاع كامل!"
+    types:
+      application_received: "طلب جديد"
+      application_accepted: "تم قبول الطلب"
+      application_rejected: "تم رفض الطلب"
+      mission_submitted: "تم تقديم المهمة"
+      mission_graded: "تم تقييم المهمة"
+      agreement_ready: "الاتفاقية جاهزة للتوقيع"
+      agreement_signed: "تم توقيع الاتفاقية"
+      review_received: "تقييم جديد"
+      review_requested: "طُلب التقييم"
+    actions:
+      view: "عرض"
+      dismiss: "تجاهل"
+
+  submissions:
+    edit:
+      title: "تقديم الحل"
+      subtitle: "أكمل مهمة إثبات العمل لـ %{offer_title}"
+      form:
+        github_link: "رابط الحل"
+        github_link_placeholder: "مستودع GitHub، ملف Figma، رابط Google Drive..."
+        notes: "ملاحظات تقنية (اختياري)"
+        notes_placeholder: "اشرح منهجك، التقنيات المستخدمة، التحديات..."
+        submit: "تقديم الحل"
+        submitting: "جاري الإرسال..."
+        cancel: "إلغاء"
+      instructions:
+        title: "تعليمات التقديم"
+        item1: "قدم رابطاً يعمل لحلك (GitHub، Figma، Drive، إلخ)"
+        item2: "تأكد من أن الرابط متاح علناً أو مشارك مع المقيّم"
+        item3: "أضف شرحاً تقنياً مختصراً في حقل الملاحظات"
+        item4: "يمكنك تحديث تقديمك قبل الموعد النهائي"
+
+  registrations:
+    select_role:
+      title: "اختر دورك"
+      subtitle: "حدد كيف ستستخدم StageUp للبدء"
+      student:
+        title: "طالب"
+        desc: "ابحث عن تربصات موثقة، ابنِ سمعتك، احصل على وظيفة"
+      company:
+        title: "شركة"
+        desc: "انشر تربصات، قيم المواهب بمهام إثبات العمل"
+      university:
+        title: "منسق جامعي"
+        desc: "تحقق من الطلاب، تتبع الاتفاقيات، إدارة الشراكات الأكاديمية"
+      already_account: "لديك حساب بالفعل؟ %{link}"
+      sign_in: "تسجيل الدخول"
+    new_student:
+      title: "تسجيل طالب"
+      subtitle: "أنشئ ملفك الشخصي كطالب موثق"
+      form:
+        first_name: "الاسم الأول"
+        last_name: "اللقب"
+        phone: "رقم الهاتف"
+        university: "الجامعة / المعهد"
+        university_placeholder: "اختر مؤسستك"
+        major: "التخصص / المجال"
+        graduation_year: "سنة التخرج"
+        bio: "نبذة قصيرة"
+        bio_placeholder: "حدثنا عن نفسك، مهاراتك، اهتماماتك..."
+        email: "البريد الجامعي"
+        email_hint: "استخدم بريدك الجامعي الرسمي (مثل @isetsf.rnu.tn) للتحقق الفوري"
+        password: "كلمة المرور"
+        password_confirmation: "تأكيد كلمة المرور"
+        submit: "إنشاء الحساب"
+        submitting: "جاري الإنشاء..."
+      back: "رجوع"
+    new_company:
+      title: "تسجيل شركة"
+      subtitle: "أنشئ ملف شركتك الموثق"
+      form:
+        name: "اسم الشركة"
+        name_placeholder: "شركتك الناشئة"
+        website: "الموقع الإلكتروني (اختياري)"
+        description: "وصف الشركة"
+        description_placeholder: "ماذا تفعل شركتك؟ التقنيات، المهمة، الثقافة..."
+        email: "بريد العمل"
+        password: "كلمة المرور"
+        password_confirmation: "تأكيد كلمة المرور"
+        submit: "إنشاء الحساب"
+        submitting: "جاري الإنشاء..."
+      back: "رجوع"
+    new_university:
+      title: "تسجيل منسق جامعي"
+      subtitle: "سجل كمنسق أكاديمي"
+      form:
+        university: "الجامعة"
+        university_placeholder: "اختر مؤسستك"
+        admin_name: "اسم المنسق الكامل"
+        admin_name_placeholder: "الأستاذ أحمد منصور"
+        department: "القسم / الكلية"
+        email: "البريد الجامعي الرسمي"
+        email_hint: "يجب أن يكون عنوان @university.tn أو @institute.rnu.tn رسمياً"
+        password: "كلمة المرور"
+        password_confirmation: "تأكيد كلمة المرور"
+        submit: "تسجيل المنسق"
+        submitting: "جاري التسجيل..."
+      back: "رجوع"
+
+  sessions:
+    new:
+      title: "تسجيل الدخول"
+      subtitle: "ادخل إلى لوحة التحكم"
+      email: "البريد الإلكتروني"
+      password: "كلمة المرور"
+      remember_me: "تذكرني"
+      forgot_password: "نسيت كلمة المرور؟"
+      submit: "دخول"
+      submitting: "جاري الدخول..."
+      no_account: "لا تملك حساباً؟ %{link}"
+      sign_up: "إنشاء حساب"
+      role_select: "دخول كـ %{role}"
+
+  admin:
+    dashboard:
+      title: "لوحة تحكم المشرف"
+      subtitle: "إشراف ومراجعة المنصة"
+      stats:
+        total_users: "إجمالي المستخدمين"
+        total_offers: "إجمالي العروض"
+        pending_coordinators: "المنسقون المعلّقون"
+        pending_companies: "الشركات المعلّقة"
+      sections:
+        coordinators: "منسقو الجامعات"
+        companies: "الشركات"
+      coordinators:
+        title: "المنسقون المعلّقون"
+        empty: "لا يوجد منسقون معلّقون"
+        approve: "موافقة"
+        reject: "رفض"
+        reject_confirm: "رفض هذا المنسق؟ سيتم حذف حسابه."
+      companies:
+        title: "الشركات المعلّقة"
+        empty: "لا توجد شركات معلّقة"
+        verify: "تحقق"
+        reject: "رفض"
+        reject_confirm: "رفض هذه الشركة؟ سيتم حذف حسابها."
+
+  internship_agreements:
+    show:
+      title: "اتفاقية التربص"
+      subtitle: "اتفاقية تربص ثلاثية الأطراف"
+      status:
+        pending: "بانتظار التوقيعات"
+        signed: "موقعة بالكامل"
+        declined: "مرفوضة"
+      parties:
+        student: "الطالب"
+        company: "مشرف الشركة"
+        university: "المنسق الجامعي"
+      actions:
+        sign: "توقيع الاتفاقية"
+        download: "تحميل PDF"
+        decline: "رفض"
+        decline_reason: "سبب الرفض"
+        decline_confirm: "هل أنت متأكد؟ لا يمكن التراجع."
+      details:
+        start_date: "تاريخ البداية"
+        end_date: "تاريخ النهاية"
+        work_mode: "وضع العمل"
+        location: "الموقع"
+        description: "وصف المهمة"
+      signatures:
+        signed_by: "موقعة من %{name} في %{date}"
+        pending: "بانتظار التوقيع"
+        your_turn: "دورك للتوقيع"
+    new:
+      title: "إنشاء اتفاقية التربص"
+      subtitle: "أنشئ الاتفاقية الرسمية ثلاثية الأطراف"
+      form:
+        start_date: "تاريخ البداية"
+        end_date: "تاريخ النهاية"
+        work_mode: "وضع العمل"
+        location: "الموقع"
+        description: "وصف المهمة"
+        description_placeholder: "صف مهمة التربص، الأهداف، والمخرجات..."
+        generate: "إنشاء الاتفاقية"
+        generating: "جاري الإنشاء..."
+
+  common:
+    save: "حفظ"
+    cancel: "إلغاء"
+    delete: "حذف"
+    edit: "تعديل"
+    view: "عرض"
+    back: "رجوع"
+    next: "التالي"
+    previous: "السابق"
+    submit: "إرسال"
+    confirm: "تأكيد"
+    close: "إغلاق"
+    loading: "جاري التحميل..."
+    error: "حدث خطأ"
+    success: "نجاح!"
+    required: "مطلوب"
+    optional: "اختياري"
+    search: "بحث"
+    filter: "تصفية"
+    sort: "ترتيب"
+    date_format: "%d/%m/%Y"
+    clear_filters: "إعادة تعيين الفلاتر"
+    time_ago:
+      just_now: "الآن"
+      minutes_ago: "منذ %{count} دقيقة"
+      hours_ago: "منذ %{count} ساعة"
+      days_ago: "منذ %{count} يوم"
+      weeks_ago: "منذ %{count} أسبوع"
+      months_ago: "منذ %{count} شهر"
+      years_ago: "منذ %{count} سنة"
+    status:
+      active: "نشط"
+      inactive: "غير نشط"
+      pending: "معلق"
+      approved: "موافق عليه"
+      rejected: "مرفوض"
+      draft: "مسودة"
+      published: "منشور"
+      closed: "مغلق"
+      completed: "مكتمل"
+      expired: "منتهي"
+    work_modes:
+      on_site: "حضوري"
+      remote: "عن بعد"
+      hybrid: "هجين"
+    stage_types:
+      pfe: "مشروع تخرج (PFE)"
+      stage: "تربص صيفي"
+      alternance: "التعليم بالتناوب"
+      initiation: "إدخال / مراقبة"
+      free: "حر / تطوير المهارات"

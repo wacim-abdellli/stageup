@@ -107,21 +107,21 @@ en:
         btn: "Start Mission"
       auth_prompt:
         title: "Sign In to Apply"
-        desc: "Create an account or sign in to submit your solution for this mission."
+        desc: "Create an account or sign in to submit your solution to this mission."
         sign_up: "Create Account"
         sign_in: "Sign In"
 
     new:
-      title: "Post a New Internship"
+      title: "Post New Internship"
       subtitle: "Create a verified internship opportunity with an optional proof-of-work mission"
       form:
         basic_info: "Basic Information"
         title: "Internship Title"
-        title_placeholder: "e.g. Front-End Web Developer Intern"
+        title_placeholder: "e.g. Front-End Developer Intern"
         stage_type: "Stage Type"
         stage_type_pfe: "PFE (Final Year Project)"
         stage_type_stage: "Summer Internship"
-        stage_type_alternance: "Work-Study (Alternance)"
+        stage_type_alternance: "Apprenticeship"
         spots: "Available Spots"
         work_mode: "Work Mode"
         work_mode_on_site: "On-site"
@@ -129,7 +129,7 @@ en:
         work_mode_hybrid: "Hybrid"
         location: "Location"
         location_placeholder: "e.g. Tunis, Tunisia"
-        deadline: "Application Deadline (optional)"
+        deadline: "Application Deadline (Optional)"
         description: "Description"
         description_placeholder: "Describe the role, responsibilities, and what the intern will learn..."
         mission_section: "Proof-of-Work Mission (Optional)"
@@ -142,7 +142,7 @@ en:
         submitting: "Posting..."
       preview:
         title: "Preview"
-        mission_attached: "Mission Attached"
+        mission_attached: "Mission Included"
         cv_only: "CV Only"
 
     edit:
@@ -161,7 +161,7 @@ en:
       spots: "Available Spots"
       work_mode: "Work Mode"
       location: "Location"
-      deadline: "Application Deadline"
+      deadline: "Deadline"
       description: "Description"
       mission_title: "Mission Title"
       mission_duration: "Mission Duration"
@@ -216,7 +216,7 @@ en:
     offers:
       title: "My Internship Offers"
       empty: "You haven't posted any internships yet"
-      post_offer: "Post New Offer"
+      post_offer: "Post an Offer"
       status:
         draft: "Draft"
         published: "Published"
@@ -258,7 +258,7 @@ en:
       empty: "No reviews yet"
       given: "Given"
       received: "Received"
-      write_review: "Write Review"
+      write_review: "Write a Review"
       rating:
         excellent: "Excellent"
         good: "Good"
@@ -274,8 +274,8 @@ en:
 
   notifications:
     title: "Notifications"
-    mark_all_read: "Mark All Read"
-    empty: "No notifications yet"
+    mark_all_read: "Mark All as Read"
+    empty: "No notifications"
     empty_desc: "You're all caught up!"
     types:
       application_received: "New Application"
@@ -306,7 +306,7 @@ en:
       instructions:
         title: "Submission Guidelines"
         item1: "Provide a working link to your solution (GitHub, Figma, Drive, etc.)"
-        item2: "Ensure the link is publicly accessible or shared with the reviewer"
+        item2: "Ensure the link is publicly accessible or shared with the evaluator"
         item3: "Include a brief technical explanation in the notes field"
         item4: "You can update your submission before the deadline"
 
@@ -316,7 +316,7 @@ en:
       subtitle: "Select how you'll use StageUp to get started"
       student:
         title: "Student"
-        desc: "Find verified internships, build your reputation, get hired"
+        desc: "Find verified internships, build reputation, get hired"
       company:
         title: "Company"
         desc: "Post internships, evaluate talent with proof-of-work missions"
@@ -334,17 +334,17 @@ en:
         phone: "Phone Number"
         university: "University / Institute"
         university_placeholder: "Select your institution"
-        major: "Major / Field of Study"
+        major: "Major / Specialization"
         graduation_year: "Graduation Year"
         bio: "Short Bio"
-        bio_placeholder: "Tell us about yourself, your skills, and interests..."
+        bio_placeholder: "Tell us about yourself, your skills, interests..."
         email: "University Email"
         email_hint: "Use your official university email (e.g. @isetsf.rnu.tn) for instant verification"
         password: "Password"
         password_confirmation: "Confirm Password"
         submit: "Create Account"
         submitting: "Creating..."
-      back: "Go Back"
+      back: "Back"
     new_company:
       title: "Company Registration"
       subtitle: "Create your verified company profile"
@@ -359,7 +359,7 @@ en:
         password_confirmation: "Confirm Password"
         submit: "Create Account"
         submitting: "Creating..."
-      back: "Go Back"
+      back: "Back"
     new_university:
       title: "University Coordinator Registration"
       subtitle: "Register as an academic coordinator"
@@ -375,7 +375,7 @@ en:
         password_confirmation: "Confirm Password"
         submit: "Register Coordinator"
         submitting: "Registering..."
-      back: "Go Back"
+      back: "Back"
 
   sessions:
     new:
@@ -405,21 +405,21 @@ en:
         companies: "Companies"
       coordinators:
         title: "Pending Coordinators"
-        empty: "No pending coordinators"
+        empty: "No coordinators pending"
         approve: "Approve"
         reject: "Reject"
         reject_confirm: "Reject this coordinator? Their account will be removed."
       companies:
         title: "Pending Companies"
-        empty: "No pending companies"
+        empty: "No companies pending"
         verify: "Verify"
         reject: "Reject"
         reject_confirm: "Reject this company? Their account will be removed."
 
   internship_agreements:
     show:
-      title: "Convention de Stage"
-      subtitle: "Three-party internship agreement"
+      title: "Internship Agreement"
+      subtitle: "Three-party internship convention"
       status:
         pending: "Pending Signatures"
         signed: "Fully Signed"
@@ -432,8 +432,8 @@ en:
         sign: "Sign Agreement"
         download: "Download PDF"
         decline: "Decline"
-        decline_reason: "Reason for declining"
-        decline_confirm: "Are you sure? This cannot be undone."
+        decline_reason: "Reason for Decline"
+        decline_confirm: "Are you sure? This action cannot be undone."
       details:
         start_date: "Start Date"
         end_date: "End Date"
@@ -442,18 +442,18 @@ en:
         description: "Mission Description"
       signatures:
         signed_by: "Signed by %{name} on %{date}"
-        pending: "Pending signature"
+        pending: "Signature pending"
         your_turn: "Your turn to sign"
     new:
-      title: "Generate Convention de Stage"
-      subtitle: "Create the official three-party internship agreement"
+      title: "Generate Internship Agreement"
+      subtitle: "Create the official three-party convention"
       form:
         start_date: "Start Date"
         end_date: "End Date"
         work_mode: "Work Mode"
         location: "Location"
         description: "Mission Description"
-        description_placeholder: "Describe the internship mission, objectives, and deliverables..."
+        description_placeholder: "Describe the mission, objectives, and deliverables..."
         generate: "Generate Agreement"
         generating: "Generating..."
 
@@ -477,7 +477,8 @@ en:
     search: "Search"
     filter: "Filter"
     sort: "Sort"
-    date_format: "%B %d, %Y"
+    date_format: "%m/%d/%Y"
+    clear_filters: "Clear Filters"
     time_ago:
       just_now: "Just now"
       minutes_ago: "%{count} minutes ago"
@@ -504,4 +505,6 @@ en:
     stage_types:
       pfe: "PFE (Final Year Project)"
       stage: "Summer Internship"
-      alternance: "Work-Study (Alternance)"
+      alternance: "Apprenticeship"
+      initiation: "Initiation / Observation"
+      free: "Free / Skill-Building"

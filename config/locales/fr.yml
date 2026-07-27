@@ -478,6 +478,7 @@ fr:
     filter: "Filtrer"
     sort: "Trier"
     date_format: "%d/%m/%Y"
+    clear_filters: "Effacer les filtres"
     time_ago:
       just_now: "À l'instant"
       minutes_ago: "Il y a %{count} minutes"
@@ -505,3 +506,5 @@ fr:
       pfe: "PFE (Projet de Fin d'Études)"
       stage: "Stage d'Été"
       alternance: "Alternance"
+      initiation: "Initiation / Observation"
+      free: "Libre / Développement de Compétences"
