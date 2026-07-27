@@ -21,9 +21,9 @@
                 <span class="match-badge match-badge-tooltip-wrapper ml-8 <%= breakdown[:total] >= 70 ? 'match-badge-high' : (breakdown[:total] >= 40 ? 'match-badge-medium' : 'match-badge-low') %>">
                   <%= breakdown[:total] %>% Match
                   <span class="match-tooltip">
-                    <span class="match-tooltip-row">Skills: <%= breakdown[:skill].round %>pt</span>
-                    <span class="match-tooltip-row">Major: <%= breakdown[:major].round %>pt</span>
-                    <span class="match-tooltip-row">Score: <%= breakdown[:readiness].round %>pt</span>
+                    <span class="match-tooltip-row"><%= t('offers.show.match_breakdown.skills', default: 'Skills') %>: <%= breakdown[:skill].round %>pt</span>
+                    <span class="match-tooltip-row"><%= t('offers.show.match_breakdown.major', default: 'Major') %>: <%= breakdown[:major].round %>pt</span>
+                    <span class="match-tooltip-row"><%= t('offers.show.match_breakdown.readiness', default: 'Score') %>: <%= breakdown[:readiness].round %>pt</span>
                   </span>
                 </span>
               <% end %>
@@ -42,22 +42,22 @@
         <% end %>
         <span class="offer-tag">
           <i data-lucide="monitor" class="offer-tag-icon"></i>
-          <%= @offer.work_mode.capitalize %>
+          <%= t("common.work_modes.#{@offer.work_mode}", default: @offer.work_mode.capitalize) %>
         </span>
         <span class="offer-tag">
           <i data-lucide="users" class="offer-tag-icon"></i>
-          <%= pluralize(@offer.spots, 'spot') %> available
+          <%= pluralize(@offer.spots, t('common.spot', default: 'spot')) %> <%= t('common.available', default: 'available') %>
         </span>
         <% if @offer.deadline %>
           <% days_left = (@offer.deadline.to_date - Date.today).to_i %>
           <span class="offer-tag <%= days_left <= 3 ? 'offer-tag-urgent' : (days_left <= 7 ? 'offer-tag-warning' : '') %>">
             <i data-lucide="calendar" class="offer-tag-icon"></i>
             <% if days_left <= 0 %>
-              Deadline passed
+              <%= t('offers.show.deadline.passed', default: 'Deadline passed') %>
             <% elsif days_left == 1 %>
-              1 day left
+              <%= t('offers.show.deadline.one_day', default: '1 day left') %>
             <% elsif days_left <= 7 %>
-              <%= days_left %> days left
+              <%= t('offers.show.deadline.days_left', count: days_left, default: '%{count} days left') %>
             <% else %>
               <%= @offer.deadline.strftime("%b %d, %Y") %>
             <% end %>

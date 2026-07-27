@@ -288,49 +288,48 @@ input[type="checkbox"] {
 
 /* Select elements — custom arrow everywhere */
 select,
-select.form-control {
+select.form-control,
+.filter-select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding-right: 36px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23626773' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  cursor: pointer;
-  color-scheme: dark;
+  background-color: #121318 !important;
+  color: #F4F4F6 !important;
+  color-scheme: dark !important;
 }
 
 select option,
-select.form-control option {
-  background-color: #121318;
-  color: #F4F4F6;
+select.form-control option,
+.filter-select option {
+  background-color: #121318 !important;
+  color: #F4F4F6 !important;
   font-weight: 500;
 }
 
 [data-theme="light"] select,
-[data-theme="light"] select.form-control {
-  color-scheme: light;
+[data-theme="light"] select.form-control,
+[data-theme="light"] .filter-select {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  color-scheme: light !important;
 }
 
 [data-theme="light"] select option,
-[data-theme="light"] select.form-control option {
-  background-color: #FFFFFF;
-  color: #0F172A;
+[data-theme="light"] select.form-control option,
+[data-theme="light"] .filter-select option {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+select.form-control {
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23626773' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
 }
 
 select.form-control:focus {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23818CF8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-}
-
-/* Also apply select-wrap pattern to filter-select */
-.filter-select {
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23626773' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 32px;
-  color-scheme: dark;
 }
 
 /* Date input dark theme fix */
@@ -3388,10 +3387,13 @@ select:-webkit-autofill:focus {
 .filter-select {
   width: 100%;
   padding: 10px 32px 10px 12px;
-  background: var(--bg-tertiary, #17181F);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #121318 !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23626773' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-md);
-  color: var(--text-primary);
+  color: #F4F4F6 !important;
   font-size: 13px;
   font-family: inherit;
   cursor: pointer;
@@ -3399,12 +3401,12 @@ select:-webkit-autofill:focus {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  color-scheme: dark;
+  color-scheme: dark !important;
 }
 
 .filter-select option {
-  background-color: #121318;
-  color: #F4F4F6;
+  background-color: #121318 !important;
+  color: #F4F4F6 !important;
   font-weight: 500;
   padding: 8px 12px;
 }
