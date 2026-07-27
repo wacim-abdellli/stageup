@@ -287,6 +287,7 @@ input[type="checkbox"] {
 }
 
 /* Select elements — custom arrow everywhere */
+select,
 select.form-control {
   appearance: none;
   -webkit-appearance: none;
@@ -296,6 +297,25 @@ select.form-control {
   background-repeat: no-repeat;
   background-position: right 12px center;
   cursor: pointer;
+  color-scheme: dark;
+}
+
+select option,
+select.form-control option {
+  background-color: #121318;
+  color: #F4F4F6;
+  font-weight: 500;
+}
+
+[data-theme="light"] select,
+[data-theme="light"] select.form-control {
+  color-scheme: light;
+}
+
+[data-theme="light"] select option,
+[data-theme="light"] select.form-control option {
+  background-color: #FFFFFF;
+  color: #0F172A;
 }
 
 select.form-control:focus {
@@ -310,6 +330,7 @@ select.form-control:focus {
   background-repeat: no-repeat;
   background-position: right 12px center;
   padding-right: 32px;
+  color-scheme: dark;
 }
 
 /* Date input dark theme fix */
@@ -3367,7 +3388,7 @@ select:-webkit-autofill:focus {
 .filter-select {
   width: 100%;
   padding: 10px 32px 10px 12px;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-tertiary, #17181F);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   color: var(--text-primary);
@@ -3378,6 +3399,14 @@ select:-webkit-autofill:focus {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  color-scheme: dark;
+}
+
+.filter-select option {
+  background-color: #121318;
+  color: #F4F4F6;
+  font-weight: 500;
+  padding: 8px 12px;
 }
 
 .filter-select:focus {
@@ -6306,6 +6335,12 @@ select:-webkit-autofill:focus {
 [data-theme="light"] .filter-select {
   background: #F8FAFC;
   border-color: rgba(15, 23, 42, 0.12);
+  color: #0F172A;
+  color-scheme: light;
+}
+
+[data-theme="light"] .filter-select option {
+  background-color: #FFFFFF;
   color: #0F172A;
 }
 
