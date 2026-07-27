@@ -301,9 +301,9 @@ select.form-control,
 select option,
 select.form-control option,
 .filter-select option {
-  background-color: #FFFFFF !important;
-  color: #0F172A !important;
-  font-weight: 600 !important;
+  background-color: #17181F !important;
+  color: #F4F4F6 !important;
+  font-weight: 500 !important;
 }
 
 [data-theme="light"] select,
@@ -3405,9 +3405,9 @@ select:-webkit-autofill:focus {
 }
 
 .filter-select option {
-  background-color: #FFFFFF !important;
-  color: #0F172A !important;
-  font-weight: 600 !important;
+  background-color: #17181F !important;
+  color: #F4F4F6 !important;
+  font-weight: 500 !important;
   padding: 8px 12px;
 }
 
@@ -7283,13 +7283,14 @@ html[dir="rtl"] .lang-floating-menu {
 
 html[dir="rtl"] .nav-dropdown-profile {
   text-align: right;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 html[dir="rtl"] .nav-dropdown-email {
   direction: ltr;
-  text-align: right;
+  text-align: left;
+  unicode-bidi: isolate;
 }
 
 html[dir="rtl"] .nav-dropdown-item {
