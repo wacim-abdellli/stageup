@@ -539,3 +539,11 @@ ar:
       alternance: "التعليم بالتناوب"
       initiation: "إدخال / مراقبة"
       free: "حر / تطوير المهارات"
+    spot:
+      zero: "منصب"
+      one: "منصب"
+      two: "منصبين"
+      few: "مناصب"
+      many: "منصباً"
+      other: "منصب"
+    available: "متاح"

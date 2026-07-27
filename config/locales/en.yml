@@ -38,6 +38,9 @@ en:
     mockup_row3_name: "Mohamed (Student)"
     mockup_row3_action: "Completed verified PFE agreement"
     mockup_row3_score: "+30 %{pts}"
+    badge_new: "New"
+    mission_attached: "Mission Attached"
+    cv_only: "CV Only"
 
   nav:
     browse_offers: "Browse Offers"
@@ -56,10 +59,8 @@ en:
 
   offers:
     index:
-      eyebrow: "VERIFIED OPPORTUNITIES"
       title: "Available Internships"
       subtitle: "Browse and apply to verified internship opportunities"
-      active_listings: "%{count} active listing"
       filters:
         title: "Filters"
         search_placeholder: "Search by title, company, skills..."
@@ -489,6 +490,33 @@ en:
         generate: "Generate Agreement"
         generating: "Generating..."
 
+  certificates:
+    verify:
+      title: "Certificate of Completion"
+      subtitle: "Verified & Authenticated via StageUp Trust Ledger"
+      recipient_label: "This certifies that"
+      institution: "Institution"
+      duration: "Duration"
+      stage_type: "Stage Type"
+      verification_id: "Verification ID"
+      signatures_heading: "Digital Signatures & Legal Verification"
+      student_role: "Student"
+      employer_role: "Employer"
+      university_role: "University Coordinator"
+      signed: "Signed"
+      qr_label: "Scan to verify authenticity"
+
+  kanban:
+    columns:
+      applied: "Applied"
+      mission: "Mission"
+      review: "Under Review"
+      accepted: "Accepted"
+      completed: "Completed"
+    card:
+      view_proof: "View Proof"
+      no_proof: "No proof submitted"
+
   common:
     save: "Save"
     cancel: "Cancel"
@@ -541,3 +569,14 @@ en:
       alternance: "Apprenticeship"
       initiation: "Initiation / Observation"
       free: "Free / Skill-Building"
+    spot:
+      one: "spot"
+      other: "spots"
+    available: "available"
+    yes: "Yes"
+    no: "No"
+    unrated: "Unrated"
+    reviews: "reviews"
+    hours: "hours"
+    ago: "ago"
+    back_to: "Back to %{page}"

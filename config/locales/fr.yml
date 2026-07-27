@@ -541,3 +541,7 @@ fr:
       alternance: "Alternance"
       initiation: "Initiation / Observation"
       free: "Libre / Développement de Compétences"
+    spot:
+      one: "place"
+      other: "places"
+    available: "disponible(s)"

@@ -46,7 +46,7 @@
         </span>
         <span class="offer-tag">
           <i data-lucide="users" class="offer-tag-icon"></i>
-          <%= pluralize(@offer.spots, t('common.spot', default: 'spot')) %> <%= t('common.available', default: 'available') %>
+          <%= @offer.spots %> <%= t('common.spot', count: @offer.spots, default: 'spot') %> <%= t('common.available', default: 'available') %>
         </span>
         <% if @offer.deadline %>
           <% days_left = (@offer.deadline.to_date - Date.today).to_i %>
