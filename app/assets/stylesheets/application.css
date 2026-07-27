@@ -301,9 +301,9 @@ select.form-control,
 select option,
 select.form-control option,
 .filter-select option {
-  background-color: #121318 !important;
-  color: #F4F4F6 !important;
-  font-weight: 500;
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  font-weight: 600 !important;
 }
 
 [data-theme="light"] select,
@@ -3405,9 +3405,9 @@ select:-webkit-autofill:focus {
 }
 
 .filter-select option {
-  background-color: #121318 !important;
-  color: #F4F4F6 !important;
-  font-weight: 500;
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  font-weight: 600 !important;
   padding: 8px 12px;
 }
 
@@ -4948,7 +4948,9 @@ select:-webkit-autofill:focus {
   position: absolute;
   top: calc(100% + 10px);
   right: 0;
-  width: 240px;
+  min-width: 260px;
+  max-width: 320px;
+  width: max-content;
   background: rgba(13, 14, 18, 0.96);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -7281,7 +7283,13 @@ html[dir="rtl"] .lang-floating-menu {
 
 html[dir="rtl"] .nav-dropdown-profile {
   text-align: right;
-  flex-direction: row;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+html[dir="rtl"] .nav-dropdown-email {
+  direction: ltr;
+  text-align: right;
 }
 
 html[dir="rtl"] .nav-dropdown-item {
