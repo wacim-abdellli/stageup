@@ -56,8 +56,10 @@ en:
 
   offers:
     index:
+      eyebrow: "VERIFIED OPPORTUNITIES"
       title: "Available Internships"
       subtitle: "Browse and apply to verified internship opportunities"
+      active_listings: "%{count} active listing"
       filters:
         title: "Filters"
         search_placeholder: "Search by title, company, skills..."
@@ -463,6 +465,7 @@ en:
     delete: "Delete"
     edit: "Edit"
     view: "View"
+    view_all: "View All"
     back: "Back"
     next: "Next"
     previous: "Previous"

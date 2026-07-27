@@ -13,10 +13,10 @@
       <div class="notif-dropdown-header">
         <div class="notif-header-left">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-          <span class="notif-dropdown-title">Notifications</span>
+          <span class="notif-dropdown-title"><%= t('notifications.title', default: 'Notifications') %></span>
         </div>
         <%= link_to notifications_path, class: "notif-mark-all-link" do %>
-          <span>View All</span>
+          <span><%= t('common.view_all', default: 'View All') %></span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
         <% end %>
       </div>
@@ -27,13 +27,13 @@
           <% notifications.each do |n| %>
             <div class="notif-item <%= 'unread' unless n.read %>">
               <span class="notif-item-text"><%= n.message %></span>
-              <span class="notif-item-time"><%= time_ago_in_words(n.created_at) %> ago</span>
+              <span class="notif-item-time"><%= time_ago_in_words(n.created_at) %> <%= t('common.time_ago.suffix', default: 'ago') %></span>
             </div>
           <% end %>
         <% else %>
           <div class="notif-empty">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="M2 2l20 20"/><path d="M8.7 3A6 6 0 0 1 18 8a6 6 0 0 1-.3 1.9"/><path d="M18 13.9C18 17.4 21 19 21 19H5.1"/></svg>
-            <span>No notifications yet</span>
+            <span><%= t('notifications.empty', default: 'No notifications yet') %></span>
           </div>
         <% end %>
       </div>

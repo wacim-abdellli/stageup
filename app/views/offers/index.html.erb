@@ -7,10 +7,10 @@
     <div>
       <div class="dir-eyebrow">
         <svg class="icon-indigo" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>VERIFIED OPPORTUNITIES</span>
+        <span><%= t('offers.index.eyebrow', default: 'VERIFIED OPPORTUNITIES') %></span>
       </div>
       <h1 class="dir-heading"><%= t('offers.index.title') %></h1>
-      <p class="dir-sub"><%= t('offers.index.subtitle') %> &mdash; <%= pluralize(@offers.size, t('common.offer', default: 'active listing')) %></p>
+      <p class="dir-sub"><%= t('offers.index.subtitle') %> &mdash; <%= t('offers.index.active_listings', count: @offers.size, default: pluralize(@offers.size, 'active listing')) %></p>
     </div>
     <% unless current_user %>
       <%= link_to new_user_session_path, class: "dir-signin-cta" do %>
@@ -26,7 +26,7 @@
     <aside class="dir-sidebar">
       <div class="sidebar-header">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><line x1="4" x2="20" y1="21" y2="21"/><line x1="4" x2="20" y1="14" y2="14"/><line x1="4" x2="20" y1="7" y2="7"/><circle cx="8" cy="14" r="2"/><circle cx="16" cy="7" r="2"/><circle cx="12" cy="21" r="2"/></svg>
-        <span class="sidebar-title">Filters</span>
+        <span class="sidebar-title"><%= t('offers.index.filters.title', default: 'Filters') %></span>
       </div>
 
       <%= form_tag offers_path, method: :get, id: "filters-form" do %>

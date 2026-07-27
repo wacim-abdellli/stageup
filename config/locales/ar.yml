@@ -56,8 +56,10 @@ ar:
 
   offers:
     index:
+      eyebrow: "فرص موثقة"
       title: "التربصات المتاحة"
       subtitle: "تصفح وقدم على فرص التربصات الموثقة"
+      active_listings: "%{count} عرض نشط"
       filters:
         title: "الفلاتر"
         search_placeholder: "ابحث بالعنوان، الشركة، المهارات..."
@@ -463,6 +465,7 @@ ar:
     delete: "حذف"
     edit: "تعديل"
     view: "عرض"
+    view_all: "عرض الكل"
     back: "رجوع"
     next: "التالي"
     previous: "السابق"

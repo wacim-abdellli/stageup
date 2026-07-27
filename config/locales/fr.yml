@@ -56,8 +56,10 @@ fr:
 
   offers:
     index:
+      eyebrow: "OPPORTUNITÉS VÉRIFIÉES"
       title: "Offres de Stage Disponibles"
       subtitle: "Parcourez et postulez aux opportunités de stage vérifiées"
+      active_listings: "%{count} offre active"
       filters:
         title: "Filtres"
         search_placeholder: "Rechercher par titre, entreprise, compétences..."
@@ -463,6 +465,7 @@ fr:
     delete: "Supprimer"
     edit: "Modifier"
     view: "Voir"
+    view_all: "Tout afficher"
     back: "Retour"
     next: "Suivant"
     previous: "Précédent"
