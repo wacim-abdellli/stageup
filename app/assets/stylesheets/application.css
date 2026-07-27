@@ -7267,3 +7267,41 @@ html[dir="rtl"] .hero-left-col {
 html[dir="rtl"] .landing-announcement-badge svg {
   order: -1;
 }
+
+/* RTL Dropdown & Search Sidebar Overrides */
+html[dir="rtl"] .nav-user-dropdown,
+html[dir="rtl"] .notif-dropdown,
+html[dir="rtl"] .lang-floating-menu {
+  right: auto;
+  left: 0;
+  transform-origin: top left;
+}
+
+html[dir="rtl"] .nav-dropdown-profile {
+  text-align: right;
+  flex-direction: row;
+}
+
+html[dir="rtl"] .nav-dropdown-item {
+  text-align: right;
+}
+
+html[dir="rtl"] .notif-dropdown-header,
+html[dir="rtl"] .notif-item {
+  text-align: right;
+}
+
+html[dir="rtl"] .search-icon-abs {
+  left: auto;
+  right: 12px;
+}
+
+html[dir="rtl"] .filter-input {
+  padding: 10px 36px 10px 12px;
+}
+
+html[dir="rtl"] .filter-select {
+  background-position: left 12px center;
+  padding-right: 12px;
+  padding-left: 32px;
+}
