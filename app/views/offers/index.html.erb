@@ -1,6 +1,23 @@
 <% content_for :title, t('offers.index.title', default: "Available Internships – StageUp") %>
 
 <div class="dir-page">
+  <%
+    stage_type_options = [
+      [t('offers.index.filters.all_types'), ""],
+      ["PFE", "PFE"],
+      ["PFA", "PFA"],
+      [t('common.stage_types.initiation'), "initiation"],
+      [t('common.stage_types.free'), "free"]
+    ]
+    work_mode_options = [
+      [t('offers.index.filters.all_modes'), ""],
+      [t('common.work_modes.remote'), "remote"],
+      [t('common.work_modes.on_site'), "onsite"],
+      [t('common.work_modes.hybrid'), "hybrid"]
+    ]
+    selected_stage_type = stage_type_options.find { |_, value| value == params[:stage_type].to_s } || stage_type_options.first
+    selected_work_mode = work_mode_options.find { |_, value| value == params[:work_mode].to_s } || work_mode_options.first
+  %>
 
   <%# ─── Page Header ─────────────────────────────────────────── %>
   <div class="dir-header">
@@ -45,31 +62,27 @@
 
         <div class="sidebar-field">
           <label class="filter-label"><%= t('offers.index.filters.stage_type') %></label>
-          <div class="custom-filter-dropdown" id="filter-stage-type-dropdown">
-            <input type="hidden" name="stage_type" value="<%= params[:stage_type] %>">
-            <% 
-              stage_types = [
-                ["", t('offers.index.filters.all_types')],
-                ["PFE", "PFE"],
-                ["PFA", "PFA"],
-                ["initiation", t('common.stage_types.initiation')],
-                ["free", t('common.stage_types.free')]
-              ]
-              current_stage_label = stage_types.find { |val, _| val == params[:stage_type].to_s }&.last || t('offers.index.filters.all_types')
-            %>
-            <button type="button" class="custom-filter-btn" aria-haspopup="true" aria-expanded="false">
-              <span class="custom-filter-val"><%= current_stage_label %></span>
-              <svg class="custom-filter-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <div class="select-wrap custom-select" data-filter-select>
+            <%= hidden_field_tag :stage_type, params[:stage_type].to_s, data: { filter_select_input: true } %>
+            <button type="button"
+                    class="filter-select custom-select-trigger"
+                    data-filter-select-trigger
+                    aria-haspopup="listbox"
+                    aria-expanded="false">
+              <span data-filter-select-label><%= selected_stage_type.first %></span>
+              <svg class="custom-select-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
             </button>
-            <div class="custom-filter-menu" role="listbox">
-              <% stage_types.each do |val, label| %>
-                <% is_sel = (params[:stage_type].to_s == val) %>
-                <div class="custom-filter-option <%= 'active' if is_sel %>" data-value="<%= val %>">
+            <div class="custom-select-menu" role="listbox">
+              <% stage_type_options.each do |label, value| %>
+                <% selected = value == params[:stage_type].to_s %>
+                <button type="button"
+                        class="custom-select-option <%= 'is-selected' if selected %>"
+                        role="option"
+                        aria-selected="<%= selected %>"
+                        data-filter-select-option
+                        data-value="<%= value %>">
                   <span><%= label %></span>
-                  <% if is_sel %>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <% end %>
-                </div>
+                </button>
               <% end %>
             </div>
           </div>
@@ -79,30 +92,27 @@
 
         <div class="sidebar-field">
           <label class="filter-label"><%= t('offers.index.filters.work_mode') %></label>
-          <div class="custom-filter-dropdown" id="filter-work-mode-dropdown">
-            <input type="hidden" name="work_mode" value="<%= params[:work_mode] %>">
-            <% 
-              work_modes = [
-                ["", t('offers.index.filters.all_modes')],
-                ["remote", t('common.work_modes.remote')],
-                ["onsite", t('common.work_modes.on_site')],
-                ["hybrid", t('common.work_modes.hybrid')]
-              ]
-              current_mode_label = work_modes.find { |val, _| val == params[:work_mode].to_s }&.last || t('offers.index.filters.all_modes')
-            %>
-            <button type="button" class="custom-filter-btn" aria-haspopup="true" aria-expanded="false">
-              <span class="custom-filter-val"><%= current_mode_label %></span>
-              <svg class="custom-filter-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <div class="select-wrap custom-select" data-filter-select>
+            <%= hidden_field_tag :work_mode, params[:work_mode].to_s, data: { filter_select_input: true } %>
+            <button type="button"
+                    class="filter-select custom-select-trigger"
+                    data-filter-select-trigger
+                    aria-haspopup="listbox"
+                    aria-expanded="false">
+              <span data-filter-select-label><%= selected_work_mode.first %></span>
+              <svg class="custom-select-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
             </button>
-            <div class="custom-filter-menu" role="listbox">
-              <% work_modes.each do |val, label| %>
-                <% is_sel = (params[:work_mode].to_s == val) %>
-                <div class="custom-filter-option <%= 'active' if is_sel %>" data-value="<%= val %>">
+            <div class="custom-select-menu" role="listbox">
+              <% work_mode_options.each do |label, value| %>
+                <% selected = value == params[:work_mode].to_s %>
+                <button type="button"
+                        class="custom-select-option <%= 'is-selected' if selected %>"
+                        role="option"
+                        aria-selected="<%= selected %>"
+                        data-filter-select-option
+                        data-value="<%= value %>">
                   <span><%= label %></span>
-                  <% if is_sel %>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <% end %>
-                </div>
+                </button>
               <% end %>
             </div>
           </div>
@@ -237,6 +247,57 @@
 
 <%= javascript_tag nonce: true do %>
   (function() {
+    function closeFilterSelect(select) {
+      var trigger = select.querySelector('[data-filter-select-trigger]');
+      select.classList.remove('open');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    document.querySelectorAll('[data-filter-select]').forEach(function(select) {
+      var trigger = select.querySelector('[data-filter-select-trigger]');
+      var input = select.querySelector('[data-filter-select-input]');
+      var label = select.querySelector('[data-filter-select-label]');
+      var form = select.closest('form');
+
+      if (!trigger || !input || !label) return;
+
+      trigger.addEventListener('click', function(event) {
+        event.stopPropagation();
+        var willOpen = !select.classList.contains('open');
+        document.querySelectorAll('[data-filter-select].open').forEach(closeFilterSelect);
+        select.classList.toggle('open', willOpen);
+        trigger.setAttribute('aria-expanded', willOpen);
+      });
+
+      select.querySelectorAll('[data-filter-select-option]').forEach(function(option) {
+        option.addEventListener('click', function(event) {
+          event.stopPropagation();
+          input.value = option.dataset.value || '';
+          label.textContent = option.textContent.trim();
+
+          select.querySelectorAll('[data-filter-select-option]').forEach(function(item) {
+            item.classList.remove('is-selected');
+            item.setAttribute('aria-selected', 'false');
+          });
+          option.classList.add('is-selected');
+          option.setAttribute('aria-selected', 'true');
+          closeFilterSelect(select);
+
+          if (form && typeof form.requestSubmit === 'function') {
+            form.requestSubmit();
+          } else if (form) {
+            form.submit();
+          }
+        });
+      });
+    });
+
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('[data-filter-select]')) {
+        document.querySelectorAll('[data-filter-select].open').forEach(closeFilterSelect);
+      }
+    });
+
     var inp = document.querySelector('#filters-form input[name="query"]');
     if (!inp) return;
 

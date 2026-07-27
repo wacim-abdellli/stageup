@@ -1,0 +1,91 @@
+- generic [ref=f7e1]:
+  - link "Skip to main content" [ref=f7e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - navigation "Main navigation" [ref=f7e3]:
+    - generic [ref=f7e4]:
+      - link "StageUp الصفحة الرئيسية" [ref=f7e6] [cursor=pointer]:
+        - /url: /?locale=ar
+        - generic [ref=f7e7]:
+          - img "StageUp Logo" [ref=f7e8]
+          - generic [ref=f7e13]: StageUp
+      - generic [ref=f7e15]:
+        - link "تصفح العروض" [ref=f7e16] [cursor=pointer]:
+          - /url: /offers?locale=ar
+        - link "لوحة التحكم" [ref=f7e21] [cursor=pointer]:
+          - /url: /dashboard?locale=ar
+      - generic [ref=f7e28]:
+        - button "Toggle theme" [ref=f7e29] [cursor=pointer]
+        - button "Select language" [ref=f7e37] [cursor=pointer]:
+          - generic [ref=f7e41]: AR
+        - button "Notifications" [ref=f7e45] [cursor=pointer]
+        - generic [ref=f7e49]:
+          - button "User menu" [expanded] [active] [ref=f7e50] [cursor=pointer]:
+            - generic [ref=f7e51]: M
+            - generic [ref=f7e52]: Mohamed
+          - menu [ref=f7e157]:
+            - generic [ref=f7e158]:
+              - generic [ref=f7e159]: M
+              - generic [ref=f7e160]:
+                - generic "mohamed.benali@isetsf.rnu.tn" [ref=f7e161]
+                - generic [ref=f7e162]: طالب
+            - menuitem "لوحة التحكم" [ref=f7e164] [cursor=pointer]
+            - menuitem "تصفح العروض" [ref=f7e171] [cursor=pointer]
+            - menuitem "تسجيل الخروج" [ref=f7e178] [cursor=pointer]
+  - main [ref=f7e55]:
+    - generic [ref=f7e56]:
+      - generic [ref=f7e58]:
+        - generic [ref=f7e59]: VERIFIED OPPORTUNITIES
+        - heading "التربصات المتاحة" [level=1] [ref=f7e62]
+        - paragraph [ref=f7e63]: تصفح وقدم على فرص التربصات الموثقة — 2 active listings
+      - generic [ref=f7e64]:
+        - complementary [ref=f7e65]:
+          - generic [ref=f7e66]: الفلاتر
+          - generic [ref=f7e72]:
+            - generic [ref=f7e73]:
+              - generic [ref=f7e74]: ابحث بالعنوان، الشركة، المهارات...
+              - textbox "ابحث بالعنوان، الشركة، المهارات..." [ref=f7e79]
+            - generic [ref=f7e81]:
+              - generic [ref=f7e82]: نوع التربص
+              - button "كل الأنواع" [ref=f7e84] [cursor=pointer]
+            - generic [ref=f7e89]:
+              - generic [ref=f7e90]: وضع العمل
+              - button "كل الأوضاع" [ref=f7e92] [cursor=pointer]
+            - button "بحث" [ref=f7e97] [cursor=pointer]
+        - generic [ref=f7e98]:
+          - generic [ref=f7e99]:
+            - heading "التربصات المتاحة" [level=2] [ref=f7e100]
+            - generic [ref=f7e101]: عروض متاحة
+          - generic [ref=f7e103]:
+            - link "Data Science Intern" [ref=f7e104] [cursor=pointer]:
+              - /url: /offers/4?locale=ar
+              - generic [ref=f7e105]:
+                - generic [ref=f7e106]:
+                  - generic [ref=f7e107]: AL
+                  - generic [ref=f7e108]:
+                    - heading "Data Science Intern" [level=3] [ref=f7e109]
+                    - generic [ref=f7e110]: AlphaTech Startups
+                - generic "Active listing" [ref=f7e111]
+              - generic [ref=f7e112]:
+                - generic [ref=f7e113]: PFA
+                - generic [ref=f7e114]: سيرة ذاتية فقط
+                - generic [ref=f7e118]: 75% match
+              - paragraph [ref=f7e119]: Clean data, build models.
+              - generic [ref=f7e120]:
+                - generic [ref=f7e121]: Tunis · عن بعد
+                - generic [ref=f7e126]: عرض التفاصيل
+            - link "Full Stack Rails Intern" [ref=f7e130] [cursor=pointer]:
+              - /url: /offers/3?locale=ar
+              - generic [ref=f7e131]:
+                - generic [ref=f7e132]:
+                  - generic [ref=f7e133]: DE
+                  - generic [ref=f7e134]:
+                    - heading "Full Stack Rails Intern" [level=3] [ref=f7e135]
+                    - generic [ref=f7e136]: DevCorp Sfax
+                - generic "Active listing" [ref=f7e137]
+              - generic [ref=f7e138]:
+                - generic [ref=f7e139]: PFE
+                - generic [ref=f7e140]: مهمة مرفقة
+              - paragraph [ref=f7e146]: Learn Rails 8 in production.
+              - generic [ref=f7e147]:
+                - generic [ref=f7e148]: Sfax · هجين
+                - generic [ref=f7e153]: عرض التفاصيل

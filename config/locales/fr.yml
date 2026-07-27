@@ -38,6 +38,9 @@ fr:
     mockup_row3_name: "Mohamed (Étudiant)"
     mockup_row3_action: "A complété une convention de PFE vérifiée"
     mockup_row3_score: "+30 %{pts}"
+    badge_new: "Nouveau"
+    mission_attached: "Mission Incluse"
+    cv_only: "CV Uniquement"
 
   nav:
     browse_offers: "Parcourir les offres"
@@ -56,10 +59,8 @@ fr:
 
   offers:
     index:
-      eyebrow: "OPPORTUNITÉS VÉRIFIÉES"
       title: "Offres de Stage Disponibles"
       subtitle: "Parcourez et postulez aux opportunités de stage vérifiées"
-      active_listings: "%{count} offre active"
       filters:
         title: "Filtres"
         search_placeholder: "Rechercher par titre, entreprise, compétences..."
@@ -485,9 +486,36 @@ fr:
         work_mode: "Mode de Travail"
         location: "Lieu"
         description: "Description de la Mission"
-        description_placeholder: "Décrivez la mission, les objectifs et les livrables..."
+        description_placeholder: "Décrivez la mission, les objectifs, et les livrables..."
         generate: "Générer la Convention"
         generating: "Génération..."
+
+  certificates:
+    verify:
+      title: "Attestation de Réussite"
+      subtitle: "Vérifiée & Authentifiée via StageUp Trust Ledger"
+      recipient_label: "Ceci certifie que"
+      institution: "Institution"
+      duration: "Durée"
+      stage_type: "Type de Stage"
+      verification_id: "ID de Vérification"
+      signatures_heading: "Signatures Numériques & Vérification Légale"
+      student_role: "Étudiant"
+      employer_role: "Employeur"
+      university_role: "Coordinateur Universitaire"
+      signed: "Signé"
+      qr_label: "Scannez pour vérifier l'authenticité"
+
+  kanban:
+    columns:
+      applied: "Candidature Envoyée"
+      mission: "Mission"
+      review: "En Évaluation"
+      accepted: "Accepté"
+      completed: "Terminé"
+    card:
+      view_proof: "Voir la Preuve"
+      no_proof: "Aucune preuve soumise"
 
   common:
     save: "Enregistrer"
@@ -495,7 +523,7 @@ fr:
     delete: "Supprimer"
     edit: "Modifier"
     view: "Voir"
-    view_all: "Tout afficher"
+    view_all: "Voir Tout"
     back: "Retour"
     next: "Suivant"
     previous: "Précédent"
@@ -544,4 +572,11 @@ fr:
     spot:
       one: "place"
       other: "places"
-    available: "disponible(s)"
+    available: "disponible"
+    yes: "Oui"
+    no: "Non"
+    unrated: "Non évalué"
+    reviews: "avis"
+    hours: "heures"
+    ago: ""
+    back_to: "Retour à %{page}"

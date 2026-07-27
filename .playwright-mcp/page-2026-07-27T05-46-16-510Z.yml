@@ -1,0 +1,70 @@
+- generic [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - main [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - generic [ref=e7]: OPPORTUNITÉS VÉRIFIÉES
+          - heading "Offres de Stage Disponibles" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Parcourez et postulez aux opportunités de stage vérifiées — 2 offre active
+        - link "Connexion" [ref=e12] [cursor=pointer]:
+          - /url: /users/sign_in
+      - generic [ref=e17]:
+        - complementary [ref=e18]:
+          - generic [ref=e19]: Filtres
+          - generic [ref=e25]:
+            - generic [ref=e26]:
+              - generic [ref=e27]: Rechercher par titre, entreprise, compétences...
+              - textbox "Rechercher par titre, entreprise, compétences..." [ref=e32]
+            - generic [ref=e34]:
+              - generic [ref=e35]: Type de Stage
+              - generic [ref=e36]:
+                - button "Tous les Types" [expanded] [active] [ref=e37] [cursor=pointer]
+                - listbox [ref=e109]:
+                  - option "Tous les Types" [selected] [ref=e110] [cursor=pointer]
+                  - option "PFE" [ref=e112] [cursor=pointer]
+                  - option "PFA" [ref=e114] [cursor=pointer]
+                  - option "Initiation / Observation" [ref=e116] [cursor=pointer]
+                  - option "Libre / Développement de Compétences" [ref=e118] [cursor=pointer]
+            - generic [ref=e42]:
+              - generic [ref=e43]: Mode de Travail
+              - button "Tous les Modes" [ref=e45] [cursor=pointer]
+            - button "Rechercher" [ref=e50] [cursor=pointer]
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - heading "Offres de Stage Disponibles" [level=2] [ref=e53]
+            - generic [ref=e54]: offres disponibles
+          - generic [ref=e56]:
+            - link "Data Science Intern" [ref=e57] [cursor=pointer]:
+              - /url: /offers/4
+              - generic [ref=e58]:
+                - generic [ref=e59]:
+                  - generic [ref=e60]: AL
+                  - generic [ref=e61]:
+                    - heading "Data Science Intern" [level=3] [ref=e62]
+                    - generic [ref=e63]: AlphaTech Startups
+                - generic "Active listing" [ref=e64]
+              - generic [ref=e65]:
+                - generic [ref=e66]: PFA
+                - generic [ref=e67]: CV Uniquement
+              - paragraph [ref=e71]: Clean data, build models.
+              - generic [ref=e72]:
+                - generic [ref=e73]: Tunis · À Distance
+                - generic [ref=e78]: Voir les Détails
+            - link "Full Stack Rails Intern" [ref=e82] [cursor=pointer]:
+              - /url: /offers/3
+              - generic [ref=e83]:
+                - generic [ref=e84]:
+                  - generic [ref=e85]: DE
+                  - generic [ref=e86]:
+                    - heading "Full Stack Rails Intern" [level=3] [ref=e87]
+                    - generic [ref=e88]: DevCorp Sfax
+                - generic "Active listing" [ref=e89]
+              - generic [ref=e90]:
+                - generic [ref=e91]: PFE
+                - generic [ref=e92]: Mission Incluse
+              - paragraph [ref=e98]: Learn Rails 8 in production.
+              - generic [ref=e99]:
+                - generic [ref=e100]: Sfax · Hybride
+                - generic [ref=e105]: Voir les Détails

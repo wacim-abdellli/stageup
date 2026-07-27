@@ -130,55 +130,11 @@
             return;
           }
 
-          // 5. Custom Filter Dropdowns
-          var filterBtn = e.target.closest('.custom-filter-btn');
-          if (filterBtn) {
-            e.stopPropagation();
-            var dropdown = filterBtn.closest('.custom-filter-dropdown');
-            var isOpen = dropdown.classList.contains('open');
-            document.querySelectorAll('.custom-filter-dropdown.open').forEach(function(d) {
-              if (d !== dropdown) {
-                d.classList.remove('open');
-                var b = d.querySelector('.custom-filter-btn');
-                if (b) b.setAttribute('aria-expanded', 'false');
-              }
-            });
-            dropdown.classList.toggle('open', !isOpen);
-            filterBtn.setAttribute('aria-expanded', (!isOpen).toString());
-            return;
-          }
-
-          var filterOption = e.target.closest('.custom-filter-option');
-          if (filterOption) {
-            e.stopPropagation();
-            var dropdown = filterOption.closest('.custom-filter-dropdown');
-            var input = dropdown.querySelector('input[type="hidden"]');
-            var val = filterOption.getAttribute('data-value');
-            if (input) {
-              input.value = val;
-              var form = dropdown.closest('form');
-              if (form) form.submit();
-            }
-            dropdown.classList.remove('open');
-            var b = dropdown.querySelector('.custom-filter-btn');
-            if (b) b.setAttribute('aria-expanded', 'false');
-            return;
-          }
-
-          // 6. Click Outside to Close Panels
+          // 5. Click Outside to Close Panels
           var insideLang = e.target.closest('#lang-menu') || e.target.closest('#lang-btn');
           var insideDropdown = e.target.closest('#nav-user-dropdown') || e.target.closest('#nav-user-menu');
           var insideNotif = e.target.closest('#notif-panel') || e.target.closest('#notif-btn');
           var insideMobile = e.target.closest('#nav-mobile-menu') || e.target.closest('#nav-toggle');
-          var insideFilter = e.target.closest('.custom-filter-dropdown');
-
-          if (!insideFilter) {
-            document.querySelectorAll('.custom-filter-dropdown.open').forEach(function(d) {
-              d.classList.remove('open');
-              var b = d.querySelector('.custom-filter-btn');
-              if (b) b.setAttribute('aria-expanded', 'false');
-            });
-          }
 
           if (!insideLang) {
             var lm = $('lang-menu');

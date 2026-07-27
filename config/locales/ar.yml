@@ -38,6 +38,9 @@ ar:
     mockup_row3_name: "محمد (طالب)"
     mockup_row3_action: "أكمل اتفاقية PFE موثقة"
     mockup_row3_score: "+30 %{pts}"
+    badge_new: "جديد"
+    mission_attached: "مهمة مرفقة"
+    cv_only: "سيرة ذاتية فقط"
 
   nav:
     browse_offers: "تصفح العروض"
@@ -487,6 +490,33 @@ ar:
         generate: "إنشاء الاتفاقية"
         generating: "جاري الإنشاء..."
 
+  certificates:
+    verify:
+      title: "شهادة إتمام"
+      subtitle: "موثقة ومصدقة عبر سجل الثقة StageUp"
+      recipient_label: "هذا يشهد بأن"
+      institution: "المؤسسة"
+      duration: "المدة"
+      stage_type: "نوع التربص"
+      verification_id: "معرّف التحقق"
+      signatures_heading: "التوقيعات الرقمية والتحقق القانوني"
+      student_role: "طالب"
+      employer_role: "صاحب العمل"
+      university_role: "منسق جامعي"
+      signed: "موقع"
+      qr_label: "امسح للتحقق من الأصالة"
+
+  kanban:
+    columns:
+      applied: "تم التقديم"
+      mission: "مهمة"
+      review: "قيد المراجعة"
+      accepted: "مقبول"
+      completed: "مكتمل"
+    card:
+      view_proof: "عرض الدليل"
+      no_proof: "لا يوجد دليل مقدم"
+
   common:
     save: "حفظ"
     cancel: "إلغاء"
@@ -540,10 +570,13 @@ ar:
       initiation: "إدخال / مراقبة"
       free: "حر / تطوير المهارات"
     spot:
-      zero: "منصب"
-      one: "منصب"
-      two: "منصبين"
-      few: "مناصب"
-      many: "منصباً"
-      other: "منصب"
+      one: "مكان"
+      other: "أماكن"
     available: "متاح"
+    yes: "نعم"
+    no: "لا"
+    unrated: "غير مقيّم"
+    reviews: "تقييمات"
+    hours: "ساعات"
+    ago: ""
+    back_to: "العودة إلى %{page}"

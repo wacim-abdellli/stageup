@@ -1,0 +1,31 @@
+- generic [ref=f4e1]:
+  - link "Skip to main content" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - main [ref=f4e3]:
+    - generic [ref=f4e5]:
+      - generic [ref=f4e6]:
+        - generic [ref=f4e7]:
+          - img "StageUp Logo" [ref=f4e8]
+          - generic [ref=f4e13]: StageUp
+        - heading "Log in" [level=2] [ref=f4e14]
+        - paragraph [ref=f4e15]: Welcome back to StageUp
+      - generic [ref=f4e16]:
+        - generic [ref=f4e17]:
+          - generic [ref=f4e18]: Email
+          - textbox "Email" [active] [ref=f4e19]:
+            - /placeholder: email@example.com
+        - generic [ref=f4e20]:
+          - generic [ref=f4e21]: Password
+          - generic [ref=f4e22]:
+            - textbox "Password" [ref=f4e23]:
+              - /placeholder: ••••••••
+            - button "Toggle password visibility" [ref=f4e24] [cursor=pointer]
+        - generic [ref=f4e28]:
+          - checkbox "Remember me" [ref=f4e29] [cursor=pointer]
+          - generic [ref=f4e30] [cursor=pointer]: Remember me
+        - button "Log in" [ref=f4e32] [cursor=pointer]
+      - generic [ref=f4e33]:
+        - link "Sign up" [ref=f4e34] [cursor=pointer]:
+          - /url: /signup
+        - link "Forgot your password?" [ref=f4e35] [cursor=pointer]:
+          - /url: /users/password/new
