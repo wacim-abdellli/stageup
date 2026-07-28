@@ -7432,8 +7432,34 @@ button.btn-accent:hover,
 .kanban-card-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 4px;
   flex: 1;
+}
+
+.kanban-card-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.kanban-card-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.kanban-card-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+.kanban-card-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.proof-link-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .kanban-card {

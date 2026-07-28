@@ -16,41 +16,42 @@
         <% (pending_submissions || []).each do |sub| %>
           <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
             <div class="kanban-card-header flex-between mb-8">
-              <div class="flex-align-center gap-8">
-                <div class="kanban-avatar">
+              <div class="flex-align-center gap-8 min-width-0">
+                <div class="kanban-avatar flex-shrink-0">
                   <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
                 </div>
-                <div>
-                  <div class="kanban-student-name"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></div>
-                  <div class="kanban-uni-label"><%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
+                <div class="min-width-0">
+                  <div class="kanban-student-name text-truncate"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></div>
+                  <div class="kanban-uni-label text-truncate"><%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
                 </div>
               </div>
-              <span class="rep-score-pill-sm">
+              <span class="rep-score-pill-sm flex-shrink-0">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                 <strong><%= sub.student_profile.commitment_score.round(0) rescue 100 %></strong>
               </span>
             </div>
 
-            <div class="kanban-card-offer mb-10">
-              <span class="badge-offer-title"><%= sub.offer.title %></span>
-            </div>
-
-            <div class="kanban-card-proof mb-12">
-              <% if sub.github_link.present? %>
-                <%= link_to sub.github_link, target: "_blank", class: "btn-proof-link" do %>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                  <%= t('kanban.card.view_proof', default: 'View Proof') %>
-                <% end %>
-              <% end %>
-              <% if sub.student_profile.cv.attached? %>
-                <%= link_to rails_blob_path(sub.student_profile.cv, disposition: "inline"), target: "_blank", class: "btn-proof-link ml-4" do %>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  CV
-                <% end %>
-              <% end %>
+            <div class="kanban-card-offer flex-between mb-12">
+              <span class="badge-offer-title text-truncate"><%= sub.offer.title %></span>
+              <span class="kanban-card-date flex-shrink-0"><%= sub.created_at.strftime("%b %d") %></span>
             </div>
 
             <div class="kanban-card-actions flex-between">
+              <div class="proof-link-container">
+                <% if sub.github_link.present? %>
+                  <%= link_to sub.github_link, target: "_blank", class: "btn-proof-link" do %>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <%= t('kanban.card.view_proof', default: 'Proof') %>
+                  <% end %>
+                <% end %>
+                <% if sub.student_profile.cv.attached? %>
+                  <%= link_to rails_blob_path(sub.student_profile.cv, disposition: "inline"), target: "_blank", class: "btn-proof-link" do %>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    CV
+                  <% end %>
+                <% end %>
+              </div>
+
               <div class="action-buttons-row">
                 <%= button_to accept_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-xs", data: { disable_with: "..." } do %>
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
@@ -61,7 +62,6 @@
                   <%= t('kanban.actions.reject', default: 'Reject') %>
                 <% end %>
               </div>
-              <span class="kanban-card-date"><%= sub.created_at.strftime("%b %d") %></span>
             </div>
           </div>
         <% end %>
@@ -89,30 +89,30 @@
         <% (active_internships || []).each do |sub| %>
           <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
             <div class="kanban-card-header flex-between mb-8">
-              <div class="flex-align-center gap-8">
-                <div class="kanban-avatar avatar-emerald">
+              <div class="flex-align-center gap-8 min-width-0">
+                <div class="kanban-avatar avatar-emerald flex-shrink-0">
                   <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
                 </div>
-                <div>
-                  <div class="kanban-student-name"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></div>
-                  <div class="kanban-uni-label"><%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
+                <div class="min-width-0">
+                  <div class="kanban-student-name text-truncate"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></div>
+                  <div class="kanban-uni-label text-truncate"><%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
                 </div>
               </div>
-              <span class="badge-status badge-accepted"><%= t('kanban.columns.accepted', default: 'ACCEPTED') %></span>
+              <span class="badge-status badge-accepted flex-shrink-0"><%= t('kanban.columns.accepted', default: 'ACCEPTED') %></span>
             </div>
 
-            <div class="kanban-card-offer mb-10">
-              <span class="badge-offer-title"><%= sub.offer.title %></span>
+            <div class="kanban-card-offer flex-between mb-12">
+              <span class="badge-offer-title text-truncate"><%= sub.offer.title %></span>
+              <span class="kanban-card-date flex-shrink-0"><%= sub.responded_at&.strftime("%b %d") || sub.created_at.strftime("%b %d") %></span>
             </div>
 
-            <div class="kanban-card-footer flex-between">
-              <span class="kanban-card-date"><%= sub.responded_at&.strftime("%b %d") || sub.created_at.strftime("%b %d") %></span>
-              <% if sub.internship_agreement %>
+            <% if sub.internship_agreement %>
+              <div class="kanban-card-actions flex-end">
                 <%= link_to submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn-proof-link" do %>
                   <%= t('kanban.card.agreement', default: 'Agreement') %> &rarr;
                 <% end %>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           </div>
         <% end %>
       <% else %>
@@ -140,24 +140,21 @@
         <% rejected_list.each do |sub| %>
           <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
             <div class="kanban-card-header flex-between mb-8">
-              <div class="flex-align-center gap-8">
-                <div class="kanban-avatar avatar-muted">
+              <div class="flex-align-center gap-8 min-width-0">
+                <div class="kanban-avatar avatar-muted flex-shrink-0">
                   <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
                 </div>
-                <div>
-                  <div class="kanban-student-name"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></div>
-                  <div class="kanban-uni-label"><%= sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
+                <div class="min-width-0">
+                  <div class="kanban-student-name text-truncate"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></div>
+                  <div class="kanban-uni-label text-truncate"><%= sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
                 </div>
               </div>
-              <span class="badge-status badge-rejected"><%= t('kanban.columns.rejected', default: 'REJECTED') %></span>
+              <span class="badge-status badge-rejected flex-shrink-0"><%= t('kanban.columns.rejected', default: 'REJECTED') %></span>
             </div>
 
-            <div class="kanban-card-offer mb-10">
-              <span class="badge-offer-title"><%= sub.offer.title %></span>
-            </div>
-
-            <div class="kanban-card-footer flex-between">
-              <span class="kanban-card-date"><%= sub.responded_at&.strftime("%b %d") || sub.created_at.strftime("%b %d") %></span>
+            <div class="kanban-card-offer flex-between">
+              <span class="badge-offer-title text-truncate"><%= sub.offer.title %></span>
+              <span class="kanban-card-date flex-shrink-0"><%= sub.responded_at&.strftime("%b %d") || sub.created_at.strftime("%b %d") %></span>
             </div>
           </div>
         <% end %>
