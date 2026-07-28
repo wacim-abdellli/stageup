@@ -20,11 +20,4 @@ test:
   password: <%= ENV.fetch("POSTGRES_PASSWORD", "postgres") %>
 
 production:
-<% if ENV["DATABASE_URL"].present? %>
   url: <%= ENV["DATABASE_URL"] %>
-<% else %>
-  adapter: sqlite3
-  database: /tmp/production.sqlite3
-  pool: 5
-  timeout: 5000
-<% end %>
