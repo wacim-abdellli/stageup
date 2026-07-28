@@ -1,4 +1,13 @@
 fr:
+  activerecord:
+    attributes:
+      user:
+        email: "Email"
+        password: "Mot de passe"
+        password_confirmation: "Confirmer le mot de passe"
+        current_password: "Mot de passe actuel"
+        remember_me: "Se souvenir de moi"
+
   home:
     title: "StageUp – Stages Vérifiés en Tunisie"
     announcement_badge: "Le premier registre de preuve de travail en Tunisie"

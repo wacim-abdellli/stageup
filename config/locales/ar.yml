@@ -1,4 +1,13 @@
 ar:
+  activerecord:
+    attributes:
+      user:
+        email: "البريد الإلكتروني"
+        password: "كلمة المرور"
+        password_confirmation: "تأكيد كلمة المرور"
+        current_password: "كلمة المرور الحالية"
+        remember_me: "تذكرني"
+
   home:
     title: "StageUp – تربصات موثقة في تونس"
     announcement_badge: "أول سجل لإثبات العمل في تونس"
