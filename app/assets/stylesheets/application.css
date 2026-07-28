@@ -536,6 +536,12 @@ select:-webkit-autofill:focus {
 .role-card-university .role-icon { background:rgba(168,85,247,0.08); border-color:rgba(168,85,247,0.15); }
 .role-card-university .role-icon i, .role-card-university .role-icon svg { stroke:#C084FC; }
 
+.role-info {
+  flex: 1;
+  min-width: 0;
+  margin-right: 16px;
+}
+
 .role-title {
   font-size: 16px;
   font-weight: 600;
@@ -545,6 +551,18 @@ select:-webkit-autofill:focus {
 .role-desc {
   font-size: 13px;
   color: var(--text-secondary);
+}
+
+.role-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  stroke: var(--text-muted);
+  transition: transform 0.2s ease, stroke 0.2s ease;
+}
+
+.role-card:hover .role-arrow {
+  transform: translateX(4px);
+  stroke: var(--text-primary);
 }
 
 /* Flash alerts */
@@ -7461,4 +7479,20 @@ html[dir="rtl"] .filter-select {
   background-position: left 12px center;
   padding-right: 12px;
   padding-left: 32px;
+}
+
+html[dir="rtl"] .role-info {
+  margin-right: 0;
+  margin-left: 16px;
+  text-align: right;
+}
+
+html[dir="rtl"] .role-arrow {
+  margin-left: 0;
+  margin-right: auto;
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .role-card:hover .role-arrow {
+  transform: translateX(-4px) scaleX(-1);
 }
