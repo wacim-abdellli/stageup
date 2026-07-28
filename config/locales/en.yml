@@ -635,7 +635,7 @@ en:
         desc: "Post internships, evaluate talent with proof-of-work missions"
       university:
         title: "University Coordinator"
-        desc: "Verify students, track agreements, manage academic partnerships"
+        desc: "Verify students, track agreements, manage partnerships"
       already_account_html: "Already have an account? %{link}"
       sign_in: "Sign In"
     new_student:

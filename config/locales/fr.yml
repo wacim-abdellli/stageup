@@ -634,7 +634,7 @@ fr:
         desc: "Publiez des stages, évaluez les talents avec des missions de preuve de travail"
       university:
         title: "Coordinateur Universitaire"
-        desc: "Vérifiez les étudiants, suivez les conventions, gérez les partenariats académiques"
+        desc: "Vérifiez les étudiants, suivez les conventions et partenariats"
       already_account_html: "Vous avez déjà un compte ? %{link}"
       sign_in: "Se Connecter"
     new_student:

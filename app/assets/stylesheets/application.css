@@ -490,9 +490,10 @@ select:-webkit-autofill:focus {
   background-color: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 18px 20px;
+  min-height: 86px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   cursor: pointer;
   transition: var(--transition);
   text-align: left;
@@ -540,7 +541,7 @@ select:-webkit-autofill:focus {
 .role-info {
   flex: 1;
   min-width: 0;
-  padding-right: 32px;
+  margin-right: 16px;
 }
 
 .role-title {
@@ -555,9 +556,8 @@ select:-webkit-autofill:focus {
 }
 
 .role-arrow {
-  position: absolute;
-  top: 22px;
-  right: 20px;
+  margin-left: auto;
+  flex-shrink: 0;
   stroke: var(--text-muted);
   transition: transform 0.2s ease, stroke 0.2s ease;
 }
@@ -7489,14 +7489,14 @@ html[dir="rtl"] .role-icon {
 }
 
 html[dir="rtl"] .role-info {
-  padding-right: 0;
-  padding-left: 32px;
+  margin-right: 0;
+  margin-left: 16px;
   text-align: right;
 }
 
 html[dir="rtl"] .role-arrow {
-  right: auto;
-  left: 20px;
+  margin-left: 0;
+  margin-right: auto;
   transform: scaleX(-1);
 }
 
