@@ -2433,6 +2433,12 @@ button.btn-accent:hover,
   padding: 0 24px;
 }
 
+.settings-hub-header {
+  margin-bottom: 36px !important;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
 .settings-hub-title {
   font-size: 26px;
   font-weight: 800;
@@ -2443,6 +2449,7 @@ button.btn-accent:hover,
 .settings-hub-subtitle {
   font-size: 13px;
   color: var(--text-secondary);
+  margin-top: 4px;
 }
 
 .settings-hub-grid {
