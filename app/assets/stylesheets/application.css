@@ -83,7 +83,7 @@
 [data-theme="light"] .nav-notifications-dropdown,
 [data-theme="light"] .dropdown-menu {
   background: #FFFFFF !important;
-  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  border: 1px solid #CBD5E1 !important;
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12) !important;
 }
 
@@ -94,7 +94,7 @@
 
 [data-theme="light"] .lang-menu-option:hover,
 [data-theme="light"] .nav-dropdown-item:hover {
-  background: rgba(15, 23, 42, 0.05) !important;
+  background: #F1F5F9 !important;
   color: #0F172A !important;
 }
 
@@ -108,16 +108,164 @@
 [data-theme="light"] .notif-bell-btn,
 [data-theme="light"] .theme-toggle-btn {
   background: #FFFFFF !important;
-  border-color: rgba(15, 23, 42, 0.14) !important;
+  border-color: #CBD5E1 !important;
   color: #334155 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
 }
 
 [data-theme="light"] .lang-icon-btn:hover,
 [data-theme="light"] .nav-user-btn:hover,
 [data-theme="light"] .notif-bell-btn:hover,
 [data-theme="light"] .theme-toggle-btn:hover {
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+  border-color: #94A3B8 !important;
+}
+
+/* Light Theme Cards & Containers */
+[data-theme="light"] .profile-card,
+[data-theme="light"] .bento-card,
+[data-theme="light"] .glass-card,
+[data-theme="light"] .dashboard-card,
+[data-theme="light"] .filter-card,
+[data-theme="light"] .hero-mockup-card,
+[data-theme="light"] .auth-card,
+[data-theme="light"] .offer-card,
+[data-theme="light"] .admin-kpi-card,
+[data-theme="light"] .empty-state-card {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
+}
+
+[data-theme="light"] .profile-card:hover,
+[data-theme="light"] .bento-card:hover,
+[data-theme="light"] .offer-card:hover,
+[data-theme="light"] .admin-kpi-card:hover {
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.1), 0 4px 12px -2px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Light Theme Inner Items & Nested Boxes */
+[data-theme="light"] .info-item,
+[data-theme="light"] .profile-field-box,
+[data-theme="light"] .meta-box,
+[data-theme="light"] .mockup-row,
+[data-theme="light"] .mockup-header,
+[data-theme="light"] .admin-subnav-bar,
+[data-theme="light"] .inline-list-sm-item {
+  background-color: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* Light Theme Buttons */
+[data-theme="light"] a.btn-primary,
+[data-theme="light"] button.btn-primary,
+[data-theme="light"] .btn-primary,
+[data-theme="light"] a.btn-accent,
+[data-theme="light"] button.btn-accent,
+[data-theme="light"] .btn-accent {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08), inset 0 1px 0 #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] a.btn-primary:hover,
+[data-theme="light"] button.btn-primary:hover,
+[data-theme="light"] .btn-primary:hover,
+[data-theme="light"] a.btn-accent:hover,
+[data-theme="light"] button.btn-accent:hover,
+[data-theme="light"] .btn-accent:hover {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #94A3B8 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] a.btn-secondary,
+[data-theme="light"] button.btn-secondary,
+[data-theme="light"] .btn-secondary {
+  background-color: #F8FAFC !important;
+  color: #334155 !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+[data-theme="light"] a.btn-secondary:hover,
+[data-theme="light"] button.btn-secondary:hover,
+[data-theme="light"] .btn-secondary:hover {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Light Theme Inputs & Form Controls */
+[data-theme="light"] .form-control,
+[data-theme="light"] .filter-input,
+[data-theme="light"] .filter-select,
+[data-theme="light"] .admin-search-input,
+[data-theme="light"] input[type="text"],
+[data-theme="light"] input[type="email"],
+[data-theme="light"] input[type="password"],
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  background-color: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #0F172A !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+[data-theme="light"] .form-control:focus,
+[data-theme="light"] .filter-input:focus,
+[data-theme="light"] .filter-select:focus,
+[data-theme="light"] .admin-search-input:focus,
+[data-theme="light"] input:focus,
+[data-theme="light"] select:focus,
+[data-theme="light"] textarea:focus {
+  border-color: #C2410C !important;
+  box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.15), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  outline: none !important;
+}
+
+/* Light Theme Navbar Capsule */
+[data-theme="light"] .nav-capsule {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06) !important;
+}
+
+[data-theme="light"] .nav-capsule-item {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .nav-capsule-item.active {
   background: #F1F5F9 !important;
   color: #0F172A !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Light Theme Filter Pills */
+[data-theme="light"] .filter-pill {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #475569 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+
+[data-theme="light"] .filter-pill:hover {
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+[data-theme="light"] .filter-pill.active {
+  background: #C2410C !important;
+  color: #FFFFFF !important;
+  border-color: #C2410C !important;
 }
 
 * {
