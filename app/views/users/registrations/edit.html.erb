@@ -1,23 +1,25 @@
 <% content_for :title, "Account Settings – StageUp" %>
 
-<div class="auth-container p-vertical-40">
-  <div class="auth-card max-width-720">
-    <div class="auth-header text-left mb-24">
-      <div class="flex-between mb-8">
+<div class="dashboard-container settings-page-container">
+  <div class="settings-card-wrapper max-width-800">
+    
+    <%# ─── Settings Header ────────────────────────────────────────────── %>
+    <div class="settings-card-header text-left mb-28">
+      <div class="flex-between mb-12">
         <%= link_to dashboard_path, class: "btn btn-secondary btn-compact" do %>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
           <%= t('common.back', default: 'Back to Dashboard') %>
         <% end %>
-        <span class="badge badge-info"><%= current_user.profileable_type.underscore.humanize %></span>
+        <span class="badge badge-info fs-12"><%= current_user.profileable_type.underscore.humanize %></span>
       </div>
-      <h1 class="auth-title"><%= t('users.edit.title', default: 'Account & Profile Settings') %></h1>
-      <p class="auth-subtitle"><%= t('users.edit.subtitle', default: 'Update your profile information and manage account security credentials.') %></p>
+      <h1 class="settings-title margin-0 mb-6"><%= t('users.edit.title', default: 'Account & Profile Settings') %></h1>
+      <p class="settings-subtitle margin-0"><%= t('users.edit.subtitle', default: 'Update your personal profile information and manage account security credentials.') %></p>
     </div>
 
     <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), method: :put, html: { multipart: true, class: "auth-form" } do |f| %>
       <% errors = ((@profile&.errors&.full_messages || []) + (resource&.errors&.full_messages || [])).uniq %>
       <% if errors.any? %>
-        <div class="flash-message flash-alert flash-col mb-20">
+        <div class="flash-message flash-alert flash-col mb-24">
           <div class="flash-col-header">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             <strong><%= t('common.errors_title', default: 'Please fix the errors below:') %></strong>
@@ -31,12 +33,10 @@
       <% end %>
 
       <%# ─── SECTION 1: PERSONAL & PROFESSIONAL PROFILE ────────────────── %>
-      <div class="settings-section mb-32">
-        <div class="settings-section-header mb-16">
-          <div class="flex-align-center gap-8">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <h3 class="fs-16 fw-600 color-primary margin-0"><%= t('users.edit.profile_section', default: 'Personal & Professional Details') %></h3>
-          </div>
+      <div class="settings-section mb-36">
+        <div class="settings-section-title-row mb-20">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.profile_section', default: 'Personal & Professional Details') %></h3>
         </div>
 
         <% if current_user.profileable_type == "StudentProfile" %>
@@ -73,28 +73,70 @@
               <%= sp.text_area :bio, rows: 3, class: "form-control", placeholder: "Brief summary of your skills, passion, and target internship." %>
             </div>
 
-            <div class="form-group">
-              <%= sp.label :skills, t('dashboard.profile_bento.skills', default: 'Skills & Competencies'), class: "form-label" %>
-              <div class="skills-checkbox-grid">
-                <% @skills.each do |skill| %>
-                  <label class="skill-checkbox-pill">
-                    <%= check_box_tag "student_profile[skill_ids][]", skill.id, @profile.skill_ids.include?(skill.id) %>
-                    <span><%= skill.name %></span>
-                  </label>
+            <%# ─── Categorized Skills Taxonomy Selector ───────────────────── %>
+            <div class="form-group mb-28">
+              <div class="flex-between flex-wrap gap-12 mb-12">
+                <label class="form-label margin-0 fs-14 fw-600 color-primary flex-align-center gap-6">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                  <%= t('dashboard.profile_bento.skills', default: 'Skills & Technical Taxonomy') %>
+                </label>
+                <span class="badge badge-success fs-11" id="skills-selected-counter">
+                  <%= @profile.skill_ids.count %> Selected
+                </span>
+              </div>
+
+              <%# Search & Filter Controls %>
+              <div class="skills-filter-toolbar mb-16">
+                <div class="skill-search-box mb-12">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" class="skill-search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="skill-search-input" class="form-control skill-search-input" placeholder="Search 98+ skills (e.g. Rails, Python, React, Docker, SQL)...">
+                </div>
+
+                <div class="category-tabs-row flex-wrap gap-6" id="category-tabs">
+                  <button type="button" class="cat-tab-btn active" data-category="all">All Skills</button>
+                  <% (@skills_by_category || {}).keys.each do |cat| %>
+                    <button type="button" class="cat-tab-btn" data-category="<%= cat.parameterize %>">
+                      <%= cat %> (<%= @skills_by_category[cat].count %>)
+                    </button>
+                  <% end %>
+                </div>
+              </div>
+
+              <%# Categorized Skill Groups Container %>
+              <div class="skills-category-container" id="skills-category-container">
+                <% (@skills_by_category || {}).each do |category, skills_list| %>
+                  <div class="skill-category-group mb-20" data-cat-id="<%= category.parameterize %>">
+                    <div class="skill-category-header flex-align-center gap-8 mb-10">
+                      <span class="category-dot"></span>
+                      <h4 class="fs-13 fw-700 color-primary margin-0 text-uppercase tracking-wider"><%= category %></h4>
+                      <span class="fs-11 text-muted">(<%= skills_list.count %>)</span>
+                    </div>
+
+                    <div class="skills-checkbox-grid">
+                      <% skills_list.each do |skill| %>
+                        <% is_checked = @profile.skill_ids.include?(skill.id) %>
+                        <label class="skill-checkbox-pill <%= 'pill-selected' if is_checked %>" data-skill-name="<%= skill.name.downcase %>">
+                          <%= check_box_tag "student_profile[skill_ids][]", skill.id, is_checked, class: "skill-checkbox-input" %>
+                          <span><%= skill.name %></span>
+                        </label>
+                      <% end %>
+                    </div>
+                  </div>
                 <% end %>
               </div>
             </div>
 
+            <%# Resume / CV Upload %>
             <div class="form-group">
               <label class="form-label"><%= t('dashboard.profile_bento.cv_document', default: 'Resume / CV Document (PDF)') %></label>
               <% if @profile.cv.attached? %>
-                <div class="cv-attached-box mb-8">
+                <div class="cv-attached-box mb-10">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
                   <span class="fs-13 font-mono text-truncate"><%= @profile.cv.filename %> (<%= number_to_human_size(@profile.cv.byte_size) %>)</span>
                 </div>
               <% end %>
               <%= sp.file_field :cv, accept: "application/pdf", class: "form-control-file" %>
-              <span class="form-help-text"><%= t('dashboard.profile_bento.cv_help', default: 'Upload a PDF file up to 5MB.') %></span>
+              <span class="form-help-text mt-4"><%= t('dashboard.profile_bento.cv_help', default: 'Upload a PDF document up to 5MB.') %></span>
             </div>
           <% end %>
 
@@ -132,12 +174,10 @@
       </div>
 
       <%# ─── SECTION 2: SECURITY & AUTHENTICATION ──────────────────────── %>
-      <div class="settings-section border-top p-top-24 mb-32">
-        <div class="settings-section-header mb-16">
-          <div class="flex-align-center gap-8">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <h3 class="fs-16 fw-600 color-primary margin-0"><%= t('users.edit.security_section', default: 'Account Security & Login Credentials') %></h3>
-          </div>
+      <div class="settings-section border-top p-top-28 mb-36">
+        <div class="settings-section-title-row mb-20">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.security_section', default: 'Account Security & Login Credentials') %></h3>
         </div>
 
         <div class="form-group">
@@ -175,3 +215,90 @@
     <% end %>
   </div>
 </div>
+
+<script nonce="<%= content_security_policy_nonce %>">
+  (function() {
+    function initSkillsFilter() {
+      var searchInput = document.getElementById('skill-search-input');
+      var categoryTabs = document.querySelectorAll('.cat-tab-btn');
+      var categoryGroups = document.querySelectorAll('.skill-category-group');
+      var skillPills = document.querySelectorAll('.skill-checkbox-pill');
+      var counterBadge = document.getElementById('skills-selected-counter');
+      var activeCategory = 'all';
+
+      // Update selected skills counter
+      function updateSelectedCounter() {
+        var count = document.querySelectorAll('.skill-checkbox-input:checked').length;
+        if (counterBadge) {
+          counterBadge.textContent = count + ' Selected';
+        }
+      }
+
+      // Checkbox change event
+      document.querySelectorAll('.skill-checkbox-input').forEach(function(chk) {
+        chk.addEventListener('change', function() {
+          var pill = chk.closest('.skill-checkbox-pill');
+          if (pill) {
+            if (chk.checked) {
+              pill.classList.add('pill-selected');
+            } else {
+              pill.classList.remove('pill-selected');
+            }
+          }
+          updateSelectedCounter();
+        });
+      });
+
+      // Filter function
+      function filterSkills() {
+        var query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+        categoryGroups.forEach(function(group) {
+          var groupCatId = group.dataset.catId;
+          var categoryMatch = (activeCategory === 'all' || activeCategory === groupCatId);
+          var hasMatchingSkills = false;
+
+          var groupPills = group.querySelectorAll('.skill-checkbox-pill');
+          groupPills.forEach(function(pill) {
+            var skillName = pill.dataset.skillName || '';
+            var searchMatch = !query || skillName.includes(query);
+
+            if (categoryMatch && searchMatch) {
+              pill.style.display = 'inline-flex';
+              hasMatchingSkills = true;
+            } else {
+              pill.style.display = 'none';
+            }
+          });
+
+          if (hasMatchingSkills) {
+            group.style.display = 'block';
+          } else {
+            group.style.display = 'none';
+          }
+        });
+      }
+
+      // Search input listener
+      if (searchInput) {
+        searchInput.addEventListener('input', filterSkills);
+      }
+
+      // Category tabs listener
+      categoryTabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          categoryTabs.forEach(function(t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+          activeCategory = tab.dataset.category;
+          filterSkills();
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSkillsFilter);
+    } else {
+      initSkillsFilter();
+    }
+  })();
+</script>

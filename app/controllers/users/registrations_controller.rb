@@ -115,7 +115,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /users/edit
   def edit
     @profile = current_user.profileable
-    @skills = Skill.all if current_user.profileable_type == "StudentProfile"
+    @skills_by_category = Skill.all.order(:name).group_by { |s| s.category.presence || "General" } if current_user.profileable_type == "StudentProfile"
     render :edit
   end
 
@@ -123,7 +123,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     @profile = resource.profileable
-    @skills = Skill.all if resource.profileable_type == "StudentProfile"
+    @skills_by_category = Skill.all.order(:name).group_by { |s| s.category.presence || "General" } if resource.profileable_type == "StudentProfile"
 
     profile_updated = update_profile_attributes
 

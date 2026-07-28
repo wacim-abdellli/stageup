@@ -2419,14 +2419,87 @@ button.btn-accent:hover,
 }
 
 /* Master Profile & Security Edit Form Styling */
-.max-width-720 {
-  max-width: 720px !important;
+.settings-page-container {
+  margin-top: 40px !important;
+  margin-bottom: 80px !important;
+}
+
+.settings-card-wrapper {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-md);
+}
+
+.max-width-800 {
+  max-width: 800px !important;
   width: 100%;
 }
 
-.settings-section-header {
+.settings-section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 12px;
+}
+
+.skills-filter-toolbar {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.skill-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.skill-search-icon {
+  position: absolute;
+  left: 12px;
+  pointer-events: none;
+}
+
+.skill-search-input {
+  padding-left: 36px !important;
+  font-size: 13px !important;
+}
+
+.category-tabs-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cat-tab-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cat-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+.cat-tab-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(194, 65, 12, 0.3);
 }
 
 .skills-checkbox-grid {
@@ -2458,11 +2531,26 @@ button.btn-accent:hover,
   border-color: var(--border-hover);
 }
 
+.skill-checkbox-pill.pill-selected {
+  background: rgba(194, 65, 12, 0.15) !important;
+  border-color: rgba(249, 115, 22, 0.5) !important;
+  color: #FB923C !important;
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.15);
+}
+
 .skill-checkbox-pill input[type="checkbox"] {
   accent-color: var(--primary);
   width: 14px;
   height: 14px;
   cursor: pointer;
+}
+
+.category-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  display: inline-block;
 }
 
 .cv-attached-box {
