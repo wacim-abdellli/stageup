@@ -48,6 +48,17 @@
             <% else %>
               <span class="badge badge-info"><%= t('dashboard.profile.roles.university') %></span>
             <% end %>
+            <% my_public_profile_path = case @role_type
+                                        when "StudentProfile" then student_profile_path(@profile)
+                                        when "CompanyProfile" then company_profile_path(@profile)
+                                        else nil
+                                        end %>
+            <% if my_public_profile_path %>
+              <%= link_to my_public_profile_path, class: "btn btn-primary btn-compact mr-6" do %>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <%= t('dashboard.profile.view_public', default: 'View My Profile') %>
+              <% end %>
+            <% end %>
             <%= link_to t('dashboard.profile.edit'), edit_user_registration_path, class: "btn btn-secondary btn-compact" %>
           </div>
         </div>
