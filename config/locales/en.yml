@@ -705,6 +705,23 @@ en:
         submit: "Register Coordinator"
         submitting: "Registering..."
       back: "Back"
+    edit:
+      title: "Edit Account — StageUp"
+      heading: "Account Settings"
+      subtitle: "Update your email address or change your password."
+      account_details: "Account Details"
+      email_placeholder: "email@example.com"
+      change_password: "Change Password"
+      leave_blank: "leave blank if not changing"
+      toggle_password_aria: "Toggle password visibility"
+      confirm_changes: "Confirm Changes"
+      current_password_placeholder: "Enter current password to confirm changes"
+      current_password_hint: "We need your current password to confirm any changes"
+      submit: "Update Account"
+      danger_zone_label: "Delete Account"
+      danger_zone_desc: "This action is irreversible and removes all your data."
+      delete_account: "Delete Account"
+      delete_confirm: "Permanently delete your account?"
 
   sessions:
     new:
@@ -741,25 +758,6 @@ en:
       submit: "Change my password"
       sign_in: "Log in"
       sign_up: "Sign up"
-
-  registrations:
-    edit:
-      title: "Edit Account — StageUp"
-      heading: "Account Settings"
-      subtitle: "Update your email address or change your password."
-      account_details: "Account Details"
-      email_placeholder: "email@example.com"
-      change_password: "Change Password"
-      leave_blank: "leave blank if not changing"
-      toggle_password_aria: "Toggle password visibility"
-      confirm_changes: "Confirm Changes"
-      current_password_placeholder: "Enter current password to confirm changes"
-      current_password_hint: "We need your current password to confirm any changes"
-      submit: "Update Account"
-      danger_zone_label: "Delete Account"
-      danger_zone_desc: "This action is irreversible and removes all your data."
-      delete_account: "Delete Account"
-      delete_confirm: "Permanently delete your account?"
 
   admin:
     dashboard:

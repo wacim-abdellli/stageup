@@ -704,6 +704,23 @@ fr:
         submit: "Enregistrer le Coordinateur"
         submitting: "Enregistrement..."
       back: "Retour"
+    edit:
+      title: "Modifier le Compte — StageUp"
+      heading: "Paramètres du Compte"
+      subtitle: "Mettez à jour votre adresse email ou changez votre mot de passe."
+      account_details: "Détails du Compte"
+      email_placeholder: "email@exemple.com"
+      change_password: "Changer le Mot de Passe"
+      leave_blank: "laisser vide si inchangé"
+      toggle_password_aria: "Afficher/masquer le mot de passe"
+      confirm_changes: "Confirmer les Modifications"
+      current_password_placeholder: "Entrez le mot de passe actuel pour confirmer"
+      current_password_hint: "Nous avons besoin de votre mot de passe actuel pour confirmer les modifications"
+      submit: "Mettre à Jour le Compte"
+      danger_zone_label: "Supprimer le Compte"
+      danger_zone_desc: "Cette action est irréversible et supprime toutes vos données."
+      delete_account: "Supprimer le Compte"
+      delete_confirm: "Supprimer définitivement votre compte ?"
 
   sessions:
     new:
@@ -740,25 +757,6 @@ fr:
       submit: "Changer mon mot de passe"
       sign_in: "Connexion"
       sign_up: "S'inscrire"
-
-  registrations:
-    edit:
-      title: "Modifier le Compte — StageUp"
-      heading: "Paramètres du Compte"
-      subtitle: "Mettez à jour votre adresse email ou changez votre mot de passe."
-      account_details: "Détails du Compte"
-      email_placeholder: "email@exemple.com"
-      change_password: "Changer le Mot de Passe"
-      leave_blank: "laisser vide si inchangé"
-      toggle_password_aria: "Afficher/masquer le mot de passe"
-      confirm_changes: "Confirmer les Modifications"
-      current_password_placeholder: "Entrez le mot de passe actuel pour confirmer"
-      current_password_hint: "Nous avons besoin de votre mot de passe actuel pour confirmer les modifications"
-      submit: "Mettre à Jour le Compte"
-      danger_zone_label: "Supprimer le Compte"
-      danger_zone_desc: "Cette action est irréversible et supprime toutes vos données."
-      delete_account: "Supprimer le Compte"
-      delete_confirm: "Supprimer définitivement votre compte ?"
 
   admin:
     dashboard:
