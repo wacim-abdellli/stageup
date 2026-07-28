@@ -4,7 +4,8 @@ test:
 
 local:
   service: Disk
-  root: <%= Rails.root.join("storage") %>
+  root: <%= ENV["VERCEL"].present? ? "/tmp/storage" : Rails.root.join("storage") %>
+
 
 amazon:
   service: S3

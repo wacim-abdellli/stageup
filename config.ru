@@ -2,15 +2,18 @@
 
 require_relative "config/environment"
 
-# Auto-prepare database for serverless ephemeral environments (Vercel)
-begin
-  ActiveRecord::Base.establish_connection
-  unless ActiveRecord::Base.connection.table_exists?('schema_migrations')
-    Rails.logger.info "Preparing serverless database schema..."
-    ActiveRecord::Tasks::DatabaseTasks.prepare_all
+# Auto-prepare SQLite database schema for serverless environments (Vercel)
+# This runs migrations if the schema_migrations table doesn't exist yet.
+if Rails.env.production? && !ENV["DATABASE_URL"].present?
+  begin
+    conn = ActiveRecord::Base.connection
+    unless conn.table_exists?("schema_migrations")
+      Rails.logger.info "[Vercel] Running db:schema:load for fresh SQLite database..."
+      load(Rails.root.join("db", "schema.rb"))
+    end
+  rescue => e
+    Rails.logger.warn "[Vercel] DB setup warning: #{e.message}"
   end
-rescue => e
-  Rails.logger.warn "Database auto-prepare warning: #{e.message}"
 end
 
 run Rails.application

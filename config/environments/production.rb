@@ -28,10 +28,11 @@ Rails.application.configure do
   # WARNING: :local storage is volatile — files will be lost on deploy/restart in containerized environments.
   # Migrate to :amazon (S3) or :google (GCS) before production launch.
   # To migrate existing blobs, use `rails active_storage:update_migrate_service`.
-  config.active_storage.service = :amazon
+  config.active_storage.service = ENV["VERCEL"].present? ? :local : :amazon
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  config.assume_ssl = true
+  # Disabled on Vercel to prevent SSL redirect loops — Vercel's edge handles HTTPS.
+  config.assume_ssl = ENV["VERCEL"].present? ? false : true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = ENV["VERCEL"].present? ? false : true
