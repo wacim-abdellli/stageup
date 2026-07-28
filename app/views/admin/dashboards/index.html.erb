@@ -140,9 +140,9 @@
             <% @recent_submissions.each do |sub| %>
               <div class="inline-list-sm-item">
                 <div>
-                  <strong class="inline-list-sm-title"><%= sub.student_profile.full_name %></strong>
+                  <strong class="inline-list-sm-title"><%= sub.student_profile&.full_name || t('home.unknown_user', default: 'Unknown User') %></strong>
                   <span class="inline-list-sm-meta">
-                    <%= sub.offer.title %> &middot; <span class="badge badge-<%= sub.status %>"><%= sub.status.humanize %></span>
+                    <%= sub.offer&.title || t('common.n_a', default: 'N/A') %> &middot; <span class="badge badge-<%= sub.status %>"><%= sub.status.humanize %></span>
                   </span>
                 </div>
                 <span class="text-muted fs-11"><%= time_ago_in_words(sub.created_at) %> <%= t('common.ago', default: 'ago') %></span>

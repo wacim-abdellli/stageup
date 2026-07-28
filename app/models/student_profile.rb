@@ -16,6 +16,10 @@ class StudentProfile < ApplicationRecord
   validates :graduation_year, numericality: { only_integer: true, greater_than_or_equal_to: 2020 }, allow_nil: true
   validate :validate_cv_format
 
+  def full_name
+    "#{first_name} #{last_name}".strip
+  end
+
   def recalculate_commitment_score!
     with_lock do
       base = 100.0
