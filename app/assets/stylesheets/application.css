@@ -7548,15 +7548,26 @@ button.btn-accent:hover,
   padding: 3px 8px;
   border-radius: 4px;
   border: 1px solid var(--border-color);
+  max-width: 100%;
 }
 
-.btn-proof-link {
+.kanban-card-date-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   font-size: 11px;
+  color: var(--text-muted);
+}
+
+.btn-proof-link-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  font-size: 11px;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 6px;
   background: rgba(194, 65, 12, 0.1);
   border: 1px solid rgba(194, 65, 12, 0.25);
@@ -7565,37 +7576,48 @@ button.btn-accent:hover,
   transition: all 0.15s ease;
 }
 
-.btn-proof-link:hover {
+.btn-proof-link-full:hover {
   background: rgba(194, 65, 12, 0.2);
   color: #FFFFFF;
 }
 
-.btn-compact-xs {
-  font-size: 11px !important;
-  padding: 4px 10px !important;
-  border-radius: 6px !important;
-  gap: 4px !important;
+.kanban-card-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
 }
 
-.btn-compact-xs-danger {
-  font-size: 11px !important;
-  padding: 4px 10px !important;
-  border-radius: 6px !important;
+.btn-accept-half {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   gap: 4px !important;
+  font-size: 11px !important;
+  padding: 6px 8px !important;
+  border-radius: 6px !important;
+  white-space: nowrap !important;
+}
+
+.btn-reject-half {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  font-size: 11px !important;
+  padding: 6px 8px !important;
+  border-radius: 6px !important;
+  white-space: nowrap !important;
   background: rgba(239, 68, 68, 0.08) !important;
   border: 1px solid rgba(239, 68, 68, 0.2) !important;
   color: #F87171 !important;
 }
 
-.btn-compact-xs-danger:hover {
+.btn-reject-half:hover {
   background: rgba(239, 68, 68, 0.2) !important;
   color: #FFFFFF !important;
-}
-
-.action-buttons-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .kanban-empty-col {
