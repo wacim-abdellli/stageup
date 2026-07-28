@@ -146,7 +146,7 @@
       <% if @offers.any? %>
         <div class="offers-grid">
           <% @offers.each do |offer| %>
-            <%= link_to offer_path(offer), class: "offer-card", aria: { label: offer.title } do %>
+            <div class="offer-card">
 
               <%# Top row: avatar + title + active dot %>
               <div class="ocard-top">
@@ -155,7 +155,9 @@
                     <%= offer.company_profile.name[0..1].upcase %>
                   </div>
                   <div class="ocard-company-info">
-                    <h3 class="offer-card-title"><%= offer.title %></h3>
+                    <h3 class="offer-card-title">
+                      <%= link_to offer.title, offer_path(offer), class: "color-primary hover-underline" %>
+                    </h3>
                     <%= link_to company_profile_path(offer.company_profile), class: "offer-card-company hover-underline" do %>
                       <%= offer.company_profile.name %>
                     <% end %>
@@ -220,13 +222,13 @@
                     <% end %>
                   </span>
                 </span>
-                <span class="offer-card-action">
+                <%= link_to offer_path(offer), class: "offer-card-action" do %>
                   <span><%= t('offers.index.card.view_details') %></span>
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </span>
+                <% end %>
               </div>
 
-            <% end %>
+            </div>
           <% end %>
         </div>
 
