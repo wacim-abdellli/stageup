@@ -4128,6 +4128,8 @@ button.btn-accent:hover,
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+  flex: 1;
 }
 
 .mockup-avatar {
@@ -4140,6 +4142,7 @@ button.btn-accent:hover,
   font-weight: 700;
   font-size: 13px;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
 }
 
 .avatar-terracotta { background: rgba(251, 146, 60, 0.1); color: var(--text-link); }
@@ -4150,24 +4153,38 @@ button.btn-accent:hover,
 .mockup-row-info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  flex: 1;
 }
 
 .mockup-user-name {
   font-size: 13px;
   font-weight: 600;
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mockup-action-text {
   font-size: 11px;
   color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mockup-score {
   font-size: 12px;
   font-weight: 700;
-  padding: 2px 8px;
+  padding: 4px 10px;
   border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .score-plus {
