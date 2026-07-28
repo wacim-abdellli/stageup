@@ -1,0 +1,164 @@
+<% content_for :title, "Account Settings – StageUp" %>
+
+<div class="auth-container p-vertical-40">
+  <div class="auth-card max-width-720">
+    <div class="auth-header text-left mb-24">
+      <div class="flex-between mb-8">
+        <%= link_to dashboard_path, class: "btn btn-secondary btn-compact" do %>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <%= t('common.back', default: 'Back to Dashboard') %>
+        <% end %>
+        <span class="badge badge-info"><%= current_user.profileable_type.underscore.humanize %></span>
+      </div>
+      <h1 class="auth-title"><%= t('users.edit.title', default: 'Account & Profile Settings') %></h1>
+      <p class="auth-subtitle"><%= t('users.edit.subtitle', default: 'Update your profile information and manage account security credentials.') %></p>
+    </div>
+
+    <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), method: :put, html: { multipart: true, class: "auth-form" } do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+
+      <%# ─── SECTION 1: PERSONAL & PROFESSIONAL PROFILE ────────────────── %>
+      <div class="settings-section mb-32">
+        <div class="settings-section-header mb-16">
+          <div class="flex-align-center gap-8">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <h3 class="fs-16 fw-600 color-primary margin-0"><%= t('users.edit.profile_section', default: 'Personal & Professional Details') %></h3>
+          </div>
+        </div>
+
+        <% if current_user.profileable_type == "StudentProfile" %>
+          <%= fields_for :student_profile, @profile do |sp| %>
+            <div class="form-row-2">
+              <div class="form-group">
+                <%= sp.label :first_name, t('users.new_student.first_name', default: 'First Name'), class: "form-label" %>
+                <%= sp.text_field :first_name, class: "form-control", required: true %>
+              </div>
+              <div class="form-group">
+                <%= sp.label :last_name, t('users.new_student.last_name', default: 'Last Name'), class: "form-label" %>
+                <%= sp.text_field :last_name, class: "form-control", required: true %>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <%= sp.label :phone, t('users.new_student.phone', default: 'Phone Number'), class: "form-label" %>
+                <%= sp.telephone_field :phone, class: "form-control", placeholder: "+216 XX XXX XXX" %>
+              </div>
+              <div class="form-group">
+                <%= sp.label :graduation_year, t('users.new_student.graduation_year', default: 'Graduation Year'), class: "form-label" %>
+                <%= sp.number_field :graduation_year, class: "form-control", min: 2020, max: 2035 %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= sp.label :major, t('users.new_student.major', default: 'Field of Study / Major'), class: "form-label" %>
+              <%= sp.text_field :major, class: "form-control", placeholder: "e.g. Software Engineering, Data Science" %>
+            </div>
+
+            <div class="form-group">
+              <%= sp.label :bio, t('users.new_student.bio', default: 'Bio & Career Summary'), class: "form-label" %>
+              <%= sp.text_area :bio, rows: 3, class: "form-control", placeholder: "Brief summary of your skills, passion, and target internship." %>
+            </div>
+
+            <div class="form-group">
+              <%= sp.label :skills, t('dashboard.profile_bento.skills', default: 'Skills & Competencies'), class: "form-label" %>
+              <div class="skills-checkbox-grid">
+                <% @skills.each do |skill| %>
+                  <label class="skill-checkbox-pill">
+                    <%= check_box_tag "student_profile[skill_ids][]", skill.id, @profile.skill_ids.include?(skill.id) %>
+                    <span><%= skill.name %></span>
+                  </label>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"><%= t('dashboard.profile_bento.cv_document', default: 'Resume / CV Document (PDF)') %></label>
+              <% if @profile.cv.attached? %>
+                <div class="cv-attached-box mb-8">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <span class="fs-13 font-mono text-truncate"><%= @profile.cv.filename %> (<%= number_to_human_size(@profile.cv.byte_size) %>)</span>
+                </div>
+              <% end %>
+              <%= sp.file_field :cv, accept: "application/pdf", class: "form-control-file" %>
+              <span class="form-help-text"><%= t('dashboard.profile_bento.cv_help', default: 'Upload a PDF file up to 5MB.') %></span>
+            </div>
+          <% end %>
+
+        <% elsif current_user.profileable_type == "CompanyProfile" %>
+          <%= fields_for :company_profile, @profile do |cp| %>
+            <div class="form-group">
+              <%= cp.label :name, t('users.new_company.name', default: 'Company Name'), class: "form-label" %>
+              <%= cp.text_field :name, class: "form-control", required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= cp.label :website, t('users.new_company.website', default: 'Company Website'), class: "form-label" %>
+              <%= cp.url_field :website, class: "form-control", placeholder: "https://example.tn" %>
+            </div>
+
+            <div class="form-group">
+              <%= cp.label :description, t('users.new_company.description', default: 'Company Description & Overview'), class: "form-label" %>
+              <%= cp.text_area :description, rows: 4, class: "form-control", placeholder: "Describe your company, tech stack, and what you offer to interns." %>
+            </div>
+          <% end %>
+
+        <% elsif current_user.profileable_type == "UniversityProfile" %>
+          <%= fields_for :university_profile, @profile do |up| %>
+            <div class="form-group">
+              <%= up.label :admin_name, t('users.new_university.admin_name', default: 'Coordinator Full Name'), class: "form-label" %>
+              <%= up.text_field :admin_name, class: "form-control", required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= up.label :department, t('users.new_university.department', default: 'University Department'), class: "form-label" %>
+              <%= up.text_field :department, class: "form-control", placeholder: "e.g. IT Department, Computer Science" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <%# ─── SECTION 2: SECURITY & AUTHENTICATION ──────────────────────── %>
+      <div class="settings-section border-top p-top-24 mb-32">
+        <div class="settings-section-header mb-16">
+          <div class="flex-align-center gap-8">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <h3 class="fs-16 fw-600 color-primary margin-0"><%= t('users.edit.security_section', default: 'Account Security & Login Credentials') %></h3>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, t('users.edit.email', default: 'Account Email Address'), class: "form-label" %>
+          <%= f.email_field :email, class: "form-control", autocomplete: "email", required: true %>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <%= f.label :password, t('users.edit.new_password', default: 'New Password (optional)'), class: "form-label" %>
+            <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: t('users.edit.leave_blank_placeholder', default: 'Leave blank to keep unchanged') %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation, t('users.edit.confirm_password', default: 'Confirm New Password'), class: "form-label" %>
+            <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+          </div>
+        </div>
+
+        <div class="security-notice-box mb-16">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" class="flex-shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span class="fs-12 text-secondary"><%= t('users.edit.current_password_help', default: 'Enter your current password ONLY if changing your email or password for security confirmation.') %></span>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :current_password, t('users.edit.current_password', default: 'Current Password (if changing email/password)'), class: "form-label" %>
+          <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
+        </div>
+      </div>
+
+      <%# ─── FOOTER ACTIONS ─────────────────────────────────────────────── %>
+      <div class="form-footer-row flex-between">
+        <%= link_to t('common.cancel', default: 'Cancel'), dashboard_path, class: "btn btn-secondary" %>
+        <%= f.submit t('users.edit.save_changes', default: 'Save Changes'), class: "btn btn-primary btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+</div>
