@@ -33,8 +33,8 @@ student_1_profile.update!(
 
 user_student_1 = User.find_or_initialize_by(email: "mohamed.benali@isetsf.rnu.tn")
 user_student_1.update!(
-  password: "password1234",
-  password_confirmation: "password1234",
+  password: "password123",
+  password_confirmation: "password123",
   profileable: student_1_profile
 )
 
@@ -51,8 +51,8 @@ student_2_profile.update!(
 
 user_student_2 = User.find_or_initialize_by(email: "cyrine.trabelsi@enis.tn")
 user_student_2.update!(
-  password: "password1234",
-  password_confirmation: "password1234",
+  password: "password123",
+  password_confirmation: "password123",
   profileable: student_2_profile
 )
 
@@ -70,8 +70,8 @@ company_1_profile.update!(
 
 user_company_1 = User.find_or_initialize_by(email: "contact@devcorp.tn")
 user_company_1.update!(
-  password: "password1234",
-  password_confirmation: "password1234",
+  password: "password123",
+  password_confirmation: "password123",
   profileable: company_1_profile
 )
 
@@ -88,8 +88,8 @@ company_2_profile.update!(
 
 user_company_2 = User.find_or_initialize_by(email: "recruiting@alphatech.co")
 user_company_2.update!(
-  password: "password1234",
-  password_confirmation: "password1234",
+  password: "password123",
+  password_confirmation: "password123",
   profileable: company_2_profile
 )
 
@@ -101,8 +101,8 @@ uni_admin_profile.update!(
 
 user_uni = User.find_or_initialize_by(email: "ahmed.mansour@isetsf.rnu.tn")
 user_uni.update!(
-  password: "password1234",
-  password_confirmation: "password1234",
+  password: "password123",
+  password_confirmation: "password123",
   profileable: uni_admin_profile
 )
 
@@ -118,8 +118,8 @@ admin_profile.update!(
 
 master_admin = User.find_or_initialize_by(email: "wacimabdelli01@gmail.com")
 master_admin.allow_admin_creation = true
-master_admin.password = "password1234"
-master_admin.password_confirmation = "password1234"
+master_admin.password = "password123"
+master_admin.password_confirmation = "password123"
 master_admin.profileable = admin_profile
 master_admin.save!
 
