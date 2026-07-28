@@ -35,7 +35,9 @@ module Admin
         return
       end
 
-      @user.update_column(:admin, !@user.admin)
+      new_admin_state = !@user.admin
+      User.where(id: @user.id).update_all(admin: new_admin_state)
+      @user.reload
       new_status = @user.admin? ? "granted admin privileges" : "removed admin privileges"
       redirect_to admin_users_path, notice: "User #{@user.email} #{new_status}."
     end
