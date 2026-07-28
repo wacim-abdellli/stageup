@@ -5,8 +5,20 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#09090B",
-  "theme_color": "#4F46E5",
+  "theme_color": "#C2410C",
   "icons": [
+    {
+      "src": "/android-chrome-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
     {
       "src": "/icon.png",
       "type": "image/png",

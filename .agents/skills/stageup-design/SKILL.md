@@ -32,9 +32,9 @@ Ensure these variable tokens are declared in `:root` and used across all stylesh
   --text-secondary: #9FA3AF;      /* Body copy / zinc grey */
   --text-muted: #626773;          /* Secondary descriptions */
   
-  --primary: #4F46E5;             /* Indigo accent (used sparingly) */
-  --primary-hover: #6366F1;
-  --primary-light: rgba(99, 102, 241, 0.08);
+  --primary: #C2410C;             /* Terracotta brand accent */
+  --primary-hover: #EA580C;
+  --primary-light: rgba(194, 65, 12, 0.08);
   
   --accent: #FFFFFF;              /* Solid white CTA accent */
   --accent-hover: #E4E4E7;

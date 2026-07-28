@@ -14,10 +14,10 @@
   /* Links */
   --text-link: #818CF8;
 
-  /* Primary Brand (Indigo) */
-  --primary: #6366F1;
-  --primary-hover: #818CF8;
-  --primary-light: rgba(99, 102, 241, 0.08);
+  /* Primary Brand (Terracotta) */
+  --primary: #C2410C;
+  --primary-hover: #EA580C;
+  --primary-light: rgba(194, 65, 12, 0.08);
 
   /* Accents */
   --accent: #FFFFFF;

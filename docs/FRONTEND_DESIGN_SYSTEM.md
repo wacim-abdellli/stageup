@@ -18,7 +18,7 @@ All front-end views must use semantic CSS tokens instead of hardcoded hex values
   --text-secondary: #9FA3AF;      /* Zinc gray body text */
   --text-muted: #626773;          /* Subtle sub-labels */
   
-  --primary: #4F46E5;             /* Indigo primary accent */
+  --primary: #C2410C;             /* Terracotta primary accent */
   --primary-hover: #6366F1;
   --primary-light: rgba(99, 102, 241, 0.08);
   

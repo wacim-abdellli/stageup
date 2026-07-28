@@ -1,4 +1,4 @@
 <h1><%= t('user_mailer.application_received.heading') %></h1>
 <p><%= t('user_mailer.application_received.body_html', student_name: "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name}", offer_title: @offer.title) %></p>
 <p><%= t('user_mailer.application_received.login_instruction') %></p>
-<%= link_to t('user_mailer.application_received.view_applications'), dashboard_url, style: "display: inline-block; padding: 10px 20px; background-color: #4F46E5; color: white; text-decoration: none; border-radius: 6px;" %>
+<%= link_to t('user_mailer.application_received.view_applications'), dashboard_url, style: "display: inline-block; padding: 10px 20px; background-color: #C2410C; color: white; text-decoration: none; border-radius: 6px;" %>
