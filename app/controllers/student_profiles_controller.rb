@@ -4,9 +4,16 @@ class StudentProfilesController < ApplicationController
 
   def show
     @commitment_events = @student_profile.commitment_events.order(created_at: :desc).limit(10)
-    @completed_submissions = @student_profile.submissions.where(status: %w[completed accepted]).includes(:offer, :reviews)
-    @reviews = Review.where(target_type: "StudentProfile", target_id: @student_profile.id).includes(:author)
-    @avg_rating = Review.where(target_type: "StudentProfile", target_id: @student_profile.id).average(:rating)&.round(1)
+    @completed_submissions = @student_profile.submissions.where(status: %w[completed accepted]).includes(:offer)
+
+    user = @student_profile.user
+    if user
+      @reviews = Review.where(receiver_id: user.id).includes(:author)
+      @avg_rating = Review.where(receiver_id: user.id).average(:rating)&.round(1)
+    else
+      @reviews = Review.none
+      @avg_rating = nil
+    end
   end
 
   private

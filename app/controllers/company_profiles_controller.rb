@@ -4,8 +4,15 @@ class CompanyProfilesController < ApplicationController
 
   def show
     @active_offers = @company_profile.offers.where(status: "active").order(created_at: :desc)
-    @reviews = Review.where(target_type: "CompanyProfile", target_id: @company_profile.id).includes(:author)
-    @avg_rating = Review.where(target_type: "CompanyProfile", target_id: @company_profile.id).average(:rating)&.round(1)
+
+    user = @company_profile.user
+    if user
+      @reviews = Review.where(receiver_id: user.id).includes(:author)
+      @avg_rating = Review.where(receiver_id: user.id).average(:rating)&.round(1)
+    else
+      @reviews = Review.none
+      @avg_rating = nil
+    end
   end
 
   private

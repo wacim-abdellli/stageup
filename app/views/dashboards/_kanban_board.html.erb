@@ -45,7 +45,7 @@
             </div>
 
             <div class="kanban-card-row-proof mb-8">
-              <%= link_to student_profile_path(sub.student_profile), target: "_blank", class: "btn-profile-link-full" do %>
+              <%= link_to student_profile_path(sub.student_profile), class: "btn-profile-link-full" do %>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 <%= t('kanban.card.view_profile', default: 'View Profile') %>
               <% end %>
