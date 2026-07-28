@@ -21,6 +21,9 @@ Rails.application.configure do
   # Enable serving of static files from the /public folder
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present? || ENV["VERCEL"].present? || true
 
+  # Secret key base fallback for Vercel serverless deployments
+  config.secret_key_base = ENV.fetch("SECRET_KEY_BASE", "a_secure_stageup_production_secret_key_base_token_2026_vercel")
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   # WARNING: :local storage is volatile — files will be lost on deploy/restart in containerized environments.
   # Migrate to :amazon (S3) or :google (GCS) before production launch.
