@@ -1,4 +1,8 @@
 fr:
+  date:
+    formats:
+      long: "%-d %B %Y"
+
   activerecord:
     attributes:
       user:
@@ -207,6 +211,13 @@ fr:
         status_label: "Statut de la Candidature :"
         view_submission: "Voir Mon Lien de Soumission"
         students_only: "Seuls les étudiants connectés peuvent postuler aux stages."
+        statuses:
+          started: "Commencé"
+          submitted: "Soumis"
+          reviewed: "Examiné"
+          accepted: "Accepté"
+          rejected: "Rejeté"
+          completed: "Terminé"
         modal_mission_desc: "Vous êtes sur le point de commencer la mission de preuve de travail pour <strong>%{offer_title}</strong>."
         modal_timer: "Fenêtre de Temps :"
         modal_success_reward: "Récompense en cas de succès :"
@@ -216,6 +227,7 @@ fr:
         modal_cv_desc: "Vous postulez à <strong>%{offer_title}</strong> chez %{company_name}."
         cv_link_label: "Lien CV / Document"
         cv_link_hint: "Collez un lien public Google Drive, Dropbox, LinkedIn ou PDF vers votre CV."
+        cv_placeholder: "https://drive.google.com/your-cv.pdf"
         confirm_start: "Confirmer et Démarrer la Mission"
         confirm_submit_cv: "Confirmer et Soumettre le CV"
       deadline:
@@ -226,6 +238,7 @@ fr:
         skills: "Compétences"
         major: "Filière"
         readiness: "Score"
+        match_label: "Correspondance"
 
     new:
       title: "Publier un Stage – StageUp"

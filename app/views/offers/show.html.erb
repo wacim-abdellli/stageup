@@ -19,7 +19,7 @@
               <% breakdown = @offer.match_breakdown_for(current_user.profileable) rescue nil %>
               <% if breakdown && breakdown[:total] < 100 %>
                 <span class="match-badge match-badge-tooltip-wrapper ml-8 <%= breakdown[:total] >= 70 ? 'match-badge-high' : (breakdown[:total] >= 40 ? 'match-badge-medium' : 'match-badge-low') %>">
-                  <%= breakdown[:total] %>% Match
+                  <%= breakdown[:total] %>% <%= t('offers.show.match_breakdown.match_label') %>
                   <span class="match-tooltip">
                     <span class="match-tooltip-row"><%= t('offers.show.match_breakdown.skills', default: 'Skills') %>: <%= breakdown[:skill].round %>pt</span>
                     <span class="match-tooltip-row"><%= t('offers.show.match_breakdown.major', default: 'Major') %>: <%= breakdown[:major].round %>pt</span>
@@ -59,7 +59,7 @@
             <% elsif days_left <= 7 %>
               <%= t('offers.show.deadline.days_left', count: days_left, default: '%{count} days left') %>
             <% else %>
-              <%= @offer.deadline.strftime("%b %d, %Y") %>
+              <%= I18n.l(@offer.deadline, format: :long) %>
             <% end %>
           </span>
         <% end %>
@@ -222,7 +222,7 @@
             <div class="app-status-center">
               <p class="fs-14 text-secondary mb-8"><%= t('offers.show.application.status_label') %></p>
               <span class="badge badge-success fs-12">
-                <%= @submission.status.upcase.gsub('_', ' ') %>
+                <%= t("offers.show.application.statuses.#{@submission.status}", default: @submission.status.upcase.gsub('_', ' ')) %>
               </span>
               <% if @submission.github_link.present? %>
                 <div class="mt-15 fs-13">
@@ -305,7 +305,7 @@
             <div class="form-group mb-16">
               <label class="form-label" for="custom_cv_url"><%= t('offers.show.application.cv_link_label') %></label>
               <%= f.url_field :custom_cv_url, value: current_user.profileable.cv_url, class: "form-control",
-                  placeholder: "https://drive.google.com/your-cv.pdf", required: true %>
+                  placeholder: t('offers.show.application.cv_placeholder'), required: true %>
               <span class="fs-12 text-muted mt-4 display-block">
                 <%= t('offers.show.application.cv_link_hint') %>
               </span>

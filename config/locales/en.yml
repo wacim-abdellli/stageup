@@ -1,4 +1,8 @@
 en:
+  date:
+    formats:
+      long: "%B %d, %Y"
+
   activerecord:
     attributes:
       user:
@@ -207,6 +211,13 @@ en:
         status_label: "Application Status:"
         view_submission: "View My Submission Link"
         students_only: "Only logged-in students can apply to internships."
+        statuses:
+          started: "Started"
+          submitted: "Submitted"
+          reviewed: "Reviewed"
+          accepted: "Accepted"
+          rejected: "Rejected"
+          completed: "Completed"
         modal_mission_desc: "You are about to start the proof-of-work mission for <strong>%{offer_title}</strong>."
         modal_timer: "Timer Window:"
         modal_success_reward: "Success Reward:"
@@ -216,6 +227,7 @@ en:
         modal_cv_desc: "You are applying to <strong>%{offer_title}</strong> at %{company_name}."
         cv_link_label: "CV Link / Document URL"
         cv_link_hint: "Paste a public Google Drive, Dropbox, LinkedIn, or PDF link to your resume."
+        cv_placeholder: "https://drive.google.com/your-cv.pdf"
         confirm_start: "Confirm & Start Mission"
         confirm_submit_cv: "Confirm & Submit CV"
       deadline:
@@ -226,6 +238,7 @@ en:
         skills: "Skills"
         major: "Major"
         readiness: "Score"
+        match_label: "Match"
 
     new:
       title: "Post an Internship – StageUp"

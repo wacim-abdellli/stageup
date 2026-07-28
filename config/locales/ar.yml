@@ -1,4 +1,8 @@
 ar:
+  date:
+    formats:
+      long: "%-d %B %Y"
+
   activerecord:
     attributes:
       user:
@@ -207,6 +211,13 @@ ar:
         status_label: "حالة الطلب:"
         view_submission: "عرض رابط تقديمي"
         students_only: "الطلاب المسجلون دخولهم فقط يمكنهم التقديم على التربصات."
+        statuses:
+          started: "بدأت"
+          submitted: "مقدم"
+          reviewed: "تمت المراجعة"
+          accepted: "مقبول"
+          rejected: "مرفوض"
+          completed: "مكتمل"
         modal_mission_desc: "أنت على وشك بدء مهمة إثبات العمل لـ <strong>%{offer_title}</strong>."
         modal_timer: "نافذة الوقت:"
         modal_success_reward: "مكافأة النجاح:"
@@ -216,6 +227,7 @@ ar:
         modal_cv_desc: "أنت تتقدم إلى <strong>%{offer_title}</strong> في %{company_name}."
         cv_link_label: "رابط السيرة الذاتية / المستند"
         cv_link_hint: "أضف رابطاً عاماً من Google Drive، Dropbox، LinkedIn، أو PDF لسيرتك الذاتية."
+        cv_placeholder: "https://drive.google.com/your-cv.pdf"
         confirm_start: "تأكيد وبدء المهمة"
         confirm_submit_cv: "تأكيد وتقديم السيرة الذاتية"
       deadline:
@@ -226,6 +238,7 @@ ar:
         skills: "المهارات"
         major: "التخصص"
         readiness: "النقاط"
+        match_label: "مطابقة"
 
     new:
       title: "نشر تربص – StageUp"
