@@ -60,35 +60,35 @@
     </div>
 
     <div class="role-grid">
-      <%= link_to new_student_registration_path, class: "role-card role-card-student" do %>
+      <%= link_to new_student_registration_path, class: "role-card role-card-student", title: t('registrations.select_role.student.desc') do %>
         <div class="role-icon icon-indigo">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
         </div>
         <div class="role-info">
           <h3 class="role-title"><%= t('registrations.select_role.student.title') %></h3>
-          <p class="role-desc"><%= t('registrations.select_role.student.desc') %></p>
+          <p class="role-desc" title="<%= t('registrations.select_role.student.desc') %>"><%= t('registrations.select_role.student.desc') %></p>
         </div>
         <svg class="role-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       <% end %>
 
-      <%= link_to new_company_registration_path, class: "role-card role-card-company" do %>
+      <%= link_to new_company_registration_path, class: "role-card role-card-company", title: t('registrations.select_role.company.desc') do %>
         <div class="role-icon icon-emerald">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         </div>
         <div class="role-info">
           <h3 class="role-title"><%= t('registrations.select_role.company.title') %></h3>
-          <p class="role-desc"><%= t('registrations.select_role.company.desc') %></p>
+          <p class="role-desc" title="<%= t('registrations.select_role.company.desc') %>"><%= t('registrations.select_role.company.desc') %></p>
         </div>
         <svg class="role-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       <% end %>
 
-      <%= link_to new_university_registration_path, class: "role-card role-card-university" do %>
+      <%= link_to new_university_registration_path, class: "role-card role-card-university", title: t('registrations.select_role.university.desc') do %>
         <div class="role-icon icon-amber">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h4"/><path d="M18 9h2a2 2 0 0 1 2 2v11h-4"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
         </div>
         <div class="role-info">
           <h3 class="role-title"><%= t('registrations.select_role.university.title') %></h3>
-          <p class="role-desc"><%= t('registrations.select_role.university.desc') %></p>
+          <p class="role-desc" title="<%= t('registrations.select_role.university.desc') %>"><%= t('registrations.select_role.university.desc') %></p>
         </div>
         <svg class="role-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       <% end %>
