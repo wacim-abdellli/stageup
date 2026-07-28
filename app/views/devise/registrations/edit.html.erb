@@ -1,15 +1,15 @@
-<% content_for :title, "Edit Account — StageUp" %>
+<% content_for :title, t("registrations.edit.title") %>
 <div class="form-page">
   <div class="form-page-header">
-    <h1 class="form-page-title">Account Settings</h1>
-    <p class="form-page-subtitle">Update your email address or change your password.</p>
+    <h1 class="form-page-title"><%= t("registrations.edit.heading") %></h1>
+    <p class="form-page-subtitle"><%= t("registrations.edit.subtitle") %></p>
   </div>
   <div class="form-page-body">
 
     <% if resource.errors.any? %>
       <div class="flash-message flash-alert mb-20">
         <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
-        <span><%= resource.errors.full_messages.first %> (<%= resource.errors.count %> error(s))</span>
+        <span><%= resource.errors.full_messages.first %> (<%= resource.errors.count %> <%= t("common.errors") %>)</span>
       </div>
     <% end %>
 
@@ -18,18 +18,18 @@
       <div class="form-section">
         <div class="form-section-title">
           <i data-lucide="user"></i>
-          Account Details
+          <%= t("registrations.edit.account_details") %>
         </div>
         <div class="form-group">
           <%= f.label :email, class: "form-label" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "email@example.com" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: t("registrations.edit.email_placeholder") %>
         </div>
       </div>
 
       <div class="form-section">
         <div class="form-section-title">
           <i data-lucide="key"></i>
-          Change Password <span class="text-muted fw-500 text-normal-case">(leave blank if not changing)</span>
+          <%= t("registrations.edit.change_password") %> <span class="text-muted fw-500 text-normal-case">(<%= t("registrations.edit.leave_blank") %>)</span>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -38,7 +38,7 @@
               <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "••••••••" %>
               <button type="button" class="pw-toggle"
                 onclick="var i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';"
-                aria-label="Toggle password visibility">
+                aria-label="<%= t("registrations.edit.toggle_password_aria") %>">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
             </div>
@@ -50,7 +50,7 @@
               <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "••••••••" %>
               <button type="button" class="pw-toggle"
                 onclick="var i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';"
-                aria-label="Toggle password visibility">
+                aria-label="<%= t("registrations.edit.toggle_password_aria") %>">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
             </div>
@@ -61,28 +61,28 @@
       <div class="form-section">
         <div class="form-section-title">
           <i data-lucide="shield-check"></i>
-          Confirm Changes
+          <%= t("registrations.edit.confirm_changes") %>
         </div>
         <div class="form-group">
           <%= f.label :current_password, class: "form-label" %>
-          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", placeholder: "Enter current password to confirm changes", required: true %>
-          <small class="hint-text">We need your current password to confirm any changes</small>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", placeholder: t("registrations.edit.current_password_placeholder"), required: true %>
+          <small class="hint-text"><%= t("registrations.edit.current_password_hint") %></small>
         </div>
       </div>
 
       <div class="form-footer">
-        <%= link_to "Back", :back, class: "btn btn-secondary btn-cancel" %>
-        <%= f.submit "Update Account", class: "btn btn-primary btn-submit" %>
+        <%= link_to t("common.back"), :back, class: "btn btn-secondary btn-cancel" %>
+        <%= f.submit t("registrations.edit.submit"), class: "btn btn-primary btn-submit" %>
       </div>
     <% end %>
 
     <div class="danger-zone">
       <div class="danger-zone-text">
-        <div class="danger-zone-label">Delete Account</div>
-        <div class="danger-zone-desc">This action is irreversible and removes all your data.</div>
+        <div class="danger-zone-label"><%= t("registrations.edit.danger_zone_label") %></div>
+        <div class="danger-zone-desc"><%= t("registrations.edit.danger_zone_desc") %></div>
       </div>
-      <%= button_to "Delete Account", registration_path(resource_name),
-            data: { confirm: "Permanently delete your account?" },
+      <%= button_to t("registrations.edit.delete_account"), registration_path(resource_name),
+            data: { confirm: t("registrations.edit.delete_confirm") },
             method: :delete,
             class: "btn btn-secondary btn-danger-outline" %>
     </div>

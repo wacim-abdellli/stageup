@@ -2,8 +2,8 @@
   <div class="auth-card">
     <div class="auth-header">
       <%= render "layouts/navbar_brand" %>
-      <h2 class="auth-title">Change your password</h2>
-      <p class="auth-subtitle">Enter your new credentials below</p>
+      <h2 class="auth-title"><%= t("passwords.edit.title") %></h2>
+      <p class="auth-subtitle"><%= t("passwords.edit.subtitle") %></p>
     </div>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
@@ -14,7 +14,7 @@
         <div class="flash-col">
           <div class="flash-col-header">
             <i data-lucide="alert-circle" class="icon-16 stroke-danger flex-shrink-0"></i>
-            <strong>Please resolve the following errors:</strong>
+            <strong><%= t("passwords.edit.errors_title") %></strong>
           </div>
           <ul class="error-list">
             <% errors.each do |msg| %>
@@ -25,26 +25,26 @@
       <% end %>
 
       <div class="form-group">
-        <%= f.label :password, "New password", class: "form-label" %>
+        <%= f.label :password, t("passwords.edit.new_password"), class: "form-label" %>
         <% if @minimum_password_length %>
-          <span class="fs-12 text-secondary"> (minimum <%= @minimum_password_length %> characters)</span>
+          <span class="fs-12 text-secondary"> <%= t("passwords.edit.minimum_characters", count: @minimum_password_length) %></span>
         <% end %>
         <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control", placeholder: "••••••••", required: true %>
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation, "Confirm new password", class: "form-label" %>
+        <%= f.label :password_confirmation, t("passwords.edit.confirm_new_password"), class: "form-label" %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "••••••••", required: true %>
       </div>
 
       <div class="form-group mt-30">
-        <%= f.submit "Change my password", class: "btn btn-accent" %>
+        <%= f.submit t("passwords.edit.submit"), class: "btn btn-accent" %>
       </div>
     <% end %>
 
     <div class="auth-links">
-      <%= link_to "Log in", new_user_session_path %>
-      <%= link_to "Sign up", select_role_path %>
+      <%= link_to t("passwords.edit.sign_in"), new_user_session_path %>
+      <%= link_to t("passwords.edit.sign_up"), select_role_path %>
     </div>
   </div>
 </div>

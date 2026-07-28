@@ -1,9 +1,9 @@
-<% content_for :title, "Edit Internship Offer – StageUp" %>
+<% content_for :title, t("offers.edit.title") %>
 <div class="form-page">
 
   <div class="form-page-header">
-    <h1 class="form-page-title">Edit Internship Offer</h1>
-    <p class="form-page-subtitle">Update the details or proof mission for this offer.</p>
+    <h1 class="form-page-title"><%= t("offers.edit.heading") %></h1>
+    <p class="form-page-subtitle"><%= t("offers.edit.subtitle") %></p>
   </div>
 
   <div class="form-page-body">
@@ -11,7 +11,7 @@
     <% if @offer.errors.any? %>
       <div class="flash-message flash-alert mb-20">
         <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
-        <span><%= @offer.errors.full_messages.first %> (<%= @offer.errors.count %> error(s))</span>
+        <span><%= @offer.errors.full_messages.first %> (<%= @offer.errors.count %> <%= t("common.errors") %>)</span>
       </div>
     <% end %>
 
@@ -20,43 +20,56 @@
       <div class="form-section">
         <div class="form-section-title">
           <i data-lucide="briefcase"></i>
-          Internship Details
+          <%= t("offers.new.form.internship_details") %>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="offer_title">Internship Title</label>
-          <%= f.text_field :title, id: "offer_title", class: "form-control", placeholder: "e.g. Front-End Web Developer Intern", required: true %>
+          <%= f.label :title, t("offers.form.title"), class: "form-label", for: "offer_title" %>
+          <%= f.text_field :title, id: "offer_title", class: "form-control", placeholder: t("offers.new.form.title_placeholder"), required: true %>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="offer_description">Description & Requirements</label>
-          <%= f.text_area :description, id: "offer_description", class: "form-control", rows: 5, placeholder: "Describe the tasks, tools, and profile you're looking for...", required: true %>
+          <%= f.label :description, t("offers.new.form.description_label"), class: "form-label", for: "offer_description" %>
+          <%= f.text_area :description, id: "offer_description", class: "form-control", rows: 5, placeholder: t("offers.new.form.description_placeholder"), required: true %>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="offer_stage_type">Stage Type</label>
-            <%= f.select :stage_type, [["PFE (Graduation)", "PFE"], ["PFA (Mid-Study)", "PFA"], ["Initiation / Observation", "initiation"], ["Free / Skill-Building", "free"]], { prompt: "Select type" }, { id: "offer_stage_type", class: "form-control", required: true } %>
+            <%= f.label :stage_type, t("offers.form.stage_type"), class: "form-label", for: "offer_stage_type" %>
+            <%= f.select :stage_type,
+                  [[t("offers.new.form.stage_type_pfe"), "PFE"],
+                   [t("offers.new.form.stage_type_pfa"), "PFA"],
+                   [t("offers.new.form.stage_type_initiation"), "initiation"],
+                   [t("offers.new.form.stage_type_free"), "free"]],
+                  { prompt: t("offers.new.form.stage_type_prompt") },
+                  { id: "offer_stage_type", class: "form-control", required: true } %>
           </div>
           <div class="form-group">
-            <label class="form-label" for="offer_spots">Available Spots</label>
+            <%= f.label :spots, t("offers.form.spots"), class: "form-label", for: "offer_spots" %>
             <%= f.number_field :spots, id: "offer_spots", class: "form-control", min: 1, required: true %>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="offer_location">Location</label>
-            <%= f.text_field :location, id: "offer_location", class: "form-control", placeholder: "e.g. Sfax", required: true %>
+            <%= f.label :location, t("offers.form.location"), class: "form-label", for: "offer_location" %>
+            <%= f.text_field :location, id: "offer_location", class: "form-control", placeholder: t("offers.new.form.location_placeholder"), required: true %>
           </div>
           <div class="form-group">
-            <label class="form-label" for="offer_work_mode">Work Mode</label>
-            <%= f.select :work_mode, [["On-Site", "onsite"], ["Remote", "remote"], ["Hybrid", "hybrid"]], {}, { id: "offer_work_mode", class: "form-control", required: true } %>
+            <%= f.label :work_mode, t("offers.form.work_mode"), class: "form-label", for: "offer_work_mode" %>
+            <%= f.select :work_mode,
+                  [[t("common.work_modes.on_site"), "onsite"],
+                   [t("common.work_modes.remote"), "remote"],
+                   [t("common.work_modes.hybrid"), "hybrid"]],
+                  {},
+                  { id: "offer_work_mode", class: "form-control", required: true } %>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="offer_deadline">Application Deadline <span class="text-muted fw-500 text-normal-case">(optional)</span></label>
+          <%= f.label :deadline, class: "form-label", for: "offer_deadline" do %>
+            <%= t("offers.form.deadline") %> <span class="text-muted fw-500 text-normal-case">(<%= t("common.optional") %>)</span>
+          <% end %>
           <%= f.date_field :deadline, id: "offer_deadline", class: "form-control" %>
         </div>
       </div>
@@ -65,31 +78,31 @@
         <div class="form-section-mission">
           <div class="form-section-title">
             <i data-lucide="git-commit"></i>
-            Proof of Work Mission <span class="text-muted fw-500 text-normal-case fs-12">(optional)</span>
+            <%= t("offers.new.form.mission_section") %> <span class="text-muted fw-500 text-normal-case fs-12">(<%= t("common.optional") %>)</span>
           </div>
           <p class="fs-13 text-secondary mb-20 lh-15">
-            Attach a small hands-on test (30–90 min) to filter candidates by real skill. Leave blank for standard CV-only applications.
+            <%= t("offers.new.form.mission_description_text") %>
           </p>
           <%= f.fields_for :mission do |m| %>
             <div class="form-group">
-              <label class="form-label" for="mission_title">Mission Title</label>
-              <%= m.text_field :title, id: "mission_title", class: "form-control", placeholder: "e.g. Build a Responsive Navigation Bar" %>
+              <%= m.label :title, t("offers.form.mission_title"), class: "form-label", for: "mission_title" %>
+              <%= m.text_field :title, id: "mission_title", class: "form-control", placeholder: t("offers.new.form.mission_title_placeholder") %>
             </div>
             <div class="form-group">
-              <label class="form-label" for="mission_instructions">Instructions & Rubric</label>
-              <%= m.text_area :instructions, id: "mission_instructions", class: "form-control", rows: 4, placeholder: "Goal, specs, resources, and evaluation details..." %>
+              <%= m.label :instructions, t("offers.new.form.mission_instructions_label"), class: "form-label", for: "mission_instructions" %>
+              <%= m.text_area :instructions, id: "mission_instructions", class: "form-control", rows: 4, placeholder: t("offers.new.form.mission_instructions_placeholder") %>
             </div>
             <div class="form-group">
-              <label class="form-label" for="mission_duration">Estimated Time (minutes)</label>
-              <%= m.number_field :estimated_duration_minutes, id: "mission_duration", class: "form-control", placeholder: "e.g. 60" %>
+              <%= m.label :estimated_duration_minutes, t("offers.form.mission_duration"), class: "form-label", for: "mission_duration" %>
+              <%= m.number_field :estimated_duration_minutes, id: "mission_duration", class: "form-control", placeholder: t("offers.new.form.mission_duration_placeholder") %>
             </div>
           <% end %>
         </div>
       </div>
 
       <div class="form-footer">
-        <%= link_to "Cancel", offer_path(@offer), class: "btn btn-secondary btn-cancel" %>
-        <%= f.submit "Update Offer", class: "btn btn-primary btn-submit", data: { disable_with: "Updating…" } %>
+        <%= link_to t("common.cancel"), offer_path(@offer), class: "btn btn-secondary btn-cancel" %>
+        <%= f.submit t("offers.edit.form.submit"), class: "btn btn-primary btn-submit", data: { disable_with: t("offers.edit.form.submitting") } %>
       </div>
 
     <% end %>

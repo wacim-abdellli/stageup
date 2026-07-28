@@ -2,14 +2,14 @@
   <div class="auth-card">
     <div class="auth-header">
       <%= render "layouts/navbar_brand" %>
-      <h2 class="auth-title">Log in</h2>
-      <p class="auth-subtitle">Welcome back to StageUp</p>
+      <h2 class="auth-title"><%= t("sessions.new.title") %></h2>
+      <p class="auth-subtitle"><%= t("sessions.new.subtitle") %></p>
     </div>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
         <%= f.label :email, class: "form-label" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "email@example.com", required: true %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: t("sessions.new.email_placeholder"), required: true %>
       </div>
 
       <div class="form-group">
@@ -18,7 +18,7 @@
           <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "••••••••", required: true %>
           <button type="button" class="pw-toggle"
             onclick="var i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';"
-            aria-label="Toggle password visibility">
+            aria-label="<%= t("sessions.new.toggle_password_aria") %>">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
         </div>
@@ -27,18 +27,18 @@
       <% if devise_mapping.rememberable? %>
         <div class="auth-remember-row">
           <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
+          <%= f.label :remember_me, t("sessions.new.remember_me") %>
         </div>
       <% end %>
 
       <div class="mt-30">
-        <%= f.submit "Log in", class: "btn btn-accent btn-block", style: "cursor: pointer;" %>
+        <%= f.submit t("sessions.new.submit"), class: "btn btn-accent btn-block", style: "cursor: pointer;" %>
       </div>
     <% end %>
 
     <div class="auth-links">
-      <%= link_to "Sign up", select_role_path %>
-      <%= link_to "Forgot your password?", new_password_path(resource_name), style: "font-size: 13px;" %>
+      <%= link_to t("sessions.new.sign_up"), select_role_path %>
+      <%= link_to t("sessions.new.forgot_password"), new_password_path(resource_name), style: "font-size: 13px;" %>
     </div>
   </div>
 </div>
