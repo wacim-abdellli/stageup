@@ -636,7 +636,7 @@ en:
       university:
         title: "University Coordinator"
         desc: "Verify students, track agreements, manage academic partnerships"
-      already_account: "Already have an account? %{link}"
+      already_account_html: "Already have an account? %{link}"
       sign_in: "Sign In"
     new_student:
       title: "Student Registration"

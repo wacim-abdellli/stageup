@@ -580,89 +580,6 @@ ar:
         submitting: "جاري الإرسال…"
         cancel: "إلغاء"
 
-  registrations:
-    select_role:
-      title: "اختر دورك"
-      subtitle: "حدد كيف ستستخدم StageUp للبدء"
-      student:
-        title: "طالب"
-        desc: "ابحث عن تربصات موثقة، ابنِ سمعتك، احصل على وظيفة"
-      company:
-        title: "شركة"
-        desc: "انشر تربصات، قيم المواهب بمهام إثبات العمل"
-      university:
-        title: "منسق جامعي"
-        desc: "تحقق من الطلاب، تتبع الاتفاقيات، إدارة الشراكات الأكاديمية"
-      already_account: "لديك حساب بالفعل؟ %{link}"
-      sign_in: "تسجيل الدخول"
-    new_student:
-      title: "تسجيل طالب"
-      subtitle: "أنشئ ملفك الشخصي كطالب موثق"
-      errors_title: "يرجى تصحيح الأخطاء التالية:"
-      not_student: "لست طالباً؟"
-      form:
-        first_name: "الاسم الأول"
-        first_name_placeholder: "محمد"
-        last_name: "اللقب"
-        last_name_placeholder: "بن علي"
-        phone: "رقم الهاتف"
-        phone_placeholder: "+216 99 123 456"
-        university: "الجامعة / المعهد"
-        university_placeholder: "اختر مؤسستك"
-        major: "التخصص / المجال"
-        major_placeholder: "هندسة البرمجيات"
-        graduation_year: "سنة التخرج"
-        graduation_year_placeholder: "2027"
-        bio: "نبذة قصيرة"
-        bio_placeholder: "حدثنا عن نفسك، مهاراتك، اهتماماتك..."
-        email: "البريد الجامعي"
-        email_placeholder: "student@isetsf.rnu.tn"
-        email_hint: "استخدم بريدك الجامعي الرسمي (مثل @isetsf.rnu.tn) للتحقق الفوري"
-        password: "كلمة المرور"
-        password_confirmation: "تأكيد كلمة المرور"
-        submit: "إنشاء الحساب"
-        submitting: "جاري الإنشاء..."
-      back: "رجوع"
-    new_company:
-      title: "تسجيل شركة"
-      subtitle: "أنشئ ملف شركتك الموثق"
-      errors_title: "يرجى تصحيح الأخطاء التالية:"
-      not_company: "لست شركة؟"
-      form:
-        name: "اسم الشركة"
-        name_placeholder: "شركتك الناشئة"
-        website: "الموقع الإلكتروني (اختياري)"
-        website_placeholder: "https://mystartup.tn"
-        description: "وصف الشركة"
-        description_placeholder: "ماذا تفعل شركتك؟ التقنيات، المهمة، الثقافة..."
-        email: "بريد العمل"
-        email_placeholder: "hr@mystartup.tn"
-        password: "كلمة المرور"
-        password_confirmation: "تأكيد كلمة المرور"
-        submit: "إنشاء الحساب"
-        submitting: "جاري الإنشاء..."
-      back: "رجوع"
-    new_university:
-      title: "تسجيل منسق جامعي"
-      subtitle: "سجل كمنسق أكاديمي"
-      errors_title: "يرجى تصحيح الأخطاء التالية:"
-      not_coordinator: "لست منسقاً؟"
-      form:
-        university: "الجامعة"
-        university_placeholder: "اختر مؤسستك"
-        admin_name: "اسم المنسق الكامل"
-        admin_name_placeholder: "الأستاذ أحمد منصور"
-        department: "القسم / الكلية"
-        department_placeholder: "قسم تكنولوجيا المعلومات"
-        email: "البريد الجامعي الرسمي"
-        email_placeholder: "admin@isetsf.rnu.tn"
-        email_hint: "يجب أن يكون عنوان @university.tn أو @institute.rnu.tn رسمياً"
-        password: "كلمة المرور"
-        password_confirmation: "تأكيد كلمة المرور"
-        submit: "تسجيل المنسق"
-        submitting: "جاري التسجيل..."
-      back: "رجوع"
-
   sessions:
     new:
       title: "تسجيل الدخول"
@@ -712,7 +629,7 @@ ar:
       university:
         title: "منسق جامعي"
         desc: "تحقق من الطلاب، تتبع الاتفاقيات، إدارة الشراكات الأكاديمية"
-      already_account: "لديك حساب بالفعل؟ %{link}"
+      already_account_html: "لديك حساب بالفعل؟ %{link}"
       sign_in: "تسجيل الدخول"
     new_student:
       title: "تسجيل طالب"

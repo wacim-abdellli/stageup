@@ -635,7 +635,7 @@ fr:
       university:
         title: "Coordinateur Universitaire"
         desc: "Vérifiez les étudiants, suivez les conventions, gérez les partenariats académiques"
-      already_account: "Vous avez déjà un compte ? %{link}"
+      already_account_html: "Vous avez déjà un compte ? %{link}"
       sign_in: "Se Connecter"
     new_student:
       title: "Inscription Étudiant"
