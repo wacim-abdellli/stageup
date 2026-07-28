@@ -1,9 +1,17 @@
 <% content_for :title, "#{@company_profile.name} – Employer Profile" %>
 
-<div class="dashboard-container p-vertical-30">
+<div class="dashboard-container profile-page-container">
+
+  <%# ─── Back Link ─────────────────────────────────────────────────── %>
+  <div class="mb-20">
+    <%= link_to dashboard_path, class: "btn btn-secondary btn-compact" do %>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      <%= t('common.back', default: 'Back to Dashboard') %>
+    <% end %>
+  </div>
 
   <%# ─── Hero Company Header ────────────────────────────────────────── %>
-  <div class="profile-card mb-24">
+  <div class="profile-hero-card mb-32">
     <div class="flex-between flex-wrap gap-16">
       <div class="flex-align-center gap-16">
         <div class="hero-avatar-circle company-avatar-circle">
