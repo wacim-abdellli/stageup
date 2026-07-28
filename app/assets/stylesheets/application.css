@@ -4902,12 +4902,30 @@ select:-webkit-autofill:focus {
   gap: 10px;
 }
 
+.logo-svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.logo-link:hover .logo-svg {
+  transform: translateY(-1px) scale(1.05);
+}
+
 .logo-lockup-text {
   font-family: 'Outfit', sans-serif;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: -0.03em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo-text-gradient {
+  background: linear-gradient(135deg, #818CF8 0%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-left: 1px;
 }
 
 /* ── Segmented Pill Navigation ── */
