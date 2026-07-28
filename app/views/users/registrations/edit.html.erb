@@ -15,7 +15,20 @@
     </div>
 
     <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), method: :put, html: { multipart: true, class: "auth-form" } do |f| %>
-      <%= render "users/shared/error_messages", resource: resource %>
+      <% errors = ((@profile&.errors&.full_messages || []) + (resource&.errors&.full_messages || [])).uniq %>
+      <% if errors.any? %>
+        <div class="flash-message flash-alert flash-col mb-20">
+          <div class="flash-col-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <strong><%= t('common.errors_title', default: 'Please fix the errors below:') %></strong>
+          </div>
+          <ul class="error-list">
+            <% errors.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
       <%# ─── SECTION 1: PERSONAL & PROFESSIONAL PROFILE ────────────────── %>
       <div class="settings-section mb-32">
