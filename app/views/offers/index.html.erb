@@ -27,7 +27,7 @@
         <span><%= t('offers.index.eyebrow', default: 'VERIFIED OPPORTUNITIES') %></span>
       </div>
       <h1 class="dir-heading"><%= t('offers.index.title') %></h1>
-      <p class="dir-sub"><%= t('offers.index.subtitle') %> &mdash; <%= t('offers.index.active_listings', count: @offers.size, default: pluralize(@offers.size, 'active listing')) %></p>
+      <p class="dir-sub"><%= t('offers.index.subtitle') %> &mdash; <%= t('offers.index.active_listings', count: @offers.size) %></p>
     </div>
     <% unless current_user %>
       <%= link_to new_user_session_path, class: "dir-signin-cta" do %>
@@ -159,7 +159,7 @@
                     <span class="offer-card-company"><%= offer.company_profile.name %></span>
                   </div>
                 </div>
-                <span class="ocard-live-dot" title="Active listing"></span>
+                <span class="ocard-live-dot" title="<%= t('offers.index.active_listing_tooltip') %>"></span>
               </div>
 
               <%# Badges row %>

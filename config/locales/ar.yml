@@ -137,6 +137,10 @@ ar:
         filters_active: "الفلاتر نشطة"
       no_results: "لا توجد تربصات تطابق فلاترك"
       no_results_hint: "حاول تعديل بحثك أو فلاترك"
+      active_listings:
+        one: "%{count} تربص نشط"
+        other: "%{count} تربصات نشطة"
+      active_listing_tooltip: "تربص نشط"
       card:
         mission_attached: "مهمة مرفقة"
         cv_only: "سيرة ذاتية فقط"

@@ -137,6 +137,10 @@ en:
         filters_active: "Filters active"
       no_results: "No internships match your filters"
       no_results_hint: "Try adjusting your search or filters"
+      active_listings:
+        one: "%{count} active listing"
+        other: "%{count} active listings"
+      active_listing_tooltip: "Active listing"
       card:
         mission_attached: "Mission Attached"
         cv_only: "CV Only"

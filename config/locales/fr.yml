@@ -137,6 +137,10 @@ fr:
         filters_active: "Filtres actifs"
       no_results: "Aucun stage ne correspond à vos filtres"
       no_results_hint: "Essayez de modifier votre recherche ou vos filtres"
+      active_listings:
+        one: "%{count} offre active"
+        other: "%{count} offres actives"
+      active_listing_tooltip: "Offre active"
       card:
         mission_attached: "Mission Incluse"
         cv_only: "CV Uniquement"
