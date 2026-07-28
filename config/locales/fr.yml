@@ -17,6 +17,8 @@ fr:
     dashboard_btn: "Tableau de bord"
     get_started_btn: "Commencer"
     pts: "pts"
+    unknown_user: "Utilisateur Inconnu"
+    no_recent_activity: "Aucune activité en direct enregistrée"
     how_it_works: "COMMENT ÇA MARCHE"
     how_it_works_title: "Un Meilleur Cycle de Stage"
     how_it_works_sub: "Une confiance vérifiable qui remplace les CV statiques et non vérifiés"

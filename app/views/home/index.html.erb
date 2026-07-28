@@ -59,38 +59,43 @@
           </div>
 
           <div class="mockup-body">
-            <div class="mockup-row animate-in visible stagger-4">
-              <div class="mockup-row-left">
-                <div class="mockup-avatar avatar-purple">C</div>
-                <div class="mockup-row-info">
-                  <span class="mockup-user-name"><%= t('home.mockup_row1_name') %></span>
-                  <span class="mockup-action-text"><%= t('home.mockup_row1_action') %></span>
+            <% events = @recent_events.to_a rescue [] %>
+            <% 3.times do |i| %>
+              <% event = events[i] %>
+              <div class="mockup-row animate-in visible stagger-<%= i + 4 %>">
+                <div class="mockup-row-left">
+                  <% if event && event.profileable %>
+                    <% name = case event.profileable
+                           when StudentProfile then "#{event.profileable.first_name} #{event.profileable.last_name}"
+                           when CompanyProfile then event.profileable.name
+                           when UniversityProfile then event.profileable.admin_name
+                           else t('home.unknown_user', default: 'Unknown User')
+                           end %>
+                    <div class="mockup-avatar avatar-<%= i == 0 ? 'purple' : (i == 1 ? 'blue' : 'green') %>">
+                      <%= name[0]&.upcase || "?" %>
+                    </div>
+                    <div class="mockup-row-info">
+                      <span class="mockup-user-name"><%= name %></span>
+                      <span class="mockup-action-text"><%= event.description.presence || event.event_type.humanize %></span>
+                    </div>
+                  <% else %>
+                    <div class="mockup-avatar avatar-muted" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">?</div>
+                    <div class="mockup-row-info">
+                      <span class="mockup-user-name text-muted"><%= t('home.unknown_user', default: 'Unknown User') %></span>
+                      <span class="mockup-action-text text-muted"><%= t('home.no_recent_activity', default: 'No live activity recorded yet') %></span>
+                    </div>
+                  <% end %>
                 </div>
+                <% if event %>
+                  <% score = event.score_delta.to_i %>
+                  <span class="mockup-score <%= score >= 0 ? 'score-plus' : 'score-minus' %>">
+                    <%= score >= 0 ? "+#{score}" : "#{score}" %> <%= t('home.pts', default: 'pts') %>
+                  </span>
+                <% else %>
+                  <span class="mockup-score score-neutral" style="color: var(--text-muted); background: rgba(255,255,255,0.03);">0 <%= t('home.pts', default: 'pts') %></span>
+                <% end %>
               </div>
-              <span class="mockup-score score-plus"><%= t('home.mockup_row1_score', pts: t('home.pts')) %></span>
-            </div>
-
-            <div class="mockup-row animate-in visible stagger-5">
-              <div class="mockup-row-left">
-                <div class="mockup-avatar avatar-blue">V</div>
-                <div class="mockup-row-info">
-                  <span class="mockup-user-name"><%= t('home.mockup_row2_name') %></span>
-                  <span class="mockup-action-text"><%= t('home.mockup_row2_action') %></span>
-                </div>
-              </div>
-              <span class="mockup-score score-minus"><%= t('home.mockup_row2_score', pts: t('home.pts')) %></span>
-            </div>
-
-            <div class="mockup-row animate-in visible stagger-6">
-              <div class="mockup-row-left">
-                <div class="mockup-avatar avatar-green">M</div>
-                <div class="mockup-row-info">
-                  <span class="mockup-user-name"><%= t('home.mockup_row3_name') %></span>
-                  <span class="mockup-action-text"><%= t('home.mockup_row3_action') %></span>
-                </div>
-              </div>
-              <span class="mockup-score score-plus"><%= t('home.mockup_row3_score', pts: t('home.pts')) %></span>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ class HomeController < ApplicationController
 
   def index
     @active_offers = Offer.where(status: "active").includes(:company_profile).order(created_at: :desc).limit(3)
+    @recent_events = CommitmentEvent.includes(:profileable).order(created_at: :desc).limit(3)
     render :index
   end
 

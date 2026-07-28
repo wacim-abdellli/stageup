@@ -17,6 +17,8 @@ en:
     dashboard_btn: "Go to Dashboard"
     get_started_btn: "Get Started"
     pts: "pts"
+    unknown_user: "Unknown User"
+    no_recent_activity: "No live activity recorded yet"
     how_it_works: "HOW IT WORKS"
     how_it_works_title: "A Better Internship Loop"
     how_it_works_sub: "Verifiable trust replacing static, unverified resumes"

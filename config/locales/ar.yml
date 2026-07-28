@@ -17,6 +17,8 @@ ar:
     dashboard_btn: "لوحة التحكم"
     get_started_btn: "ابدأ الآن"
     pts: "نقاط"
+    unknown_user: "مستخدم مجهول"
+    no_recent_activity: "لا يوجد نشاط مباشر مسجل بعد"
     how_it_works: "كيف يعمل"
     how_it_works_title: "دورة تربص أفضل"
     how_it_works_sub: "ثقة قابلة للتحقق تحل محل السير الذاتية الثابتة غير الموثقة"
