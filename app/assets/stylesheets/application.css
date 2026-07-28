@@ -491,7 +491,7 @@ select:-webkit-autofill:focus {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 18px 48px 18px 20px;
-  min-height: 86px;
+  height: 86px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -501,6 +501,7 @@ select:-webkit-autofill:focus {
   width: 100%;
   text-decoration: none;
   color: inherit;
+  overflow: hidden;
 }
 
 .role-card:hover {
@@ -553,6 +554,9 @@ select:-webkit-autofill:focus {
 .role-desc {
   font-size: 13px;
   color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .role-arrow {
