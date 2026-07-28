@@ -1,4 +1,47 @@
 <% content_for :title, "#{t('registrations.select_role.title')} – StageUp" %>
+<% content_for :head do %>
+<style nonce="<%= content_security_policy_nonce %>">
+  .role-card {
+    box-sizing: border-box;
+    height: 86px;
+    min-height: unset;
+    overflow: hidden;
+    padding: 0 48px 0 20px;
+    position: relative;
+  }
+  .role-info {
+    min-width: 0;
+    overflow: hidden;
+  }
+  .role-desc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .role-arrow {
+    position: absolute !important;
+    right: 20px;
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+  .role-card:hover .role-arrow {
+    transform: translateY(-50%) translateX(4px);
+  }
+  html[dir="rtl"] .role-card {
+    padding: 0 20px 0 48px;
+  }
+  html[dir="rtl"] .role-arrow {
+    right: auto;
+    left: 20px;
+    transform: translateY(-50%) scaleX(-1);
+  }
+  html[dir="rtl"] .role-card:hover .role-arrow {
+    transform: translateY(-50%) translateX(-4px) scaleX(-1);
+  }
+</style>
+<% end %>
 <div class="auth-container">
   <div class="auth-card auth-card-md">
     <div class="auth-header">

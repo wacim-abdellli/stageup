@@ -7490,20 +7490,26 @@ html[dir="rtl"] .filter-select {
   padding-left: 32px;
 }
 
+html[dir="rtl"] .role-card {
+  padding: 18px 20px 18px 48px;
+}
+
 html[dir="rtl"] .role-icon {
   margin-right: 0;
-  margin-left: 20px;
+  margin-left: 16px;
 }
 
 html[dir="rtl"] .role-info {
   margin-right: 0;
-  margin-left: 16px;
+  margin-left: 0;
   text-align: right;
 }
 
 html[dir="rtl"] .role-arrow {
+  position: absolute;
   right: auto;
   left: 20px;
+  top: 50%;
   transform: translateY(-50%) scaleX(-1);
 }
 
