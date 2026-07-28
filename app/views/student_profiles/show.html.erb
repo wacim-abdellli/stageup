@@ -176,30 +176,45 @@
       </div>
 
       <%# Verified Reputation Ledger Events %>
-      <div class="profile-card p-20">
-        <h3 class="ledger-card-title mb-14 flex-align-center gap-6">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          Reputation Event History
-        </h3>
+      <div class="profile-card p-24">
+        <div class="flex-between flex-wrap gap-12 mb-20 pb-12 border-bottom-subtle">
+          <h3 class="fs-15 fw-700 color-primary margin-0 flex-align-center gap-8">
+            <div class="settings-icon-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <span>Reputation Event History</span>
+          </h3>
+          <% if @commitment_events.any? %>
+            <span class="badge badge-info fs-11"><%= @commitment_events.count %> Events Recorded</span>
+          <% end %>
+        </div>
+
         <% if @commitment_events.any? %>
           <div class="ledger-timeline">
             <% @commitment_events.each do |event| %>
-              <div class="ledger-event-item">
+              <div class="ledger-event">
+                <div class="ledger-event-line"></div>
                 <div class="ledger-event-node <%= event.score_delta > 0 ? 'node-positive' : (event.score_delta == 0 ? 'node-neutral' : 'node-negative') %>"></div>
                 <div class="ledger-event-body">
-                  <div class="ledger-event-header flex-between mb-4">
-                    <span class="ledger-event-title fs-12 fw-700 color-primary"><%= event.event_type.to_s.humanize.upcase %></span>
-                    <span class="ledger-event-delta fs-12 fw-700 <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %>">
-                      <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %>
+                  <div class="ledger-event-header flex-between flex-wrap gap-8 mb-4">
+                    <strong class="fs-13 fw-600 color-primary"><%= event.event_type.to_s.humanize.titleize %></strong>
+                    <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %>">
+                      <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %> pts
                     </span>
                   </div>
-                  <p class="ledger-event-desc fs-11 text-muted margin-0"><%= event.description %></p>
+                  <p class="ledger-event-desc fs-12 text-secondary margin-0 mb-4"><%= event.description %></p>
+                  <span class="ledger-event-time flex-align-center gap-4 text-muted fs-11">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <%= time_ago_in_words(event.created_at) %> ago
+                  </span>
                 </div>
               </div>
             <% end %>
           </div>
         <% else %>
-          <p class="text-muted fs-12 italic margin-0">No ledger history recorded yet.</p>
+          <div class="text-center p-20">
+            <p class="text-muted fs-12 italic margin-0">No reputation ledger events recorded yet.</p>
+          </div>
         <% end %>
       </div>
 
