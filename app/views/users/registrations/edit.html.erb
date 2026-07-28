@@ -271,6 +271,7 @@
                 <%# Left 70% Skills Matrix %>
                 <div class="skills-matrix-browser" id="skills-matrix">
                   <%= fields_for :student_profile, @profile do |sp| %>
+                    <%= hidden_field_tag "student_profile[skill_ids][]", "" %>
                     <% (@skills_by_category || {}).each do |category_title, skills_arr| %>
                       <div class="skills-cat-block mb-24" data-cat-slug="<%= category_title.parameterize %>">
                         <div class="skills-cat-header flex-align-center gap-8 mb-12">
@@ -282,14 +283,14 @@
                         <div class="skills-chips-grid">
                           <% skills_arr.each do |skill_obj| %>
                             <% selected = @profile.skill_ids.include?(skill_obj.id) %>
-                            <label class="skill-chip-box <%= 'chip-active' if selected %>"
-                                   data-skill-id="<%= skill_obj.id %>"
-                                   data-skill-name="<%= skill_obj.name %>"
-                                   data-skill-query="<%= skill_obj.name.downcase %>">
+                            <div class="skill-chip-box <%= 'chip-active' if selected %>"
+                                 data-skill-id="<%= skill_obj.id %>"
+                                 data-skill-name="<%= skill_obj.name %>"
+                                 data-skill-query="<%= skill_obj.name.downcase %>">
                               <%= check_box_tag "student_profile[skill_ids][]", skill_obj.id, selected, class: "skill-chip-checkbox" %>
                               <span class="chip-label-text"><%= skill_obj.name %></span>
                               <span class="chip-check-icon" aria-hidden="true">✓</span>
-                            </label>
+                            </div>
                           <% end %>
                         </div>
                       </div>
@@ -571,6 +572,8 @@
           } else {
             chip.classList.remove('chip-active');
           }
+          var floatingSaveBar = document.getElementById('floating-save-bar');
+          if (floatingSaveBar) floatingSaveBar.classList.add('bar-visible');
           syncSelectedPanel();
         });
       });
@@ -582,6 +585,8 @@
             var p = chk.closest('.skill-chip-box');
             if (p) p.classList.remove('chip-active');
           });
+          var floatingSaveBar = document.getElementById('floating-save-bar');
+          if (floatingSaveBar) floatingSaveBar.classList.add('bar-visible');
           syncSelectedPanel();
         });
       }

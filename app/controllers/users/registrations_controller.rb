@@ -137,7 +137,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if profile_updated && user_updated
       bypass_sign_in(resource) if password_changing
-      redirect_to dashboard_path, notice: "Your profile and security settings were successfully updated."
+      redirect_to edit_user_registration_path(locale: I18n.locale), notice: "Your profile and security settings were successfully updated."
     else
       flash.now[:alert] = "Please fix the errors below to update your settings."
       render :edit, status: :unprocessable_entity
@@ -155,8 +155,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if params[:student_profile][:cv].present?
         @profile.cv.attach(params[:student_profile][:cv])
       end
-      if params[:student_profile][:skill_ids].present?
-        @profile.skill_ids = params[:student_profile][:skill_ids].reject(&:blank?)
+      if params[:student_profile].key?(:skill_ids)
+        @profile.skill_ids = Array(params[:student_profile][:skill_ids]).reject(&:blank?)
       end
       @profile.update(sp_params)
     when "CompanyProfile"
