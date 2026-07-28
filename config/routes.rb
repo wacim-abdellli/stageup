@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   resource :dashboard, only: [ :show ] do
     patch :update_cv
   end
+
+  resources :student_profiles, only: [:show], path: "students"
+  resources :company_profiles, only: [:show], path: "companies"
   resources :offers do
     member do
       post :publish

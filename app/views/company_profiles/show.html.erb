@@ -1,0 +1,115 @@
+<% content_for :title, "#{@company_profile.name} – Employer Profile" %>
+
+<div class="dashboard-container p-vertical-30">
+
+  <%# ─── Hero Company Header ────────────────────────────────────────── %>
+  <div class="profile-card mb-24">
+    <div class="flex-between flex-wrap gap-16">
+      <div class="flex-align-center gap-16">
+        <div class="hero-avatar-circle company-avatar-circle">
+          <%= @company_profile.name.first.upcase rescue 'C' %>
+        </div>
+        <div>
+          <div class="flex-align-center gap-8 mb-4">
+            <h1 class="fs-22 fw-700 margin-0"><%= @company_profile.name %></h1>
+            <% if @company_profile.verified? %>
+              <span class="badge badge-success">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mr-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Verified Company
+              </span>
+            <% end %>
+          </div>
+          <% if @company_profile.website.present? %>
+            <a href="<%= @company_profile.website %>" target="_blank" class="color-secondary fs-13 hover-underline flex-align-center gap-4">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/></svg>
+              <%= @company_profile.website %>
+            </a>
+          <% end %>
+        </div>
+      </div>
+
+      <% if current_user.profileable == @company_profile %>
+        <%= link_to edit_user_registration_path, class: "btn btn-primary" do %>
+          <%= t('dashboard.profile.edit', default: 'Edit Company Profile') %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <%# ─── Left Main Column ───────────────────────────────────────── %>
+    <div class="left-col">
+
+      <%# Company Overview %>
+      <div class="profile-card mb-24">
+        <h3 class="section-heading mb-12">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" class="mr-6"><path d="M3 21h18"/><path d="M19 21v-4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/></svg>
+          Company Overview & Mission
+        </h3>
+        <p class="color-secondary fs-14 line-height-16 margin-0">
+          <%= @company_profile.description.presence || "Leading software & technology employer on StageUp." %>
+        </p>
+      </div>
+
+      <%# Active Internship Missions Offered %>
+      <div class="profile-card">
+        <h3 class="section-heading mb-16">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" class="mr-6"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+          Active Open Internship Missions (<%= @active_offers.count %>)
+        </h3>
+
+        <% if @active_offers.any? %>
+          <div class="offers-grid">
+            <% @active_offers.each do |offer| %>
+              <div class="offer-card">
+                <div class="offer-card-header flex-between mb-8">
+                  <span class="badge badge-info"><%= offer.stage_type.upcase %></span>
+                  <span class="badge badge-success"><%= offer.work_mode.humanize %></span>
+                </div>
+                <h4 class="offer-card-title mb-4">
+                  <%= link_to offer.title, offer_path(offer), class: "hover-underline color-primary" %>
+                </h4>
+                <div class="offer-card-location fs-12 text-muted mb-12">
+                  📍 <%= offer.location.presence || "Sfax, Tunisia" %>
+                </div>
+                <div class="offer-card-footer flex-between">
+                  <span class="fs-12 text-muted"><%= offer.duration_months %> Months</span>
+                  <%= link_to "View Mission &rarr;".html_safe, offer_path(offer), class: "btn btn-secondary btn-compact-sm" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted fs-13 italic margin-0">No active internship offers currently open.</p>
+        <% end %>
+      </div>
+
+    </div>
+
+    <%# ─── Right Column: Company Metrics ──────────────────────────── %>
+    <div class="right-col">
+
+      <div class="profile-card p-25 mb-24">
+        <h3 class="metrics-card-title mb-16">Employer Stats</h3>
+        <div class="rep-stat-list">
+          <div class="rep-stat-row">
+            <span class="rep-stat-label">Active Missions</span>
+            <strong><%= @active_offers.count %></strong>
+          </div>
+          <div class="rep-stat-row">
+            <span class="rep-stat-label">Verification Status</span>
+            <span class="badge badge-success"><%= @company_profile.verified? ? "Verified Employer" : "In Verification" %></span>
+          </div>
+          <div class="rep-stat-row">
+            <span class="rep-stat-label">Intern Rating</span>
+            <strong><%= @avg_rating ? "#{@avg_rating} / 5" : "5.0 / 5" %> ⭐</strong>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

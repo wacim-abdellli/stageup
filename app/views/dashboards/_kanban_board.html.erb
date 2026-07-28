@@ -17,11 +17,13 @@
           <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
             <div class="kanban-card-row-header flex-between mb-8">
               <div class="flex-align-center gap-8 min-width-0">
-                <div class="kanban-avatar flex-shrink-0">
+                <%= link_to student_profile_path(sub.student_profile), class: "kanban-avatar flex-shrink-0" do %>
                   <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
-                </div>
+                <% end %>
                 <div class="min-width-0">
-                  <div class="kanban-student-name text-truncate"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></div>
+                  <div class="kanban-student-name text-truncate">
+                    <%= link_to "#{sub.student_profile.first_name} #{sub.student_profile.last_name}", student_profile_path(sub.student_profile), class: "hover-underline color-primary" %>
+                  </div>
                   <div class="kanban-uni-label text-truncate"><%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
                 </div>
               </div>

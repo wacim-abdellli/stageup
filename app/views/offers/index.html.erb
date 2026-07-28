@@ -156,7 +156,9 @@
                   </div>
                   <div class="ocard-company-info">
                     <h3 class="offer-card-title"><%= offer.title %></h3>
-                    <span class="offer-card-company"><%= offer.company_profile.name %></span>
+                    <%= link_to company_profile_path(offer.company_profile), class: "offer-card-company hover-underline" do %>
+                      <%= offer.company_profile.name %>
+                    <% end %>
                   </div>
                 </div>
                 <span class="ocard-live-dot" title="<%= t('offers.index.active_listing_tooltip') %>"></span>
@@ -180,11 +182,11 @@
                   <% breakdown = offer.match_breakdown_for(current_user.profileable) rescue nil %>
                   <% if breakdown && breakdown[:total] < 100 %>
                     <span class="match-badge match-badge-tooltip-wrapper <%= breakdown[:total] >= 70 ? 'match-badge-high' : (breakdown[:total] >= 40 ? 'match-badge-medium' : 'match-badge-low') %>">
-                      <%= breakdown[:total] %>% match
+                      <%= breakdown[:total] %>% <%= t('offers.show.match_breakdown.match_label') %>
                       <span class="match-tooltip">
-                        <span class="match-tooltip-row">Skills: <%= breakdown[:skill].round %>pt</span>
-                        <span class="match-tooltip-row">Major: <%= breakdown[:major].round %>pt</span>
-                        <span class="match-tooltip-row">Score: <%= breakdown[:readiness].round %>pt</span>
+                        <span class="match-tooltip-row"><%= t('offers.show.match_breakdown.skills') %>: <%= breakdown[:skill].round %>pt</span>
+                        <span class="match-tooltip-row"><%= t('offers.show.match_breakdown.major') %>: <%= breakdown[:major].round %>pt</span>
+                        <span class="match-tooltip-row"><%= t('offers.show.match_breakdown.readiness') %>: <%= breakdown[:readiness].round %>pt</span>
                       </span>
                     </span>
                   <% end %>
