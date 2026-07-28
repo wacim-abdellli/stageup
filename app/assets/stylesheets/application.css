@@ -781,11 +781,11 @@ button.btn-accent:hover,
 /* Flash alerts */
 .flash-portal {
   position: fixed;
-  top: 80px;
+  top: 20px;
   right: 24px;
   left: auto;
   transform: none;
-  z-index: 500;
+  z-index: 9999;
   width: max-content;
   max-width: min(400px, calc(100vw - 32px));
   display: flex;
