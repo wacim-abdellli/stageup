@@ -1,5 +1,12 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here is idempotent so that it can be executed at any point in every environment.
+# db/seeds.rb
+# Idempotent seed script to populate test data for StageUp manual testing.
+
+puts "Cleaning up old data..."
+CommitmentEvent.destroy_all
+InternshipAgreement.destroy_all
+Submission.destroy_all
+Mission.destroy_all
+Offer.destroy_all
 
 puts "Seeding Universities..."
 iset_sfax = University.find_or_create_by!(email_domain: "isetsf.rnu.tn") do |u|
@@ -20,98 +27,113 @@ student_1_profile.update!(
   university: iset_sfax,
   major: "Software Engineering",
   graduation_year: 2027,
-  bio: "Web developer passionate about Ruby on Rails.",
+  bio: "Full-Stack developer passionate about Ruby on Rails & React.",
   commitment_score: 100.0
 )
 
-User.find_or_create_by!(email: "mohamed.benali@isetsf.rnu.tn") do |u|
-  u.password = "password123"
-  u.profileable = student_1_profile
-end
+user_student_1 = User.find_or_initialize_by(email: "mohamed.benali@isetsf.rnu.tn")
+user_student_1.update!(
+  password: "password1234",
+  password_confirmation: "password1234",
+  profileable: student_1_profile
+)
 
 # Student 2: Cyrine Trabelsi
 student_2_profile = StudentProfile.find_or_initialize_by(first_name: "Cyrine", last_name: "Trabelsi")
 student_2_profile.update!(
   phone: "+216 22 987 654",
   university: enis,
-  major: "Data Science",
+  major: "Data Science & AI",
   graduation_year: 2026,
-  bio: "Data engineer looking for a PFE internship.",
+  bio: "Data engineer looking for a PFE internship in AI/ML.",
   commitment_score: 95.0
 )
 
-User.find_or_create_by!(email: "cyrine.trabelsi@enis.tn") do |u|
-  u.password = "password123"
-  u.profileable = student_2_profile
-end
-
+user_student_2 = User.find_or_initialize_by(email: "cyrine.trabelsi@enis.tn")
+user_student_2.update!(
+  password: "password1234",
+  password_confirmation: "password1234",
+  profileable: student_2_profile
+)
 
 puts "Seeding Company Profiles..."
 # Company 1: DevCorp Sfax
 company_1_profile = CompanyProfile.find_or_initialize_by(name: "DevCorp Sfax")
 company_1_profile.update!(
   website: "https://devcorp.tn",
-  description: "A leading software agency in Sfax.",
+  description: "A leading software agency in Sfax specializing in Web & Mobile solutions.",
   verified: true,
   response_rate: 100.0,
   avg_response_time_hours: 4.5,
   offers_count: 0
 )
 
-User.find_or_create_by!(email: "contact@devcorp.tn") do |u|
-  u.password = "password123"
-  u.profileable = company_1_profile
-end
+user_company_1 = User.find_or_initialize_by(email: "contact@devcorp.tn")
+user_company_1.update!(
+  password: "password1234",
+  password_confirmation: "password1234",
+  profileable: company_1_profile
+)
 
 # Company 2: AlphaTech Startups
 company_2_profile = CompanyProfile.find_or_initialize_by(name: "AlphaTech Startups")
 company_2_profile.update!(
   website: "https://alphatech.co",
-  description: "AI and IoT solutions developer in Sfax.",
-  verified: false,
-  response_rate: 0.0,
-  avg_response_time_hours: 0.0,
+  description: "AI and IoT solutions developer in Sfax and Tunis.",
+  verified: true,
+  response_rate: 85.0,
+  avg_response_time_hours: 12.0,
   offers_count: 0
 )
 
-User.find_or_create_by!(email: "recruiting@alphatech.co") do |u|
-  u.password = "password123"
-  u.profileable = company_2_profile
-end
-
+user_company_2 = User.find_or_initialize_by(email: "recruiting@alphatech.co")
+user_company_2.update!(
+  password: "password1234",
+  password_confirmation: "password1234",
+  profileable: company_2_profile
+)
 
 puts "Seeding University Profiles..."
-# Uni Admin: Ahmed Mansour (IT department head at ISET Sfax)
 uni_admin_profile = UniversityProfile.find_or_initialize_by(admin_name: "Prof. Ahmed Mansour", department: "IT Department")
 uni_admin_profile.update!(
   university: iset_sfax
 )
 
-User.find_or_create_by!(email: "ahmed.mansour@isetsf.rnu.tn") do |u|
-  u.password = "password123"
-  u.profileable = uni_admin_profile
-end
+user_uni = User.find_or_initialize_by(email: "ahmed.mansour@isetsf.rnu.tn")
+user_uni.update!(
+  password: "password1234",
+  password_confirmation: "password1234",
+  profileable: uni_admin_profile
+)
+
+puts "Seeding Master Admin User..."
+admin_profile = StudentProfile.find_or_initialize_by(first_name: "Wacim", last_name: "Abdelli")
+admin_profile.update!(
+  phone: "+216 21 666 374",
+  major: "AI Engineering",
+  graduation_year: 2027,
+  bio: "StageUp Platform Master Administrator.",
+  commitment_score: 100.0
+)
+
+master_admin = User.find_or_initialize_by(email: "wacimabdelli01@gmail.com")
+master_admin.allow_admin_creation = true
+master_admin.password = "password1234"
+master_admin.password_confirmation = "password1234"
+master_admin.profileable = admin_profile
+master_admin.save!
 
 puts "Seeding Skills..."
 skill_names = %w[Ruby\ on\ Rails React Data\ Science Python SQL Docker JavaScript CSS Git Java]
 skills = skill_names.map { |name| Skill.find_or_create_by!(name: name) }
 
-# Associate skills with student 1 (Mohamed — Rails/JS/CSS/SQL/Git)
-student_1_profile.skills << [ skills[0], skills[6], skills[7], skills[4], skills[8] ] # Rails, JS, CSS, SQL, Git
-
-# Associate skills with student 2 (Cyrine — Data Science/Python/SQL)
-student_2_profile.skills << [ skills[2], skills[3], skills[4] ] # Data Science, Python, SQL
-
-# Associate skills with offer 1 (Full Stack Rails — Rails/React/SQL/Docker/JS/CSS/Git)
-offer_1.skills << [ skills[0], skills[1], skills[4], skills[5], skills[6], skills[7], skills[8] ] # Rails, React, SQL, Docker, JS, CSS, Git
-
-# Associate skills with offer 2 (Data Science Intern — Python/SQL/Data Science)
-offer_2.skills << [ skills[2], skills[3], skills[4] ] # Data Science, Python, SQL
+student_1_profile.skills = [ skills[0], skills[1], skills[4], skills[6], skills[8] ] # Rails, React, SQL, JS, Git
+student_2_profile.skills = [ skills[2], skills[3], skills[4], skills[5] ] # Data Science, Python, SQL, Docker
 
 puts "Seeding Offers & Missions..."
 offer_1 = Offer.find_or_initialize_by(title: "Full Stack Rails Intern", company_profile: company_1_profile)
 offer_1.update!(
-  description: "Learn Rails 8 in production.",
+  description: "Join our team to build high-scale Rails 8 applications with Hotwire & Turbo.",
   stage_type: "PFE",
   spots: 2,
   location: "Sfax",
@@ -119,23 +141,32 @@ offer_1.update!(
   status: "active",
   deadline: 30.days.from_now
 )
+offer_1.skills = [ skills[0], skills[1], skills[4], skills[5], skills[6] ]
 
 mission_1 = Mission.find_or_initialize_by(offer: offer_1)
 mission_1.update!(
   title: "Rails URL Shortener Task",
-  instructions: "Build a Rails API that shortens URLs. Include tests.",
+  instructions: "Build a mini Rails API that shortens URLs, tracks click analytics, and includes Minitest unit tests.",
   estimated_duration_minutes: 90
 )
 
-offer_2 = Offer.find_or_initialize_by(title: "Data Science Intern", company_profile: company_2_profile)
+offer_2 = Offer.find_or_initialize_by(title: "AI & Data Science Intern", company_profile: company_2_profile)
 offer_2.update!(
-  description: "Clean data, build models.",
+  description: "Clean real-world telemetry data and train machine learning models for anomaly detection.",
   stage_type: "PFA",
   spots: 1,
   location: "Tunis",
   work_mode: "remote",
   status: "active",
-  deadline: 30.days.from_now
+  deadline: 20.days.from_now
+)
+offer_2.skills = [ skills[2], skills[3], skills[4] ]
+
+mission_2 = Mission.find_or_initialize_by(offer: offer_2)
+mission_2.update!(
+  title: "Python Data Cleaning Challenge",
+  instructions: "Parse a 100K row CSV dataset using Pandas, clean null values, and calculate key performance indicators.",
+  estimated_duration_minutes: 120
 )
 
 puts "Seeding Submissions..."
@@ -144,16 +175,16 @@ sub_1 = Submission.find_or_initialize_by(student_profile: student_1_profile, off
 sub_1.update!(
   mission: mission_1,
   status: "started",
-  created_at: Time.current
+  created_at: 2.hours.ago
 )
 
-# 2. Cyrine has submitted on offer 1
+# 2. Cyrine has submitted code on offer 1 for company review
 sub_2 = Submission.find_or_initialize_by(student_profile: student_2_profile, offer: offer_1)
 sub_2.update!(
   mission: mission_1,
   status: "submitted",
   github_link: "https://github.com/cyrine-trabelsi/url-shortener",
-  submission_notes: "Here is my URL shortener code. It includes 10 unit tests.",
+  submission_notes: "Completed the URL shortener challenge in Rails 8. Included full unit test suite passing 100%.",
   submitted_at: 1.day.ago
 )
 
@@ -161,7 +192,7 @@ company_1_profile.recalculate_metrics!
 company_2_profile.recalculate_metrics!
 
 puts "Seeding Commitment Events..."
-CommitmentEvent.find_or_create_by!(
+CommitmentEvent.create!(
   profileable: student_1_profile,
   event_type: "student_completed_internship",
   score_delta: 15.0,
@@ -169,7 +200,7 @@ CommitmentEvent.find_or_create_by!(
   created_at: 2.days.ago
 )
 
-CommitmentEvent.find_or_create_by!(
+CommitmentEvent.create!(
   profileable: company_1_profile,
   event_type: "company_responded_on_time",
   score_delta: 10.0,
@@ -177,7 +208,7 @@ CommitmentEvent.find_or_create_by!(
   created_at: 1.day.ago
 )
 
-CommitmentEvent.find_or_create_by!(
+CommitmentEvent.create!(
   profileable: student_2_profile,
   event_type: "student_completed_internship",
   score_delta: 15.0,
@@ -185,61 +216,12 @@ CommitmentEvent.find_or_create_by!(
   created_at: 3.days.ago
 )
 
-CommitmentEvent.find_or_create_by!(
-  profileable: student_1_profile,
-  event_type: "student_mission_expired",
-  score_delta: -10.0,
-  description: "Failed to submit Rails URL Shortener Task within 48h deadline",
+CommitmentEvent.create!(
+  profileable: company_2_profile,
+  event_type: "company_responded_on_time",
+  score_delta: 10.0,
+  description: "Verified university agreement within 24h deadline",
   created_at: 4.days.ago
 )
-
-CommitmentEvent.find_or_create_by!(
-  profileable: company_2_profile,
-  event_type: "company_ghosted_offer",
-  score_delta: -15.0,
-  description: "Failed to review student applications within 7 days",
-  created_at: 5.days.ago
-)
-
-CommitmentEvent.find_or_create_by!(
-  profileable: student_2_profile,
-  event_type: "student_completed_internship",
-  score_delta: 15.0,
-  description: "Completed React frontend challenge on time",
-  created_at: 6.days.ago
-)
-
-CommitmentEvent.find_or_create_by!(
-  profileable: company_1_profile,
-  event_type: "company_responded_late",
-  score_delta: -5.0,
-  description: "Delayed evaluation of candidate code challenge",
-  created_at: 7.days.ago
-)
-
-CommitmentEvent.find_or_create_by!(
-  profileable: student_1_profile,
-  event_type: "student_completed_internship",
-  score_delta: 10.0,
-  description: "Successfully solved ISET Sfax verification task",
-  created_at: 8.days.ago
-)
-
-puts "Seeding Admin User..."
-admin_profile = StudentProfile.find_or_create_by!(first_name: "System", last_name: "Admin") do |p|
-  p.phone = "+216 00 000 000"
-  p.major = "Administration"
-  p.graduation_year = 2030
-  p.bio = "StageUp system administrator."
-  p.commitment_score = 100.0
-end
-
-User.find_or_create_by!(email: "admin@stageup.tn") do |u|
-  u.password = "password"
-  u.allow_admin_creation = true
-  u.admin = true
-  u.profileable = admin_profile
-end
-puts "Admin user created (admin@stageup.tn / password)"
 
 puts "Database successfully seeded!"
