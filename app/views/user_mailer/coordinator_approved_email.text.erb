@@ -1,10 +1,10 @@
-Hello <%= @profile.admin_name %>,
+<%= t('user_mailer.coordinator_approved.greeting', name: @profile.admin_name) %>
 
-Your university coordinator account has been approved by the StageUp administration team.
+<%= t('user_mailer.coordinator_approved.body') %>
 
-You can now log in to your account to manage internship agreements, review student submissions, and sign conventions de stage on behalf of <%= @profile.university.name %>.
+<%= t('user_mailer.coordinator_approved.login_instruction', university: @profile.university.name) %>
 
-If you have any questions, please contact the StageUp support team.
+<%= t('user_mailer.coordinator_approved.support') %>
 
-Best regards,
-The StageUp Team
+<%= t('user_mailer.coordinator_approved.regards') %>
+<%= t('user_mailer.coordinator_approved.team') %>

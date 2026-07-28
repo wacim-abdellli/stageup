@@ -2,15 +2,15 @@
   <div class="auth-card">
     <div class="auth-header">
       <%= render "layouts/navbar_brand" %>
-      <h2 class="auth-title">Convention de Stage</h2>
-      <p class="auth-subtitle">Tunisian Three-Way Internship Agreement</p>
+      <h2 class="auth-title"><%= t('internship_agreements.new.title') %></h2>
+      <p class="auth-subtitle"><%= t('internship_agreements.new.subtitle') %></p>
     </div>
 
     <% if @agreement.errors.any? %>
       <div class="flash-message flash-alert flash-col">
         <div class="flash-col-header">
           <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
-          <strong>Please resolve the following errors:</strong>
+          <strong><%= t('internship_agreements.new.errors_title') %></strong>
         </div>
         <ul class="error-list">
           <% @agreement.errors.full_messages.each do |msg| %>
@@ -21,23 +21,23 @@
     <% end %>
 
     <%= form_with model: [@submission, @agreement], local: true do |f| %>
-      <h3 class="section-heading-lg">Internship Dates</h3>
+      <h3 class="section-heading-lg"><%= t('internship_agreements.new.dates_title') %></h3>
 
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label" for="internship_agreement_start_date">Start Date</label>
+          <label class="form-label" for="internship_agreement_start_date"><%= t('internship_agreements.new.form.start_date') %></label>
           <%= f.date_field :start_date, class: "form-control", required: true %>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="internship_agreement_end_date">End Date</label>
+          <label class="form-label" for="internship_agreement_end_date"><%= t('internship_agreements.new.form.end_date') %></label>
           <%= f.date_field :end_date, class: "form-control", required: true %>
         </div>
       </div>
 
       <div class="form-footer-row">
-        <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary" %>
-        <%= f.submit "Generate Agreement", class: "btn btn-primary", data: { disable_with: "Generating…" } %>
+        <%= link_to t('common.cancel'), dashboard_path, class: "btn btn-secondary" %>
+        <%= f.submit t('internship_agreements.new.form.generate'), class: "btn btn-primary", data: { disable_with: t('internship_agreements.new.form.generating') } %>
       </div>
     <% end %>
   </div>

@@ -16,7 +16,8 @@ class UserMailerTest < ActionMailer::TestCase
 
   test "application_received_email renders correctly" do
     mail = UserMailer.application_received_email(@company_user, @submission)
-    assert_equal "New Application Received – #{@offer.title}", mail.subject
+    expected_subject = I18n.t('user_mailer.application_received.subject', offer_title: @offer.title)
+    assert_equal expected_subject, mail.subject
     assert_equal [ @submission.offer.company_profile.user.email ], mail.to
     assert_match @offer.title, mail.body.encoded
   end
@@ -30,6 +31,8 @@ class UserMailerTest < ActionMailer::TestCase
 
   test "agreement_signature_requested_email renders correctly" do
     mail = UserMailer.agreement_signature_requested_email(@student_user, @agreement)
+    expected_subject = I18n.t('user_mailer.agreement_signature_requested.subject', offer_title: @offer.title)
+    assert_equal expected_subject, mail.subject
     assert_equal [ @student_user.email ], mail.to
     assert_match @offer.title, mail.body.encoded
   end
@@ -41,14 +44,16 @@ class UserMailerTest < ActionMailer::TestCase
 
   test "coordinator_approved_email renders correctly" do
     mail = UserMailer.coordinator_approved_email(@coord_user, @uni_profile)
-    assert_equal "Your Coordinator Account Has Been Approved", mail.subject
+    expected_subject = I18n.t('user_mailer.coordinator_approved.subject')
+    assert_equal expected_subject, mail.subject
     assert_equal [ @coord_user.email ], mail.to
     assert_match @uni_profile.admin_name, mail.body.encoded
   end
 
   test "company_verified_email renders correctly" do
     mail = UserMailer.company_verified_email(@company_user, @comp_profile)
-    assert_equal "Your Company Account Has Been Verified", mail.subject
+    expected_subject = I18n.t('user_mailer.company_verified.subject')
+    assert_equal expected_subject, mail.subject
     assert_equal [ @company_user.email ], mail.to
     assert_match @comp_profile.name, mail.body.encoded
   end

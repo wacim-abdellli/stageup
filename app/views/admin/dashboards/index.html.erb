@@ -1,12 +1,12 @@
 <div class="dashboard-container">
   <div class="dashboard-header">
     <div class="dashboard-header-left">
-      <h1 class="fs-22 fw-700">Admin Panel</h1>
-      <p class="header-meta">Manage university coordinators and company verifications</p>
+      <h1 class="fs-22 fw-700"><%= t('admin.dashboard.title') %></h1>
+      <p class="header-meta"><%= t('admin.dashboard.subtitle') %></p>
     </div>
     <div class="flex-row gap-10 align-center">
-      <%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-secondary btn-header" %>
-      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-header m-0" %>
+      <%= link_to t('common.back_to', page: t('dashboard.title')), dashboard_path, class: "btn btn-secondary btn-header" %>
+      <%= button_to t('nav.sign_out'), destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-header m-0" %>
     </div>
   </div>
 
@@ -16,7 +16,7 @@
       <div class="profile-card card-mb">
         <h2 class="section-heading">
           <i data-lucide="landmark" class="section-heading-icon"></i>
-          Pending Coordinators
+          <%= t('admin.dashboard.coordinators.title') %>
         </h2>
 
         <% if @pending_coordinators.any? %>
@@ -30,8 +30,8 @@
                   </span>
                 </div>
                 <div class="action-group-8">
-                  <%= button_to "Approve Coordinator", approve_admin_university_profile_path(coord), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: "Approving…" } %>
-                  <%= button_to "Reject Coordinator", reject_admin_university_profile_path(coord), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Reject this coordinator? Their account will be removed." } %>
+                  <%= button_to t('admin.dashboard.coordinators.approve'), approve_admin_university_profile_path(coord), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: t('admin.dashboard.coordinators.approving') } %>
+                  <%= button_to t('admin.dashboard.coordinators.reject'), reject_admin_university_profile_path(coord), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: t('admin.dashboard.coordinators.reject_confirm') } %>
                 </div>
               </div>
             <% end %>
@@ -39,8 +39,8 @@
         <% else %>
           <div class="empty-state-card">
             <div class="empty-state-icon"><i data-lucide="check-circle" class="icon-40"></i></div>
-            <h3 class="empty-state-title">All Clear</h3>
-            <p class="empty-state-text">No pending coordinator requests.</p>
+            <h3 class="empty-state-title"><%= t('admin.dashboard.coordinators.all_clear_title') %></h3>
+            <p class="empty-state-text"><%= t('admin.dashboard.coordinators.empty') %></p>
           </div>
         <% end %>
       </div>
@@ -49,7 +49,7 @@
       <div class="profile-card card-mb">
         <h2 class="section-heading">
           <i data-lucide="briefcase" class="section-heading-icon"></i>
-          Unverified Companies
+          <%= t('admin.dashboard.companies.title') %>
         </h2>
 
         <% if @unverified_companies.any? %>
@@ -59,11 +59,11 @@
                 <div>
                   <strong class="inline-list-sm-title"><%= company.name %></strong>
                   <span class="inline-list-sm-meta">
-                    <%= company.user.email %> &middot; <%= company.website.presence || "No website" %>
+                    <%= company.user.email %> &middot; <%= company.website.presence || t('admin.dashboard.companies.no_website') %>
                   </span>
                 </div>
                 <div class="action-group-8">
-                  <%= button_to "Verify Company", verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: "Verifying…" } %>
+                  <%= button_to t('admin.dashboard.companies.verify'), verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: t('admin.dashboard.companies.verifying') } %>
                 </div>
               </div>
             <% end %>
@@ -71,8 +71,8 @@
         <% else %>
           <div class="empty-state-card">
             <div class="empty-state-icon"><i data-lucide="check-circle" class="icon-40"></i></div>
-            <h3 class="empty-state-title">All Clear</h3>
-            <p class="empty-state-text">No unverified company profiles.</p>
+            <h3 class="empty-state-title"><%= t('admin.dashboard.companies.all_clear_title') %></h3>
+            <p class="empty-state-text"><%= t('admin.dashboard.companies.all_clear_text') %></p>
           </div>
         <% end %>
       </div>

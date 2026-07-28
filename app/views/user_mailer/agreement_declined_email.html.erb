@@ -1,5 +1,5 @@
-<h1>Convention de Stage Declined</h1>
-<p>The internship agreement for <strong><%= @offer.title %></strong> has been <strong style="color: #F87171;">declined</strong> by the university coordinator.</p>
-<p><strong>Reason provided:</strong> <%= @reason %></p>
-<p>You may generate a new agreement with corrected terms if needed.</p>
-<%= link_to "View Agreement", submission_internship_agreement_url(@submission, @agreement), style: "display: inline-block; padding: 10px 20px; background-color: #4F46E5; color: white; text-decoration: none; border-radius: 6px;" %>
+<h1><%= t('user_mailer.agreement_declined.heading') %></h1>
+<p><%= t('user_mailer.agreement_declined.body_intro_html', offer_title: @offer.title, declined_label: t('user_mailer.agreement_declined.declined_label')) %></p>
+<p><strong><%= t('user_mailer.agreement_declined.reason_label') %></strong> <%= @reason %></p>
+<p><%= t('user_mailer.agreement_declined.body_suggestion') %></p>
+<%= link_to t('user_mailer.agreement_declined.view_agreement'), submission_internship_agreement_url(@submission, @agreement), style: "display: inline-block; padding: 10px 20px; background-color: #4F46E5; color: white; text-decoration: none; border-radius: 6px;" %>

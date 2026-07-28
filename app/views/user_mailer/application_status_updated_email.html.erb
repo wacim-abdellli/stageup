@@ -1,3 +1,3 @@
-<h1>Application <%= @status.humanize %></h1>
-<p>Your application for <strong><%= @offer.title %></strong> at <strong><%= @company.name %></strong> has been <strong><%= @status %></strong>.</p>
-<%= link_to "View Details", dashboard_url, style: "display: inline-block; padding: 10px 20px; background-color: #4F46E5; color: white; text-decoration: none; border-radius: 6px;" %>
+<h1><%= t('user_mailer.application_status_updated.heading', status: @status.humanize) %></h1>
+<p><%= t('user_mailer.application_status_updated.body_html', offer_title: @offer.title, company_name: @company.name, status: @status) %></p>
+<%= link_to t('user_mailer.application_status_updated.view_details'), dashboard_url, style: "display: inline-block; padding: 10px 20px; background-color: #4F46E5; color: white; text-decoration: none; border-radius: 6px;" %>

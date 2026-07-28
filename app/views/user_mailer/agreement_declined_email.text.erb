@@ -1,9 +1,9 @@
-Convention de Stage Declined
+<%= t('user_mailer.agreement_declined.heading') %>
 
-The internship agreement for <%= @offer.title %> has been declined by the university coordinator.
+<%= t('user_mailer.agreement_declined.body_intro', offer_title: @offer.title, declined_label: t('user_mailer.agreement_declined.declined_label')) %>
 
-Reason provided: <%= @reason %>
+<%= t('user_mailer.agreement_declined.reason_label') %> <%= @reason %>
 
-You may generate a new agreement with corrected terms if needed.
+<%= t('user_mailer.agreement_declined.body_suggestion') %>
 
-View Agreement: <%= submission_internship_agreement_url(@submission, @agreement) %>
+<%= t('user_mailer.agreement_declined.view_agreement') %>: <%= submission_internship_agreement_url(@submission, @agreement) %>

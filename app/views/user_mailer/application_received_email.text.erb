@@ -1,7 +1,7 @@
-New Application Received
+<%= t('user_mailer.application_received.heading') %>
 
-<%= @submission.student_profile.first_name %> <%= @submission.student_profile.last_name %> has applied to <%= @offer.title %>.
+<%= t('user_mailer.application_received.body', student_name: "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name}", offer_title: @offer.title) %>
 
-Log in to your dashboard to review their CV and proof solution.
+<%= t('user_mailer.application_received.login_instruction') %>
 
 <%= dashboard_url %>

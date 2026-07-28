@@ -2,8 +2,8 @@
   <div class="auth-card">
     <div class="auth-header">
       <%= render "layouts/navbar_brand" %>
-      <h2 class="auth-title">Join as a Coordinator</h2>
-      <p class="auth-subtitle">Validate local internships & oversee student track records</p>
+      <h2 class="auth-title"><%= t('registrations.new_university.title') %></h2>
+      <p class="auth-subtitle"><%= t('registrations.new_university.subtitle') %></p>
     </div>
 
     <%= form_with scope: :university_profile, url: university_registration_path, local: true do |f| %>
@@ -14,7 +14,7 @@
         <div class="flash-message flash-alert flash-col">
           <div class="flash-col-header">
             <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
-            <strong>Please resolve the following errors:</strong>
+            <strong><%= t('registrations.new_university.errors_title') %></strong>
           </div>
           <ul class="error-list">
             <% errors.each do |msg| %>
@@ -25,30 +25,30 @@
       <% end %>
 
       <div class="form-group">
-        <label class="form-label" for="university_id">Your University</label>
-        <%= f.collection_select :university_id, @universities, :id, :name, { prompt: "Select your University" }, { id: "university_id", class: "form-control", required: true } %>
+        <label class="form-label" for="university_id"><%= t('registrations.new_university.form.university') %></label>
+        <%= f.collection_select :university_id, @universities, :id, :name, { prompt: t('registrations.new_university.form.university_placeholder') }, { id: "university_id", class: "form-control", required: true } %>
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="admin_name">Coordinator Full Name</label>
-        <%= f.text_field :admin_name, value: @university_profile.admin_name, id: "admin_name", class: "form-control", placeholder: "Prof. Ahmed Mansour", required: true %>
+        <label class="form-label" for="admin_name"><%= t('registrations.new_university.form.admin_name') %></label>
+        <%= f.text_field :admin_name, value: @university_profile.admin_name, id: "admin_name", class: "form-control", placeholder: t('registrations.new_university.form.admin_name_placeholder'), required: true %>
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="department">Academic Department</label>
-        <%= f.text_field :department, value: @university_profile.department, id: "department", class: "form-control", placeholder: "Department of IT", required: true %>
+        <label class="form-label" for="department"><%= t('registrations.new_university.form.department') %></label>
+        <%= f.text_field :department, value: @university_profile.department, id: "department", class: "form-control", placeholder: t('registrations.new_university.form.department_placeholder'), required: true %>
       </div>
 
       <!-- Nested User Fields -->
       <%= fields_for :user, @user do |u| %>
         <div class="form-group">
-          <label class="form-label" for="user_email">Official University Email</label>
-          <%= u.email_field :email, id: "user_email", class: "form-control", placeholder: "admin@isetsf.rnu.tn", required: true %>
+          <label class="form-label" for="user_email"><%= t('registrations.new_university.form.email') %></label>
+          <%= u.email_field :email, id: "user_email", class: "form-control", placeholder: t('registrations.new_university.form.email_placeholder'), required: true %>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="user_password">Password</label>
+            <label class="form-label" for="user_password"><%= t('registrations.new_university.form.password') %></label>
             <div class="pw-wrap">
               <%= u.password_field :password, id: "user_password", class: "form-control", placeholder: "••••••••", required: true %>
               <button type="button" class="pw-toggle"
@@ -60,7 +60,7 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="user_password_confirmation">Confirm Password</label>
+            <label class="form-label" for="user_password_confirmation"><%= t('registrations.new_university.form.password_confirmation') %></label>
             <div class="pw-wrap">
               <%= u.password_field :password_confirmation, id: "user_password_confirmation", class: "form-control", placeholder: "••••••••", required: true %>
               <button type="button" class="pw-toggle"
@@ -73,13 +73,13 @@
         </div>
       <% end %>
 
-      <button type="submit" class="btn btn-primary btn-mt" data-turbo-submits-with="Registering…">
-        Register Coordinator Profile
+      <button type="submit" class="btn btn-primary btn-mt" data-turbo-submits-with="<%= t('registrations.new_university.form.submitting') %>">
+        <%= t('registrations.new_university.form.submit') %>
       </button>
     <% end %>
 
     <div class="auth-footer mt-25">
-      Not a coordinator? <%= link_to "Go Back", select_role_path %>
+      <%= t('registrations.new_university.not_coordinator') %> <%= link_to t('registrations.new_university.back'), select_role_path %>
     </div>
   </div>
 </div>

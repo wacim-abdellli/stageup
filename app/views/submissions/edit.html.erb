@@ -1,13 +1,13 @@
-<% content_for :title, "Submit Proof of Work – StageUp" %>
+<% content_for :title, t("submissions.edit.title") %>
 <div class="form-page form-page-narrow">
 
   <div class="form-page-header">
     <div class="step-eyebrow">
       <svg class="icon-indigo" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
-      <span>STEP 2 OF 2 · PROOF SUBMISSION</span>
+      <span><%= t("submissions.edit.eyebrow") %></span>
     </div>
-    <h1 class="form-page-title">Submit Proof of Work</h1>
-    <p class="form-page-subtitle">Paste your completed solution URL and optional explanation notes below.</p>
+    <h1 class="form-page-title"><%= t("submissions.edit.heading") %></h1>
+    <p class="form-page-subtitle"><%= t("submissions.edit.description") %></p>
   </div>
 
   <div class="form-page-body">
@@ -16,15 +16,15 @@
       <div class="review-context-row">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         <div>
-          <span class="review-context-label">Internship Offer</span>
+          <span class="review-context-label"><%= t("submissions.edit.internship_label") %></span>
           <strong class="review-context-value"><%= @submission.offer.title %></strong>
         </div>
       </div>
       <div class="review-context-row">
         <svg class="icon-indigo" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
         <div>
-          <span class="review-context-label">Attached Mission</span>
-            <strong class="review-context-value"><%= @submission.mission&.title || "No mission attached" %></strong>
+          <span class="review-context-label"><%= t("submissions.edit.mission_label") %></span>
+            <strong class="review-context-value"><%= @submission.mission&.title || t("submissions.edit.no_mission") %></strong>
         </div>
       </div>
     </div>
@@ -39,26 +39,26 @@
     <%= form_with model: @submission, local: true do |f| %>
 
       <div class="form-group mb-20">
-        <label class="form-label" for="github_link">Solution URL (GitHub Repo, Figma File, Google Drive)</label>
+        <label class="form-label" for="github_link"><%= t("submissions.edit.form.github_link") %></label>
         <%= f.url_field :github_link, id: "github_link", class: "form-control",
-            placeholder: "https://github.com/myusername/myrepo",
+            placeholder: t("submissions.edit.form.github_link_placeholder"),
             required: true, oninput: "valURL(this)" %>
         
         <div class="inline-warning-box mt-10">
           <svg class="icon-amber" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span>Ensure your URL is <strong>publicly accessible</strong> so recruiters can verify your work.</span>
+          <span><%= t("submissions.edit.form.url_warning_html") %></span>
         </div>
       </div>
 
       <div class="form-group mb-24">
-        <label class="form-label" for="submission_notes">Notes / Technical Explanation (Optional)</label>
+        <label class="form-label" for="submission_notes"><%= t("submissions.edit.form.notes") %></label>
         <%= f.text_area :submission_notes, id: "submission_notes", class: "form-control", rows: 4,
-            placeholder: "Describe your implementation details, tech stack used, setup instructions, or key assumptions..." %>
+            placeholder: t("submissions.edit.form.notes_placeholder") %>
       </div>
 
       <div class="form-footer flex-between">
-        <%= link_to "Cancel", offer_path(@submission.offer), class: "btn btn-secondary btn-cancel" %>
-        <%= f.submit "Submit Proof Solution →", class: "btn btn-primary btn-submit", data: { disable_with: "Submitting…" } %>
+        <%= link_to t("common.cancel"), offer_path(@submission.offer), class: "btn btn-secondary btn-cancel" %>
+        <%= f.submit t("submissions.edit.form.submit"), class: "btn btn-primary btn-submit", data: { disable_with: t("submissions.edit.form.submitting") } %>
       </div>
 
     <% end %>

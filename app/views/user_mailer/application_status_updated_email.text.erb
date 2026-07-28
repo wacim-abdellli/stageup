@@ -1,5 +1,5 @@
-Application <%= @status.humanize %>
+<%= t('user_mailer.application_status_updated.heading', status: @status.humanize) %>
 
-Your application for <%= @offer.title %> at <%= @company.name %> has been <%= @status %>.
+<%= t('user_mailer.application_status_updated.body', offer_title: @offer.title, company_name: @company.name, status: @status) %>
 
-View Details: <%= dashboard_url %>
+<%= t('user_mailer.application_status_updated.view_details') %>: <%= dashboard_url %>

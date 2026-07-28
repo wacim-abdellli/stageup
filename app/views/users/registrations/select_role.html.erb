@@ -1,10 +1,10 @@
-<% content_for :title, "Create Account – StageUp" %>
+<% content_for :title, "#{t('registrations.select_role.title')} – StageUp" %>
 <div class="auth-container">
   <div class="auth-card auth-card-md">
     <div class="auth-header">
       <%= render "layouts/navbar_brand" %>
-      <h2 class="auth-title">Create your account</h2>
-      <p class="auth-subtitle">Select your profile type to get started</p>
+      <h2 class="auth-title"><%= t('registrations.select_role.title') %></h2>
+      <p class="auth-subtitle"><%= t('registrations.select_role.subtitle') %></p>
     </div>
 
     <div class="role-grid">
@@ -13,8 +13,8 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
         </div>
         <div class="role-info">
-          <h3 class="role-title">I am a Student</h3>
-          <p class="role-desc">Browse internships, prove your skills with missions, and build a verified career profile.</p>
+          <h3 class="role-title"><%= t('registrations.select_role.student.title') %></h3>
+          <p class="role-desc"><%= t('registrations.select_role.student.desc') %></p>
         </div>
         <svg class="role-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       <% end %>
@@ -24,8 +24,8 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         </div>
         <div class="role-info">
-          <h3 class="role-title">I am a Company / Startup</h3>
-          <p class="role-desc">Post internship offers, attach proof-of-work missions, and hire reliable talent.</p>
+          <h3 class="role-title"><%= t('registrations.select_role.company.title') %></h3>
+          <p class="role-desc"><%= t('registrations.select_role.company.desc') %></p>
         </div>
         <svg class="role-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       <% end %>
@@ -35,15 +35,15 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h4"/><path d="M18 9h2a2 2 0 0 1 2 2v11h-4"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
         </div>
         <div class="role-info">
-          <h3 class="role-title">I am a University Coordinator</h3>
-          <p class="role-desc">Verify student profiles, endorse trusted companies, and simplify internship agreements.</p>
+          <h3 class="role-title"><%= t('registrations.select_role.university.title') %></h3>
+          <p class="role-desc"><%= t('registrations.select_role.university.desc') %></p>
         </div>
         <svg class="role-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       <% end %>
     </div>
 
     <div class="auth-footer">
-      Already have an account? <%= link_to "Sign In", new_user_session_path, class: "auth-signin-link" %>
+      <%= t('registrations.select_role.already_account', link: link_to(t('registrations.select_role.sign_in'), new_user_session_path, class: "auth-signin-link")) %>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<% content_for :title, "Dashboard – StageUp" %>
+<% content_for :title, "#{t('dashboard.title')} – StageUp" %>
 
 <div class="dashboard-container">
 
@@ -7,15 +7,15 @@
     <div class="dash-welcome-inner">
       <div>
         <h1 class="dash-welcome-title">
-          Welcome back<% if @profile.respond_to?(:first_name) && @profile.first_name.present? %>, <%= @profile.first_name %><% elsif @profile.respond_to?(:name) && @profile.name.present? %>, <%= @profile.name %><% end %>
+          <%= t('dashboard.welcome_back', name: @profile.respond_to?(:first_name) && @profile.first_name.present? ? @profile.first_name : (@profile.respond_to?(:name) && @profile.name.present? ? @profile.name : '')) %>
         </h1>
         <p class="dash-welcome-sub">
           <% if @role_type == "StudentProfile" %>
-            Manage your applications, track internship progress, and build your commitment score.
+            <%= t('dashboard.welcome_sub.student') %>
           <% elsif @role_type == "CompanyProfile" %>
-            Review student applicants, publish proof missions, and manage active internship offers.
+            <%= t('dashboard.welcome_sub.company') %>
           <% else %>
-            Monitor student internship agreements and track university partner commitments.
+            <%= t('dashboard.welcome_sub.university') %>
           <% end %>
         </p>
       </div>
@@ -38,17 +38,17 @@
         <div class="section-heading-row">
           <div class="section-title-left">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <h2>My Profile</h2>
+            <h2><%= t('dashboard.profile.title') %></h2>
           </div>
           <div class="section-heading-row-right">
             <% if @role_type == "StudentProfile" %>
-              <span class="badge badge-info">Student</span>
+              <span class="badge badge-info"><%= t('dashboard.profile.roles.student') %></span>
             <% elsif @role_type == "CompanyProfile" %>
-              <span class="badge badge-info">Company</span>
+              <span class="badge badge-info"><%= t('dashboard.profile.roles.company') %></span>
             <% else %>
-              <span class="badge badge-info">University</span>
+              <span class="badge badge-info"><%= t('dashboard.profile.roles.university') %></span>
             <% end %>
-            <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-secondary btn-compact" %>
+            <%= link_to t('dashboard.profile.edit'), edit_user_registration_path, class: "btn btn-secondary btn-compact" %>
           </div>
         </div>
 
@@ -59,7 +59,7 @@
                 <span class="bento-icon-badge indigo">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </span>
-                <span class="bento-label">Full Name</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.full_name') %></span>
               </div>
               <span class="bento-value"><%= @profile.first_name %> <%= @profile.last_name %></span>
             </div>
@@ -69,11 +69,11 @@
                 <span class="bento-icon-badge emerald">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 </span>
-                <span class="bento-label">Phone</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.phone') %></span>
               </div>
               <span class="bento-value">
                 <% student_phone = @profile.respond_to?(:phone) ? @profile.phone : (@profile.respond_to?(:phone_number) ? @profile.phone_number : nil) %>
-                <%= student_phone.presence || "Not specified" %>
+                <%= student_phone.presence || t('dashboard.profile_bento.phone_not_specified') %>
               </span>
             </div>
 
@@ -82,11 +82,11 @@
                 <span class="bento-icon-badge amber">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                 </span>
-                <span class="bento-label">Major</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.major') %></span>
               </div>
               <span class="bento-value">
                 <% student_major = @profile.respond_to?(:major) ? @profile.major : (@profile.respond_to?(:field_of_study) ? @profile.field_of_study : nil) %>
-                <%= student_major.presence || "Not specified" %>
+                <%= student_major.presence || t('dashboard.profile_bento.major_not_specified') %>
               </span>
             </div>
 
@@ -95,9 +95,9 @@
                 <span class="bento-icon-badge purple">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                 </span>
-                <span class="bento-label">Graduation Year</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.graduation_year') %></span>
               </div>
-              <span class="bento-value"><%= @profile.graduation_year.presence || "Not specified" %></span>
+              <span class="bento-value"><%= @profile.graduation_year.presence || t('dashboard.profile_bento.graduation_not_specified') %></span>
             </div>
 
             <div class="profile-bento-item">
@@ -105,13 +105,13 @@
                 <span class="bento-icon-badge cyan">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                 </span>
-                <span class="bento-label">University</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.university') %></span>
               </div>
               <span class="bento-value">
                 <% if @profile.respond_to?(:university) && @profile.university %>
                   <%= @profile.university.name %>
                 <% else %>
-                  <span class="text-muted italic">Self-declared / Unassociated</span>
+                  <span class="text-muted italic"><%= t('dashboard.profile_bento.university_self_declared') %></span>
                 <% end %>
               </span>
             </div>
@@ -121,7 +121,7 @@
                 <span class="bento-icon-badge indigo">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                 </span>
-                <span class="bento-label">Skills</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.skills') %></span>
               </div>
               <div class="bento-value">
                 <% if @profile.respond_to?(:skills) && @profile.skills.any? %>
@@ -131,7 +131,7 @@
                     <% end %>
                   </div>
                 <% else %>
-                  <span class="text-muted italic">None added</span>
+                  <span class="text-muted italic"><%= t('dashboard.profile_bento.skills_none') %></span>
                 <% end %>
               </div>
             </div>
@@ -141,62 +141,62 @@
                 <span class="bento-icon-badge emerald">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                 </span>
-                <span class="bento-label">Bio</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.bio') %></span>
               </div>
-              <span class="bento-value"><%= (@profile.respond_to?(:bio) && @profile.bio.present?) ? @profile.bio : "No bio provided yet." %></span>
+              <span class="bento-value"><%= (@profile.respond_to?(:bio) && @profile.bio.present?) ? @profile.bio : t('dashboard.profile_bento.bio_empty') %></span>
             </div>
 
           <% elsif @role_type == "CompanyProfile" %>
             <div class="profile-bento-item">
               <div class="bento-header-row">
                 <span class="bento-icon-badge indigo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M19 21v-4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/></svg></span>
-                <span class="bento-label">Company Name</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.company_name') %></span>
               </div>
               <span class="bento-value"><%= @profile.name %></span>
             </div>
             <div class="profile-bento-item">
               <div class="bento-header-row">
                 <span class="bento-icon-badge cyan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/></svg></span>
-                <span class="bento-label">Website</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.website') %></span>
               </div>
-              <span class="bento-value"><%= (@profile.respond_to?(:website) && @profile.website.present?) ? @profile.website : "Not specified" %></span>
+              <span class="bento-value"><%= (@profile.respond_to?(:website) && @profile.website.present?) ? @profile.website : t('dashboard.profile_bento.website_not_provided') %></span>
             </div>
             <div class="profile-bento-item">
               <div class="bento-header-row">
                 <span class="bento-icon-badge emerald"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-                <span class="bento-label">Verification Status</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.verification_status') %></span>
               </div>
-              <span class="bento-value"><%= (@profile.respond_to?(:verified?) && @profile.verified?) ? "Verified Recruiter" : "Pending Verification" %></span>
+              <span class="bento-value"><%= (@profile.respond_to?(:verified?) && @profile.verified?) ? t('dashboard.profile_bento.verified') : t('dashboard.profile_bento.not_verified') %></span>
             </div>
             <div class="profile-bento-item bento-full-width">
               <div class="bento-header-row">
                 <span class="bento-icon-badge purple"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg></span>
-                <span class="bento-label">Description</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.description') %></span>
               </div>
-              <span class="bento-value"><%= (@profile.respond_to?(:description) && @profile.description.present?) ? @profile.description : "No description provided." %></span>
+              <span class="bento-value"><%= (@profile.respond_to?(:description) && @profile.description.present?) ? @profile.description : t('dashboard.profile_bento.description_empty') %></span>
             </div>
 
           <% elsif @role_type == "UniversityProfile" %>
             <div class="profile-bento-item">
               <div class="bento-header-row">
                 <span class="bento-icon-badge indigo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-                <span class="bento-label">Admin Name</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.admin_name') %></span>
               </div>
               <span class="bento-value"><%= @profile.admin_name %></span>
             </div>
             <div class="profile-bento-item">
               <div class="bento-header-row">
                 <span class="bento-icon-badge amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg></span>
-                <span class="bento-label">Department</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.department') %></span>
               </div>
               <span class="bento-value"><%= @profile.department %></span>
             </div>
             <div class="profile-bento-item">
               <div class="bento-header-row">
                 <span class="bento-icon-badge cyan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg></span>
-                <span class="bento-label">Institution Name</span>
+                <span class="bento-label"><%= t('dashboard.profile_bento.institution_name') %></span>
               </div>
-              <span class="bento-value"><%= @profile.university ? @profile.university.name : "University Partner" %></span>
+              <span class="bento-value"><%= @profile.university ? @profile.university.name : t('dashboard.profile_bento.institution_name') %></span>
             </div>
           <% end %>
         </div>
@@ -210,7 +210,7 @@
           <div class="section-heading-row">
             <div class="section-title-left">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              <h2>Active Internships & Milestone Progress</h2>
+              <h2><%= t('dashboard.active_internships.title') %></h2>
             </div>
           </div>
 
@@ -221,11 +221,11 @@
                   <div class="internship-item-left">
                     <strong class="internship-item-title"><%= sub.offer.title %></strong>
                     <span class="internship-item-meta">
-                      Company: <%= sub.offer.company_profile.name %>
+                      <%= t('dashboard.active_internships.company_label') %> <%= sub.offer.company_profile.name %>
                       <span class="badge-status <%= "badge-#{sub.status}" %> ml-8"><%= sub.status.humanize %></span>
                       <% match_pct = sub.offer.match_percentage_for(@profile) rescue 100 %>
                       <% if match_pct < 100 %>
-                        <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %> ml-4"><%= match_pct %>% Match</span>
+                        <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %> ml-4"><%= match_pct %>% <%= t('dashboard.active_internships.match') %></span>
                       <% end %>
                     </span>
 
@@ -238,7 +238,7 @@
                               <% if ms[:timestamp] %>
                                 <%= ms[:timestamp].strftime("%b %d, %Y") %>
                               <% else %>
-                                <%= ms[:complete] ? "Done" : "—" %>
+                                <%= ms[:complete] ? t('dashboard.active_internships.milestone_done') : "—" %>
                               <% end %>
                             </div>
                             <div class="timeline-step <%= ms[:complete] ? 'completed' : 'pending' %>">
@@ -262,36 +262,36 @@
                     <% if sub.status == "accepted" %>
                       <% if sub.student_confirmed_completed %>
                         <span class="badge-status badge-completion-pending">
-                          Waiting for Employer
+                          <%= t('dashboard.active_internships.waiting_employer') %>
                         </span>
                       <% else %>
-                        <%= button_to "Mark Completed", confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success", data: { disable_with: "Completing…" } %>
-                        <%= button_to "Abandon", abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: "Are you sure you want to abandon this internship? Your commitment score will be penalized.", disable_with: "Abandoning…" } %>
+                        <%= button_to t('dashboard.active_internships.mark_completed'), confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success", data: { disable_with: t('dashboard.active_internships.completing') } %>
+                        <%= button_to t('dashboard.active_internships.abandon'), abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: t('dashboard.active_internships.abandon_confirm'), disable_with: t('dashboard.active_internships.abandoning') } %>
                       <% end %>
 
                       <% if sub.internship_agreement %>
                         <% if sub.internship_agreement.status == "pending_signatures" %>
-                          <span class="badge-status badge-pending">Awaiting Signatures</span>
+                          <span class="badge-status badge-pending"><%= t('dashboard.active_internships.awaiting_signatures') %></span>
                         <% elsif sub.internship_agreement.status == "declined" %>
-                          <span class="badge-status badge-declined">Agreement Declined</span>
+                          <span class="badge-status badge-declined"><%= t('dashboard.active_internships.agreement_declined') %></span>
                         <% end %>
-                        <%= link_to "View & Sign Agreement", submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" %>
+                        <%= link_to t('dashboard.active_internships.view_sign_agreement'), submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" %>
                       <% else %>
-                        <%= link_to "Generate Convention de Stage", new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
+                        <%= link_to t('dashboard.active_internships.generate_agreement'), new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" %>
                       <% end %>
                     <% else %>
-                      <span class="badge-status badge-completed">Completed</span>
+                      <span class="badge-status badge-completed"><%= t('common.status.completed') %></span>
                       <% if sub.internship_agreement&.verification_token.present? %>
-                        <%= link_to "View Certificate",
+                        <%= link_to t('dashboard.active_internships.view_certificate'),
                             verify_certificate_path(token: sub.internship_agreement.verification_token),
                             class: "btn btn-secondary btn-compact",
                             target: "_blank" %>
                       <% end %>
                       <% my_review = sub.reviews.detect { |r| r.author_id == current_user.id } %>
                       <% if my_review.nil? %>
-                        <%= link_to "Leave Review", new_submission_review_path(sub), class: "btn btn-primary w-auto fs-12 btn-review" %>
+                        <%= link_to t('dashboard.active_internships.leave_review'), new_submission_review_path(sub), class: "btn btn-primary w-auto fs-12 btn-review" %>
                       <% else %>
-                        <span class="fs-12 text-muted">Review Submitted</span>
+                        <span class="fs-12 text-muted"><%= t('dashboard.active_internships.review_submitted') %></span>
                       <% end %>
                     <% end %>
                   </div>
@@ -303,11 +303,11 @@
               <div class="empty-state-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
               </div>
-              <h3 class="empty-state-title">No Active Internships</h3>
+              <h3 class="empty-state-title"><%= t('dashboard.active_internships.no_active_title') %></h3>
               <p class="empty-state-text">
-                You haven't started any internships on StageUp yet. Search for active offers, apply, and complete your proof mission!
+                <%= t('dashboard.active_internships.no_active_text') %>
               </p>
-              <%= link_to "Browse Active Offers", offers_path, class: "btn btn-primary btn-compact" %>
+              <%= link_to t('dashboard.active_internships.browse_active'), offers_path, class: "btn btn-primary btn-compact" %>
             </div>
           <% end %>
         </div>
@@ -319,7 +319,7 @@
           <div class="section-heading-row">
             <div class="section-title-left">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
-              <h2>Applications Pipeline</h2>
+              <h2><%= t('dashboard.kanban.title') %></h2>
             </div>
           </div>
 
@@ -334,9 +334,9 @@
           <div class="section-heading-row">
             <div class="section-title-left">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-              <h2>My Internship Offers</h2>
+              <h2><%= t('dashboard.offers.title') %></h2>
             </div>
-            <%= link_to "Post New Offer", new_offer_path, class: "btn btn-primary btn-compact" %>
+            <%= link_to t('dashboard.offers.post_offer'), new_offer_path, class: "btn btn-primary btn-compact" %>
           </div>
 
           <% if @company_offers.any? %>
@@ -350,16 +350,16 @@
                         <%= link_to offer.title, offer_path(offer), class: "offer-mgmt-link" %>
                       </strong>
                       <span class="inline-list-sm-meta">
-                        <%= offer.draft? ? "Draft" : offer.status.humanize %> &middot; <%= offer.submissions.size %> applicant(s)
+                        <%= offer.draft? ? t('dashboard.offers.draft_label') : offer.status.humanize %> &middot; <%= offer.submissions.size %> <%= t('dashboard.offers.applicant_count') %>
                       </span>
                     </div>
                   </div>
                   <div class="action-group-8">
-                    <%= link_to "Edit", edit_offer_path(offer), class: "btn btn-secondary btn-compact-sm" %>
+                    <%= link_to t('common.edit'), edit_offer_path(offer), class: "btn btn-secondary btn-compact-sm" %>
                     <% if offer.draft? %>
-                      <%= button_to "Delete", offer_path(offer), method: :delete, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Permanently delete this draft?" } %>
+                      <%= button_to t('dashboard.offers.delete_draft'), offer_path(offer), method: :delete, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: t('dashboard.offers.delete_draft_confirm') } %>
                     <% else %>
-                      <%= button_to "Archive", offer_path(offer), method: :delete, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Archive this offer?" } %>
+                      <%= button_to t('dashboard.offers.archive'), offer_path(offer), method: :delete, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: t('dashboard.offers.archive_confirm') } %>
                     <% end %>
                   </div>
                 </div>
@@ -370,9 +370,9 @@
               <div class="empty-state-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
               </div>
-              <h3 class="empty-state-title">No Offers Posted Yet</h3>
-              <p class="empty-state-text">Publish your first internship offer to attract candidate talent and receive proof mission submissions.</p>
-              <%= link_to "Post an Offer", new_offer_path, class: "btn btn-primary btn-compact-empty" %>
+              <h3 class="empty-state-title"><%= t('dashboard.offers.no_offers_title') %></h3>
+              <p class="empty-state-text"><%= t('dashboard.offers.no_offers_text') %></p>
+              <%= link_to t('dashboard.offers.post_offer_empty'), new_offer_path, class: "btn btn-primary btn-compact-empty" %>
             </div>
           <% end %>
         </div>
@@ -388,8 +388,8 @@
       <% if @role_type == "StudentProfile" %>
         <div class="profile-card rep-metrics-card mb-24">
           <div class="rep-metrics-header">
-            <h3 class="rep-metrics-title">Reputation</h3>
-            <span class="rep-metrics-sub">Public · Verified</span>
+            <h3 class="rep-metrics-title"><%= t('dashboard.reputation.title') %></h3>
+            <span class="rep-metrics-sub"><%= t('dashboard.reputation.public_verified_label') %></span>
           </div>
 
           <div class="rep-score-row">
@@ -400,7 +400,7 @@
               </span>
               <span class="rep-score-label">/ 100</span>
             </div>
-            <span class="rep-score-desc">Commitment Score</span>
+            <span class="rep-score-desc"><%= t('dashboard.reputation.score_label') %></span>
           </div>
 
           <div class="rep-divider"></div>
@@ -408,13 +408,13 @@
           <div class="rep-rating-row">
             <div class="rep-rating-left">
               <svg class="icon-14 icon-amber-fill" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <span class="rep-rating-label">Avg. Rating</span>
+              <span class="rep-rating-label"><%= t('dashboard.reputation.avg_rating') %></span>
             </div>
             <span class="rep-rating-value">
               <% if defined?(@avg_rating) && @avg_rating %>
                 <%= @avg_rating.round(1) %> / 5
               <% else %>
-                Unrated
+                <%= t('common.unrated') %>
               <% end %>
             </span>
           </div>
@@ -422,22 +422,22 @@
 
       <% else %>
         <div class="profile-card p-25 mb-24">
-          <h3 class="metrics-card-title">Reputation Metrics</h3>
+          <h3 class="metrics-card-title"><%= t('dashboard.reputation.metrics_title') %></h3>
           <% if @role_type == "CompanyProfile" %>
             <div class="rep-stat-list">
               <div class="rep-stat-row">
-                <span class="rep-stat-label">Active Offers</span>
+                <span class="rep-stat-label"><%= t('dashboard.reputation.active_offers') %></span>
                 <strong><%= @company_offers.count %></strong>
               </div>
               <div class="rep-stat-row">
-                <span class="rep-stat-label">Verification</span>
-                <span class="rep-metrics-sub"><%= @profile.verified? ? "Verified" : "Grace Period" %></span>
+                <span class="rep-stat-label"><%= t('dashboard.reputation.verification_label') %></span>
+                <span class="rep-metrics-sub"><%= @profile.verified? ? t('dashboard.reputation.verified_status') : t('dashboard.reputation.grace_period') %></span>
               </div>
             </div>
           <% elsif @role_type == "UniversityProfile" %>
             <div class="rep-stat-list">
               <div class="rep-stat-row">
-                <span class="rep-stat-label">Associated Students</span>
+                <span class="rep-stat-label"><%= t('dashboard.reputation.associated_students') %></span>
                 <strong><%= @total_students_count %></strong>
               </div>
             </div>
@@ -451,9 +451,9 @@
           <div class="ledger-card-header">
             <div class="ledger-card-title-row">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              <h3 class="ledger-card-title">Commitment Ledger</h3>
+              <h3 class="ledger-card-title"><%= t('dashboard.reputation.ledger_title') %></h3>
             </div>
-            <span class="ledger-card-sub">Score History</span>
+            <span class="ledger-card-sub"><%= t('dashboard.reputation.history_title') %></span>
           </div>
 
           <% if @commitment_ledger_events.present? && @commitment_ledger_events.any? %>
@@ -463,13 +463,13 @@
                   <div class="ledger-event-node <%= event.score_delta > 0 ? 'node-positive' : (event.score_delta == 0 ? 'node-neutral' : 'node-negative') %>"></div>
                   <div class="ledger-event-body">
                     <div class="ledger-event-header">
-                      <span class="ledger-event-title"><%= (event.respond_to?(:event_type) && event.event_type.present?) ? event.event_type.humanize : "Event" %></span>
+                      <span class="ledger-event-title"><%= (event.respond_to?(:event_type) && event.event_type.present?) ? event.event_type.humanize : t('dashboard.reputation.event_label') %></span>
                       <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %>">
                         <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %>
                       </span>
                     </div>
                     <p class="ledger-event-desc"><%= event.description %></p>
-                    <span class="ledger-event-time"><%= time_ago_in_words(event.created_at) %> ago</span>
+                    <span class="ledger-event-time"><%= time_ago_in_words(event.created_at) %></span>
                   </div>
                 </div>
               <% end %>
@@ -477,7 +477,7 @@
           <% else %>
             <div class="ledger-empty-state">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <p>No reputation events logged yet. Complete internships to build your score history.</p>
+              <p><%= t('dashboard.reputation.empty') %></p>
             </div>
           <% end %>
         </div>

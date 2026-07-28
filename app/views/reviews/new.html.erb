@@ -1,10 +1,10 @@
-<% content_for :title, "Leave a Review – StageUp" %>
+<% content_for :title, "#{t("dashboard.reviews.write_review")} – StageUp" %>
 <div class="form-page form-page-narrow">
 
   <div class="form-page-header">
-    <h1 class="form-page-title">Leave a Review</h1>
+    <h1 class="form-page-title"><%= t("dashboard.reviews.write_review") %></h1>
     <p class="form-page-subtitle">
-      Share your experience with <strong><%= current_user == @submission.student_profile.user ? @submission.offer.company_profile.name : "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name}" %></strong>
+      <%= t("dashboard.reviews.subtitle_html", name: current_user == @submission.student_profile.user ? @submission.offer.company_profile.name : "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name}") %>
     </p>
   </div>
 
@@ -14,7 +14,7 @@
       <div class="review-context-row">
         <i data-lucide="briefcase"></i>
         <div>
-          <span class="review-context-label">Internship</span>
+          <span class="review-context-label"><%= t("dashboard.reviews.internship") %></span>
           <strong class="review-context-value"><%= @submission.offer.title %></strong>
         </div>
       </div>
@@ -30,7 +30,7 @@
     <%= form_with model: [@submission, @review], local: true do |f| %>
 
       <div class="form-group">
-        <label class="form-label">Rating</label>
+        <label class="form-label"><%= t("dashboard.reviews.rating_label") %></label>
         <div class="star-picker" id="star-picker">
           <% (1..5).each do |i| %>
             <button type="button" class="star-btn" data-v="<%= i %>" onclick="pickStar(<%= i %>)">
@@ -39,24 +39,24 @@
           <% end %>
         </div>
         <%= f.hidden_field :rating, id: "rv" %>
-        <span id="sh" class="form-hint">Click a star to rate</span>
+        <span id="sh" class="form-hint"><%= t("dashboard.reviews.click_to_rate") %></span>
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="comment">Feedback & Review</label>
+        <label class="form-label" for="comment"><%= t("dashboard.reviews.feedback") %></label>
         <%= f.text_area :comment, id: "comment", class: "form-control", rows: 5,
-            placeholder: "Describe the collaboration, skills learned, professionalism, and any constructive comments...",
+            placeholder: t("dashboard.reviews.comment_placeholder"),
             required: true, oninput: "updateCC(this)" %>
         <div class="form-hint-row">
-          <small class="form-hint">Reviews cannot be edited once submitted.</small>
-          <span id="cc" class="char-count">0 / min 10</span>
+          <small class="form-hint"><%= t("dashboard.reviews.hint") %></small>
+          <span id="cc" class="char-count"><%= t("dashboard.reviews.char_count", count: 0, min: 10) %></span>
         </div>
       </div>
 
       <div class="form-footer">
-        <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary btn-cancel" %>
-        <%= f.submit "Submit Review", class: "btn btn-primary btn-submit",
-            data: { turbo_confirm: "Reviews cannot be edited after submission. Continue?", disable_with: "Submitting…" } %>
+        <%= link_to t("common.cancel"), dashboard_path, class: "btn btn-secondary btn-cancel" %>
+        <%= f.submit t("dashboard.reviews.submit"), class: "btn btn-primary btn-submit",
+            data: { turbo_confirm: t("dashboard.reviews.turbo_confirm"), disable_with: t("dashboard.reviews.submitting") } %>
       </div>
 
     <% end %>
@@ -64,7 +64,7 @@
 </div>
 
 <%= javascript_tag nonce: true do %>
-  var labels = ['Poor','Below Average','Average','Good','Excellent'];
+  var labels = JSON.parse('<%= raw t("dashboard.reviews.rating.labels").to_json %>');
   function pickStar(v) {
     document.getElementById('rv').value = v;
     document.getElementById('sh').textContent = labels[v-1] + ' (' + v + '/5)';

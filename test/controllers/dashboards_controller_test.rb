@@ -5,7 +5,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
 
   test "approved university coordinator can load dashboard and sees stats" do
     sign_in users(:university_user)
-    get dashboard_url
+    get dashboard_url, params: { locale: "en" }
     assert_response :success
     assert_match "Prof. Ahmed Mansour", @response.body
     assert_select ".rep-stat-label", text: "Associated Students"
@@ -14,7 +14,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
 
   test "pending university coordinator sees pending approval view" do
     sign_in users(:pending_university_user)
-    get dashboard_url
+    get dashboard_url, params: { locale: "en" }
     assert_response :success
     assert_select "h2", text: "Verification Pending"
   end

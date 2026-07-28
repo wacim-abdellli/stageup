@@ -1,14 +1,14 @@
-<% content_for :title, "Notifications – StageUp" %>
+<% content_for :title, "#{t("notifications.title")} – StageUp" %>
 <div class="notif-page-wrap">
   <div class="notif-page-header">
     <div>
-      <h1 class="notif-page-title">Notifications</h1>
+      <h1 class="notif-page-title"><%= t("notifications.title") %></h1>
       <% if @unread_count > 0 %>
-        <p class="notif-page-subtitle"><%= @unread_count %> unread</p>
+        <p class="notif-page-subtitle"><%= t("notifications.unread_count", count: @unread_count) %></p>
       <% end %>
     </div>
     <% if @unread_count > 0 %>
-      <%= button_to "Mark All Read", read_all_notifications_path, method: :post, class: "btn btn-accent btn-compact-sm" %>
+      <%= button_to t("notifications.mark_all_read"), read_all_notifications_path, method: :post, class: "btn btn-accent btn-compact-sm" %>
     <% end %>
   </div>
 
@@ -16,7 +16,7 @@
     <div class="notif-list-card">
       <% @notifications.group_by { |n| n.created_at.to_date }.each do |date, notifs| %>
         <div class="notif-date-group-label">
-          <%= date == Date.today ? "Today" : date == Date.yesterday ? "Yesterday" : date.strftime("%B %d, %Y") %>
+          <%= date == Date.today ? t("notifications.today") : date == Date.yesterday ? t("notifications.yesterday") : date.strftime("%B %d, %Y") %>
         </div>
         <% notifs.each do |notification| %>
           <div class="notif-list-item <%= 'unread' unless notification.read %>">
@@ -25,10 +25,10 @@
             </div>
             <div class="notif-item-content">
               <p class="notif-item-message"><%= notification.message %></p>
-              <span class="notif-item-time"><%= time_ago_in_words(notification.created_at) %> ago</span>
+              <span class="notif-item-time"><%= "#{time_ago_in_words(notification.created_at)} #{t("common.ago")}".strip %></span>
             </div>
             <% unless notification.read %>
-              <%= button_to "Mark Read", notification_path(notification), method: :patch, class: "btn btn-secondary btn-compact-sm notif-mark-btn" %>
+              <%= button_to t("notifications.mark_read"), notification_path(notification), method: :patch, class: "btn btn-secondary btn-compact-sm notif-mark-btn" %>
             <% end %>
           </div>
         <% end %>
@@ -39,27 +39,25 @@
       <div class="notif-empty-glow">
         <i data-lucide="bell" class="icon-32 stroke-secondary"></i>
       </div>
-      <h3 class="notif-empty-title">All Caught Up</h3>
-      <p class="notif-empty-desc">
-        You have no new notifications. Updates about applications, agreements, and internship milestones will appear here.
-      </p>
+      <h3 class="notif-empty-title"><%= t("notifications.empty_title") %></h3>
+      <p class="notif-empty-desc"><%= t("notifications.empty_desc") %></p>
     </div>
   <% end %>
 
   <% if @total_pages > 1 %>
     <div class="pagination-nav">
       <% if @current_page > 1 %>
-        <%= link_to "← Previous", notifications_path(page: @current_page - 1), class: "pagination-link" %>
+        <%= link_to t("common.previous"), notifications_path(page: @current_page - 1), class: "pagination-link" %>
       <% else %>
-        <span class="pagination-link pagination-link-disabled">← Previous</span>
+        <span class="pagination-link pagination-link-disabled"><%= t("common.previous") %></span>
       <% end %>
 
-      <span class="pagination-info">Page <%= @current_page %> of <%= @total_pages %></span>
+      <span class="pagination-info"><%= t("notifications.page_info", current: @current_page, total: @total_pages) %></span>
 
       <% if @current_page < @total_pages %>
-        <%= link_to "Next →", notifications_path(page: @current_page + 1), class: "pagination-link" %>
+        <%= link_to t("common.next"), notifications_path(page: @current_page + 1), class: "pagination-link" %>
       <% else %>
-        <span class="pagination-link pagination-link-disabled">Next →</span>
+        <span class="pagination-link pagination-link-disabled"><%= t("common.next") %></span>
       <% end %>
     </div>
   <% end %>

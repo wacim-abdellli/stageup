@@ -7,11 +7,11 @@
   <div class="agreement-action-bar hide-on-print">
     <%= link_to dashboard_path, class: "btn btn-secondary" do %>
       <i data-lucide="arrow-left"></i>
-      Dashboard
+      <%= t('dashboard.title') %>
     <% end %>
     <button id="print-btn" class="btn btn-secondary">
       <i data-lucide="printer"></i>
-      Print / Save as PDF
+      <%= t('dashboard.internship_agreements.show.print') %>
     </button>
   </div>
   <div class="agreement-card">
@@ -20,16 +20,16 @@
       <div class="agreement-declined-banner">
         <p class="agreement-declined-title">
           <i data-lucide="x-circle" class="icon-16 stroke-danger"></i>
-          Agreement Declined
+          <%= t('dashboard.internship_agreements.show.declined_title') %>
         </p>
-        <p class="agreement-declined-reason"><strong>Reason:</strong> <%= @agreement.rejection_reason %></p>
-        <p class="agreement-declined-by">Declined by <%= university&.name %> coordinator</p>
+        <p class="agreement-declined-reason"><%= t('dashboard.internship_agreements.show.declined_reason', reason: @agreement.rejection_reason) %></p>
+        <p class="agreement-declined-by"><%= t('dashboard.internship_agreements.show.declined_by', university: university&.name) %></p>
       </div>
     <% end %>
 
     <div class="agreement-header">
-      <h1 class="agreement-title">CONVENTION DE STAGE</h1>
-      <p class="agreement-subtitle">This agreement is made in accordance with Tunisian law governing internship programmes.</p>
+      <h1 class="agreement-title"><%= t('dashboard.internship_agreements.show.title') %></h1>
+      <p class="agreement-subtitle"><%= t('dashboard.internship_agreements.show.subtitle') %></p>
     </div>
 
     <% if @agreement.status == "fully_executed" && @agreement.verification_token.present? %>
@@ -37,11 +37,11 @@
         <div class="cert-banner-left">
           <svg class="icon-18 icon-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
           <div>
-            <strong class="cert-banner-title">Certificate Available</strong>
-            <p class="cert-banner-sub">This internship is fully executed and publicly verifiable.</p>
+            <strong class="cert-banner-title"><%= t('dashboard.internship_agreements.show.certificate_banner') %></strong>
+            <p class="cert-banner-sub"><%= t('dashboard.internship_agreements.show.certificate_sub') %></p>
           </div>
         </div>
-        <%= link_to "Open Public Certificate →",
+        <%= link_to t('dashboard.internship_agreements.show.view_certificate'),
             verify_certificate_path(token: @agreement.verification_token),
             class: "btn btn-primary btn-compact",
             target: "_blank" %>
@@ -51,113 +51,111 @@
     <div class="text-center mb-30">
       <% if @agreement.status == "fully_executed" %>
         <span class="badge-status badge-completed fs-14 pill-lg">
-          FULLY EXECUTED — All parties have signed
+          <%= t('dashboard.internship_agreements.show.fully_executed_badge') %>
         </span>
         <div class="mt-10 hide-on-print">
-          <button type="button" id="print-btn-2" class="btn btn-secondary">Print / Save PDF</button>
+          <button type="button" id="print-btn-2" class="btn btn-secondary"><%= t('dashboard.internship_agreements.show.print') %></button>
         </div>
       <% elsif @agreement.status == "declined" %>
         <span class="badge-status badge-declined fs-14 pill-lg">
-          DECLINED — University rejected this agreement
+          <%= t('dashboard.internship_agreements.show.declined_badge') %>
         </span>
       <% else %>
         <span class="badge-status badge-pending fs-14 pill-lg">
-          PENDING SIGNATURES — Awaiting: <%= @agreement.pending_signatories.join(", ") %>
+          <%= t('dashboard.internship_agreements.show.pending_badge', signatories: @agreement.pending_signatories.join(", ")) %>
         </span>
       <% end %>
     </div>
 
     <div class="mb-30">
-      <h2 class="agreement-article-title">Article 1 — Parties</h2>
+      <h2 class="agreement-article-title"><%= t('dashboard.internship_agreements.show.article1') %></h2>
       <p class="agreement-text">
-        This Convention de Stage is entered into between the following three parties:
+        <%= t('dashboard.internship_agreements.show.article1_text') %>
       </p>
       <ul class="agreement-list">
-        <li><strong class="text-primary">The Student:</strong> <%= student.first_name %> <%= student.last_name %>, enrolled at <%= university&.name || "an affiliated university" %> (<%= student.major.presence || "No major specified" %>)</li>
-        <li><strong class="text-primary">The Employer:</strong> <%= company.name %>, registered in Tunisia</li>
-        <li><strong class="text-primary">The University:</strong> <%= university&.name || "Independent / Self-declared" %></li>
+        <li><strong class="text-primary"><%= t('dashboard.internship_agreements.show.student_role') %></strong> <%= student.first_name %> <%= student.last_name %>, <%= t('dashboard.internship_agreements.show.enrolled_at') %> <%= university&.name || t('dashboard.internship_agreements.show.affiliated_university') %> (<%= student.major.presence || t('dashboard.internship_agreements.show.no_major') %>)</li>
+        <li><strong class="text-primary"><%= t('dashboard.internship_agreements.show.employer_role') %></strong> <%= company.name %>, <%= t('dashboard.internship_agreements.show.registered_in_tunisia') %></li>
+        <li><strong class="text-primary"><%= t('dashboard.internship_agreements.show.university_role') %></strong> <%= university&.name || t('dashboard.internship_agreements.show.self_declared') %></li>
       </ul>
     </div>
 
     <div class="mb-30">
-      <h2 class="agreement-article-title">Article 2 — Dates & Duration</h2>
+      <h2 class="agreement-article-title"><%= t('dashboard.internship_agreements.show.article2') %></h2>
       <p class="agreement-text">
-        The internship shall commence on <strong class="text-primary"><%= @agreement.start_date.strftime("%B %d, %Y") %></strong> 
-        and conclude on <strong class="text-primary"><%= @agreement.end_date.strftime("%B %d, %Y") %></strong>.
+        <%= t('dashboard.internship_agreements.show.article2_text', start_date: @agreement.start_date.strftime("%B %d, %Y"), end_date: @agreement.end_date.strftime("%B %d, %Y")) %>
       </p>
       <p class="agreement-text mt-8">
-        Total duration: <strong class="text-primary"><%= (@agreement.end_date - @agreement.start_date).to_i %> days</strong>.
+        <%= t('dashboard.internship_agreements.show.duration', days: (@agreement.end_date - @agreement.start_date).to_i) %>
       </p>
     </div>
 
     <div class="mb-30">
-      <h2 class="agreement-article-title">Article 3 — Internship Subject</h2>
+      <h2 class="agreement-article-title"><%= t('dashboard.internship_agreements.show.article3') %></h2>
       <p class="agreement-text">
-        <%= student.first_name %> shall carry out an internship titled <strong class="text-primary">"<%= @agreement.submission.offer.title %>"</strong> 
-        at <%= company.name %> under the terms described in the original offer.
+        <%= t('dashboard.internship_agreements.show.article3_text', name: student.first_name, title: @agreement.submission.offer.title, company: company.name) %>
       </p>
     </div>
 
     <div class="border-top pt-30">
-      <h2 class="agreement-article-title">Signatures</h2>
+      <h2 class="agreement-article-title"><%= t('dashboard.internship_agreements.show.signatures') %></h2>
       <p class="text-muted fs-13 mb-25">
-        Each party must sign below for this agreement to be fully executed. Once all three signatures are present, the status will automatically update to "Fully Executed".
+        <%= t('dashboard.internship_agreements.show.signatures_desc') %>
       </p>
 
       <div class="agreement-signatures-grid">
         <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.student_signed_at && current_user.profileable_type == "StudentProfile" && current_user.profileable == student && @agreement.status != "declined" %>">
           <i data-lucide="graduation-cap" class="icon-20 mb-8 stroke-muted"></i>
-          <h3 class="agreement-sign-box-title">Student</h3>
+          <h3 class="agreement-sign-box-title"><%= t('dashboard.internship_agreements.show.student_box') %></h3>
           <p class="agreement-sign-box-name"><%= student.first_name %> <%= student.last_name %></p>
           <% if @agreement.student_signed_at %>
             <div class="agreement-signed-badge">
-              <span class="agreement-signed-label">Signed</span>
-              <p class="agreement-signed-date"><%= @agreement.student_signed_at.strftime("%B %d, %Y at %H:%M") %></p>
+              <span class="agreement-signed-label"><%= t('dashboard.internship_agreements.show.signed') %></span>
+              <p class="agreement-signed-date"><%= t('dashboard.internship_agreements.show.signed_on', date: @agreement.student_signed_at.strftime("%B %d, %Y at %H:%M")) %></p>
             </div>
           <% else %>
             <% if current_user.profileable_type == "StudentProfile" && current_user.profileable == student && @agreement.status != "declined" %>
-              <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: "Signing…" } %>
+              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: t('dashboard.internship_agreements.show.signing') } %>
             <% else %>
-              <span class="agreement-unsigned-label">Not signed yet</span>
+              <span class="agreement-unsigned-label"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
             <% end %>
           <% end %>
         </div>
 
         <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.company_signed_at && current_user.profileable_type == "CompanyProfile" && current_user.profileable == company && @agreement.status != "declined" %>">
           <i data-lucide="briefcase" class="icon-20 mb-8 stroke-muted"></i>
-          <h3 class="agreement-sign-box-title">Employer</h3>
+          <h3 class="agreement-sign-box-title"><%= t('dashboard.internship_agreements.show.employer_box') %></h3>
           <p class="agreement-sign-box-name"><%= company.name %></p>
           <% if @agreement.company_signed_at %>
             <div class="agreement-signed-badge">
-              <span class="agreement-signed-label">Signed</span>
-              <p class="agreement-signed-date"><%= @agreement.company_signed_at.strftime("%B %d, %Y at %H:%M") %></p>
+              <span class="agreement-signed-label"><%= t('dashboard.internship_agreements.show.signed') %></span>
+              <p class="agreement-signed-date"><%= t('dashboard.internship_agreements.show.signed_on', date: @agreement.company_signed_at.strftime("%B %d, %Y at %H:%M")) %></p>
             </div>
           <% else %>
             <% if current_user.profileable_type == "CompanyProfile" && current_user.profileable == company && @agreement.status != "declined" %>
-              <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: "Signing…" } %>
+              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: t('dashboard.internship_agreements.show.signing') } %>
             <% else %>
-              <span class="agreement-unsigned-label">Not signed yet</span>
+              <span class="agreement-unsigned-label"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
             <% end %>
           <% end %>
         </div>
 
         <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.university_signed_at && current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id && @agreement.status != "declined" %>">
           <i data-lucide="landmark" class="icon-20 mb-8 stroke-muted"></i>
-          <h3 class="agreement-sign-box-title">University Coordinator</h3>
-          <p class="agreement-sign-box-name"><%= university&.name || "Independent" %></p>
+          <h3 class="agreement-sign-box-title"><%= t('dashboard.internship_agreements.show.university_box') %></h3>
+          <p class="agreement-sign-box-name"><%= university&.name || t('dashboard.internship_agreements.show.independent') %></p>
           <% if @agreement.university_signed_at %>
             <div class="agreement-signed-badge">
-              <span class="agreement-signed-label">Signed</span>
-              <p class="agreement-signed-date"><%= @agreement.university_signed_at.strftime("%B %d, %Y at %H:%M") %></p>
+              <span class="agreement-signed-label"><%= t('dashboard.internship_agreements.show.signed') %></span>
+              <p class="agreement-signed-date"><%= t('dashboard.internship_agreements.show.signed_on', date: @agreement.university_signed_at.strftime("%B %d, %Y at %H:%M")) %></p>
             </div>
           <% else %>
             <% if current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id && @agreement.status != "declined" %>
-              <%= button_to "Sign Agreement", sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: "Signing…" } %>
+              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: t('dashboard.internship_agreements.show.signing') } %>
               <div class="mt-10">
-                <button type="button" class="btn btn-secondary btn-compact" onclick="document.getElementById('decline-form').classList.toggle('d-none')">Decline Agreement</button>
+                <button type="button" class="btn btn-secondary btn-compact" onclick="document.getElementById('decline-form').classList.toggle('d-none')"><%= t('dashboard.internship_agreements.show.decline') %></button>
               </div>
             <% else %>
-              <span class="agreement-unsigned-label">Not signed yet</span>
+              <span class="agreement-unsigned-label"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
             <% end %>
           <% end %>
         </div>
@@ -166,11 +164,11 @@
       <% if current_user.profileable_type == "UniversityProfile" && @agreement.status == "pending_signatures" && @submission.student_profile.university_id == current_user.profileable.university_id %>
         <div id="decline-form" class="decline-form-wrapper d-none">
           <%= form_with model: [@submission, @agreement], url: decline_submission_internship_agreement_path(@submission, @agreement), method: :post, local: true do |f| %>
-            <label class="fs-12 text-secondary fw-600 mb-4 block">Reason for declining:</label>
-            <%= text_area_tag :rejection_reason, nil, placeholder: "Explain why this agreement is being declined...", class: "decline-textarea", required: true %>
+            <label class="fs-12 text-secondary fw-600 mb-4 block"><%= t('dashboard.internship_agreements.show.decline_reason') %></label>
+            <%= text_area_tag :rejection_reason, nil, placeholder: t('dashboard.internship_agreements.show.decline_placeholder'), class: "decline-textarea", required: true %>
             <div class="decline-actions">
-              <button type="button" class="btn btn-secondary btn-compact-sm" onclick="document.getElementById('decline-form').classList.add('d-none')">Cancel</button>
-              <%= f.submit "Confirm Decline", class: "btn btn-secondary btn-compact-sm btn-decline-confirm", data: { disable_with: "Declining…" } %>
+              <button type="button" class="btn btn-secondary btn-compact-sm" onclick="document.getElementById('decline-form').classList.add('d-none')"><%= t('dashboard.internship_agreements.show.cancel') %></button>
+              <%= f.submit t('dashboard.internship_agreements.show.confirm_decline'), class: "btn btn-secondary btn-compact-sm btn-decline-confirm", data: { disable_with: t('dashboard.internship_agreements.show.declining') } %>
             </div>
           <% end %>
         </div>
@@ -178,7 +176,7 @@
     </div>
 
     <div class="agreement-back-row">
-      <%= link_to "← Back to Dashboard", dashboard_path, class: "btn btn-secondary agreement-back-link" %>
+      <%= link_to t('common.back_to', page: t('dashboard.title')), dashboard_path, class: "btn btn-secondary agreement-back-link" %>
     </div>
   </div>
 </div>

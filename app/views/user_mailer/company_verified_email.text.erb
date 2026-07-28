@@ -1,10 +1,10 @@
-Hello,
+<%= t('user_mailer.company_verified.greeting') %>
 
-Your company account <%= @profile.name %> has been verified by the StageUp administration team.
+<%= t('user_mailer.company_verified.body_verified', company_name: @profile.name) %>
 
-You can now post internship offers, receive student applications, and manage your recruitment pipeline.
+<%= t('user_mailer.company_verified.capabilities') %>
 
-If you have any questions, please contact the StageUp support team.
+<%= t('user_mailer.company_verified.support') %>
 
-Best regards,
-The StageUp Team
+<%= t('user_mailer.company_verified.regards') %>
+<%= t('user_mailer.company_verified.team') %>

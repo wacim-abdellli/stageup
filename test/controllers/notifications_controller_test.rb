@@ -46,7 +46,7 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
   test "shows empty state when no notifications" do
     sign_in @student_user
     @student_user.notifications.destroy_all
-    get notifications_path
+    get notifications_path, params: { locale: "en" }
     assert_response :success
     assert_select "h3", text: "All Caught Up"
   end

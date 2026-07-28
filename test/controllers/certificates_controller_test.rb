@@ -11,7 +11,7 @@ class CertificatesControllerTest < ActionDispatch::IntegrationTest
   test "should verify valid token for fully executed agreement" do
     get verify_certificate_url(token: @executed_agreement.verification_token)
     assert_response :success
-    assert_select ".cert-title", text: "Certificate of Completion"
+    assert_select ".cert-title", text: I18n.t("certificates.verify.title")
     assert_select ".cert-student-name", text: /#{@executed_agreement.submission.student_profile.first_name}/
   end
 

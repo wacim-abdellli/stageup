@@ -2,10 +2,10 @@
   <div class="dashboard-header">
     <div>
       <%= render "layouts/navbar_brand" %>
-      <p class="text-secondary fs-14">Logged in as: <strong><%= current_user.email %></strong></p>
+      <p class="text-secondary fs-14"><%= t('dashboard.pending_approval.logged_in_as') %> <strong><%= current_user.email %></strong></p>
     </div>
     <div>
-      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-sm" %>
+      <%= button_to t('nav.sign_out'), destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-sm" %>
     </div>
   </div>
 
@@ -13,23 +13,23 @@
     <div class="pending-icon-row">
       <i data-lucide="lock" class="pending-lock-icon"></i>
     </div>
-    <h2 class="pending-title">Verification Pending</h2>
+    <h2 class="pending-title"><%= t('dashboard.pending_approval.title') %></h2>
     <p class="pending-text">
-      Thank you for registering as a coordinator for <strong><%= @profile.university.name %></strong> (<%= @profile.department %>). 
-      To protect student data privacy, coordinator dashboards must be verified by StageUp administrators before activation.
+      <%= t('dashboard.pending_approval.registration_thanks', university: @profile.university.name, department: @profile.department) %>
+      <%= t('dashboard.pending_approval.privacy_notice') %>
     </p>
 
     <div class="pending-info-card">
-      <h3 class="pending-info-title">What happens next?</h3>
+      <h3 class="pending-info-title"><%= t('dashboard.pending_approval.what_next') %></h3>
       <ul class="pending-info-list">
-        <li>We will verify your official university email domain.</li>
-        <li>We may contact your department head or review university records.</li>
-        <li>Once approved, you will receive a notification email and full access will be unlocked.</li>
+        <li><%= t('dashboard.pending_approval.step1') %></li>
+        <li><%= t('dashboard.pending_approval.step2') %></li>
+        <li><%= t('dashboard.pending_approval.step3') %></li>
       </ul>
     </div>
 
     <p class="pending-contact">
-      Need urgent activation? Contact us at <a href="mailto:support@stageup.tn">support@stageup.tn</a>.
+      <%= t('dashboard.pending_approval.contact', email: "support@stageup.tn") %>
     </p>
   </div>
 </div>

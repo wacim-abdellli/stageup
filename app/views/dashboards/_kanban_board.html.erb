@@ -4,7 +4,7 @@
   <%# Column 1: Submitted & Under Review %>
   <div class="kanban-col kanban-drop-zone" data-target-status="pending">
     <div class="kanban-col-header flex-between">
-      <span>Under Review</span>
+      <span><%= t('kanban.columns.review') %></span>
       <span class="kanban-col-count"><%= (pending_submissions || []).count %></span>
     </div>
     <div class="kanban-card-list">
@@ -21,9 +21,9 @@
           <div class="kanban-card-footer flex-between">
             <span class="kanban-card-date"><%= sub.created_at.strftime("%b %d") %></span>
             <% if sub.github_link.present? %>
-              <%= link_to "View Proof", sub.github_link, target: "_blank", class: "kanban-card-link" %>
+              <%= link_to t('kanban.card.view_proof'), sub.github_link, target: "_blank", class: "kanban-card-link" %>
             <% elsif sub.student_profile.cv_url.present? %>
-              <%= link_to "View CV", sub.student_profile.cv_url, target: "_blank", class: "kanban-card-link" %>
+              <%= link_to t('kanban.card.view_cv'), sub.student_profile.cv_url, target: "_blank", class: "kanban-card-link" %>
             <% end %>
           </div>
         </div>
@@ -34,7 +34,7 @@
   <%# Column 2: Accepted %>
   <div class="kanban-col kanban-drop-zone" data-target-status="accept">
     <div class="kanban-col-header flex-between">
-      <span>Accepted</span>
+      <span><%= t('kanban.columns.accepted') %></span>
       <span class="kanban-col-count"><%= (active_internships || []).count %></span>
     </div>
     <div class="kanban-card-list">
@@ -42,7 +42,7 @@
         <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
           <div class="kanban-card-top flex-between">
             <span class="kanban-student-name"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></span>
-            <span class="badge-status badge-accepted">Accepted</span>
+            <span class="badge-status badge-accepted"><%= t('kanban.columns.accepted') %></span>
           </div>
           <div class="kanban-card-title"><%= sub.offer.title %></div>
           <div class="kanban-card-footer flex-between">
@@ -56,7 +56,7 @@
   <%# Column 3: Rejected %>
   <div class="kanban-col kanban-drop-zone" data-target-status="reject">
     <div class="kanban-col-header flex-between">
-      <span>Rejected</span>
+      <span><%= t('kanban.columns.rejected') %></span>
       <span class="kanban-col-count"><%= (processed_submissions || []).select { |s| s.status == "rejected" }.count rescue 0 %></span>
     </div>
     <div class="kanban-card-list">
@@ -64,7 +64,7 @@
         <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
           <div class="kanban-card-top flex-between">
             <span class="kanban-student-name"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></span>
-            <span class="badge-status badge-rejected">Rejected</span>
+            <span class="badge-status badge-rejected"><%= t('kanban.columns.rejected') %></span>
           </div>
           <div class="kanban-card-title"><%= sub.offer.title %></div>
           <div class="kanban-card-footer flex-between">

@@ -23,9 +23,9 @@ class Admin::DashboardsControllerTest < ActionDispatch::IntegrationTest
 
   test "admin can access admin dashboard" do
     sign_in @admin_user
-    get admin_dashboard_url
+    get admin_dashboard_url, params: { locale: "en" }
     assert_response :success
-    assert_select "h1", text: "Admin Panel"
+    assert_select "h1", text: "Admin Dashboard"
   end
 
   test "admin can approve a university coordinator" do

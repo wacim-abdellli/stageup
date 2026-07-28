@@ -1,7 +1,7 @@
-Convention de Stage Ready for Signature
+<%= t('user_mailer.agreement_signature_requested.heading') %>
 
-The internship agreement for <%= @offer.title %> is ready for your signature.
+<%= t('user_mailer.agreement_signature_requested.body', offer_title: @offer.title) %>
 
-All parties have reviewed the terms. Please log in to review and sign the document.
+<%= t('user_mailer.agreement_signature_requested.login_instruction') %>
 
 <%= submission_internship_agreement_url(@submission, @agreement) %>
