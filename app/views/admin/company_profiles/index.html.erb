@@ -1,0 +1,97 @@
+<% content_for :title, "#{t('admin.companies.title', default: 'Company Verifications')} – StageUp" %>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="dashboard-header-left">
+      <h1 class="fs-22 fw-700"><%= t('admin.companies.title', default: 'Company Verifications') %></h1>
+      <p class="header-meta"><%= t('admin.companies.subtitle', default: 'Manage company profiles, review credentials, and grant verification badges') %></p>
+    </div>
+    <div class="flex-row gap-10 align-center">
+      <%= link_to t('common.back_to', page: t('dashboard.title', default: 'Dashboard')), dashboard_path, class: "btn btn-secondary btn-header" %>
+    </div>
+  </div>
+
+  <%= render "admin/subnav" %>
+
+  <!-- Search & Filter Controls -->
+  <div class="admin-toolbar">
+    <%= form_tag admin_company_profiles_path, method: :get, class: "admin-search-form" do %>
+      <div class="admin-search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <%= text_field_tag :query, params[:query], placeholder: t('admin.companies.search_placeholder', default: 'Search by company name, website...'), class: "admin-search-input" %>
+      </div>
+      
+      <div class="admin-filter-pills">
+        <%= link_to t('common.all', default: 'All'), admin_company_profiles_path(query: params[:query]), class: "filter-pill #{'active' unless params[:status].present?}" %>
+        <%= link_to t('admin.companies.unverified', default: 'Unverified'), admin_company_profiles_path(status: 'unverified', query: params[:query]), class: "filter-pill #{'active' if params[:status] == 'unverified'}" %>
+        <%= link_to t('admin.companies.verified', default: 'Verified'), admin_company_profiles_path(status: 'verified', query: params[:query]), class: "filter-pill #{'active' if params[:status] == 'verified'}" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Companies Table -->
+  <div class="profile-card">
+    <% if @profiles.any? %>
+      <div class="table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th><%= t('admin.companies.table.name', default: 'Company Name') %></th>
+              <th><%= t('admin.companies.table.contact', default: 'Contact Email & Site') %></th>
+              <th><%= t('admin.companies.table.offers_posted', default: 'Offers Posted') %></th>
+              <th><%= t('admin.companies.table.status', default: 'Verification State') %></th>
+              <th><%= t('admin.companies.table.actions', default: 'Actions') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @profiles.each do |company| %>
+              <tr>
+                <td>
+                  <strong class="fs-13 fw-600"><%= company.name %></strong>
+                </td>
+                <td>
+                  <div class="flex-column">
+                    <span class="fs-12 text-muted"><%= company.user.email %></span>
+                    <% if company.website.present? %>
+                      <%= link_to company.website, company.website, target: "_blank", class: "btn-link-sm fs-11" %>
+                    <% else %>
+                      <span class="text-muted fs-11 italic"><%= t('admin.dashboard.companies.no_website', default: 'No website') %></span>
+                    <% end %>
+                  </div>
+                </td>
+                <td>
+                  <span class="badge badge-tag"><%= company.offers.count %> <%= t('admin.companies.table.offers', default: 'offers') %></span>
+                </td>
+                <td>
+                  <% if company.verified? %>
+                    <span class="badge badge-verified"><%= t('admin.companies.verified_badge', default: 'VERIFIED') %></span>
+                  <% else %>
+                    <span class="badge badge-pending"><%= t('admin.companies.unverified_badge', default: 'UNVERIFIED') %></span>
+                  <% end %>
+                </td>
+                <td>
+                  <div class="action-group-8">
+                    <% if company.verified? %>
+                      <%= button_to unverify_admin_company_profile_path(company), method: :post, class: "btn btn-secondary btn-compact-sm" do %>
+                        <span><%= t('admin.companies.revoke', default: 'Revoke Verification') %></span>
+                      <% end %>
+                    <% else %>
+                      <%= button_to verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: t('admin.dashboard.companies.verifying') } do %>
+                        <span><%= t('admin.dashboard.companies.verify', default: 'Verify Company') %></span>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-state-card">
+        <h3 class="empty-state-title"><%= t('admin.companies.no_results', default: 'No companies found') %></h3>
+        <p class="empty-state-text"><%= t('admin.companies.no_results_hint', default: 'Try clearing your search query or verification filter') %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

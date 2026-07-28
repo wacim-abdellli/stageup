@@ -1,6 +1,23 @@
 module Admin
   class UniversityProfilesController < AdminController
-    before_action :set_profile
+    before_action :set_profile, only: [:approve, :reject]
+
+    def index
+      @profiles = UniversityProfile.includes(:university, :user).order(created_at: :desc)
+
+      if params[:status] == "pending"
+        @profiles = @profiles.where(approved: false)
+      elsif params[:status] == "approved"
+        @profiles = @profiles.where(approved: true)
+      end
+
+      if params[:query].present?
+        q = "%#{params[:query].downcase}%"
+        @profiles = @profiles.where("LOWER(admin_name) LIKE ? OR LOWER(department) LIKE ?", q, q)
+      end
+
+      @profiles = @profiles.limit(100)
+    end
 
     def approve
       @profile.update!(approved: true)
@@ -10,8 +27,8 @@ module Admin
         message: "Your university coordinator account has been approved. You can now manage internship agreements.",
         notifiable: @profile
       )
-      UserMailer.coordinator_approved_email(@profile.user, @profile).deliver_later
-      redirect_to admin_dashboard_path, notice: "#{@profile.admin_name} has been approved."
+      UserMailer.coordinator_approved_email(@profile.user, @profile).deliver_later rescue nil
+      redirect_back fallback_location: admin_university_profiles_path, notice: "#{@profile.admin_name} has been approved."
     end
 
     def reject
@@ -19,9 +36,9 @@ module Admin
         @profile.user&.destroy!
         @profile.destroy!
       end
-      redirect_to admin_dashboard_path, notice: "Coordinator profile has been rejected and removed."
+      redirect_back fallback_location: admin_university_profiles_path, notice: "Coordinator profile has been rejected and removed."
     rescue ActiveRecord::RecordNotDestroyed, ActiveRecord::RecordInvalid
-      redirect_to admin_dashboard_path, alert: "Failed to reject coordinator. Please try again or contact support."
+      redirect_back fallback_location: admin_university_profiles_path, alert: "Failed to reject coordinator. Please try again."
     end
 
     private

@@ -1,0 +1,89 @@
+<% content_for :title, "#{t('admin.offers.title', default: 'Offer Moderation')} – StageUp" %>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="dashboard-header-left">
+      <h1 class="fs-22 fw-700"><%= t('admin.offers.title', default: 'Offer Moderation') %></h1>
+      <p class="header-meta"><%= t('admin.offers.subtitle', default: 'Review, manage status, or moderate posted internship listings') %></p>
+    </div>
+    <div class="flex-row gap-10 align-center">
+      <%= link_to t('common.back_to', page: t('dashboard.title', default: 'Dashboard')), dashboard_path, class: "btn btn-secondary btn-header" %>
+    </div>
+  </div>
+
+  <%= render "admin/subnav" %>
+
+  <!-- Search & Filter Controls -->
+  <div class="admin-toolbar">
+    <%= form_tag admin_offers_path, method: :get, class: "admin-search-form" do %>
+      <div class="admin-search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <%= text_field_tag :query, params[:query], placeholder: t('admin.offers.search_placeholder', default: 'Search by title, location...'), class: "admin-search-input" %>
+      </div>
+      
+      <div class="admin-filter-pills">
+        <%= link_to t('common.all', default: 'All'), admin_offers_path(query: params[:query]), class: "filter-pill #{'active' unless params[:status].present?}" %>
+        <%= link_to t('offers.status.active', default: 'Active'), admin_offers_path(status: 'active', query: params[:query]), class: "filter-pill #{'active' if params[:status] == 'active'}" %>
+        <%= link_to t('offers.status.closed', default: 'Closed'), admin_offers_path(status: 'closed', query: params[:query]), class: "filter-pill #{'active' if params[:status] == 'closed'}" %>
+        <%= link_to t('offers.status.draft', default: 'Draft'), admin_offers_path(status: 'draft', query: params[:query]), class: "filter-pill #{'active' if params[:status] == 'draft'}" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Offers Table -->
+  <div class="profile-card">
+    <% if @offers.any? %>
+      <div class="table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th><%= t('admin.offers.table.title', default: 'Internship Title') %></th>
+              <th><%= t('admin.offers.table.company', default: 'Company') %></th>
+              <th><%= t('admin.offers.table.details', default: 'Details') %></th>
+              <th><%= t('admin.offers.table.status', default: 'Status') %></th>
+              <th><%= t('admin.offers.table.actions', default: 'Actions') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @offers.each do |offer| %>
+              <tr>
+                <td>
+                  <div class="flex-column">
+                    <strong class="fs-13 fw-600"><%= link_to offer.title, offer_path(offer), target: "_blank", class: "btn-link-sm" %></strong>
+                    <span class="text-muted fs-11"><%= offer.location %> &middot; <%= offer.spots %> <%= t('admin.offers.table.spots', default: 'spots') %></span>
+                  </div>
+                </td>
+                <td>
+                  <span class="fw-500 fs-13"><%= offer.company_profile.name %></span>
+                </td>
+                <td>
+                  <span class="badge badge-tag"><%= offer.stage_type.upcase %></span>
+                  <span class="badge badge-tag"><%= offer.work_mode.humanize %></span>
+                </td>
+                <td>
+                  <span class="badge badge-<%= offer.status %>"><%= offer.status.humanize %></span>
+                </td>
+                <td>
+                  <div class="action-group-8">
+                    <%= button_to toggle_status_admin_offer_path(offer), method: :post, class: "btn btn-compact-sm btn-secondary" do %>
+                      <span><%= offer.status == 'active' ? t('admin.offers.close', default: 'Close Offer') : t('admin.offers.activate', default: 'Activate') %></span>
+                    <% end %>
+
+                    <%= button_to admin_offer_path(offer), method: :delete, class: "btn btn-compact-danger-sm", data: { turbo_confirm: t('admin.offers.delete_confirm', default: 'Permanently delete this offer listing?') } do %>
+                      <span><%= t('common.delete', default: 'Delete') %></span>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-state-card">
+        <h3 class="empty-state-title"><%= t('admin.offers.no_results', default: 'No offers found') %></h3>
+        <p class="empty-state-text"><%= t('admin.offers.no_results_hint', default: 'Try adjusting your search query or status filter') %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

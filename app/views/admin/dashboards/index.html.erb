@@ -1,12 +1,55 @@
+<% content_for :title, "#{t('admin.dashboard.title')} – StageUp" %>
+
 <div class="dashboard-container">
   <div class="dashboard-header">
     <div class="dashboard-header-left">
+      <div class="admin-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span><%= t('admin.dashboard.badge', default: 'MASTER ADMIN PANEL') %></span>
+      </div>
       <h1 class="fs-22 fw-700"><%= t('admin.dashboard.title') %></h1>
       <p class="header-meta"><%= t('admin.dashboard.subtitle') %></p>
     </div>
     <div class="flex-row gap-10 align-center">
-      <%= link_to t('common.back_to', page: t('dashboard.title')), dashboard_path, class: "btn btn-secondary btn-header" %>
-      <%= button_to t('nav.sign_out'), destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-header m-0" %>
+      <%= link_to t('common.back_to', page: t('dashboard.title', default: 'Dashboard')), dashboard_path, class: "btn btn-secondary btn-header" %>
+    </div>
+  </div>
+
+  <%= render "admin/subnav" %>
+
+  <!-- System KPI Stat Cards -->
+  <div class="admin-kpi-grid">
+    <div class="admin-kpi-card kpi-indigo">
+      <div class="admin-kpi-label"><%= t('admin.kpi.total_users', default: 'Total Platform Users') %></div>
+      <div class="admin-kpi-value"><%= @stats[:total_users] %></div>
+      <div class="admin-kpi-meta">
+        <span><%= @stats[:students_count] %> <%= t('admin.kpi.students', default: 'Students') %></span> &middot;
+        <span><%= @stats[:companies_count] %> <%= t('admin.kpi.companies', default: 'Companies') %></span>
+      </div>
+    </div>
+
+    <div class="admin-kpi-card kpi-emerald">
+      <div class="admin-kpi-label"><%= t('admin.kpi.active_offers', default: 'Active Internships') %></div>
+      <div class="admin-kpi-value"><%= @stats[:active_offers] %></div>
+      <div class="admin-kpi-meta">
+        <span><%= t('admin.kpi.total_posted', count: @stats[:total_offers], default: "#{@stats[:total_offers]} Total Posted") %></span>
+      </div>
+    </div>
+
+    <div class="admin-kpi-card kpi-amber">
+      <div class="admin-kpi-label"><%= t('admin.kpi.submissions', default: 'Proof Submissions') %></div>
+      <div class="admin-kpi-value"><%= @stats[:total_submissions] %></div>
+      <div class="admin-kpi-meta">
+        <span><%= @stats[:completed_submissions] %> <%= t('admin.kpi.accepted', default: 'Accepted') %></span>
+      </div>
+    </div>
+
+    <div class="admin-kpi-card kpi-purple">
+      <div class="admin-kpi-label"><%= t('admin.kpi.agreements', default: 'Agreements Issued') %></div>
+      <div class="admin-kpi-value"><%= @stats[:total_agreements] %></div>
+      <div class="admin-kpi-meta">
+        <span><%= @stats[:signed_agreements] %> <%= t('admin.kpi.signed', default: 'Signed') %></span>
+      </div>
     </div>
   </div>
 
@@ -14,10 +57,13 @@
     <div>
       <!-- Pending Coordinators -->
       <div class="profile-card card-mb">
-        <h2 class="section-heading">
-          <i data-lucide="landmark" class="section-heading-icon"></i>
-          <%= t('admin.dashboard.coordinators.title') %>
-        </h2>
+        <div class="card-header-flex">
+          <h2 class="section-heading m-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h4"/><path d="M18 9h2a2 2 0 0 1 2 2v11h-4"/></svg>
+            <%= t('admin.dashboard.coordinators.title') %>
+          </h2>
+          <%= link_to t('common.view_all', default: 'View All'), admin_university_profiles_path, class: "btn-link-sm" %>
+        </div>
 
         <% if @pending_coordinators.any? %>
           <div class="inline-list-sm">
@@ -38,7 +84,7 @@
           </div>
         <% else %>
           <div class="empty-state-card">
-            <div class="empty-state-icon"><i data-lucide="check-circle" class="icon-40"></i></div>
+            <div class="empty-state-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
             <h3 class="empty-state-title"><%= t('admin.dashboard.coordinators.all_clear_title') %></h3>
             <p class="empty-state-text"><%= t('admin.dashboard.coordinators.empty') %></p>
           </div>
@@ -47,10 +93,13 @@
 
       <!-- Unverified Companies -->
       <div class="profile-card card-mb">
-        <h2 class="section-heading">
-          <i data-lucide="briefcase" class="section-heading-icon"></i>
-          <%= t('admin.dashboard.companies.title') %>
-        </h2>
+        <div class="card-header-flex">
+          <h2 class="section-heading m-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--indigo)" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <%= t('admin.dashboard.companies.title') %>
+          </h2>
+          <%= link_to t('common.view_all', default: 'View All'), admin_company_profiles_path, class: "btn-link-sm" %>
+        </div>
 
         <% if @unverified_companies.any? %>
           <div class="inline-list-sm">
@@ -59,7 +108,7 @@
                 <div>
                   <strong class="inline-list-sm-title"><%= company.name %></strong>
                   <span class="inline-list-sm-meta">
-                    <%= company.user.email %> &middot; <%= company.website.presence || t('admin.dashboard.companies.no_website') %>
+                    <%= company.user.email %> &middot; <%= company.website.presence || t('admin.dashboard.companies.no_website', default: 'No website') %>
                   </span>
                 </div>
                 <div class="action-group-8">
@@ -70,9 +119,39 @@
           </div>
         <% else %>
           <div class="empty-state-card">
-            <div class="empty-state-icon"><i data-lucide="check-circle" class="icon-40"></i></div>
+            <div class="empty-state-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
             <h3 class="empty-state-title"><%= t('admin.dashboard.companies.all_clear_title') %></h3>
             <p class="empty-state-text"><%= t('admin.dashboard.companies.all_clear_text') %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div>
+      <!-- Recent Proof Submissions -->
+      <div class="profile-card">
+        <h2 class="section-heading">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <%= t('admin.dashboard.recent_submissions', default: 'Recent Submissions') %>
+        </h2>
+
+        <% if @recent_submissions.any? %>
+          <div class="inline-list-sm">
+            <% @recent_submissions.each do |sub| %>
+              <div class="inline-list-sm-item">
+                <div>
+                  <strong class="inline-list-sm-title"><%= sub.student_profile.full_name %></strong>
+                  <span class="inline-list-sm-meta">
+                    <%= sub.offer.title %> &middot; <span class="badge badge-<%= sub.status %>"><%= sub.status.humanize %></span>
+                  </span>
+                </div>
+                <span class="text-muted fs-11"><%= time_ago_in_words(sub.created_at) %> <%= t('common.ago', default: 'ago') %></span>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="empty-state-card">
+            <p class="empty-state-text"><%= t('admin.dashboard.no_submissions', default: 'No submissions recorded yet.') %></p>
           </div>
         <% end %>
       </div>

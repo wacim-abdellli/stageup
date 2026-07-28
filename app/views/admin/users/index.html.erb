@@ -1,0 +1,99 @@
+<% content_for :title, "#{t('admin.users.title', default: 'User Management')} – StageUp" %>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="dashboard-header-left">
+      <h1 class="fs-22 fw-700"><%= t('admin.users.title', default: 'User Management') %></h1>
+      <p class="header-meta"><%= t('admin.users.subtitle', default: 'Manage accounts, role permissions, and access states across StageUp') %></p>
+    </div>
+    <div class="flex-row gap-10 align-center">
+      <%= link_to t('common.back_to', page: t('dashboard.title', default: 'Dashboard')), dashboard_path, class: "btn btn-secondary btn-header" %>
+    </div>
+  </div>
+
+  <%= render "admin/subnav" %>
+
+  <!-- Search & Filter Controls -->
+  <div class="admin-toolbar">
+    <%= form_tag admin_users_path, method: :get, class: "admin-search-form" do %>
+      <div class="admin-search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <%= text_field_tag :query, params[:query], placeholder: t('admin.users.search_placeholder', default: 'Search by email...'), class: "admin-search-input" %>
+      </div>
+      
+      <div class="admin-filter-pills">
+        <%= link_to t('common.all', default: 'All'), admin_users_path(query: params[:query]), class: "filter-pill #{'active' unless params[:role].present?}" %>
+        <%= link_to t('admin.roles.student', default: 'Students'), admin_users_path(role: 'student', query: params[:query]), class: "filter-pill #{'active' if params[:role] == 'student'}" %>
+        <%= link_to t('admin.roles.company', default: 'Companies'), admin_users_path(role: 'company', query: params[:query]), class: "filter-pill #{'active' if params[:role] == 'company'}" %>
+        <%= link_to t('admin.roles.university', default: 'Coordinators'), admin_users_path(role: 'university', query: params[:query]), class: "filter-pill #{'active' if params[:role] == 'university'}" %>
+        <%= link_to t('admin.roles.admin', default: 'Admins'), admin_users_path(role: 'admin', query: params[:query]), class: "filter-pill #{'active' if params[:role] == 'admin'}" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Users Table -->
+  <div class="profile-card">
+    <% if @users.any? %>
+      <div class="table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th><%= t('admin.users.email', default: 'Email') %></th>
+              <th><%= t('admin.users.role', default: 'Profile Role') %></th>
+              <th><%= t('admin.users.admin_status', default: 'Admin Status') %></th>
+              <th><%= t('admin.users.joined', default: 'Joined Date') %></th>
+              <th><%= t('admin.users.actions', default: 'Actions') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <div class="flex-column">
+                    <strong class="fs-13 fw-600"><%= user.email %></strong>
+                    <% if user.access_locked? %>
+                      <span class="badge badge-danger" style="width: fit-content;"><%= t('admin.users.locked', default: 'LOCKED') %></span>
+                    <% end %>
+                  </div>
+                </td>
+                <td>
+                  <span class="role-type-badge role-<%= user.profileable_type.tableize.singularize %>">
+                    <%= user.profileable_type.gsub('Profile', '') %>
+                  </span>
+                </td>
+                <td>
+                  <% if user.admin? %>
+                    <span class="badge badge-verified"><%= t('admin.users.is_admin', default: 'ADMIN') %></span>
+                  <% else %>
+                    <span class="badge badge-closed"><%= t('admin.users.standard', default: 'Standard') %></span>
+                  <% end %>
+                </td>
+                <td class="text-muted fs-12"><%= user.created_at.strftime("%b %d, %Y") %></td>
+                <td>
+                  <div class="action-group-8">
+                    <% unless user == current_user %>
+                      <%= button_to toggle_admin_admin_user_path(user), method: :post, class: "btn btn-compact-sm #{user.admin? ? 'btn-secondary' : 'btn-primary'}", data: { turbo_confirm: user.admin? ? t('admin.users.revoke_confirm', default: 'Revoke admin privileges?') : t('admin.users.grant_confirm', default: 'Grant admin privileges?') } do %>
+                        <span><%= user.admin? ? t('admin.users.revoke_admin', default: 'Revoke Admin') : t('admin.users.grant_admin', default: 'Make Admin') %></span>
+                      <% end %>
+
+                      <%= button_to toggle_lock_admin_user_path(user), method: :post, class: "btn btn-compact-danger-sm", data: { turbo_confirm: user.access_locked? ? t('admin.users.unlock_confirm', default: 'Unlock this account?') : t('admin.users.lock_confirm', default: 'Lock this user account?') } do %>
+                        <span><%= user.access_locked? ? t('admin.users.unlock', default: 'Unlock') : t('admin.users.lock', default: 'Lock Account') %></span>
+                      <% end %>
+                    <% else %>
+                      <span class="text-muted fs-12 italic"><%= t('admin.users.you', default: '(Current User)') %></span>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-state-card">
+        <h3 class="empty-state-title"><%= t('admin.users.no_results', default: 'No users found') %></h3>
+        <p class="empty-state-text"><%= t('admin.users.no_results_hint', default: 'Try clearing your search or role filters') %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+<% content_for :title, "#{t('admin.coordinators.title', default: 'Academic Coordinators')} – StageUp" %>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="dashboard-header-left">
+      <h1 class="fs-22 fw-700"><%= t('admin.coordinators.title', default: 'Academic Coordinators') %></h1>
+      <p class="header-meta"><%= t('admin.coordinators.subtitle', default: 'Review university coordinator applications and manage verification approvals') %></p>
+    </div>
+    <div class="flex-row gap-10 align-center">
+      <%= link_to t('common.back_to', page: t('dashboard.title', default: 'Dashboard')), dashboard_path, class: "btn btn-secondary btn-header" %>
+    </div>
+  </div>
+
+  <%= render "admin/subnav" %>
+
+  <!-- Search & Filter Controls -->
+  <div class="admin-toolbar">
+    <%= form_tag admin_university_profiles_path, method: :get, class: "admin-search-form" do %>
+      <div class="admin-search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <%= text_field_tag :query, params[:query], placeholder: t('admin.coordinators.search_placeholder', default: 'Search by coordinator name, department...'), class: "admin-search-input" %>
+      </div>
+      
+      <div class="admin-filter-pills">
+        <%= link_to t('common.all', default: 'All'), admin_university_profiles_path(query: params[:query]), class: "filter-pill #{'active' unless params[:status].present?}" %>
+        <%= link_to t('admin.coordinators.pending', default: 'Pending Approval'), admin_university_profiles_path(status: 'pending', query: params[:query]), class: "filter-pill #{'active' if params[:status] == 'pending'}" %>
+        <%= link_to t('admin.coordinators.approved', default: 'Approved'), admin_university_profiles_path(status: 'approved', query: params[:query]), class: "filter-pill #{'active' if params[:status] == 'approved'}" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Coordinators Table -->
+  <div class="profile-card">
+    <% if @profiles.any? %>
+      <div class="table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th><%= t('admin.coordinators.table.name', default: 'Coordinator Name') %></th>
+              <th><%= t('admin.coordinators.table.institution', default: 'Institution / Dept') %></th>
+              <th><%= t('admin.coordinators.table.status', default: 'Approval Status') %></th>
+              <th><%= t('admin.coordinators.table.actions', default: 'Actions') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @profiles.each do |coord| %>
+              <tr>
+                <td>
+                  <div class="flex-column">
+                    <strong class="fs-13 fw-600"><%= coord.admin_name %></strong>
+                    <span class="text-muted fs-11"><%= coord.user.email %></span>
+                  </div>
+                </td>
+                <td>
+                  <div class="flex-column">
+                    <span class="fw-500 fs-13"><%= coord.university.name %></span>
+                    <span class="text-muted fs-11"><%= coord.department %></span>
+                  </div>
+                </td>
+                <td>
+                  <% if coord.approved? %>
+                    <span class="badge badge-verified"><%= t('admin.coordinators.approved_badge', default: 'APPROVED') %></span>
+                  <% else %>
+                    <span class="badge badge-pending"><%= t('admin.coordinators.pending_badge', default: 'PENDING') %></span>
+                  <% end %>
+                </td>
+                <td>
+                  <div class="action-group-8">
+                    <% unless coord.approved? %>
+                      <%= button_to approve_admin_university_profile_path(coord), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: t('admin.dashboard.coordinators.approving') } do %>
+                        <span><%= t('admin.dashboard.coordinators.approve', default: 'Approve') %></span>
+                      <% end %>
+                    <% end %>
+
+                    <%= button_to reject_admin_university_profile_path(coord), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: t('admin.dashboard.coordinators.reject_confirm', default: 'Reject and remove this coordinator?') } do %>
+                      <span><%= coord.approved? ? t('common.remove', default: 'Revoke / Delete') : t('admin.dashboard.coordinators.reject', default: 'Reject') %></span>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-state-card">
+        <h3 class="empty-state-title"><%= t('admin.coordinators.no_results', default: 'No coordinators found') %></h3>
+        <p class="empty-state-text"><%= t('admin.coordinators.no_results_hint', default: 'Try clearing your search or status filter') %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -51,14 +51,22 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "dashboard", to: "dashboards#index", as: :dashboard
-    resources :university_profiles, only: [] do
+    resources :users, only: [:index, :show] do
+      post :toggle_admin, on: :member
+      post :toggle_lock, on: :member
+    end
+    resources :offers, only: [:index, :show, :destroy] do
+      post :toggle_status, on: :member
+    end
+    resources :university_profiles, only: [:index] do
       post :approve, on: :member
       post :reject, on: :member
     end
-    resources :company_profiles, only: [] do
+    resources :company_profiles, only: [:index] do
       post :verify, on: :member
       post :unverify, on: :member
     end
+    resources :agreements, only: [:index, :show]
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

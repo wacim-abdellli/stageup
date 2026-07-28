@@ -1,0 +1,78 @@
+<% content_for :title, "#{t('admin.agreements.title', default: 'Internship Agreements')} – StageUp" %>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="dashboard-header-left">
+      <h1 class="fs-22 fw-700"><%= t('admin.agreements.title', default: 'Internship Agreements') %></h1>
+      <p class="header-meta"><%= t('admin.agreements.subtitle', default: 'Monitor legally binding tri-party internship agreements across StageUp') %></p>
+    </div>
+    <div class="flex-row gap-10 align-center">
+      <%= link_to t('common.back_to', page: t('dashboard.title', default: 'Dashboard')), dashboard_path, class: "btn btn-secondary btn-header" %>
+    </div>
+  </div>
+
+  <%= render "admin/subnav" %>
+
+  <!-- Search & Filter Controls -->
+  <div class="admin-toolbar">
+    <div class="admin-filter-pills">
+      <%= link_to t('common.all', default: 'All'), admin_agreements_path, class: "filter-pill #{'active' unless params[:status].present?}" %>
+      <%= link_to t('agreements.status.pending_signatures', default: 'Pending Signatures'), admin_agreements_path(status: 'pending_signatures'), class: "filter-pill #{'active' if params[:status] == 'pending_signatures'}" %>
+      <%= link_to t('agreements.status.approved', default: 'Fully Approved'), admin_agreements_path(status: 'approved'), class: "filter-pill #{'active' if params[:status] == 'approved'}" %>
+    </div>
+  </div>
+
+  <!-- Agreements Table -->
+  <div class="profile-card">
+    <% if @agreements.any? %>
+      <div class="table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th><%= t('admin.agreements.table.id', default: 'Agreement / Token') %></th>
+              <th><%= t('admin.agreements.table.student', default: 'Student') %></th>
+              <th><%= t('admin.agreements.table.offer', default: 'Internship Offer') %></th>
+              <th><%= t('admin.agreements.table.dates', default: 'Dates') %></th>
+              <th><%= t('admin.agreements.table.status', default: 'Status') %></th>
+              <th><%= t('admin.agreements.table.actions', default: 'Actions') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @agreements.each do |agreement| %>
+              <tr>
+                <td>
+                  <div class="flex-column">
+                    <strong class="fs-13 fw-600">#<%= agreement.id %></strong>
+                    <span class="text-muted fs-11 font-mono"><%= agreement.verification_token.to_s.truncate(12) %></span>
+                  </div>
+                </td>
+                <td>
+                  <strong class="fs-13 fw-500"><%= agreement.submission.student_profile.full_name %></strong>
+                </td>
+                <td>
+                  <span class="fs-13"><%= agreement.submission.offer.title %></span>
+                </td>
+                <td class="text-muted fs-12">
+                  <%= agreement.start_date.strftime("%b %d, %Y") %> &ndash; <%= agreement.end_date.strftime("%b %d, %Y") %>
+                </td>
+                <td>
+                  <span class="badge badge-<%= agreement.status %>"><%= agreement.status.humanize %></span>
+                </td>
+                <td>
+                  <%= link_to admin_agreement_path(agreement), class: "btn btn-secondary btn-compact-sm" do %>
+                    <span><%= t('common.view', default: 'View') %></span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-state-card">
+        <h3 class="empty-state-title"><%= t('admin.agreements.no_results', default: 'No agreements found') %></h3>
+        <p class="empty-state-text"><%= t('admin.agreements.no_results_hint', default: 'No internship agreements match the selected filter.') %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
