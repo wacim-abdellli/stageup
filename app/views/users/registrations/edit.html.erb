@@ -136,40 +136,58 @@
 
             <% if current_user.profileable_type == "StudentProfile" %>
               <%= fields_for :student_profile, @profile do |sp| %>
-                <div class="form-row-2">
-                  <div class="form-group">
-                    <%= sp.label :first_name, t('users.new_student.first_name', default: 'First Name'), class: "form-label" %>
-                    <%= sp.text_field :first_name, class: "form-control", id: "input-first-name", required: true %>
+                <div class="field-group-section">
+                  <div class="field-group-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="field-group-title-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Identity Details</span>
                   </div>
-                  <div class="form-group">
-                    <%= sp.label :last_name, t('users.new_student.last_name', default: 'Last Name'), class: "form-label" %>
-                    <%= sp.text_field :last_name, class: "form-control", id: "input-last-name", required: true %>
-                  </div>
-                </div>
-
-                <div class="form-row-2">
-                  <div class="form-group">
-                    <%= sp.label :phone, t('users.new_student.phone', default: 'Phone Number'), class: "form-label" %>
-                    <%= sp.telephone_field :phone, class: "form-control", placeholder: "+216 XX XXX XXX" %>
-                    <span class="form-help-text">Visible only to accepted employers</span>
-                  </div>
-                  <div class="form-group">
-                    <%= sp.label :graduation_year, t('users.new_student.graduation_year', default: 'Graduation Year'), class: "form-label" %>
-                    <%= sp.number_field :graduation_year, class: "form-control", min: 2020, max: 2035 %>
+                  <div class="form-row-2">
+                    <div class="form-group">
+                      <%= sp.label :first_name, t('users.new_student.first_name', default: 'First Name'), class: "form-label" %>
+                      <%= sp.text_field :first_name, class: "form-control", id: "input-first-name", required: true %>
+                    </div>
+                    <div class="form-group">
+                      <%= sp.label :last_name, t('users.new_student.last_name', default: 'Last Name'), class: "form-label" %>
+                      <%= sp.text_field :last_name, class: "form-control", id: "input-last-name", required: true %>
+                    </div>
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <%= sp.label :major, t('users.new_student.major', default: 'Field of Study / Major'), class: "form-label" %>
-                  <%= sp.text_field :major, class: "form-control", placeholder: "e.g. Software Engineering, Data Science & AI" %>
+                <div class="field-group-section">
+                  <div class="field-group-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="field-group-title-icon"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    <span>Academic & Contact Information</span>
+                  </div>
+                  <div class="form-row-2">
+                    <div class="form-group">
+                      <%= sp.label :phone, t('users.new_student.phone', default: 'Phone Number'), class: "form-label" %>
+                      <%= sp.telephone_field :phone, class: "form-control", placeholder: "+216 XX XXX XXX" %>
+                      <span class="form-help-text">Visible only to accepted employers</span>
+                    </div>
+                    <div class="form-group">
+                      <%= sp.label :graduation_year, t('users.new_student.graduation_year', default: 'Graduation Year'), class: "form-label" %>
+                      <%= sp.number_field :graduation_year, class: "form-control", min: 2020, max: 2035 %>
+                    </div>
+                  </div>
+
+                  <div class="form-group margin-0">
+                    <%= sp.label :major, t('users.new_student.major', default: 'Field of Study / Major'), class: "form-label" %>
+                    <%= sp.text_field :major, class: "form-control", placeholder: "e.g. Software Engineering, Data Science & AI" %>
+                  </div>
                 </div>
 
-                <div class="form-group margin-0">
-                  <div class="flex-between mb-6">
-                    <%= sp.label :bio, t('users.new_student.bio', default: 'Bio & Summary'), class: "form-label margin-0" %>
-                    <span class="fs-11 text-muted" id="bio-char-counter">0 / 300</span>
+                <div class="field-group-section">
+                  <div class="field-group-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="field-group-title-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <span>Portfolio & Bio Summary</span>
                   </div>
-                  <%= sp.text_area :bio, rows: 4, class: "form-control", id: "input-bio", maxlength: 300, placeholder: "I'm a final-year engineering student passionate about building AI products and web platforms..." %>
+                  <div class="form-group margin-0">
+                    <div class="flex-between mb-6">
+                      <%= sp.label :bio, t('users.new_student.bio', default: 'Bio & Summary'), class: "form-label margin-0" %>
+                      <span class="fs-11 text-muted" id="bio-char-counter">0 / 300</span>
+                    </div>
+                    <%= sp.text_area :bio, rows: 4, class: "form-control", id: "input-bio", maxlength: 300, placeholder: "I'm a final-year engineering student passionate about building AI products and web platforms..." %>
+                  </div>
                 </div>
               <% end %>
 
@@ -257,8 +275,8 @@
                       <div class="skills-cat-block mb-24" data-cat-slug="<%= category_title.parameterize %>">
                         <div class="skills-cat-header flex-align-center gap-8 mb-12">
                           <span class="cat-accent-line"></span>
-                          <h4 class="fs-13 fw-700 color-primary margin-0 text-uppercase tracking-wide"><%= category_title %></h4>
-                          <span class="cat-badge-count">(<%= skills_arr.count %>)</span>
+                          <h4 class="fs-13 fw-700 color-primary margin-0"><%= category_title %></h4>
+                          <span class="cat-count-pill"><%= skills_arr.count %></span>
                         </div>
 
                         <div class="skills-chips-grid">
