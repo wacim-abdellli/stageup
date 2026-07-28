@@ -3,7 +3,7 @@
 <div class="dashboard-container settings-hub-container">
   
   <%# ─── Settings Header Bar ────────────────────────────────────────── %>
-  <div class="settings-hub-header flex-between flex-wrap gap-16 mb-28">
+  <div class="settings-hub-header flex-between flex-wrap gap-16 mb-24">
     <div>
       <div class="flex-align-center gap-10 mb-6">
         <%= link_to dashboard_path, class: "btn btn-secondary btn-compact" do %>
@@ -20,7 +20,7 @@
   <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), method: :put, html: { multipart: true, id: "settings-main-form" } do |f| %>
     <% errors = ((@profile&.errors&.full_messages || []) + (resource&.errors&.full_messages || [])).uniq %>
     <% if errors.any? %>
-      <div class="flash-message flash-alert flash-col mb-28">
+      <div class="flash-message flash-alert flash-col mb-24">
         <div class="flash-col-header">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           <strong><%= t('common.errors_title', default: 'Please fix the errors below:') %></strong>
@@ -36,274 +36,389 @@
     <%# ─── 2-Column Hub Layout ───────────────────────────────────────── %>
     <div class="settings-hub-grid">
 
-      <%# Left Sidebar Navigation %>
+      <%# Left Sidebar Navigation & Mini Profile Preview Card %>
       <div class="settings-sidebar">
-        <div class="settings-nav-card">
+        <div class="settings-nav-card mb-20">
           <nav class="settings-nav-list" role="tablist">
-            <a href="#section-personal" class="settings-nav-item active" data-tab="section-personal">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <span>Personal Profile</span>
-            </a>
+            <button type="button" class="settings-nav-item active" data-pane="pane-personal">
+              <span class="flex-align-center gap-10">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Personal Profile</span>
+              </span>
+              <span class="tab-status-dot dot-active"></span>
+            </button>
 
             <% if current_user.profileable_type == "StudentProfile" %>
-              <a href="#section-skills" class="settings-nav-item" data-tab="section-skills">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                <span>Skills & Stack</span>
+              <button type="button" class="settings-nav-item" data-pane="pane-skills">
+                <span class="flex-align-center gap-10">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                  <span>Skills & Stack</span>
+                </span>
                 <span class="sidebar-count-badge" id="nav-skills-badge"><%= @profile.skill_ids.count %></span>
-              </a>
+              </button>
 
-              <a href="#section-cv" class="settings-nav-item" data-tab="section-cv">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>Resume & CV</span>
-              </a>
+              <button type="button" class="settings-nav-item" data-pane="pane-cv">
+                <span class="flex-align-center gap-10">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <span>Resume & CV</span>
+                </span>
+                <% if @profile.cv.attached? %>
+                  <span class="fs-10 text-emerald fw-700">PDF</span>
+                <% end %>
+              </button>
             <% end %>
 
-            <a href="#section-security" class="settings-nav-item" data-tab="section-security">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <span>Account & Security</span>
-            </a>
+            <button type="button" class="settings-nav-item" data-pane="pane-security">
+              <span class="flex-align-center gap-10">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>Account & Security</span>
+              </span>
+            </button>
           </nav>
+        </div>
+
+        <%# Live Mini Profile Card Preview %>
+        <div class="sidebar-profile-preview-card">
+          <div class="sidebar-preview-header text-center p-16">
+            <div class="preview-avatar-circle margin-0-auto mb-10">
+              <span id="preview-avatar-text"><%= (current_user.email.first rescue 'U').upcase %></span>
+            </div>
+            <strong class="sidebar-preview-name block color-primary text-truncate fs-14 mb-2" id="preview-name-text">
+              <% if current_user.profileable_type == "StudentProfile" %>
+                <%= @profile.first_name.presence || "Candidate" %> <%= @profile.last_name %>
+              <% elsif current_user.profileable_type == "CompanyProfile" %>
+                <%= @profile.name.presence || "Employer" %>
+              <% else %>
+                <%= current_user.email.split('@').first %>
+              <% end %>
+            </strong>
+            <span class="fs-11 text-muted block mb-12" id="preview-sub-text">
+              <% if current_user.profileable_type == "StudentProfile" %>
+                <%= @profile.university&.name || @profile.major.presence || "Student Candidate" %>
+              <% elsif current_user.profileable_type == "CompanyProfile" %>
+                Company Profile
+              <% else %>
+                University Account
+              <% end %>
+            </span>
+            <% public_link = case current_user.profileable_type
+                             when "StudentProfile" then student_profile_path(@profile)
+                             when "CompanyProfile" then company_profile_path(@profile)
+                             else nil
+                             end %>
+            <% if public_link %>
+              <%= link_to public_link, target: "_blank", class: "btn-sidebar-public-link" do %>
+                <span>View Public Profile</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
 
-      <%# Right Main Form Content %>
+      <%# Right Main Form Content Pane %>
       <div class="settings-content-pane">
 
-        <%# SECTION: Personal Details %>
-        <div class="settings-card mb-32" id="section-personal">
-          <div class="settings-card-header mb-20">
-            <div class="flex-align-center gap-10">
-              <div class="settings-icon-badge">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
-              <div>
-                <h3 class="fs-17 fw-700 color-primary margin-0">Personal Profile Details</h3>
-                <p class="fs-12 text-muted margin-0">Information visible on your public portfolio page</p>
+        <%# ─── TAB PANE 1: PERSONAL PROFILE ──────────────────────────── %>
+        <div class="settings-pane active" id="pane-personal">
+          <div class="settings-card mb-24">
+            <div class="settings-card-header mb-20 flex-between">
+              <div class="flex-align-center gap-10">
+                <div class="settings-icon-badge">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div>
+                  <h3 class="fs-17 fw-700 color-primary margin-0">Personal Profile Details</h3>
+                  <p class="fs-12 text-muted margin-0">Public portfolio information visible to employers and companies</p>
+                </div>
               </div>
             </div>
+
+            <% if current_user.profileable_type == "StudentProfile" %>
+              <%= fields_for :student_profile, @profile do |sp| %>
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <%= sp.label :first_name, t('users.new_student.first_name', default: 'First Name'), class: "form-label" %>
+                    <%= sp.text_field :first_name, class: "form-control", id: "input-first-name", required: true %>
+                  </div>
+                  <div class="form-group">
+                    <%= sp.label :last_name, t('users.new_student.last_name', default: 'Last Name'), class: "form-label" %>
+                    <%= sp.text_field :last_name, class: "form-control", id: "input-last-name", required: true %>
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <%= sp.label :phone, t('users.new_student.phone', default: 'Phone Number'), class: "form-label" %>
+                    <%= sp.telephone_field :phone, class: "form-control", placeholder: "+216 XX XXX XXX" %>
+                    <span class="form-help-text">Visible only to accepted employers</span>
+                  </div>
+                  <div class="form-group">
+                    <%= sp.label :graduation_year, t('users.new_student.graduation_year', default: 'Graduation Year'), class: "form-label" %>
+                    <%= sp.number_field :graduation_year, class: "form-control", min: 2020, max: 2035 %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <%= sp.label :major, t('users.new_student.major', default: 'Field of Study / Major'), class: "form-label" %>
+                  <%= sp.text_field :major, class: "form-control", placeholder: "e.g. Software Engineering, Data Science & AI" %>
+                </div>
+
+                <div class="form-group margin-0">
+                  <div class="flex-between mb-6">
+                    <%= sp.label :bio, t('users.new_student.bio', default: 'Bio & Summary'), class: "form-label margin-0" %>
+                    <span class="fs-11 text-muted" id="bio-char-counter">0 / 300</span>
+                  </div>
+                  <%= sp.text_area :bio, rows: 4, class: "form-control", id: "input-bio", maxlength: 300, placeholder: "I'm a final-year engineering student passionate about building AI products and web platforms..." %>
+                </div>
+              <% end %>
+
+            <% elsif current_user.profileable_type == "CompanyProfile" %>
+              <%= fields_for :company_profile, @profile do |cp| %>
+                <div class="form-group">
+                  <%= cp.label :name, t('users.new_company.name', default: 'Company Name'), class: "form-label" %>
+                  <%= cp.text_field :name, class: "form-control", id: "input-company-name", required: true %>
+                </div>
+
+                <div class="form-group">
+                  <%= cp.label :website, t('users.new_company.website', default: 'Company Website'), class: "form-label" %>
+                  <%= cp.url_field :website, class: "form-control", placeholder: "https://example.tn" %>
+                </div>
+
+                <div class="form-group margin-0">
+                  <%= cp.label :description, t('users.new_company.description', default: 'Company Overview'), class: "form-label" %>
+                  <%= cp.text_area :description, rows: 5, class: "form-control", placeholder: "Describe your company culture, technology stack, and mission opportunities." %>
+                </div>
+              <% end %>
+
+            <% elsif current_user.profileable_type == "UniversityProfile" %>
+              <%= fields_for :university_profile, @profile do |up| %>
+                <div class="form-group">
+                  <%= up.label :admin_name, t('users.new_university.admin_name', default: 'Coordinator Full Name'), class: "form-label" %>
+                  <%= up.text_field :admin_name, class: "form-control", required: true %>
+                </div>
+
+                <div class="form-group margin-0">
+                  <%= up.label :department, t('users.new_university.department', default: 'University Department'), class: "form-label" %>
+                  <%= up.text_field :department, class: "form-control", placeholder: "e.g. IT & Computer Science Department" %>
+                </div>
+              <% end %>
+            <% end %>
           </div>
-
-          <% if current_user.profileable_type == "StudentProfile" %>
-            <%= fields_for :student_profile, @profile do |sp| %>
-              <div class="form-row-2">
-                <div class="form-group">
-                  <%= sp.label :first_name, t('users.new_student.first_name', default: 'First Name'), class: "form-label" %>
-                  <%= sp.text_field :first_name, class: "form-control", required: true %>
-                </div>
-                <div class="form-group">
-                  <%= sp.label :last_name, t('users.new_student.last_name', default: 'Last Name'), class: "form-label" %>
-                  <%= sp.text_field :last_name, class: "form-control", required: true %>
-                </div>
-              </div>
-
-              <div class="form-row-2">
-                <div class="form-group">
-                  <%= sp.label :phone, t('users.new_student.phone', default: 'Phone Number'), class: "form-label" %>
-                  <%= sp.telephone_field :phone, class: "form-control", placeholder: "+216 XX XXX XXX" %>
-                </div>
-                <div class="form-group">
-                  <%= sp.label :graduation_year, t('users.new_student.graduation_year', default: 'Graduation Year'), class: "form-label" %>
-                  <%= sp.number_field :graduation_year, class: "form-control", min: 2020, max: 2035 %>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <%= sp.label :major, t('users.new_student.major', default: 'Field of Study / Major'), class: "form-label" %>
-                <%= sp.text_field :major, class: "form-control", placeholder: "e.g. Software Engineering, Data Science & AI" %>
-              </div>
-
-              <div class="form-group margin-0">
-                <%= sp.label :bio, t('users.new_student.bio', default: 'Bio & Summary'), class: "form-label" %>
-                <%= sp.text_area :bio, rows: 4, class: "form-control", placeholder: "Write a summary highlighting your goals, skills, and target internship roles." %>
-              </div>
-            <% end %>
-
-          <% elsif current_user.profileable_type == "CompanyProfile" %>
-            <%= fields_for :company_profile, @profile do |cp| %>
-              <div class="form-group">
-                <%= cp.label :name, t('users.new_company.name', default: 'Company Name'), class: "form-label" %>
-                <%= cp.text_field :name, class: "form-control", required: true %>
-              </div>
-
-              <div class="form-group">
-                <%= cp.label :website, t('users.new_company.website', default: 'Company Website'), class: "form-label" %>
-                <%= cp.url_field :website, class: "form-control", placeholder: "https://example.tn" %>
-              </div>
-
-              <div class="form-group margin-0">
-                <%= cp.label :description, t('users.new_company.description', default: 'Company Overview'), class: "form-label" %>
-                <%= cp.text_area :description, rows: 4, class: "form-control", placeholder: "Describe your company, engineering team, and culture." %>
-              </div>
-            <% end %>
-
-          <% elsif current_user.profileable_type == "UniversityProfile" %>
-            <%= fields_for :university_profile, @profile do |up| %>
-              <div class="form-group">
-                <%= up.label :admin_name, t('users.new_university.admin_name', default: 'Coordinator Name'), class: "form-label" %>
-                <%= up.text_field :admin_name, class: "form-control", required: true %>
-              </div>
-
-              <div class="form-group margin-0">
-                <%= up.label :department, t('users.new_university.department', default: 'University Department'), class: "form-label" %>
-                <%= up.text_field :department, class: "form-control", placeholder: "e.g. IT & Computer Science Department" %>
-              </div>
-            <% end %>
-          <% end %>
         </div>
 
-        <%# SECTION: Skills & Taxonomy (Student Only) %>
+        <%# ─── TAB PANE 2: SKILLS & STACK (STUDENT ONLY) ──────────────── %>
         <% if current_user.profileable_type == "StudentProfile" %>
-          <div class="settings-card mb-32" id="section-skills">
-            <div class="settings-card-header mb-20 flex-between flex-wrap gap-12">
-              <div class="flex-align-center gap-10">
-                <div class="settings-icon-badge">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <div class="settings-pane" id="pane-skills">
+            <div class="settings-card mb-24">
+              <div class="settings-card-header mb-20 flex-between flex-wrap gap-12">
+                <div class="flex-align-center gap-10">
+                  <div class="settings-icon-badge">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                  </div>
+                  <div>
+                    <h3 class="fs-17 fw-700 color-primary margin-0">Technical Skills & Stack Taxonomy</h3>
+                    <p class="fs-12 text-muted margin-0">Select from 144+ verified technologies to match with company offers</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 class="fs-17 fw-700 color-primary margin-0">Technical Skills & Stack Taxonomy</h3>
-                  <p class="fs-12 text-muted margin-0">Select from 140+ verified technologies to match with company offers</p>
+                <div class="flex-align-center gap-8">
+                  <span class="badge badge-success fs-12" id="skills-live-counter">
+                    <%= @profile.skill_ids.count %> Skills Selected
+                  </span>
+                  <button type="button" class="btn btn-secondary btn-compact" id="btn-clear-skills">Clear All</button>
                 </div>
-              </div>
-              <div class="flex-align-center gap-8">
-                <span class="badge badge-success fs-12" id="skills-live-counter">
-                  <%= @profile.skill_ids.count %> Skills Selected
-                </span>
-                <button type="button" class="btn btn-secondary btn-compact" id="btn-clear-skills">Clear All</button>
-              </div>
-            </div>
-
-            <%# Search & Filter Toolbar %>
-            <div class="skills-hub-filter mb-20">
-              <div class="skill-search-input-wrapper mb-14">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" class="skill-search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="Search 140+ skills (e.g., Rails, PyTorch, Docker, React, Kafka, Kubernetes)...">
               </div>
 
-              <div class="category-pills-scroll" id="hub-category-pills">
-                <button type="button" class="hub-cat-pill active" data-cat="all">
-                  All Skills (<%= Skill.count %>)
-                </button>
-                <% (@skills_by_category || {}).each do |cat_name, list| %>
-                  <button type="button" class="hub-cat-pill" data-cat="<%= cat_name.parameterize %>">
-                    <%= cat_name %> (<%= list.count %>)
+              <%# Toolbar: Search + Category Filter Pills %>
+              <div class="skills-hub-filter mb-20">
+                <div class="skill-search-input-wrapper mb-14">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" class="skill-search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="Search 144+ skills (e.g. Rails, PyTorch, Docker, React, Kafka, Kubernetes)...">
+                </div>
+
+                <div class="category-pills-scroll" id="hub-category-pills">
+                  <button type="button" class="hub-cat-pill active" data-cat="all">
+                    All Skills (<%= Skill.count %>)
                   </button>
-                <% end %>
+                  <% (@skills_by_category || {}).each do |cat_name, list| %>
+                    <button type="button" class="hub-cat-pill" data-cat="<%= cat_name.parameterize %>">
+                      <%= cat_name %> (<%= list.count %>)
+                    </button>
+                  <% end %>
+                </div>
               </div>
-            </div>
 
-            <%# Categorized Skill Matrix %>
-            <div class="skills-matrix-wrapper" id="skills-matrix">
-              <%= fields_for :student_profile, @profile do |sp| %>
-                <% (@skills_by_category || {}).each do |category_title, skills_arr| %>
-                  <div class="skills-cat-block mb-24" data-cat-slug="<%= category_title.parameterize %>">
-                    <div class="skills-cat-header flex-align-center gap-8 mb-12">
-                      <span class="cat-accent-line"></span>
-                      <h4 class="fs-13 fw-700 color-primary margin-0 text-uppercase tracking-wide"><%= category_title %></h4>
-                      <span class="cat-badge-count">(<%= skills_arr.count %>)</span>
+              <%# Split Layout: 70% Matrix Browser + 30% Selected Side Panel %>
+              <div class="skills-split-layout">
+                <%# Left 70% Skills Matrix %>
+                <div class="skills-matrix-browser" id="skills-matrix">
+                  <%= fields_for :student_profile, @profile do |sp| %>
+                    <% (@skills_by_category || {}).each do |category_title, skills_arr| %>
+                      <div class="skills-cat-block mb-24" data-cat-slug="<%= category_title.parameterize %>">
+                        <div class="skills-cat-header flex-align-center gap-8 mb-12">
+                          <span class="cat-accent-line"></span>
+                          <h4 class="fs-13 fw-700 color-primary margin-0 text-uppercase tracking-wide"><%= category_title %></h4>
+                          <span class="cat-badge-count">(<%= skills_arr.count %>)</span>
+                        </div>
+
+                        <div class="skills-chips-grid">
+                          <% skills_arr.each do |skill_obj| %>
+                            <% selected = @profile.skill_ids.include?(skill_obj.id) %>
+                            <label class="skill-chip-box <%= 'chip-active' if selected %>"
+                                   data-skill-id="<%= skill_obj.id %>"
+                                   data-skill-name="<%= skill_obj.name %>"
+                                   data-skill-query="<%= skill_obj.name.downcase %>">
+                              <%= check_box_tag "student_profile[skill_ids][]", skill_obj.id, selected, class: "skill-chip-checkbox" %>
+                              <span class="chip-label-text"><%= skill_obj.name %></span>
+                              <span class="chip-check-icon" aria-hidden="true">✓</span>
+                            </label>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+
+                <%# Right 30% Selected Skills Removable List Panel %>
+                <div class="skills-selected-sidebar">
+                  <div class="skills-selected-panel">
+                    <div class="panel-header flex-between mb-12">
+                      <strong class="fs-13 color-primary">My Selected Stack</strong>
+                      <span class="fs-11 text-muted" id="selected-panel-count"><%= @profile.skill_ids.count %> picked</span>
                     </div>
 
-                    <div class="skills-chips-grid">
-                      <% skills_arr.each do |skill_obj| %>
-                        <% selected = @profile.skill_ids.include?(skill_obj.id) %>
-                        <label class="skill-chip-box <%= 'chip-active' if selected %>" data-skill-query="<%= skill_obj.name.downcase %>">
-                          <%= check_box_tag "student_profile[skill_ids][]", skill_obj.id, selected, class: "skill-chip-checkbox" %>
-                          <span class="chip-label-text"><%= skill_obj.name %></span>
-                          <span class="chip-check-icon" aria-hidden="true">✓</span>
-                        </label>
-                      <% end %>
+                    <div class="selected-chips-scroll" id="selected-chips-list">
+                      <%# Dynamically populated by JS %>
                     </div>
                   </div>
-                <% end %>
-              <% end %>
+                </div>
+              </div>
             </div>
           </div>
 
-          <%# SECTION: Resume / CV Upload %>
-          <div class="settings-card mb-32" id="section-cv">
-            <div class="settings-card-header mb-20">
-              <div class="flex-align-center gap-10">
-                <div class="settings-icon-badge">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
-                </div>
-                <div>
-                  <h3 class="fs-17 fw-700 color-primary margin-0">Resume & CV Document</h3>
-                  <p class="fs-12 text-muted margin-0">PDF document accessible by verified employers</p>
+          <%# ─── TAB PANE 3: RESUME & CV (STUDENT ONLY) ─────────────────── %>
+          <div class="settings-pane" id="pane-cv">
+            <div class="settings-card mb-24">
+              <div class="settings-card-header mb-20">
+                <div class="flex-align-center gap-10">
+                  <div class="settings-icon-badge">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <div>
+                    <h3 class="fs-17 fw-700 color-primary margin-0">Resume & CV Document</h3>
+                    <p class="fs-12 text-muted margin-0">PDF document accessible by verified employers</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <%= fields_for :student_profile, @profile do |sp| %>
-              <% if @profile.cv.attached? %>
-                <div class="cv-active-card mb-16 flex-between flex-wrap gap-12">
-                  <div class="flex-align-center gap-12">
-                    <div class="pdf-file-icon">PDF</div>
-                    <div>
-                      <strong class="fs-14 color-primary block text-truncate"><%= @profile.cv.filename %></strong>
-                      <span class="fs-12 text-muted"><%= number_to_human_size(@profile.cv.byte_size) %> &middot; Uploaded</span>
+              <%= fields_for :student_profile, @profile do |sp| %>
+                <% if @profile.cv.attached? %>
+                  <div class="cv-active-card mb-20 flex-between flex-wrap gap-12">
+                    <div class="flex-align-center gap-12">
+                      <div class="pdf-file-badge">PDF</div>
+                      <div>
+                        <strong class="fs-14 color-primary block text-truncate"><%= @profile.cv.filename %></strong>
+                        <span class="fs-12 text-muted"><%= number_to_human_size(@profile.cv.byte_size) %> &middot; Uploaded</span>
+                      </div>
                     </div>
+                    <%= link_to rails_blob_path(@profile.cv, disposition: "inline"), target: "_blank", class: "btn btn-secondary btn-compact" do %>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      Preview PDF
+                    <% end %>
                   </div>
-                  <%= link_to rails_blob_path(@profile.cv, disposition: "inline"), target: "_blank", class: "btn btn-secondary btn-compact" do %>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    Preview PDF
-                  <% end %>
+                <% end %>
+
+                <div class="cv-dropzone-container" id="cv-dropzone">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" class="mb-10 margin-0-auto block"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <div class="fs-14 fw-600 color-primary mb-4">Drag & drop your PDF resume here</div>
+                  <div class="fs-12 text-muted mb-14">PDF only &middot; Maximum file size 5MB</div>
+                  <label class="btn btn-secondary btn-compact cursor-pointer">
+                    <span>Browse PDF File</span>
+                    <%= sp.file_field :cv, accept: "application/pdf", class: "cv-hidden-input", id: "cv-file-input" %>
+                  </label>
+                  <div class="fs-12 text-emerald fw-600 mt-10 display-none" id="cv-selected-filename"></div>
                 </div>
               <% end %>
-
-              <div class="cv-dropzone-box">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" class="mb-8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                <div class="fs-14 fw-600 color-primary mb-4">Upload New Resume (PDF)</div>
-                <div class="fs-12 text-muted mb-12">Max size: 5MB &middot; Format: .pdf</div>
-                <%= sp.file_field :cv, accept: "application/pdf", class: "cv-file-input" %>
-              </div>
-            <% end %>
+            </div>
           </div>
         <% end %>
 
-        <%# SECTION: Security & Login Credentials %>
-        <div class="settings-card mb-32" id="section-security">
-          <div class="settings-card-header mb-20">
-            <div class="flex-align-center gap-10">
-              <div class="settings-icon-badge">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <%# ─── TAB PANE 4: ACCOUNT & SECURITY ────────────────────────── %>
+        <div class="settings-pane" id="pane-security">
+          <div class="settings-card mb-24">
+            <div class="settings-card-header mb-20">
+              <div class="flex-align-center gap-10">
+                <div class="settings-icon-badge">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div>
+                  <h3 class="fs-17 fw-700 color-primary margin-0">Account Email & Credentials</h3>
+                  <p class="fs-12 text-muted margin-0">Manage login credentials and security authentication</p>
+                </div>
               </div>
-              <div>
-                <h3 class="fs-17 fw-700 color-primary margin-0">Account Security & Credentials</h3>
-                <p class="fs-12 text-muted margin-0">Update your email address or account password</p>
+            </div>
+
+            <%# Sub-card A: Email %>
+            <div class="security-subcard mb-24">
+              <h4 class="fs-14 fw-600 color-primary mb-12 flex-align-center gap-6">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Email Address
+              </h4>
+              <div class="form-group margin-0">
+                <%= f.label :email, t('users.edit.email', default: 'Account Email Address'), class: "form-label" %>
+                <%= f.email_field :email, class: "form-control", autocomplete: "email", required: true %>
               </div>
             </div>
-          </div>
 
-          <div class="form-group">
-            <%= f.label :email, t('users.edit.email', default: 'Account Email Address'), class: "form-label" %>
-            <%= f.email_field :email, class: "form-control", autocomplete: "email", required: true %>
-          </div>
-
-          <div class="form-row-2">
-            <div class="form-group">
-              <%= f.label :password, t('users.edit.new_password', default: 'New Password (optional)'), class: "form-label" %>
-              <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: t('users.edit.leave_blank_placeholder', default: 'Leave blank to keep current password') %>
+            <%# Sub-card B: Password Change %>
+            <div class="security-subcard mb-24">
+              <h4 class="fs-14 fw-600 color-primary mb-12 flex-align-center gap-6">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Change Password (Optional)
+              </h4>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <%= f.label :password, t('users.edit.new_password', default: 'New Password'), class: "form-label" %>
+                  <%= f.password_field :password, class: "form-control", id: "input-new-password", autocomplete: "new-password", placeholder: t('users.edit.leave_blank_placeholder', default: 'Leave blank to keep unchanged') %>
+                  
+                  <%# Password Strength Meter %>
+                  <div class="password-meter-bar mt-8">
+                    <div class="meter-segment" id="meter-1"></div>
+                    <div class="meter-segment" id="meter-2"></div>
+                    <div class="meter-segment" id="meter-3"></div>
+                    <div class="meter-segment" id="meter-4"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label :password_confirmation, t('users.edit.confirm_password', default: 'Confirm New Password'), class: "form-label" %>
+                  <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <%= f.label :password_confirmation, t('users.edit.confirm_password', default: 'Confirm New Password'), class: "form-label" %>
-              <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+
+            <%# Sub-card C: Security Guard Notice %>
+            <div class="security-notice-box mb-20">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" class="flex-shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span class="fs-12 text-secondary"><%= t('users.edit.current_password_help', default: 'Enter your current password ONLY if changing your email or password for security confirmation.') %></span>
             </div>
-          </div>
 
-          <div class="security-notice-box mb-16">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" class="flex-shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span class="fs-12 text-secondary"><%= t('users.edit.current_password_help', default: 'Enter your current password ONLY if changing your email address or password.') %></span>
-          </div>
-
-          <div class="form-group margin-0">
-            <%= f.label :current_password, t('users.edit.current_password', default: 'Current Password'), class: "form-label" %>
-            <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
+            <div class="form-group margin-0">
+              <%= f.label :current_password, t('users.edit.current_password', default: 'Current Password'), class: "form-label" %>
+              <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
+            </div>
           </div>
         </div>
 
-        <%# Footer Actions Floating Bar %>
-        <div class="settings-actions-bar flex-between">
-          <%= link_to t('common.cancel', default: 'Cancel'), dashboard_path, class: "btn btn-secondary" %>
-          <%= f.submit t('users.edit.save_changes', default: 'Save Changes'), class: "btn btn-primary btn-lg px-32" %>
+        <%# Floating Dirty-State Unsaved Changes Bar %>
+        <div class="floating-save-bar" id="floating-save-bar">
+          <div class="flex-align-center gap-10">
+            <span class="save-status-dot"></span>
+            <span class="fs-13 fw-600 color-primary">You have unsaved profile changes</span>
+          </div>
+          <div class="flex-align-center gap-12">
+            <%= link_to t('common.cancel', default: 'Cancel'), dashboard_path, class: "btn btn-secondary btn-compact" %>
+            <%= f.submit t('users.edit.save_changes', default: 'Save Changes'), class: "btn btn-primary btn-compact px-20" %>
+          </div>
         </div>
 
       </div>
@@ -314,28 +429,113 @@
 
 <script nonce="<%= content_security_policy_nonce %>">
   (function() {
-    function initSettingsHub() {
-      // 1. Sidebar Nav Click Handler
-      var navItems = document.querySelectorAll('.settings-nav-item');
-      navItems.forEach(function(item) {
-        item.addEventListener('click', function(e) {
-          navItems.forEach(function(n) { n.classList.remove('active'); });
-          item.classList.add('active');
+    function initMasterSettings() {
+      // ─── 1. TRUE TAB SWITCHING ──────────────────────────────────
+      var navButtons = document.querySelectorAll('.settings-nav-item');
+      var panes = document.querySelectorAll('.settings-pane');
+
+      navButtons.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var targetPaneId = btn.dataset.pane;
+
+          navButtons.forEach(function(b) { b.classList.remove('active'); });
+          panes.forEach(function(p) { p.classList.remove('active'); });
+
+          btn.classList.add('active');
+          var targetPane = document.getElementById(targetPaneId);
+          if (targetPane) targetPane.classList.add('active');
         });
       });
 
-      // 2. Skills Counter & Chip Toggle
+      // ─── 2. LIVE MINI PROFILE PREVIEW CARD ──────────────────────
+      var firstNameInput = document.getElementById('input-first-name');
+      var lastNameInput = document.getElementById('input-last-name');
+      var companyNameInput = document.getElementById('input-company-name');
+      var previewNameText = document.getElementById('preview-name-text');
+      var previewAvatarText = document.getElementById('preview-avatar-text');
+
+      function updatePreviewName() {
+        if (firstNameInput && lastNameInput && previewNameText) {
+          var fname = firstNameInput.value.trim();
+          var lname = lastNameInput.value.trim();
+          if (fname || lname) {
+            previewNameText.textContent = (fname + ' ' + lname).trim();
+          }
+          if (fname && previewAvatarText) {
+            previewAvatarText.textContent = fname.charAt(0).toUpperCase();
+          }
+        } else if (companyNameInput && previewNameText) {
+          var cname = companyNameInput.value.trim();
+          if (cname) {
+            previewNameText.textContent = cname;
+            if (previewAvatarText) previewAvatarText.textContent = cname.charAt(0).toUpperCase();
+          }
+        }
+      }
+
+      if (firstNameInput) firstNameInput.addEventListener('input', updatePreviewName);
+      if (lastNameInput) lastNameInput.addEventListener('input', updatePreviewName);
+      if (companyNameInput) companyNameInput.addEventListener('input', updatePreviewName);
+
+      // ─── 3. BIO CHARACTER COUNTER ──────────────────────────────
+      var bioInput = document.getElementById('input-bio');
+      var bioCounter = document.getElementById('bio-char-counter');
+
+      if (bioInput && bioCounter) {
+        function updateBioCount() {
+          var len = bioInput.value.length;
+          bioCounter.textContent = len + ' / 300';
+          if (len >= 280) {
+            bioCounter.style.color = '#EF4444';
+          } else {
+            bioCounter.style.color = 'var(--text-muted)';
+          }
+        }
+        bioInput.addEventListener('input', updateBioCount);
+        updateBioCount();
+      }
+
+      // ─── 4. SKILLS MATRIX & SELECTED SIDE PANEL SYNCHRONIZATION 
+      var chipBoxes = document.querySelectorAll('.skill-chip-box');
+      var selectedChipsList = document.getElementById('selected-chips-list');
+      var selectedPanelCount = document.getElementById('selected-panel-count');
       var liveCounter = document.getElementById('skills-live-counter');
       var navBadge = document.getElementById('nav-skills-badge');
       var clearBtn = document.getElementById('btn-clear-skills');
       var searchInput = document.getElementById('hub-skill-search');
       var catPills = document.querySelectorAll('.hub-cat-pill');
       var catBlocks = document.querySelectorAll('.skills-cat-block');
-      var chipBoxes = document.querySelectorAll('.skill-chip-box');
       var activeCat = 'all';
 
-      function updateCounter() {
-        var count = document.querySelectorAll('.skill-chip-checkbox:checked').length;
+      function syncSelectedPanel() {
+        if (!selectedChipsList) return;
+        selectedChipsList.innerHTML = '';
+        var count = 0;
+
+        chipBoxes.forEach(function(chip) {
+          var chk = chip.querySelector('.skill-chip-checkbox');
+          if (chk && chk.checked) {
+            count++;
+            var sName = chip.dataset.skillName || 'Skill';
+            var sId = chip.dataset.skillId;
+
+            var tag = document.createElement('div');
+            tag.className = 'selected-panel-chip';
+            tag.innerHTML = '<span>' + sName + '</span><button type="button" class="remove-chip-btn" data-id="' + sId + '">&times;</button>';
+
+            tag.querySelector('.remove-chip-btn').addEventListener('click', function(e) {
+              e.stopPropagation();
+              chk.checked = false;
+              chip.classList.remove('chip-active');
+              syncSelectedPanel();
+            });
+
+            selectedChipsList.appendChild(tag);
+          }
+        });
+
+        if (selectedPanelCount) selectedPanelCount.textContent = count + ' picked';
         if (liveCounter) liveCounter.textContent = count + ' Skills Selected';
         if (navBadge) navBadge.textContent = count;
       }
@@ -353,45 +553,44 @@
           } else {
             chip.classList.remove('chip-active');
           }
-          updateCounter();
+          syncSelectedPanel();
         });
       });
 
-      // Clear all skills
       if (clearBtn) {
         clearBtn.addEventListener('click', function() {
           document.querySelectorAll('.skill-chip-checkbox').forEach(function(chk) {
             chk.checked = false;
-            var parent = chk.closest('.skill-chip-box');
-            if (parent) parent.classList.remove('chip-active');
+            var p = chk.closest('.skill-chip-box');
+            if (p) p.classList.remove('chip-active');
           });
-          updateCounter();
+          syncSelectedPanel();
         });
       }
 
       // Filter skills matrix
-      function filterMatrix() {
+      function filterSkills() {
         var query = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
         catBlocks.forEach(function(block) {
-          var blockSlug = block.dataset.catSlug;
-          var catMatch = (activeCat === 'all' || activeCat === blockSlug);
-          var hasVisibleChips = false;
+          var slug = block.dataset.catSlug;
+          var catMatch = (activeCat === 'all' || activeCat === slug);
+          var hasVisible = false;
 
-          var blockChips = block.querySelectorAll('.skill-chip-box');
-          blockChips.forEach(function(chip) {
-            var name = chip.dataset.skillQuery || '';
-            var searchMatch = !query || name.includes(query);
+          var chips = block.querySelectorAll('.skill-chip-box');
+          chips.forEach(function(chip) {
+            var q = chip.dataset.skillQuery || '';
+            var searchMatch = !query || q.includes(query);
 
             if (catMatch && searchMatch) {
               chip.style.display = 'inline-flex';
-              hasVisibleChips = true;
+              hasVisible = true;
             } else {
               chip.style.display = 'none';
             }
           });
 
-          if (hasVisibleChips) {
+          if (hasVisible) {
             block.style.display = 'block';
           } else {
             block.style.display = 'none';
@@ -399,22 +598,73 @@
         });
       }
 
-      if (searchInput) searchInput.addEventListener('input', filterMatrix);
+      if (searchInput) searchInput.addEventListener('input', filterSkills);
 
       catPills.forEach(function(pill) {
         pill.addEventListener('click', function() {
           catPills.forEach(function(p) { p.classList.remove('active'); });
           pill.classList.add('active');
           activeCat = pill.dataset.cat;
-          filterMatrix();
+          filterSkills();
         });
       });
+
+      // Initial sync
+      syncSelectedPanel();
+
+      // ─── 5. CV FILE SELECTION PREVIEW ─────────────────────────
+      var cvInput = document.getElementById('cv-file-input');
+      var cvNameBox = document.getElementById('cv-selected-filename');
+      if (cvInput && cvNameBox) {
+        cvInput.addEventListener('change', function() {
+          if (cvInput.files && cvInput.files[0]) {
+            cvNameBox.textContent = 'Selected: ' + cvInput.files[0].name;
+            cvNameBox.style.display = 'block';
+          }
+        });
+      }
+
+      // ─── 6. PASSWORD STRENGTH METER ────────────────────────────
+      var passInput = document.getElementById('input-new-password');
+      if (passInput) {
+        passInput.addEventListener('input', function() {
+          var val = passInput.value;
+          var score = 0;
+          if (val.length >= 8) score++;
+          if (/[A-Z]/.test(val)) score++;
+          if (/[0-9]/.test(val)) score++;
+          if (/[^A-Za-z0-9]/.test(val)) score++;
+
+          for (var i = 1; i <= 4; i++) {
+            var el = document.getElementById('meter-' + i);
+            if (el) {
+              if (val.length > 0 && i <= score) {
+                el.className = 'meter-segment active-' + score;
+              } else {
+                el.className = 'meter-segment';
+              }
+            }
+          }
+        });
+      }
+
+      // ─── 7. FLOATING DIRTY STATE SAVE BAR ──────────────────────
+      var mainForm = document.getElementById('settings-main-form');
+      var floatingSaveBar = document.getElementById('floating-save-bar');
+      if (mainForm && floatingSaveBar) {
+        mainForm.addEventListener('input', function() {
+          floatingSaveBar.classList.add('bar-visible');
+        });
+        mainForm.addEventListener('change', function() {
+          floatingSaveBar.classList.add('bar-visible');
+        });
+      }
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initSettingsHub);
+      document.addEventListener('DOMContentLoaded', initMasterSettings);
     } else {
-      initSettingsHub();
+      initMasterSettings();
     }
   })();
 </script>
