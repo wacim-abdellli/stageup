@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>" dir="<%= I18n.locale == :ar ? 'rtl' : 'ltr' %>">
   <head>
-    <title><%= content_for(:title) || "StageUp – Verified Internships in Tunisia" %></title>
-    <meta name="description" content="StageUp – Tunisia's first verified internship platform. Proof-of-work missions, reputation scoring, and official agreements.">
+    <title><%= content_for(:title) || t('layouts.default_title') %></title>
+    <meta name="description" content="<%= t('layouts.meta_description') %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -231,19 +231,30 @@
         <div class="flash-portal" aria-live="polite" role="status">
           <% if flash[:notice] %>
             <div class="flash-message flash-notice">
-              <i data-lucide="check-circle" class="icon-16 flex-shrink-0 stroke-success"></i>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
               <span><%= flash[:notice] %></span>
-              <button type="button" class="flash-close" aria-label="Dismiss alert">
-                <i data-lucide="x" class="icon-16"></i>
+              <button type="button" class="flash-close" aria-label="<%= t('common.dismiss_alert', default: 'Dismiss alert') %>">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
               </button>
             </div>
           <% end %>
           <% if flash[:alert] %>
             <div class="flash-message flash-alert">
-              <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
               <span><%= flash[:alert] %></span>
-              <button type="button" class="flash-close" aria-label="Dismiss alert">
-                <i data-lucide="x" class="icon-16"></i>
+              <button type="button" class="flash-close" aria-label="<%= t('common.dismiss_alert', default: 'Dismiss alert') %>">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
               </button>
             </div>
           <% end %>
