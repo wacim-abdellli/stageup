@@ -50,7 +50,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # If we reach here, validation failed. Merge errors to display them in the view.
     flash.now[:alert] = "Please fix the errors below to complete your registration."
-    render :new_student
+    render :new_student, status: :unprocessable_entity
   end
 
   # GET /signup/company
@@ -79,7 +79,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     flash.now[:alert] = "Please fix the errors below to complete your registration."
-    render :new_company
+    render :new_company, status: :unprocessable_entity
   end
 
   # GET /signup/university
@@ -110,7 +110,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     flash.now[:alert] = "Please fix the errors below to complete your registration."
-    render :new_university
+    render :new_university, status: :unprocessable_entity
   end
 
   private
