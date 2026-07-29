@@ -138,6 +138,7 @@ ar:
     toggle_navigation: "تبديل التنقل"
     select_language: "اختيار اللغة"
     language_selector: "محدد اللغة"
+    view_my_profile: "عرض ملفي العام"
 
   locales:
     fr: "Français"
@@ -156,6 +157,8 @@ ar:
         work_mode: "وضع العمل"
         all_types: "كل الأنواع"
         all_modes: "كل الأوضاع"
+        stage_type_pfe: "مشروع تخرج (PFE)"
+        stage_type_pfa: "مشروع نهاية السنة (PFA)"
         clear_filters: "إعادة تعيين الفلاتر"
         filters_active: "الفلاتر نشطة"
       no_results: "لا توجد تربصات تطابق فلاترك"
@@ -173,6 +176,7 @@ ar:
         total_offers: "عروض متاحة"
 
     show:
+      page_title: "%{title} – StageUp"
       title: "تفاصيل التربص"
       apply_now: "قدم الآن"
       sign_in_to_apply: "سجل الدخول للتقديم"
@@ -307,6 +311,10 @@ ar:
       mission_title: "عنوان المهمة"
       mission_duration: "مدة المهمة"
       mission_description: "وصف المهمة"
+    status:
+      active: "نشط"
+      closed: "مغلق"
+      draft: "مسودة"
 
   dashboard:
     title: "لوحة التحكم"
@@ -424,6 +432,7 @@ ar:
         company: "شركة"
         university: "جامعة"
       edit: "تعديل الملف"
+      view_public: "عرض ملفي الشخصي"
     profile_bento:
       full_name: "الاسم الكامل"
       phone: "الهاتف"
@@ -583,7 +592,8 @@ ar:
     yesterday: "أمس"
     mark_read: "تحديد كمقروء"
     empty_title: "على اطلاع كامل"
-    empty_desc: "ليس لديك إشعارات جديدة. ستظهر التحديثات حول الطلبات والاتفاقيات ومراحل التربص هنا."
+    empty: "لا توجد إشعارات بعد"
+    empty_desc: "ليس لديك إشعارات جديدة."
     page_info: "الصفحة %{current} من %{total}"
     types:
       application_received: "طلب جديد"
@@ -623,6 +633,11 @@ ar:
       accepted: "مقبول"
       signed: "موقع"
       done: "مكتمل"
+
+  agreements:
+    status:
+      pending_signatures: "بانتظار التوقيعات"
+      approved: "معتمد بالكامل"
 
   sessions:
     new:
@@ -768,6 +783,11 @@ ar:
       coordinators: "المنسقون"
       companies: "الشركات"
       agreements: "الاتفاقيات"
+    roles:
+      student: "طلاب"
+      company: "شركات"
+      university: "منسقون"
+      admin: "مشرفون"
     kpi:
       total_users: "إجمالي مستخدمي المنصة"
       students: "طلاب"
@@ -911,6 +931,7 @@ ar:
 
   internship_agreements:
     show:
+      page_title: "اتفاقية التربص – StageUp"
       title: "اتفاقية التربص"
       subtitle: "اتفاقية تربص ثلاثية الأطراف"
       status:
@@ -984,9 +1005,21 @@ ar:
       view_proof: "عرض الدليل"
       view_cv: "عرض السيرة الذاتية"
       no_proof: "لا يوجد دليل مقدم"
+      view_profile: "عرض الملف الشخصي"
+      agreement: "الاتفاقية"
+    actions:
+      accept: "قبول"
+      reject: "رفض"
+    empty:
+      review: "لا توجد طلبات معلقة"
+      accepted: "لا يوجد مرشحون مقبولون نشطون"
+      rejected: "لا توجد طلبات مرفوضة"
 
   common:
     skip_link: "تخطى إلى المحتوى الرئيسي"
+    all: "الكل"
+    n_a: "غ.م"
+    errors_title: "يرجى تصحيح الأخطاء أدناه:"
     save: "حفظ"
     cancel: "إلغاء"
     delete: "حذف"
@@ -1006,6 +1039,7 @@ ar:
     success: "نجاح!"
     required: "مطلوب"
     optional: "اختياري"
+    out_of: "%{count} / %{max}"
     search: "بحث"
     filter: "تصفية"
     sort: "ترتيب"
@@ -1036,6 +1070,7 @@ ar:
       hybrid: "هجين"
     stage_types:
       pfe: "مشروع تخرج (PFE)"
+      pfa: "مشروع نهاية السنة (PFA)"
       stage: "تربص صيفي"
       alternance: "التعليم بالتناوب"
       initiation: "إدخال / مراقبة"
@@ -1051,6 +1086,83 @@ ar:
     hours: "ساعات"
     ago: ""
     back_to: "العودة إلى %{page}"
+
+  student_profiles:
+    show:
+      title_suffix: "– ملف الطالب"
+      badge_student: "طالب متربص"
+      major_fallback: "هندسة البرمجيات"
+      class_of: "دفعة %{year}"
+      completed_prefix: "مكتمل"
+      verified_ledger_badge: "سجل معتمد"
+      reputation_history_title: "سجل السمعة"
+      no_ledger_history: "لا توجد أحداث سمعة مسجلة بعد."
+      events_recorded: "%{count} حدث مسجل"
+
+  company_profiles:
+    show:
+      title_suffix: "– ملف الشركة"
+      verified_badge: "شركة موثقة"
+      edit_profile: "تعديل ملف الشركة"
+      overview_heading: "نظرة عامة ومهمة"
+      description_fallback: "صاحب عمل رائد في البرمجيات والتكنولوجيا على StageUp."
+      active_missions_heading: "مهام التربص المفتوحة (%{count})"
+      location_fallback: "صفاقس، تونس"
+      months_label: "أشهر"
+      view_mission: "عرض المهمة ←"
+      no_active_offers: "لا توجد عروض تربص مفتوحة حالياً."
+      employer_stats_title: "إحصائيات صاحب العمل"
+      active_missions_label: "المهام النشطة"
+      verification_status_label: "حالة التوثيق"
+      verified_employer: "صاحب عمل موثق"
+      in_verification: "قيد التوثيق"
+      intern_rating_label: "تقييم المتربصين"
+      rating_fallback: "5.0 / 5"
+
+  users:
+    edit:
+      page_title: "إعدادات الحساب – StageUp"
+      tab_personal: "الملف الشخصي"
+      tab_skills: "المهارات والتقنيات"
+      tab_resume: "السيرة الذاتية"
+      tab_security: "الحساب والأمان"
+      preview_student_label: "طالب متربص"
+      preview_company_label: "ملف الشركة"
+      preview_university_label: "حساب الجامعة"
+      view_public_profile: "عرض الملف العام"
+      personal_heading: "تفاصيل الملف الشخصي"
+      personal_subtext: "معلومات المحفظة العامة المرئية لأصحاب العمل"
+      section_identity: "معلومات الهوية"
+      section_academic: "المعلومات الأكاديمية والتواصل"
+      phone_placeholder: "+216 XX XXX XXX"
+      phone_hint: "مرئي فقط لأصحاب العمل المقبولين"
+      major_placeholder: "مثال: هندسة البرمجيات، علم البيانات والذكاء الاصطناعي"
+      section_portfolio: "المحفظة والسيرة الذاتية"
+      bio_placeholder: "أنا طالب في السنة النهائية شغوف بتطوير منتجات الذكاء الاصطناعي والمنصات الويب..."
+      website_placeholder: "https://example.tn"
+      description_placeholder: "صف ثقافة شركتك، مجموعة التقنيات، وفرص المهام."
+      department_placeholder: "مثال: قسم تكنولوجيا المعلومات وعلوم الحاسوب"
+      skills_heading: "تصنيف المهارات والتقنيات"
+      skills_subtext: "اختر من بين 144+ تقنية موثقة لتتناسب مع عروض الشركات"
+      skills_count_label: "المهارات المحددة"
+      clear_skills: "مسح الكل"
+      skill_search_placeholder: "ابحث بين 144+ مهارة (مثال: Rails, PyTorch, Docker, React)..."
+      all_skills_label: "كل المهارات (%{count})"
+      selected_stack_label: "مجموعتي المختارة"
+      picked_suffix: "مختارة"
+      resume_heading: "السيرة الذاتية"
+      resume_subtext: "ملف PDF متاح لأصحاب العمل الموثقين"
+      preview_pdf: "معاينة PDF"
+      dropzone_label: "اسحب وأفلت سيرتك الذاتية PDF هنا"
+      dropzone_hint: "PDF فقط · الحجم الأقصى 5 ميجابايت"
+      browse_pdf: "تصفح ملف PDF"
+      security_heading: "البريد الإلكتروني وبيانات الحساب"
+      security_subtext: "إدارة بيانات تسجيل الدخول والأمان"
+      email_address_label: "البريد الإلكتروني"
+      change_password_label: "تغيير كلمة المرور (اختياري)"
+      unsaved_changes: "لديك تغييرات غير محفوظة"
+      bio_char_suffix: " / %{max}"
+      selected_file_prefix: "المحدد:"
 
   pwa:
     name: "StageUp"

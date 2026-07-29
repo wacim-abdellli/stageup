@@ -4,8 +4,8 @@
   <%
     stage_type_options = [
       [t('offers.index.filters.all_types'), ""],
-      ["PFE", "PFE"],
-      ["PFA", "PFA"],
+      [t('offers.index.filters.stage_type_pfe'), "PFE"],
+      [t('offers.index.filters.stage_type_pfa'), "PFA"],
       [t('common.stage_types.initiation'), "initiation"],
       [t('common.stage_types.free'), "free"]
     ]
@@ -168,7 +168,7 @@
 
               <%# Badges row %>
               <div class="ocard-badges">
-                <span class="offer-card-badge-stage"><%= offer.stage_type.upcase %></span>
+                <span class="offer-card-badge-stage"><%= t("common.stage_types.#{offer.stage_type.downcase}", default: offer.stage_type.upcase) %></span>
                 <% if offer.mission.present? %>
                   <span class="offer-card-badge-proof">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>

@@ -157,6 +157,8 @@ en:
         work_mode: "Work Mode"
         all_types: "All Types"
         all_modes: "All Modes"
+        stage_type_pfe: "PFE (Final Year Project)"
+        stage_type_pfa: "PFA (Mid-Study)"
         clear_filters: "Reset Filters"
         filters_active: "Filters active"
       no_results: "No internships match your filters"
@@ -174,6 +176,7 @@ en:
         total_offers: "offers available"
 
     show:
+      page_title: "%{title} – StageUp"
       title: "Internship Details"
       apply_now: "Apply Now"
       sign_in_to_apply: "Sign In to Apply"
@@ -1079,6 +1082,7 @@ en:
     success: "Success!"
     required: "Required"
     optional: "Optional"
+    out_of: "%{count} / %{max}"
     search: "Search"
     filter: "Filter"
     sort: "Sort"
@@ -1109,6 +1113,7 @@ en:
       hybrid: "Hybrid"
     stage_types:
       pfe: "PFE (Final Year Project)"
+      pfa: "PFA (Mid-Study)"
       stage: "Summer Internship"
       alternance: "Apprenticeship"
       initiation: "Initiation / Observation"

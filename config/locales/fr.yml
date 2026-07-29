@@ -157,6 +157,8 @@ fr:
         work_mode: "Mode de Travail"
         all_types: "Tous les Types"
         all_modes: "Tous les Modes"
+        stage_type_pfe: "PFE (Projet de Fin d'Études)"
+        stage_type_pfa: "PFA (Projet de Fin d'Année)"
         clear_filters: "Réinitialiser"
         filters_active: "Filtres actifs"
       no_results: "Aucun stage ne correspond à vos filtres"
@@ -174,6 +176,7 @@ fr:
         total_offers: "offres disponibles"
 
     show:
+      page_title: "%{title} – StageUp"
       title: "Détails du Stage"
       apply_now: "Postuler Maintenant"
       sign_in_to_apply: "Connectez-vous pour Postuler"
@@ -429,6 +432,7 @@ fr:
         company: "Entreprise"
         university: "Université"
       edit: "Modifier le Profil"
+      view_public: "Voir mon Profil"
     profile_bento:
       full_name: "Nom Complet"
       phone: "Téléphone"
@@ -671,6 +675,11 @@ fr:
       accepted: "Accepté"
       signed: "Signé"
       done: "Terminé"
+
+  agreements:
+    status:
+      pending_signatures: "Signatures en attente"
+      approved: "Approuvé"
 
   registrations:
     select_role:
@@ -1038,6 +1047,15 @@ fr:
       view_proof: "Voir la Preuve"
       view_cv: "Voir le CV"
       no_proof: "Aucune preuve soumise"
+      view_profile: "Voir le Profil"
+      agreement: "Convention"
+    actions:
+      accept: "Accepter"
+      reject: "Refuser"
+    empty:
+      review: "Aucune candidature en attente"
+      accepted: "Aucun candidat accepté actif"
+      rejected: "Aucune candidature refusée"
 
   common:
     skip_link: "Aller au contenu principal"
@@ -1063,6 +1081,7 @@ fr:
     success: "Succès !"
     required: "Requis"
     optional: "Optionnel"
+    out_of: "%{count} / %{max}"
     search: "Rechercher"
     filter: "Filtrer"
     sort: "Trier"
@@ -1093,6 +1112,7 @@ fr:
       hybrid: "Hybride"
     stage_types:
       pfe: "PFE (Projet de Fin d'Études)"
+      pfa: "PFA (Projet de Fin d'Année)"
       stage: "Stage d'Été"
       alternance: "Alternance"
       initiation: "Initiation / Observation"
@@ -1108,6 +1128,83 @@ fr:
     hours: "heures"
     ago: ""
     back_to: "Retour à %{page}"
+
+  student_profiles:
+    show:
+      title_suffix: "– Profil Candidat"
+      badge_student: "Candidat Étudiant"
+      major_fallback: "Génie Logiciel"
+      class_of: "Promotion %{year}"
+      completed_prefix: "Terminé"
+      verified_ledger_badge: "REGISTRE CERTIFIÉ"
+      reputation_history_title: "Historique de Réputation"
+      no_ledger_history: "Aucun événement de réputation enregistré."
+      events_recorded: "%{count} Événements Enregistrés"
+
+  company_profiles:
+    show:
+      title_suffix: "– Profil Employeur"
+      verified_badge: "Entreprise Certifiée"
+      edit_profile: "Modifier le Profil Entreprise"
+      overview_heading: "Présentation & Mission"
+      description_fallback: "Employeur leader en logiciels et technologies sur StageUp."
+      active_missions_heading: "Missions de Stage Ouvertes (%{count})"
+      location_fallback: "Sfax, Tunisie"
+      months_label: "Mois"
+      view_mission: "Voir la Mission →"
+      no_active_offers: "Aucune offre de stage actuellement ouverte."
+      employer_stats_title: "Statistiques Employeur"
+      active_missions_label: "Missions Actives"
+      verification_status_label: "Statut de Vérification"
+      verified_employer: "Employeur Certifié"
+      in_verification: "En Cours de Vérification"
+      intern_rating_label: "Note des Stagiaires"
+      rating_fallback: "5.0 / 5"
+
+  users:
+    edit:
+      page_title: "Paramètres du Compte – StageUp"
+      tab_personal: "Profil Personnel"
+      tab_skills: "Compétences & Stack"
+      tab_resume: "CV & Documents"
+      tab_security: "Compte & Sécurité"
+      preview_student_label: "Candidat Étudiant"
+      preview_company_label: "Profil Entreprise"
+      preview_university_label: "Compte Université"
+      view_public_profile: "Voir le Profil Public"
+      personal_heading: "Détails du Profil Personnel"
+      personal_subtext: "Informations de portfolio public visibles par les employeurs"
+      section_identity: "Identité"
+      section_academic: "Informations Académiques & Contact"
+      phone_placeholder: "+216 XX XXX XXX"
+      phone_hint: "Visible uniquement pour les employeurs acceptés"
+      major_placeholder: "ex. Génie Logiciel, Data Science & IA"
+      section_portfolio: "Portfolio & Bio"
+      bio_placeholder: "Je suis un étudiant en dernière année passionné par le développement d'IA et de plateformes web..."
+      website_placeholder: "https://example.tn"
+      description_placeholder: "Décrivez la culture, la stack technique et les missions de votre entreprise."
+      department_placeholder: "ex. Département Informatique & Télécoms"
+      skills_heading: "Taxonomie des Compétences & Stack Technique"
+      skills_subtext: "Sélectionnez parmi 144+ technologies vérifiées pour correspondre aux offres"
+      skills_count_label: "Compétences Sélectionnées"
+      clear_skills: "Tout Effacer"
+      skill_search_placeholder: "Rechercher parmi 144+ compétences (ex. Rails, PyTorch, Docker, React)..."
+      all_skills_label: "Toutes les Compétences (%{count})"
+      selected_stack_label: "Ma Stack Sélectionnée"
+      picked_suffix: "sélectionnées"
+      resume_heading: "CV & Documents"
+      resume_subtext: "Document PDF accessible par les employeurs vérifiés"
+      preview_pdf: "Aperçu PDF"
+      dropzone_label: "Glissez-déposez votre CV PDF ici"
+      dropzone_hint: "PDF uniquement · Taille max 5 Mo"
+      browse_pdf: "Parcourir le PDF"
+      security_heading: "Email & Identifiants du Compte"
+      security_subtext: "Gérer les identifiants de connexion et la sécurité"
+      email_address_label: "Adresse Email"
+      change_password_label: "Changer le Mot de Passe (Optionnel)"
+      unsaved_changes: "Vous avez des modifications non enregistrées"
+      bio_char_suffix: " / %{max}"
+      selected_file_prefix: "Sélectionné :"
 
   pwa:
     name: "StageUp"

@@ -1,4 +1,4 @@
-<% content_for :title, "#{@offer.title} – StageUp" %>
+<% content_for :title, t('offers.show.page_title', title: @offer.title) %>
 <div class="offer-detail-page">
   <nav class="offer-breadcrumb">
     <%= link_to offers_path, class: "offer-back-link" do %>
@@ -30,7 +30,7 @@
             <% end %>
           </span>
         </div>
-        <span class="badge-status offer-stage-badge"><%= @offer.stage_type %></span>
+        <span class="badge-status offer-stage-badge"><%= t("common.stage_types.#{@offer.stage_type.downcase}", default: @offer.stage_type) %></span>
       </div>
 
       <div class="offer-tags">
@@ -173,7 +173,7 @@
                 <div class="review-header">
                   <span class="review-rating">
                     <i data-lucide="star" class="star-icon"></i>
-                    <%= rev.rating %> / 5
+                    <%= t('common.out_of', count: rev.rating, max: 5) %>
                   </span>
                   <span class="fs-10 text-muted"><%= time_ago_in_words(rev.created_at) %> <%= t('common.ago', default: 'ago') %></span>
                 </div>

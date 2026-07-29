@@ -16,7 +16,7 @@
     <div class="notif-list-card">
       <% @notifications.group_by { |n| n.created_at.to_date }.each do |date, notifs| %>
         <div class="notif-date-group-label">
-          <%= date == Date.today ? t("notifications.today") : date == Date.yesterday ? t("notifications.yesterday") : date.strftime("%B %d, %Y") %>
+          <%= date == Date.today ? t("notifications.today") : date == Date.yesterday ? t("notifications.yesterday") : I18n.l(date, format: :long) %>
         </div>
         <% notifs.each do |notification| %>
           <div class="notif-list-item <%= 'unread' unless notification.read %>">

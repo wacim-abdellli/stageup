@@ -1,4 +1,4 @@
-<% content_for :title, t('users.edit.page_title') %>
+<% content_for :title, strip_tags(t('users.edit.page_title', default: "Account & Profile Settings – StageUp")) %>
 
 <div class="dashboard-container settings-hub-container">
   
@@ -8,7 +8,7 @@
       <div class="flex-align-center gap-10 mb-6">
         <%= link_to dashboard_path, class: "btn btn-secondary btn-compact" do %>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          <%= t('common.back_to', page: t('dashboard.title')) %>
+          <%= t('common.back_to', page: t('dashboard.title', default: 'Dashboard'), default: 'Back to Dashboard') %>
         <% end %>
         <span class="badge badge-info fs-12"><%= current_user.profileable_type.underscore.humanize %></span>
       </div>
@@ -43,7 +43,7 @@
             <button type="button" class="settings-nav-item active" data-pane="pane-personal">
               <span class="flex-align-center gap-10">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span><%= t('users.edit.tab_personal') %></span>
+                <span><%= t('users.edit.tab_personal', default: 'Personal Profile') %></span>
               </span>
               <span class="tab-status-dot dot-active"></span>
             </button>
@@ -52,7 +52,7 @@
               <button type="button" class="settings-nav-item" data-pane="pane-skills">
                 <span class="flex-align-center gap-10">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                  <span><%= t('users.edit.tab_skills') %></span>
+                  <span><%= t('users.edit.tab_skills', default: 'Skills & Stack') %></span>
                 </span>
                 <span class="sidebar-count-badge" id="nav-skills-badge"><%= @profile.skill_ids.count %></span>
               </button>
@@ -60,7 +60,7 @@
               <button type="button" class="settings-nav-item" data-pane="pane-cv">
                 <span class="flex-align-center gap-10">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  <span><%= t('users.edit.tab_resume') %></span>
+                  <span><%= t('users.edit.tab_resume', default: 'Resume & CV') %></span>
                 </span>
                 <% if @profile.cv.attached? %>
                   <span class="fs-10 text-emerald fw-700">PDF</span>
@@ -71,7 +71,7 @@
               <button type="button" class="settings-nav-item" data-pane="pane-security">
                 <span class="flex-align-center gap-10">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  <span><%= t('users.edit.tab_security') %></span>
+                  <span><%= t('users.edit.tab_security', default: 'Account & Security') %></span>
               </span>
             </button>
           </nav>
@@ -94,42 +94,42 @@
             </strong>
             <span class="fs-11 text-muted block mb-12" id="preview-sub-text">
               <% if current_user.profileable_type == "StudentProfile" %>
-                <%= @profile.university&.name || @profile.major.presence || t('users.edit.preview_student_label') %>
+                <%= @profile.university&.name || @profile.major.presence || t('users.edit.preview_student_label', default: 'Student Candidate') %>
               <% elsif current_user.profileable_type == "CompanyProfile" %>
-                <%= t('users.edit.preview_company_label') %>
+                <%= t('users.edit.preview_company_label', default: 'Company Profile') %>
               <% else %>
-                <%= t('users.edit.preview_university_label') %>
+                <%= t('users.edit.preview_university_label', default: 'University Account') %>
               <% end %>
             </span>
-            <% public_link = case current_user.profileable_type
-                             when "StudentProfile" then student_profile_path(@profile)
-                             when "CompanyProfile" then company_profile_path(@profile)
-                             else nil
-                             end %>
-            <% if public_link %>
-              <%= link_to public_link, target: "_blank", class: "btn-sidebar-public-link" do %>
-                <span><%= t('users.edit.view_public_profile') %></span>
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <% if current_user.profileable_type == "StudentProfile" %>
+              <%= link_to student_profile_path(@profile), class: "btn btn-secondary btn-compact w-100 fs-12 justify-center" do %>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span><%= t('users.edit.view_public_profile', default: 'View Public Profile') %></span>
+              <% end %>
+            <% elsif current_user.profileable_type == "CompanyProfile" %>
+              <%= link_to company_profile_path(@profile), class: "btn btn-secondary btn-compact w-100 fs-12 justify-center" do %>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span><%= t('users.edit.view_public_profile', default: 'View Public Profile') %></span>
               <% end %>
             <% end %>
           </div>
         </div>
       </div>
 
-      <%# Right Main Form Content Pane %>
-      <div class="settings-content-pane">
+      <%# Right Main Pane Content Container %>
+      <div class="settings-content-area">
 
-        <%# ─── TAB PANE 1: PERSONAL PROFILE ──────────────────────────── %>
+        <%# ─── TAB PANE 1: PERSONAL / PROFILE ────────────────────────── %>
         <div class="settings-pane active" id="pane-personal">
           <div class="settings-card mb-24">
-            <div class="settings-card-header mb-20 flex-between">
+            <div class="settings-card-header mb-20">
               <div class="flex-align-center gap-10">
                 <div class="settings-icon-badge">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </div>
                 <div>
-                  <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.personal_heading') %></h3>
-                  <p class="fs-12 text-muted margin-0"><%= t('users.edit.personal_subtext') %></p>
+                  <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.personal_heading', default: 'Personal Profile Details') %></h3>
+                  <p class="fs-12 text-muted margin-0"><%= t('users.edit.personal_subtext', default: 'Public portfolio information visible to employers and companies') %></p>
                 </div>
               </div>
             </div>
@@ -139,7 +139,7 @@
                 <div class="field-group-section">
                   <div class="field-group-title">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="field-group-title-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    <span><%= t('users.edit.section_identity') %></span>
+                    <span><%= t('users.edit.section_identity', default: 'Identity Details') %></span>
                   </div>
                   <div class="form-row-2">
                     <div class="form-group">
@@ -156,13 +156,13 @@
                 <div class="field-group-section">
                   <div class="field-group-title">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="field-group-title-icon"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                    <span><%= t('users.edit.section_academic') %></span>
+                    <span><%= t('users.edit.section_academic', default: 'Academic & Contact Information') %></span>
                   </div>
                   <div class="form-row-2">
                     <div class="form-group">
                       <%= sp.label :phone, t('users.new_student.phone', default: 'Phone Number'), class: "form-label" %>
-                      <%= sp.telephone_field :phone, class: "form-control", placeholder: t('users.edit.phone_placeholder') %>
-                      <span class="form-help-text"><%= t('users.edit.phone_hint') %></span>
+                      <%= sp.telephone_field :phone, class: "form-control", placeholder: t('users.edit.phone_placeholder', default: '+216 XX XXX XXX') %>
+                      <span class="form-help-text"><%= t('users.edit.phone_hint', default: 'Visible only to accepted employers') %></span>
                     </div>
                     <div class="form-group">
                       <%= sp.label :graduation_year, t('users.new_student.graduation_year', default: 'Graduation Year'), class: "form-label" %>
@@ -172,21 +172,21 @@
 
                   <div class="form-group margin-0">
                     <%= sp.label :major, t('users.new_student.major', default: 'Field of Study / Major'), class: "form-label" %>
-                    <%= sp.text_field :major, class: "form-control", placeholder: t('users.edit.major_placeholder') %>
+                    <%= sp.text_field :major, class: "form-control", placeholder: t('users.edit.major_placeholder', default: 'e.g. Software Engineering, Data Science & AI') %>
                   </div>
                 </div>
 
                 <div class="field-group-section">
                   <div class="field-group-title">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="field-group-title-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    <span><%= t('users.edit.section_portfolio') %></span>
+                    <span><%= t('users.edit.section_portfolio', default: 'Portfolio & Bio Summary') %></span>
                   </div>
                   <div class="form-group margin-0">
                     <div class="flex-between mb-6">
                       <%= sp.label :bio, t('users.new_student.bio', default: 'Bio & Summary'), class: "form-label margin-0" %>
-                      <span class="fs-11 text-muted" id="bio-char-counter" data-suffix="<%= t('users.edit.bio_char_suffix', max: 300) %>">0 <%= t('users.edit.bio_char_suffix', max: 300) %></span>
+                      <span class="fs-11 text-muted" id="bio-char-counter" data-suffix="<%= j(strip_tags(t('users.edit.bio_char_suffix', max: 300, default: ' / 300'))) %>">0 <%= strip_tags(t('users.edit.bio_char_suffix', max: 300, default: ' / 300')) %></span>
                     </div>
-                    <%= sp.text_area :bio, rows: 4, class: "form-control", id: "input-bio", maxlength: 300, placeholder: t('users.edit.bio_placeholder') %>
+                    <%= sp.text_area :bio, rows: 4, class: "form-control", id: "input-bio", maxlength: 300, placeholder: t('users.edit.bio_placeholder', default: 'Describe your technical interests and career goals...') %>
                   </div>
                 </div>
               <% end %>
@@ -200,12 +200,12 @@
 
                 <div class="form-group">
                   <%= cp.label :website, t('users.new_company.website', default: 'Company Website'), class: "form-label" %>
-                  <%= cp.url_field :website, class: "form-control", placeholder: t('users.edit.website_placeholder') %>
+                  <%= cp.url_field :website, class: "form-control", placeholder: t('users.edit.website_placeholder', default: 'https://example.tn') %>
                 </div>
 
                 <div class="form-group margin-0">
                   <%= cp.label :description, t('users.new_company.description', default: 'Company Overview'), class: "form-label" %>
-                  <%= cp.text_area :description, rows: 5, class: "form-control", placeholder: t('users.edit.description_placeholder') %>
+                  <%= cp.text_area :description, rows: 5, class: "form-control", placeholder: t('users.edit.description_placeholder', default: 'Describe your company culture, technology stack, and mission opportunities.') %>
                 </div>
               <% end %>
 
@@ -218,7 +218,7 @@
 
                 <div class="form-group margin-0">
                   <%= up.label :department, t('users.new_university.department', default: 'University Department'), class: "form-label" %>
-                  <%= up.text_field :department, class: "form-control", placeholder: t('users.edit.department_placeholder') %>
+                  <%= up.text_field :department, class: "form-control", placeholder: t('users.edit.department_placeholder', default: 'e.g. IT & Computer Science Department') %>
                 </div>
               <% end %>
             <% end %>
@@ -235,15 +235,15 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                   </div>
                   <div>
-                    <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.skills_heading') %></h3>
-                    <p class="fs-12 text-muted margin-0"><%= t('users.edit.skills_subtext') %></p>
+                    <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.skills_heading', default: 'Technical Skills & Stack Taxonomy') %></h3>
+                    <p class="fs-12 text-muted margin-0"><%= t('users.edit.skills_subtext', default: 'Select from verified technologies to match with company offers') %></p>
                   </div>
                 </div>
                 <div class="flex-align-center gap-8">
-                  <span class="badge badge-success fs-12" id="skills-live-counter" data-suffix="<%= t('users.edit.skills_count_label') %>">
-                    <%= @profile.skill_ids.count %> <%= t('users.edit.skills_count_label') %>
+                  <span class="badge badge-success fs-12" id="skills-live-counter" data-suffix="<%= j(strip_tags(t('users.edit.skills_count_label', default: 'Skills Selected'))) %>">
+                    <%= @profile.skill_ids.count %> <%= strip_tags(t('users.edit.skills_count_label', default: 'Skills Selected')) %>
                   </span>
-                  <button type="button" class="btn btn-secondary btn-compact" id="btn-clear-skills"><%= t('users.edit.clear_skills') %></button>
+                  <button type="button" class="btn btn-secondary btn-compact" id="btn-clear-skills"><%= t('users.edit.clear_skills', default: 'Clear All') %></button>
                 </div>
               </div>
 
@@ -251,12 +251,12 @@
               <div class="skills-hub-filter mb-20">
                 <div class="skill-search-input-wrapper mb-14">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" class="skill-search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                  <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="<%= t('users.edit.skill_search_placeholder') %>">
+                  <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="<%= j(strip_tags(t('users.edit.skill_search_placeholder', default: 'Search 144+ skills (e.g. Rails, PyTorch, Docker)...'))) %>">
                 </div>
 
                 <div class="category-pills-scroll" id="hub-category-pills">
                   <button type="button" class="hub-cat-pill active" data-cat="all">
-                    <%= t('users.edit.all_skills_label', count: Skill.count) %>
+                    <%= t('users.edit.all_skills_label', count: Skill.count, default: "All Skills (#{Skill.count})") %>
                   </button>
                   <% (@skills_by_category || {}).each do |cat_name, list| %>
                     <button type="button" class="hub-cat-pill" data-cat="<%= cat_name.parameterize %>">
@@ -302,8 +302,8 @@
                 <div class="skills-selected-sidebar">
                   <div class="skills-selected-panel">
                     <div class="panel-header flex-between mb-12">
-                      <strong class="fs-13 color-primary"><%= t('users.edit.selected_stack_label') %></strong>
-                      <span class="fs-11 text-muted" id="selected-panel-count" data-suffix="<%= t('users.edit.picked_suffix') %>"><%= @profile.skill_ids.count %> <%= t('users.edit.picked_suffix') %></span>
+                      <strong class="fs-13 color-primary"><%= t('users.edit.selected_stack_label', default: 'My Selected Stack') %></strong>
+                      <span class="fs-11 text-muted" id="selected-panel-count" data-suffix="<%= j(strip_tags(t('users.edit.picked_suffix', default: 'picked'))) %>"><%= @profile.skill_ids.count %> <%= strip_tags(t('users.edit.picked_suffix', default: 'picked')) %></span>
                     </div>
 
                     <div class="selected-chips-scroll" id="selected-chips-list">
@@ -324,8 +324,8 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
                   </div>
                   <div>
-                    <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.resume_heading') %></h3>
-                    <p class="fs-12 text-muted margin-0"><%= t('users.edit.resume_subtext') %></p>
+                    <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.resume_heading', default: 'Resume & CV Document') %></h3>
+                    <p class="fs-12 text-muted margin-0"><%= t('users.edit.resume_subtext', default: 'PDF document accessible by verified employers') %></p>
                   </div>
                 </div>
               </div>
@@ -342,18 +342,20 @@
                     </div>
                     <%= link_to rails_blob_path(@profile.cv, disposition: "inline"), target: "_blank", class: "btn btn-secondary btn-compact" do %>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                      <%= t('users.edit.preview_pdf') %>
+                      <%= t('users.edit.preview_pdf', default: 'Preview PDF') %>
                     <% end %>
                   </div>
                 <% end %>
 
                 <div class="cv-dropzone-container" id="cv-dropzone">
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" class="mb-10 margin-0-auto block"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                  <div class="fs-14 fw-600 color-primary mb-4"><%= t('users.edit.dropzone_label') %></div>
-                  <div class="fs-12 text-muted mb-14"><%= t('users.edit.dropzone_hint') %></div>
-                  <label class="btn btn-secondary btn-compact cursor-pointer">
-                    <span><%= t('users.edit.browse_pdf') %></span>
-                    <%= sp.file_field :cv, accept: "application/pdf", class: "cv-hidden-input", id: "cv-file-input" %>
+                  <div class="cv-dropzone-icon mb-12">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  </div>
+                  <div class="fs-14 fw-600 color-primary mb-4"><%= t('users.edit.dropzone_label', default: 'Drag & drop your PDF resume here') %></div>
+                  <div class="fs-12 text-muted mb-14"><%= t('users.edit.dropzone_hint', default: 'PDF only · Maximum file size 5MB') %></div>
+                  <label class="btn btn-primary btn-compact cursor-pointer">
+                    <span><%= t('users.edit.browse_pdf', default: 'Browse PDF File') %></span>
+                    <%= sp.file_field :cv, id: "cv-file-input", accept: "application/pdf", class: "d-none" %>
                   </label>
                   <div class="fs-12 text-emerald fw-600 mt-10 display-none" id="cv-selected-filename"></div>
                 </div>
@@ -371,8 +373,8 @@
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 </div>
                 <div>
-                  <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.security_heading') %></h3>
-                  <p class="fs-12 text-muted margin-0"><%= t('users.edit.security_subtext') %></p>
+                  <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.security_heading', default: 'Account Email & Credentials') %></h3>
+                  <p class="fs-12 text-muted margin-0"><%= t('users.edit.security_subtext', default: 'Manage login credentials and security authentication') %></p>
                 </div>
               </div>
             </div>
@@ -381,7 +383,7 @@
             <div class="security-subcard mb-24">
               <h4 class="fs-14 fw-600 color-primary mb-12 flex-align-center gap-6">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <%= t('users.edit.email_address_label') %>
+                <%= t('users.edit.email_address_label', default: 'Email Address') %>
               </h4>
               <div class="form-group margin-0">
                 <%= f.label :email, t('users.edit.email', default: 'Account Email Address'), class: "form-label" %>
@@ -393,7 +395,7 @@
             <div class="security-subcard mb-24">
               <h4 class="fs-14 fw-600 color-primary mb-12 flex-align-center gap-6">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <%= t('users.edit.change_password_label') %>
+                <%= t('users.edit.change_password_label', default: 'Change Password (Optional)') %>
               </h4>
               <div class="form-row-2">
                 <div class="form-group">
@@ -432,7 +434,7 @@
         <div class="floating-save-bar" id="floating-save-bar">
           <div class="flex-align-center gap-10">
             <span class="save-status-dot"></span>
-            <span class="fs-13 fw-600 color-primary"><%= t('users.edit.unsaved_changes') %></span>
+            <span class="fs-13 fw-600 color-primary"><%= t('users.edit.unsaved_changes', default: 'You have unsaved profile changes') %></span>
           </div>
           <div class="flex-align-center gap-12">
             <%= link_to t('common.cancel', default: 'Cancel'), dashboard_path, class: "btn btn-secondary btn-compact" %>
