@@ -3272,85 +3272,76 @@ button.btn-accent:hover,
   color: #0F172A !important;
 }
 
-/* Public Student Profile Visual Design System (Redesigned Vercel/Linear Aesthetic) */
-.profile-page-container {
-  margin-top: 32px !important;
-  margin-bottom: 80px !important;
+/* Candidate Portfolio Hub Design Architecture */
+.candidate-hub-container {
+  max-width: 1160px !important;
+  margin: 32px auto 80px !important;
+  padding: 0 24px;
 }
 
-.profile-hero-card {
+.candidate-cover-card {
   position: relative;
-  overflow: hidden;
   background: rgba(15, 16, 21, 0.95);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 32px 36px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.profile-hero-ambient-glow {
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(194, 65, 12, 0.06) 50%, transparent 80%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.profile-hero-inner {
+.candidate-cover-banner {
+  height: 120px;
+  background: linear-gradient(135deg, rgba(194, 65, 12, 0.25) 0%, rgba(99, 102, 241, 0.2) 50%, rgba(16, 185, 129, 0.1) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
-  z-index: 1;
 }
 
-.hero-avatar-wrapper {
+.candidate-cover-body {
+  padding: 0 32px 28px;
   position: relative;
-  display: inline-block;
 }
 
-.hero-avatar-circle {
+.candidate-avatar-wrapper {
+  position: relative;
+  margin-top: -40px;
+}
+
+.candidate-avatar-circle {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(194, 65, 12, 0.25) 0%, rgba(99, 102, 241, 0.15) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 24px rgba(194, 65, 12, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 3px solid #0F1015;
+  box-shadow: 0 0 24px rgba(194, 65, 12, 0.3);
   color: #F4F4F6;
   font-size: 32px;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  background: linear-gradient(135deg, #1E1F29 0%, #0F1015 100%);
 }
 
-.hero-avatar-online-dot {
+.candidate-avatar-status {
   position: absolute;
-  bottom: 2px;
-  right: 2px;
+  bottom: 4px;
+  right: 4px;
   width: 14px;
   height: 14px;
   background: #10B981;
   border: 2px solid #0F1015;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
 }
 
-.hero-candidate-name {
-  font-size: 28px;
+.candidate-name {
+  font-size: 26px;
   font-weight: 800;
-  color: var(--text-primary);
   letter-spacing: -0.025em;
-  line-height: 1.1;
+  color: var(--text-primary);
 }
 
-.hero-verified-badge {
+.badge-verified-candidate {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
   font-size: 11px;
   font-weight: 700;
   color: #34D399;
@@ -3358,52 +3349,192 @@ button.btn-accent:hover,
   border: 1px solid rgba(16, 185, 129, 0.25);
   padding: 3px 10px;
   border-radius: 9999px;
-  letter-spacing: 0.02em;
 }
 
-.hero-meta-pill {
+.btn-cv-download {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  color: #34D399 !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.15);
+  padding: 8px 16px !important;
+  font-weight: 700 !important;
+}
+
+.btn-cv-download:hover {
+  background: rgba(16, 185, 129, 0.25) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(16, 185, 129, 0.6) !important;
+  transform: translateY(-1px);
+}
+
+.candidate-metrics-bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px 24px;
+}
+
+.candidate-metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metric-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.metric-num {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.metric-num.score-high { color: #10B981; }
+.metric-num.score-mid { color: #F59E0B; }
+.metric-num.score-low { color: #EF4444; }
+
+.metric-total {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.metric-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-color);
+}
+
+.candidate-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .candidate-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.candidate-section-card {
+  background: rgba(15, 16, 21, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.candidate-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.candidate-bio-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--primary);
+  padding-left: 16px;
+}
+
+.candidate-skills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.candidate-skill-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-color);
-  padding: 5px 12px;
-  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
   transition: all 0.2s ease;
 }
 
-.hero-meta-pill.pill-highlight {
-  color: #A5B4FC;
-  background: rgba(99, 102, 241, 0.08);
-  border-color: rgba(99, 102, 241, 0.2);
+.candidate-skill-pill:hover {
+  border-color: rgba(194, 65, 12, 0.4);
+  background: rgba(194, 65, 12, 0.1);
+  color: #FB923C;
 }
 
-.btn-resume-glow {
-  background: rgba(16, 185, 129, 0.12) !important;
-  border: 1px solid rgba(16, 185, 129, 0.3) !important;
-  color: #34D399 !important;
-  box-shadow: 0 0 16px rgba(16, 185, 129, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  font-weight: 700 !important;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 6px var(--primary);
 }
 
-.btn-resume-glow:hover {
-  background: rgba(16, 185, 129, 0.22) !important;
-  color: #FFFFFF !important;
-  border-color: rgba(16, 185, 129, 0.5) !important;
-  box-shadow: 0 0 24px rgba(16, 185, 129, 0.3) !important;
-  transform: translateY(-1px) !important;
+.candidate-sidebar-card {
+  background: rgba(15, 16, 21, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.candidate-bio-box {
+.candidate-sidebar-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.candidate-exp-item {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-color);
-  padding: 20px;
   border-radius: var(--radius-md);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.candidate-exp-item:last-child {
+  margin-bottom: 0;
+}
+
+.exp-company-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.badge-status-verified {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 4px 10px;
+  border-radius: 9999px;
 }
 
 .public-skill-badge {
