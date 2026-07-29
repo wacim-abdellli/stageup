@@ -3274,9 +3274,9 @@ button.btn-accent:hover,
 
 /* Candidate Portfolio Hub Design Architecture */
 .candidate-hub-container {
-  max-width: 1160px !important;
-  margin: 32px auto 80px !important;
-  padding: 0 24px;
+  max-width: 1200px !important;
+  margin: 56px auto 100px !important;
+  padding: 0 32px !important;
 }
 
 .candidate-cover-card {
@@ -3286,33 +3286,34 @@ button.btn-accent:hover,
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  margin-bottom: 36px;
 }
 
 .candidate-cover-banner {
-  height: 120px;
-  background: linear-gradient(135deg, rgba(194, 65, 12, 0.25) 0%, rgba(99, 102, 241, 0.2) 50%, rgba(16, 185, 129, 0.1) 100%);
+  height: 140px;
+  background: linear-gradient(135deg, rgba(194, 65, 12, 0.28) 0%, rgba(99, 102, 241, 0.22) 50%, rgba(16, 185, 129, 0.12) 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
 }
 
 .candidate-cover-body {
-  padding: 0 32px 28px;
+  padding: 0 36px 32px;
   position: relative;
 }
 
 .candidate-avatar-wrapper {
   position: relative;
-  margin-top: -40px;
+  margin-top: -44px;
 }
 
 .candidate-avatar-circle {
-  width: 80px;
-  height: 80px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
-  border: 3px solid #0F1015;
-  box-shadow: 0 0 24px rgba(194, 65, 12, 0.3);
+  border: 4px solid #0F1015;
+  box-shadow: 0 0 28px rgba(194, 65, 12, 0.35);
   color: #F4F4F6;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -3324,16 +3325,16 @@ button.btn-accent:hover,
   position: absolute;
   bottom: 4px;
   right: 4px;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   background: #10B981;
-  border: 2px solid #0F1015;
+  border: 3px solid #0F1015;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.9);
 }
 
 .candidate-name {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
   letter-spacing: -0.025em;
   color: var(--text-primary);
@@ -3347,7 +3348,7 @@ button.btn-accent:hover,
   color: #34D399;
   background: rgba(16, 185, 129, 0.1);
   border: 1px solid rgba(16, 185, 129, 0.25);
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 9999px;
 }
 
@@ -3356,7 +3357,7 @@ button.btn-accent:hover,
   border: 1px solid rgba(16, 185, 129, 0.35) !important;
   color: #34D399 !important;
   box-shadow: 0 0 16px rgba(16, 185, 129, 0.15);
-  padding: 8px 16px !important;
+  padding: 10px 20px !important;
   font-weight: 700 !important;
 }
 
@@ -3370,29 +3371,30 @@ button.btn-accent:hover,
 .candidate-metrics-bar {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 36px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 16px 24px;
+  padding: 20px 28px;
+  margin-top: 28px;
 }
 
 .candidate-metric-item {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .metric-label {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--text-muted);
 }
 
 .metric-num {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
 }
 
@@ -3408,20 +3410,21 @@ button.btn-accent:hover,
 
 .metric-divider {
   width: 1px;
-  height: 28px;
+  height: 32px;
   background: var(--border-color);
 }
 
 .candidate-grid {
   display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 24px;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
   align-items: start;
 }
 
 @media (max-width: 900px) {
   .candidate-grid {
     grid-template-columns: 1fr;
+    gap: 28px;
   }
 }
 
@@ -3429,37 +3432,41 @@ button.btn-accent:hover,
   background: rgba(15, 16, 21, 0.95);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 28px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .candidate-section-title {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text-primary);
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .candidate-bio-text {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--text-secondary);
   border-left: 3px solid var(--primary);
-  padding-left: 16px;
+  padding-left: 20px;
+  margin-top: 8px;
 }
 
 .candidate-skills-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .candidate-skill-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-color);
@@ -3487,15 +3494,16 @@ button.btn-accent:hover,
   background: rgba(15, 16, 21, 0.95);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .candidate-sidebar-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
-  margin: 0;
+  margin: 0 0 20px 0;
 }
 
 .candidate-exp-item {
