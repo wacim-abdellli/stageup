@@ -3275,7 +3275,7 @@ button.btn-accent:hover,
 /* Candidate Portfolio Hub Design Architecture */
 .candidate-hub-container {
   max-width: 1200px !important;
-  margin: 56px auto 100px !important;
+  margin: 16px auto 80px !important;
   padding: 0 32px !important;
 }
 
