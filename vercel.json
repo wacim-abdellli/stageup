@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "buildCommand": "bundle exec rails db:migrate RAILS_ENV=production",
   "env": {
     "VERCEL": "1",
     "RAILS_ENV": "production",
