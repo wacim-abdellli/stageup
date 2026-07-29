@@ -3,17 +3,10 @@
 <div class="dashboard-container candidate-hub-container">
 
   <%# ─── Top Navigation Bar ───────────────────────────────────────── %>
-  <div class="flex-between flex-align-center mb-16">
+  <div class="mb-20">
     <%= link_to dashboard_path, class: "btn-back-settings" do %>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       <%= t('common.back_to', page: t('dashboard.title', default: 'Dashboard'), default: 'Back to Dashboard') %>
-    <% end %>
-
-    <% if current_user.profileable == @student_profile %>
-      <%= link_to edit_user_registration_path, class: "btn btn-secondary btn-compact" do %>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        <%= t('dashboard.profile.edit', default: 'Edit Settings') %>
-      <% end %>
     <% end %>
   </div>
 
@@ -51,6 +44,13 @@
         </div>
 
         <div class="flex-align-center gap-12 flex-wrap">
+          <% if current_user.profileable == @student_profile %>
+            <%= link_to edit_user_registration_path, class: "btn btn-secondary btn-compact" do %>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              <%= t('dashboard.profile.edit', default: 'Edit Settings') %>
+            <% end %>
+          <% end %>
+
           <% if @student_profile.cv.attached? %>
             <%= link_to rails_blob_path(@student_profile.cv, disposition: "inline"), target: "_blank", class: "btn btn-primary btn-cv-download" do %>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>

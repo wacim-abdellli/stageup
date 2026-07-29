@@ -3303,7 +3303,11 @@ button.btn-accent:hover,
 
 .candidate-avatar-wrapper {
   position: relative;
+  display: inline-block;
+  width: 88px;
+  height: 88px;
   margin-top: -44px;
+  flex-shrink: 0;
 }
 
 .candidate-avatar-circle {
@@ -3323,14 +3327,15 @@ button.btn-accent:hover,
 
 .candidate-avatar-status {
   position: absolute;
-  bottom: 4px;
-  right: 4px;
-  width: 16px;
-  height: 16px;
+  bottom: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
   background: #10B981;
   border: 3px solid #0F1015;
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(16, 185, 129, 0.9);
+  z-index: 2;
 }
 
 .candidate-name {
