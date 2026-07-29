@@ -32,7 +32,7 @@
       <div class="admin-kpi-label"><%= t('admin.kpi.active_offers', default: 'Active Internships') %></div>
       <div class="admin-kpi-value"><%= @stats[:active_offers] %></div>
       <div class="admin-kpi-meta">
-        <span><%= t('admin.kpi.total_posted', count: @stats[:total_offers], default: "#{@stats[:total_offers]} Total Posted") %></span>
+        <span><%= t('admin.kpi.total_posted', count: @stats[:total_offers]) %></span>
       </div>
     </div>
 

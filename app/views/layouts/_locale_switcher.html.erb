@@ -2,7 +2,7 @@
   <button type="button"
           class="lang-icon-btn"
           id="lang-btn"
-          aria-label="Select language"
+          aria-label="<%= t('nav.select_language') %>"
           aria-haspopup="true"
           aria-controls="lang-menu"
           aria-expanded="false"
@@ -16,11 +16,11 @@
     <svg class="lang-chevron-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
   </button>
 
-  <div class="lang-floating-menu" id="lang-menu" role="menu" aria-label="Language selector">
+  <div class="lang-floating-menu" id="lang-menu" role="menu" aria-label="<%= t('nav.language_selector') %>">
     <% [
-      [:fr, "Français", "FR"],
-      [:en, "English", "EN"],
-      [:ar, "العربية", "AR"]
+      [:fr, t("locales.fr"), "FR"],
+      [:en, t("locales.en"), "EN"],
+      [:ar, t("locales.ar"), "AR"]
     ].each do |loc, full_name, short_code| %>
       <% is_active = (I18n.locale == loc) %>
       <%= link_to url_for(request.query_parameters.merge(locale: loc)),

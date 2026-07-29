@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <% unread = current_user.notifications.unread.count %>
   <div class="notif-bell-container">
-    <button class="notif-bell-btn" id="notif-btn" aria-label="Notifications" data-notifications-target="bell">
+    <button class="notif-bell-btn" id="notif-btn" aria-label="<%= t('notifications.bell_aria') %>" data-notifications-target="bell">
       <svg class="notif-bell-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
         <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
@@ -27,13 +27,13 @@
           <% notifications.each do |n| %>
             <div class="notif-item <%= 'unread' unless n.read %>">
               <span class="notif-item-text"><%= n.message %></span>
-              <span class="notif-item-time"><%= time_ago_in_words(n.created_at) %> <%= t('common.time_ago.suffix', default: 'ago') %></span>
+              <span class="notif-item-time"><%= time_ago_in_words(n.created_at) %> <%= t('common.ago') %></span>
             </div>
           <% end %>
         <% else %>
           <div class="notif-empty">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="M2 2l20 20"/><path d="M8.7 3A6 6 0 0 1 18 8a6 6 0 0 1-.3 1.9"/><path d="M18 13.9C18 17.4 21 19 21 19H5.1"/></svg>
-            <span><%= t('notifications.empty', default: 'No notifications yet') %></span>
+            <span><%= t('notifications.empty') %></span>
           </div>
         <% end %>
       </div>

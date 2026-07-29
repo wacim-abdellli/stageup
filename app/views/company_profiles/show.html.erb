@@ -1,4 +1,4 @@
-<% content_for :title, "#{@company_profile.name} – Employer Profile" %>
+<% content_for :title, "#{@company_profile.name} #{t('company_profiles.show.title_suffix')}" %>
 
 <div class="dashboard-container profile-page-container">
 
@@ -6,7 +6,7 @@
   <div class="mb-20">
     <%= link_to dashboard_path, class: "btn btn-secondary btn-compact" do %>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      <%= t('common.back', default: 'Back to Dashboard') %>
+      <%= t('common.back_to', page: t('dashboard.title')) %>
     <% end %>
   </div>
 
@@ -23,7 +23,7 @@
             <% if @company_profile.verified? %>
               <span class="badge badge-success">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mr-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                Verified Company
+                <%= t('company_profiles.show.verified_badge') %>
               </span>
             <% end %>
           </div>
@@ -38,7 +38,7 @@
 
       <% if current_user.profileable == @company_profile %>
         <%= link_to edit_user_registration_path, class: "btn btn-primary" do %>
-          <%= t('dashboard.profile.edit', default: 'Edit Company Profile') %>
+          <%= t('company_profiles.show.edit_profile') %>
         <% end %>
       <% end %>
     </div>
@@ -53,10 +53,10 @@
       <div class="profile-card mb-24">
         <h3 class="section-heading mb-12">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" class="mr-6"><path d="M3 21h18"/><path d="M19 21v-4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/></svg>
-          Company Overview & Mission
+          <%= t('company_profiles.show.overview_heading') %>
         </h3>
         <p class="color-secondary fs-14 line-height-16 margin-0">
-          <%= @company_profile.description.presence || "Leading software & technology employer on StageUp." %>
+          <%= @company_profile.description.presence || t('company_profiles.show.description_fallback') %>
         </p>
       </div>
 
@@ -64,7 +64,7 @@
       <div class="profile-card">
         <h3 class="section-heading mb-16">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" class="mr-6"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-          Active Open Internship Missions (<%= @active_offers.count %>)
+          <%= t('company_profiles.show.active_missions_heading', count: @active_offers.count) %>
         </h3>
 
         <% if @active_offers.any? %>
@@ -79,17 +79,17 @@
                   <%= link_to offer.title, offer_path(offer), class: "hover-underline color-primary" %>
                 </h4>
                 <div class="offer-card-location fs-12 text-muted mb-12">
-                  📍 <%= offer.location.presence || "Sfax, Tunisia" %>
+                  📍 <%= offer.location.presence || t('company_profiles.show.location_fallback') %>
                 </div>
                 <div class="offer-card-footer flex-between">
-                  <span class="fs-12 text-muted"><%= offer.duration_months %> Months</span>
-                  <%= link_to "View Mission &rarr;".html_safe, offer_path(offer), class: "btn btn-secondary btn-compact-sm" %>
+                  <span class="fs-12 text-muted"><%= offer.duration_months %> <%= t('company_profiles.show.months_label') %></span>
+                  <%= link_to t('company_profiles.show.view_mission'), offer_path(offer), class: "btn btn-secondary btn-compact-sm" %>
                 </div>
               </div>
             <% end %>
           </div>
         <% else %>
-          <p class="text-muted fs-13 italic margin-0">No active internship offers currently open.</p>
+          <p class="text-muted fs-13 italic margin-0"><%= t('company_profiles.show.no_active_offers') %></p>
         <% end %>
       </div>
 
@@ -99,19 +99,19 @@
     <div class="right-col">
 
       <div class="profile-card p-25 mb-24">
-        <h3 class="metrics-card-title mb-16">Employer Stats</h3>
+        <h3 class="metrics-card-title mb-16"><%= t('company_profiles.show.employer_stats_title') %></h3>
         <div class="rep-stat-list">
           <div class="rep-stat-row">
-            <span class="rep-stat-label">Active Missions</span>
+            <span class="rep-stat-label"><%= t('company_profiles.show.active_missions_label') %></span>
             <strong><%= @active_offers.count %></strong>
           </div>
           <div class="rep-stat-row">
-            <span class="rep-stat-label">Verification Status</span>
-            <span class="badge badge-success"><%= @company_profile.verified? ? "Verified Employer" : "In Verification" %></span>
+            <span class="rep-stat-label"><%= t('company_profiles.show.verification_status_label') %></span>
+            <span class="badge badge-success"><%= @company_profile.verified? ? t('company_profiles.show.verified_employer') : t('company_profiles.show.in_verification') %></span>
           </div>
           <div class="rep-stat-row">
-            <span class="rep-stat-label">Intern Rating</span>
-            <strong><%= @avg_rating ? "#{@avg_rating} / 5" : "5.0 / 5" %> ⭐</strong>
+            <span class="rep-stat-label"><%= t('company_profiles.show.intern_rating_label') %></span>
+            <strong><%= @avg_rating ? "#{@avg_rating} / 5" : t('company_profiles.show.rating_fallback') %> ⭐</strong>
           </div>
         </div>
       </div>

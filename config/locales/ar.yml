@@ -3,6 +3,10 @@ ar:
     formats:
       long: "%-d %B %Y"
 
+  layouts:
+    default_title: "StageUp – تربصات موثقة في تونس"
+    meta_description: "StageUp – أول منصة تربصات موثقة في تونس. مهام إثبات العمل، نقاط السمعة، واتفاقيات رسمية."
+
   activerecord:
     attributes:
       user:
@@ -57,6 +61,7 @@ ar:
     badge_new: "جديد"
     mission_attached: "مهمة مرفقة"
     cv_only: "سيرة ذاتية فقط"
+    unknown_company: "شركة غير معروفة"
 
   user_mailer:
     coordinator_approved:
@@ -126,6 +131,18 @@ ar:
     company: "شركة"
     university: "جامعة"
     user: "مستخدم"
+    main_navigation: "التنقل الرئيسي"
+    toggle_theme_title: "تبديل السمة الفاتحة/الداكنة"
+    toggle_theme_aria: "تبديل السمة"
+    user_menu: "قائمة المستخدم"
+    toggle_navigation: "تبديل التنقل"
+    select_language: "اختيار اللغة"
+    language_selector: "محدد اللغة"
+
+  locales:
+    fr: "Français"
+    en: "English"
+    ar: "العربية"
 
   offers:
     index:
@@ -464,6 +481,7 @@ ar:
       comment_placeholder: "صف التعاون، المهارات المكتسبة، الاحترافية، وأي تعليقات بناءة..."
       hint: "لا يمكن تعديل التقييمات بعد الإرسال."
       char_count: "%{count} / الحد الأدنى %{min}"
+      char_count_suffix: " / الحد الأدنى %{min}"
       submit: "إرسال التقييم"
       submitting: "جاري الإرسال…"
       turbo_confirm: "لا يمكن تعديل التقييمات بعد الإرسال. هل تريد المتابعة؟"
@@ -557,6 +575,7 @@ ar:
   notifications:
     title: "الإشعارات"
     mark_all_read: "تحديد الكل كمقروء"
+    bell_aria: "الإشعارات"
     unread_count:
       one: "%{count} غير مقروء"
       other: "%{count} غير مقروءة"
@@ -598,6 +617,12 @@ ar:
         submit: "تقديم حل الإثبات ←"
         submitting: "جاري الإرسال…"
         cancel: "إلغاء"
+    milestones:
+      applied: "تم التقديم"
+      checked: "تم الفحص"
+      accepted: "مقبول"
+      signed: "موقع"
+      done: "مكتمل"
 
   sessions:
     new:
@@ -869,6 +894,20 @@ ar:
         dates: "التواريخ"
         status: "الحالة"
         actions: "الإجراءات"
+      show:
+        title: "الاتفاقية #%{id} – StageUp Admin"
+        heading: "اتفاقية التربص #%{id}"
+        verification_token: "رمز التحقق:"
+        metadata: "بيانات الاتفاقية"
+        start_date: "تاريخ البداية:"
+        end_date: "تاريخ النهاية:"
+        status_label: "الحالة:"
+        verification_url: "رابط التحقق:"
+        signatures_log: "سجل التوقيعات"
+        student_signature: "توقيع الطالب:"
+        company_signature: "توقيع الشركة:"
+        university_signature: "توقيع الجامعة:"
+        pending: "معلق"
 
   internship_agreements:
     show:
@@ -960,6 +999,7 @@ ar:
     submit: "إرسال"
     confirm: "تأكيد"
     close: "إغلاق"
+    dismiss_alert: "تجاهل التنبيه"
     loading: "جاري التحميل..."
     error: "حدث خطأ"
     errors: "خطأ (أخطاء)"
@@ -1011,3 +1051,7 @@ ar:
     hours: "ساعات"
     ago: ""
     back_to: "العودة إلى %{page}"
+
+  pwa:
+    name: "StageUp"
+    description: "StageUp – تربصات موثقة في تونس"

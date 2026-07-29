@@ -12,7 +12,7 @@
         
         <div class="landing-badge-container animate-in visible stagger-1">
           <div class="landing-announcement-badge">
-            <span class="badge-new-tag">New</span>
+            <span class="badge-new-tag"><%= t('home.badge_new') %></span>
             <span class="badge-text"><%= t('home.announcement_badge') %></span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </div>
@@ -192,12 +192,12 @@
                   <% if offer.mission.present? %>
                     <span class="featured-mission-badge">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
-                      <span>Mission Attached</span>
+                      <span><%= t('home.mission_attached') %></span>
                     </span>
                   <% else %>
                     <span class="featured-cv-badge">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-                      <span>CV Only</span>
+                      <span><%= t('home.cv_only') %></span>
                     </span>
                   <% end %>
                 </div>
@@ -209,7 +209,7 @@
                     <%= link_to offer.title, new_user_session_path, title: t('nav.unlock') %>
                   <% end %>
                 </h3>
-                <span class="featured-offer-company"><%= offer.company_profile&.name || "Unknown Company" %></span>
+                <span class="featured-offer-company"><%= offer.company_profile&.name || t('home.unknown_company') %></span>
               </div>
 
               <div class="featured-offer-footer">
@@ -217,7 +217,7 @@
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                   <span>
                     <% if offer.location.downcase == "remote" %>
-                      Remote
+                      <%= t('common.work_modes.remote') %>
                     <% else %>
                       <%= offer.location %> (<%= offer.work_mode.capitalize %>)
                     <% end %>

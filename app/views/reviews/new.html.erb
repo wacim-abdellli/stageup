@@ -49,7 +49,7 @@
             required: true, oninput: "updateCC(this)" %>
         <div class="form-hint-row">
           <small class="form-hint"><%= t("dashboard.reviews.hint") %></small>
-          <span id="cc" class="char-count"><%= t("dashboard.reviews.char_count", count: 0, min: 10) %></span>
+          <span id="cc" class="char-count" data-suffix="<%= t('dashboard.reviews.char_count_suffix', min: 10) %>"><%= t("dashboard.reviews.char_count", count: 0, min: 10) %></span>
         </div>
       </div>
 
@@ -84,7 +84,7 @@
   function updateCC(el) {
     var n = el.value.length;
     var c = document.getElementById('cc');
-    c.textContent = n + ' / min 10';
+    c.textContent = n + c.dataset.suffix;
     c.classList.toggle('char-count-ok', n >= 10);
   }
 <% end %>

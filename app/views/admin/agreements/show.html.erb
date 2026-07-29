@@ -1,13 +1,13 @@
-<% content_for :title, "Agreement ##{@agreement.id} – StageUp Admin" %>
+<% content_for :title, t('admin.agreements.show.title', id: @agreement.id) %>
 
 <div class="dashboard-container">
   <div class="dashboard-header">
     <div class="dashboard-header-left">
-      <h1 class="fs-22 fw-700">Internship Agreement #<%= @agreement.id %></h1>
-      <p class="header-meta">Verification Token: <code class="font-mono"><%= @agreement.verification_token %></code></p>
+      <h1 class="fs-22 fw-700"><%= t('admin.agreements.show.heading', id: @agreement.id) %></h1>
+      <p class="header-meta"><%= t('admin.agreements.show.verification_token') %> <code class="font-mono"><%= @agreement.verification_token %></code></p>
     </div>
     <div class="flex-row gap-10 align-center">
-      <%= link_to t('common.back', default: 'Back'), admin_agreements_path, class: "btn btn-secondary btn-header" %>
+      <%= link_to t('common.back'), admin_agreements_path, class: "btn btn-secondary btn-header" %>
     </div>
   </div>
 
@@ -24,21 +24,21 @@
 
     <div class="grid-2-cols gap-24">
       <div>
-        <h3 class="fs-14 fw-700 text-muted uppercase mb-12">Agreement Metadata</h3>
+        <h3 class="fs-14 fw-700 text-muted uppercase mb-12"><%= t('admin.agreements.show.metadata') %></h3>
         <ul class="meta-details-list">
-          <li><strong>Start Date:</strong> <%= @agreement.start_date.strftime("%B %d, %Y") %></li>
-          <li><strong>End Date:</strong> <%= @agreement.end_date.strftime("%B %d, %Y") %></li>
-          <li><strong>Status:</strong> <%= @agreement.status.humanize %></li>
-          <li><strong>Verification URL:</strong> <%= link_to verify_certificate_url(token: @agreement.verification_token), verify_certificate_url(token: @agreement.verification_token), target: "_blank", class: "btn-link-sm" if @agreement.verification_token.present? %></li>
+          <li><strong><%= t('admin.agreements.show.start_date') %></strong> <%= @agreement.start_date.strftime("%B %d, %Y") %></li>
+          <li><strong><%= t('admin.agreements.show.end_date') %></strong> <%= @agreement.end_date.strftime("%B %d, %Y") %></li>
+          <li><strong><%= t('admin.agreements.show.status_label') %></strong> <%= @agreement.status.humanize %></li>
+          <li><strong><%= t('admin.agreements.show.verification_url') %></strong> <%= link_to verify_certificate_url(token: @agreement.verification_token), verify_certificate_url(token: @agreement.verification_token), target: "_blank", class: "btn-link-sm" if @agreement.verification_token.present? %></li>
         </ul>
       </div>
 
       <div>
-        <h3 class="fs-14 fw-700 text-muted uppercase mb-12">Signatures Log</h3>
+        <h3 class="fs-14 fw-700 text-muted uppercase mb-12"><%= t('admin.agreements.show.signatures_log') %></h3>
         <ul class="meta-details-list">
-          <li><strong>Student Signature:</strong> <%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("%B %d, %Y %H:%M") : "Pending" %></li>
-          <li><strong>Company Signature:</strong> <%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("%B %d, %Y %H:%M") : "Pending" %></li>
-          <li><strong>University Signature:</strong> <%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("%B %d, %Y %H:%M") : "Pending" %></li>
+          <li><strong><%= t('admin.agreements.show.student_signature') %></strong> <%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("%B %d, %Y %H:%M") : t('admin.agreements.show.pending') %></li>
+          <li><strong><%= t('admin.agreements.show.company_signature') %></strong> <%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("%B %d, %Y %H:%M") : t('admin.agreements.show.pending') %></li>
+          <li><strong><%= t('admin.agreements.show.university_signature') %></strong> <%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("%B %d, %Y %H:%M") : t('admin.agreements.show.pending') %></li>
         </ul>
       </div>
     </div>

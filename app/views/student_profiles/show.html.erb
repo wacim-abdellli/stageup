@@ -1,4 +1,4 @@
-<% content_for :title, "#{@student_profile.first_name} #{@student_profile.last_name} – Candidate Profile" %>
+<% content_for :title, "#{@student_profile.first_name} #{@student_profile.last_name} #{t('student_profiles.show.title_suffix')}" %>
 
 <div class="dashboard-container profile-page-container">
 
@@ -6,7 +6,7 @@
   <div class="mb-20">
     <%= link_to dashboard_path, class: "btn btn-secondary btn-compact" do %>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      <%= t('common.back', default: 'Back to Dashboard') %>
+      <%= t('common.back_to', page: t('dashboard.title')) %>
     <% end %>
   </div>
 
@@ -27,20 +27,23 @@
                 <%= @student_profile.university.name %>
               </span>
             <% else %>
-              <span class="badge badge-info fs-12">Student Candidate</span>
+              <span class="badge badge-info fs-12">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <%= t('student_profiles.show.badge_student') %>
+              </span>
             <% end %>
           </div>
 
           <div class="hero-candidate-pills flex-align-center gap-12 flex-wrap">
             <span class="hero-meta-pill">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              <%= @student_profile.major.presence || "Software Engineering" %>
+              <%= @student_profile.major.presence || t('student_profiles.show.major_fallback') %>
             </span>
 
             <% if @student_profile.graduation_year %>
               <span class="hero-meta-pill">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                Class of <%= @student_profile.graduation_year %>
+                <%= t('student_profiles.show.class_of', year: @student_profile.graduation_year) %>
               </span>
             <% end %>
 
@@ -122,7 +125,7 @@
                 <div>
                   <strong class="internship-item-title"><%= sub.offer.title %></strong>
                   <div class="fs-12 text-muted mt-2">
-                    <%= sub.offer.company_profile.name %> &middot; Completed <%= sub.updated_at.strftime("%b %Y") %>
+                    <%= sub.offer.company_profile.name %> &middot; <%= t('student_profiles.show.completed_prefix') %> <%= sub.updated_at.strftime("%b %Y") %>
                   </div>
                 </div>
                 <span class="badge badge-success"><%= sub.status.humanize %></span>
@@ -147,7 +150,7 @@
           <h3 class="rep-metrics-title margin-0"><%= t('dashboard.reputation.title', default: 'Commitment Score') %></h3>
           <span class="badge badge-success fs-11">
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mr-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            VERIFIED LEDGER
+            <%= t('student_profiles.show.verified_ledger_badge') %>
           </span>
         </div>
 
@@ -182,10 +185,10 @@
             <div class="settings-icon-badge">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
-            <span>Reputation Event History</span>
+            <span><%= t('student_profiles.show.reputation_history_title') %></span>
           </h3>
           <% if @commitment_events.any? %>
-            <span class="badge badge-info fs-11"><%= @commitment_events.count %> Events Recorded</span>
+            <span class="badge badge-info fs-11"><%= t('student_profiles.show.events_recorded', count: @commitment_events.count) %></span>
           <% end %>
         </div>
 
@@ -199,13 +202,13 @@
                   <div class="ledger-event-header flex-between flex-wrap gap-8 mb-4">
                     <strong class="fs-13 fw-600 color-primary"><%= event.event_type.to_s.humanize.titleize %></strong>
                     <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %>">
-                      <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %> pts
+                      <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %> <%= t('home.pts') %>
                     </span>
                   </div>
                   <p class="ledger-event-desc fs-12 text-secondary margin-0 mb-4"><%= event.description %></p>
                   <span class="ledger-event-time flex-align-center gap-4 text-muted fs-11">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    <%= time_ago_in_words(event.created_at) %> ago
+                    <%= time_ago_in_words(event.created_at) %> <%= t('common.ago') %>
                   </span>
                 </div>
               </div>
@@ -213,7 +216,7 @@
           </div>
         <% else %>
           <div class="text-center p-20">
-            <p class="text-muted fs-12 italic margin-0">No reputation ledger events recorded yet.</p>
+            <p class="text-muted fs-12 italic margin-0"><%= t('student_profiles.show.no_ledger_history') %></p>
           </div>
         <% end %>
       </div>

@@ -3,6 +3,10 @@ fr:
     formats:
       long: "%-d %B %Y"
 
+  layouts:
+    default_title: "StageUp – Stages Vérifiés en Tunisie"
+    meta_description: "StageUp – La première plateforme de stages vérifiés en Tunisie. Missions de preuve de travail, score de réputation, et conventions officielles."
+
   activerecord:
     attributes:
       user:
@@ -57,6 +61,7 @@ fr:
     badge_new: "Nouveau"
     mission_attached: "Mission Incluse"
     cv_only: "CV Uniquement"
+    unknown_company: "Entreprise inconnue"
 
   user_mailer:
     coordinator_approved:
@@ -126,6 +131,19 @@ fr:
     company: "Entreprise"
     university: "Université"
     user: "Utilisateur"
+    main_navigation: "Navigation principale"
+    toggle_theme_title: "Changer le thème Clair/Sombre"
+    toggle_theme_aria: "Changer le thème"
+    user_menu: "Menu utilisateur"
+    toggle_navigation: "Afficher/masquer la navigation"
+    select_language: "Choisir la langue"
+    language_selector: "Sélecteur de langue"
+    view_my_profile: "Voir mon profil public"
+
+  locales:
+    fr: "Français"
+    en: "English"
+    ar: "العربية"
 
   offers:
     index:
@@ -290,6 +308,10 @@ fr:
       mission_title: "Titre de la Mission"
       mission_duration: "Durée de la Mission"
       mission_description: "Description de la Mission"
+    status:
+      active: "Active"
+      closed: "Fermée"
+      draft: "Brouillon"
 
   dashboard:
     title: "Tableau de Bord"
@@ -464,6 +486,7 @@ fr:
       comment_placeholder: "Décrivez la collaboration, les compétences acquises, le professionnalisme et tous commentaires constructifs..."
       hint: "Les avis ne peuvent pas être modifiés une fois soumis."
       char_count: "%{count} / min %{min}"
+      char_count_suffix: " / min %{min}"
       submit: "Soumettre l'Avis"
       submitting: "Envoi en cours…"
       turbo_confirm: "Les avis ne peuvent pas être modifiés après soumission. Continuer ?"
@@ -599,6 +622,7 @@ fr:
   notifications:
     title: "Notifications"
     mark_all_read: "Tout Marquer comme Lu"
+    bell_aria: "Notifications"
     unread_count:
       one: "%{count} non lue"
       other: "%{count} non lues"
@@ -606,7 +630,8 @@ fr:
     yesterday: "Hier"
     mark_read: "Marquer comme Lu"
     empty_title: "Vous êtes à jour"
-    empty_desc: "Vous n'avez aucune nouvelle notification. Les mises à jour concernant les candidatures, les conventions et les étapes des stages apparaîtront ici."
+    empty: "Aucune notification pour l'instant"
+    empty_desc: "Vous n'avez aucune nouvelle notification."
     page_info: "Page %{current} sur %{total}"
     types:
       application_received: "Nouvelle Candidature"
@@ -640,6 +665,12 @@ fr:
         submit: "Soumettre la Solution de Preuve →"
         submitting: "Envoi en cours…"
         cancel: "Annuler"
+    milestones:
+      applied: "Candidature envoyée"
+      checked: "Vérifié"
+      accepted: "Accepté"
+      signed: "Signé"
+      done: "Terminé"
 
   registrations:
     select_role:
@@ -785,6 +816,11 @@ fr:
       coordinators: "Coordinateurs"
       companies: "Entreprises"
       agreements: "Conventions"
+    roles:
+      student: "Étudiants"
+      company: "Entreprises"
+      university: "Coordinateurs"
+      admin: "Administrateurs"
     kpi:
       total_users: "Utilisateurs Totaux"
       students: "Étudiants"
@@ -911,9 +947,24 @@ fr:
         dates: "Dates"
         status: "Statut"
         actions: "Actions"
+      show:
+        title: "Convention #%{id} – StageUp Admin"
+        heading: "Convention de Stage #%{id}"
+        verification_token: "Jeton de vérification :"
+        metadata: "Métadonnées de la Convention"
+        start_date: "Date de début :"
+        end_date: "Date de fin :"
+        status_label: "Statut :"
+        verification_url: "URL de vérification :"
+        signatures_log: "Journal des Signatures"
+        student_signature: "Signature étudiant :"
+        company_signature: "Signature entreprise :"
+        university_signature: "Signature université :"
+        pending: "En attente"
 
   internship_agreements:
     show:
+      page_title: "Convention de Stage – StageUp"
       title: "Convention de Stage"
       subtitle: "Convention de stage tripartite"
       status:
@@ -990,6 +1041,9 @@ fr:
 
   common:
     skip_link: "Aller au contenu principal"
+    all: "Tous"
+    n_a: "N/D"
+    errors_title: "Veuillez corriger les erreurs ci-dessous :"
     save: "Enregistrer"
     cancel: "Annuler"
     delete: "Supprimer"
@@ -1002,6 +1056,7 @@ fr:
     submit: "Soumettre"
     confirm: "Confirmer"
     close: "Fermer"
+    dismiss_alert: "Ignorer l'alerte"
     loading: "Chargement..."
     error: "Une erreur s'est produite"
     errors: "erreur(s)"
@@ -1053,3 +1108,7 @@ fr:
     hours: "heures"
     ago: ""
     back_to: "Retour à %{page}"
+
+  pwa:
+    name: "StageUp"
+    description: "StageUp – Stages Vérifiés en Tunisie"

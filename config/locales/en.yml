@@ -3,6 +3,10 @@ en:
     formats:
       long: "%B %d, %Y"
 
+  layouts:
+    default_title: "StageUp – Verified Internships in Tunisia"
+    meta_description: "StageUp – Tunisia's first verified internship platform. Proof-of-work missions, reputation scoring, and official agreements."
+
   activerecord:
     attributes:
       user:
@@ -57,6 +61,7 @@ en:
     badge_new: "New"
     mission_attached: "Mission Attached"
     cv_only: "CV Only"
+    unknown_company: "Unknown Company"
 
   user_mailer:
     coordinator_approved:
@@ -126,6 +131,19 @@ en:
     company: "Company"
     university: "University"
     user: "User"
+    main_navigation: "Main navigation"
+    toggle_theme_title: "Toggle Light/Dark Theme"
+    toggle_theme_aria: "Toggle theme"
+    user_menu: "User menu"
+    toggle_navigation: "Toggle navigation"
+    select_language: "Select language"
+    language_selector: "Language selector"
+    view_my_profile: "View My Public Profile"
+
+  locales:
+    fr: "Français"
+    en: "English"
+    ar: "العربية"
 
   offers:
     index:
@@ -290,6 +308,10 @@ en:
       mission_title: "Mission Title"
       mission_duration: "Mission Duration"
       mission_description: "Mission Description"
+    status:
+      active: "Active"
+      closed: "Closed"
+      draft: "Draft"
 
   dashboard:
     title: "Dashboard"
@@ -408,6 +430,7 @@ en:
         company: "Company"
         university: "University"
       edit: "Edit Profile"
+      view_public: "View My Profile"
     profile_bento:
       full_name: "Full Name"
       phone: "Phone"
@@ -465,6 +488,7 @@ en:
       comment_placeholder: "Describe the collaboration, skills learned, professionalism, and any constructive comments..."
       hint: "Reviews cannot be edited once submitted."
       char_count: "%{count} / min %{min}"
+      char_count_suffix: " / min %{min}"
       submit: "Submit Review"
       submitting: "Submitting…"
       turbo_confirm: "Reviews cannot be edited after submission. Continue?"
@@ -603,11 +627,13 @@ en:
     unread_count:
       one: "%{count} unread"
       other: "%{count} unread"
+    bell_aria: "Notifications"
     today: "Today"
     yesterday: "Yesterday"
     mark_read: "Mark Read"
     empty_title: "All Caught Up"
-    empty_desc: "You have no new notifications. Updates about applications, agreements, and internship milestones will appear here."
+    empty: "No notifications yet"
+    empty_desc: "You have no new notifications."
     page_info: "Page %{current} of %{total}"
     types:
       application_received: "New Application"
@@ -641,6 +667,17 @@ en:
         submit: "Submit Proof Solution →"
         submitting: "Submitting…"
         cancel: "Cancel"
+    milestones:
+      applied: "Applied"
+      checked: "Checked"
+      accepted: "Accepted"
+      signed: "Signed"
+      done: "Done"
+
+  agreements:
+    status:
+      pending_signatures: "Pending Signatures"
+      approved: "Fully Approved"
 
   registrations:
     select_role:
@@ -786,6 +823,11 @@ en:
       coordinators: "Coordinators"
       companies: "Companies"
       agreements: "Agreements"
+    roles:
+      student: "Students"
+      company: "Companies"
+      university: "Coordinators"
+      admin: "Admins"
     kpi:
       total_users: "Total Platform Users"
       students: "Students"
@@ -912,9 +954,24 @@ en:
         dates: "Dates"
         status: "Status"
         actions: "Actions"
+      show:
+        title: "Agreement #%{id} – StageUp Admin"
+        heading: "Internship Agreement #%{id}"
+        verification_token: "Verification Token:"
+        metadata: "Agreement Metadata"
+        start_date: "Start Date:"
+        end_date: "End Date:"
+        status_label: "Status:"
+        verification_url: "Verification URL:"
+        signatures_log: "Signatures Log"
+        student_signature: "Student Signature:"
+        company_signature: "Company Signature:"
+        university_signature: "University Signature:"
+        pending: "Pending"
 
   internship_agreements:
     show:
+      page_title: "Convention de Stage – StageUp"
       title: "Internship Agreement"
       subtitle: "Three-party internship convention"
       status:
@@ -988,9 +1045,21 @@ en:
       view_proof: "View Proof"
       view_cv: "View CV"
       no_proof: "No proof submitted"
+      view_profile: "View Profile"
+      agreement: "Agreement"
+    actions:
+      accept: "Accept"
+      reject: "Reject"
+    empty:
+      review: "No pending submissions"
+      accepted: "No active accepted candidates"
+      rejected: "No rejected applications"
 
   common:
     skip_link: "Skip to main content"
+    all: "All"
+    n_a: "N/A"
+    errors_title: "Please fix the errors below:"
     save: "Save"
     cancel: "Cancel"
     delete: "Delete"
@@ -1003,6 +1072,7 @@ en:
     submit: "Submit"
     confirm: "Confirm"
     close: "Close"
+    dismiss_alert: "Dismiss alert"
     loading: "Loading..."
     error: "An error occurred"
     errors: "error(s)"
@@ -1054,3 +1124,84 @@ en:
     hours: "hours"
     ago: "ago"
     back_to: "Back to %{page}"
+
+  student_profiles:
+    show:
+      title_suffix: "– Candidate Profile"
+      badge_student: "Student Candidate"
+      major_fallback: "Software Engineering"
+      class_of: "Class of %{year}"
+      completed_prefix: "Completed"
+      verified_ledger_badge: "VERIFIED LEDGER"
+      reputation_history_title: "Reputation Event History"
+      no_ledger_history: "No reputation ledger events recorded yet."
+      events_recorded: "%{count} Events Recorded"
+
+  company_profiles:
+    show:
+      title_suffix: "– Employer Profile"
+      verified_badge: "Verified Company"
+      edit_profile: "Edit Company Profile"
+      overview_heading: "Company Overview & Mission"
+      description_fallback: "Leading software & technology employer on StageUp."
+      active_missions_heading: "Active Open Internship Missions (%{count})"
+      location_fallback: "Sfax, Tunisia"
+      months_label: "Months"
+      view_mission: "View Mission →"
+      no_active_offers: "No active internship offers currently open."
+      employer_stats_title: "Employer Stats"
+      active_missions_label: "Active Missions"
+      verification_status_label: "Verification Status"
+      verified_employer: "Verified Employer"
+      in_verification: "In Verification"
+      intern_rating_label: "Intern Rating"
+      rating_fallback: "5.0 / 5"
+
+  users:
+    edit:
+      page_title: "Account & Profile Settings – StageUp"
+      tab_personal: "Personal Profile"
+      tab_skills: "Skills & Stack"
+      tab_resume: "Resume & CV"
+      tab_security: "Account & Security"
+      preview_student_label: "Student Candidate"
+      preview_company_label: "Company Profile"
+      preview_university_label: "University Account"
+      view_public_profile: "View Public Profile"
+      personal_heading: "Personal Profile Details"
+      personal_subtext: "Public portfolio information visible to employers and companies"
+      section_identity: "Identity Details"
+      section_academic: "Academic & Contact Information"
+      phone_placeholder: "+216 XX XXX XXX"
+      phone_hint: "Visible only to accepted employers"
+      major_placeholder: "e.g. Software Engineering, Data Science & AI"
+      section_portfolio: "Portfolio & Bio Summary"
+      bio_placeholder: "I'm a final-year engineering student passionate about building AI products and web platforms..."
+      website_placeholder: "https://example.tn"
+      description_placeholder: "Describe your company culture, technology stack, and mission opportunities."
+      department_placeholder: "e.g. IT & Computer Science Department"
+      skills_heading: "Technical Skills & Stack Taxonomy"
+      skills_subtext: "Select from 144+ verified technologies to match with company offers"
+      skills_count_label: "Skills Selected"
+      clear_skills: "Clear All"
+      skill_search_placeholder: "Search 144+ skills (e.g. Rails, PyTorch, Docker, React, Kafka, Kubernetes)..."
+      all_skills_label: "All Skills (%{count})"
+      selected_stack_label: "My Selected Stack"
+      picked_suffix: "picked"
+      resume_heading: "Resume & CV Document"
+      resume_subtext: "PDF document accessible by verified employers"
+      preview_pdf: "Preview PDF"
+      dropzone_label: "Drag & drop your PDF resume here"
+      dropzone_hint: "PDF only · Maximum file size 5MB"
+      browse_pdf: "Browse PDF File"
+      security_heading: "Account Email & Credentials"
+      security_subtext: "Manage login credentials and security authentication"
+      email_address_label: "Email Address"
+      change_password_label: "Change Password (Optional)"
+      unsaved_changes: "You have unsaved profile changes"
+      bio_char_suffix: " / %{max}"
+      selected_file_prefix: "Selected:"
+
+  pwa:
+    name: "StageUp"
+    description: "StageUp – Verified Internships in Tunisia"
