@@ -3,8 +3,8 @@
 <div class="dashboard-container profile-page-container">
 
   <%# ─── Top Navigation Bar ───────────────────────────────────────── %>
-  <div class="flex-between flex-wrap gap-12 mb-24">
-    <%= link_to dashboard_path, class: "btn btn-secondary btn-compact" do %>
+  <div class="flex-between flex-wrap gap-12 mb-20">
+    <%= link_to dashboard_path, class: "btn-back-settings" do %>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       <%= t('common.back_to', page: t('dashboard.title', default: 'Dashboard'), default: 'Back to Dashboard') %>
     <% end %>
@@ -16,57 +16,39 @@
     <% end %>
   </div>
 
-  <%# ─── Hero Candidate Header Card ───────────────────────────────── %>
-  <div class="profile-hero-card mb-32">
-    <div class="profile-hero-ambient-glow"></div>
-    <div class="profile-hero-inner flex-between flex-wrap gap-24">
-      <div class="flex-align-center gap-24 flex-wrap">
-        <div class="hero-avatar-wrapper">
-          <div class="hero-avatar-circle">
-            <span><%= @student_profile.first_name.first.upcase rescue 'S' %></span>
-          </div>
-          <span class="hero-avatar-online-dot" title="Verified Active Candidate"></span>
+  <%# ─── Hero Candidate Header Card (Clean & Minimalist) ──────────── %>
+  <div class="profile-hero-card mb-24 p-24">
+    <div class="flex-between flex-wrap gap-20">
+      <div class="flex-align-center gap-20 flex-wrap">
+        <div class="hero-avatar-circle flex-shrink-0">
+          <span><%= @student_profile.first_name.first.upcase rescue 'S' %></span>
         </div>
 
         <div>
-          <div class="flex-align-center gap-12 flex-wrap mb-8">
+          <div class="flex-align-center gap-10 flex-wrap mb-6">
             <h1 class="hero-candidate-name margin-0"><%= @student_profile.first_name %> <%= @student_profile.last_name %></h1>
-            <span class="hero-verified-badge" title="Identity & Reputation Verified">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" class="mr-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-              Verified Candidate
+            <span class="badge badge-success fs-11 flex-align-center gap-4">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              <span>Verified Candidate</span>
             </span>
           </div>
 
-          <div class="hero-candidate-pills flex-align-center gap-10 flex-wrap">
+          <div class="hero-clean-meta flex-align-center gap-8 flex-wrap fs-13 text-secondary">
             <% if @student_profile.university %>
-              <span class="hero-meta-pill pill-highlight">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                <%= @student_profile.university.name %>
-              </span>
-            <% else %>
-              <span class="hero-meta-pill pill-highlight">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <%= t('student_profiles.show.badge_student', default: 'Student Candidate') %>
-              </span>
+              <span class="color-primary fw-600"><%= @student_profile.university.name %></span>
+              <span>&middot;</span>
             <% end %>
 
-            <span class="hero-meta-pill">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              <%= @student_profile.major.presence || t('student_profiles.show.major_fallback', default: 'Engineering Candidate') %>
-            </span>
+            <span><%= @student_profile.major.presence || t('student_profiles.show.major_fallback', default: 'Engineering Candidate') %></span>
 
             <% if @student_profile.graduation_year %>
-              <span class="hero-meta-pill">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                <%= t('student_profiles.show.class_of', year: @student_profile.graduation_year, default: "Class of #{@student_profile.graduation_year}") %>
-              </span>
+              <span>&middot;</span>
+              <span><%= t('student_profiles.show.class_of', year: @student_profile.graduation_year, default: "Class of #{@student_profile.graduation_year}") %></span>
             <% end %>
 
             <% if @student_profile.phone.present? %>
-              <span class="hero-meta-pill">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <%= @student_profile.phone %>
-              </span>
+              <span>&middot;</span>
+              <span><%= @student_profile.phone %></span>
             <% end %>
           </div>
         </div>
@@ -74,8 +56,8 @@
 
       <div class="flex-align-center gap-12">
         <% if @student_profile.cv.attached? %>
-          <%= link_to rails_blob_path(@student_profile.cv, disposition: "inline"), target: "_blank", class: "btn btn-primary btn-resume-glow px-20 py-10" do %>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <%= link_to rails_blob_path(@student_profile.cv, disposition: "inline"), target: "_blank", class: "btn btn-primary btn-compact" do %>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
             <span><%= t('dashboard.profile_bento.view_cv', default: 'View Resume (PDF)') %></span>
           <% end %>
         <% end %>
@@ -89,13 +71,12 @@
     <div class="left-col">
 
       <%# About & Bio Section %>
-      <div class="profile-card mb-24">
-        <div class="profile-card-header flex-between mb-16">
+      <div class="profile-card mb-20">
+        <div class="profile-card-header flex-between mb-12">
           <h3 class="section-heading margin-0 flex-align-center gap-8">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             <span><%= t('dashboard.profile_bento.bio', default: 'About Candidate') %></span>
           </h3>
-          <span class="fs-11 text-muted uppercase tracking-wide fw-600">Executive Summary</span>
         </div>
         <div class="candidate-bio-box">
           <p class="color-secondary fs-14 line-height-16 margin-0">
@@ -105,8 +86,8 @@
       </div>
 
       <%# Skills & Technical Stack %>
-      <div class="profile-card mb-24">
-        <div class="profile-card-header flex-between mb-16">
+      <div class="profile-card mb-20">
+        <div class="profile-card-header flex-between mb-14">
           <h3 class="section-heading margin-0 flex-align-center gap-8">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
             <span><%= t('dashboard.profile_bento.skills', default: 'Verified Skills & Technical Stack') %></span>
@@ -125,15 +106,13 @@
             <% end %>
           </div>
         <% else %>
-          <div class="empty-state-box text-center p-20">
-            <p class="text-muted fs-13 italic margin-0"><%= t('dashboard.profile_bento.skills_none', default: 'No technical skills listed yet.') %></p>
-          </div>
+          <p class="text-muted fs-13 italic margin-0"><%= t('dashboard.profile_bento.skills_none', default: 'No technical skills listed yet.') %></p>
         <% end %>
       </div>
 
       <%# Completed Missions & Work Experience %>
       <div class="profile-card">
-        <div class="profile-card-header flex-between mb-16">
+        <div class="profile-card-header flex-between mb-14">
           <h3 class="section-heading margin-0 flex-align-center gap-8">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
             <span><%= t('dashboard.active_internships.title', default: 'Completed Missions & Work Experience') %></span>
@@ -167,10 +146,7 @@
             <% end %>
           </div>
         <% else %>
-          <div class="empty-state-box text-center p-24">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" class="mb-8 margin-0-auto block"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            <p class="text-muted fs-13 italic margin-0"><%= t('dashboard.active_internships.no_active_title', default: 'No completed proof-of-work missions recorded yet.') %></p>
-          </div>
+          <p class="text-muted fs-13 italic margin-0"><%= t('dashboard.active_internships.no_active_title', default: 'No completed proof-of-work missions recorded yet.') %></p>
         <% end %>
       </div>
 
@@ -179,61 +155,50 @@
     <%# ─── Right Column: Reputation Score & Ledger ───────────────── %>
     <div class="right-col">
 
-      <%# Verified Reputation Score Card %>
-      <div class="profile-card rep-metrics-card mb-24">
-        <div class="rep-metrics-header flex-between mb-20">
-          <div class="flex-align-center gap-8">
-            <div class="settings-icon-badge">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3 class="rep-metrics-title margin-0"><%= t('dashboard.reputation.title', default: 'Commitment Score') %></h3>
-          </div>
+      <%# Verified Reputation Score Card (Clean Minimal Gauge) %>
+      <div class="profile-card rep-metrics-card mb-20 p-20">
+        <div class="rep-metrics-header flex-between mb-14">
+          <h3 class="rep-metrics-title margin-0 fs-15"><%= t('dashboard.reputation.title', default: 'Commitment Score') %></h3>
           <span class="badge badge-success fs-11">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mr-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mr-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             <%= t('student_profiles.show.verified_ledger_badge', default: 'Verified Ledger') %>
           </span>
         </div>
 
-        <div class="rep-score-hero-container mb-20">
+        <div class="rep-score-row mb-12 flex-align-center gap-12">
           <% score = @student_profile.commitment_score.round(0) rescue 100 %>
-          <div class="rep-score-ring-box">
-            <div class="rep-score-main">
-              <span class="rep-score-number <%= score >= 90 ? 'score-color-high' : (score >= 70 ? 'score-color-mid' : 'score-color-low') %>">
-                <%= score %>
-              </span>
-              <span class="rep-score-total">/ 100</span>
-            </div>
+          <div class="rep-score-number <%= score >= 90 ? 'score-color-high' : (score >= 70 ? 'score-color-mid' : 'score-color-low') %> fs-36 fw-900">
+            <%= score %>
           </div>
-          <div class="rep-score-bar-bg mt-12 mb-8">
-            <div class="rep-score-bar-fill <%= score >= 90 ? 'fill-emerald' : (score >= 70 ? 'fill-amber' : 'fill-rose') %>" style="width: <%= score %>%;"></div>
+          <div>
+            <span class="fs-12 text-muted block">/ 100 points</span>
+            <span class="fs-12 text-secondary fw-600"><%= t('dashboard.reputation.score_label', default: 'Public Rating') %></span>
           </div>
-          <span class="rep-score-desc block text-center fs-12 text-muted"><%= t('dashboard.reputation.score_label', default: 'On-Chain Commitment Score') %></span>
         </div>
 
-        <div class="rep-divider mb-16"></div>
+        <div class="rep-score-bar-bg mb-14">
+          <div class="rep-score-bar-fill <%= score >= 90 ? 'fill-emerald' : (score >= 70 ? 'fill-amber' : 'fill-rose') %>" style="width: <%= score %>%;"></div>
+        </div>
 
-        <div class="rep-rating-row flex-between">
-          <div class="rep-rating-left flex-align-center gap-6">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span class="rep-rating-label fs-13 text-secondary"><%= t('dashboard.reputation.avg_rating', default: 'Employer Rating') %></span>
-          </div>
-          <span class="rep-rating-value fs-13 fw-600 color-primary">
+        <div class="rep-divider mb-12"></div>
+
+        <div class="rep-rating-row flex-between fs-13">
+          <span class="text-secondary"><%= t('dashboard.reputation.avg_rating', default: 'Employer Rating') %></span>
+          <strong class="color-primary">
             <%= @avg_rating ? "#{@avg_rating} / 5.0 ⭐" : t('common.unrated', default: 'Unrated (5.0 default)') %>
-          </span>
+          </strong>
         </div>
       </div>
 
       <%# Verified Reputation Ledger Events %>
-      <div class="profile-card p-24">
-        <div class="flex-between flex-wrap gap-12 mb-20 pb-12 border-bottom-subtle">
-          <h3 class="fs-15 fw-700 color-primary margin-0 flex-align-center gap-8">
-            <div class="settings-icon-badge">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
+      <div class="profile-card p-20">
+        <div class="flex-between flex-wrap gap-12 mb-16 pb-10 border-bottom-subtle">
+          <h3 class="fs-14 fw-700 color-primary margin-0 flex-align-center gap-8">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             <span><%= t('student_profiles.show.reputation_history_title', default: 'Reputation Event History') %></span>
           </h3>
           <% if @commitment_events.any? %>
-            <span class="badge badge-info fs-11"><%= t('student_profiles.show.events_recorded', count: @commitment_events.count, default: "#{@commitment_events.count} Events") %></span>
+            <span class="badge badge-info fs-11"><%= @commitment_events.count %> Events</span>
           <% end %>
         </div>
 
@@ -244,9 +209,9 @@
                 <div class="ledger-event-line"></div>
                 <div class="ledger-event-node <%= event.score_delta > 0 ? 'node-positive' : (event.score_delta == 0 ? 'node-neutral' : 'node-negative') %>"></div>
                 <div class="ledger-event-body">
-                  <div class="ledger-event-header flex-between flex-wrap gap-8 mb-4">
+                  <div class="ledger-event-header flex-between flex-wrap gap-8 mb-2">
                     <strong class="fs-13 fw-600 color-primary"><%= event.event_type.to_s.humanize.titleize %></strong>
-                    <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %>">
+                    <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %> fs-12">
                       <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %> <%= t('home.pts', default: 'pts') %>
                     </span>
                   </div>
@@ -260,10 +225,7 @@
             <% end %>
           </div>
         <% else %>
-          <div class="text-center p-24">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" class="mb-8 margin-0-auto block"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <p class="text-muted fs-12 italic margin-0"><%= t('student_profiles.show.no_ledger_history', default: 'No recorded reputation events yet.') %></p>
-          </div>
+          <p class="text-muted fs-12 italic margin-0"><%= t('student_profiles.show.no_ledger_history', default: 'No recorded reputation events yet.') %></p>
         <% end %>
       </div>
 

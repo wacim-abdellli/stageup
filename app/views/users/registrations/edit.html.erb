@@ -83,42 +83,44 @@
           </nav>
         </div>
 
-        <%# Live Mini Profile Card Preview %>
-        <div class="sidebar-profile-preview-card">
-          <div class="sidebar-preview-header text-center p-16">
-            <div class="preview-avatar-circle margin-0-auto mb-10">
+        <%# Live Mini Profile Card Preview (Clean & Aligned) %>
+        <div class="sidebar-profile-preview-card mt-16 p-16">
+          <div class="flex-align-center gap-12 mb-12">
+            <div class="preview-avatar-circle flex-shrink-0">
               <span id="preview-avatar-text"><%= (current_user.email.first rescue 'U').upcase %></span>
             </div>
-            <strong class="sidebar-preview-name block color-primary text-truncate fs-14 mb-2" id="preview-name-text">
-              <% if current_user.profileable_type == "StudentProfile" %>
-                <%= @profile.first_name.presence || "Candidate" %> <%= @profile.last_name %>
-              <% elsif current_user.profileable_type == "CompanyProfile" %>
-                <%= @profile.name.presence || "Employer" %>
-              <% else %>
-                <%= current_user.email.split('@').first %>
-              <% end %>
-            </strong>
-            <span class="fs-11 text-muted block mb-12" id="preview-sub-text">
-              <% if current_user.profileable_type == "StudentProfile" %>
-                <%= @profile.university&.name || @profile.major.presence || t('users.edit.preview_student_label', default: 'Student Candidate') %>
-              <% elsif current_user.profileable_type == "CompanyProfile" %>
-                <%= t('users.edit.preview_company_label', default: 'Company Profile') %>
-              <% else %>
-                <%= t('users.edit.preview_university_label', default: 'University Account') %>
-              <% end %>
-            </span>
-            <% if current_user.profileable_type == "StudentProfile" %>
-              <%= link_to student_profile_path(@profile), class: "btn btn-secondary btn-compact w-100 fs-12 justify-center" do %>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                <span><%= t('users.edit.view_public_profile', default: 'View Public Profile') %></span>
-              <% end %>
-            <% elsif current_user.profileable_type == "CompanyProfile" %>
-              <%= link_to company_profile_path(@profile), class: "btn btn-secondary btn-compact w-100 fs-12 justify-center" do %>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                <span><%= t('users.edit.view_public_profile', default: 'View Public Profile') %></span>
-              <% end %>
-            <% end %>
+            <div class="overflow-hidden">
+              <strong class="sidebar-preview-name block color-primary text-truncate fs-14 margin-0" id="preview-name-text">
+                <% if current_user.profileable_type == "StudentProfile" %>
+                  <%= @profile.first_name.presence || "Candidate" %> <%= @profile.last_name %>
+                <% elsif current_user.profileable_type == "CompanyProfile" %>
+                  <%= @profile.name.presence || "Employer" %>
+                <% else %>
+                  <%= current_user.email.split('@').first %>
+                <% end %>
+              </strong>
+              <span class="fs-12 text-muted block text-truncate mt-2" id="preview-sub-text">
+                <% if current_user.profileable_type == "StudentProfile" %>
+                  <%= @profile.university&.name || @profile.major.presence || t('users.edit.preview_student_label', default: 'Student Candidate') %>
+                <% elsif current_user.profileable_type == "CompanyProfile" %>
+                  <%= t('users.edit.preview_company_label', default: 'Company Profile') %>
+                <% else %>
+                  <%= t('users.edit.preview_university_label', default: 'University Account') %>
+                <% end %>
+              </span>
+            </div>
           </div>
+          <% if current_user.profileable_type == "StudentProfile" %>
+            <%= link_to student_profile_path(@profile), class: "btn btn-secondary btn-compact w-100 fs-12 justify-center flex-align-center gap-6" do %>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span><%= t('users.edit.view_public_profile', default: 'View Public Profile') %></span>
+            <% end %>
+          <% elsif current_user.profileable_type == "CompanyProfile" %>
+            <%= link_to company_profile_path(@profile), class: "btn btn-secondary btn-compact w-100 fs-12 justify-center flex-align-center gap-6" do %>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span><%= t('users.edit.view_public_profile', default: 'View Public Profile') %></span>
+            <% end %>
+          <% end %>
         </div>
       </div>
 

@@ -2606,28 +2606,28 @@ button.btn-accent:hover,
   color: var(--text-muted);
 }
 
-/* Sidebar Mini Profile Live Preview Card */
+/* Sidebar Mini Profile Live Preview Card (Clean & Aligned Layout) */
 .sidebar-profile-preview-card {
-  background: var(--bg-secondary);
+  background: rgba(15, 16, 21, 0.95);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .preview-avatar-circle {
-  width: 52px;
-  height: 52px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(194, 65, 12, 0.25) 0%, rgba(249, 115, 22, 0.1) 100%);
-  border: 2px solid rgba(249, 115, 22, 0.4);
-  color: #FB923C;
-  font-size: 20px;
+  background: linear-gradient(135deg, rgba(194, 65, 12, 0.2) 0%, rgba(99, 102, 241, 0.15) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 12px rgba(194, 65, 12, 0.15);
+  color: var(--text-primary);
+  font-size: 16px;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .btn-sidebar-public-link {
