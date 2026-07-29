@@ -24,6 +24,9 @@ Rails.application.configure do
   # Secret key base fallback for Vercel serverless deployments
   config.secret_key_base = ENV.fetch("SECRET_KEY_BASE", "a_secure_stageup_production_secret_key_base_token_2026_vercel")
 
+  # Don't crash if RAILS_MASTER_KEY is missing — credentials are optional on Vercel
+  config.require_master_key = false
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   # WARNING: :local storage is volatile — files will be lost on deploy/restart in containerized environments.
   # Migrate to :amazon (S3) or :google (GCS) before production launch.
