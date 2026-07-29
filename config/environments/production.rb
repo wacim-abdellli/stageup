@@ -33,12 +33,10 @@ Rails.application.configure do
   # To migrate existing blobs, use `rails active_storage:update_migrate_service`.
   config.active_storage.service = ENV["VERCEL"].present? ? :local : :amazon
 
-  # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  # Disabled on Vercel to prevent SSL redirect loops — Vercel's edge handles HTTPS.
-  config.assume_ssl = ENV["VERCEL"].present? ? false : true
-
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = ENV["VERCEL"].present? ? false : true
+  # Assume all access to the app is happening through an SSL-terminating reverse proxy (Vercel edge).
+  # Required so Rails recognizes request.scheme as "https" and matches Origin headers for CSRF protection.
+  config.assume_ssl = true
+  config.force_ssl = false
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
