@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "bundle exec rails db:migrate RAILS_ENV=production",
+  "buildCommand": "bundle exec rails assets:precompile RAILS_ENV=production",
   "env": {
     "VERCEL": "1",
     "RAILS_ENV": "production",
