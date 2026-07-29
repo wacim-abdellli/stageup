@@ -1,0 +1,64 @@
+# Arabic translations for Devise
+ar:
+  devise:
+    confirmations:
+      confirmed: "تم تأكيد عنوان بريدك الإلكتروني بنجاح."
+      send_instructions: "ستتلقى رسالة إلكترونية تحتوي على تعليمات تأكيد بريدك الإلكتروني خلال بضع دقائق."
+      send_paranoid_instructions: "إذا كان عنوان بريدك الإلكتروني موجودًا، ستتلقى رسالة إلكترونية بتعليمات التأكيد."
+    failure:
+      already_authenticated: "أنت مسجل الدخول بالفعل."
+      inactive: "حسابك لم يتم تنشيطه بعد."
+      invalid: "اسم المستخدم أو كلمة المرور غير صحيحة."
+      locked: "حسابك مقفل."
+      last_attempt: "لديك محاولة واحدة أخيرة قبل قفل حسابك."
+      not_found_in_database: "اسم المستخدم أو كلمة المرور غير صحيحة."
+      timeout: "انتهت مهلة الجلسة. يرجى تسجيل الدخول مجددًا."
+      unauthenticated: "يجب عليك تسجيل الدخول أو إنشاء حساب للمتابعة."
+      unconfirmed: "يجب تأكيد عنوان بريدك الإلكتروني قبل المتابعة."
+    mailer:
+      confirmation_instructions:
+        subject: "تعليمات التأكيد"
+      reset_password_instructions:
+        subject: "تعليمات إعادة ضبط كلمة المرور"
+      unlock_instructions:
+        subject: "تعليمات فك قفل الحساب"
+      email_changed:
+        subject: "تم تغيير البريد الإلكتروني"
+      password_change:
+        subject: "تم تغيير كلمة المرور"
+    omniauth_callbacks:
+      failure: "تعذر التوثيق من %{kind} بسبب: %{reason}."
+      success: "تم التوثيق بنجاح من حساب %{kind}."
+    passwords:
+      no_token: "لا يمكنك الوصول إلى هذه الصفحة بدون رابط إعادة ضبط كلمة المرور."
+      send_instructions: "ستتلقى رسالة إلكترونية تحتوي على تعليمات إعادة ضبط كلمة المرور خلال دقائق."
+      send_paranoid_instructions: "إذا كان حسابك موجودًا، ستتلقى رابط استعادة كلمة المرور قريباً."
+      updated: "تم تغيير كلمة المرور بنجاح. أنت الآن مسجل الدخول."
+      updated_not_active: "تم تغيير كلمة المرور بنجاح."
+    registrations:
+      destroyed: "إلى اللقاء! تم إلغاء حسابك بنجاح."
+      signed_up: "مرحبًا بك! تم التسجيل بنجاح."
+      signed_up_but_inactive: "تم التسجيل بنجاح، لكن الحساب غير مفعل بعد."
+      signed_up_but_locked: "تم التسجيل بنجاح، لكن الحساب مقفل."
+      signed_up_but_unconfirmed: "تم إرسال رابط التأكيد إلى بريدك الإلكتروني."
+      update_needs_confirmation: "تم تحديث الحساب بنجاح، يرجى تأكيد البريد الإلكتروني الجديد."
+      updated: "تم تحديث الحساب بنجاح."
+      updated_but_not_signed_in: "تم تحديث الحساب بنجاح، يرجى تسجيل الدخول مجددًا."
+    sessions:
+      signed_in: "تم تسجيل الدخول بنجاح."
+      signed_out: "تم تسجيل الخروج بنجاح."
+      already_signed_out: "تم تسجيل الخروج بنجاح."
+    unlocks:
+      send_instructions: "ستتلقى رسالة إلكترونية بتعليمات فك قفل الحساب."
+      send_paranoid_instructions: "إذا كان حسابك موجودًا، ستتلقى رسالة إلكترونية بتعليمات فك القفل."
+      unlocked: "تم فك قفل الحساب بنجاح."
+  errors:
+    messages:
+      already_confirmed: "تم تأكيده بالفعل، يرجى تسجيل الدخول"
+      confirmation_period_expired: "ينبغي التأكيد خلال %{period}"
+      expired: "انتهت الصلاحية"
+      not_found: "غير موجود"
+      not_locked: "لم يكن مقفلاً"
+      not_saved:
+        one: "منع خطأ واحد حفظ هذا %{resource}:"
+        other: "منعت %{count} أخطاء حفظ هذا %{resource}:"

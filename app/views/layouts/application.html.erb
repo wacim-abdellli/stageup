@@ -229,7 +229,7 @@
     <main id="main-content">
       <% if flash[:notice] || flash[:alert] %>
         <div class="flash-portal" aria-live="polite" role="status">
-          <% if flash[:notice] %>
+          <% if flash[:notice].present? && !flash[:notice].to_s.include?("translation_missing") %>
             <div class="flash-message flash-notice">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
@@ -243,7 +243,7 @@
               </button>
             </div>
           <% end %>
-          <% if flash[:alert] %>
+          <% if flash[:alert].present? && !flash[:alert].to_s.include?("translation_missing") %>
             <div class="flash-message flash-alert">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
                 <circle cx="12" cy="12" r="10"/>
