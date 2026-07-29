@@ -6,11 +6,14 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
+  # TEMPORARY DEBUG: expose real errors instead of generic 500 page
+  config.consider_all_requests_local = true
+
   # Eager load code on boot for better performance and memory savings (ignored by Rake tasks).
   config.eager_load = true
 
   # Full error reports are disabled.
-  config.consider_all_requests_local = false
+  # config.consider_all_requests_local = false  # overridden above for debugging
 
   # Turn on fragment caching in view templates.
   config.action_controller.perform_caching = true
