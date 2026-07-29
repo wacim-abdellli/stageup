@@ -28,7 +28,7 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
-/public/assets
+# public/assets intentionally tracked so precompiled CSS is always available
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
