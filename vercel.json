@@ -20,20 +20,7 @@
   ],
   "routes": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/public/assets/$1"
-    },
-    {
-      "src": "/favicon\\.ico",
-      "dest": "/public/favicon.ico"
-    },
-    {
-      "src": "/favicon\\.svg",
-      "dest": "/public/favicon.svg"
-    },
-    {
-      "src": "/icon\\.png",
-      "dest": "/public/icon.png"
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
