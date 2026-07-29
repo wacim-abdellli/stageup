@@ -2,32 +2,39 @@
 
 begin
   require_relative "config/environment"
-rescue => e
-  $stderr.puts "RAILS BOOT FAILED: #{e.class}: #{e.message}"
-  $stderr.puts e.backtrace.first(20).join("\n")
-  $stderr.flush
-  run lambda { |_env|
-    body = "Boot Error: #{e.class}: #{e.message}\n\n#{e.backtrace.first(20).join("\n")}"
-    [500, { "Content-Type" => "text/plain" }, [body]]
-  }
-else
-  # Middleware to expose runtime errors on Vercel (remove after debugging)
-  class VercelErrorReporter
-    def initialize(app)
-      @app = app
-    end
 
-    def call(env)
-      @app.call(env)
+  # Auto-run migrations on first boot (Vercel serverless: DATABASE_URL available at runtime, not build time)
+  if Rails.env.production?
+    begin
+      conn = ActiveRecord::Base.connection
+      unless conn.table_exists?("schema_migrations")
+        Rails.logger.info "[StageUp] schema_migrations missing — loading full schema..."
+        load(Rails.root.join("db", "schema.rb"))
+        Rails.logger.info "[StageUp] Schema loaded successfully."
+      else
+        ctx = ActiveRecord::MigrationContext.new(
+          Rails.root.join("db", "migrate"),
+          ActiveRecord::SchemaMigration.new(ActiveRecord::Base.connection_pool)
+        )
+        if ctx.needs_migration?
+          Rails.logger.info "[StageUp] Running pending migrations..."
+          ctx.migrate
+          Rails.logger.info "[StageUp] Migrations complete."
+        end
+      end
     rescue => e
-      $stderr.puts "RUNTIME ERROR: #{e.class}: #{e.message}"
-      $stderr.puts e.backtrace.first(20).join("\n")
-      body = "Runtime Error: #{e.class}\n#{e.message}\n\n#{e.backtrace.first(20).join("\n")}"
-      [500, { "Content-Type" => "text/plain" }, [body]]
+      Rails.logger.error "[StageUp] DB setup error: #{e.class}: #{e.message}"
     end
   end
 
-  use VercelErrorReporter
+rescue => e
+  $stderr.puts "BOOT ERROR: #{e.class}: #{e.message}"
+  $stderr.puts e.backtrace.first(15).join("\n")
+  run lambda { |_env|
+    [500, { "Content-Type" => "text/plain" },
+     ["Boot Error: #{e.class}: #{e.message}\n\n#{e.backtrace.first(15).join("\n")}"]]
+  }
+else
   run Rails.application
   Rails.application.load_server
 end
