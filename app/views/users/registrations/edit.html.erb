@@ -286,14 +286,24 @@
                   <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="<%= j(strip_tags(t('users.edit.skill_search_placeholder', default: 'Search 300+ skills across Business, Engineering, Design & IT...'))) %>">
                 </div>
 
-                <div class="category-select-wrapper">
-                  <select id="hub-category-select" class="form-control category-dropdown-select no-dirty-track">
-                    <option value="all">All Categories (<%= Skill.count %>)</option>
+                <div class="custom-cat-dropdown" id="custom-cat-dropdown">
+                  <button type="button" class="custom-cat-trigger" id="custom-cat-trigger">
+                    <span id="custom-cat-selected-text">All Categories (<%= Skill.count %>)</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="select-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+
+                  <div class="custom-cat-menu" id="custom-cat-menu">
+                    <button type="button" class="custom-cat-option active" data-value="all">
+                      <span>All Categories</span>
+                      <span class="custom-opt-badge"><%= Skill.count %></span>
+                    </button>
                     <% (@skills_by_category || {}).each do |cat_name, list| %>
-                      <option value="<%= cat_name.parameterize %>"><%= cat_name %> (<%= list.count %>)</option>
+                      <button type="button" class="custom-cat-option" data-value="<%= cat_name.parameterize %>">
+                        <span><%= cat_name %></span>
+                        <span class="custom-opt-badge"><%= list.count %></span>
+                      </button>
                     <% end %>
-                  </select>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="select-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
                 </div>
               </div>
 
@@ -641,29 +651,40 @@
 
       if (searchInput) searchInput.addEventListener('input', filterSkills);
 
-      var catSelect = document.getElementById('hub-category-select');
+      var customDropdown = document.getElementById('custom-cat-dropdown');
+      var customTrigger = document.getElementById('custom-cat-trigger');
+      var customMenu = document.getElementById('custom-cat-menu');
+      var customSelectedText = document.getElementById('custom-cat-selected-text');
+      var customOptions = document.querySelectorAll('.custom-cat-option');
 
-      catPills.forEach(function(pill) {
-        pill.addEventListener('click', function() {
-          catPills.forEach(function(p) { p.classList.remove('active'); });
-          pill.classList.add('active');
-          activeCat = pill.dataset.cat;
-          if (catSelect) catSelect.value = activeCat;
-          filterSkills();
+      if (customTrigger && customMenu) {
+        customTrigger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          customDropdown.classList.toggle('is-open');
         });
-      });
 
-      if (catSelect) {
-        catSelect.addEventListener('change', function() {
-          activeCat = catSelect.value;
-          catPills.forEach(function(p) {
-            if (p.dataset.cat === activeCat) {
-              p.classList.add('active');
-            } else {
-              p.classList.remove('active');
+        customOptions.forEach(function(opt) {
+          opt.addEventListener('click', function(e) {
+            e.stopPropagation();
+            customOptions.forEach(function(o) { o.classList.remove('active'); });
+            opt.classList.add('active');
+            activeCat = opt.dataset.value;
+
+            var titleText = opt.querySelector('span:first-child').textContent;
+            var badgeText = opt.querySelector('.custom-opt-badge').textContent;
+            if (customSelectedText) {
+              customSelectedText.textContent = titleText + ' (' + badgeText + ')';
             }
+
+            customDropdown.classList.remove('is-open');
+            filterSkills();
           });
-          filterSkills();
+        });
+
+        document.addEventListener('click', function(e) {
+          if (customDropdown && !customDropdown.contains(e.target)) {
+            customDropdown.classList.remove('is-open');
+          }
         });
       }
 
