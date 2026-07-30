@@ -83,14 +83,14 @@
           </nav>
         </div>
 
-        <%# Live Mini Profile Card Preview (Clean & Aligned) %>
-        <div class="sidebar-profile-preview-card mt-16 p-16">
-          <div class="flex-align-center gap-12 mb-12">
-            <div class="preview-avatar-circle flex-shrink-0">
+        <%# Live Mini Profile Card Preview (Clean & Aligned Layout) %>
+        <div class="sidebar-profile-preview-card mt-20">
+          <div class="preview-card-header">
+            <div class="preview-avatar-circle">
               <span id="preview-avatar-text"><%= (current_user.email.first rescue 'U').upcase %></span>
             </div>
-            <div class="overflow-hidden">
-              <strong class="sidebar-preview-name block color-primary text-truncate fs-14 margin-0" id="preview-name-text">
+            <div class="preview-card-info">
+              <strong class="sidebar-preview-name block color-primary text-truncate fs-14 margin-0 fw-700" id="preview-name-text">
                 <% if current_user.profileable_type == "StudentProfile" %>
                   <%= @profile.first_name.presence || "Candidate" %> <%= @profile.last_name %>
                 <% elsif current_user.profileable_type == "CompanyProfile" %>

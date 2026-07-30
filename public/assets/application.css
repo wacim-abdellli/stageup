@@ -2657,18 +2657,34 @@ button.btn-accent:hover,
   background: rgba(15, 16, 21, 0.95);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
+  padding: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.preview-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.preview-card-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .preview-avatar-circle {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(194, 65, 12, 0.2) 0%, rgba(99, 102, 241, 0.15) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, rgba(194, 65, 12, 0.25) 0%, rgba(99, 102, 241, 0.2) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 0 12px rgba(194, 65, 12, 0.15);
   color: var(--text-primary);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
   display: flex;
   align-items: center;
