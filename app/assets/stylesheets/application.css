@@ -3494,7 +3494,12 @@ button.btn-accent:hover,
   color: var(--text-primary);
   display: flex;
   align-items: center;
+  gap: 12px;
   margin-bottom: 20px;
+}
+
+.candidate-section-title svg {
+  flex-shrink: 0;
 }
 
 .candidate-bio-text {
