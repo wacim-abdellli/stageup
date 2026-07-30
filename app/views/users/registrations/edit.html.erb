@@ -685,12 +685,15 @@
       var mainForm = document.getElementById('settings-main-form');
       var floatingSaveBar = document.getElementById('floating-save-bar');
       if (mainForm && floatingSaveBar) {
-        mainForm.addEventListener('input', function() {
+        function handleDirtyState(e) {
+          if (!e.target) return;
+          if (e.target.id === 'hub-skill-search' || e.target.classList.contains('hub-skill-search-field') || e.target.classList.contains('no-dirty-track')) {
+            return;
+          }
           floatingSaveBar.classList.add('bar-visible');
-        });
-        mainForm.addEventListener('change', function() {
-          floatingSaveBar.classList.add('bar-visible');
-        });
+        }
+        mainForm.addEventListener('input', handleDirtyState);
+        mainForm.addEventListener('change', handleDirtyState);
       }
     }
 
