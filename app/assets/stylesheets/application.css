@@ -9003,12 +9003,15 @@ button.btn-accent:hover,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 10px;
+  padding: 9px 12px;
   border-radius: 8px;
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.015em;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   transition: all 0.15s ease;
 }
 
@@ -9018,7 +9021,8 @@ button.btn-accent:hover,
 }
 
 .lang-menu-option.active {
-  background: rgba(194, 65, 12, 0.12);
+  background: rgba(194, 65, 12, 0.15);
+  border: 1px solid rgba(194, 65, 12, 0.3);
   color: #FB923C;
   font-weight: 600;
 }
@@ -9026,17 +9030,18 @@ button.btn-accent:hover,
 .lang-option-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .lang-option-name {
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .lang-option-code {
   font-size: 11px;
   font-weight: 700;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .lang-check-svg {
