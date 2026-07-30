@@ -2860,8 +2860,9 @@ button.btn-accent:hover,
 .selected-stack-showcase-box {
   background: rgba(16, 185, 129, 0.04);
   border: 1px solid rgba(16, 185, 129, 0.2);
-  border-radius: var(--radius-md);
-  padding: 16px 20px;
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin-bottom: 28px;
 }
 
 .pulse-emerald-dot {
@@ -2876,35 +2877,42 @@ button.btn-accent:hover,
 .selected-chips-flex-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  min-height: 38px;
+  gap: 10px;
+  min-height: 40px;
   align-items: center;
 }
 
 .selected-panel-chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 8px;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 9999px;
   background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.35);
   color: #34D399;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
 }
 
 .remove-chip-btn {
-  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.15);
   border: none;
   color: #EF4444;
-  font-size: 14px;
-  font-weight: 700;
   cursor: pointer;
-  padding: 0 4px;
+  padding: 0;
+  margin-left: 2px;
+  transition: all 0.15s ease;
 }
 
 .remove-chip-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
   color: #F87171;
 }
 
@@ -2913,6 +2921,7 @@ button.btn-accent:hover,
   align-items: center !important;
   gap: 16px !important;
   width: 100% !important;
+  margin-bottom: 28px !important;
   box-sizing: border-box !important;
 }
 
@@ -3046,10 +3055,10 @@ button.btn-accent:hover,
 .skills-categories-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
-  max-height: 560px;
+  gap: 24px;
+  max-height: 620px;
   overflow-y: auto;
-  padding-right: 8px;
+  padding-right: 10px;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 }
@@ -3066,8 +3075,8 @@ button.btn-accent:hover,
 .skills-cat-card {
   background: rgba(15, 16, 21, 0.6);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 18px 20px;
+  border-radius: 14px;
+  padding: 22px 24px;
   transition: all 0.2s ease;
   height: max-content;
 }
@@ -3078,7 +3087,8 @@ button.btn-accent:hover,
 
 .skills-cat-header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding-bottom: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
 }
 
 .cat-accent-dot {
@@ -3102,18 +3112,18 @@ button.btn-accent:hover,
 .skills-chips-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .skill-chip-box {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-color);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
   cursor: pointer;

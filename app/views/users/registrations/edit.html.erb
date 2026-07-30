@@ -288,7 +288,7 @@
 
                 <div class="category-select-wrapper">
                   <select id="hub-category-select" class="form-control category-dropdown-select no-dirty-track">
-                    <option value="all">⚡ All Categories (<%= Skill.count %>)</option>
+                    <option value="all">All Categories (<%= Skill.count %>)</option>
                     <% (@skills_by_category || {}).each do |cat_name, list| %>
                       <option value="<%= cat_name.parameterize %>"><%= cat_name %> (<%= list.count %>)</option>
                     <% end %>
@@ -559,7 +559,7 @@
 
             var tag = document.createElement('div');
             tag.className = 'selected-panel-chip';
-            tag.innerHTML = '<span>' + sName + '</span><button type="button" class="remove-chip-btn" data-id="' + sId + '">&times;</button>';
+            tag.innerHTML = '<span>' + sName + '</span><button type="button" class="remove-chip-btn" data-id="' + sId + '" aria-label="Remove"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>';
 
             tag.querySelector('.remove-chip-btn').addEventListener('click', function(e) {
               e.stopPropagation();
