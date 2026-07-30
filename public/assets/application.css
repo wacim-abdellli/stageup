@@ -2512,15 +2512,18 @@ button.btn-accent:hover,
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  height: 30px;
+  box-sizing: border-box;
   font-size: 12px;
   font-weight: 600;
   color: var(--text-secondary);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-color);
-  padding: 6px 14px;
+  padding: 0 14px;
   border-radius: 9999px;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none !important;
+  line-height: 1;
 }
 
 .btn-back-settings:hover {
@@ -2534,14 +2537,17 @@ button.btn-accent:hover,
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  height: 30px;
+  box-sizing: border-box;
   font-size: 11px;
   font-weight: 700;
   color: #818CF8;
   background: rgba(99, 102, 241, 0.08);
   border: 1px solid rgba(99, 102, 241, 0.2);
-  padding: 5px 12px;
+  padding: 0 14px;
   border-radius: 9999px;
   letter-spacing: 0.04em;
+  line-height: 1;
 }
 
 .role-status-dot {
