@@ -9420,6 +9420,79 @@ html[dir="rtl"] .admin-search-input {
   border-color: rgba(194, 65, 12, 0.5);
 }
 
+.public-skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Candidate Portfolio Hub Light Theme Overrides (Placed lower for cascade specificity) */
+[data-theme="light"] .candidate-cover-card,
+[data-theme="light"] .candidate-section-card,
+[data-theme="light"] .candidate-sidebar-card {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
+}
+
+[data-theme="light"] .candidate-cover-banner {
+  background: linear-gradient(135deg, rgba(194, 65, 12, 0.12) 0%, rgba(99, 102, 241, 0.08) 50%, rgba(16, 185, 129, 0.05) 100%) !important;
+  border-bottom-color: #E2E8F0 !important;
+}
+
+[data-theme="light"] .candidate-avatar-circle {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%) !important;
+  border-color: #FFFFFF !important;
+  color: #0F172A !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] .candidate-avatar-status {
+  border-color: #FFFFFF !important;
+}
+
+[data-theme="light"] .candidate-name,
+[data-theme="light"] .candidate-section-title,
+[data-theme="light"] .candidate-sidebar-title,
+[data-theme="light"] .exp-title {
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .candidate-bio-text {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .candidate-metrics-bar,
+[data-theme="light"] .candidate-exp-item,
+[data-theme="light"] .exp-company-avatar {
+  background: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .metric-divider {
+  background: #E2E8F0 !important;
+}
+
+[data-theme="light"] .candidate-skill-pill {
+  background: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+  color: #334155 !important;
+}
+
+[data-theme="light"] .candidate-skill-pill:hover {
+  background: rgba(194, 65, 12, 0.08) !important;
+  border-color: rgba(194, 65, 12, 0.3) !important;
+  color: #C2410C !important;
+}
+
 .admin-filter-pills {
   display: flex;
   align-items: center;
