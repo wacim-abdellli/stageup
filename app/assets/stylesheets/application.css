@@ -3024,7 +3024,7 @@ button.btn-accent:hover,
 /* Skills 70 / 30 Split Layout */
 .skills-split-layout {
   display: grid;
-  grid-template-columns: 1fr 240px;
+  grid-template-columns: 1fr 260px;
   gap: 24px;
   align-items: start;
 }
@@ -3033,6 +3033,60 @@ button.btn-accent:hover,
   .skills-split-layout {
     grid-template-columns: 1fr;
   }
+}
+
+.skills-matrix-browser {
+  max-height: 540px;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.skills-matrix-browser::-webkit-scrollbar {
+  width: 6px;
+}
+
+.skills-matrix-browser::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+.skills-cat-block {
+  background: rgba(15, 16, 21, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+}
+
+.skills-cat-block:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.skills-cat-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+}
+
+[data-theme="light"] .skills-matrix-browser {
+  scrollbar-color: rgba(15, 23, 42, 0.2) transparent;
+}
+
+[data-theme="light"] .skills-matrix-browser::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.2);
+}
+
+[data-theme="light"] .skills-cat-block {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+}
+
+[data-theme="light"] .skills-cat-header {
+  border-bottom-color: #F1F5F9 !important;
 }
 
 .skills-selected-sidebar {
@@ -3044,14 +3098,14 @@ button.btn-accent:hover,
   background: var(--bg-tertiary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 18px;
 }
 
 .selected-chips-scroll {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  max-height: 420px;
+  max-height: 460px;
   overflow-y: auto;
 }
 
@@ -6628,11 +6682,12 @@ button.btn-accent:hover,
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 64px;
-  gap: 24px;
+  gap: 16px;
+  box-sizing: border-box;
 }
 
 /* ── Logo ── */
