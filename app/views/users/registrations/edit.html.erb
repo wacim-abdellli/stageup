@@ -234,6 +234,7 @@
         </div>
 
         <%# ─── TAB PANE 2: SKILLS & STACK (STUDENT ONLY) ────────────────── %>
+        <% if current_user.profileable_type == "StudentProfile" %>
           <div class="settings-pane" id="pane-skills">
             <div class="settings-card mb-24">
 
