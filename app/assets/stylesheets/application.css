@@ -2863,9 +2863,21 @@ button.btn-accent:hover,
   padding: 20px;
 }
 
+.skill-search-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .skill-search-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
 .skill-search-input-wrapper {
   position: relative;
-  margin-bottom: 18px;
 }
 
 .skill-search-icon {
@@ -2881,37 +2893,132 @@ button.btn-accent:hover,
   padding-left: 42px !important;
   font-size: 13px !important;
   background: var(--bg-secondary) !important;
-  height: 44px;
+  height: 42px;
 }
 
-.category-pills-scroll {
+.category-select-wrapper {
+  position: relative;
+  width: 280px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .category-select-wrapper {
+    width: 100%;
+  }
+}
+
+.category-dropdown-select {
+  width: 100%;
+  height: 42px;
+  background: rgba(15, 16, 21, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 32px 0 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-dropdown-select:hover {
+  border-color: rgba(194, 65, 12, 0.4);
+}
+
+.select-chevron {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-muted);
+}
+
+.category-pills-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.category-pills-row::-webkit-scrollbar {
+  height: 4px;
+}
+
+.category-pills-row::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
 }
 
 .hub-cat-pill {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
   border-radius: 9999px;
-  padding: 5px 14px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
   cursor: pointer;
+  flex-shrink: 0;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
 .hub-cat-pill:hover {
   background: rgba(255, 255, 255, 0.08);
   color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .hub-cat-pill.active {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #FFFFFF;
-  box-shadow: 0 0 12px rgba(194, 65, 12, 0.3);
+  background: rgba(194, 65, 12, 0.18);
+  border-color: rgba(194, 65, 12, 0.4);
+  color: #FB923C;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(194, 65, 12, 0.15);
+}
+
+.pill-badge-num {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 0.8;
+}
+
+.hub-cat-pill.active .pill-badge-num {
+  background: rgba(194, 65, 12, 0.3);
+  color: #FB923C;
+}
+
+[data-theme="light"] .category-dropdown-select {
+  background: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .hub-cat-pill {
+  background: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] .hub-cat-pill.active {
+  background: rgba(194, 65, 12, 0.12) !important;
+  border-color: rgba(194, 65, 12, 0.3) !important;
+  color: #C2410C !important;
 }
 
 /* Skills 70 / 30 Split Layout */

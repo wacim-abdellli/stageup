@@ -255,20 +255,31 @@
                 </div>
               </div>
 
-              <%# Toolbar: Search + Category Filter Pills %>
+              <%# Toolbar: Integrated Modern Search + Category Dropdown & Single-Row Scroll Pills %>
               <div class="skills-hub-filter mb-20">
-                <div class="skill-search-input-wrapper mb-14">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" class="skill-search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                  <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="<%= j(strip_tags(t('users.edit.skill_search_placeholder', default: 'Search 144+ skills (e.g. Rails, PyTorch, Docker)...'))) %>">
+                <div class="skill-search-row mb-12">
+                  <div class="skill-search-input-wrapper flex-1">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" class="skill-search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="<%= j(strip_tags(t('users.edit.skill_search_placeholder', default: 'Search 300+ skills (e.g. SEO, SolidWorks, Figma, Python)...'))) %>">
+                  </div>
+
+                  <div class="category-select-wrapper">
+                    <select id="hub-category-select" class="form-control category-dropdown-select no-dirty-track">
+                      <option value="all">⚡ All Categories (<%= Skill.count %>)</option>
+                      <% (@skills_by_category || {}).each do |cat_name, list| %>
+                        <option value="<%= cat_name.parameterize %>"><%= cat_name %> (<%= list.count %>)</option>
+                      <% end %>
+                    </select>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="select-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
                 </div>
 
-                <div class="category-pills-scroll" id="hub-category-pills">
-                  <button type="button" class="hub-cat-pill active" data-cat="all">
-                    <%= t('users.edit.all_skills_label', count: Skill.count, default: "All Skills (#{Skill.count})") %>
-                  </button>
+                <%# Single-Row Horizontally Scrollable Domain Bar %>
+                <div class="category-pills-row" id="hub-category-pills">
+                  <button type="button" class="hub-cat-pill active" data-cat="all">All Domains (<%= Skill.count %>)</button>
                   <% (@skills_by_category || {}).each do |cat_name, list| %>
                     <button type="button" class="hub-cat-pill" data-cat="<%= cat_name.parameterize %>">
-                      <%= cat_name %> (<%= list.count %>)
+                      <%= cat_name %> <span class="pill-badge-num"><%= list.count %></span>
                     </button>
                   <% end %>
                 </div>
@@ -633,14 +644,31 @@
 
       if (searchInput) searchInput.addEventListener('input', filterSkills);
 
+      var catSelect = document.getElementById('hub-category-select');
+
       catPills.forEach(function(pill) {
         pill.addEventListener('click', function() {
           catPills.forEach(function(p) { p.classList.remove('active'); });
           pill.classList.add('active');
           activeCat = pill.dataset.cat;
+          if (catSelect) catSelect.value = activeCat;
           filterSkills();
         });
       });
+
+      if (catSelect) {
+        catSelect.addEventListener('change', function() {
+          activeCat = catSelect.value;
+          catPills.forEach(function(p) {
+            if (p.dataset.cat === activeCat) {
+              p.classList.add('active');
+            } else {
+              p.classList.remove('active');
+            }
+          });
+          filterSkills();
+        });
+      }
 
       // Initial sync
       syncSelectedPanel();
