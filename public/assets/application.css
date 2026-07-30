@@ -132,16 +132,61 @@
 [data-theme="light"] .auth-card,
 [data-theme="light"] .offer-card,
 [data-theme="light"] .admin-kpi-card,
-[data-theme="light"] .empty-state-card {
+[data-theme="light"] .empty-state-card,
+[data-theme="light"] .candidate-cover-card,
+[data-theme="light"] .candidate-section-card,
+[data-theme="light"] .candidate-sidebar-card,
+[data-theme="light"] .settings-hub-header,
+[data-theme="light"] .sidebar-profile-preview-card {
   background-color: #FFFFFF !important;
   border: 1px solid #E2E8F0 !important;
   box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
 }
 
+[data-theme="light"] .candidate-cover-banner {
+  background: linear-gradient(135deg, rgba(194, 65, 12, 0.12) 0%, rgba(99, 102, 241, 0.08) 50%, rgba(16, 185, 129, 0.05) 100%) !important;
+  border-bottom-color: #E2E8F0 !important;
+}
+
+[data-theme="light"] .candidate-avatar-circle {
+  background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%) !important;
+  border-color: #FFFFFF !important;
+  color: #0F172A !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] .candidate-avatar-status {
+  border-color: #FFFFFF !important;
+}
+
+[data-theme="light"] .candidate-metrics-bar {
+  background: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+}
+
+[data-theme="light"] .metric-divider {
+  background: #E2E8F0 !important;
+}
+
+[data-theme="light"] .candidate-skill-pill {
+  background: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+  color: #334155 !important;
+}
+
+[data-theme="light"] .candidate-skill-pill:hover {
+  background: rgba(194, 65, 12, 0.08) !important;
+  border-color: rgba(194, 65, 12, 0.3) !important;
+  color: #C2410C !important;
+}
+
 [data-theme="light"] .profile-card:hover,
 [data-theme="light"] .bento-card:hover,
 [data-theme="light"] .offer-card:hover,
-[data-theme="light"] .admin-kpi-card:hover {
+[data-theme="light"] .admin-kpi-card:hover,
+[data-theme="light"] .candidate-cover-card:hover,
+[data-theme="light"] .candidate-section-card:hover,
+[data-theme="light"] .candidate-sidebar-card:hover {
   border-color: #CBD5E1 !important;
   box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.1), 0 4px 12px -2px rgba(15, 23, 42, 0.05) !important;
 }
@@ -153,7 +198,8 @@
 [data-theme="light"] .mockup-row,
 [data-theme="light"] .mockup-header,
 [data-theme="light"] .admin-subnav-bar,
-[data-theme="light"] .inline-list-sm-item {
+[data-theme="light"] .inline-list-sm-item,
+[data-theme="light"] .candidate-exp-item {
   background-color: #F8FAFC !important;
   border: 1px solid #E2E8F0 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
