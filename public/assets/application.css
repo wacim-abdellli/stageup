@@ -3054,31 +3054,19 @@ button.btn-accent:hover,
 
 .skills-categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 24px;
-  max-height: 620px;
-  overflow-y: auto;
-  padding-right: 10px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
-}
-
-.skills-categories-grid::-webkit-scrollbar {
-  width: 6px;
-}
-
-.skills-categories-grid::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 9999px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .skills-cat-card {
   background: rgba(15, 16, 21, 0.6);
   border: 1px solid var(--border-color);
   border-radius: 14px;
-  padding: 22px 24px;
+  padding: 24px;
   transition: all 0.2s ease;
-  height: max-content;
+  box-sizing: border-box;
 }
 
 .skills-cat-card:hover {
@@ -3086,27 +3074,33 @@ button.btn-accent:hover,
 }
 
 .skills-cat-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding-bottom: 14px;
   margin-bottom: 18px;
+  width: 100%;
 }
 
 .cat-accent-dot {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--primary);
   display: inline-block;
+  flex-shrink: 0;
 }
 
 .cat-count-badge {
   font-size: 11px;
   font-weight: 700;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.06);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .skills-chips-wrap {
