@@ -2909,9 +2909,11 @@ button.btn-accent:hover,
 }
 
 .skills-search-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 @media (max-width: 768px) {
@@ -2919,6 +2921,126 @@ button.btn-accent:hover,
     flex-direction: column;
     align-items: stretch;
   }
+}
+
+.skill-search-input-wrapper {
+  position: relative !important;
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.skill-search-icon {
+  position: absolute !important;
+  left: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none !important;
+  z-index: 3 !important;
+}
+
+.hub-skill-search-field {
+  width: 100% !important;
+  height: 44px !important;
+  padding-left: 42px !important;
+  padding-right: 14px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  background: rgba(15, 16, 21, 0.95) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-primary) !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+.hub-skill-search-field:focus {
+  border-color: rgba(194, 65, 12, 0.5) !important;
+  box-shadow: 0 0 14px rgba(194, 65, 12, 0.2) !important;
+}
+
+.category-select-wrapper {
+  position: relative !important;
+  width: 270px !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+@media (max-width: 768px) {
+  .category-select-wrapper {
+    width: 100% !important;
+  }
+}
+
+.category-dropdown-select {
+  width: 100% !important;
+  height: 44px !important;
+  background: rgba(15, 16, 21, 0.95) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-primary) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 0 36px 0 14px !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+.category-dropdown-select:hover {
+  border-color: rgba(194, 65, 12, 0.4) !important;
+}
+
+.select-chevron {
+  position: absolute !important;
+  right: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none !important;
+  color: var(--text-muted) !important;
+  z-index: 2 !important;
+}
+
+/* Sidebar Navigation Icon Badges */
+.settings-nav-icon-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.settings-nav-item:hover .settings-nav-icon-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.settings-nav-item.active .settings-nav-icon-badge {
+  background: rgba(194, 65, 12, 0.18);
+  border-color: rgba(194, 65, 12, 0.4);
+  color: #FB923C;
+}
+
+[data-theme="light"] .settings-nav-icon-badge {
+  background: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] .settings-nav-item.active .settings-nav-icon-badge {
+  background: rgba(194, 65, 12, 0.1) !important;
+  border-color: rgba(194, 65, 12, 0.25) !important;
+  color: #C2410C !important;
 }
 
 .skills-categories-grid {
