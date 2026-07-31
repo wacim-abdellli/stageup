@@ -1,6 +1,8 @@
 require "test_helper"
 
 class NotificationTest < ActiveSupport::TestCase
+  include ActionCable::TestHelper
+
   setup do
     @student_user = users(:mohamed_user)
     @company_user = users(:company_user)

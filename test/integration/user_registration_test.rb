@@ -10,7 +10,7 @@ class UserRegistrationTest < ActionDispatch::IntegrationTest
         student_profile: { first_name: "Test", last_name: "Student", major: "CS", graduation_year: 2027 }
       }
     end
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_select ".flash-alert", text: "Please fix the errors below to complete your registration."
     assert_match /not yet approved/, response.body
   end
@@ -32,7 +32,7 @@ class UserRegistrationTest < ActionDispatch::IntegrationTest
         student_profile: { first_name: "Test", last_name: "Student", major: "CS", graduation_year: 2027 }
       }
     end
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_select ".flash-alert", text: "Please fix the errors below to complete your registration."
   end
 

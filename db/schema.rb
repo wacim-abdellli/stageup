@@ -209,7 +209,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_28_213822) do
     t.index ["student_profile_id", "offer_id"], name: "index_submissions_on_student_profile_id_and_offer_id", unique: true
     t.index ["student_profile_id", "status"], name: "index_submissions_on_student_profile_id_and_status"
     t.index ["student_profile_id"], name: "index_submissions_on_student_profile_id"
-    t.index ["submitted_at"], name: "idx_submissions_submitted_at_pending", where: "((status)::text = ANY ((ARRAY['submitted'::character varying, 'under_review'::character varying])::text[]))"
+    t.index ["submitted_at"], name: "idx_submissions_submitted_at_pending", where: "((status)::text = ANY (ARRAY[('submitted'::character varying)::text, ('under_review'::character varying)::text]))"
     t.index ["submitted_at"], name: "index_submissions_on_submitted_at"
   end
 
@@ -256,7 +256,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_28_213822) do
     t.index ["profileable_type", "profileable_id"], name: "index_users_on_profileable"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
-    t.check_constraint "profileable_type::text = ANY (ARRAY['StudentProfile'::character varying, 'CompanyProfile'::character varying, 'UniversityProfile'::character varying]::text[])", name: "check_profileable_type"
+    t.check_constraint "profileable_type::text = ANY (ARRAY['StudentProfile'::character varying::text, 'CompanyProfile'::character varying::text, 'UniversityProfile'::character varying::text])", name: "check_profileable_type"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

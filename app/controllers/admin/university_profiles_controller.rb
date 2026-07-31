@@ -28,7 +28,7 @@ module Admin
         notifiable: @profile
       )
       UserMailer.coordinator_approved_email(@profile.user, @profile).deliver_later rescue nil
-      redirect_back fallback_location: admin_university_profiles_path, notice: "#{@profile.admin_name} has been approved."
+      redirect_back fallback_location: admin_dashboard_path, notice: "#{@profile.admin_name} has been approved."
     end
 
     def reject
@@ -36,9 +36,9 @@ module Admin
         @profile.user&.destroy!
         @profile.destroy!
       end
-      redirect_back fallback_location: admin_university_profiles_path, notice: "Coordinator profile has been rejected and removed."
+      redirect_back fallback_location: admin_dashboard_path, notice: "Coordinator profile has been rejected and removed."
     rescue ActiveRecord::RecordNotDestroyed, ActiveRecord::RecordInvalid
-      redirect_back fallback_location: admin_university_profiles_path, alert: "Failed to reject coordinator. Please try again."
+      redirect_back fallback_location: admin_dashboard_path, alert: "Failed to reject coordinator. Please try again."
     end
 
     private

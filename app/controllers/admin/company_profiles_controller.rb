@@ -28,7 +28,7 @@ module Admin
         notifiable: @profile
       )
       UserMailer.company_verified_email(@profile.user, @profile).deliver_later rescue nil
-      redirect_back fallback_location: admin_company_profiles_path, notice: "#{@profile.name} has been verified."
+      redirect_back fallback_location: admin_dashboard_path, notice: "#{@profile.name} has been verified."
     end
 
     def unverify
@@ -39,7 +39,7 @@ module Admin
         message: "Your company account verification has been revoked by StageUp administrators.",
         notifiable: @profile
       )
-      redirect_back fallback_location: admin_company_profiles_path, notice: "#{@profile.name} has been unverified."
+      redirect_back fallback_location: admin_dashboard_path, notice: "#{@profile.name} has been unverified."
     end
 
     private
