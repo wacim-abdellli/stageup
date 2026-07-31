@@ -66,14 +66,18 @@
                 </td>
                 <td>
                   <div class="action-group-8">
-                    <% unless coord.approved? %>
+                    <% if coord.approved? %>
+                      <%= button_to unapprove_admin_university_profile_path(coord), method: :post, class: "btn btn-secondary btn-compact-sm" do %>
+                        <span><%= t('admin.coordinators.revoke_approval', default: 'Revoke Approval') %></span>
+                      <% end %>
+                    <% else %>
                       <%= button_to approve_admin_university_profile_path(coord), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: t('admin.dashboard.coordinators.approving') } do %>
                         <span><%= t('admin.dashboard.coordinators.approve', default: 'Approve') %></span>
                       <% end %>
                     <% end %>
 
-                    <%= button_to reject_admin_university_profile_path(coord), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: t('admin.dashboard.coordinators.reject_confirm', default: 'Reject and remove this coordinator?') } do %>
-                      <span><%= coord.approved? ? t('common.remove', default: 'Revoke / Delete') : t('admin.dashboard.coordinators.reject', default: 'Reject') %></span>
+                    <%= button_to reject_admin_university_profile_path(coord), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: t('admin.dashboard.coordinators.reject_confirm', default: 'Delete and remove this coordinator account?') } do %>
+                      <span><%= t('common.delete', default: 'Delete') %></span>
                     <% end %>
                   </div>
                 </td>

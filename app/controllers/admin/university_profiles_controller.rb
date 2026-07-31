@@ -1,6 +1,6 @@
 module Admin
   class UniversityProfilesController < AdminController
-    before_action :set_profile, only: [:approve, :reject]
+    before_action :set_profile, only: [:approve, :unapprove, :reject]
 
     def index
       @profiles = UniversityProfile.includes(:university, :user).order(created_at: :desc)
@@ -29,6 +29,17 @@ module Admin
       )
       UserMailer.coordinator_approved_email(@profile.user, @profile).deliver_later rescue nil
       redirect_back fallback_location: admin_dashboard_path, notice: "#{@profile.admin_name} has been approved."
+    end
+
+    def unapprove
+      @profile.update!(approved: false)
+      Notification.trigger(
+        recipient: @profile.user,
+        action: "coordinator_approved",
+        message: "Your university coordinator approval has been revoked by StageUp administrators.",
+        notifiable: @profile
+      )
+      redirect_back fallback_location: admin_dashboard_path, notice: "Approval for #{@profile.admin_name} has been revoked."
     end
 
     def reject

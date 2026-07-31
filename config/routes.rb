@@ -63,6 +63,7 @@ Rails.application.routes.draw do
     end
     resources :university_profiles, only: [:index] do
       post :approve, on: :member
+      post :unapprove, on: :member
       post :reject, on: :member
     end
     resources :company_profiles, only: [:index] do

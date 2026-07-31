@@ -106,12 +106,13 @@
             <% @unverified_companies.each do |company| %>
               <div class="inline-list-sm-item">
                 <div>
-                  <strong class="inline-list-sm-title"><%= company.name %></strong>
+                  <strong class="inline-list-sm-title"><%= link_to company.name, company_profile_path(company), target: "_blank", class: "btn-link-sm" %></strong>
                   <span class="inline-list-sm-meta">
-                    <%= company.user.email %> &middot; <%= company.website.presence || t('admin.dashboard.companies.no_website', default: 'No website') %>
+                    <%= company.user.email %> &middot; <%= company.website.present? ? link_to(company.website, company.website, target: "_blank", class: "btn-link-sm fs-11") : t('admin.dashboard.companies.no_website', default: 'No website') %>
                   </span>
                 </div>
                 <div class="action-group-8">
+                  <%= link_to t('common.inspect', default: 'Profile'), company_profile_path(company), target: "_blank", class: "btn btn-secondary btn-compact-sm" %>
                   <%= button_to t('admin.dashboard.companies.verify'), verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: t('admin.dashboard.companies.verifying') } %>
                 </div>
               </div>
