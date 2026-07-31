@@ -1,0 +1,207 @@
+<% content_for :title, "User Security Inspection – StageUp Admin" %>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="dashboard-header-left">
+      <div class="admin-badge mb-6">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>SECURITY & CREDENTIAL INSPECTOR</span>
+      </div>
+      <h1 class="fs-22 fw-700">Account Audit: <%= @user.email %></h1>
+      <p class="header-meta">Detailed user profile inspection, domain validation, and credential verification</p>
+    </div>
+    <div class="flex-row gap-10 align-center">
+      <%= link_to "Back to Users", admin_users_path, class: "btn btn-secondary btn-header" %>
+      <%= link_to "Admin Dashboard", admin_dashboard_path, class: "btn btn-secondary btn-header" %>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div>
+      <!-- Account Overview Card -->
+      <div class="profile-card card-mb">
+        <h2 class="section-heading mb-16">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          Account Identity & Credentials
+        </h2>
+
+        <div class="rep-stat-list">
+          <div class="rep-stat-row">
+            <span class="rep-stat-label">Email Address</span>
+            <strong class="fs-13"><%= @user.email %></strong>
+          </div>
+          <div class="rep-stat-row">
+            <span class="rep-stat-label">Account Role</span>
+            <span class="role-type-badge role-<%= @user.profileable_type.tableize.singularize %>">
+              <%= @user.profileable_type.gsub('Profile', '') %>
+            </span>
+          </div>
+          <div class="rep-stat-row">
+            <span class="rep-stat-label">Registration Date</span>
+            <span class="fs-13 text-muted"><%= @user.created_at.strftime("%B %d, %Y at %H:%M UTC") %></span>
+          </div>
+          <div class="rep-stat-row">
+            <span class="rep-stat-label">Admin Privileges</span>
+            <span>
+              <% if @user.admin? %>
+                <span class="badge badge-verified">ADMINISTRATOR</span>
+              <% else %>
+                <span class="badge badge-closed">STANDARD USER</span>
+              <% end %>
+            </span>
+          </div>
+          <div class="rep-stat-row">
+            <span class="rep-stat-label">Account Status</span>
+            <span>
+              <% if @user.access_locked? %>
+                <span class="badge badge-danger">ACCOUNT LOCKED</span>
+              <% else %>
+                <span class="badge badge-verified">ACTIVE</span>
+              <% end %>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Specific Profile Details -->
+      <% if @user.profileable_type == "UniversityProfile" %>
+        <% profile = @user.profileable %>
+        <% uni = profile.university %>
+        <% domain_matched = uni.present? && @user.email.to_s.downcase.end_with?("@#{uni.email_domain.to_s.downcase}") %>
+        
+        <div class="profile-card card-mb">
+          <div class="card-header-flex">
+            <h2 class="section-heading m-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h4"/><path d="M18 9h2a2 2 0 0 1 2 2v11h-4"/></svg>
+              Academic Coordinator Verification Audit
+            </h2>
+            <% if profile.approved? %>
+              <span class="badge badge-verified">APPROVED COORDINATOR</span>
+            <% else %>
+              <span class="badge badge-pending">PENDING APPROVAL</span>
+            <% end %>
+          </div>
+
+          <!-- Security Tip Banner -->
+          <div class="inline-warning-box mt-16 mb-20 <%= domain_matched ? 'border-success' : 'border-amber' %>">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="<%= domain_matched ? 'var(--emerald)' : 'var(--accent-amber)' %>" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <div>
+              <strong>Security Audit Signal:</strong>
+              <% if domain_matched %>
+                <span class="text-success">Email domain matches the official university domain (<code>@<%= uni.email_domain %></code>). High authenticity confidence.</span>
+              <% else %>
+                <span class="text-amber">Email domain (<code><%= @user.email.split('@').last %></code>) does not match the official university domain (<code>@<%= uni&.email_domain %></code>). Inspect department credentials carefully.</span>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="rep-stat-list">
+            <div class="rep-stat-row">
+              <span class="rep-stat-label">Coordinator Name</span>
+              <strong class="fs-14"><%= profile.admin_name %></strong>
+            </div>
+            <div class="rep-stat-row">
+              <span class="rep-stat-label">Academic Department</span>
+              <span class="fs-13"><%= profile.department %></span>
+            </div>
+            <div class="rep-stat-row">
+              <span class="rep-stat-label">Institution</span>
+              <strong class="fs-13 text-primary"><%= uni&.name %></strong>
+            </div>
+            <div class="rep-stat-row">
+              <span class="rep-stat-label">Official Domain</span>
+              <code><%= uni&.email_domain %></code>
+            </div>
+            <div class="rep-stat-row">
+              <span class="rep-stat-label">Registered Students</span>
+              <span class="badge badge-tag"><%= StudentProfile.where(university: uni).count %> students</span>
+            </div>
+          </div>
+
+          <div class="mt-24 action-group-8">
+            <% if profile.approved? %>
+              <%= button_to "Revoke Approval", unapprove_admin_university_profile_path(profile), method: :post, class: "btn btn-secondary", data: { turbo_confirm: "Revoke coordinator approval? They will lose access to signing agreements." } %>
+            <% else %>
+              <%= button_to "Approve Coordinator", approve_admin_university_profile_path(profile), method: :post, class: "btn btn-primary", data: { disable_with: "Approving…" } %>
+            <% end %>
+            <%= button_to "Delete Account", reject_admin_university_profile_path(profile), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Permanently delete this coordinator account?" } %>
+          </div>
+        </div>
+
+      <% elsif @user.profileable_type == "CompanyProfile" %>
+        <% company = @user.profileable %>
+        <div class="profile-card card-mb">
+          <div class="card-header-flex">
+            <h2 class="section-heading m-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--indigo)" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              Employer Audit & Verification
+            </h2>
+            <% if company.verified? %>
+              <span class="badge badge-verified">VERIFIED EMPLOYER</span>
+            <% else %>
+              <span class="badge badge-pending">PENDING VERIFICATION</span>
+            <% end %>
+          </div>
+
+          <div class="rep-stat-list mt-16">
+            <div class="rep-stat-row">
+              <span class="rep-stat-label">Company Name</span>
+              <strong class="fs-14"><%= company.name %></strong>
+            </div>
+            <div class="rep-stat-row">
+              <span class="rep-stat-label">Official Website</span>
+              <% if company.website.present? %>
+                <%= link_to company.website, company.website, target: "_blank", class: "btn-link-sm fs-13" %>
+              <% else %>
+                <span class="text-muted fs-12 italic">No website provided</span>
+              <% end %>
+            </div>
+            <div class="rep-stat-row">
+              <span class="rep-stat-label">Offers Posted</span>
+              <span class="badge badge-tag"><%= company.offers.count %> offers</span>
+            </div>
+            <div class="rep-stat-row">
+              <span class="rep-stat-label">Company Description</span>
+              <p class="fs-13 text-secondary m-0"><%= company.description.presence || "No description provided." %></p>
+            </div>
+          </div>
+
+          <div class="mt-24 action-group-8">
+            <%= link_to "View Public Company Profile", company_profile_path(company), target: "_blank", class: "btn btn-secondary" %>
+            <% if company.verified? %>
+              <%= button_to "Revoke Verification", unverify_admin_company_profile_path(company), method: :post, class: "btn btn-secondary" %>
+            <% else %>
+              <%= button_to "Verify Company", verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary", data: { disable_with: "Verifying…" } %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div>
+      <!-- Admin Controls Card -->
+      <div class="profile-card">
+        <h2 class="section-heading mb-16">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Admin Security Controls
+        </h2>
+
+        <% unless @user == current_user %>
+          <div class="flex-column gap-12">
+            <div>
+              <span class="form-label">Toggle System Admin Role</span>
+              <%= button_to @user.admin? ? "Revoke Admin Rights" : "Grant Admin Rights", toggle_admin_admin_user_path(@user), method: :post, class: "btn #{@user.admin? ? 'btn-secondary' : 'btn-primary'} btn-block", data: { turbo_confirm: "Are you sure you want to change admin privileges for #{@user.email}?" } %>
+            </div>
+
+            <div class="mt-12">
+              <span class="form-label">Account Access Lock</span>
+              <%= button_to @user.access_locked? ? "Unlock Account" : "Lock Account", toggle_lock_admin_user_path(@user), method: :post, class: "btn btn-secondary btn-block", data: { turbo_confirm: "Lock/unlock this account?" } %>
+            </div>
+          </div>
+        <% else %>
+          <p class="text-muted fs-13 italic m-0">You are currently inspecting your own Master Admin account.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

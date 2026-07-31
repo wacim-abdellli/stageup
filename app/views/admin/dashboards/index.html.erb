@@ -68,14 +68,25 @@
         <% if @pending_coordinators.any? %>
           <div class="inline-list-sm">
             <% @pending_coordinators.each do |coord| %>
+              <% domain_matched = coord.university.present? && coord.user.email.to_s.downcase.end_with?("@#{coord.university.email_domain.to_s.downcase}") %>
               <div class="inline-list-sm-item">
                 <div>
-                  <strong class="inline-list-sm-title"><%= coord.admin_name %></strong>
+                  <div class="flex-row align-center gap-8 mb-2">
+                    <strong class="inline-list-sm-title">
+                      <%= link_to coord.admin_name, admin_user_path(coord.user), class: "offer-mgmt-link" %>
+                    </strong>
+                    <% if domain_matched %>
+                      <span class="badge badge-verified fs-10">✓ Domain Matched</span>
+                    <% else %>
+                      <span class="badge badge-pending fs-10">⚠️ Domain Check Needed</span>
+                    <% end %>
+                  </div>
                   <span class="inline-list-sm-meta">
-                    <%= coord.user.email %> &middot; <%= coord.department %> &middot; <%= coord.university.name %>
+                    <%= coord.user.email %> &middot; <%= coord.department %> &middot; <strong><%= coord.university.name %></strong>
                   </span>
                 </div>
                 <div class="action-group-8">
+                  <%= link_to t('common.inspect', default: 'Inspect'), admin_user_path(coord.user), class: "btn btn-secondary btn-compact-sm" %>
                   <%= button_to t('admin.dashboard.coordinators.approve'), approve_admin_university_profile_path(coord), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: t('admin.dashboard.coordinators.approving') } %>
                   <%= button_to t('admin.dashboard.coordinators.reject'), reject_admin_university_profile_path(coord), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: t('admin.dashboard.coordinators.reject_confirm') } %>
                 </div>
@@ -106,13 +117,13 @@
             <% @unverified_companies.each do |company| %>
               <div class="inline-list-sm-item">
                 <div>
-                  <strong class="inline-list-sm-title"><%= link_to company.name, company_profile_path(company), target: "_blank", class: "btn-link-sm" %></strong>
+                  <strong class="inline-list-sm-title"><%= link_to company.name, company_profile_path(company), target: "_blank", class: "offer-mgmt-link" %></strong>
                   <span class="inline-list-sm-meta">
                     <%= company.user.email %> &middot; <%= company.website.present? ? link_to(company.website, company.website, target: "_blank", class: "btn-link-sm fs-11") : t('admin.dashboard.companies.no_website', default: 'No website') %>
                   </span>
                 </div>
                 <div class="action-group-8">
-                  <%= link_to t('common.inspect', default: 'Profile'), company_profile_path(company), target: "_blank", class: "btn btn-secondary btn-compact-sm" %>
+                  <%= link_to t('common.inspect', default: 'Inspect'), admin_user_path(company.user), class: "btn btn-secondary btn-compact-sm" %>
                   <%= button_to t('admin.dashboard.companies.verify'), verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: t('admin.dashboard.companies.verifying') } %>
                 </div>
               </div>
