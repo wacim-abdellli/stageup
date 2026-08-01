@@ -8,10 +8,12 @@ module Rateable
   end
 
   def recalculate_average_rating!
-    result = Review.where(receiver: user).pick("AVG(rating)")
-    avg = result ? result.to_f.round(1) : nil
-    update_columns(cached_average_rating: avg) if persisted?
-    avg
+    with_lock do
+      result = Review.where(receiver: user).pick("AVG(rating)")
+      avg = result ? result.to_f.round(1) : nil
+      update_columns(cached_average_rating: avg) if persisted?
+      avg
+    end
   end
 
   def reviews_received_count

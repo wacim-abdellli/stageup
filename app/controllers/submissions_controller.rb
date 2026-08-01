@@ -162,12 +162,14 @@ class SubmissionsController < ApplicationController
     ActiveRecord::Base.transaction do
       @submission.update!(status: "abandoned", responded_at: Time.current)
       student = @submission.student_profile
-      student.commitment_events.create!(
-        event_type: "student_abandoned_mission",
-        score_delta: -25.0,
-        description: "Abandoned internship '#{@submission.offer.title}' at #{@submission.offer.company_profile.name}."
-      )
-      student.recalculate_commitment_score!
+      student.with_lock do
+        student.commitment_events.create!(
+          event_type: "student_abandoned_mission",
+          score_delta: -25.0,
+          description: "Abandoned internship '#{@submission.offer.title}' at #{@submission.offer.company_profile.name}."
+        )
+        student.recalculate_commitment_score!
+      end
       company_user = @submission.offer.company_profile.user
       Notification.trigger(
         recipient: company_user,
@@ -192,12 +194,14 @@ class SubmissionsController < ApplicationController
     ActiveRecord::Base.transaction do
       @submission.update!(status: "cancelled", responded_at: Time.current)
       company = @submission.offer.company_profile
-      company.commitment_events.create!(
-        event_type: "company_cancelled_internship",
-        score_delta: -15.0,
-        description: "Internship for '#{@submission.offer.title}' cancelled by company '#{company.name}'."
-      )
-      company.recalculate_commitment_score!
+      company.with_lock do
+        company.commitment_events.create!(
+          event_type: "company_cancelled_internship",
+          score_delta: -15.0,
+          description: "Internship for '#{@submission.offer.title}' cancelled by company '#{company.name}'."
+        )
+        company.recalculate_commitment_score!
+      end
       student_user = @submission.student_profile.user
       Notification.trigger(
         recipient: student_user,
@@ -220,8 +224,10 @@ class SubmissionsController < ApplicationController
       return
     end
     role = current_user.profileable_type
-    @submission.with_lock do
-      @submission.confirm_completion_by!(role)
+    ActiveRecord::Base.transaction do
+      @submission.with_lock do
+        @submission.confirm_completion_by!(role)
+      end
     end
     if @submission.status == "completed"
       other_party = role == "StudentProfile" ? @submission.offer.company_profile.user : @submission.student_profile.user

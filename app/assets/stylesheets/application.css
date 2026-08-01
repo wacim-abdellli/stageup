@@ -10067,3 +10067,30 @@ html[dir="rtl"] .admin-table {
 html[dir="rtl"] .role-card:hover .role-arrow {
   transform: translateY(-50%) translateX(-4px) scaleX(-1);
 }
+
+/* ── Light Mode Token Refinements ── */
+[data-theme="light"] .btn-primary {
+  background-color: #0F172A;
+  color: #FFFFFF;
+  border-color: rgba(15, 23, 42, 0.25);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .btn-primary:hover {
+  background-color: #1E293B;
+  color: #FFFFFF;
+}
+
+[data-theme="light"] a:hover {
+  color: #4338CA;
+}
+
+[data-theme="light"] input[type="date"].form-control {
+  color-scheme: light;
+}
+
+[data-theme="light"] input[type="checkbox"] {
+  border-color: rgba(15, 23, 42, 0.25);
+  background-color: rgba(15, 23, 42, 0.04);
+}
+
