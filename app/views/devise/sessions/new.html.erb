@@ -32,7 +32,7 @@
       <% end %>
 
       <div class="mt-30">
-        <%= f.submit t("sessions.new.submit"), class: "btn btn-accent btn-block", style: "cursor: pointer;", data: { turbo_submits_with: t("sessions.new.submit") } %>
+        <%= f.submit t("sessions.new.submit"), class: "btn btn-accent btn-block", data: { turbo_submits_with: t("sessions.new.submitting", default: "Signing in...") } %>
       </div>
     <% end %>
 
