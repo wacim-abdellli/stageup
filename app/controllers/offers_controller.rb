@@ -21,7 +21,7 @@ class OffersController < ApplicationController
     @total_count = @offers.count
     @total_pages = (@total_count.to_f / per_page).ceil
     @current_page = page
-    @offers = @offers.includes(:skills, company_profile: :user).order(created_at: :desc).limit(per_page).offset((page - 1) * per_page)
+    @offers = @offers.includes(:skills, :mission, company_profile: :user).order(created_at: :desc).limit(per_page).offset((page - 1) * per_page)
   end
 
   def show

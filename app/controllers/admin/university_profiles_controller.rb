@@ -27,7 +27,11 @@ module Admin
         message: "Your university coordinator account has been approved. You can now manage internship agreements.",
         notifiable: @profile
       )
-      UserMailer.coordinator_approved_email(@profile.user, @profile).deliver_later rescue nil
+      begin
+        UserMailer.coordinator_approved_email(@profile.user, @profile).deliver_later
+      rescue StandardError => e
+        Rails.logger.error("[Mailer] coordinator_approved_email failed: #{e.message}")
+      end
       redirect_back fallback_location: admin_dashboard_path, notice: "#{@profile.admin_name} has been approved."
     end
 

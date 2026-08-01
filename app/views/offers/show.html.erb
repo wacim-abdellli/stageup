@@ -16,7 +16,7 @@
           <h2 class="offer-title-lg"><%= @offer.title %></h2>
           <span class="offer-company"><%= @company.name %>
             <% if current_user&.profileable_type == "StudentProfile" %>
-              <% breakdown = @offer.match_breakdown_for(current_user.profileable) rescue nil %>
+              <% breakdown = current_user&.profileable&.respond_to?(:skills) ? @offer.match_breakdown_for(current_user.profileable) : nil %>
               <% if breakdown && breakdown[:total] < 100 %>
                 <span class="match-badge match-badge-tooltip-wrapper ml-8 <%= breakdown[:total] >= 70 ? 'match-badge-high' : (breakdown[:total] >= 40 ? 'match-badge-medium' : 'match-badge-low') %>">
                   <%= breakdown[:total] %>% <%= t('offers.show.match_breakdown.match_label') %>

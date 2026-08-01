@@ -27,7 +27,11 @@ module Admin
         message: "Your company account has been verified. You can now post internship offers.",
         notifiable: @profile
       )
-      UserMailer.company_verified_email(@profile.user, @profile).deliver_later rescue nil
+      begin
+        UserMailer.company_verified_email(@profile.user, @profile).deliver_later
+      rescue StandardError => e
+        Rails.logger.error("[Mailer] company_verified_email failed: #{e.message}")
+      end
       redirect_back fallback_location: admin_dashboard_path, notice: "#{@profile.name} has been verified."
     end
 

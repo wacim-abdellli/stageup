@@ -19,13 +19,13 @@ class DashboardsController < ApplicationController
       @avg_rating = @profile.cached_average_rating
     elsif @role_type == "CompanyProfile"
       company_subs = @profile.submissions.where(status: [ "accepted", "completed" ])
-      @active_internships = company_subs.includes(:student_profile, :offer, :reviews, :internship_agreement).order(created_at: :desc)
+      @active_internships = company_subs.includes(student_profile: :university, offer: :company_profile, reviews: [], internship_agreement: []).order(created_at: :desc)
       @completed_internships_count = @profile.submissions.where(status: "completed").count
       @offers_count = @profile.offers.count
 
       offer_ids = @profile.offers.select(:id)
       pending = Submission.where(offer_id: offer_ids).where(status: %w[submitted under_review])
-      @pending_submissions = pending.includes(:offer, student_profile: { cv_attachment: :blob }).order(created_at: :desc)
+      @pending_submissions = pending.includes(:offer, student_profile: [:university, { cv_attachment: :blob }]).order(created_at: :desc)
 
       processed = Submission.where(offer_id: offer_ids).where(status: [ "accepted", "rejected", "completed" ])
       @processed_submissions = processed.includes(:student_profile, :offer).order(responded_at: :desc).limit(10)

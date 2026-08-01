@@ -21,8 +21,10 @@ Rails.application.configure do
   # Enable serving of static files from the /public folder
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present? || ENV["VERCEL"].present? || true
 
-  # Secret key base fallback for Vercel serverless deployments
-  config.secret_key_base = ENV.fetch("SECRET_KEY_BASE", "a_secure_stageup_production_secret_key_base_token_2026_vercel")
+  # Secret key base must be set via environment variable in production.
+  # On Vercel/Railway/Render, set SECRET_KEY_BASE in the dashboard.
+  # Generate one with: rails secret
+  config.secret_key_base = ENV.fetch("SECRET_KEY_BASE")
 
   # Don't crash if RAILS_MASTER_KEY is missing — credentials are optional on Vercel
   config.require_master_key = false
@@ -36,10 +38,10 @@ Rails.application.configure do
   # Assume all access to the app is happening through an SSL-terminating reverse proxy (Vercel edge).
   # Required so Rails recognizes request.scheme as "https" and matches Origin headers for CSRF protection.
   config.assume_ssl = true
-  config.force_ssl = false
+  config.force_ssl = true
 
   # Skip http-to-https redirect for the default health check endpoint.
-  # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
+  config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
   # Log to STDOUT with the current request id as a default log tag.
   config.log_tags = [ :request_id ]
