@@ -61,9 +61,8 @@ Rails.application.configure do
   config.cache_store = :memory_store
   config.active_job.queue_adapter = :async
 
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  config.action_mailer.raise_delivery_errors = true
+  # Do not raise email delivery errors in production if SMTP server is unconfigured or unreachable.
+  config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: ENV.fetch("APP_HOST", "stageup-ten.vercel.app"), protocol: "https" }
