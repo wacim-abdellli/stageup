@@ -37,6 +37,15 @@ class OffersControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Only verified recruiters can manage internship offers.", flash[:alert]
   end
 
+  test "verified company user cannot edit offer of another company" do
+    company_two = users(:company_user_two)
+    company_two.profileable.update!(verified: true)
+    sign_in company_two
+    get edit_offer_url(@offer)
+    assert_redirected_to dashboard_path
+    assert_equal "You can only manage your own offers.", flash[:alert]
+  end
+
   test "unverified company cannot access new offer form" do
     sign_in users(:company_user_two)
     get new_offer_url

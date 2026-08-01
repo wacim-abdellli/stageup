@@ -3,9 +3,9 @@
 class OffersController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
   before_action :ensure_company!, only: [ :new, :create, :edit, :update, :destroy, :publish ]
-  before_action :set_offer, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_public_offer, only: [ :show ]
+  before_action :set_company_offer, only: [ :edit, :update, :destroy, :publish ]
   before_action :require_auth_for_show!, only: [ :show ]
-  before_action :ensure_offer_owner!, only: [ :edit, :update, :destroy ]
 
   def index
     per_page = 20
@@ -93,7 +93,6 @@ class OffersController < ApplicationController
   end
 
   def publish
-    @offer = current_user.profileable.offers.find(params[:id])
     unless @offer.status == "draft"
       redirect_to dashboard_path, alert: "Only draft offers can be published."
       return
@@ -122,14 +121,14 @@ class OffersController < ApplicationController
     end
   end
 
-  def set_offer
+  def set_public_offer
     @offer = Offer.includes(:skills).find(params[:id])
   end
 
-  def ensure_offer_owner!
-    unless @offer.company_profile == current_user.profileable
-      redirect_to dashboard_path, alert: "You can only manage your own offers."
-    end
+  def set_company_offer
+    @offer = current_user.profileable.offers.includes(:skills).find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to dashboard_path, alert: "You can only manage your own offers."
   end
 
   def require_auth_for_show!
