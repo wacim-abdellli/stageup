@@ -273,6 +273,12 @@ class SubmissionsController < ApplicationController
       @submission = current_user.profileable.submissions.find(params[:id])
     elsif current_user.profileable_type == "CompanyProfile"
       @submission = Submission.joins(:offer).where(offers: { company_profile_id: current_user.profileable_id }).find(params[:id])
+    elsif current_user.profileable_type == "UniversityProfile"
+      profile = current_user.profileable
+      raise ActiveRecord::RecordNotFound unless profile.approved? && profile.university_id.present?
+      @submission = Submission.joins(:student_profile)
+                              .where(student_profiles: { university_id: profile.university_id })
+                              .find(params[:id])
     else
       redirect_to dashboard_path, alert: "Not authorized." and return
     end
