@@ -346,6 +346,12 @@
   top: 8px;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--bg-primary);
@@ -355,6 +361,38 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Global Mobile Touch & Auto-Zoom Safeguards */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px !important; /* Prevents unwanted iOS Safari page auto-zoom */
+  }
+
+  .btn,
+  button,
+  .form-control,
+  .nav-link,
+  .mobile-nav-link {
+    min-height: 44px; /* Touch target minimum height */
+  }
+
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -4925,6 +4963,7 @@ button.btn-accent:hover,
   top: calc(100% + 10px);
   right: 0;
   width: 320px;
+  max-width: min(320px, calc(100vw - 24px));
   background: rgba(13, 14, 18, 0.96);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -9095,7 +9134,19 @@ button.btn-accent:hover,
 
 @media (max-width: 992px) {
   .kanban-board {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 16px;
+    gap: 12px;
+  }
+
+  .kanban-col {
+    flex: 0 0 85vw;
+    max-width: 360px;
+    scroll-snap-align: start;
+    min-height: 460px;
   }
 }
 
@@ -10042,6 +10093,20 @@ html[dir="rtl"] .admin-table {
 
 .admin-table tr:last-child td {
   border-bottom: none;
+}
+
+/* Responsive Admin Tables Container */
+.admin-card-table-wrapper,
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .admin-table {
+    min-width: 600px; /* Ensures admin data columns retain formatting without clipping */
+  }
 }
 
 .role-type-badge {
