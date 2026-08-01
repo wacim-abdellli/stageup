@@ -7492,9 +7492,9 @@ button.btn-accent:hover,
 
 @media (max-width: 1024px) {
   .dashboard-grid { grid-template-columns: 1fr; }
-  .right-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .right-col { display: flex !important; flex-direction: column !important; gap: 16px !important; width: 100% !important; }
 }
-@media (max-width: 640px) { .right-col { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .right-col { display: flex !important; flex-direction: column !important; gap: 16px !important; width: 100% !important; } }
 
 .sticky-sidebar { position: sticky; top: 84px; }
 
