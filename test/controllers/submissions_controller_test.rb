@@ -281,7 +281,7 @@ class SubmissionsControllerTest < ActionDispatch::IntegrationTest
     )
 
     post confirm_completion_submission_path(sub)
-    assert_redirected_to dashboard_path
-    assert_match /Not authorized/, flash[:alert]
+    assert_redirected_to root_path
+    assert_match /The requested resource was not found/, flash[:alert]
   end
 end

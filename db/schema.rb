@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_28_213822) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_01_053500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
@@ -51,6 +52,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_28_213822) do
     t.float "score_delta", default: 0.0, null: false
     t.datetime "updated_at", null: false
     t.index ["profileable_type", "profileable_id", "created_at"], name: "index_commitment_events_on_profile_and_created_at"
+    t.index ["profileable_type", "profileable_id", "event_type"], name: "idx_commitment_events_profile_event_type"
     t.index ["profileable_type", "profileable_id"], name: "index_commitment_events_on_profileable"
   end
 
@@ -67,6 +69,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_28_213822) do
     t.datetime "updated_at", null: false
     t.boolean "verified", default: false, null: false
     t.string "website"
+    t.index ["name"], name: "idx_company_profiles_name_trgm", opclass: :gin_trgm_ops, using: :gin
   end
 
   create_table "internship_agreements", force: :cascade do |t|
@@ -126,7 +129,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_28_213822) do
     t.string "work_mode", default: "onsite", null: false
     t.index ["company_profile_id", "status"], name: "index_offers_on_company_profile_id_and_status"
     t.index ["company_profile_id"], name: "index_offers_on_company_profile_id"
+    t.index ["description"], name: "idx_offers_description_trgm", opclass: :gin_trgm_ops, using: :gin
     t.index ["status"], name: "index_offers_on_status"
+    t.index ["title"], name: "idx_offers_title_trgm", opclass: :gin_trgm_ops, using: :gin
   end
 
   create_table "offers_skills", id: false, force: :cascade do |t|
