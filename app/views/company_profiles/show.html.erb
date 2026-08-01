@@ -62,7 +62,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M3 21h18"/><path d="M19 21v-4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/></svg>
             <span><%= t('company_profiles.show.overview_heading', default: 'Company Overview') %></span>
           </h3>
-          <span class="fs-11 text-muted uppercase tracking-wide fw-600">About Employer</span>
+          <span class="fs-11 text-muted uppercase tracking-wide fw-600"><%= t('company_profiles.show.about_employer') %></span>
         </div>
         <div class="candidate-bio-box">
           <p class="color-secondary fs-14 line-height-16 margin-0">
@@ -79,7 +79,7 @@
             <span><%= t('company_profiles.show.active_missions_heading', count: @active_offers.count, default: "Active Internship Listings (#{@active_offers.count})") %></span>
           </h3>
           <% if @active_offers.any? %>
-            <span class="badge badge-info fs-11"><%= @active_offers.count %> Available</span>
+            <span class="badge badge-info fs-11"><%= t('company_profiles.show.available_badge', count: @active_offers.count) %></span>
           <% end %>
         </div>
 

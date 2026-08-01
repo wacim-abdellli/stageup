@@ -1,18 +1,18 @@
-<% content_for :title, "User Security Inspection – StageUp Admin" %>
+<% content_for :title, t('admin.users.show.title') %>
 
 <div class="dashboard-container">
   <div class="dashboard-header">
     <div class="dashboard-header-left">
       <div class="admin-badge mb-6">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>SECURITY & CREDENTIAL INSPECTOR</span>
+        <span><%= t('admin.users.show.badge') %></span>
       </div>
-      <h1 class="fs-22 fw-700">Account Audit: <%= @user.email %></h1>
-      <p class="header-meta">Detailed user profile inspection, domain validation, and credential verification</p>
+      <h1 class="fs-22 fw-700"><%= t('admin.users.show.heading') %> <%= @user.email %></h1>
+      <p class="header-meta"><%= t('admin.users.show.subtitle') %></p>
     </div>
     <div class="flex-row gap-10 align-center">
-      <%= link_to "Back to Users", admin_users_path, class: "btn btn-secondary btn-header" %>
-      <%= link_to "Admin Dashboard", admin_dashboard_path, class: "btn btn-secondary btn-header" %>
+      <%= link_to t('admin.users.show.back_to_users'), admin_users_path, class: "btn btn-secondary btn-header" %>
+      <%= link_to t('admin.users.show.admin_dashboard'), admin_dashboard_path, class: "btn btn-secondary btn-header" %>
     </div>
   </div>
 
@@ -22,41 +22,41 @@
       <div class="profile-card card-mb">
         <h2 class="section-heading mb-16">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-          Account Identity & Credentials
+          <%= t('admin.users.show.identity_heading') %>
         </h2>
 
         <div class="rep-stat-list">
           <div class="rep-stat-row">
-            <span class="rep-stat-label">Email Address</span>
+            <span class="rep-stat-label"><%= t('admin.users.show.email_label') %></span>
             <strong class="fs-13"><%= @user.email %></strong>
           </div>
           <div class="rep-stat-row">
-            <span class="rep-stat-label">Account Role</span>
+            <span class="rep-stat-label"><%= t('admin.users.show.role_label') %></span>
             <span class="role-type-badge role-<%= @user.profileable_type.tableize.singularize %>">
               <%= @user.profileable_type.gsub('Profile', '') %>
             </span>
           </div>
           <div class="rep-stat-row">
-            <span class="rep-stat-label">Registration Date</span>
+            <span class="rep-stat-label"><%= t('admin.users.show.registration_date_label') %></span>
             <span class="fs-13 text-muted"><%= @user.created_at.strftime("%B %d, %Y at %H:%M UTC") %></span>
           </div>
           <div class="rep-stat-row">
-            <span class="rep-stat-label">Admin Privileges</span>
+            <span class="rep-stat-label"><%= t('admin.users.show.admin_privileges_label') %></span>
             <span>
               <% if @user.admin? %>
-                <span class="badge badge-verified">ADMINISTRATOR</span>
+                <span class="badge badge-verified"><%= t('admin.users.show.administrator_badge') %></span>
               <% else %>
-                <span class="badge badge-closed">STANDARD USER</span>
+                <span class="badge badge-closed"><%= t('admin.users.show.standard_user_badge') %></span>
               <% end %>
             </span>
           </div>
           <div class="rep-stat-row">
-            <span class="rep-stat-label">Account Status</span>
+            <span class="rep-stat-label"><%= t('admin.users.show.account_status_label') %></span>
             <span>
               <% if @user.access_locked? %>
-                <span class="badge badge-danger">ACCOUNT LOCKED</span>
+                <span class="badge badge-danger"><%= t('admin.users.show.account_locked_badge') %></span>
               <% else %>
-                <span class="badge badge-verified">ACTIVE</span>
+                <span class="badge badge-verified"><%= t('admin.users.show.active_badge') %></span>
               <% end %>
             </span>
           </div>
@@ -73,12 +73,12 @@
           <div class="card-header-flex">
             <h2 class="section-heading m-0">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h4"/><path d="M18 9h2a2 2 0 0 1 2 2v11h-4"/></svg>
-              Academic Coordinator Verification Audit
+              <%= t('admin.users.show.coordinator_heading') %>
             </h2>
             <% if profile.approved? %>
-              <span class="badge badge-verified">APPROVED COORDINATOR</span>
+              <span class="badge badge-verified"><%= t('admin.users.show.approved_badge') %></span>
             <% else %>
-              <span class="badge badge-pending">PENDING APPROVAL</span>
+              <span class="badge badge-pending"><%= t('admin.users.show.pending_badge') %></span>
             <% end %>
           </div>
 
@@ -86,45 +86,45 @@
           <div class="inline-warning-box mt-16 mb-20 <%= domain_matched ? 'border-success' : 'border-amber' %>">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="<%= domain_matched ? 'var(--emerald)' : 'var(--accent-amber)' %>" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             <div>
-              <strong>Security Audit Signal:</strong>
+              <strong><%= t('admin.users.show.audit_signal') %></strong>
               <% if domain_matched %>
-                <span class="text-success">Email domain matches the official university domain (<code>@<%= uni.email_domain %></code>). High authenticity confidence.</span>
+                <span class="text-success"><%= t('admin.users.show.domain_match', domain: "@#{uni.email_domain}") %></span>
               <% else %>
-                <span class="text-amber">Email domain (<code><%= @user.email.split('@').last %></code>) does not match the official university domain (<code>@<%= uni&.email_domain %></code>). Inspect department credentials carefully.</span>
+                <span class="text-amber"><%= t('admin.users.show.domain_mismatch', user_domain: @user.email.split('@').last, uni_domain: "@#{uni&.email_domain}") %></span>
               <% end %>
             </div>
           </div>
 
           <div class="rep-stat-list">
             <div class="rep-stat-row">
-              <span class="rep-stat-label">Coordinator Name</span>
+              <span class="rep-stat-label"><%= t('admin.users.show.coordinator_name_label') %></span>
               <strong class="fs-14"><%= profile.admin_name %></strong>
             </div>
             <div class="rep-stat-row">
-              <span class="rep-stat-label">Academic Department</span>
+              <span class="rep-stat-label"><%= t('admin.users.show.department_label') %></span>
               <span class="fs-13"><%= profile.department %></span>
             </div>
             <div class="rep-stat-row">
-              <span class="rep-stat-label">Institution</span>
+              <span class="rep-stat-label"><%= t('admin.users.show.institution_label') %></span>
               <strong class="fs-13 text-primary"><%= uni&.name %></strong>
             </div>
             <div class="rep-stat-row">
-              <span class="rep-stat-label">Official Domain</span>
+              <span class="rep-stat-label"><%= t('admin.users.show.official_domain_label') %></span>
               <code><%= uni&.email_domain %></code>
             </div>
             <div class="rep-stat-row">
-              <span class="rep-stat-label">Registered Students</span>
-              <span class="badge badge-tag"><%= StudentProfile.where(university: uni).count %> students</span>
+              <span class="rep-stat-label"><%= t('admin.users.show.registered_students_label') %></span>
+              <span class="badge badge-tag"><%= t('admin.users.show.students_count', count: StudentProfile.where(university: uni).count) %></span>
             </div>
           </div>
 
           <div class="mt-24 action-group-8">
             <% if profile.approved? %>
-              <%= button_to "Revoke Approval", unapprove_admin_university_profile_path(profile), method: :post, class: "btn btn-secondary", data: { turbo_confirm: "Revoke coordinator approval? They will lose access to signing agreements." } %>
+              <%= button_to t('admin.users.show.revoke_approval'), unapprove_admin_university_profile_path(profile), method: :post, class: "btn btn-secondary", data: { turbo_confirm: t('admin.users.show.revoke_approval_confirm') } %>
             <% else %>
-              <%= button_to "Approve Coordinator", approve_admin_university_profile_path(profile), method: :post, class: "btn btn-primary", data: { turbo_submits_with: "Approving…" } %>
+              <%= button_to t('admin.users.show.approve_coordinator'), approve_admin_university_profile_path(profile), method: :post, class: "btn btn-primary", data: { turbo_submits_with: t('admin.users.show.approving') } %>
             <% end %>
-            <%= button_to "Delete Account", reject_admin_university_profile_path(profile), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Permanently delete this coordinator account?" } %>
+            <%= button_to t('admin.users.show.delete_account'), reject_admin_university_profile_path(profile), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: t('admin.users.show.delete_account_confirm') } %>
           </div>
         </div>
 
@@ -134,44 +134,44 @@
           <div class="card-header-flex">
             <h2 class="section-heading m-0">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--indigo)" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              Employer Audit & Verification
+              <%= t('admin.users.show.employer_heading') %>
             </h2>
             <% if company.verified? %>
-              <span class="badge badge-verified">VERIFIED EMPLOYER</span>
+              <span class="badge badge-verified"><%= t('admin.users.show.verified_employer_badge') %></span>
             <% else %>
-              <span class="badge badge-pending">PENDING VERIFICATION</span>
+              <span class="badge badge-pending"><%= t('admin.users.show.pending_verification_badge') %></span>
             <% end %>
           </div>
 
           <div class="rep-stat-list mt-16">
             <div class="rep-stat-row">
-              <span class="rep-stat-label">Company Name</span>
+              <span class="rep-stat-label"><%= t('admin.users.show.company_name_label') %></span>
               <strong class="fs-14"><%= company.name %></strong>
             </div>
             <div class="rep-stat-row">
-              <span class="rep-stat-label">Official Website</span>
+              <span class="rep-stat-label"><%= t('admin.users.show.website_label') %></span>
               <% if company.website.present? %>
                 <%= link_to company.website, company.website, target: "_blank", class: "btn-link-sm fs-13" %>
               <% else %>
-                <span class="text-muted fs-12 italic">No website provided</span>
+                <span class="text-muted fs-12 italic"><%= t('admin.users.show.no_website') %></span>
               <% end %>
             </div>
             <div class="rep-stat-row">
-              <span class="rep-stat-label">Offers Posted</span>
-              <span class="badge badge-tag"><%= company.offers.count %> offers</span>
+              <span class="rep-stat-label"><%= t('admin.users.show.offers_posted_label') %></span>
+              <span class="badge badge-tag"><%= t('admin.users.show.offers_count', count: company.offers.count) %></span>
             </div>
             <div class="rep-stat-row">
-              <span class="rep-stat-label">Company Description</span>
-              <p class="fs-13 text-secondary m-0"><%= company.description.presence || "No description provided." %></p>
+              <span class="rep-stat-label"><%= t('admin.users.show.description_label') %></span>
+              <p class="fs-13 text-secondary m-0"><%= company.description.presence || t('admin.users.show.no_description') %></p>
             </div>
           </div>
 
           <div class="mt-24 action-group-8">
-            <%= link_to "View Public Company Profile", company_profile_path(company), target: "_blank", class: "btn btn-secondary" %>
+            <%= link_to t('admin.users.show.view_company_profile'), company_profile_path(company), target: "_blank", class: "btn btn-secondary" %>
             <% if company.verified? %>
-              <%= button_to "Revoke Verification", unverify_admin_company_profile_path(company), method: :post, class: "btn btn-secondary" %>
+              <%= button_to t('admin.users.show.revoke_verification'), unverify_admin_company_profile_path(company), method: :post, class: "btn btn-secondary" %>
             <% else %>
-              <%= button_to "Verify Company", verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary", data: { turbo_submits_with: "Verifying…" } %>
+              <%= button_to t('admin.users.show.verify_company'), verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary", data: { turbo_submits_with: t('admin.users.show.verifying') } %>
             <% end %>
           </div>
         </div>
@@ -183,23 +183,23 @@
       <div class="profile-card">
         <h2 class="section-heading mb-16">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Admin Security Controls
+          <%= t('admin.users.show.security_controls_heading') %>
         </h2>
 
         <% unless @user == current_user %>
           <div class="flex-column gap-12">
             <div>
-              <span class="form-label">Toggle System Admin Role</span>
-              <%= button_to @user.admin? ? "Revoke Admin Rights" : "Grant Admin Rights", toggle_admin_admin_user_path(@user), method: :post, class: "btn #{@user.admin? ? 'btn-secondary' : 'btn-primary'} btn-block", data: { turbo_confirm: "Are you sure you want to change admin privileges for #{@user.email}?" } %>
+              <span class="form-label"><%= t('admin.users.show.toggle_admin_heading') %></span>
+              <%= button_to @user.admin? ? t('admin.users.show.revoke_admin') : t('admin.users.show.grant_admin'), toggle_admin_admin_user_path(@user), method: :post, class: "btn #{@user.admin? ? 'btn-secondary' : 'btn-primary'} btn-block", data: { turbo_confirm: t('admin.users.show.toggle_admin_confirm', email: @user.email) } %>
             </div>
 
             <div class="mt-12">
-              <span class="form-label">Account Access Lock</span>
-              <%= button_to @user.access_locked? ? "Unlock Account" : "Lock Account", toggle_lock_admin_user_path(@user), method: :post, class: "btn btn-secondary btn-block", data: { turbo_confirm: "Lock/unlock this account?" } %>
+              <span class="form-label"><%= t('admin.users.show.account_lock_heading') %></span>
+              <%= button_to @user.access_locked? ? t('admin.users.show.unlock_account') : t('admin.users.show.lock_account'), toggle_lock_admin_user_path(@user), method: :post, class: "btn btn-secondary btn-block", data: { turbo_confirm: t('admin.users.show.toggle_lock_confirm') } %>
             </div>
           </div>
         <% else %>
-          <p class="text-muted fs-13 italic m-0">You are currently inspecting your own Master Admin account.</p>
+          <p class="text-muted fs-13 italic m-0"><%= t('admin.users.show.self_inspection_warning') %></p>
         <% end %>
       </div>
     </div>

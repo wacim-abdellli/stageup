@@ -2,6 +2,7 @@
 
 class UserMailer < ApplicationMailer
   def application_received_email(user, submission)
+    return if user.nil? || user.email.blank?
     @user = user
     @submission = submission
     @offer = submission.offer
@@ -10,6 +11,7 @@ class UserMailer < ApplicationMailer
   end
 
   def application_status_updated_email(user, submission)
+    return if user.nil? || user.email.blank?
     @user = user
     @submission = submission
     @offer = submission.offer
@@ -19,6 +21,7 @@ class UserMailer < ApplicationMailer
   end
 
   def agreement_signature_requested_email(user, agreement)
+    return if user.nil? || user.email.blank?
     @user = user
     @agreement = agreement
     @submission = agreement.submission
@@ -27,6 +30,7 @@ class UserMailer < ApplicationMailer
   end
 
   def agreement_declined_email(user, agreement)
+    return if user.nil? || user.email.blank?
     @user = user
     @agreement = agreement
     @submission = agreement.submission
@@ -36,12 +40,14 @@ class UserMailer < ApplicationMailer
   end
 
   def coordinator_approved_email(user, profile)
+    return if user.nil? || user.email.blank?
     @user = user
     @profile = profile
     mail(to: @user.email, subject: t('user_mailer.coordinator_approved.subject'))
   end
 
   def company_verified_email(user, profile)
+    return if user.nil? || user.email.blank?
     @user = user
     @profile = profile
     mail(to: @user.email, subject: t('user_mailer.company_verified.subject'))

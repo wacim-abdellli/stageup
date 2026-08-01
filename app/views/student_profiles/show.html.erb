@@ -22,7 +22,7 @@
             <div class="candidate-avatar-circle">
               <span><%= @student_profile.first_name.first.upcase rescue 'S' %></span>
             </div>
-            <span class="candidate-avatar-status" title="Active Verified Candidate"></span>
+            <span class="candidate-avatar-status" title="<%= t('student_profiles.show.verified_title') %>"></span>
           </div>
 
           <div class="candidate-title-block">
@@ -30,7 +30,7 @@
               <h1 class="candidate-name margin-0"><%= @student_profile.first_name %> <%= @student_profile.last_name %></h1>
               <span class="badge-verified-candidate">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" class="mr-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                Verified Candidate
+                <%= t('student_profiles.show.verified_badge') %>
               </span>
             </div>
 
@@ -65,7 +65,7 @@
       <div class="candidate-metrics-bar mt-24">
         <% score = @student_profile.commitment_score.round(0) rescue 100 %>
         <div class="candidate-metric-item">
-          <span class="metric-label">Commitment Score</span>
+          <span class="metric-label"><%= t('student_profiles.show.commitment_score') %></span>
           <div class="metric-val flex-align-center gap-6">
             <span class="metric-num <%= score >= 90 ? 'score-high' : (score >= 70 ? 'score-mid' : 'score-low') %>"><%= score %></span>
             <span class="metric-total">/ 100</span>
@@ -75,7 +75,7 @@
         <div class="metric-divider"></div>
 
         <div class="candidate-metric-item">
-          <span class="metric-label">Employer Rating</span>
+          <span class="metric-label"><%= t('student_profiles.show.employer_rating') %></span>
           <div class="metric-val flex-align-center gap-6">
             <span class="metric-num color-primary"><%= @avg_rating ? "#{@avg_rating}" : "5.0" %></span>
             <span class="fs-14 color-amber">★</span>
@@ -85,10 +85,10 @@
         <div class="metric-divider"></div>
 
         <div class="candidate-metric-item">
-          <span class="metric-label">Verified Missions</span>
+          <span class="metric-label"><%= t('student_profiles.show.verified_missions') %></span>
           <div class="metric-val flex-align-center gap-6">
             <span class="metric-num color-primary"><%= @completed_submissions.count %></span>
-            <span class="fs-12 text-muted">Completed</span>
+            <span class="fs-12 text-muted"><%= t('student_profiles.show.completed') %></span>
           </div>
         </div>
       </div>
@@ -121,7 +121,7 @@
             <span><%= t('dashboard.profile_bento.skills', default: 'Technical Stack & Skills') %></span>
           </h3>
           <% if @student_profile.skills.any? %>
-            <span class="fs-12 text-muted fw-600"><%= @student_profile.skills.count %> Skills Verified</span>
+            <span class="fs-12 text-muted fw-600"><%= t('student_profiles.show.skills_verified', count: @student_profile.skills.count) %></span>
           <% end %>
         </div>
 
@@ -163,7 +163,7 @@
                 </div>
                 <span class="badge-status-verified">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" class="mr-4"><polyline points="20 6 9 17 4 12"/></svg>
-                  Verified Completion
+                  <%= t('student_profiles.show.verified_completion') %>
                 </span>
               </div>
             <% end %>
@@ -180,25 +180,25 @@
 
       <%# Academic Info Card %>
       <div class="candidate-sidebar-card mb-24">
-        <h4 class="candidate-sidebar-title mb-16">Academic Details</h4>
+        <h4 class="candidate-sidebar-title mb-16"><%= t('student_profiles.show.academic_details') %></h4>
         <div class="info-list">
           <div class="info-row flex-between py-8 border-bottom-subtle">
-            <span class="info-label text-muted fs-13">University</span>
-            <strong class="info-val fs-13 color-primary"><%= @student_profile.university&.name || 'Autonomous Student' %></strong>
+            <span class="info-label text-muted fs-13"><%= t('student_profiles.show.university_label') %></span>
+            <strong class="info-val fs-13 color-primary"><%= @student_profile.university&.name || t('student_profiles.show.autonomous_student') %></strong>
           </div>
           <div class="info-row flex-between py-8 border-bottom-subtle">
-            <span class="info-label text-muted fs-13">Major</span>
+            <span class="info-label text-muted fs-13"><%= t('student_profiles.show.major_label') %></span>
             <strong class="info-val fs-13 color-primary"><%= @student_profile.major.presence || 'Computer Science' %></strong>
           </div>
           <% if @student_profile.graduation_year %>
             <div class="info-row flex-between py-8 border-bottom-subtle">
-              <span class="info-label text-muted fs-13">Class Of</span>
+              <span class="info-label text-muted fs-13"><%= t('student_profiles.show.class_of_label') %></span>
               <strong class="info-val fs-13 color-primary"><%= @student_profile.graduation_year %></strong>
             </div>
           <% end %>
           <% if @student_profile.phone.present? %>
             <div class="info-row flex-between py-8">
-              <span class="info-label text-muted fs-13">Contact Phone</span>
+              <span class="info-label text-muted fs-13"><%= t('student_profiles.show.phone_label') %></span>
               <strong class="info-val fs-13 color-primary"><%= @student_profile.phone %></strong>
             </div>
           <% end %>
@@ -208,8 +208,8 @@
       <%# Reputation Activity Ledger %>
       <div class="candidate-sidebar-card">
         <h4 class="candidate-sidebar-title mb-16 flex-between">
-          <span>Reputation Ledger</span>
-          <span class="badge badge-success fs-10">Verified</span>
+          <span><%= t('student_profiles.show.reputation_ledger') %></span>
+          <span class="badge badge-success fs-10"><%= t('student_profiles.show.verified') %></span>
         </h4>
 
         <% if @commitment_events.any? %>

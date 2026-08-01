@@ -76,9 +76,9 @@
                       <%= link_to coord.admin_name, admin_user_path(coord.user), class: "offer-mgmt-link" %>
                     </strong>
                     <% if domain_matched %>
-                      <span class="badge badge-verified fs-10">✓ Domain Matched</span>
+                      <span class="badge badge-verified fs-10"><%= t('admin.dashboard.coordinators.domain_matched') %></span>
                     <% else %>
-                      <span class="badge badge-pending fs-10">⚠️ Domain Check Needed</span>
+                      <span class="badge badge-pending fs-10"><%= t('admin.dashboard.coordinators.domain_check_needed') %></span>
                     <% end %>
                   </div>
                   <span class="inline-list-sm-meta">
