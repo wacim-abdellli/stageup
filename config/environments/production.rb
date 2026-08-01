@@ -69,13 +69,15 @@ Rails.application.configure do
 
   # Specify outgoing SMTP server. Set SMTP_HOST, SMTP_PORT, SMTP_USERNAME, and SMTP_PASSWORD via env vars.
   config.action_mailer.delivery_method = :smtp
+  smtp_port = ENV.fetch("SMTP_PORT", 587).to_i
   config.action_mailer.smtp_settings = {
     address: ENV.fetch("SMTP_HOST", "smtp.postmarkapp.com"),
-    port: ENV.fetch("SMTP_PORT", 587).to_i,
+    port: smtp_port,
     user_name: ENV.fetch("SMTP_USERNAME", ""),
     password: ENV.fetch("SMTP_PASSWORD", ""),
-    authentication: :plain,
-    enable_starttls_auto: true
+    authentication: ENV.fetch("SMTP_AUTHENTICATION", "plain").to_sym,
+    enable_starttls_auto: smtp_port != 465,
+    ssl: smtp_port == 465
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
