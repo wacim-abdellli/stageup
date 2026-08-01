@@ -464,7 +464,7 @@
           </div>
           <div class="flex-align-center gap-12">
             <%= link_to t('common.cancel', default: 'Cancel'), dashboard_path, class: "btn btn-secondary btn-compact" %>
-            <%= f.submit t('users.edit.save_changes', default: 'Save Changes'), class: "btn btn-primary btn-compact px-20" %>
+            <%= f.submit t('users.edit.save_changes', default: 'Save Changes'), class: "btn btn-primary btn-compact px-20", data: { turbo_submits_with: t('users.edit.save_changes', default: 'Save Changes') } %>
           </div>
         </div>
 

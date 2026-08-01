@@ -313,7 +313,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary close-modal-trigger"><%= t('common.cancel') %></button>
-            <%= f.submit t('offers.show.application.confirm_submit_cv'), class: "btn btn-primary", data: { disable_with: t('common.loading') } %>
+            <%= f.submit t('offers.show.application.confirm_submit_cv'), class: "btn btn-primary", data: { turbo_submits_with: t('common.loading') } %>
           </div>
         <% end %>
       </div>

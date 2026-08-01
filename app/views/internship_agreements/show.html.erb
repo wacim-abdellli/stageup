@@ -168,7 +168,7 @@
             <%= text_area_tag :rejection_reason, nil, placeholder: t('dashboard.internship_agreements.show.decline_placeholder'), class: "decline-textarea", required: true %>
             <div class="decline-actions">
               <button type="button" class="btn btn-secondary btn-compact-sm" onclick="document.getElementById('decline-form').classList.add('d-none')"><%= t('dashboard.internship_agreements.show.cancel') %></button>
-              <%= f.submit t('dashboard.internship_agreements.show.confirm_decline'), class: "btn btn-secondary btn-compact-sm btn-decline-confirm", data: { disable_with: t('dashboard.internship_agreements.show.declining') } %>
+              <%= f.submit t('dashboard.internship_agreements.show.confirm_decline'), class: "btn btn-secondary btn-compact-sm btn-decline-confirm", data: { turbo_submits_with: t('dashboard.internship_agreements.show.declining') } %>
             </div>
           <% end %>
         </div>

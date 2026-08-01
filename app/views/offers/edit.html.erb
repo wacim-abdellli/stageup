@@ -102,7 +102,7 @@
 
       <div class="form-footer">
         <%= link_to t("common.cancel"), offer_path(@offer), class: "btn btn-secondary btn-cancel" %>
-        <%= f.submit t("offers.edit.form.submit"), class: "btn btn-primary btn-submit", data: { disable_with: t("offers.edit.form.submitting") } %>
+        <%= f.submit t("offers.edit.form.submit"), class: "btn btn-primary btn-submit", data: { turbo_submits_with: t("offers.edit.form.submitting") } %>
       </div>
 
     <% end %>

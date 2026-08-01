@@ -27,7 +27,7 @@
       </div>
 
       <div class="form-group mt-30">
-        <%= f.submit t("passwords.new.submit"), class: "btn btn-accent" %>
+        <%= f.submit t("passwords.new.submit"), class: "btn btn-accent", data: { turbo_submits_with: t("passwords.new.submit") } %>
       </div>
     <% end %>
 

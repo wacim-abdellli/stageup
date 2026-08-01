@@ -37,7 +37,7 @@
 
       <div class="form-footer-row">
         <%= link_to t('common.cancel'), dashboard_path, class: "btn btn-secondary" %>
-        <%= f.submit t('internship_agreements.new.form.generate'), class: "btn btn-primary", data: { disable_with: t('internship_agreements.new.form.generating') } %>
+        <%= f.submit t('internship_agreements.new.form.generate'), class: "btn btn-primary", data: { turbo_submits_with: t('internship_agreements.new.form.generating') } %>
       </div>
     <% end %>
   </div>

@@ -56,7 +56,7 @@
       <div class="form-footer">
         <%= link_to t("common.cancel"), dashboard_path, class: "btn btn-secondary btn-cancel" %>
         <%= f.submit t("dashboard.reviews.submit"), class: "btn btn-primary btn-submit",
-            data: { turbo_confirm: t("dashboard.reviews.turbo_confirm"), disable_with: t("dashboard.reviews.submitting") } %>
+            data: { turbo_confirm: t("dashboard.reviews.turbo_confirm"), turbo_submits_with: t("dashboard.reviews.submitting") } %>
       </div>
 
     <% end %>
