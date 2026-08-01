@@ -1811,6 +1811,25 @@ button.btn-accent:hover,
   flex-shrink: 0;
 }
 
+@media (max-width: 640px) {
+  .section-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .section-heading-row-right {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .section-heading-row-right .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
 .section-heading {
   font-size: 20px;
   margin-bottom: 20px;

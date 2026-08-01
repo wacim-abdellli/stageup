@@ -296,15 +296,43 @@
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 768px) {
     .navbar-inner {
-      grid-template-columns: auto 1fr auto;
-      gap: 12px;
-      padding: 0 16px;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 0 16px !important;
     }
 
-    .navbar-center {
-      display: none;
+    .navbar-center,
+    .nav-pill-container,
+    .nav-cta-btn,
+    .nav-avatar-name,
+    .lang-dropdown-wrapper,
+    .lang-switcher-container {
+      display: none !important;
+    }
+
+    .navbar-right {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    .nav-avatar-btn {
+      padding: 2px !important;
+      border-radius: 50% !important;
+      background: none !important;
+      border: none !important;
+    }
+
+    .nav-avatar-chevron {
+      display: none !important;
+    }
+
+    .navbar-hamburger {
+      display: flex !important;
     }
   }
 </style>
