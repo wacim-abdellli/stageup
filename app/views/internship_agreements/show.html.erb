@@ -114,7 +114,7 @@
             </div>
           <% else %>
             <% if current_user.profileable_type == "StudentProfile" && current_user.profileable == student && @agreement.status != "declined" %>
-              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: t('dashboard.internship_agreements.show.signing') } %>
+              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
             <% else %>
               <span class="agreement-unsigned-label"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
             <% end %>
@@ -132,7 +132,7 @@
             </div>
           <% else %>
             <% if current_user.profileable_type == "CompanyProfile" && current_user.profileable == company && @agreement.status != "declined" %>
-              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: t('dashboard.internship_agreements.show.signing') } %>
+              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
             <% else %>
               <span class="agreement-unsigned-label"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
             <% end %>
@@ -150,7 +150,7 @@
             </div>
           <% else %>
             <% if current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id && @agreement.status != "declined" %>
-              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { disable_with: t('dashboard.internship_agreements.show.signing') } %>
+              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
               <div class="mt-10">
                 <button type="button" class="btn btn-secondary btn-compact" onclick="document.getElementById('decline-form').classList.toggle('d-none')"><%= t('dashboard.internship_agreements.show.decline') %></button>
               </div>

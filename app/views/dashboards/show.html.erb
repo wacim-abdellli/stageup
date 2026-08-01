@@ -276,8 +276,8 @@
                           <%= t('dashboard.active_internships.waiting_employer') %>
                         </span>
                       <% else %>
-                        <%= button_to t('dashboard.active_internships.mark_completed'), confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success", data: { disable_with: t('dashboard.active_internships.completing') } %>
-                        <%= button_to t('dashboard.active_internships.abandon'), abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: t('dashboard.active_internships.abandon_confirm'), disable_with: t('dashboard.active_internships.abandoning') } %>
+                        <%= button_to t('dashboard.active_internships.mark_completed'), confirm_completion_submission_path(sub), method: :post, class: "btn btn-primary btn-compact-success", data: { turbo_submits_with: t('dashboard.active_internships.completing') } %>
+                        <%= button_to t('dashboard.active_internships.abandon'), abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger", data: { turbo_confirm: t('dashboard.active_internships.abandon_confirm'), turbo_submits_with: t('dashboard.active_internships.abandoning') } %>
                       <% end %>
 
                       <% if sub.internship_agreement %>

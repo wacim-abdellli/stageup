@@ -76,7 +76,7 @@
                         <span><%= t('admin.companies.revoke', default: 'Revoke Verification') %></span>
                       <% end %>
                     <% else %>
-                      <%= button_to verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: t('admin.dashboard.companies.verifying') } do %>
+                      <%= button_to verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary btn-compact-sm", data: { turbo_submits_with: t('admin.dashboard.companies.verifying') } do %>
                         <span><%= t('admin.dashboard.companies.verify', default: 'Verify Company') %></span>
                       <% end %>
                     <% end %>

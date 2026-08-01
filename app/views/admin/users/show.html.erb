@@ -122,7 +122,7 @@
             <% if profile.approved? %>
               <%= button_to "Revoke Approval", unapprove_admin_university_profile_path(profile), method: :post, class: "btn btn-secondary", data: { turbo_confirm: "Revoke coordinator approval? They will lose access to signing agreements." } %>
             <% else %>
-              <%= button_to "Approve Coordinator", approve_admin_university_profile_path(profile), method: :post, class: "btn btn-primary", data: { disable_with: "Approving…" } %>
+              <%= button_to "Approve Coordinator", approve_admin_university_profile_path(profile), method: :post, class: "btn btn-primary", data: { turbo_submits_with: "Approving…" } %>
             <% end %>
             <%= button_to "Delete Account", reject_admin_university_profile_path(profile), method: :post, class: "btn btn-secondary btn-compact-danger-sm", data: { turbo_confirm: "Permanently delete this coordinator account?" } %>
           </div>
@@ -171,7 +171,7 @@
             <% if company.verified? %>
               <%= button_to "Revoke Verification", unverify_admin_company_profile_path(company), method: :post, class: "btn btn-secondary" %>
             <% else %>
-              <%= button_to "Verify Company", verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary", data: { disable_with: "Verifying…" } %>
+              <%= button_to "Verify Company", verify_admin_company_profile_path(company), method: :post, class: "btn btn-primary", data: { turbo_submits_with: "Verifying…" } %>
             <% end %>
           </div>
         </div>

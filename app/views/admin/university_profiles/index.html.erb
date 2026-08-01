@@ -71,7 +71,7 @@
                         <span><%= t('admin.coordinators.revoke_approval', default: 'Revoke Approval') %></span>
                       <% end %>
                     <% else %>
-                      <%= button_to approve_admin_university_profile_path(coord), method: :post, class: "btn btn-primary btn-compact-sm", data: { disable_with: t('admin.dashboard.coordinators.approving') } do %>
+                      <%= button_to approve_admin_university_profile_path(coord), method: :post, class: "btn btn-primary btn-compact-sm", data: { turbo_submits_with: t('admin.dashboard.coordinators.approving') } do %>
                         <span><%= t('admin.dashboard.coordinators.approve', default: 'Approve') %></span>
                       <% end %>
                     <% end %>

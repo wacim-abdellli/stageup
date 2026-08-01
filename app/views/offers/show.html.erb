@@ -278,7 +278,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary close-modal-trigger"><%= t('common.cancel') %></button>
-          <%= button_to t('offers.show.application.confirm_start'), submissions_path(offer_id: @offer.id, mission_id: @offer.mission.id), class: "btn btn-primary", data: { disable_with: t('common.loading') } %>
+          <%= button_to t('offers.show.application.confirm_start'), submissions_path(offer_id: @offer.id, mission_id: @offer.mission.id), class: "btn btn-primary", data: { turbo_submits_with: t('common.loading') } %>
         </div>
       </div>
     </div>

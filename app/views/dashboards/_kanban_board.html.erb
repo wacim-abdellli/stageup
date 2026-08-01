@@ -61,11 +61,11 @@
             <% end %>
 
             <div class="kanban-card-row-actions">
-              <%= button_to accept_submission_path(sub), method: :post, class: "btn btn-primary btn-accept-half", data: { disable_with: "..." } do %>
+              <%= button_to accept_submission_path(sub), method: :post, class: "btn btn-primary btn-accept-half", data: { turbo_submits_with: "..." } do %>
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
                 <%= t('kanban.actions.accept', default: 'Accept') %>
               <% end %>
-              <%= button_to reject_submission_path(sub), method: :post, class: "btn btn-secondary btn-reject-half", data: { disable_with: "..." } do %>
+              <%= button_to reject_submission_path(sub), method: :post, class: "btn btn-secondary btn-reject-half", data: { turbo_submits_with: "..." } do %>
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 <%= t('kanban.actions.reject', default: 'Reject') %>
               <% end %>
