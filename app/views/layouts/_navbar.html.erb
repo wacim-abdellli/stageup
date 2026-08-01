@@ -180,12 +180,43 @@
       <span><%= t('nav.my_dashboard') %></span>
     <% end %>
 
+    <% if current_user.admin? %>
+      <%= link_to admin_dashboard_path, class: "mobile-nav-link mobile-nav-admin" do %>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span><%= t('admin.dashboard.title', default: 'Admin Panel') %></span>
+      <% end %>
+    <% end %>
+
+    <% my_nav_profile_path = case current_user.profileable_type
+                            when "StudentProfile" then student_profile_path(current_user.profileable)
+                            when "CompanyProfile" then company_profile_path(current_user.profileable)
+                            else nil
+                            end %>
+    <% if my_nav_profile_path %>
+      <%= link_to my_nav_profile_path, class: "mobile-nav-link" do %>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span><%= t('nav.view_my_profile', default: 'View My Public Profile') %></span>
+      <% end %>
+    <% end %>
+
     <% if current_user.profileable_type == "CompanyProfile" %>
       <%= link_to new_offer_path, class: "mobile-nav-link mobile-nav-cta" do %>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
         <span><%= t('nav.post_offer') %></span>
       <% end %>
     <% end %>
+
+    <div class="mobile-nav-divider"></div>
+
+    <%# Mobile Language Selector %>
+    <div class="mobile-lang-row">
+      <span class="mobile-lang-label"><%= t('common.language', default: 'Language') %>:</span>
+      <div class="mobile-lang-options">
+        <%= link_to "EN", url_for(locale: :en), class: "mobile-lang-opt #{'active' if I18n.locale == :en}" %>
+        <%= link_to "FR", url_for(locale: :fr), class: "mobile-lang-opt #{'active' if I18n.locale == :fr}" %>
+        <%= link_to "AR", url_for(locale: :ar), class: "mobile-lang-opt #{'active' if I18n.locale == :ar}" %>
+      </div>
+    </div>
 
     <div class="mobile-nav-divider"></div>
 
