@@ -6,9 +6,10 @@
 Proof-of-work missions · Reputation scoring · Official Convention de Stage
 
 [![Ruby](https://img.shields.io/badge/Ruby-3.3.11-CC342D?logo=ruby&logoColor=white)](https://www.ruby-lang.org/)
-[![Rails](https://img.shields.io/badge/Rails-8.1-CC0000?logo=rubyonrails&logoColor=white)](https://rubyonrails.org/)
+[![Rails](https://img.shields.io/badge/Rails-8.1.3-CC0000?logo=rubyonrails&logoColor=white)](https://rubyonrails.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![CI](https://github.com/your-org/stageup/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/stageup/actions)
+[![Tests](https://img.shields.io/badge/Tests-200_passing-brightgreen?logo=checkmarx&logoColor=white)](#running-the-test-suite)
+[![Security](https://img.shields.io/badge/Security-Audited-blueviolet?logo=shieldsdotio&logoColor=white)](#security)
 
 </div>
 
@@ -31,9 +32,9 @@ StageUp fixes this with three core mechanisms:
 | Role | What They Can Do |
 |------|-----------------|
 | **Student** | Browse offers, complete proof missions, track applications, sign agreements, leave reviews |
-| **Company** | Post offers with optional missions, review applications, accept/reject candidates, manage active internships |
-| **University Coordinator** | Monitor all students from their institution, review agreements, sign off on completions |
-| **Admin** | Verify company accounts, approve university coordinators |
+| **Company** | Post offers with optional missions, review applications via Kanban board, accept/reject candidates, manage active internships |
+| **University Coordinator** | Monitor all students from their institution, review and sign agreements, confirm completions |
+| **Master Admin** | Verify companies (with domain-match badge), approve/revoke university coordinators, inspect any user profile, lock/unlock accounts, grant/revoke admin privileges |
 
 ---
 
@@ -74,7 +75,7 @@ The fastest way to get running:
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/your-org/stageup.git
+git clone https://github.com/wacim-abdellli/stageup.git
 cd stageup
 
 # 2. Copy environment variables
@@ -95,7 +96,7 @@ The app will be available at **http://localhost:3000**
 
 ```bash
 # 1. Clone and enter the project
-git clone https://github.com/your-org/stageup.git
+git clone https://github.com/wacim-abdellli/stageup.git
 cd stageup
 
 # 2. Install Ruby dependencies
@@ -145,15 +146,25 @@ rails credentials:edit
 
 ## Running the Test Suite
 
+The test suite covers **200 tests** with **677 assertions** across 28 test files:
+
+| Category | Tests | Files |
+|---|---|---|
+| Controller tests | 82 | 10 |
+| Model tests | 93 | 12 |
+| Job tests | 10 | 2 |
+| Integration tests | 9 | 3 |
+| Mailer tests | 6 | 1 |
+
 ```bash
 # Run all tests
 rails test
 
-# Run system tests (requires Chrome)
-rails test:system
-
 # Run a specific test file
 rails test test/controllers/submissions_controller_test.rb
+
+# Run a specific test by name
+rails test test/controllers/offers_controller_test.rb -n "test_verified_company_user_cannot_edit_offer_of_another_company"
 ```
 
 ---
@@ -212,34 +223,37 @@ Only after all three signatures does the internship move toward formal completio
 
 ```
 app/
-  controllers/
-    admin/            → Company verification, university approval
-    users/            → Custom Devise registration with role selection
-    submissions_controller.rb   → Full application lifecycle
-    offers_controller.rb        → Offer management
-    internship_agreements_controller.rb
-    dashboards_controller.rb    → Role-specific dashboards
-    reviews_controller.rb
+  controllers/          → 19 controllers (13 user-facing + 6 admin)
+    admin/              → Company verification, coordinator approval, user inspection
+    users/              → Custom Devise registration with role selection
+    submissions_controller.rb   → Full application lifecycle (query-scoped per role)
+    offers_controller.rb        → Offer CRUD (split public/company scoping)
+    internship_agreements_controller.rb → Convention de Stage signing flow
+    dashboards_controller.rb    → Role-specific dashboards + Kanban board
+    reviews_controller.rb       → Post-internship review system
   models/
-    user.rb                     → Devise auth, polymorphic profileable
-    student_profile.rb          → CV, skills, commitment score
-    company_profile.rb          → Offers, response metrics, reputation
-    university_profile.rb       → Coordinator access
+    user.rb                     → Devise auth, polymorphic profileable, attr_readonly :admin
+    student_profile.rb          → CV, skills, commitment score (with_lock)
+    company_profile.rb          → Offers, response metrics, reputation (with_lock)
+    university_profile.rb       → Coordinator access with approval gate
     submission.rb               → Application state machine
-    offer.rb                    → Internship postings with missions
-    internship_agreement.rb     → Convention de Stage signing flow
+    offer.rb                    → Internship postings with optional missions
+    internship_agreement.rb     → Convention de Stage 3-party signing (with_lock)
     commitment_event.rb         → Audit log for score changes
     review.rb                   → Post-internship reviews
+    concerns/rateable.rb        → Thread-safe average rating calculation (with_lock)
   jobs/
-    verify_submission_job.rb    → Git repo verification via clone
+    verify_submission_job.rb    → Git repo verification (Open3, 100MB limit, ensure cleanup)
     reputation_tracker_job.rb   → Daily ghosting penalty sweep
-    resolve_expired_submissions_job.rb
+    resolve_expired_submissions_job.rb → Hourly expiration + auto-completion
+  channels/
+    notifications_channel.rb    → Real-time ActionCable per-user streaming
 config/
   recurring.yml     → Solid Queue recurring task schedule
   queue.yml         → Solid Queue worker configuration
   storage.yml       → Active Storage services (local/S3)
 db/
-  migrate/          → 24 migrations
+  migrate/          → 34 migrations (17 foreign keys, pg_trgm indexes)
   schema.rb         → Current DB schema
 ```
 
@@ -274,14 +288,35 @@ Production requires:
 
 ## Security
 
+### Authentication & Access Control
 - All passwords have a minimum length of **12 characters**
 - Accounts are **locked after 10 failed login attempts** and unlocked via email
 - Sessions **expire after 30 minutes** of inactivity
-- All file uploads verify the PDF magic bytes before accepting (prevents disguised executables)
-- Git repo URLs are validated against an allowlist of trusted hosts (GitHub, GitLab, Bitbucket) before cloning
+- Admin privilege escalation blocked via `attr_readonly :admin` + custom create validation
 - Rate limiting on signup, login, and password reset endpoints via Rack::Attack
+
+### IDOR & Authorization
+- **Every mutable controller action** uses query-scoped access (`current_user.profileable.resources.find`) — no unscoped `find` + separate auth check pattern
+- Submissions use **3-way role scoping** (Student / Company / University Coordinator)
+- Offers split into `set_public_offer` (read-only) and `set_company_offer` (mutations) with cross-company IDOR test coverage
+- University coordinators require `approved?` + `university_id` match for all agreement and submission access
+
+### Concurrency & Data Integrity
+- **9 row-locked mutations** using `with_lock` for all score recalculations, status transitions, and agreement signatures
+- `ActiveRecord::Base.transaction` wraps all multi-step operations (commit/abandon/cancel/complete)
+- `RecordNotUnique` rescue on duplicate submission creation
+- **17 foreign key constraints** + unique composite index on `submissions(student_profile_id, offer_id)`
+
+### Input Validation & Injection Prevention
+- All file uploads verify PDF magic bytes before accepting (prevents disguised executables)
+- Git repo URLs validated against an allowlist of trusted hosts (GitHub, GitLab, Bitbucket) before cloning
+- Repository verification uses `Open3.capture3` (array args, no shell interpolation) with 100MB size limit and guaranteed `ensure` cleanup
+- `ActionController::ParameterMissing` rescued without exposing internal parameter names
+
+### Transport & Headers
 - HTTPS enforced in production with HSTS headers
 - Full suite of security headers (X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
+- Content Security Policy with nonces for scripts and styles
 - Brakeman static analysis runs in CI on every push
 
 ---
