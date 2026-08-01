@@ -8,7 +8,7 @@ Proof-of-work missions · Reputation scoring · Official Convention de Stage
 [![Ruby](https://img.shields.io/badge/Ruby-3.3.11-CC342D?logo=ruby&logoColor=white)](https://www.ruby-lang.org/)
 [![Rails](https://img.shields.io/badge/Rails-8.1.3-CC0000?logo=rubyonrails&logoColor=white)](https://rubyonrails.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![Tests](https://img.shields.io/badge/Tests-200_passing-brightgreen?logo=checkmarx&logoColor=white)](#running-the-test-suite)
+[![Tests](https://img.shields.io/badge/Tests-201_passing-brightgreen?logo=checkmarx&logoColor=white)](#running-the-test-suite)
 [![Security](https://img.shields.io/badge/Security-Audited-blueviolet?logo=shieldsdotio&logoColor=white)](#security)
 
 </div>
@@ -146,7 +146,7 @@ rails credentials:edit
 
 ## Running the Test Suite
 
-The test suite covers **200 tests** with **677 assertions** across 28 test files:
+The test suite covers **201 tests** with **681 assertions** across 28 test files:
 
 | Category | Tests | Files |
 |---|---|---|
@@ -216,6 +216,14 @@ When a student is accepted, either party can generate a *Convention de Stage* �
 3. A university coordinator (if the student is affiliated with a partner university)
 
 Only after all three signatures does the internship move toward formal completion.
+
+### 🌍 Internationalization (I18n)
+The platform is fully trilingual (**English, French, Arabic**). All hardcoded UI strings, button labels, and flash messages have been externalized to locale dictionaries. The UI gracefully falls back and handles right-to-left (RTL) readiness.
+
+### 🚀 Performance & Resiliency
+- **Zero N+1 Queries:** Database fetching is strictly eager-loaded via `.includes` (e.g., fetching 50 active internships loads all associated student profiles, university details, and company offers in 4 queries instead of 200).
+- **Fuzzy Search:** `pg_trgm` GIN indexes power lightning-fast text searching across offers and company profiles.
+- **Mailer Safety:** All background mailers implement nil-safety guards to prevent `NoMethodError` crashes when accounts are deactivated or missing emails.
 
 ---
 
