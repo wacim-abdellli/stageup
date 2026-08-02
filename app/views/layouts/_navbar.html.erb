@@ -235,8 +235,17 @@
 
     <div class="mobile-nav-divider"></div>
 
-    <div class="mobile-nav-user-info">
-      <span class="mobile-nav-email"><%= current_user.email %></span>
+    <div class="mobile-nav-user-card">
+      <div class="mobile-nav-user-avatar">
+        <%= current_user.email[0].upcase %>
+      </div>
+      <div class="mobile-nav-user-details">
+        <span class="mobile-nav-user-name">
+          <% prof = current_user.profileable %>
+          <%= (prof.respond_to?(:first_name) && prof.first_name.present?) ? "#{prof.first_name} #{prof.last_name rescue ''}" : ((prof.respond_to?(:name) && prof.name.present?) ? prof.name : current_user.email.split('@').first) %>
+        </span>
+        <span class="mobile-nav-user-email" title="<%= current_user.email %>"><%= current_user.email %></span>
+      </div>
     </div>
 
     <%= button_to destroy_user_session_path,

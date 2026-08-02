@@ -7341,7 +7341,9 @@ button.btn-accent:hover,
 }
 
 .navbar-mobile-menu.open {
-  max-height: 400px;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   opacity: 1;
 }
 
