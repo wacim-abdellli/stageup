@@ -131,7 +131,7 @@
     <div class="dir-main">
 
       <div class="dir-list-header">
-        <h2 class="dir-list-title"><%= t('offers.index.title') %></h2>
+        <h2 class="dir-list-title"><%= t('offers.index.list_title', default: 'All Opportunities') %></h2>
         <div class="dir-list-meta">
           <% if params[:query].present? || params[:stage_type].present? || params[:work_mode].present? %>
             <span class="filter-active-pill">

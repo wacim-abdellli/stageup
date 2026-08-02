@@ -2236,12 +2236,33 @@ button.btn-accent:hover,
   line-height: 1.4;
 }
 
-/* Offer show specific */
 .offer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 30px;
   align-items: start;
+}
+
+@media (max-width: 900px) {
+  .offer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .offer-grid .profile-card.p-40,
+  .offer-grid .profile-card {
+    padding: 20px !important;
+  }
+
+  .offer-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .offer-title-lg {
+    font-size: 20px !important;
+  }
 }
 
 .offer-header-row {
@@ -7712,7 +7733,17 @@ button.btn-accent:hover,
 }
 
 @media (max-width: 900px) {
-  .dir-body { grid-template-columns: 1fr; }
+  .dir-body {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .dir-sidebar {
+    position: static !important;
+    top: auto !important;
+    margin-bottom: 24px !important;
+    z-index: 1 !important;
+  }
 }
 
 /* ── Sidebar ── */
