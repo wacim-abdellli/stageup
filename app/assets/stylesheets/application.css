@@ -1230,7 +1230,7 @@ button.btn-accent:hover,
 .score-pill .dot-danger { background-color: #EF4444; }
 
 .score-pill strong {
-  color: #FFFFFF;
+  color: var(--text-primary);
   font-weight: 700;
 }
 
@@ -8645,7 +8645,10 @@ button.btn-accent:hover,
 }
 
 
-/* ── Light Mode Component Styling ── */
+[data-theme="light"] .score-pill strong {
+  color: #0F172A !important;
+}
+
 [data-theme="light"] .navbar {
   background: rgba(255, 255, 255, 0.88);
   border-bottom-color: rgba(0, 0, 0, 0.08);

@@ -197,7 +197,7 @@
           <% if @submission.nil? %>
             <% if @offer.mission %>
               <p class="fs-13 text-secondary mb-20 lh-15">
-                <%= t('offers.show.application.mission_prompt') %>
+                <%= sanitize t('offers.show.application.mission_prompt') %>
               </p>
               <button type="button" class="btn btn-primary w-100" id="btn-open-mission-modal">
                 <%= t('offers.show.application.start_mission') %>
