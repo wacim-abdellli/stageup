@@ -123,12 +123,20 @@ master_admin.password_confirmation = "password123456"
 master_admin.profileable = admin_profile
 master_admin.save!
 
-puts "Seeding Skills..."
-skill_names = %w[Ruby\ on\ Rails React Data\ Science Python SQL Docker JavaScript CSS Git Java]
-skills = skill_names.map { |name| Skill.find_or_create_by!(name: name) }
+puts "Seeding 250+ Categorized Skills..."
+load Rails.root.join("db", "seeds_skills.rb")
 
-student_1_profile.skills = [ skills[0], skills[1], skills[4], skills[6], skills[8] ] # Rails, React, SQL, JS, Git
-student_2_profile.skills = [ skills[2], skills[3], skills[4], skills[5] ] # Data Science, Python, SQL, Docker
+rails_skill = Skill.find_by(name: "Ruby on Rails")
+react_skill = Skill.find_by(name: "React")
+sql_skill = Skill.find_by(name: "PostgreSQL") || Skill.find_by(name: "MySQL")
+js_skill = Skill.find_by(name: "JavaScript")
+git_skill = Skill.find_by(name: "CI/CD Pipelines") || Skill.find_by(name: "Docker")
+ds_skill = Skill.find_by(name: "Data Analysis")
+python_skill = Skill.find_by(name: "Python")
+docker_skill = Skill.find_by(name: "Docker")
+
+student_1_profile.skills = [ rails_skill, react_skill, sql_skill, js_skill, git_skill ].compact
+student_2_profile.skills = [ ds_skill, python_skill, sql_skill, docker_skill ].compact
 
 puts "Seeding Offers & Missions..."
 offer_1 = Offer.find_or_initialize_by(title: "Full Stack Rails Intern", company_profile: company_1_profile)
@@ -141,7 +149,7 @@ offer_1.update!(
   status: "active",
   deadline: 30.days.from_now
 )
-offer_1.skills = [ skills[0], skills[1], skills[4], skills[5], skills[6] ]
+offer_1.skills = [ rails_skill, react_skill, sql_skill, js_skill, docker_skill ].compact
 
 mission_1 = Mission.find_or_initialize_by(offer: offer_1)
 mission_1.update!(
@@ -160,7 +168,7 @@ offer_2.update!(
   status: "active",
   deadline: 20.days.from_now
 )
-offer_2.skills = [ skills[2], skills[3], skills[4] ]
+offer_2.skills = [ ds_skill, python_skill, sql_skill ].compact
 
 mission_2 = Mission.find_or_initialize_by(offer: offer_2)
 mission_2.update!(
