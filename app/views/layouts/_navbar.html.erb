@@ -12,8 +12,8 @@
     <div class="navbar-center">
       <div class="nav-pill-container" id="nav-links">
         <%= link_to offers_path,
-              class: "nav-link #{'nav-link-active' if request.path.start_with?(offers_path)}",
-              aria: { current: (request.path.start_with?(offers_path) ? "page" : nil) } do %>
+              class: "nav-link #{'nav-link-active' if request.path.include?('offers')}",
+              aria: { current: (request.path.include?('offers') ? "page" : nil) } do %>
           <svg class="nav-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/>
             <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
