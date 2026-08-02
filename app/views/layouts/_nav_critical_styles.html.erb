@@ -595,4 +595,24 @@
     background: #FEF2F2 !important;
     border: 1px solid #FCA5A5 !important;
   }
+
+  /* ── Commitment Score Pill High-Contrast Safeguards ── */
+  .score-pill strong,
+  .score-pill .score-val {
+    color: var(--text-primary) !important;
+  }
+
+  [data-theme="light"] .score-pill strong,
+  [data-theme="light"] .score-pill .score-val {
+    color: #0F172A !important;
+  }
+
+  [data-theme="light"] .score-pill {
+    background-color: rgba(194, 65, 12, 0.08) !important;
+    border-color: rgba(194, 65, 12, 0.2) !important;
+  }
+
+  [data-theme="light"] .score-pill .score-label {
+    color: #475569 !important;
+  }
 </style>
