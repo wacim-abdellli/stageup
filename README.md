@@ -2,39 +2,103 @@
 
 # StageUp 🎓
 
-**Tunisia's first verified internship platform.**
-Proof-of-work missions · Reputation scoring · Official Convention de Stage
+**Tunisia's first verified internship platform.**  
+Proof-of-work missions · Reputation scoring · Official Convention de Stage · 300+ Skills Catalog
 
 [![Ruby](https://img.shields.io/badge/Ruby-3.3.11-CC342D?logo=ruby&logoColor=white)](https://www.ruby-lang.org/)
 [![Rails](https://img.shields.io/badge/Rails-8.1.3-CC0000?logo=rubyonrails&logoColor=white)](https://rubyonrails.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Tests](https://img.shields.io/badge/Tests-201_passing-brightgreen?logo=checkmarx&logoColor=white)](#running-the-test-suite)
 [![Security](https://img.shields.io/badge/Security-Audited-blueviolet?logo=shieldsdotio&logoColor=white)](#security)
+[![i18n](https://img.shields.io/badge/Locales-EN%20%7C%20FR%20%7C%20AR-orange?logo=translate&logoColor=white)](#-internationalization-i18n)
 
 </div>
 
 ---
 
+## 📌 Table of Contents
+
+- [What Is StageUp?](#what-is-stageup)
+- [Who Uses It](#who-uses-it)
+- [Core Features](#core-features)
+  - [Proof-of-Work Missions](#proof-of-work-missions)
+  - [Commitment Score System](#commitment-score-system)
+  - [Convention de Stage](#convention-de-stage)
+  - [300+ Industry Skills Catalog](#300-industry-skills-catalog)
+  - [Trilingual Support (EN / FR / AR)](#-internationalization-i18n)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Option A — Docker Setup (Recommended)](#option-a--docker-setup-recommended)
+  - [Option B — Local Setup](#option-b--local-setup)
+- [Environment Variables](#environment-variables)
+- [Running the Test Suite](#running-the-test-suite)
+- [Background Jobs](#background-jobs)
+- [Project Structure](#project-structure)
+- [Security & Architecture](#security)
+- [Deployment](#deployment)
+- [License](#license)
+
+---
+
 ## What Is StageUp?
 
-StageUp solves a real problem in the Tunisian job market: internship ghosting. Companies ghost students after offers. Students abandon internships without notice. Nobody is held accountable.
+StageUp solves a real structural problem in the Tunisian job market: **internship ghosting**. Companies ghost students after offers. Students abandon internships without notice. Nobody is held accountable.
 
-StageUp fixes this with three core mechanisms:
+StageUp fixes this with four core mechanisms:
 
-- **Proof-of-Work Missions** — Companies can attach a real coding/design task to an offer. Students must complete it within 48 hours before their application is considered. No more "I'm very motivated" cover letters.
-- **Commitment Scores** — Every party (student, company) has a public reputation score that tracks their reliability over time. Ghost an application? Lose points. Respond on time? Gain points.
-- **Official Agreements** — Internships that reach the offer stage generate a legally-structured *Convention de Stage* that requires signatures from the student, company, and university coordinator before either side can confirm completion.
+- **Proof-of-Work Missions** — Companies attach real coding or design tasks to internship offers. Students submit solutions within 48 hours to demonstrate skills before applications are reviewed.
+- **Commitment Scores** — Every user (student and company) maintains a public reputation score tracking reliability over time. Late responses or abandonments deduct points; on-time actions earn points.
+- **Official Agreements** — Accepted internships generate a legally-structured *Convention de Stage* requiring digital signatures from student, company representative, and university coordinator.
+- **300+ Skills Engine** — A deep-dive catalog of 300+ categorized skills across 15 engineering and business disciplines powering candidate-offer skill matching.
 
 ---
 
 ## Who Uses It
 
-| Role | What They Can Do |
-|------|-----------------|
-| **Student** | Browse offers, complete proof missions, track applications, sign agreements, leave reviews |
-| **Company** | Post offers with optional missions, review applications via Kanban board, accept/reject candidates, manage active internships |
-| **University Coordinator** | Monitor all students from their institution, review and sign agreements, confirm completions |
-| **Master Admin** | Verify companies (with domain-match badge), approve/revoke university coordinators, inspect any user profile, lock/unlock accounts, grant/revoke admin privileges |
+| Role | Capabilities |
+|------|--------------|
+| **Student** | Browse verified offers, complete proof missions, manage application Kanban status, sign *Conventions de Stage*, leave company reviews |
+| **Company** | Post offers with optional missions, manage applications via Kanban board, accept/reject candidates, track response times, review active interns |
+| **University Coordinator** | Monitor enrolled students, review and digitally sign *Conventions de Stage*, verify completion certificates |
+| **Master Admin** | Verify company profiles (domain-matching badge), approve/revoke coordinators, inspect user audit logs, grant/revoke admin roles |
+
+---
+
+## Core Features
+
+### Proof-of-Work Missions
+When a company creates an offer, they can attach an optional mission (coding challenge, design brief, or data task). When a student applies, they accept the task and have **48 hours** to submit their solution via GitHub, Figma, or public URL. Solutions are verified automatically via repo inspection and file checking.
+
+### Commitment Score System
+Every user starts with a **100/100** reputation score:
+
+| Event | Score Delta |
+|-------|-------------|
+| Company responds to application on time (< 14 days) | **+1** |
+| Company responds late (14+ days) | **-5** |
+| Company ghosts an application (no response) | **-15** |
+| Student completes an internship | **+15** |
+| Student abandons an active internship | **-25** |
+| Student proof mission expires (2nd+ time) | **-10** |
+
+### Convention de Stage
+When a student is accepted, either party generates a structured 3-party agreement (*Convention de Stage*) requiring digital signatures from:
+1. Student
+2. Company Representative  
+3. University Coordinator (if enrolled at a partner institution)
+
+### 300+ Industry Skills Catalog
+A 15-category skill ecosystem spanning:
+- *Backend & Web Architecture* (Rails, Node, Django, Go, Spring, PostgreSQL, Redis)
+- *Frontend Engineering* (React, Next.js, Vue, TypeScript, Tailwind CSS, WebAssembly)
+- *Data Science & AI* (PyTorch, TensorFlow, LLMs, RAG, Prompt Engineering, PowerBI)
+- *DevOps & Cloud* (Docker, Kubernetes, AWS, Terraform, CI/CD)
+- *Design & UI/UX* (Figma, Design Systems, Adobe Suite, Motion Graphics, Blender)
+- *Engineering* (SolidWorks, CATIA, FEA/ANSYS, PCB Design, Microcontrollers, Revit BIM)
+- *Business & Management* (Digital Marketing, SEO, CRM, Agile, Talent Acquisition)
+
+### 🌍 Internationalization (I18n)
+Full native trilingual support (**English, French, Arabic**). All headings, button labels, notifications, and form validation errors are localized with right-to-left (RTL) compatibility.
 
 ---
 
@@ -42,70 +106,58 @@ StageUp fixes this with three core mechanisms:
 
 | Layer | Technology |
 |-------|-----------|
-| Framework | Ruby on Rails 8.1 |
-| Language | Ruby 3.3.11 |
-| Database | PostgreSQL 16 |
-| Background Jobs | Solid Queue |
-| Cache | Solid Cache (DB-backed) |
-| WebSockets | Solid Cable |
-| File Storage | Active Storage → AWS S3 (production) |
-| Auth | Devise (with lockable, timeoutable) |
-| Rate Limiting | Rack::Attack |
-| Frontend | Hotwire (Turbo + Stimulus), Propshaft |
-| Deployment | Kamal + Docker |
-| CI | GitHub Actions |
+| **Framework** | Ruby on Rails 8.1 |
+| **Language** | Ruby 3.3.11 |
+| **Database** | PostgreSQL 16 (`pg_trgm` fuzzy search + GIN indexing) |
+| **Background Processing** | Solid Queue (DB-backed queue worker) |
+| **Cache & Real-time** | Solid Cache + ActionCable (Solid Cable) |
+| **Storage** | Active Storage → AWS S3 (production) |
+| **Authentication** | Devise (lockable, timeoutable, trackable) |
+| **Frontend** | Hotwire (Turbo Drive + Frame + Streams, Stimulus) |
+| **Styling** | Vanilla CSS (Vercel/Linear dark-mode aesthetic with semantic tokens) |
+| **Security Scanning** | Brakeman + Rack::Attack rate-limiting |
+| **Deployment** | Docker + Kamal |
 
 ---
 
 ## Getting Started
 
-### Prerequisites
-
-Make sure you have these installed:
-
-- **Ruby** 3.3.11 — use [rbenv](https://github.com/rbenv/rbenv) or [asdf](https://asdf-vm.com/)
-- **PostgreSQL** 16+
-- **Docker & Docker Compose** (for the containerized dev setup)
-
----
-
-### Option A — Docker (Recommended, Zero Config)
-
-The fastest way to get running:
+### Option A — Docker Setup (Recommended)
 
 ```bash
-# 1. Clone the repo
+# 1. Clone repository
 git clone https://github.com/wacim-abdellli/stageup.git
 cd stageup
 
-# 2. Copy environment variables
+# 2. Copy environment file
 cp .env.example .env
 
-# 3. Start everything (database + web server)
-docker compose up
+# 3. Spin up containers
+docker compose up -d
 
-# 4. In a separate terminal, set up the database
+# 4. Initialize database and seed 300+ skills
 docker compose exec web rails db:create db:migrate db:seed
 ```
 
-The app will be available at **http://localhost:3000**
+App available at **http://localhost:3000**
 
 ---
 
 ### Option B — Local Setup
 
 ```bash
-# 1. Clone and enter the project
+# 1. Clone repository & install dependencies
 git clone https://github.com/wacim-abdellli/stageup.git
 cd stageup
-
-# 2. Install Ruby dependencies
 bundle install
 
-# 3. Set up the database
+# 2. Configure environment
+cp .env.example .env
+
+# 3. Create database & seed 300+ skills
 rails db:create db:migrate db:seed
 
-# 4. Start the development server
+# 4. Start development server
 rails server
 ```
 
@@ -115,115 +167,55 @@ Visit **http://localhost:3000**
 
 ## Environment Variables
 
-Copy `.env.example` to `.env` and fill in the values:
+Copy `.env.example` to `.env` and fill in values:
 
-```bash
-cp .env.example .env
-```
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `POSTGRES_USER` | Database username | Dev only |
-| `POSTGRES_PASSWORD` | Database password | Dev only |
-| `POSTGRES_HOST` | Database host (`db` in Docker) | Dev only |
-| `APP_HOST` | Your production domain (e.g. `stageup.tn`) | Production |
+| Variable | Purpose | Environment |
+|----------|---------|-------------|
+| `POSTGRES_USER` | Database username | Dev / Docker |
+| `POSTGRES_PASSWORD` | Database password | Dev / Docker |
+| `POSTGRES_HOST` | Database host (`db` in Docker) | Dev / Docker |
+| `APP_HOST` | Production domain (`stageup.tn`) | Production |
 | `APP_DATABASE_PASSWORD` | Production database password | Production |
-| `AWS_REGION` | S3 bucket region | Production |
-| `AWS_S3_BUCKET` | S3 bucket name for file uploads | Production |
-| `SMTP_HOST` | SMTP server (e.g. `smtp.postmarkapp.com`) | Production |
-| `SMTP_USERNAME` | SMTP username / API key | Production |
-| `SMTP_PASSWORD` | SMTP password | Production |
-| `DEVISE_MAILER_SENDER` | From address for emails | Production |
-| `RAILS_MASTER_KEY` | Rails credentials master key | Production |
-
-AWS credentials (`access_key_id`, `secret_access_key`) are stored securely in Rails encrypted credentials:
-
-```bash
-rails credentials:edit
-```
+| `AWS_REGION` | S3 region | Production |
+| `AWS_S3_BUCKET` | S3 storage bucket | Production |
+| `SMTP_HOST` | SMTP server (`smtp.postmarkapp.com`) | Production |
+| `SMTP_USERNAME` | SMTP API username | Production |
+| `SMTP_PASSWORD` | SMTP API key | Production |
+| `DEVISE_MAILER_SENDER` | Sender email address | Production |
+| `RAILS_MASTER_KEY` | Master key for encrypted credentials | Production |
 
 ---
 
 ## Running the Test Suite
 
-The test suite covers **201 tests** with **681 assertions** across 28 test files:
-
-| Category | Tests | Files |
-|---|---|---|
-| Controller tests | 82 | 10 |
-| Model tests | 93 | 12 |
-| Job tests | 10 | 2 |
-| Integration tests | 9 | 3 |
-| Mailer tests | 6 | 1 |
+The test suite covers **201 runs** with **681 assertions** across 28 test files with zero failures:
 
 ```bash
-# Run all tests
+# Run full test suite
 rails test
 
-# Run a specific test file
+# Run specific test file
 rails test test/controllers/submissions_controller_test.rb
 
-# Run a specific test by name
-rails test test/controllers/offers_controller_test.rb -n "test_verified_company_user_cannot_edit_offer_of_another_company"
+# Run specific test method
+rails test test/controllers/offers_controller_test.rb -n "test_company_user_can_create_offer"
 ```
 
 ---
 
 ## Background Jobs
 
-StageUp uses **Solid Queue** for background processing. Two critical jobs run on a schedule:
+Powered by **Solid Queue**. Recurring tasks configured in `config/recurring.yml`:
 
-| Job | Schedule | What It Does |
+| Job | Schedule | Description |
 |-----|----------|-------------|
-| `ReputationTrackerJob` | Daily at midnight | Penalizes companies who haven't responded to applications in 14+ days |
-| `ResolveExpiredSubmissionsJob` | Every hour | Expires unsubmitted proof missions (48h timeout), auto-completes internships after 7-day confirmation window |
+| `ReputationTrackerJob` | Daily at midnight | Applies ghosting penalties to companies inactive for 14+ days |
+| `ResolveExpiredSubmissionsJob` | Hourly | Expires unsubmitted proof missions (48h timeout) and auto-completes internships |
 
-Start the job worker alongside your web server:
-
+Run job worker in development:
 ```bash
-# In development, run in a separate terminal
 rails jobs:work
-
-# Or with Docker
-docker compose exec web rails jobs:work
 ```
-
----
-
-## Key Features In-Depth
-
-### Proof-of-Work Missions
-When a company creates an offer, they can optionally attach a mission — a real task (a coding challenge, a design brief, a short analysis). When a student applies, they accept the mission and have **48 hours** to submit their solution via GitHub, Figma, or any public URL. The link is automatically verified by cloning the repo and checking for required files. Failing to submit within 48 hours impacts the student's commitment score.
-
-### Commitment Score System
-Every user (student and company) starts at **100/100**. Actions change this score:
-
-| Event | Delta |
-|-------|-------|
-| Company responds to application on time (< 14 days) | +1 |
-| Company responds late | -5 |
-| Company ghosts an application (14+ days, no response) | -15 |
-| Student completes an internship | +15 |
-| Student abandons an active internship | -25 |
-| Student's proof mission expires (2nd+ time) | -10 |
-
-Scores are visible on offer pages, so students can see how reliable a company is before applying.
-
-### Convention de Stage
-When a student is accepted, either party can generate a *Convention de Stage* — a structured internship agreement document. It requires three digital signatures:
-1. The student
-2. The company representative  
-3. A university coordinator (if the student is affiliated with a partner university)
-
-Only after all three signatures does the internship move toward formal completion.
-
-### 🌍 Internationalization (I18n)
-The platform is fully trilingual (**English, French, Arabic**). All hardcoded UI strings, button labels, and flash messages have been externalized to locale dictionaries. The UI gracefully falls back and handles right-to-left (RTL) readiness.
-
-### 🚀 Performance & Resiliency
-- **Zero N+1 Queries:** Database fetching is strictly eager-loaded via `.includes` (e.g., fetching 50 active internships loads all associated student profiles, university details, and company offers in 4 queries instead of 200).
-- **Fuzzy Search:** `pg_trgm` GIN indexes power lightning-fast text searching across offers and company profiles.
-- **Mailer Safety:** All background mailers implement nil-safety guards to prevent `NoMethodError` crashes when accounts are deactivated or missing emails.
 
 ---
 
@@ -231,124 +223,72 @@ The platform is fully trilingual (**English, French, Arabic**). All hardcoded UI
 
 ```
 app/
-  controllers/          → 19 controllers (13 user-facing + 6 admin)
-    admin/              → Company verification, coordinator approval, user inspection
-    users/              → Custom Devise registration with role selection
-    submissions_controller.rb   → Full application lifecycle (query-scoped per role)
-    offers_controller.rb        → Offer CRUD (split public/company scoping)
-    internship_agreements_controller.rb → Convention de Stage signing flow
-    dashboards_controller.rb    → Role-specific dashboards + Kanban board
-    reviews_controller.rb       → Post-internship review system
+  controllers/              → 19 controllers (13 user-facing + 6 admin)
+    admin/                  → Company verification, coordinator approval, user audit
+    submissions_controller.rb   → Role-scoped application lifecycle
+    offers_controller.rb        → Offer CRUD & match breakdown
+    internship_agreements_controller.rb → 3-party agreement signing
   models/
-    user.rb                     → Devise auth, polymorphic profileable, attr_readonly :admin
-    student_profile.rb          → CV, skills, commitment score (with_lock)
-    company_profile.rb          → Offers, response metrics, reputation (with_lock)
-    university_profile.rb       → Coordinator access with approval gate
-    submission.rb               → Application state machine
-    offer.rb                    → Internship postings with optional missions
-    internship_agreement.rb     → Convention de Stage 3-party signing (with_lock)
-    commitment_event.rb         → Audit log for score changes
-    review.rb                   → Post-internship reviews
-    concerns/rateable.rb        → Thread-safe average rating calculation (with_lock)
+    user.rb                 → Devise auth, polymorphic profile, attr_readonly :admin
+    student_profile.rb      → CV, skills, commitment score (with_lock)
+    company_profile.rb      → Offers, response metrics, reputation (with_lock)
+    university_profile.rb   → Coordinator approval gate
+    submission.rb           → Application state machine
+    offer.rb                → Postings & mission attachments
+    internship_agreement.rb → Legally-structured Convention de Stage (with_lock)
+    commitment_event.rb     → Audit trail for score history
+    review.rb               → Post-internship ratings
   jobs/
-    verify_submission_job.rb    → Git repo verification (Open3, 100MB limit, ensure cleanup)
-    reputation_tracker_job.rb   → Daily ghosting penalty sweep
-    resolve_expired_submissions_job.rb → Hourly expiration + auto-completion
-  channels/
-    notifications_channel.rb    → Real-time ActionCable per-user streaming
-config/
-  recurring.yml     → Solid Queue recurring task schedule
-  queue.yml         → Solid Queue worker configuration
-  storage.yml       → Active Storage services (local/S3)
+    verify_submission_job.rb → Git repo verification (Open3, 100MB limit)
+    reputation_tracker_job.rb → Daily ghosting penalty sweep
+    resolve_expired_submissions_job.rb → Hourly expiration sweep
 db/
-  migrate/          → 34 migrations (17 foreign keys, pg_trgm indexes)
-  schema.rb         → Current DB schema
+  migrate/                  → 34 migrations (17 foreign keys, pg_trgm GIN indexes)
+  seeds.rb                  → Main database seeder
+  seeds_skills.rb           → 300+ skills catalog seeder
 ```
-
----
-
-## Deployment
-
-StageUp deploys via **Kamal** to any Docker-capable server.
-
-```bash
-# First deploy
-kamal setup
-kamal deploy
-
-# Subsequent deploys
-kamal deploy
-
-# Run migrations on production
-kamal app exec 'rails db:migrate'
-
-# Check logs
-kamal app logs
-```
-
-Production requires:
-- A Linux server with Docker installed
-- A PostgreSQL database (managed or self-hosted)
-- An AWS S3 bucket for file storage
-- An SMTP provider (Postmark, SendGrid, etc.)
 
 ---
 
 ## Security
 
 ### Authentication & Access Control
-- All passwords have a minimum length of **12 characters**
-- Accounts are **locked after 10 failed login attempts** and unlocked via email
-- Sessions **expire after 30 minutes** of inactivity
-- Admin privilege escalation blocked via `attr_readonly :admin` + custom create validation
-- Rate limiting on signup, login, and password reset endpoints via Rack::Attack
+- Passwords enforce **minimum 12 characters**.
+- Accounts lock after **10 failed login attempts** (unlockable via email token).
+- Sessions timeout after **30 minutes** of inactivity.
+- Admin privilege escalation blocked via `attr_readonly :admin` and creation validations.
+- Rate-limiting on auth routes via `Rack::Attack`.
 
-### IDOR & Authorization
-- **Every mutable controller action** uses query-scoped access (`current_user.profileable.resources.find`) — no unscoped `find` + separate auth check pattern
-- Submissions use **3-way role scoping** (Student / Company / University Coordinator)
-- Offers split into `set_public_offer` (read-only) and `set_company_offer` (mutations) with cross-company IDOR test coverage
-- University coordinators require `approved?` + `university_id` match for all agreement and submission access
+### IDOR & Authorization Scoping
+- All mutable controller actions enforce query-scoped access (`current_user.profileable.resources.find`).
+- Submissions enforce 3-way role scoping (Student / Company / University Coordinator).
+- University coordinators require `approved?` + `university_id` match.
 
 ### Concurrency & Data Integrity
-- **9 row-locked mutations** using `with_lock` for all score recalculations, status transitions, and agreement signatures
-- `ActiveRecord::Base.transaction` wraps all multi-step operations (commit/abandon/cancel/complete)
-- `RecordNotUnique` rescue on duplicate submission creation
-- **17 foreign key constraints** + unique composite index on `submissions(student_profile_id, offer_id)`
-
-### Input Validation & Injection Prevention
-- All file uploads verify PDF magic bytes before accepting (prevents disguised executables)
-- Git repo URLs validated against an allowlist of trusted hosts (GitHub, GitLab, Bitbucket) before cloning
-- Repository verification uses `Open3.capture3` (array args, no shell interpolation) with 100MB size limit and guaranteed `ensure` cleanup
-- `ActionController::ParameterMissing` rescued without exposing internal parameter names
-
-### Transport & Headers
-- HTTPS enforced in production with HSTS headers
-- Full suite of security headers (X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
-- Content Security Policy with nonces for scripts and styles
-- Brakeman static analysis runs in CI on every push
+- **9 row-locked mutations** (`with_lock`) wrap all score recalculations, state transitions, and agreement signatures inside explicit database transactions.
+- Unique composite index on `submissions(student_profile_id, offer_id)`.
+- 17 foreign key constraints enforced in PostgreSQL.
 
 ---
 
-## Contributing
+## Deployment
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Write tests for your changes
-4. Run the full test suite: `rails test`
-5. Run the linter: `bin/rubocop`
-6. Open a pull request
+Deploy via **Kamal** to any Linux server with Docker:
 
-All PRs are automatically scanned with Brakeman (security), RuboCop (style), and the full test suite via GitHub Actions.
+```bash
+# Deploy to server
+kamal deploy
+
+# Run remote database migrations
+kamal app exec 'rails db:migrate'
+```
 
 ---
 
 ## License
 
-This project is proprietary. All rights reserved.
-
----
+Proprietary software. All rights reserved.
 
 <div align="center">
-Built with ❤️ in Tunisia · <a href="mailto:hello@stageup.tn">hello@stageup.tn</a>
+Built with ❤️ in Tunisia ·
 </div>
-
