@@ -196,6 +196,29 @@ sub_2.update!(
   submitted_at: 1.day.ago
 )
 
+# 3. Accepted submission with fully executed agreement and verified certificate
+sub_3 = Submission.find_or_initialize_by(student_profile: student_1_profile, offer: offer_2)
+sub_3.update!(
+  mission: mission_2,
+  status: "accepted",
+  github_link: "https://github.com/wacim-abdellli/data-challenge",
+  submission_notes: "Cleaned telemetry dataset and trained PyTorch anomaly detection model.",
+  submitted_at: 5.days.ago,
+  accepted_at: 4.days.ago
+)
+
+agreement_1 = InternshipAgreement.find_or_initialize_by(submission: sub_3)
+agreement_1.update!(
+  status: "fully_executed",
+  verification_token: "STAGEUP-VERIFIED-CERT-2026",
+  student_signed_at: 4.days.ago,
+  company_signed_at: 4.days.ago,
+  university_signed_at: 3.days.ago,
+  academic_year: "2025-2026",
+  start_date: 30.days.from_now.to_date,
+  end_date: 120.days.from_now.to_date
+)
+
 company_1_profile.recalculate_metrics!
 company_2_profile.recalculate_metrics!
 
