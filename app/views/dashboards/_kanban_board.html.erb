@@ -15,33 +15,33 @@
       <% if (pending_submissions || []).any? %>
         <% (pending_submissions || []).each do |sub| %>
           <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
-            <div class="kanban-card-row-header flex-between mb-8">
-              <div class="flex-align-center gap-8 min-width-0">
-                <%= link_to student_profile_path(sub.student_profile), class: "kanban-avatar flex-shrink-0" do %>
-                  <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
-                <% end %>
-                <div class="min-width-0">
-                  <div class="kanban-student-name text-truncate">
-                    <%= link_to "#{sub.student_profile.first_name} #{sub.student_profile.last_name}", student_profile_path(sub.student_profile), class: "hover-underline color-primary" %>
-                  </div>
-                  <div class="kanban-uni-label text-truncate"><%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
-                </div>
-              </div>
+            <div class="kanban-card-top-row mb-8">
+              <span class="kanban-card-date-badge">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                <%= sub.created_at.strftime("%b %d, %Y") %>
+              </span>
               <span class="rep-score-pill-sm flex-shrink-0">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                 <strong><%= sub.student_profile.commitment_score.round(0) rescue 100 %></strong>
               </span>
             </div>
 
-            <div class="kanban-card-row-offer mb-6">
-              <span class="badge-offer-title text-truncate"><%= sub.offer.title %></span>
+            <div class="kanban-card-user-row mb-8">
+              <%= link_to student_profile_path(sub.student_profile), class: "kanban-avatar flex-shrink-0" do %>
+                <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
+              <% end %>
+              <div class="min-width-0 flex-1">
+                <div class="kanban-student-name text-truncate" title="<%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>">
+                  <%= link_to "#{sub.student_profile.first_name} #{sub.student_profile.last_name}", student_profile_path(sub.student_profile), class: "hover-underline color-primary" %>
+                </div>
+                <div class="kanban-uni-label text-truncate" title="<%= sub.student_profile.university&.name || sub.student_profile.major.presence %>">
+                  <%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %>
+                </div>
+              </div>
             </div>
 
-            <div class="kanban-card-row-meta mb-10">
-              <span class="kanban-card-date-badge">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                <%= sub.created_at.strftime("%b %d, %Y") %>
-              </span>
+            <div class="kanban-card-row-offer mb-8">
+              <span class="badge-offer-title text-truncate" title="<%= sub.offer.title %>"><%= sub.offer.title %></span>
             </div>
 
             <div class="kanban-card-row-proof mb-8">
@@ -95,30 +95,30 @@
       <% if (active_internships || []).any? %>
         <% (active_internships || []).each do |sub| %>
           <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
-            <div class="kanban-card-row-header flex-between mb-8">
-              <div class="flex-align-center gap-8 min-width-0">
-                <div class="kanban-avatar avatar-emerald flex-shrink-0">
-                  <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
-                </div>
-                <div class="min-width-0">
-                  <div class="kanban-student-name text-truncate" title="<%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>">
-                    <%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>
-                  </div>
-                  <div class="kanban-uni-label text-truncate"><%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
-                </div>
-              </div>
-              <span class="badge-status badge-accepted flex-shrink-0"><%= t('kanban.columns.accepted', default: 'ACCEPTED') %></span>
-            </div>
-
-            <div class="kanban-card-row-offer mb-6">
-              <span class="badge-offer-title text-truncate"><%= sub.offer.title %></span>
-            </div>
-
-            <div class="kanban-card-row-meta mb-10">
+            <div class="kanban-card-top-row mb-8">
               <span class="kanban-card-date-badge">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                 <%= sub.responded_at&.strftime("%b %d, %Y") || sub.created_at.strftime("%b %d, %Y") %>
               </span>
+              <span class="badge-status badge-accepted"><%= t('kanban.columns.accepted', default: 'ACCEPTED') %></span>
+            </div>
+
+            <div class="kanban-card-user-row mb-8">
+              <div class="kanban-avatar avatar-emerald flex-shrink-0">
+                <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
+              </div>
+              <div class="min-width-0 flex-1">
+                <div class="kanban-student-name text-truncate" title="<%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>">
+                  <%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>
+                </div>
+                <div class="kanban-uni-label text-truncate" title="<%= sub.student_profile.university&.name || sub.student_profile.major.presence %>">
+                  <%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %>
+                </div>
+              </div>
+            </div>
+
+            <div class="kanban-card-row-offer mb-8">
+              <span class="badge-offer-title text-truncate" title="<%= sub.offer.title %>"><%= sub.offer.title %></span>
             </div>
 
             <div class="kanban-card-row-proof mt-8">
@@ -160,28 +160,30 @@
       <% if rejected_list.any? %>
         <% rejected_list.each do |sub| %>
           <div class="kanban-card" draggable="true" data-submission-id="<%= sub.id %>" data-status="<%= sub.status %>">
-            <div class="kanban-card-row-header flex-between mb-8">
-              <div class="flex-align-center gap-8 min-width-0">
-                <div class="kanban-avatar avatar-muted flex-shrink-0">
-                  <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
-                </div>
-                <div class="min-width-0">
-                  <div class="kanban-student-name text-truncate"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></div>
-                  <div class="kanban-uni-label text-truncate"><%= sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
-                </div>
-              </div>
-              <span class="badge-status badge-rejected flex-shrink-0"><%= t('kanban.columns.rejected', default: 'REJECTED') %></span>
-            </div>
-
-            <div class="kanban-card-row-offer mb-6">
-              <span class="badge-offer-title text-truncate"><%= sub.offer.title %></span>
-            </div>
-
-            <div class="kanban-card-row-meta">
+            <div class="kanban-card-top-row mb-8">
               <span class="kanban-card-date-badge">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                 <%= sub.responded_at&.strftime("%b %d, %Y") || sub.created_at.strftime("%b %d, %Y") %>
               </span>
+              <span class="badge-status badge-rejected"><%= t('kanban.columns.rejected', default: 'REJECTED') %></span>
+            </div>
+
+            <div class="kanban-card-user-row mb-8">
+              <div class="kanban-avatar avatar-muted flex-shrink-0">
+                <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
+              </div>
+              <div class="min-width-0 flex-1">
+                <div class="kanban-student-name text-truncate" title="<%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>">
+                  <%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>
+                </div>
+                <div class="kanban-uni-label text-truncate" title="<%= sub.student_profile.university&.name || sub.student_profile.major.presence %>">
+                  <%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %>
+                </div>
+              </div>
+            </div>
+
+            <div class="kanban-card-row-offer mb-6">
+              <span class="badge-offer-title text-truncate" title="<%= sub.offer.title %>"><%= sub.offer.title %></span>
             </div>
           </div>
         <% end %>
@@ -195,63 +197,3 @@
   </div>
 
 </div>
-
-<script nonce="<%= content_security_policy_nonce %>">
-  (function() {
-    function initKanban() {
-      var csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-
-      document.querySelectorAll('.kanban-card').forEach(function(card) {
-        card.addEventListener('dragstart', function(e) {
-          e.dataTransfer.setData('text/plain', card.dataset.submissionId);
-          card.classList.add('dragging');
-        });
-
-        card.addEventListener('dragend', function() {
-          card.classList.remove('dragging');
-        });
-      });
-
-      document.querySelectorAll('.kanban-drop-zone').forEach(function(zone) {
-        zone.addEventListener('dragover', function(e) {
-          e.preventDefault();
-          zone.classList.add('drag-over');
-        });
-
-        zone.addEventListener('dragleave', function() {
-          zone.classList.remove('drag-over');
-        });
-
-        zone.addEventListener('drop', function(e) {
-          e.preventDefault();
-          zone.classList.remove('drag-over');
-          var submissionId = e.dataTransfer.getData('text/plain');
-          var targetStatus = zone.dataset.targetStatus;
-          if (!submissionId || !targetStatus) return;
-
-          var url = '/submissions/' + submissionId + '/' + targetStatus;
-          fetch(url, {
-            method: 'POST',
-            headers: {
-              'X-CSRF-Token': csrfToken,
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
-          }).then(function(res) {
-            if (res.ok) {
-              window.location.reload();
-            }
-          }).catch(function(err) {
-            console.error('Kanban drag error:', err);
-          });
-        });
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initKanban);
-    } else {
-      initKanban();
-    }
-  })();
-</script>

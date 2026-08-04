@@ -635,31 +635,85 @@
     color: #475569 !important;
   }
 
-  /* ── Kanban Card Badge & Header Styling Fixes ── */
+  /* ── Kanban Card Robust Layout & Overflow Safeguards ── */
+  .kanban-card {
+    position: relative !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding: 14px !important;
+  }
+
+  .kanban-card-top-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  .kanban-card-user-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
   .badge-status {
+    display: inline-flex !important;
+    align-items: center !important;
     font-size: 10px !important;
     font-weight: 700 !important;
-    padding: 3px 8px !important;
+    padding: 2px 7px !important;
     border-radius: 9999px !important;
     line-height: 1.2 !important;
     letter-spacing: 0.03em !important;
     white-space: nowrap !important;
     text-transform: uppercase !important;
+    flex-shrink: 0 !important;
+    max-width: 100px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
   .kanban-student-name {
     font-weight: 700 !important;
     font-size: 13.5px !important;
+    line-height: 1.3 !important;
     color: var(--text-primary) !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+    display: block !important;
+    width: 100% !important;
   }
 
-  .kanban-card-row-header {
+  .kanban-uni-label {
+    font-size: 11px !important;
+    color: var(--text-muted) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .btn-proof-link-full,
+  .btn-profile-link-full {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
-    gap: 8px !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    width: 100% !important;
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    text-decoration: none !important;
   }
 </style>
