@@ -101,7 +101,9 @@
                   <%= sub.student_profile.first_name.first.upcase rescue 'S' %>
                 </div>
                 <div class="min-width-0">
-                  <div class="kanban-student-name text-truncate"><%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %></div>
+                  <div class="kanban-student-name text-truncate" title="<%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>">
+                    <%= sub.student_profile.first_name %> <%= sub.student_profile.last_name %>
+                  </div>
                   <div class="kanban-uni-label text-truncate"><%= sub.student_profile.university&.name || sub.student_profile.major.presence || t('dashboard.profile_bento.student') %></div>
                 </div>
               </div>
@@ -119,13 +121,19 @@
               </span>
             </div>
 
-            <% if sub.internship_agreement %>
-              <div class="kanban-card-row-proof">
+            <div class="kanban-card-row-proof mt-8">
+              <% if sub.internship_agreement.present? %>
                 <%= link_to submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn-proof-link-full" do %>
-                  <%= t('kanban.card.agreement', default: 'Agreement') %> &rarr;
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <%= t('kanban.card.agreement', default: 'View Agreement') %> &rarr;
                 <% end %>
-              </div>
-            <% end %>
+              <% else %>
+                <%= link_to new_submission_internship_agreement_path(sub), class: "btn-proof-link-full" do %>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  <%= t('kanban.card.create_agreement', default: 'Generate Agreement') %> &rarr;
+                <% end %>
+              <% end %>
+            </div>
           </div>
         <% end %>
       <% else %>

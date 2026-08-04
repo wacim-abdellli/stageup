@@ -635,10 +635,31 @@
     color: #475569 !important;
   }
 
-  [data-theme="light"] .nav-link-active {
-    color: #0F172A !important;
-    background: #FFFFFF !important;
-    border: 1px solid #CBD5E1 !important;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12) !important;
+  /* ── Kanban Card Badge & Header Styling Fixes ── */
+  .badge-status {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    padding: 3px 8px !important;
+    border-radius: 9999px !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0.03em !important;
+    white-space: nowrap !important;
+    text-transform: uppercase !important;
+  }
+
+  .kanban-student-name {
+    font-weight: 700 !important;
+    font-size: 13.5px !important;
+    color: var(--text-primary) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .kanban-card-row-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
   }
 </style>
