@@ -678,7 +678,8 @@ select:-webkit-autofill:focus {
 .pw-wrap { position:relative; }
 .pw-wrap .form-control { padding-right:44px; }
 .pw-toggle { position:absolute; right:12px; top:50%; transform:translateY(-50%);
-  background:none; border:none; cursor:pointer; color:var(--text-muted); padding:0; }
+  background:none; border:none; cursor:pointer; color:var(--text-muted); padding:0; display:inline-flex; align-items:center; justify-content:center; }
+.pw-toggle * { pointer-events:none; }
 .pw-toggle:hover { color:var(--text-primary); }
 
 .form-row {
