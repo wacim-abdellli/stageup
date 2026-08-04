@@ -26,12 +26,23 @@
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="internship_agreement_start_date"><%= t('internship_agreements.new.form.start_date') %></label>
-          <%= f.date_field :start_date, class: "form-control", required: true %>
+          <%= f.date_field :start_date, class: "form-control", required: true, id: "internship_agreement_start_date" %>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="internship_agreement_end_date"><%= t('internship_agreements.new.form.end_date') %></label>
-          <%= f.date_field :end_date, class: "form-control", required: true %>
+          <%= f.date_field :end_date, class: "form-control", required: true, id: "internship_agreement_end_date" %>
+        </div>
+      </div>
+
+      <div id="duration-badge-container" class="duration-badge-box mb-20 hidden">
+        <div class="flex-align-center gap-8">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div>
+            <span><%= t('internship_agreements.new.duration_label', default: 'Total Duration:') %></span>
+            <strong id="duration-days-count" class="duration-days-highlight">0 Days</strong>
+            <span id="duration-human-approx" class="duration-human-text"></span>
+          </div>
         </div>
       </div>
 
@@ -40,5 +51,55 @@
         <%= f.submit t('internship_agreements.new.form.generate'), class: "btn btn-primary", data: { turbo_submits_with: t('internship_agreements.new.form.generating') } %>
       </div>
     <% end %>
+
+    <script nonce="<%= content_security_policy_nonce %>">
+      (function() {
+        function updateDuration() {
+          var startInput = document.getElementById('internship_agreement_start_date');
+          var endInput = document.getElementById('internship_agreement_end_date');
+          var container = document.getElementById('duration-badge-container');
+          var countEl = document.getElementById('duration-days-count');
+          var approxEl = document.getElementById('duration-human-approx');
+
+          if (!startInput || !endInput || !container || !countEl) return;
+
+          if (startInput.value && endInput.value) {
+            var startDate = new Date(startInput.value);
+            var endDate = new Date(endInput.value);
+
+            if (!isNaN(startDate) && !isNaN(endDate)) {
+              var diffTime = endDate - startDate;
+              var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+              if (diffDays > 0) {
+                container.classList.remove('hidden');
+                countEl.textContent = diffDays + (diffDays === 1 ? ' Day' : ' Days');
+                var weeks = Math.floor(diffDays / 7);
+                var months = (diffDays / 30).toFixed(1);
+                if (diffDays >= 30) {
+                  approxEl.textContent = ' (~' + months + ' months)';
+                } else if (diffDays >= 7) {
+                  approxEl.textContent = ' (~' + weeks + ' weeks)';
+                } else {
+                  approxEl.textContent = '';
+                }
+              } else if (diffDays === 0) {
+                container.classList.remove('hidden');
+                countEl.textContent = '1 Day (Same day)';
+                approxEl.textContent = '';
+              } else {
+                container.classList.remove('hidden');
+                countEl.textContent = 'End date must be after start date';
+                approxEl.textContent = '';
+              }
+            }
+          }
+        }
+
+        document.addEventListener('input', updateDuration);
+        document.addEventListener('change', updateDuration);
+        setTimeout(updateDuration, 100);
+      })();
+    </script>
   </div>
 </div>
