@@ -716,4 +716,43 @@
     text-align: center !important;
     text-decoration: none !important;
   }
+
+  /* ── Offer Page Meta Tag Pills Upgrade ── */
+  .offer-tags {
+    display: flex !important;
+    gap: 10px !important;
+    margin-bottom: 24px !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  }
+
+  .offer-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    padding: 6px 14px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 8px !important;
+    color: var(--text-primary) !important;
+    font-size: 12.5px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.15s ease !important;
+  }
+
+  .offer-tag-icon {
+    width: 14px !important;
+    height: 14px !important;
+    stroke: currentColor !important;
+    flex-shrink: 0 !important;
+  }
+
+  [data-theme="light"] .offer-tag {
+    background: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+    color: #0F172A !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
+  }
 </style>

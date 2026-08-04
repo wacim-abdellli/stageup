@@ -34,24 +34,24 @@
       </div>
 
       <div class="offer-tags">
-        <% if @offer.location.downcase != "remote" %>
+        <% if @offer.location.present? && @offer.location.downcase != "remote" %>
           <span class="offer-tag">
-            <i data-lucide="map-pin" class="offer-tag-icon"></i>
+            <svg class="offer-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
             <%= @offer.location %>
           </span>
         <% end %>
         <span class="offer-tag">
-          <i data-lucide="monitor" class="offer-tag-icon"></i>
+          <svg class="offer-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
           <%= t("common.work_modes.#{@offer.work_mode}", default: @offer.work_mode.capitalize) %>
         </span>
         <span class="offer-tag">
-          <i data-lucide="users" class="offer-tag-icon"></i>
+          <svg class="offer-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <%= @offer.spots %> <%= t('common.spot', count: @offer.spots, default: 'spot') %> <%= t('common.available', default: 'available') %>
         </span>
         <% if @offer.deadline %>
           <% days_left = (@offer.deadline.to_date - Date.today).to_i %>
           <span class="offer-tag <%= days_left <= 3 ? 'offer-tag-urgent' : (days_left <= 7 ? 'offer-tag-warning' : '') %>">
-            <i data-lucide="calendar" class="offer-tag-icon"></i>
+            <svg class="offer-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
             <% if days_left <= 0 %>
               <%= t('offers.show.deadline.passed', default: 'Deadline passed') %>
             <% elsif days_left == 1 %>
@@ -59,7 +59,7 @@
             <% elsif days_left <= 7 %>
               <%= t('offers.show.deadline.days_left', count: days_left, default: '%{count} days left') %>
             <% else %>
-              <%= I18n.l(@offer.deadline, format: :long) %>
+              <%= @offer.deadline.strftime("%b %d, %Y") %>
             <% end %>
           </span>
         <% end %>
