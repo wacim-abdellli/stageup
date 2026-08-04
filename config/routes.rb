@@ -48,6 +48,8 @@ Rails.application.routes.draw do
     end
   end
   get "certificates/verify/:token", to: "certificates#verify", as: :verify_certificate
+  get "certificates/verify", to: "certificates#verify"
+  get "certificates", to: "certificates#verify"
 
   root to: "home#index"
   get "reputation_events", to: "home#reputation_events"
