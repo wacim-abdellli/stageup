@@ -4,38 +4,37 @@
 <% university = @agreement.university %>
 
 <div class="agreement-container">
+  <%# ─── Top Action Bar ─── %>
   <div class="agreement-action-bar hide-on-print">
     <%= link_to dashboard_path, class: "btn btn-secondary" do %>
-      <i data-lucide="arrow-left"></i>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
       <%= t('dashboard.title') %>
     <% end %>
-    <button id="print-btn" class="btn btn-secondary">
-      <i data-lucide="printer"></i>
+    <button id="print-btn" type="button" class="btn btn-secondary">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
       <%= t('dashboard.internship_agreements.show.print') %>
     </button>
   </div>
+
   <div class="agreement-card">
 
+    <%# ─── Declined Banner ─── %>
     <% if @agreement.status == "declined" %>
-      <div class="agreement-declined-banner">
-        <p class="agreement-declined-title">
-          <i data-lucide="x-circle" class="icon-16 stroke-danger"></i>
-          <%= t('dashboard.internship_agreements.show.declined_title') %>
-        </p>
+      <div class="agreement-declined-banner mb-24">
+        <div class="flex-align-center gap-10 mb-6">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <strong class="agreement-declined-title"><%= t('dashboard.internship_agreements.show.declined_title') %></strong>
+        </div>
         <p class="agreement-declined-reason"><%= t('dashboard.internship_agreements.show.declined_reason', reason: @agreement.rejection_reason) %></p>
         <p class="agreement-declined-by"><%= t('dashboard.internship_agreements.show.declined_by', university: university&.name) %></p>
       </div>
     <% end %>
 
-    <div class="agreement-header">
-      <h1 class="agreement-title"><%= t('dashboard.internship_agreements.show.title') %></h1>
-      <p class="agreement-subtitle"><%= t('dashboard.internship_agreements.show.subtitle') %></p>
-    </div>
-
+    <%# ─── Verification Certificate Banner ─── %>
     <% if @agreement.status == "fully_executed" && @agreement.verification_token.present? %>
       <div class="cert-banner hide-on-print mb-24">
         <div class="cert-banner-left">
-          <svg class="icon-18 icon-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
           <div>
             <strong class="cert-banner-title"><%= t('dashboard.internship_agreements.show.certificate_banner') %></strong>
             <p class="cert-banner-sub"><%= t('dashboard.internship_agreements.show.certificate_sub') %></p>
@@ -48,125 +47,248 @@
       </div>
     <% end %>
 
-    <div class="text-center mb-30">
-      <% if @agreement.status == "fully_executed" %>
-        <span class="badge-status badge-completed fs-14 pill-lg">
-          <%= t('dashboard.internship_agreements.show.fully_executed_badge') %>
-        </span>
-        <div class="mt-10 hide-on-print">
-          <button type="button" id="print-btn-2" class="btn btn-secondary"><%= t('dashboard.internship_agreements.show.print') %></button>
-        </div>
-      <% elsif @agreement.status == "declined" %>
-        <span class="badge-status badge-declined fs-14 pill-lg">
-          <%= t('dashboard.internship_agreements.show.declined_badge') %>
-        </span>
-      <% else %>
-        <span class="badge-status badge-pending fs-14 pill-lg">
-          <%= t('dashboard.internship_agreements.show.pending_badge', signatories: @agreement.pending_signatories.join(", ")) %>
-        </span>
-      <% end %>
+    <%# ─── Document Header ─── %>
+    <div class="agreement-header text-center mb-24">
+      <div class="flex-center gap-8 mb-8">
+        <span class="badge-document-tag">CONVENTION DE STAGE</span>
+        <span class="badge-document-id">ID: AGR-<%= @agreement.id %></span>
+      </div>
+      <h1 class="agreement-title"><%= t('dashboard.internship_agreements.show.title') %></h1>
+      <p class="agreement-subtitle"><%= t('dashboard.internship_agreements.show.subtitle') %></p>
     </div>
 
-    <div class="mb-30">
-      <h2 class="agreement-article-title"><%= t('dashboard.internship_agreements.show.article1') %></h2>
-      <p class="agreement-text">
+    <%# ─── 3-Party Signatory Progress Bar ─── %>
+    <div class="signatory-tracker-card mb-30 hide-on-print">
+      <div class="signatory-tracker-header flex-between mb-12">
+        <span class="fs-12 text-muted uppercase fw-700 letter-spacing-1"><%= t('internship_agreements.show.signatory_status', default: '3-PARTY SIGNATURE PROGRESS') %></span>
+        <% if @agreement.status == "fully_executed" %>
+          <span class="badge-status badge-completed"><%= t('dashboard.internship_agreements.show.fully_executed_badge') %></span>
+        <% elsif @agreement.status == "declined" %>
+          <span class="badge-status badge-declined"><%= t('dashboard.internship_agreements.show.declined_badge') %></span>
+        <% else %>
+          <span class="badge-status badge-warning"><%= t('internship_agreements.show.pending_status', default: 'IN PROGRESS') %></span>
+        <% end %>
+      </div>
+
+      <div class="signatory-steps-grid">
+        <%# Step 1: Student %>
+        <div class="signatory-step-item <%= @agreement.student_signed_at ? 'step-completed' : 'step-pending' %>">
+          <div class="flex-align-center gap-8">
+            <% if @agreement.student_signed_at %>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <% else %>
+              <span class="step-dot-amber"></span>
+            <% end %>
+            <strong class="fs-12 text-primary"><%= t('dashboard.internship_agreements.show.student_box') %></strong>
+          </div>
+          <span class="fs-11 text-muted block text-truncate mt-4"><%= student.first_name %> <%= student.last_name %></span>
+          <span class="fs-10 text-muted block mt-2">
+            <%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("%b %d, %H:%M") : t('dashboard.internship_agreements.show.not_signed') %>
+          </span>
+        </div>
+
+        <%# Step 2: Employer %>
+        <div class="signatory-step-item <%= @agreement.company_signed_at ? 'step-completed' : 'step-pending' %>">
+          <div class="flex-align-center gap-8">
+            <% if @agreement.company_signed_at %>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <% else %>
+              <span class="step-dot-amber"></span>
+            <% end %>
+            <strong class="fs-12 text-primary"><%= t('dashboard.internship_agreements.show.employer_box') %></strong>
+          </div>
+          <span class="fs-11 text-muted block text-truncate mt-4"><%= company.name %></span>
+          <span class="fs-10 text-muted block mt-2">
+            <%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("%b %d, %H:%M") : t('dashboard.internship_agreements.show.not_signed') %>
+          </span>
+        </div>
+
+        <%# Step 3: University Coordinator %>
+        <div class="signatory-step-item <%= @agreement.university_signed_at ? 'step-completed' : 'step-pending' %>">
+          <div class="flex-align-center gap-8">
+            <% if @agreement.university_signed_at %>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <% else %>
+              <span class="step-dot-amber"></span>
+            <% end %>
+            <strong class="fs-12 text-primary"><%= t('dashboard.internship_agreements.show.university_box') %></strong>
+          </div>
+          <span class="fs-11 text-muted block text-truncate mt-4"><%= university&.name || t('dashboard.internship_agreements.show.independent') %></span>
+          <span class="fs-10 text-muted block mt-2">
+            <%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("%b %d, %H:%M") : t('dashboard.internship_agreements.show.not_signed') %>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <%# ─── Article 1: Parties ─── %>
+    <div class="agreement-article-box mb-24">
+      <h2 class="agreement-article-title flex-align-center gap-8">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <%= t('dashboard.internship_agreements.show.article1') %>
+      </h2>
+      <p class="agreement-text mb-12">
         <%= t('dashboard.internship_agreements.show.article1_text') %>
       </p>
-      <ul class="agreement-list">
-        <li><strong class="text-primary"><%= t('dashboard.internship_agreements.show.student_role') %></strong> <%= student.first_name %> <%= student.last_name %>, <%= t('dashboard.internship_agreements.show.enrolled_at') %> <%= university&.name || t('dashboard.internship_agreements.show.affiliated_university') %> (<%= student.major.presence || t('dashboard.internship_agreements.show.no_major') %>)</li>
-        <li><strong class="text-primary"><%= t('dashboard.internship_agreements.show.employer_role') %></strong> <%= company.name %>, <%= t('dashboard.internship_agreements.show.registered_in_tunisia') %></li>
-        <li><strong class="text-primary"><%= t('dashboard.internship_agreements.show.university_role') %></strong> <%= university&.name || t('dashboard.internship_agreements.show.self_declared') %></li>
-      </ul>
+
+      <div class="parties-cards-grid">
+        <div class="party-info-card">
+          <span class="party-role-badge"><%= t('dashboard.internship_agreements.show.student_role') %></span>
+          <strong class="party-name"><%= student.first_name %> <%= student.last_name %></strong>
+          <span class="party-meta"><%= t('dashboard.internship_agreements.show.enrolled_at') %> <%= university&.name || t('dashboard.internship_agreements.show.affiliated_university') %></span>
+          <span class="party-submeta">(<%= student.major.presence || t('dashboard.internship_agreements.show.no_major') %>)</span>
+        </div>
+
+        <div class="party-info-card">
+          <span class="party-role-badge"><%= t('dashboard.internship_agreements.show.employer_role') %></span>
+          <strong class="party-name"><%= company.name %></strong>
+          <span class="party-meta"><%= t('dashboard.internship_agreements.show.registered_in_tunisia') %></span>
+        </div>
+
+        <div class="party-info-card">
+          <span class="party-role-badge"><%= t('dashboard.internship_agreements.show.university_role') %></span>
+          <strong class="party-name"><%= university&.name || t('dashboard.internship_agreements.show.self_declared') %></strong>
+          <span class="party-meta"><%= t('internship_agreements.show.partner_institution', default: 'Official Higher Education Institution') %></span>
+        </div>
+      </div>
     </div>
 
-    <div class="mb-30">
-      <h2 class="agreement-article-title"><%= t('dashboard.internship_agreements.show.article2') %></h2>
-      <p class="agreement-text">
+    <%# ─── Article 2: Dates & Duration ─── %>
+    <div class="agreement-article-box mb-24">
+      <h2 class="agreement-article-title flex-align-center gap-8">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <%= t('dashboard.internship_agreements.show.article2') %>
+      </h2>
+      <p class="agreement-text mb-12">
         <%= t('dashboard.internship_agreements.show.article2_text', start_date: @agreement.start_date.strftime("%B %d, %Y"), end_date: @agreement.end_date.strftime("%B %d, %Y")) %>
       </p>
-      <p class="agreement-text mt-8">
-        <%= t('dashboard.internship_agreements.show.duration', days: (@agreement.end_date - @agreement.start_date).to_i) %>
-      </p>
+
+      <% duration_days = (@agreement.end_date - @agreement.start_date).to_i %>
+      <div class="duration-highlight-bar flex-between">
+        <div class="flex-align-center gap-8">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="fs-13 text-secondary"><%= t('dashboard.internship_agreements.show.duration_title', default: 'Calculated Period:') %></span>
+        </div>
+        <strong class="fs-14 color-primary fw-700">
+          <%= duration_days %> <%= t('common.days', count: duration_days, default: 'Days') %>
+          <span class="fs-12 text-muted fw-400">(~<%= (duration_days / 30.0).round(1) %> months)</span>
+        </strong>
+      </div>
     </div>
 
-    <div class="mb-30">
-      <h2 class="agreement-article-title"><%= t('dashboard.internship_agreements.show.article3') %></h2>
+    <%# ─── Article 3: Subject & Scope ─── %>
+    <div class="agreement-article-box mb-30">
+      <h2 class="agreement-article-title flex-align-center gap-8">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <%= t('dashboard.internship_agreements.show.article3') %>
+      </h2>
       <p class="agreement-text">
         <%= t('dashboard.internship_agreements.show.article3_text', name: student.first_name, title: @agreement.submission.offer.title, company: company.name) %>
       </p>
     </div>
 
+    <%# ─── Official Signatures Execution Grid ─── %>
     <div class="border-top pt-30">
-      <h2 class="agreement-article-title"><%= t('dashboard.internship_agreements.show.signatures') %></h2>
-      <p class="text-muted fs-13 mb-25">
-        <%= t('dashboard.internship_agreements.show.signatures_desc') %>
-      </p>
+      <div class="mb-20">
+        <h2 class="agreement-article-title"><%= t('dashboard.internship_agreements.show.signatures') %></h2>
+        <p class="text-muted fs-13 mt-4">
+          <%= t('dashboard.internship_agreements.show.signatures_desc') %>
+        </p>
+      </div>
 
       <div class="agreement-signatures-grid">
+        <%# 1. Student Box %>
         <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.student_signed_at && current_user.profileable_type == "StudentProfile" && current_user.profileable == student && @agreement.status != "declined" %>">
-          <i data-lucide="graduation-cap" class="icon-20 mb-8 stroke-muted"></i>
+          <div class="flex-between mb-8">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <% if @agreement.student_signed_at %>
+              <span class="sign-seal-tag seal-success">✓ <%= t('dashboard.internship_agreements.show.signed') %></span>
+            <% else %>
+              <span class="sign-seal-tag seal-pending"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
+            <% end %>
+          </div>
           <h3 class="agreement-sign-box-title"><%= t('dashboard.internship_agreements.show.student_box') %></h3>
           <p class="agreement-sign-box-name"><%= student.first_name %> <%= student.last_name %></p>
           <% if @agreement.student_signed_at %>
-            <div class="agreement-signed-badge">
-              <span class="agreement-signed-label"><%= t('dashboard.internship_agreements.show.signed') %></span>
+            <div class="agreement-signed-badge mt-10">
               <p class="agreement-signed-date"><%= t('dashboard.internship_agreements.show.signed_on', date: @agreement.student_signed_at.strftime("%B %d, %Y at %H:%M")) %></p>
             </div>
           <% else %>
             <% if current_user.profileable_type == "StudentProfile" && current_user.profileable == student && @agreement.status != "declined" %>
-              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
+              <div class="mt-12">
+                <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-block", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
+              </div>
             <% else %>
-              <span class="agreement-unsigned-label"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
+              <span class="agreement-unsigned-label mt-10 block"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
             <% end %>
           <% end %>
         </div>
 
+        <%# 2. Employer Box %>
         <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.company_signed_at && current_user.profileable_type == "CompanyProfile" && current_user.profileable == company && @agreement.status != "declined" %>">
-          <i data-lucide="briefcase" class="icon-20 mb-8 stroke-muted"></i>
+          <div class="flex-between mb-8">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <% if @agreement.company_signed_at %>
+              <span class="sign-seal-tag seal-success">✓ <%= t('dashboard.internship_agreements.show.signed') %></span>
+            <% else %>
+              <span class="sign-seal-tag seal-pending"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
+            <% end %>
+          </div>
           <h3 class="agreement-sign-box-title"><%= t('dashboard.internship_agreements.show.employer_box') %></h3>
           <p class="agreement-sign-box-name"><%= company.name %></p>
           <% if @agreement.company_signed_at %>
-            <div class="agreement-signed-badge">
-              <span class="agreement-signed-label"><%= t('dashboard.internship_agreements.show.signed') %></span>
+            <div class="agreement-signed-badge mt-10">
               <p class="agreement-signed-date"><%= t('dashboard.internship_agreements.show.signed_on', date: @agreement.company_signed_at.strftime("%B %d, %Y at %H:%M")) %></p>
             </div>
           <% else %>
             <% if current_user.profileable_type == "CompanyProfile" && current_user.profileable == company && @agreement.status != "declined" %>
-              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
+              <div class="mt-12">
+                <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-block", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
+              </div>
             <% else %>
-              <span class="agreement-unsigned-label"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
+              <span class="agreement-unsigned-label mt-10 block"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
             <% end %>
           <% end %>
         </div>
 
+        <%# 3. University Coordinator Box %>
         <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.university_signed_at && current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id && @agreement.status != "declined" %>">
-          <i data-lucide="landmark" class="icon-20 mb-8 stroke-muted"></i>
+          <div class="flex-between mb-8">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7 12 2"/></svg>
+            <% if @agreement.university_signed_at %>
+              <span class="sign-seal-tag seal-success">✓ <%= t('dashboard.internship_agreements.show.signed') %></span>
+            <% else %>
+              <span class="sign-seal-tag seal-pending"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
+            <% end %>
+          </div>
           <h3 class="agreement-sign-box-title"><%= t('dashboard.internship_agreements.show.university_box') %></h3>
           <p class="agreement-sign-box-name"><%= university&.name || t('dashboard.internship_agreements.show.independent') %></p>
           <% if @agreement.university_signed_at %>
-            <div class="agreement-signed-badge">
-              <span class="agreement-signed-label"><%= t('dashboard.internship_agreements.show.signed') %></span>
+            <div class="agreement-signed-badge mt-10">
               <p class="agreement-signed-date"><%= t('dashboard.internship_agreements.show.signed_on', date: @agreement.university_signed_at.strftime("%B %d, %Y at %H:%M")) %></p>
             </div>
           <% else %>
             <% if current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id && @agreement.status != "declined" %>
-              <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-compact", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
-              <div class="mt-10">
-                <button type="button" class="btn btn-secondary btn-compact" onclick="document.getElementById('decline-form').classList.toggle('d-none')"><%= t('dashboard.internship_agreements.show.decline') %></button>
+              <div class="mt-12">
+                <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-block", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
+                <div class="mt-8">
+                  <button type="button" class="btn btn-secondary btn-block btn-compact" onclick="document.getElementById('decline-form').classList.toggle('d-none')"><%= t('dashboard.internship_agreements.show.decline') %></button>
+                </div>
               </div>
             <% else %>
-              <span class="agreement-unsigned-label"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
+              <span class="agreement-unsigned-label mt-10 block"><%= t('dashboard.internship_agreements.show.not_signed') %></span>
             <% end %>
           <% end %>
         </div>
       </div>
 
+      <%# Decline Form %>
       <% if current_user.profileable_type == "UniversityProfile" && @agreement.status == "pending_signatures" && @submission.student_profile.university_id == current_user.profileable.university_id %>
-        <div id="decline-form" class="decline-form-wrapper d-none">
+        <div id="decline-form" class="decline-form-wrapper d-none mt-20">
           <%= form_with model: [@submission, @agreement], url: decline_submission_internship_agreement_path(@submission, @agreement), method: :post, local: true do |f| %>
-            <label class="fs-12 text-secondary fw-600 mb-4 block"><%= t('dashboard.internship_agreements.show.decline_reason') %></label>
+            <label class="fs-12 text-secondary fw-600 mb-6 block"><%= t('dashboard.internship_agreements.show.decline_reason') %></label>
             <%= text_area_tag :rejection_reason, nil, placeholder: t('dashboard.internship_agreements.show.decline_placeholder'), class: "decline-textarea", required: true %>
-            <div class="decline-actions">
+            <div class="decline-actions mt-10">
               <button type="button" class="btn btn-secondary btn-compact-sm" onclick="document.getElementById('decline-form').classList.add('d-none')"><%= t('dashboard.internship_agreements.show.cancel') %></button>
               <%= f.submit t('dashboard.internship_agreements.show.confirm_decline'), class: "btn btn-secondary btn-compact-sm btn-decline-confirm", data: { turbo_submits_with: t('dashboard.internship_agreements.show.declining') } %>
             </div>
@@ -175,12 +297,15 @@
       <% end %>
     </div>
 
-    <div class="agreement-back-row">
+    <div class="agreement-back-row mt-30 text-center hide-on-print">
       <%= link_to t('common.back_to', page: t('dashboard.title')), dashboard_path, class: "btn btn-secondary agreement-back-link" %>
     </div>
   </div>
 </div>
-<%= javascript_tag nonce: true do %>
-  document.getElementById('print-btn')?.addEventListener('click', function() { window.print(); });
-  document.getElementById('print-btn-2')?.addEventListener('click', function() { window.print(); });
-<% end %>
+
+<script nonce="<%= content_security_policy_nonce %>">
+  (function() {
+    function printDoc() { window.print(); }
+    document.getElementById('print-btn')?.addEventListener('click', printDoc);
+  })();
+</script>

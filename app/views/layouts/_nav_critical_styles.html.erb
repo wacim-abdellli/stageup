@@ -788,4 +788,225 @@
   [data-theme="light"] .duration-days-highlight {
     color: #C2410C !important;
   }
+
+  /* ── Convention de Stage Document & Signatory Tracker Styling ── */
+  .badge-document-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    font-size: 10.5px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.08em !important;
+    padding: 3px 10px !important;
+    border-radius: 9999px !important;
+    background: rgba(249, 115, 22, 0.12) !important;
+    border: 1px solid rgba(249, 115, 22, 0.3) !important;
+    color: #FB923C !important;
+  }
+
+  .badge-document-id {
+    display: inline-flex !important;
+    align-items: center !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    padding: 3px 8px !important;
+    border-radius: 6px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-muted) !important;
+  }
+
+  .signatory-tracker-card {
+    background: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+  }
+
+  .signatory-steps-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  @media (max-width: 768px) {
+    .signatory-steps-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  .signatory-step-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px !important;
+    padding: 10px 12px !important;
+  }
+
+  .signatory-step-item.step-completed {
+    border-color: rgba(16, 185, 129, 0.3) !important;
+    background: rgba(16, 185, 129, 0.04) !important;
+  }
+
+  .step-dot-amber {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background-color: #F59E0B !important;
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.6) !important;
+    flex-shrink: 0 !important;
+  }
+
+  .agreement-article-box {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+  }
+
+  .agreement-article-title {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 12px !important;
+  }
+
+  .parties-cards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+    margin-top: 14px !important;
+  }
+
+  @media (max-width: 768px) {
+    .parties-cards-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  .party-info-card {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px !important;
+    padding: 12px 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+
+  .party-role-badge {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    color: #FB923C !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .party-name {
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+  }
+
+  .party-meta {
+    font-size: 11.5px !important;
+    color: var(--text-muted) !important;
+  }
+
+  .party-submeta {
+    font-size: 11px !important;
+    color: var(--text-muted) !important;
+    opacity: 0.8 !important;
+  }
+
+  .duration-highlight-bar {
+    background: rgba(249, 115, 22, 0.06) !important;
+    border: 1px solid rgba(249, 115, 22, 0.2) !important;
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    margin-top: 10px !important;
+  }
+
+  .agreement-signatures-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  @media (max-width: 768px) {
+    .agreement-signatures-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  .agreement-sign-box {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .agreement-sign-box.awaiting-mine {
+    border: 1px solid #FB923C !important;
+    box-shadow: 0 0 16px rgba(251, 146, 60, 0.15) !important;
+    background: rgba(249, 115, 22, 0.04) !important;
+  }
+
+  .sign-seal-tag {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    padding: 2px 8px !important;
+    border-radius: 9999px !important;
+    text-transform: uppercase !important;
+  }
+
+  .seal-success {
+    background: rgba(16, 185, 129, 0.1) !important;
+    color: #10B981 !important;
+    border: 1px solid rgba(16, 185, 129, 0.25) !important;
+  }
+
+  .seal-pending {
+    background: rgba(245, 158, 11, 0.1) !important;
+    color: #F59E0B !important;
+    border: 1px solid rgba(245, 158, 11, 0.25) !important;
+  }
+
+  /* Light mode overrides */
+  [data-theme="light"] .signatory-tracker-card,
+  [data-theme="light"] .agreement-article-box,
+  [data-theme="light"] .party-info-card,
+  [data-theme="light"] .signatory-step-item,
+  [data-theme="light"] .agreement-sign-box {
+    background: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
+  }
+
+  [data-theme="light"] .agreement-sign-box.awaiting-mine {
+    border-color: #C2410C !important;
+    background: #FFF7ED !important;
+  }
+
+  /* Print Styles */
+  @media print {
+    .hide-on-print, .navbar, .footer, nav {
+      display: none !important;
+    }
+    body {
+      background: #FFFFFF !important;
+      color: #000000 !important;
+    }
+    .agreement-container, .agreement-card {
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
+      background: #FFFFFF !important;
+      color: #000000 !important;
+    }
+    .agreement-article-box, .party-info-card, .agreement-sign-box {
+      border: 1px solid #000000 !important;
+      background: #FFFFFF !important;
+      color: #000000 !important;
+    }
+  }
 </style>
