@@ -32,7 +32,7 @@
 
     <%# ─── Verification Certificate Banner ─── %>
     <% if @agreement.status == "fully_executed" && @agreement.verification_token.present? %>
-      <div class="cert-banner hide-on-print mb-24">
+      <div class="cert-banner hide-on-print mb-32">
         <div class="cert-banner-left">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
           <div>
@@ -48,8 +48,8 @@
     <% end %>
 
     <%# ─── Document Header ─── %>
-    <div class="agreement-header text-center mb-24">
-      <div class="flex-center gap-8 mb-8">
+    <div class="agreement-header text-center my-28">
+      <div class="flex-center gap-8 mb-10">
         <span class="badge-document-tag">CONVENTION DE STAGE</span>
         <span class="badge-document-id">ID: AGR-<%= @agreement.id %></span>
       </div>
