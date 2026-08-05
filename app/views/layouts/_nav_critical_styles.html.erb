@@ -1227,6 +1227,46 @@
     border-radius: 10px !important;
   }
 
+  /* ── Full Notifications Page Styling ── */
+  .notif-item-icon {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .notif-item-icon.icon-green {
+    background: rgba(16, 185, 129, 0.12) !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    color: #10B981 !important;
+  }
+
+  .notif-item-icon.icon-red {
+    background: rgba(239, 68, 68, 0.12) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    color: #F87171 !important;
+  }
+
+  .notif-item-icon.icon-blue {
+    background: rgba(59, 130, 246, 0.12) !important;
+    border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    color: #60A5FA !important;
+  }
+
+  .notif-item-icon.icon-amber {
+    background: rgba(245, 158, 11, 0.12) !important;
+    border: 1px solid rgba(245, 158, 11, 0.3) !important;
+    color: #FBBF24 !important;
+  }
+
+  .notif-item-content:hover .notif-item-message {
+    color: #FB923C !important;
+    text-decoration: underline !important;
+  }
+
   [data-theme="light"] .cert-card-master {
     background: #FFFFFF !important;
     border-color: #E2E8F0 !important;

@@ -21,14 +21,14 @@
         <% notifs.each do |notification| %>
           <div class="notif-list-item <%= 'unread' unless notification.read %>">
             <div class="notif-item-icon <%= action_icon_color(notification.action) %>">
-              <i data-lucide="<%= notification_icon(notification.action) %>" class="icon-18"></i>
+              <%= render_notification_icon_svg(notification.action) %>
             </div>
-            <div class="notif-item-content">
-              <p class="notif-item-message"><%= notification.message %></p>
-              <span class="notif-item-time"><%= "#{time_ago_in_words(notification.created_at)} #{t("common.ago")}".strip %></span>
-            </div>
+            <%= link_to notification.target_path, class: "notif-item-content flex-1 min-width-0 text-decoration-none" do %>
+              <p class="notif-item-message color-primary fw-500 mb-4"><%= notification.message %></p>
+              <span class="notif-item-time fs-12 text-muted block"><%= "#{time_ago_in_words(notification.created_at)} #{t("common.ago")}".strip %></span>
+            <% end %>
             <% unless notification.read %>
-              <%= button_to t("notifications.mark_read"), notification_path(notification), method: :patch, class: "btn btn-secondary btn-compact-sm notif-mark-btn" %>
+              <%= button_to t("notifications.mark_read"), notification_path(notification), method: :patch, class: "btn btn-secondary btn-compact-sm notif-mark-btn flex-shrink-0" %>
             <% end %>
           </div>
         <% end %>
