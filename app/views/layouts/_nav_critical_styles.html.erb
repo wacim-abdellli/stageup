@@ -1006,7 +1006,34 @@
     border: 1px solid rgba(245, 158, 11, 0.25) !important;
   }
 
-  /* Light mode overrides */
+  /* ── Notifications Dropdown Link Styling ── */
+  .notif-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 14px !important;
+    text-decoration: none !important;
+    color: var(--text-primary) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    transition: background 0.15s ease !important;
+    position: relative !important;
+  }
+
+  .notif-item:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .notif-item.unread {
+    background: rgba(249, 115, 22, 0.05) !important;
+  }
+
+  .unread-dot {
+    width: 7px !important;
+    height: 7px !important;
+    border-radius: 50% !important;
+    background-color: #FB923C !important;
+    box-shadow: 0 0 6px rgba(251, 146, 60, 0.8) !important;
+  }
   [data-theme="light"] .signatory-tracker-card,
   [data-theme="light"] .agreement-article-box,
   [data-theme="light"] .party-info-card,

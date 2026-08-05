@@ -23,8 +23,23 @@ class Notification < ApplicationRecord
   scope :recent, -> { order(created_at: :desc) }
   scope :by_recipient, ->(recipient) { where(recipient: recipient) }
 
-  def mark_as_read!
-    update!(read: true)
+  def target_path
+    case notifiable
+    when InternshipAgreement
+      "/submissions/#{notifiable.submission_id}/internship_agreements/#{notifiable.id}"
+    when Submission
+      if notifiable.internship_agreement.present?
+        "/submissions/#{notifiable.id}/internship_agreements/#{notifiable.internship_agreement.id}"
+      elsif notifiable.offer.present?
+        "/offers/#{notifiable.offer_id}"
+      else
+        "/dashboard"
+      end
+    when Offer
+      "/offers/#{notifiable.id}"
+    else
+      "/dashboard"
+    end
   end
 
   def self.trigger(recipient:, action:, message:, notifiable:)

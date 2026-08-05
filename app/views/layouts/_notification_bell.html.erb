@@ -25,10 +25,26 @@
         <% notifications = current_user.notifications.order(created_at: :desc).limit(5) %>
         <% if notifications.any? %>
           <% notifications.each do |n| %>
-            <div class="notif-item <%= 'unread' unless n.read %>">
-              <span class="notif-item-text"><%= n.message %></span>
-              <span class="notif-item-time"><%= time_ago_in_words(n.created_at) %> <%= t('common.ago') %></span>
-            </div>
+            <%= link_to n.target_path, class: "notif-item #{'unread' unless n.read}" do %>
+              <div class="notif-item-icon flex-shrink-0">
+                <% if n.action.include?('agreement') %>
+                  📜
+                <% elsif n.action.include?('application') %>
+                  🎓
+                <% elsif n.action.include?('coordinator') || n.action.include?('company') %>
+                  🏛️
+                <% else %>
+                  🔔
+                <% end %>
+              </div>
+              <div class="min-width-0 flex-1">
+                <span class="notif-item-text block text-truncate"><%= n.message %></span>
+                <span class="notif-item-time block fs-11 text-muted mt-2"><%= time_ago_in_words(n.created_at) %> <%= t('common.ago') %></span>
+              </div>
+              <% unless n.read %>
+                <span class="unread-dot flex-shrink-0"></span>
+              <% end %>
+            <% end %>
           <% end %>
         <% else %>
           <div class="notif-empty">
