@@ -9267,6 +9267,7 @@ button.btn-accent:hover,
   background: rgba(16, 185, 129, 0.06);
   border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: var(--radius-md);
+  margin-bottom: 40px !important;
 }
 
 .cert-banner-left {
