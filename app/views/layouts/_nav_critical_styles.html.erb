@@ -1070,5 +1070,44 @@
       background: #FFFFFF !important;
       color: #000000 !important;
     }
+  /* ── Fully Executed Certificate Banner ── */
+  .cert-banner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    padding: 16px 20px !important;
+    background: rgba(16, 185, 129, 0.08) !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.12) !important;
+  }
+
+  .cert-banner-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+  }
+
+  .cert-banner-title {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #10B981 !important;
+    display: block !important;
+  }
+
+  .cert-banner-sub {
+    font-size: 12.5px !important;
+    color: var(--text-muted) !important;
+    margin-top: 2px !important;
+  }
+
+  [data-theme="light"] .cert-banner {
+    background: #ECFDF5 !important;
+    border-color: #A7F3D0 !important;
+  }
+
+  [data-theme="light"] .cert-banner-title {
+    color: #047857 !important;
   }
 </style>
