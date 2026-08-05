@@ -1,100 +1,129 @@
 <% content_for :title, "#{t('certificates.verify.title')} – #{@student.first_name} #{@student.last_name}" %>
 
-<div class="cert-page">
-  <div class="cert-container">
+<div class="cert-page py-40">
+  <div class="cert-container max-w-900 mx-auto px-20">
 
-    <div class="cert-header">
-      <div class="cert-badge">
-        <svg class="icon-16 icon-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        <span><%= t('certificates.verify.badge_text') %></span>
+    <%# ─── Top Header Action Bar ─── %>
+    <div class="cert-action-bar flex-between align-items-center mb-24 hide-on-print">
+      <div class="cert-badge-verified">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <span><%= t('certificates.verify.badge_text', default: 'OFFICIAL VERIFIED CREDENTIAL') %></span>
       </div>
-      <h1 class="cert-title"><%= t('certificates.verify.title') %></h1>
-      <p class="cert-sub"><%= t('certificates.verify.subtitle') %></p>
+      <button type="button" class="btn btn-secondary btn-compact" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+        <%= t('dashboard.internship_agreements.show.print', default: 'Print Certificate') %>
+      </button>
     </div>
 
-    <div class="cert-card glass-card">
-      <div class="cert-watermark">STAGEUP</div>
+    <%# ─── Master Certificate Card ─── %>
+    <div class="cert-card-master p-32">
+      <div class="cert-watermark-logo">STAGEUP</div>
 
-      <div class="cert-body">
-        <p class="cert-recipient-label"><%= t('certificates.verify.recipient_label') %></p>
-        <h2 class="cert-student-name"><%= @student.first_name %> <%= @student.last_name %></h2>
-        <p class="cert-fulfillment">
+      <%# Certificate Header %>
+      <div class="cert-card-header text-center mb-28">
+        <div class="cert-logo-brand mb-12">
+          <%= render "layouts/navbar_brand" %>
+        </div>
+        <span class="cert-legal-standard-label uppercase fs-11 fw-700 tracking-wider text-muted"><%= t('certificates.verify.legal_standard', default: 'REPUBLIC OF TUNISIA &middot; THREE-PARTY INTERNSHIP VERIFICATION') %></span>
+        <h1 class="cert-master-title mt-8"><%= t('certificates.verify.title', default: 'Certificate of Internship Completion') %></h1>
+      </div>
+
+      <%# Recipient & Achievement %>
+      <div class="cert-recipient-block text-center mb-32">
+        <p class="cert-recipient-sub text-muted fs-13 uppercase tracking-wider mb-8"><%= t('certificates.verify.recipient_label', default: 'THIS IS TO CERTIFY THAT') %></p>
+        <h2 class="cert-student-name color-primary font-weight-800 mb-12"><%= @student.first_name %> <%= @student.last_name %></h2>
+        <p class="cert-fulfillment-text fs-15 text-secondary max-w-650 mx-auto">
           <%= t('certificates.verify.fulfillment_text', title: @offer.title, company: @company.name) %>
         </p>
-
-        <div class="cert-details-grid">
-          <div class="cert-detail-item">
-            <span class="cert-detail-label"><%= t('certificates.verify.institution') %></span>
-            <strong class="cert-detail-value"><%= @student.university&.name || t('certificates.verify.academic_partner') %></strong>
-          </div>
-          <div class="cert-detail-item">
-            <span class="cert-detail-label"><%= t('certificates.verify.duration') %></span>
-            <strong class="cert-detail-value"><%= @agreement.start_date.strftime("%B %d, %Y") %> &ndash; <%= @agreement.end_date.strftime("%B %d, %Y") %></strong>
-          </div>
-          <div class="cert-detail-item">
-            <span class="cert-detail-label"><%= t('certificates.verify.stage_type') %></span>
-            <strong class="cert-detail-value"><%= @offer.stage_type %></strong>
-          </div>
-          <div class="cert-detail-item">
-            <span class="cert-detail-label"><%= t('certificates.verify.verification_id') %></span>
-            <strong class="cert-detail-value cert-token-code"><%= @agreement.verification_token %></strong>
-          </div>
-        </div>
-
-        <div class="cert-signatures-section">
-          <h3 class="cert-section-heading"><%= t('certificates.verify.signatures_heading') %></h3>
-          <div class="cert-signatures-grid">
-            <div class="cert-signature-card">
-              <div class="cert-sig-icon">
-                <svg class="icon-16 icon-indigo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
-              <div class="cert-sig-meta">
-                <span class="cert-sig-role"><%= t('certificates.verify.student_role') %></span>
-                <strong class="cert-sig-name"><%= @student.first_name %> <%= @student.last_name %></strong>
-                <span class="cert-sig-date"><%= t('certificates.verify.signed_on', date: @agreement.student_signed_at&.strftime("%b %d, %Y at %H:%M UTC") || t('certificates.verify.signed')) %></span>
-              </div>
-            </div>
-
-            <div class="cert-signature-card">
-              <div class="cert-sig-icon">
-                <svg class="icon-16 icon-indigo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/></svg>
-              </div>
-              <div class="cert-sig-meta">
-                <span class="cert-sig-role"><%= t('certificates.verify.employer_role') %></span>
-                <strong class="cert-sig-name"><%= @company.name %></strong>
-                <span class="cert-sig-date"><%= t('certificates.verify.signed_on', date: @agreement.company_signed_at&.strftime("%b %d, %Y at %H:%M UTC") || t('certificates.verify.signed')) %></span>
-              </div>
-            </div>
-
-            <div class="cert-signature-card">
-              <div class="cert-sig-icon">
-                <svg class="icon-16 icon-indigo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-              </div>
-              <div class="cert-sig-meta">
-                <span class="cert-sig-role"><%= t('certificates.verify.university_role') %></span>
-                <strong class="cert-sig-name"><%= @student.university&.name || t('certificates.verify.university_role') %></strong>
-                <span class="cert-sig-date"><%= t('certificates.verify.signed_on', date: @agreement.university_signed_at&.strftime("%b %d, %Y at %H:%M UTC") || t('certificates.verify.signed')) %></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cert-qr-wrap">
-          <% qr_url = verify_certificate_url(token: @agreement.verification_token) %>
-          <% qr = RQRCode::QRCode.new(qr_url) %>
-          <div class="cert-qr-block">
-            <%= qr.as_svg(
-              offset: 0,
-              color: "F4F4F6",
-              shape_rendering: "crispEdges",
-              module_size: 4,
-              standalone: true
-            ).html_safe %>
-            <p class="cert-qr-label"><%= t('certificates.verify.qr_label') %></p>
-          </div>
-        </div>
-
       </div>
+
+      <%# Metadata Grid & QR Code Layout %>
+      <div class="cert-content-grid mb-32">
+        <div class="cert-details-column">
+          <div class="cert-detail-box">
+            <span class="cert-detail-label"><%= t('certificates.verify.institution', default: 'Institution') %></span>
+            <strong class="cert-detail-val color-primary"><%= @student.university&.name || t('certificates.verify.academic_partner') %></strong>
+          </div>
+
+          <div class="cert-detail-box">
+            <span class="cert-detail-label"><%= t('certificates.verify.duration', default: 'Duration') %></span>
+            <% duration_days = (@agreement.end_date - @agreement.start_date).to_i %>
+            <strong class="cert-detail-val color-primary">
+              <%= @agreement.start_date.strftime("%b %d, %Y") %> &ndash; <%= @agreement.end_date.strftime("%b %d, %Y") %>
+              <span class="fs-12 text-muted fw-400">(<%= duration_days %> Days)</span>
+            </strong>
+          </div>
+
+          <div class="cert-detail-box">
+            <span class="cert-detail-label"><%= t('certificates.verify.stage_type', default: 'Stage Type') %></span>
+            <strong class="cert-detail-val color-primary"><%= @offer.stage_type.to_s.upcase %></strong>
+          </div>
+
+          <div class="cert-detail-box">
+            <span class="cert-detail-label"><%= t('certificates.verify.verification_id', default: 'Verification ID') %></span>
+            <strong class="cert-detail-val cert-token-highlight"><%= @agreement.verification_token %></strong>
+          </div>
+        </div>
+
+        <%# QR Code Box %>
+        <div class="cert-qr-column flex-center">
+          <div class="cert-qr-container p-16 text-center">
+            <% qr_url = verify_certificate_url(token: @agreement.verification_token) %>
+            <% qr = RQRCode::QRCode.new(qr_url) %>
+            <div class="cert-qr-svg mb-8">
+              <%= qr.as_svg(
+                offset: 0,
+                color: "FFFFFF",
+                shape_rendering: "crispEdges",
+                module_size: 4,
+                standalone: true
+              ).html_safe %>
+            </div>
+            <span class="cert-qr-caption fs-10 text-muted block"><%= t('certificates.verify.qr_label', default: 'Scan to verify authenticity on StageUp') %></span>
+          </div>
+        </div>
+      </div>
+
+      <%# 3 Digital Signatures Grid %>
+      <div class="cert-signatures-section pt-24 border-top">
+        <h3 class="fs-12 uppercase text-muted fw-700 tracking-wider mb-16 text-center"><%= t('certificates.verify.signatures_heading', default: 'DIGITAL SIGNATURES & LEGAL VERIFICATION') %></h3>
+
+        <div class="cert-signatures-grid">
+          <div class="cert-sig-card p-14">
+            <div class="flex-align-center gap-8 mb-6">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="fs-11 uppercase text-muted fw-700"><%= t('certificates.verify.student_role', default: 'Student') %></span>
+            </div>
+            <strong class="fs-13 block color-primary text-truncate"><%= @student.first_name %> <%= @student.last_name %></strong>
+            <span class="fs-10 text-muted block mt-2">
+              <%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : t('certificates.verify.signed') %>
+            </span>
+          </div>
+
+          <div class="cert-sig-card p-14">
+            <div class="flex-align-center gap-8 mb-6">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="fs-11 uppercase text-muted fw-700"><%= t('certificates.verify.employer_role', default: 'Employer') %></span>
+            </div>
+            <strong class="fs-13 block color-primary text-truncate"><%= @company.name %></strong>
+            <span class="fs-10 text-muted block mt-2">
+              <%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : t('certificates.verify.signed') %>
+            </span>
+          </div>
+
+          <div class="cert-sig-card p-14">
+            <div class="flex-align-center gap-8 mb-6">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="fs-11 uppercase text-muted fw-700"><%= t('certificates.verify.university_role', default: 'University Coordinator') %></span>
+            </div>
+            <strong class="fs-13 block color-primary text-truncate"><%= @student.university&.name || t('certificates.verify.university_role') %></strong>
+            <span class="fs-10 text-muted block mt-2">
+              <%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : t('certificates.verify.signed') %>
+            </span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
