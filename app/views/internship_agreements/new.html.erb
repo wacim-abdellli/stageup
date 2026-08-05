@@ -20,8 +20,11 @@
       </div>
     <% end %>
 
-    <%= form_with model: [@submission, @agreement], local: true do |f| %>
-      <h3 class="section-heading-lg"><%= t('internship_agreements.new.dates_title') %></h3>
+    <%= form_with model: [@submission, @agreement], local: true, data: { stage_type: @submission.offer.stage_type.to_s.upcase } do |f| %>
+      <div class="flex-between align-items-center mb-16">
+        <h3 class="section-heading-lg mb-0"><%= t('internship_agreements.new.dates_title') %></h3>
+        <span class="badge-status badge-completed"><%= @submission.offer.stage_type.to_s.upcase %> (<%= t('internship_agreements.new.legal_type', default: 'Tunisian Legal Standard') %>)</span>
+      </div>
 
       <div class="form-row">
         <div class="form-group">
@@ -44,6 +47,7 @@
             <span id="duration-human-approx" class="duration-human-text"></span>
           </div>
         </div>
+        <div id="legal-warning-msg" class="legal-warning-box mt-8 hidden"></div>
       </div>
 
       <div class="form-footer-row">
@@ -60,6 +64,8 @@
           var container = document.getElementById('duration-badge-container');
           var countEl = document.getElementById('duration-days-count');
           var approxEl = document.getElementById('duration-human-approx');
+          var warningEl = document.getElementById('legal-warning-msg');
+          var stageType = "<%= @submission.offer.stage_type.to_s.upcase %>";
 
           if (!startInput || !endInput || !container || !countEl) return;
 
@@ -83,14 +89,29 @@
                 } else {
                   approxEl.textContent = '';
                 }
+
+                // Tunisian Ministry of Higher Education Legal Rules
+                if (warningEl) {
+                  if (stageType === "PFE" && diffDays < 120) {
+                    warningEl.classList.remove('hidden');
+                    warningEl.innerHTML = "⚠️ <strong>Tunisian Legal Requirement:</strong> A PFE (Graduation Project) must be at least 4 to 6 months (120 – 180 days). Currently: " + diffDays + " days.";
+                  } else if (stageType === "PFA" && diffDays < 60) {
+                    warningEl.classList.remove('hidden');
+                    warningEl.innerHTML = "⚠️ <strong>Tunisian Legal Requirement:</strong> A PFA (Mid-Studies Project) must be at least 2 months (60 days). Currently: " + diffDays + " days.";
+                  } else {
+                    warningEl.classList.add('hidden');
+                  }
+                }
               } else if (diffDays === 0) {
                 container.classList.remove('hidden');
                 countEl.textContent = '1 Day (Same day)';
                 approxEl.textContent = '';
+                if (warningEl) warningEl.classList.add('hidden');
               } else {
                 container.classList.remove('hidden');
                 countEl.textContent = 'End date must be after start date';
                 approxEl.textContent = '';
+                if (warningEl) warningEl.classList.add('hidden');
               }
             }
           }
