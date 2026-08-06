@@ -4,72 +4,75 @@
   <div class="cert-container max-w-900 mx-auto px-20">
 
     <%# ─── Top Action Bar ─── %>
-    <div class="cert-action-bar flex-between align-items-center mb-20 hide-on-print">
+    <div class="cert-action-bar flex-between align-items-center mb-24 hide-on-print">
       <div class="cert-badge-verified">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        <span><%= t('certificates.verify.badge_text', default: 'OFFICIAL VERIFIED CREDENTIAL') %></span>
+        <span><%= t('certificates.verify.badge_text', default: 'OFFICIAL VERIFIED ACADEMIC CREDENTIAL') %></span>
       </div>
-      <button type="button" class="btn btn-secondary btn-compact" onclick="window.print()">
+      <button type="button" class="btn btn-primary btn-compact" onclick="window.print()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
-        <%= t('dashboard.internship_agreements.show.print', default: 'Print Certificate') %>
+        <%= t('dashboard.internship_agreements.show.print', default: 'Print / Export PDF') %>
       </button>
     </div>
 
-    <%# ─── Master Certificate Card ─── %>
-    <div class="cert-card-master p-36">
-      <div class="cert-watermark-logo">STAGEUP</div>
+    <%# ─── Prestige Diploma Master Card ─── %>
+    <div class="cert-card-diploma p-40">
 
-      <%# Certificate Header %>
-      <div class="cert-card-header text-center mb-28">
-        <span class="cert-legal-standard-label uppercase fs-11 fw-700 tracking-wider text-muted block mb-6">
-          <%= t('certificates.verify.legal_standard', default: 'REPUBLIC OF TUNISIA · THREE-PARTY INTERNSHIP VERIFICATION') %>
+      <%# Diploma Golden Header Emblem %>
+      <div class="cert-diploma-header text-center mb-32">
+        <div class="cert-emblem-badge mb-10 mx-auto">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          <span class="fs-11 uppercase fw-800 text-amber tracking-wider">STAGEUP TRUST LEDGER</span>
+        </div>
+        <span class="cert-legal-standard-sub uppercase fs-11 fw-700 tracking-wider text-muted block mb-8">
+          <%= t('certificates.verify.legal_standard', default: 'REPUBLIC OF TUNISIA · MINISTRY OF HIGHER EDUCATION & SCIENTIFIC RESEARCH') %>
         </span>
-        <h1 class="cert-master-title"><%= t('certificates.verify.title', default: 'Certificate of Completion') %></h1>
-        <p class="cert-master-sub text-muted fs-13 mt-4"><%= t('certificates.verify.subtitle', default: 'This certifies that') %></p>
+        <h1 class="cert-diploma-title"><%= t('certificates.verify.title', default: 'CERTIFICATE OF COMPLETION') %></h1>
+        <p class="cert-diploma-sub text-muted fs-13 mt-6"><%= t('certificates.verify.subtitle', default: 'This official credential certifies that') %></p>
       </div>
 
       <%# Recipient & Achievement Hero %>
-      <div class="cert-recipient-block text-center mb-32">
-        <h2 class="cert-student-name color-primary font-weight-800 mb-12"><%= @student.first_name %> <%= @student.last_name %></h2>
-        <p class="cert-fulfillment-text fs-15 text-secondary max-w-650 mx-auto">
+      <div class="cert-recipient-hero text-center mb-36">
+        <h2 class="cert-student-hero-name font-weight-800 mb-14"><%= @student.first_name %> <%= @student.last_name %></h2>
+        <p class="cert-fulfillment-sentence fs-15 text-secondary max-w-650 mx-auto">
           <%= t('certificates.verify.fulfillment_text', title: @offer.title, company: @company.name) %>
         </p>
       </div>
 
-      <%# Metadata Grid & Compact QR Layout %>
-      <div class="cert-content-grid mb-32">
-        <div class="cert-details-column">
-          <div class="cert-detail-box">
-            <span class="cert-detail-label"><%= t('certificates.verify.institution', default: 'Institution') %></span>
-            <strong class="cert-detail-val color-primary"><%= @student.university&.name || t('certificates.verify.academic_partner') %></strong>
+      <%# 2-Column Bento Grid: Metadata Left + Gold QR Seal Right %>
+      <div class="cert-bento-grid mb-36">
+        <div class="cert-metadata-column">
+          <div class="cert-info-pill">
+            <span class="cert-info-label"><%= t('certificates.verify.institution', default: 'Institution') %></span>
+            <strong class="cert-info-value color-primary"><%= @student.university&.name || t('certificates.verify.academic_partner') %></strong>
           </div>
 
-          <div class="cert-detail-box">
-            <span class="cert-detail-label"><%= t('certificates.verify.duration', default: 'Duration') %></span>
+          <div class="cert-info-pill">
+            <span class="cert-info-label"><%= t('certificates.verify.duration', default: 'Duration') %></span>
             <% duration_days = (@agreement.end_date - @agreement.start_date).to_i %>
-            <strong class="cert-detail-val color-primary">
+            <strong class="cert-info-value color-primary">
               <%= @agreement.start_date.strftime("%b %d, %Y") %> &ndash; <%= @agreement.end_date.strftime("%b %d, %Y") %>
               <span class="fs-12 text-muted fw-400">(<%= duration_days %> Days)</span>
             </strong>
           </div>
 
-          <div class="cert-detail-box">
-            <span class="cert-detail-label"><%= t('certificates.verify.stage_type', default: 'Stage Type') %></span>
-            <strong class="cert-detail-val color-primary"><%= @offer.stage_type.to_s.upcase %></strong>
+          <div class="cert-info-pill">
+            <span class="cert-info-label"><%= t('certificates.verify.stage_type', default: 'Stage Type') %></span>
+            <strong class="cert-info-value color-amber fw-700"><%= @offer.stage_type.to_s.upcase %></strong>
           </div>
 
-          <div class="cert-detail-box">
-            <span class="cert-detail-label"><%= t('certificates.verify.verification_id', default: 'Verification ID') %></span>
-            <strong class="cert-detail-val cert-token-highlight"><%= @agreement.verification_token %></strong>
+          <div class="cert-info-pill">
+            <span class="cert-info-label"><%= t('certificates.verify.verification_id', default: 'Verification ID') %></span>
+            <strong class="cert-info-value cert-token-code"><%= @agreement.verification_token %></strong>
           </div>
         </div>
 
-        <%# QR Code Box with White Background Canvas %>
-        <div class="cert-qr-column flex-center">
-          <div class="cert-qr-wrapper p-16 text-center">
+        <%# Gold QR Seal Box %>
+        <div class="cert-qr-gold-wrapper flex-center">
+          <div class="cert-qr-seal-box p-16 text-center">
             <% qr_url = verify_certificate_url(token: @agreement.verification_token) %>
             <% qr = RQRCode::QRCode.new(qr_url) %>
-            <div class="cert-qr-white-canvas p-12 mb-10 mx-auto">
+            <div class="cert-qr-canvas p-10 mb-8 mx-auto">
               <%= qr.as_svg(
                 offset: 0,
                 color: "000000",
@@ -78,7 +81,7 @@
                 standalone: true
               ).html_safe %>
             </div>
-            <span class="cert-qr-caption fs-10 text-muted block fw-600"><%= t('certificates.verify.qr_label', default: 'Scan to verify authenticity on StageUp') %></span>
+            <span class="cert-qr-caption fs-10 text-muted block fw-600"><%= t('certificates.verify.qr_label', default: 'Scan with camera to verify live record') %></span>
           </div>
         </div>
       </div>

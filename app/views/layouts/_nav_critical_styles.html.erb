@@ -1124,96 +1124,97 @@
     line-height: 1.4 !important;
   }
 
-  /* ── Master Verified Certificate Credential Styling ── */
-  .cert-card-master {
+  /* ── Master Verified Certificate Diploma Styling ── */
+  .cert-card-diploma {
     position: relative !important;
-    background: rgba(15, 23, 42, 0.75) !important;
-    border: 1px solid rgba(251, 146, 60, 0.25) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 0 40px rgba(251, 146, 60, 0.08), 0 20px 40px rgba(0, 0, 0, 0.4) !important;
-    backdrop-filter: blur(16px) !important;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(10, 15, 30, 0.98) 100%) !important;
+    border: 2px solid rgba(245, 158, 11, 0.4) !important;
+    outline: 1px solid rgba(245, 158, 11, 0.15) !important;
+    outline-offset: -8px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 0 50px rgba(245, 158, 11, 0.1), 0 25px 50px rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(20px) !important;
     overflow: hidden !important;
   }
 
-  .cert-badge-verified {
+  .cert-emblem-badge {
     display: inline-flex !important;
     align-items: center !important;
     gap: 8px !important;
-    font-size: 11px !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.06em !important;
     padding: 6px 14px !important;
+    background: rgba(245, 158, 11, 0.08) !important;
+    border: 1px solid rgba(245, 158, 11, 0.25) !important;
     border-radius: 9999px !important;
-    background: rgba(16, 185, 129, 0.1) !important;
-    border: 1px solid rgba(16, 185, 129, 0.3) !important;
-    color: #10B981 !important;
   }
 
-  .cert-master-title {
-    font-size: 26px !important;
-    font-weight: 800 !important;
-    color: var(--text-primary) !important;
-    letter-spacing: -0.02em !important;
+  .cert-diploma-title {
+    font-size: 28px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.06em !important;
+    color: #FFFFFF !important;
+    text-transform: uppercase !important;
   }
 
-  .cert-student-name {
-    font-size: 32px !important;
+  .cert-student-hero-name {
+    font-size: 38px !important;
     letter-spacing: -0.02em !important;
-    background: linear-gradient(135deg, #FFFFFF 0%, #FB923C 100%) !important;
+    font-weight: 900 !important;
+    background: linear-gradient(135deg, #FFFFFF 30%, #F59E0B 100%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
+    text-shadow: 0 0 30px rgba(245, 158, 11, 0.2) !important;
   }
 
-  .cert-content-grid {
+  .cert-bento-grid {
     display: grid !important;
-    grid-template-columns: 2fr 1fr !important;
+    grid-template-columns: 1.8fr 1fr !important;
     gap: 24px !important;
     align-items: center !important;
   }
 
   @media (max-width: 768px) {
-    .cert-content-grid {
+    .cert-bento-grid {
       grid-template-columns: 1fr !important;
     }
   }
 
-  .cert-detail-box {
+  .cert-info-pill {
     display: flex !important;
     flex-direction: column !important;
     gap: 4px !important;
-    padding: 10px 14px !important;
+    padding: 12px 16px !important;
     background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.07) !important;
-    border-radius: 8px !important;
-    margin-bottom: 8px !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 10px !important;
+    margin-bottom: 10px !important;
   }
 
-  .cert-detail-label {
+  .cert-info-label {
     font-size: 10px !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     text-transform: uppercase !important;
     color: var(--text-muted) !important;
-    letter-spacing: 0.05em !important;
+    letter-spacing: 0.06em !important;
   }
 
-  .cert-token-highlight {
+  .cert-token-code {
     font-family: monospace !important;
-    color: #FB923C !important;
+    color: #F59E0B !important;
     font-weight: 700 !important;
     letter-spacing: 0.05em !important;
   }
 
-  .cert-qr-container, .cert-qr-wrapper {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 14px !important;
+  .cert-qr-gold-wrapper {
+    background: rgba(245, 158, 11, 0.03) !important;
+    border: 1px solid rgba(245, 158, 11, 0.2) !important;
+    border-radius: 16px !important;
   }
 
-  .cert-qr-white-canvas {
+  .cert-qr-canvas {
     background: #FFFFFF !important;
-    border-radius: 12px !important;
+    border-radius: 10px !important;
     display: inline-block !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4) !important;
   }
 
   .cert-signatures-grid {
