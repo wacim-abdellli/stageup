@@ -6,7 +6,7 @@
 <div class="agreement-container">
 
   <%# ─── Action Bar ─── %>
-  <div class="agreement-action-bar hide-on-print">
+  <div class="agreement-action-bar hide-on-print" style="display:flex;justify-content:space-between;align-items:center;">
     <%= link_to root_path, class: "btn btn-secondary" do %>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
       Home
@@ -42,7 +42,7 @@
 
     <%# ─── Document Header ─── %>
     <div class="agreement-header" style="margin-bottom:32px;padding-bottom:24px;">
-      <div class="flex-center gap-8 mb-12">
+      <div style="display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:12px;">
         <span class="badge-document-tag">CERTIFICATE OF COMPLETION</span>
         <span class="badge-document-id">ID: AGR-<%= @agreement.id %></span>
       </div>
@@ -70,7 +70,7 @@
     </div>
 
     <%# ─── Details + QR Code Side by Side ─── %>
-    <div class="agreement-signatures-grid" style="margin-bottom:32px;grid-template-columns:1.7fr 1fr;">
+    <div class="cert-details-grid" style="margin-bottom:32px;">
 
       <%# Left: Metadata Fields %>
       <div>
