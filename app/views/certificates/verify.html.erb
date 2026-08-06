@@ -1,188 +1,169 @@
-<% content_for :title, "#{t('certificates.verify.title', default: 'Certificate of Completion')} – #{@student.first_name} #{@student.last_name}" %>
-
+<% content_for :title, "Certificate of Completion – #{@student.first_name} #{@student.last_name}" %>
 <% duration_days = (@agreement.end_date - @agreement.start_date).to_i %>
 <% qr_url = verify_certificate_url(token: @agreement.verification_token) %>
 <% qr = RQRCode::QRCode.new(qr_url) %>
 
-<%# ─── Full-Page Wrapper ─── %>
-<div style="min-height: 100vh; background: #060A13; padding: 40px 16px; display: flex; align-items: flex-start; justify-content: center;">
-  <div style="width: 100%; max-width: 880px; margin: 0 auto;">
+<div class="agreement-container">
 
-    <%# ─── Action Bar ─── %>
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;" class="hide-on-print">
-      <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); font-size: 11px; font-weight: 700; color: #10B981; letter-spacing: 0.04em;">
-        <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; display: inline-block; animation: pulse-glow 2s ease-in-out infinite;"></span>
-        VERIFIED CREDENTIAL
-      </div>
-      <div style="display: flex; gap: 8px;">
-        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'))" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: #A0AEC0; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          Share
-        </button>
-        <button onclick="window.print()" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; border: 1px solid rgba(245,158,11,0.3); background: rgba(245,158,11,0.1); color: #F59E0B; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
-          Print PDF
-        </button>
-      </div>
+  <%# ─── Action Bar ─── %>
+  <div class="agreement-action-bar hide-on-print">
+    <%= link_to root_path, class: "btn btn-secondary" do %>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+      Home
+    <% end %>
+    <div style="display:flex;gap:8px;">
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'))" class="btn btn-secondary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        Share
+      </button>
+      <button onclick="window.print()" class="btn btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+        Print PDF
+      </button>
     </div>
-
-    <%# ═══════════════════════════════════════════════════════════ %>
-    <%#                 MASTER DIPLOMA CARD                       %>
-    <%# ═══════════════════════════════════════════════════════════ %>
-    <div style="position: relative; background: linear-gradient(170deg, #0C1222 0%, #111B33 50%, #0A1020 100%); border: 1.5px solid rgba(245,158,11,0.35); border-radius: 20px; padding: 36px 40px 32px; box-shadow: 0 0 80px rgba(245,158,11,0.08), 0 24px 48px rgba(0,0,0,0.6); overflow: hidden;">
-
-      <%# Subtle inner border accent %>
-      <div style="position: absolute; inset: 8px; border: 1px solid rgba(245,158,11,0.12); border-radius: 14px; pointer-events: none;"></div>
-
-      <%# ── HEADER: Emblem + Title ── %>
-      <div style="text-align: center; margin-bottom: 24px; position: relative; z-index: 1;">
-        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 16px; border-radius: 999px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.22); margin-bottom: 12px;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-          <span style="font-size: 10px; font-weight: 800; color: #F59E0B; letter-spacing: 0.12em; text-transform: uppercase;">StageUp Trust Ledger</span>
-        </div>
-        <div style="font-size: 9.5px; font-weight: 600; color: #64748B; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px;">
-          Republic of Tunisia · Ministry of Higher Education & Scientific Research
-        </div>
-        <h1 style="font-size: 24px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.1em; text-transform: uppercase; margin: 0; line-height: 1.2;">
-          Certificate of Completion
-        </h1>
-      </div>
-
-      <%# ── DIVIDER ── %>
-      <div style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.3) 50%, transparent 100%); margin-bottom: 24px;"></div>
-
-      <%# ── RECIPIENT HERO ── %>
-      <div style="text-align: center; margin-bottom: 24px; position: relative; z-index: 1;">
-        <div style="font-size: 9.5px; font-weight: 700; color: #F59E0B; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px;">Awarded To</div>
-        <h2 style="font-size: 36px; font-weight: 900; margin: 0 0 10px 0; line-height: 1.1; background: linear-gradient(135deg, #FFFFFF 30%, #F5C563 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-          <%= @student.first_name %> <%= @student.last_name %>
-        </h2>
-        <p style="font-size: 14px; color: #94A3B8; margin: 0; line-height: 1.5;">
-          has successfully completed an official internship as
-          <strong style="color: #E2E8F0;"><%= @offer.title %></strong>
-          at <strong style="color: #E2E8F0;"><%= @company.name %></strong>
-        </p>
-      </div>
-
-      <%# ── 2-COL LAYOUT: Details + QR ── %>
-      <div style="display: flex; gap: 20px; align-items: stretch; margin-bottom: 24px;">
-
-        <%# LEFT COLUMN: Key Details Table %>
-        <div style="flex: 1; min-width: 0;">
-          <table style="width: 100%; border-collapse: separate; border-spacing: 0 6px;">
-            <tr>
-              <td style="padding: 10px 14px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; vertical-align: top; width: 50%;">
-                <div style="font-size: 9.5px; font-weight: 700; color: #64748B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;">Institution</div>
-                <div style="font-size: 13px; font-weight: 700; color: #E2E8F0;"><%= @student.university&.name || "ISET Sfax" %></div>
-              </td>
-              <td style="padding: 10px 14px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; vertical-align: top; width: 50%;">
-                <div style="font-size: 9.5px; font-weight: 700; color: #64748B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;">Stage Type</div>
-                <div style="font-size: 13px; font-weight: 800; color: #F59E0B;"><%= @offer.stage_type.to_s.upcase %></div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" style="padding: 10px 14px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; vertical-align: top;">
-                <div style="font-size: 9.5px; font-weight: 700; color: #64748B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;">Internship Period</div>
-                <div style="font-size: 13px; font-weight: 700; color: #E2E8F0;">
-                  <%= @agreement.start_date.strftime("%b %d, %Y") %> – <%= @agreement.end_date.strftime("%b %d, %Y") %>
-                  <span style="font-size: 11px; color: #F59E0B; font-weight: 700; margin-left: 6px;">(<%= duration_days %> days)</span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" style="padding: 10px 14px; background: rgba(255,255,255,0.025); border: 1px solid rgba(245,158,11,0.15); border-radius: 8px; vertical-align: top;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                  <span style="font-size: 9.5px; font-weight: 700; color: #64748B; letter-spacing: 0.08em; text-transform: uppercase;">Verification ID</span>
-                  <span style="font-size: 9px; font-weight: 700; color: #10B981; letter-spacing: 0.05em;">✓ VERIFIED</span>
-                </div>
-                <div style="font-size: 12px; font-weight: 700; color: #F59E0B; font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; letter-spacing: 0.03em; word-break: break-all;"><%= @agreement.verification_token %></div>
-              </td>
-            </tr>
-          </table>
-        </div>
-
-        <%# RIGHT COLUMN: QR Code Seal %>
-        <div style="width: 180px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; background: rgba(245,158,11,0.03); border: 1px solid rgba(245,158,11,0.18); border-radius: 14px;">
-          <div style="background: #FFFFFF; padding: 8px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.4); margin-bottom: 10px; line-height: 0;">
-            <%= qr.as_svg(
-              offset: 0,
-              color: "000000",
-              shape_rendering: "crispEdges",
-              module_size: 2.5,
-              standalone: true
-            ).html_safe %>
-          </div>
-          <div style="font-size: 9px; font-weight: 700; color: #F59E0B; letter-spacing: 0.1em; text-transform: uppercase; text-align: center;">Scan to Verify</div>
-          <div style="font-size: 8.5px; color: #64748B; margin-top: 2px; text-align: center;">StageUp Trust Ledger</div>
-        </div>
-
-      </div>
-
-      <%# ── DIVIDER ── %>
-      <div style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%); margin-bottom: 20px;"></div>
-
-      <%# ── 3 DIGITAL SIGNATURES ── %>
-      <div style="position: relative; z-index: 1;">
-        <div style="font-size: 9px; font-weight: 700; color: #475569; letter-spacing: 0.14em; text-transform: uppercase; text-align: center; margin-bottom: 12px;">
-          Digital Signatures & Legal Verification
-        </div>
-
-        <div style="display: flex; gap: 10px;">
-          <%# Student %>
-          <div style="flex: 1; padding: 12px; background: rgba(16,185,129,0.03); border: 1px solid rgba(16,185,129,0.2); border-radius: 10px;">
-            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span style="font-size: 9.5px; font-weight: 700; color: #10B981; text-transform: uppercase; letter-spacing: 0.06em;">Student</span>
-            </div>
-            <div style="font-size: 13px; font-weight: 700; color: #E2E8F0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= @student.first_name %> <%= @student.last_name %></div>
-            <div style="font-size: 10px; color: #64748B; margin-top: 3px;">
-              <%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("Signed %b %d, %Y · %H:%M UTC") : "Digitally Signed" %>
-            </div>
-          </div>
-
-          <%# Employer %>
-          <div style="flex: 1; padding: 12px; background: rgba(16,185,129,0.03); border: 1px solid rgba(16,185,129,0.2); border-radius: 10px;">
-            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span style="font-size: 9.5px; font-weight: 700; color: #10B981; text-transform: uppercase; letter-spacing: 0.06em;">Employer</span>
-            </div>
-            <div style="font-size: 13px; font-weight: 700; color: #E2E8F0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= @company.name %></div>
-            <div style="font-size: 10px; color: #64748B; margin-top: 3px;">
-              <%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("Signed %b %d, %Y · %H:%M UTC") : "Digitally Signed" %>
-            </div>
-          </div>
-
-          <%# University %>
-          <div style="flex: 1; padding: 12px; background: rgba(16,185,129,0.03); border: 1px solid rgba(16,185,129,0.2); border-radius: 10px;">
-            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span style="font-size: 9.5px; font-weight: 700; color: #10B981; text-transform: uppercase; letter-spacing: 0.06em;">University</span>
-            </div>
-            <div style="font-size: 13px; font-weight: 700; color: #E2E8F0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= @student.university&.name || "ISET Sfax" %></div>
-            <div style="font-size: 10px; color: #64748B; margin-top: 3px;">
-              <%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("Signed %b %d, %Y · %H:%M UTC") : "Digitally Signed" %>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <%# ─── Footer Timestamp ─── %>
-    <div style="text-align: center; margin-top: 16px; font-size: 10px; color: #475569;">
-      This credential was issued via <strong style="color: #64748B;">StageUp</strong> on <%= @agreement.university_signed_at&.strftime("%B %d, %Y") || "N/A" %> · Permanent verification at this URL
-    </div>
-
   </div>
-</div>
 
-<style>
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 1; box-shadow: 0 0 6px #10B981; }
-    50% { opacity: 0.4; box-shadow: 0 0 12px #10B981; }
-  }
-  @media (max-width: 700px) {
-    .cert-bento-flex { flex-direction: column !important; }
-    .cert-sig-flex { flex-direction: column !important; }
-  }
-</style>
+  <div class="agreement-card">
+
+    <%# ─── Verified Badge Strip ─── %>
+    <div class="cert-banner hide-on-print" style="margin-bottom:32px;">
+      <div class="cert-banner-left">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <div>
+          <strong class="cert-banner-title">Certificate Available</strong>
+          <p class="cert-banner-sub">This internship is fully executed and publicly verifiable.</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#10B981;display:inline-block;"></span>
+        <span style="font-size:11px;font-weight:700;color:#10B981;letter-spacing:0.06em;">VERIFIED</span>
+      </div>
+    </div>
+
+    <%# ─── Document Header ─── %>
+    <div class="agreement-header" style="margin-bottom:32px;padding-bottom:24px;">
+      <div class="flex-center gap-8 mb-12">
+        <span class="badge-document-tag">CERTIFICATE OF COMPLETION</span>
+        <span class="badge-document-id">ID: AGR-<%= @agreement.id %></span>
+      </div>
+      <h1 class="agreement-title">CERTIFICATE OF COMPLETION</h1>
+      <p class="agreement-subtitle">Officially issued under the Republic of Tunisia · Ministry of Higher Education & Scientific Research</p>
+    </div>
+
+    <%# ─── Graduate Recipient Block ─── %>
+    <div style="text-align:center;margin-bottom:32px;padding:24px;background:var(--bg-primary);border:1px solid var(--border-color);border-radius:var(--radius-md);">
+      <p style="font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin:0 0 8px 0;">Awarded To</p>
+      <h2 style="font-size:34px;font-weight:900;margin:0 0 10px 0;background:linear-gradient(135deg,#FFFFFF 30%,#F59E0B 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+        <%= @student.first_name %> <%= @student.last_name %>
+      </h2>
+      <p style="font-size:13px;color:var(--text-secondary);margin:0 0 6px 0;">
+        Enrolled at <strong style="color:var(--text-primary);"><%= @student.university&.name || "Higher Education Institution" %></strong>
+        <% if @student.respond_to?(:major) && @student.major.present? %>
+          &middot; Major: <strong style="color:var(--text-primary);"><%= @student.major %></strong>
+        <% end %>
+      </p>
+      <p style="font-size:15px;color:var(--text-secondary);margin:0;line-height:1.6;">
+        has successfully completed an official internship as
+        <strong style="color:var(--text-primary);"><%= @offer.title %></strong>
+        at <strong style="color:var(--text-primary);"><%= @company.name %></strong>
+      </p>
+    </div>
+
+    <%# ─── Details + QR Code Side by Side ─── %>
+    <div class="agreement-signatures-grid" style="margin-bottom:32px;grid-template-columns:1.7fr 1fr;">
+
+      <%# Left: Metadata Fields %>
+      <div>
+        <%# Institution %>
+        <div style="padding:14px 16px;background:var(--bg-primary);border:1px solid var(--border-color);border-radius:var(--radius-md);margin-bottom:10px;">
+          <p style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 4px 0;">Academic Institution</p>
+          <p style="font-size:14px;font-weight:700;color:var(--text-primary);margin:0;"><%= @student.university&.name || "ISET Sfax" %></p>
+        </div>
+
+        <%# Internship Period %>
+        <div style="padding:14px 16px;background:var(--bg-primary);border:1px solid var(--border-color);border-radius:var(--radius-md);margin-bottom:10px;">
+          <p style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 4px 0;">Internship Period</p>
+          <p style="font-size:14px;font-weight:700;color:var(--text-primary);margin:0;">
+            <%= @agreement.start_date.strftime("%b %d, %Y") %> – <%= @agreement.end_date.strftime("%b %d, %Y") %>
+            <span style="font-size:12px;font-weight:600;color:#F59E0B;margin-left:6px;">(<%= duration_days %> days)</span>
+          </p>
+        </div>
+
+        <%# Stage Type %>
+        <div style="padding:14px 16px;background:var(--bg-primary);border:1px solid var(--border-color);border-radius:var(--radius-md);margin-bottom:10px;">
+          <p style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 4px 0;">Stage Classification</p>
+          <p style="font-size:14px;font-weight:800;color:#F59E0B;margin:0;"><%= @offer.stage_type.to_s.upcase %></p>
+        </div>
+
+        <%# Verification ID %>
+        <div style="padding:14px 16px;background:var(--bg-primary);border:1px solid rgba(245,158,11,0.25);border-radius:var(--radius-md);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <p style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin:0;">Verification Token</p>
+            <span style="font-size:9px;font-weight:700;color:#10B981;letter-spacing:0.05em;">✓ IMMUTABLE</span>
+          </div>
+          <p style="font-size:12px;font-weight:700;color:#F59E0B;font-family:monospace;letter-spacing:0.04em;margin:0;word-break:break-all;"><%= @agreement.verification_token %></p>
+        </div>
+      </div>
+
+      <%# Right: QR Seal %>
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background:var(--bg-primary);border:1px solid rgba(245,158,11,0.2);border-radius:var(--radius-md);">
+        <div style="background:#FFFFFF;padding:10px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.3);margin-bottom:12px;line-height:0;">
+          <%= qr.as_svg(
+            offset: 0,
+            color: "000000",
+            shape_rendering: "crispEdges",
+            module_size: 3,
+            standalone: true
+          ).html_safe %>
+        </div>
+        <p style="font-size:10px;font-weight:700;color:#F59E0B;letter-spacing:0.1em;text-transform:uppercase;text-align:center;margin:0 0 4px 0;">Scan to Verify</p>
+        <p style="font-size:10px;color:var(--text-muted);text-align:center;margin:0;">StageUp Trust Ledger</p>
+      </div>
+
+    </div>
+
+    <%# ─── 3-Party Digital Signatures ─── %>
+    <div style="border-top:1px solid var(--border-color);padding-top:24px;">
+      <p style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;text-align:center;margin:0 0 16px 0;">Three-Party Digital Signatures & Legal Verification</p>
+
+      <div class="agreement-signatures-grid">
+        <%# Student %>
+        <div class="agreement-sign-box">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:10px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.06em;">Student</span>
+          </div>
+          <p style="font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;"><%= @student.first_name %> <%= @student.last_name %></p>
+          <p style="font-size:11px;color:var(--text-muted);margin:0;">
+            <%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
+          </p>
+        </div>
+
+        <%# Employer %>
+        <div class="agreement-sign-box">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:10px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.06em;">Employer</span>
+          </div>
+          <p style="font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;"><%= @company.name %></p>
+          <p style="font-size:11px;color:var(--text-muted);margin:0;">
+            <%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
+          </p>
+        </div>
+
+        <%# University %>
+        <div class="agreement-sign-box">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span style="font-size:10px;font-weight:700;color:#10B981;text-transform:uppercase;letter-spacing:0.06em;">University</span>
+          </div>
+          <p style="font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;"><%= @student.university&.name || "ISET Sfax" %></p>
+          <p style="font-size:11px;color:var(--text-muted);margin:0;">
+            <%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div><%# end .agreement-card %>
+</div><%# end .agreement-container %>
