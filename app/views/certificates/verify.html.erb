@@ -1,77 +1,110 @@
 <% content_for :title, "#{t('certificates.verify.title', default: 'Certificate of Completion')} – #{@student.first_name} #{@student.last_name}" %>
 
-<div class="cert-page py-28" style="min-height: 80vh; display: flex; align-items: center; justify-content: center;">
-  <div class="cert-container max-w-900 mx-auto px-16 w-100">
+<div class="cert-page py-40" style="min-height: 100vh; background: #070B14; display: flex; align-items: center; justify-content: center;">
+  <div class="cert-container max-w-950 mx-auto px-20 w-100">
 
-    <%# ─── Top Action Bar ─── %>
-    <div class="cert-action-bar flex-between align-items-center mb-16 hide-on-print">
-      <div class="cert-badge-verified flex-align-center gap-8 px-12 py-6 border-radius-full" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #10B981; font-size: 11px; font-weight: 800; letter-spacing: 0.05em;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        <span><%= t('certificates.verify.badge_text', default: 'OFFICIAL VERIFIED ACADEMIC CREDENTIAL') %></span>
+    <%# ─── Top Verification & Action Bar ─── %>
+    <div class="cert-action-bar flex-between align-items-center mb-20 hide-on-print">
+      <div class="cert-status-badge flex-align-center gap-10 px-14 py-8 border-radius-full" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #10B981; font-size: 11.5px; font-weight: 800; letter-spacing: 0.05em;">
+        <span class="live-emerald-pulse" style="width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 10px #10B981;"></span>
+        <span>✓ IMMUTABLE VERIFIED CREDENTIAL</span>
       </div>
-      <button type="button" class="btn btn-primary btn-compact" onclick="window.print()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
-        <%= t('dashboard.internship_agreements.show.print', default: 'Print / Export PDF') %>
-      </button>
+
+      <div class="flex-align-center gap-10">
+        <button type="button" class="btn btn-secondary btn-compact" onclick="navigator.clipboard.writeText(window.location.href); alert('Certificate link copied to clipboard!');">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Share Credential Link
+        </button>
+        <button type="button" class="btn btn-primary btn-compact" onclick="window.print()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+          Print / Export PDF
+        </button>
+      </div>
     </div>
 
-    <%# ─── Master Diploma Card ─── %>
-    <div class="cert-card-diploma p-32" style="background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(10, 15, 30, 0.98) 100%) !important; border: 2px solid rgba(245, 158, 11, 0.4) !important; outline: 1px solid rgba(245, 158, 11, 0.15) !important; outline-offset: -6px !important; border-radius: 18px !important; box-shadow: 0 0 50px rgba(245, 158, 11, 0.12), 0 20px 40px rgba(0, 0, 0, 0.6) !important;">
+    <%# ─── Pro Master Diploma Credential Card ─── %>
+    <div class="cert-master-diploma-card p-40 position-relative overflow-hidden" style="background: linear-gradient(145deg, #0B132B 0%, #151D36 50%, #0D162D 100%) !important; border: 2px solid #F59E0B !important; outline: 1px dashed rgba(245, 158, 11, 0.4) !important; outline-offset: -12px !important; border-radius: 24px !important; box-shadow: 0 0 60px rgba(245, 158, 11, 0.15), 0 30px 60px rgba(0, 0, 0, 0.7) !important;">
 
-      <%# Diploma Header %>
-      <div class="cert-diploma-header text-center mb-24">
-        <div class="cert-emblem-badge inline-flex align-items-center gap-6 px-12 py-4 mb-8 border-radius-full" style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25);">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-          <span class="fs-10 uppercase fw-800 text-amber tracking-wider">STAGEUP TRUST LEDGER</span>
+      <%# Corner Decorative Seals %>
+      <div style="position: absolute; top: 18px; left: 20px; color: #F59E0B; font-size: 14px; opacity: 0.6;">❖</div>
+      <div style="position: absolute; top: 18px; right: 20px; color: #F59E0B; font-size: 14px; opacity: 0.6;">❖</div>
+      <div style="position: absolute; bottom: 18px; left: 20px; color: #F59E0B; font-size: 14px; opacity: 0.6;">❖</div>
+      <div style="position: absolute; bottom: 18px; right: 20px; color: #F59E0B; font-size: 14px; opacity: 0.6;">❖</div>
+
+      <%# Academic Header Emblem %>
+      <div class="text-center mb-28">
+        <div class="inline-flex align-items-center gap-8 px-14 py-6 border-radius-full mb-10" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          <span class="fs-11 uppercase fw-800 tracking-wider" style="color: #F59E0B;">STAGEUP VERIFIED ACADEMIC CREDENTIAL</span>
         </div>
-        <span class="cert-legal-standard-sub uppercase fs-10 fw-700 tracking-wider text-muted block mb-4">
-          <%= t('certificates.verify.legal_standard', default: 'REPUBLIC OF TUNISIA · MINISTRY OF HIGHER EDUCATION & SCIENTIFIC RESEARCH') %>
+
+        <span class="uppercase fs-10 fw-700 tracking-wider text-muted block mb-6" style="letter-spacing: 0.15em;">
+          REPUBLIC OF TUNISIA &middot; MINISTRY OF HIGHER EDUCATION &amp; SCIENTIFIC RESEARCH
         </span>
-        <h1 class="cert-diploma-title" style="font-size: 26px !important; font-weight: 900 !important; letter-spacing: 0.06em !important; color: #FFFFFF !important; text-transform: uppercase !important; margin: 0 !important;"><%= t('certificates.verify.title', default: 'CERTIFICATE OF COMPLETION') %></h1>
-        <p class="cert-diploma-sub text-muted fs-12 mt-4 mb-0"><%= t('certificates.verify.subtitle', default: 'This official credential certifies that') %></p>
+
+        <h1 style="font-size: 30px !important; font-weight: 900 !important; letter-spacing: 0.08em !important; color: #FFFFFF !important; text-transform: uppercase !important; margin: 0 0 6px 0 !important; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+          CERTIFICATE OF COMPLETION
+        </h1>
+
+        <p class="text-muted fs-13 mb-0" style="font-style: italic;">
+          This official document certifies that the graduate below has fulfilled all legal &amp; academic requirements.
+        </p>
       </div>
 
-      <%# Recipient & Achievement Hero %>
-      <div class="cert-recipient-hero text-center mb-28">
-        <h2 class="cert-student-hero-name" style="font-size: 34px !important; font-weight: 900 !important; background: linear-gradient(135deg, #FFFFFF 30%, #F59E0B 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; margin: 0 0 8px 0 !important;"><%= @student.first_name %> <%= @student.last_name %></h2>
-        <p class="cert-fulfillment-sentence fs-14 text-secondary max-w-650 mx-auto mb-0" style="line-height: 1.5 !important;">
+      <%# Student Hero Block %>
+      <div class="text-center mb-32 p-20 border-radius-16" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06);">
+        <span class="fs-10 uppercase fw-800 tracking-wider text-muted block mb-4" style="color: #F59E0B !important;">GRADUATE INTERN</span>
+        <h2 style="font-size: 40px !important; font-weight: 900 !important; background: linear-gradient(135deg, #FFFFFF 20%, #F59E0B 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; margin: 0 0 10px 0 !important; text-shadow: 0 0 35px rgba(245, 158, 11, 0.25);">
+          <%= @student.first_name %> <%= @student.last_name %>
+        </h2>
+        <p class="fs-13 text-muted mb-10">
+          Enrolled at <strong class="color-primary"><%= @student.university&.name || "Higher Education Institution" %></strong> &middot; Major: <strong class="color-primary"><%= @student.major.presence || "Software Engineering" %></strong>
+        </p>
+        <p class="fs-15 text-secondary max-w-700 mx-auto mb-0" style="line-height: 1.6 !important;">
           <%= t('certificates.verify.fulfillment_text', title: @offer.title, company: @company.name) %>
         </p>
       </div>
 
-      <%# 2-Column Bento Grid: Metadata Left + Compact Gold QR Seal Right %>
-      <div class="cert-bento-grid mb-28" style="display: grid; grid-template-columns: 1.8fr 1fr; gap: 20px; align-items: center;">
-        <div class="cert-metadata-column" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-          <div class="cert-info-pill p-10 border-radius-8" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07);">
-            <span class="cert-info-label fs-10 fw-700 text-muted uppercase block mb-2"><%= t('certificates.verify.institution', default: 'Institution') %></span>
-            <strong class="cert-info-value fs-13 color-primary text-truncate block"><%= @student.university&.name || t('certificates.verify.academic_partner') %></strong>
+      <%# Pro Bento Data Grid (Metadata Left + QR Code Stamp Right) %>
+      <div class="mb-32" style="display: grid; grid-template-columns: 1.8fr 1fr; gap: 20px; align-items: center;">
+
+        <%# Left: Metadata Bento Cards %>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="p-12 border-radius-10" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
+            <span class="fs-10 fw-800 text-muted uppercase block mb-3" style="letter-spacing: 0.06em;">ACADEMIC INSTITUTION</span>
+            <strong class="fs-13 color-primary block text-truncate"><%= @student.university&.name || "ISET Sfax" %></strong>
+            <span class="fs-10 text-muted block mt-2">Verified University Partner</span>
           </div>
 
-          <div class="cert-info-pill p-10 border-radius-8" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07);">
-            <span class="cert-info-label fs-10 fw-700 text-muted uppercase block mb-2"><%= t('certificates.verify.stage_type', default: 'Stage Type') %></span>
-            <strong class="cert-info-value fs-13 color-amber fw-700 block"><%= @offer.stage_type.to_s.upcase %></strong>
+          <div class="p-12 border-radius-10" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
+            <span class="fs-10 fw-800 text-muted uppercase block mb-3" style="letter-spacing: 0.06em;">STAGE CLASSIFICATION</span>
+            <strong class="fs-13 block fw-800" style="color: #F59E0B;"><%= @offer.stage_type.to_s.upcase %> &middot; Graduation Project</strong>
+            <span class="fs-10 text-muted block mt-2">Tunisian Higher Ed Standard</span>
           </div>
 
-          <div class="cert-info-pill p-10 border-radius-8" style="grid-column: span 2; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07);">
-            <span class="cert-info-label fs-10 fw-700 text-muted uppercase block mb-2"><%= t('certificates.verify.duration', default: 'Duration') %></span>
+          <div class="p-12 border-radius-10" style="grid-column: span 2; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
+            <span class="fs-10 fw-800 text-muted uppercase block mb-3" style="letter-spacing: 0.06em;">OFFICIAL INTERNSHIP PERIOD</span>
             <% duration_days = (@agreement.end_date - @agreement.start_date).to_i %>
-            <strong class="cert-info-value fs-13 color-primary block">
-              <%= @agreement.start_date.strftime("%b %d, %Y") %> &ndash; <%= @agreement.end_date.strftime("%b %d, %Y") %>
-              <span class="fs-12 text-muted fw-400">(<%= duration_days %> Days)</span>
+            <strong class="fs-13 color-primary block">
+              <%= @agreement.start_date.strftime("%B %d, %Y") %> &ndash; <%= @agreement.end_date.strftime("%B %d, %Y") %>
+              <span class="fs-12 text-amber fw-700 ml-4">(<%= duration_days %> Days / ~<%= (duration_days / 30.0).round(1) %> Months)</span>
             </strong>
           </div>
 
-          <div class="cert-info-pill p-10 border-radius-8" style="grid-column: span 2; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07);">
-            <span class="cert-info-label fs-10 fw-700 text-muted uppercase block mb-2"><%= t('certificates.verify.verification_id', default: 'Verification ID') %></span>
-            <strong class="cert-info-value cert-token-code fs-12 color-amber font-mono fw-700 block text-truncate"><%= @agreement.verification_token %></strong>
+          <div class="p-12 border-radius-10" style="grid-column: span 2; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 158, 11, 0.25);">
+            <div class="flex-between align-items-center mb-3">
+              <span class="fs-10 fw-800 text-muted uppercase block" style="letter-spacing: 0.06em;">CRYPTOGRAPHIC VERIFICATION TOKEN</span>
+              <span class="fs-10 fw-700 text-emerald" style="color: #10B981;">✓ IMMUTABLE</span>
+            </div>
+            <strong class="fs-12 color-amber font-mono fw-800 block text-truncate" style="letter-spacing: 0.06em;"><%= @agreement.verification_token %></strong>
           </div>
         </div>
 
-        <%# Compact Gold QR Seal Box %>
-        <div class="cert-qr-gold-wrapper p-14 border-radius-14 text-center" style="background: rgba(245, 158, 11, 0.03); border: 1px solid rgba(245, 158, 11, 0.2);">
+        <%# Right: Official Gold Stamp QR Canvas %>
+        <div class="p-18 border-radius-16 text-center" style="background: rgba(245, 158, 11, 0.04); border: 1px solid rgba(245, 158, 11, 0.25);">
           <% qr_url = verify_certificate_url(token: @agreement.verification_token) %>
           <% qr = RQRCode::QRCode.new(qr_url) %>
-          <div class="cert-qr-canvas p-8 mb-6 mx-auto border-radius-8 inline-block" style="background: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+          <div class="p-10 border-radius-12 inline-block mb-8" style="background: #FFFFFF; box-shadow: 0 8px 20px rgba(0,0,0,0.5);">
             <%= qr.as_svg(
               offset: 0,
               color: "000000",
@@ -80,47 +113,56 @@
               standalone: true
             ).html_safe %>
           </div>
-          <span class="cert-qr-caption fs-10 text-muted block fw-600"><%= t('certificates.verify.qr_label', default: 'Scan to verify live record') %></span>
+          <span class="fs-10 text-muted block fw-700 uppercase tracking-wider" style="color: #F59E0B !important;">SCAN TO VERIFY AUTHENTICITY</span>
+          <span class="fs-10 text-muted block mt-2">StageUp Trust Ledger &middot; Instant Verification</span>
         </div>
+
       </div>
 
-      <%# 3 Digital Signatures Grid %>
-      <div class="cert-signatures-section pt-20 border-top">
-        <h3 class="fs-10 uppercase text-muted fw-700 tracking-wider mb-12 text-center"><%= t('certificates.verify.signatures_heading', default: 'DIGITAL SIGNATURES & LEGAL VERIFICATION') %></h3>
+      <%# 3 Official Digital Signature Seals at Bottom %>
+      <div class="pt-24 border-top" style="border-color: rgba(255, 255, 255, 0.1) !important;">
+        <div class="text-center mb-16">
+          <span class="fs-10 uppercase fw-800 tracking-wider text-muted block" style="letter-spacing: 0.12em;">THREE-PARTY DIGITAL SIGNATURES &amp; LEGAL VERIFICATION</span>
+        </div>
 
-        <div class="cert-signatures-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-          <div class="cert-sig-card p-12 border-radius-8" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(16, 185, 129, 0.25);">
-            <div class="flex-align-center gap-6 mb-4">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span class="fs-10 uppercase text-muted fw-700"><%= t('certificates.verify.student_role', default: 'Student') %></span>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+
+          <%# Student Signature Card %>
+          <div class="p-14 border-radius-10" style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.3);">
+            <div class="flex-align-center gap-6 mb-6">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="fs-10 uppercase fw-800" style="color: #10B981;">STUDENT SIGNATORY</span>
             </div>
-            <strong class="fs-12 block color-primary text-truncate"><%= @student.first_name %> <%= @student.last_name %></strong>
-            <span class="fs-10 text-muted block mt-2">
-              <%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("Signed %b %d, %Y") : t('certificates.verify.signed') %>
+            <strong class="fs-13 color-primary block text-truncate mb-2"><%= @student.first_name %> <%= @student.last_name %></strong>
+            <span class="fs-10 text-muted block">
+              <%= @agreement.student_signed_at ? "Signed #{@agreement.student_signed_at.strftime("%b %d, %Y at %H:%M UTC")}" : "Digitally Signed" %>
             </span>
           </div>
 
-          <div class="cert-sig-card p-12 border-radius-8" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(16, 185, 129, 0.25);">
-            <div class="flex-align-center gap-6 mb-4">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span class="fs-10 uppercase text-muted fw-700"><%= t('certificates.verify.employer_role', default: 'Employer') %></span>
+          <%# Employer Signature Card %>
+          <div class="p-14 border-radius-10" style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.3);">
+            <div class="flex-align-center gap-6 mb-6">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="fs-10 uppercase fw-800" style="color: #10B981;">EMPLOYER SUPERVISOR</span>
             </div>
-            <strong class="fs-12 block color-primary text-truncate"><%= @company.name %></strong>
-            <span class="fs-10 text-muted block mt-2">
-              <%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("Signed %b %d, %Y") : t('certificates.verify.signed') %>
+            <strong class="fs-13 color-primary block text-truncate mb-2"><%= @company.name %></strong>
+            <span class="fs-10 text-muted block">
+              <%= @agreement.company_signed_at ? "Signed #{@agreement.company_signed_at.strftime("%b %d, %Y at %H:%M UTC")}" : "Digitally Signed" %>
             </span>
           </div>
 
-          <div class="cert-sig-card p-12 border-radius-8" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(16, 185, 129, 0.25);">
-            <div class="flex-align-center gap-6 mb-4">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span class="fs-11 uppercase text-muted fw-700"><%= t('certificates.verify.university_role', default: 'University Coordinator') %></span>
+          <%# University Coordinator Signature Card %>
+          <div class="p-14 border-radius-10" style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.3);">
+            <div class="flex-align-center gap-6 mb-6">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="fs-10 uppercase fw-800" style="color: #10B981;">UNIVERSITY COORDINATOR</span>
             </div>
-            <strong class="fs-12 block color-primary text-truncate"><%= @student.university&.name || t('certificates.verify.university_role') %></strong>
-            <span class="fs-10 text-muted block mt-2">
-              <%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("Signed %b %d, %Y") : t('certificates.verify.signed') %>
+            <strong class="fs-13 color-primary block text-truncate mb-2"><%= @student.university&.name || "ISET Sfax" %></strong>
+            <span class="fs-10 text-muted block">
+              <%= @agreement.university_signed_at ? "Signed #{@agreement.university_signed_at.strftime("%b %d, %Y at %H:%M UTC")}" : "Digitally Signed" %>
             </span>
           </div>
+
         </div>
       </div>
 
