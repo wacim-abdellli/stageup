@@ -21859,3 +21859,490 @@ html[dir="rtl"] .role-card:hover .role-arrow {
   .cert-token-hash { background: #f5f5f5 !important; border-color: #ccc !important; color: #333 !important; }
 }
 
+/* ===================================================================
+   CERTIFICATE OF COMPLETION - PRODUCTION POLISH
+   Scoped override for the public verification document.
+   =================================================================== */
+main:has(.cert-page-wrap) {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 220px),
+    var(--bg-primary);
+  min-height: 100vh;
+}
+
+.cert-page-wrap {
+  width: min(100%, 960px) !important;
+  max-width: 960px !important;
+  margin: 0 auto !important;
+  padding: 48px 24px 88px !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.cert-page-wrap svg {
+  flex-shrink: 0;
+}
+
+.cert-action-bar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin: 0 0 24px !important;
+}
+
+.cert-action-bar .btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  min-height: 40px !important;
+  padding: 0 16px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+
+.cert-document {
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012)),
+    var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 24px 80px rgba(0, 0, 0, 0.52) !important;
+}
+
+.cert-document::before {
+  content: none !important;
+}
+
+.cert-doc-header,
+.cert-section,
+.cert-signatures {
+  position: relative !important;
+  z-index: 1 !important;
+  padding-left: clamp(24px, 5vw, 64px) !important;
+  padding-right: clamp(24px, 5vw, 64px) !important;
+}
+
+.cert-doc-header {
+  padding-top: 56px !important;
+  padding-bottom: 40px !important;
+  text-align: left !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.cert-issuer-mark,
+.cert-doc-meta {
+  justify-content: flex-start !important;
+}
+
+.cert-issuer-mark {
+  margin-bottom: 24px !important;
+}
+
+.cert-issuer-logo {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: var(--text-primary) !important;
+}
+
+.cert-issuer-sub {
+  font-size: 11px !important;
+  color: var(--text-muted) !important;
+}
+
+.cert-doc-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
+}
+
+.cert-meta-tag,
+.cert-meta-id,
+.cert-type-pill,
+.cert-immutable-pill,
+.cert-fully-executed {
+  border-radius: 9999px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+.cert-meta-tag,
+.cert-type-pill {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+.cert-meta-id {
+  background: transparent !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-muted) !important;
+}
+
+.cert-doc-title {
+  max-width: 780px !important;
+  margin: 0 0 16px !important;
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-size: clamp(34px, 6vw, 64px) !important;
+  font-weight: 800 !important;
+  line-height: 0.98 !important;
+  letter-spacing: 0 !important;
+  color: var(--text-primary) !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.cert-doc-subtitle {
+  max-width: 620px !important;
+  margin: 0 !important;
+  color: var(--text-secondary) !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+
+.cert-doc-rule {
+  width: 100% !important;
+  height: 1px !important;
+  margin: 32px 0 0 !important;
+  background: var(--border-color) !important;
+}
+
+.cert-section {
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.cert-section-verify {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.cert-section-label {
+  margin-bottom: 16px !important;
+  color: var(--text-primary) !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.cert-section-label svg {
+  stroke: var(--text-muted) !important;
+}
+
+.cert-section-text {
+  max-width: 760px !important;
+  color: var(--text-secondary) !important;
+  font-size: 15px !important;
+  line-height: 1.75 !important;
+}
+
+.cert-section-text strong,
+.cert-party-name,
+.cert-stat-value,
+.cert-sig-name {
+  color: var(--text-primary) !important;
+}
+
+.cert-parties,
+.cert-stat-row,
+.cert-token-block,
+.cert-sig-card {
+  background: rgba(255, 255, 255, 0.018) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.cert-parties {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr) 1px minmax(0, 1fr) !important;
+  margin-top: 24px !important;
+  overflow: hidden !important;
+}
+
+.cert-party {
+  min-width: 0 !important;
+  padding: 24px !important;
+}
+
+.cert-party-role,
+.cert-stat-label,
+.cert-token-label,
+.cert-sig-role {
+  color: var(--text-muted) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+}
+
+.cert-party-name {
+  font-size: 17px !important;
+  line-height: 1.25 !important;
+}
+
+.cert-party-detail,
+.cert-party-sub,
+.cert-sig-date,
+.cert-sig-capacity {
+  color: var(--text-secondary) !important;
+}
+
+.cert-party-divider,
+.cert-sig-line {
+  background: var(--border-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.cert-stat-row {
+  margin-top: 24px !important;
+}
+
+.cert-stat {
+  padding: 20px 24px !important;
+}
+
+.cert-stat-value {
+  font-size: 28px !important;
+  letter-spacing: 0 !important;
+}
+
+.cert-stat-badge {
+  width: fit-content !important;
+  padding: 7px 12px !important;
+  background: transparent !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 9999px !important;
+  color: var(--text-secondary) !important;
+  font-size: 13px !important;
+}
+
+.cert-verify-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 168px !important;
+  gap: 24px !important;
+  align-items: start !important;
+  margin-top: 16px !important;
+}
+
+.cert-token-block {
+  margin-top: 16px !important;
+  padding: 20px !important;
+  gap: 12px !important;
+}
+
+.cert-token-top,
+.cert-token-top-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.cert-token-top {
+  justify-content: space-between !important;
+}
+
+.cert-immutable-pill,
+.cert-fully-executed {
+  background: rgba(16, 185, 129, 0.06) !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+  color: #34D399 !important;
+}
+
+.cert-token-hash {
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 12px !important;
+  background: rgba(0, 0, 0, 0.22) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  color: #FBBF24 !important;
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+.cert-copy-btn {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+}
+
+.cert-token-url span {
+  color: var(--text-muted) !important;
+  font-size: 11px !important;
+}
+
+.cert-qr-wrap {
+  width: 168px !important;
+  gap: 10px !important;
+}
+
+.cert-qr-box {
+  width: 168px !important;
+  height: 168px !important;
+  padding: 12px !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35) !important;
+}
+
+.cert-qr-box svg {
+  width: 140px !important;
+  height: 140px !important;
+  max-width: 140px !important;
+  max-height: 140px !important;
+}
+
+.cert-qr-scan-label {
+  color: var(--text-primary) !important;
+  font-size: 10px !important;
+}
+
+.cert-qr-scan-sub {
+  color: var(--text-muted) !important;
+}
+
+.cert-signatures {
+  padding-top: 40px !important;
+  padding-bottom: 48px !important;
+}
+
+.cert-sig-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  margin-bottom: 24px !important;
+}
+
+.cert-sig-title {
+  color: var(--text-primary) !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+}
+
+.cert-sig-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+.cert-sig-card {
+  padding: 22px !important;
+  text-align: left !important;
+}
+
+[data-theme="light"] main:has(.cert-page-wrap) {
+  background: #F3F4F6 !important;
+}
+
+[data-theme="light"] .cert-document {
+  background: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] .cert-parties,
+[data-theme="light"] .cert-stat-row,
+[data-theme="light"] .cert-token-block,
+[data-theme="light"] .cert-sig-card {
+  background: #F8FAFC !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] .cert-token-hash {
+  background: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #92400E !important;
+}
+
+@media (max-width: 760px) {
+  .cert-page-wrap {
+    padding: 24px 12px 56px !important;
+  }
+
+  .cert-action-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .cert-action-bar .btn {
+    width: 100% !important;
+  }
+
+  .cert-doc-header,
+  .cert-section,
+  .cert-signatures {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .cert-doc-header {
+    padding-top: 40px !important;
+  }
+
+  .cert-parties,
+  .cert-stat-row,
+  .cert-verify-layout,
+  .cert-sig-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .cert-party-divider {
+    width: 100% !important;
+    height: 1px !important;
+  }
+
+  .cert-stat {
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--border-color) !important;
+  }
+
+  .cert-stat:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .cert-qr-wrap {
+    width: 100% !important;
+    flex-direction: column !important;
+  }
+}
+
+@media print {
+  main:has(.cert-page-wrap),
+  .cert-page-wrap {
+    background: #FFFFFF !important;
+  }
+
+  .cert-page-wrap {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .cert-document {
+    color: #111827 !important;
+    border: 1px solid #D1D5DB !important;
+    box-shadow: none !important;
+  }
+
+  .cert-doc-title,
+  .cert-section-text strong,
+  .cert-party-name,
+  .cert-stat-value,
+  .cert-sig-name {
+    color: #111827 !important;
+  }
+}
