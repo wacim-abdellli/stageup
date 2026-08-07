@@ -35,6 +35,27 @@ rescue => e
      ["Boot Error: #{e.class}: #{e.message}\n\n#{e.backtrace.first(15).join("\n")}"]]
   }
 else
+  use Rack::Static,
+    urls: [
+      "/assets",
+      "/favicon.ico",
+      "/favicon.svg",
+      "/apple-touch-icon.png",
+      "/android-chrome-192.png",
+      "/android-chrome-512.png",
+      "/icon.png",
+      "/icon.svg",
+      "/logo-primary.svg",
+      "/logo-light.svg",
+      "/logo-monochrome.svg",
+      "/manifest.json",
+      "/robots.txt"
+    ],
+    root: "public",
+    header_rules: [
+      [:all, { "cache-control" => "public, max-age=31536000" }]
+    ]
+
   run Rails.application
   Rails.application.load_server
 end
