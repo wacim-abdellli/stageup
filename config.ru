@@ -1,40 +1,53 @@
 # This file is used by Rack-based servers to start the application.
 
-begin
-  require_relative "config/environment"
+require_relative "config/environment"
 
-  # Auto-run migrations on first boot (Vercel serverless: DATABASE_URL available at runtime, not build time)
-  if Rails.env.production?
-    begin
-      conn = ActiveRecord::Base.connection
-      unless conn.table_exists?("schema_migrations")
-        Rails.logger.info "[StageUp] schema_migrations missing — loading full schema..."
-        load(Rails.root.join("db", "schema.rb"))
-        Rails.logger.info "[StageUp] Schema loaded successfully."
-      else
-        ctx = ActiveRecord::MigrationContext.new(
-          Rails.root.join("db", "migrate"),
-          ActiveRecord::SchemaMigration.new(ActiveRecord::Base.connection_pool)
-        )
-        if ctx.needs_migration?
-          Rails.logger.info "[StageUp] Running pending migrations..."
-          ctx.migrate
-          Rails.logger.info "[StageUp] Migrations complete."
-        end
+# Auto-run migrations on first boot (Vercel serverless: DATABASE_URL available at runtime, not build time)
+if Rails.env.production?
+  begin
+    conn = ActiveRecord::Base.connection
+    unless conn.table_exists?("schema_migrations")
+      Rails.logger.info "[StageUp] schema_migrations missing — loading full schema..."
+      load(Rails.root.join("db", "schema.rb"))
+      Rails.logger.info "[StageUp] Schema loaded successfully."
+    else
+      ctx = ActiveRecord::MigrationContext.new(
+        Rails.root.join("db", "migrate"),
+        ActiveRecord::SchemaMigration.new(ActiveRecord::Base.connection_pool)
+      )
+      if ctx.needs_migration?
+        Rails.logger.info "[StageUp] Running pending migrations..."
+        ctx.migrate
+        Rails.logger.info "[StageUp] Migrations complete."
       end
-    rescue => e
-      Rails.logger.error "[StageUp] DB setup error: #{e.class}: #{e.message}"
+    end
+  rescue => e
+    Rails.logger.error "[StageUp] DB setup error: #{e.class}: #{e.message}"
+  end
+end
+
+css_app = lambda do |env|
+  path = env["PATH_INFO"].to_s
+
+  if path.end_with?(".css") || path.include?("stylesheet")
+    css_file = Rails.root.join("app/assets/stylesheets/application.css")
+    if File.file?(css_file)
+      content = File.read(css_file)
+      return [
+        200,
+        {
+          "content-type" => "text/css; charset=utf-8",
+          "cache-control" => "public, max-age=31536000, immutable",
+          "content-length" => content.bytesize.to_s
+        },
+        [content]
+      ]
     end
   end
 
-rescue => e
-  $stderr.puts "BOOT ERROR: #{e.class}: #{e.message}"
-  $stderr.puts e.backtrace.first(15).join("\n")
-  run lambda { |_env|
-    [500, { "Content-Type" => "text/plain" },
-     ["Boot Error: #{e.class}: #{e.message}\n\n#{e.backtrace.first(15).join("\n")}"]]
-  }
-else
-  run Rails.application
-  Rails.application.load_server
+  Rails.application.call(env)
 end
+
+run css_app
+Rails.application.load_server
+
