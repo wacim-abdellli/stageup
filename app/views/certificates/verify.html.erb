@@ -128,26 +128,32 @@
         This certificate is immutably recorded on the StageUp Trust Ledger. Scan the QR code or visit the verification URL to confirm its authenticity instantly.
       </p>
 
-      <div class="cert-details-grid">
-        <%# Left: Verification Token %>
-        <div class="cert-token-box">
-          <span class="cert-token-label">Cryptographic Verification Token</span>
-          <div class="cert-token-row">
-            <code class="cert-token-value"><%= @agreement.verification_token %></code>
-            <span class="cert-token-immutable">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="cert-verify-grid">
+        <%# Left: Token panel %>
+        <div class="cert-token-panel">
+          <div class="cert-token-header">
+            <span class="cert-token-label">Cryptographic Verification Token</span>
+            <span class="cert-immutable-badge">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
               IMMUTABLE
             </span>
+          </div>
+          <code class="cert-token-value"><%= @agreement.verification_token %></code>
+          <div class="cert-token-footer">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <span><%= verify_certificate_url(token: @agreement.verification_token) %></span>
           </div>
         </div>
 
         <%# Right: QR Code %>
-        <div class="cert-qr-box">
+        <div class="cert-qr-panel">
           <div class="cert-qr-inner">
-            <%= qr.as_svg(offset: 0, color: "000000", shape_rendering: "crispEdges", module_size: 3, standalone: true).html_safe %>
+            <%= qr.as_svg(offset: 0, color: "000000", shape_rendering: "crispEdges", module_size: 4, standalone: true).html_safe %>
           </div>
-          <span class="cert-qr-label">Scan to Verify</span>
-          <span class="cert-qr-sublabel">StageUp Trust Ledger</span>
+          <div class="cert-qr-caption">
+            <span class="cert-qr-label">Scan to Verify</span>
+            <span class="cert-qr-sublabel">StageUp Trust Ledger</span>
+          </div>
         </div>
       </div>
     </div>
