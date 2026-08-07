@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "bundle exec rails assets:precompile RAILS_ENV=production",
+  "buildCommand": "bundle exec rails assets:precompile RAILS_ENV=production && cat public/certificate-polish.css >> public/assets/application.css && for f in public/assets/application-*.css; do [ -f \"$f\" ] && cat public/certificate-polish.css >> \"$f\"; done",
   "env": {
     "VERCEL": "1",
     "RAILS_ENV": "production",

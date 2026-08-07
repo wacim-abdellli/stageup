@@ -1,0 +1,682 @@
+/* ===================================================================
+   CERTIFICATE OF COMPLETION - PUBLIC ROUTE POLISH
+   Keeps /certificates/verify/:token professional even without the signed-in shell.
+   =================================================================== */
+body:has(.cert-page-wrap) {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(194, 65, 12, 0.10), transparent 320px),
+    linear-gradient(180deg, #090A0F 0%, #07080A 100%);
+  color: var(--text-primary, #F4F4F6);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body:has(.cert-page-wrap) .skip-link:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+body:has(.cert-page-wrap) #main-content {
+  min-height: 100vh;
+}
+
+.cert-page-wrap {
+  width: min(100%, 960px) !important;
+  max-width: 960px !important;
+  margin: 0 auto !important;
+  padding: 48px 24px 88px !important;
+  box-sizing: border-box !important;
+  color: var(--text-primary, #F4F4F6) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.cert-page-wrap *,
+.cert-page-wrap *::before,
+.cert-page-wrap *::after {
+  box-sizing: border-box;
+}
+
+.cert-page-wrap svg {
+  flex: 0 0 auto;
+}
+
+.cert-action-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  margin: 0 0 24px !important;
+}
+
+.cert-action-bar .btn,
+.cert-copy-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+  border-radius: 8px !important;
+  font-family: inherit !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease !important;
+}
+
+.cert-action-bar .btn {
+  min-height: 40px !important;
+  padding: 0 16px !important;
+  gap: 8px !important;
+}
+
+.cert-action-bar .btn:hover,
+.cert-copy-btn:hover {
+  transform: translateY(-1px);
+}
+
+.cert-action-bar .btn-secondary {
+  background: rgba(255, 255, 255, 0.02) !important;
+  color: var(--text-secondary, #9FA3AF) !important;
+}
+
+.cert-action-bar .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  color: var(--text-primary, #F4F4F6) !important;
+}
+
+.cert-action-bar .btn-primary {
+  background: #FFFFFF !important;
+  color: #09090B !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.08) !important;
+}
+
+.cert-document {
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012)),
+    var(--bg-secondary, #0F1015) !important;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 24px 80px rgba(0, 0, 0, 0.56) !important;
+}
+
+.cert-document::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 0 auto auto !important;
+  width: 360px !important;
+  height: 360px !important;
+  background: radial-gradient(circle, rgba(194, 65, 12, 0.09), transparent 68%) !important;
+  pointer-events: none !important;
+}
+
+.cert-doc-header,
+.cert-section,
+.cert-signatures {
+  position: relative !important;
+  z-index: 1 !important;
+  padding-left: clamp(24px, 5vw, 64px) !important;
+  padding-right: clamp(24px, 5vw, 64px) !important;
+}
+
+.cert-doc-header {
+  padding-top: 56px !important;
+  padding-bottom: 40px !important;
+  text-align: left !important;
+  border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+}
+
+.cert-issuer-mark,
+.cert-doc-meta {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+.cert-issuer-mark {
+  gap: 8px !important;
+  margin-bottom: 24px !important;
+}
+
+.cert-issuer-logo {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  color: var(--text-primary, #F4F4F6) !important;
+}
+
+.cert-issuer-sep {
+  color: var(--text-muted, #626773) !important;
+}
+
+.cert-issuer-sub {
+  color: var(--text-muted, #626773) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.cert-doc-meta {
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
+}
+
+.cert-meta-tag,
+.cert-meta-id,
+.cert-type-pill,
+.cert-immutable-pill,
+.cert-fully-executed,
+.cert-stat-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  gap: 6px !important;
+  border-radius: 9999px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+  white-space: nowrap !important;
+}
+
+.cert-meta-tag,
+.cert-type-pill,
+.cert-stat-badge {
+  background: transparent !important;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+  color: var(--text-secondary, #9FA3AF) !important;
+}
+
+.cert-meta-tag {
+  padding: 5px 14px !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+
+.cert-meta-id {
+  padding: 5px 12px !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+  color: var(--text-muted, #626773) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+}
+
+.cert-doc-title {
+  max-width: 780px !important;
+  margin: 0 0 16px !important;
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-size: clamp(34px, 6vw, 64px) !important;
+  font-weight: 800 !important;
+  line-height: 0.98 !important;
+  letter-spacing: 0 !important;
+  color: var(--text-primary, #F4F4F6) !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.cert-doc-subtitle {
+  max-width: 640px !important;
+  margin: 0 !important;
+  color: var(--text-secondary, #9FA3AF) !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+
+.cert-doc-rule {
+  width: 100% !important;
+  height: 1px !important;
+  margin: 32px 0 0 !important;
+  background: var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+}
+
+.cert-section {
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+  border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+}
+
+.cert-section-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
+  color: var(--text-primary, #F4F4F6) !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+.cert-section-label svg {
+  stroke: var(--text-muted, #626773) !important;
+}
+
+.cert-section-text {
+  max-width: 760px !important;
+  margin: 0 !important;
+  color: var(--text-secondary, #9FA3AF) !important;
+  font-size: 15px !important;
+  line-height: 1.75 !important;
+}
+
+.cert-section-text strong,
+.cert-party-name,
+.cert-stat-value,
+.cert-sig-name {
+  color: var(--text-primary, #F4F4F6) !important;
+}
+
+.cert-parties,
+.cert-stat-row,
+.cert-token-block,
+.cert-sig-card {
+  background: rgba(255, 255, 255, 0.018) !important;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+  border-radius: 12px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.cert-parties {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr) 1px minmax(0, 1fr) !important;
+  margin-top: 24px !important;
+  overflow: hidden !important;
+}
+
+.cert-party {
+  display: flex !important;
+  min-width: 0 !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  padding: 24px !important;
+}
+
+.cert-party-divider {
+  width: 1px !important;
+  background: var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+}
+
+.cert-party-role,
+.cert-stat-label,
+.cert-token-label,
+.cert-sig-role {
+  color: var(--text-muted, #626773) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.cert-party-name {
+  display: block !important;
+  font-size: 17px !important;
+  line-height: 1.25 !important;
+}
+
+.cert-party-detail,
+.cert-party-sub,
+.cert-sig-date,
+.cert-sig-capacity,
+.cert-qr-scan-sub {
+  color: var(--text-secondary, #9FA3AF) !important;
+}
+
+.cert-stat-row {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  margin-top: 24px !important;
+  overflow: hidden !important;
+}
+
+.cert-stat {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  padding: 20px 24px !important;
+  border-right: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+}
+
+.cert-stat:last-child {
+  border-right: 0 !important;
+}
+
+.cert-stat-value {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  letter-spacing: 0 !important;
+}
+
+.cert-stat-value em {
+  color: var(--text-secondary, #9FA3AF) !important;
+  font-size: 13px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+}
+
+.cert-type-pill,
+.cert-stat-badge {
+  padding: 4px 10px !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+}
+
+.cert-verify-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 168px !important;
+  gap: 24px !important;
+  align-items: start !important;
+  margin-top: 16px !important;
+}
+
+.cert-verify-info {
+  min-width: 0 !important;
+}
+
+.cert-verify-intro {
+  margin-bottom: 0 !important;
+}
+
+.cert-token-block {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  margin-top: 16px !important;
+  padding: 20px !important;
+}
+
+.cert-token-top,
+.cert-token-top-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.cert-token-top {
+  justify-content: space-between !important;
+}
+
+.cert-immutable-pill,
+.cert-fully-executed {
+  background: rgba(16, 185, 129, 0.06) !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+  color: #34D399 !important;
+}
+
+.cert-immutable-pill {
+  padding: 3px 10px !important;
+  font-size: 8px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+}
+
+.cert-copy-btn {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  color: var(--text-muted, #626773) !important;
+}
+
+.cert-copy-btn:hover,
+.cert-copy-btn.cert-copy-success {
+  background: rgba(16, 185, 129, 0.08) !important;
+  border-color: rgba(16, 185, 129, 0.24) !important;
+  color: #34D399 !important;
+}
+
+.cert-token-hash {
+  display: block !important;
+  width: 100% !important;
+  padding: 12px !important;
+  background: rgba(0, 0, 0, 0.22) !important;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+  border-radius: 8px !important;
+  color: #FBBF24 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1.55 !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+.cert-token-url {
+  display: flex !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  gap: 6px !important;
+}
+
+.cert-token-url svg {
+  stroke: var(--text-muted, #626773) !important;
+}
+
+.cert-token-url span {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  color: var(--text-muted, #626773) !important;
+  font-size: 11px !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.cert-qr-wrap {
+  display: flex !important;
+  width: 168px !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.cert-qr-box {
+  display: flex !important;
+  width: 168px !important;
+  height: 168px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 12px !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35) !important;
+}
+
+.cert-qr-box svg {
+  display: block !important;
+  width: 140px !important;
+  height: 140px !important;
+  max-width: 140px !important;
+  max-height: 140px !important;
+}
+
+.cert-qr-scan-label {
+  color: var(--text-primary, #F4F4F6) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.cert-signatures {
+  padding-top: 40px !important;
+  padding-bottom: 48px !important;
+}
+
+.cert-sig-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  margin-bottom: 24px !important;
+}
+
+.cert-sig-title {
+  margin: 0 !important;
+  color: var(--text-primary, #F4F4F6) !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+}
+
+.cert-fully-executed {
+  padding: 5px 12px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+.cert-sig-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+.cert-sig-card {
+  display: flex !important;
+  min-width: 0 !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  padding: 22px !important;
+  text-align: left !important;
+}
+
+.cert-sig-line {
+  width: 100% !important;
+  height: 1px !important;
+  margin: 12px 0 8px !important;
+  background: var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+  border: 0 !important;
+}
+
+[data-theme="light"] body:has(.cert-page-wrap) {
+  background: #F3F4F6 !important;
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .cert-document {
+  background: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] .cert-parties,
+[data-theme="light"] .cert-stat-row,
+[data-theme="light"] .cert-token-block,
+[data-theme="light"] .cert-sig-card {
+  background: #F8FAFC !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] .cert-party-divider,
+[data-theme="light"] .cert-sig-line {
+  background: rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] .cert-token-hash {
+  background: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #92400E !important;
+}
+
+@media (max-width: 760px) {
+  .cert-page-wrap {
+    padding: 24px 12px 56px !important;
+  }
+
+  .cert-action-bar,
+  .cert-sig-header {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .cert-action-bar .btn {
+    width: 100% !important;
+  }
+
+  .cert-doc-header,
+  .cert-section,
+  .cert-signatures {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .cert-doc-header {
+    padding-top: 40px !important;
+  }
+
+  .cert-parties,
+  .cert-stat-row,
+  .cert-verify-layout,
+  .cert-sig-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .cert-party-divider {
+    width: 100% !important;
+    height: 1px !important;
+  }
+
+  .cert-stat {
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+  }
+
+  .cert-stat:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .cert-qr-wrap {
+    width: 100% !important;
+  }
+}
+
+@media print {
+  body:has(.cert-page-wrap),
+  .cert-page-wrap {
+    background: #FFFFFF !important;
+  }
+
+  .cert-page-wrap {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .cert-action-bar,
+  .hide-on-print {
+    display: none !important;
+  }
+
+  .cert-document {
+    color: #111827 !important;
+    border: 1px solid #D1D5DB !important;
+    box-shadow: none !important;
+  }
+
+  .cert-doc-title,
+  .cert-section-text strong,
+  .cert-party-name,
+  .cert-stat-value,
+  .cert-sig-name {
+    color: #111827 !important;
+  }
+}
