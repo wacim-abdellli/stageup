@@ -4550,134 +4550,587 @@ button.btn-accent:hover,
   margin-bottom: 20px;
 }
 
-/* ============= INTERNSHIP AGREEMENT CSS ============= */
+/* ============= INTERNSHIP AGREEMENT & CERTIFICATE CSS ============= */
 
+/* ── Container & Layout ── */
 .agreement-container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
+  max-width: 860px;
+  margin: 40px auto 80px;
+  padding: 0 24px;
 }
 
+/* ── Action Bar ── */
+.agreement-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* ── Main Card ── */
 .agreement-card {
-  background-color: var(--bg-secondary);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 50px;
-  box-shadow: var(--shadow-lg);
+  border-radius: 20px;
+  padding: 52px 56px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03) inset,
+    0 24px 64px rgba(0,0,0,0.6),
+    0 1px 0 rgba(255,255,255,0.06) inset;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Subtle ambient top-left glow */
+.agreement-card::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(194,65,12,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.agreement-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Verified Banner ── */
+.cert-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 40px;
+  box-shadow: 0 0 20px rgba(16,185,129,0.04);
+}
+
+.cert-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cert-banner-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #34D399;
+  letter-spacing: 0.01em;
+}
+
+.cert-banner-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0;
+  margin-top: 2px;
+}
+
+/* ── Certificate Document Header ── */
 .agreement-header {
   text-align: center;
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 25px;
-  margin-bottom: 30px;
+  padding-bottom: 32px;
+  margin-bottom: 40px;
+  position: relative;
 }
 
+.agreement-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(251,146,60,0.7), transparent);
+  border-radius: 2px;
+}
+
+/* Badge row */
+.cert-header-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.badge-document-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FB923C;
+  background: rgba(251,146,60,0.08);
+  border: 1px solid rgba(251,146,60,0.25);
+  border-radius: 9999px;
+  padding: 4px 12px;
+}
+
+.badge-document-id {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  padding: 4px 12px;
+}
+
+/* Main certificate title */
 .agreement-title {
-  font-size: 28px;
-  margin-bottom: 4px;
-  letter-spacing: 1px;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #F8FAFC 0%, #CBD5E1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .agreement-subtitle {
-  color: var(--text-secondary);
+  color: var(--text-muted);
   font-size: 13px;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── Article Boxes ── */
+.agreement-article-box {
+  background: rgba(255,255,255,0.015);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid rgba(251,146,60,0.4);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.agreement-article-box:hover {
+  border-color: rgba(255,255,255,0.1);
+  border-left-color: rgba(251,146,60,0.65);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 4px 16px rgba(0,0,0,0.2);
 }
 
 .agreement-article-title {
-  font-size: 20px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 8px;
-  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: -0.01em;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .agreement-text {
   color: var(--text-secondary);
-  line-height: 1.8;
-  font-size: 15px;
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.agreement-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .agreement-list {
   color: var(--text-secondary);
   line-height: 2;
-  font-size: 15px;
-  margin-left: 20px;
+  font-size: 14px;
   list-style: none;
   padding-left: 0;
+}
+
+/* ── Parties Cards Grid ── */
+.parties-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.party-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.party-info-card:hover {
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+
+.party-role-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FB923C;
+  margin-bottom: 6px;
+}
+
+.party-name {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.party-meta {
+  display: block;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.party-submeta {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ── Duration / Stage Highlight Bar ── */
+.duration-highlight-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-top: 16px;
+}
+
+/* ── Cert Details Grid (QR + Token) ── */
+.cert-details-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: start;
+  margin-top: 16px;
+}
+
+.cert-token-box {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cert-token-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.cert-token-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cert-token-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: #F59E0B;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+.cert-token-immutable {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #10B981;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cert-qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-primary);
+  border: 1px solid rgba(245,158,11,0.18);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.cert-qr-inner {
+  background: #FFFFFF;
+  padding: 10px;
+  border-radius: 8px;
+  line-height: 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+}
+
+.cert-qr-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #F59E0B;
+  text-align: center;
+}
+
+.cert-qr-sublabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Signatures Section ── */
+.cert-signatures-header {
+  margin-bottom: 20px;
+}
+
+.cert-signatures-status {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.cert-signatures-status strong {
+  color: #10B981;
 }
 
 .agreement-signatures-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  gap: 12px;
 }
 
 .agreement-sign-box {
-  background-color: var(--bg-primary);
+  background: var(--bg-primary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 20px;
   text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-@keyframes pulse-border {
-  0%,100% { border-color:rgba(194,65,12,0.2); }
-  50% { border-color:rgba(194,65,12,0.5); box-shadow:0 0 0 3px rgba(194,65,12,0.06); }
+.agreement-sign-box:hover {
+  border-color: rgba(16,185,129,0.25);
+  box-shadow: 0 0 0 1px rgba(16,185,129,0.08);
 }
-.agreement-sign-box.awaiting-mine { animation: pulse-border 2.5s ease infinite; }
 
-.agreement-sign-box-title {
-  font-size: 14px;
+.sign-role-label {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #10B981;
+  margin-bottom: 6px;
+}
+
+.sign-name {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
   margin-bottom: 4px;
 }
 
-.agreement-sign-box-name {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 15px;
-}
-
-.agreement-signed-badge {
-  background-color: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  border-radius: var(--radius-sm);
-  padding: 10px;
-}
-
-.agreement-signed-label {
-  font-size: 13px;
-  color: #34D399;
-  font-weight: 600;
-}
-
-.agreement-signed-date {
+.sign-date {
+  display: block;
   font-size: 11px;
   color: var(--text-muted);
-  margin-top: 4px;
 }
 
-.agreement-unsigned-label {
-  font-size: 12px;
+.sign-divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 10px 0;
+}
+
+.sign-role-sub {
+  display: block;
+  font-size: 10px;
   color: var(--text-muted);
 }
 
-.agreement-back-row {
-  text-align: center;
-  margin-top: 40px;
-  border-top: 1px solid var(--border-color);
-  padding-top: 25px;
+@keyframes pulse-border {
+  0%,100% { border-color: rgba(194,65,12,0.2); }
+  50% { border-color: rgba(194,65,12,0.5); box-shadow: 0 0 0 3px rgba(194,65,12,0.06); }
+}
+.agreement-sign-box.awaiting-mine { animation: pulse-border 2.5s ease infinite; }
+
+/* Backwards-compat for agreement (non-cert) views */
+.agreement-sign-box-title { font-size: 14px; margin-bottom: 4px; }
+.agreement-sign-box-name { font-size: 13px; color: var(--text-secondary); margin-bottom: 15px; }
+.agreement-signed-badge { background-color: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); border-radius: var(--radius-sm); padding: 10px; }
+.agreement-signed-label { font-size: 13px; color: #34D399; font-weight: 600; }
+.agreement-signed-date { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+.agreement-unsigned-label { font-size: 12px; color: var(--text-muted); }
+.agreement-back-row { text-align: center; margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 25px; }
+.agreement-back-link { display: inline-flex; width: auto; padding: 10px 24px; }
+
+/* ── Utility classes used in certificate view ── */
+.flex-align-center { display: flex; align-items: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-30 { margin-bottom: 30px; }
+.mt-4 { margin-top: 4px; }
+.pt-30 { padding-top: 30px; }
+.border-top { border-top: 1px solid var(--border-color); }
+.fs-11 { font-size: 11px; }
+.fs-12 { font-size: 12px; }
+.fs-13 { font-size: 13px; }
+.fs-14 { font-size: 14px; }
+.fw-400 { font-weight: 400; }
+.fw-700 { font-weight: 700; }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.color-primary { color: var(--text-primary); }
+
+/* ── Light Theme Overrides for Certificate ── */
+[data-theme="light"] .agreement-card {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  box-shadow:
+    0 0 0 1px rgba(15,23,42,0.04) inset,
+    0 20px 60px rgba(15,23,42,0.08),
+    0 4px 16px rgba(15,23,42,0.04);
 }
 
-.agreement-back-link {
-  display: inline-flex;
-  width: auto;
-  padding: 10px 24px;
+[data-theme="light"] .agreement-card::before {
+  background: radial-gradient(circle, rgba(194,65,12,0.04) 0%, transparent 70%);
 }
 
+[data-theme="light"] .cert-banner {
+  background: rgba(16,185,129,0.04);
+  border-color: rgba(16,185,129,0.25);
+}
+
+[data-theme="light"] .agreement-article-box {
+  background: #F8FAFC;
+  border-color: #E2E8F0;
+  border-left-color: rgba(194,65,12,0.5);
+}
+
+[data-theme="light"] .agreement-article-box:hover {
+  border-color: #CBD5E1;
+  border-left-color: #C2410C;
+}
+
+[data-theme="light"] .party-info-card,
+[data-theme="light"] .duration-highlight-bar,
+[data-theme="light"] .cert-token-box,
+[data-theme="light"] .cert-qr-box,
+[data-theme="light"] .agreement-sign-box {
+  background: #F8FAFC;
+  border-color: #E2E8F0;
+}
+
+[data-theme="light"] .agreement-title {
+  background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Mobile Responsive ── */
 @media (max-width: 768px) {
+  .agreement-card {
+    padding: 28px 20px;
+    border-radius: var(--radius-md);
+  }
+
+  .agreement-action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cert-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .parties-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cert-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cert-qr-box {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+
   .agreement-signatures-grid {
     grid-template-columns: 1fr;
+  }
+
+  .agreement-title {
+    font-size: 20px;
+  }
+
+  .cert-header-badges {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .agreement-container {
+    padding: 0 12px;
+  }
+
+  .agreement-card {
+    padding: 20px 16px;
   }
 }
 
@@ -6689,6 +7142,10 @@ button.btn-accent:hover,
     padding: 0 !important;
   }
 
+  .agreement-card::before {
+    display: none !important;
+  }
+
   .agreement-container {
     max-width: 100% !important;
   }
@@ -6709,6 +7166,9 @@ button.btn-accent:hover,
 
   .agreement-title {
     font-size: 22px;
+    background: none !important;
+    -webkit-text-fill-color: #000 !important;
+    color: #000 !important;
   }
 
   .agreement-sign-box {
@@ -6719,11 +7179,27 @@ button.btn-accent:hover,
   }
 
   .badge-status,
+  .badge-document-tag,
+  .badge-document-id,
   .pill-lg {
     font-family: Georgia, "Times New Roman", serif;
     border: 1px solid #ccc;
     background: #f5f5f5 !important;
     color: #111 !important;
+  }
+
+  .agreement-article-box {
+    border-left-color: #ccc;
+    background: none !important;
+  }
+
+  .party-info-card,
+  .duration-highlight-bar,
+  .cert-token-box,
+  .cert-qr-box,
+  .agreement-sign-box {
+    background: #f9f9f9 !important;
+    border-color: #ccc !important;
   }
 }
 
@@ -9026,268 +9502,7 @@ button.btn-accent:hover,
   color: #0F172A;
 }
 
-/* Public Digital Certificate Styles */
-.cert-page {
-  padding: 40px 20px 80px;
-  background: var(--bg-primary);
-  min-height: 100vh;
-}
-
-.cert-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.cert-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.cert-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
-  border-radius: 9999px;
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  color: #34D399;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  margin-bottom: 16px;
-}
-
-.cert-title {
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
-}
-
-.cert-sub {
-  font-size: 14px;
-  color: var(--text-muted);
-}
-
-.cert-card {
-  position: relative;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 48px;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-}
-
-.cert-watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-25deg);
-  font-size: 100px;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.02);
-  letter-spacing: 0.15em;
-  pointer-events: none;
-  white-space: nowrap;
-  user-select: none;
-}
-
-.cert-body {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-
-.cert-recipient-label {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-
-.cert-student-name {
-  font-size: 36px;
-  font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-  margin-bottom: 16px;
-}
-
-.cert-fulfillment {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto 36px;
-}
-
-.cert-fulfillment strong {
-  color: var(--text-primary);
-}
-
-.cert-details-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  margin-bottom: 40px;
-  text-align: left;
-}
-
-.cert-detail-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.cert-detail-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-}
-
-.cert-detail-value {
-  font-size: 13px;
-  color: var(--text-primary);
-}
-
-.cert-token-code {
-  font-family: monospace;
-  letter-spacing: 0.05em;
-  color: var(--primary-hover);
-}
-
-.cert-signatures-section {
-  text-align: left;
-  margin-bottom: 40px;
-}
-
-.cert-section-heading {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin-bottom: 16px;
-}
-
-.cert-signatures-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.cert-signature-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-}
-
-.cert-sig-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
-  background: var(--primary-light);
-  flex-shrink: 0;
-}
-
-.cert-sig-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  overflow: hidden;
-}
-
-.cert-sig-role {
-  font-size: 11px;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-.cert-sig-name {
-  font-size: 13px;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.cert-sig-date {
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-.cert-qr-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-color);
-}
-
-.cert-qr-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 24px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-}
-
-.cert-qr-label {
-  font-size: 11px;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.cert-banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px 20px;
-  background: rgba(16, 185, 129, 0.06);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  border-radius: var(--radius-md);
-  margin-bottom: 40px !important;
-}
-
-.cert-banner-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.cert-banner-title {
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.cert-banner-sub {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin: 0;
-}
+/* Old certificate styles removed � see INTERNSHIP AGREEMENT & CERTIFICATE CSS section */
 
 /* Real-Time Kanban Board Styles */
 .kanban-board {

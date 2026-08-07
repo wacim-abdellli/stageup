@@ -19,8 +19,8 @@
 
   <div class="agreement-card">
 
-    <%# ─── Green Verified Banner ─── %>
-    <div class="cert-banner hide-on-print" style="margin-bottom: 40px !important;">
+    <%# ─── Verified Status Banner ─── %>
+    <div class="cert-banner hide-on-print">
       <div class="cert-banner-left">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
         <div>
@@ -32,20 +32,24 @@
     </div>
 
     <%# ─── Document Header ─── %>
-    <div class="agreement-header" style="margin-top: 24px !important; margin-bottom: 32px !important;">
-      <div style="display:flex; justify-content:center; align-items:center; gap:8px; margin-bottom:12px;">
-        <span class="badge-document-tag">CERTIFICATE OF COMPLETION</span>
+    <div class="agreement-header">
+      <div class="cert-header-badges">
+        <span class="badge-document-tag">
+          <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Certificate of Completion
+        </span>
         <span class="badge-document-id">ID: AGR-<%= @agreement.id %></span>
       </div>
+
       <h1 class="agreement-title">CERTIFICATE OF COMPLETION</h1>
       <p class="agreement-subtitle">This certificate is issued in accordance with Tunisian law governing higher education internship programmes.</p>
     </div>
 
     <%# ─── Article 1: Graduate & Parties ─── %>
     <div class="agreement-article-box mb-24">
-      <h2 class="agreement-article-title flex-align-center gap-8">
+      <h2 class="agreement-article-title">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Article 1 — Graduate & Parties
+        Article 1 — Graduate &amp; Parties
       </h2>
       <p class="agreement-text mb-12">
         This Certificate of Completion is jointly issued by the three parties below, confirming the successful fulfilment of all internship obligations.
@@ -53,29 +57,29 @@
 
       <div class="parties-cards-grid">
         <div class="party-info-card">
-          <span class="party-role-badge">THE GRADUATE</span>
+          <span class="party-role-badge">The Graduate</span>
           <strong class="party-name"><%= @student.first_name %> <%= @student.last_name %></strong>
           <span class="party-meta">Enrolled at <%= @student.university&.name || "Higher Education Institution" %></span>
           <span class="party-submeta">(<%= @student.respond_to?(:major) && @student.major.present? ? @student.major : "Software Engineering" %>)</span>
         </div>
 
         <div class="party-info-card">
-          <span class="party-role-badge">THE EMPLOYER</span>
+          <span class="party-role-badge">The Employer</span>
           <strong class="party-name"><%= @company.name %></strong>
           <span class="party-meta">Host organisation – <%= @offer.title %></span>
         </div>
 
         <div class="party-info-card">
-          <span class="party-role-badge">THE UNIVERSITY</span>
+          <span class="party-role-badge">The University</span>
           <strong class="party-name"><%= @student.university&.name || "ISET Sfax" %></strong>
           <span class="party-meta">Official Higher Education Institution</span>
         </div>
       </div>
     </div>
 
-    <%# ─── Article 2: Dates & Duration ─── %>
+    <%# ─── Article 2: Internship Period ─── %>
     <div class="agreement-article-box mb-24">
-      <h2 class="agreement-article-title flex-align-center gap-8">
+      <h2 class="agreement-article-title">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
         Article 2 — Internship Period
       </h2>
@@ -83,40 +87,40 @@
         The internship commenced on <strong><%= @agreement.start_date.strftime("%B %d, %Y") %></strong> and concluded on <strong><%= @agreement.end_date.strftime("%B %d, %Y") %></strong>, in compliance with Tunisian Higher Education regulations.
       </p>
 
-      <div class="duration-highlight-bar flex-between">
+      <div class="duration-highlight-bar">
         <div class="flex-align-center gap-8">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span class="fs-13 text-secondary">Calculated Period:</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="fs-13 text-secondary">Calculated Period</span>
         </div>
         <strong class="fs-14 color-primary fw-700">
           <%= duration_days %> Days
-          <span class="fs-12 text-muted fw-400">(~<%= (duration_days / 30.0).round(1) %> months)</span>
+          <span class="fs-12 text-muted fw-400">&nbsp;(~<%= (duration_days / 30.0).round(1) %> months)</span>
         </strong>
       </div>
     </div>
 
     <%# ─── Article 3: Internship Subject ─── %>
     <div class="agreement-article-box mb-24">
-      <h2 class="agreement-article-title flex-align-center gap-8">
+      <h2 class="agreement-article-title">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        Article 3 — Internship Subject & Classification
+        Article 3 — Internship Subject &amp; Classification
       </h2>
       <p class="agreement-text mb-12">
         <%= @student.first_name %> carried out an internship titled <strong>"<%= @offer.title %>"</strong> at <%= @company.name %>, classified as a <strong><%= @offer.stage_type.to_s.upcase %></strong> stage under the terms described in the original offer.
       </p>
 
-      <div class="duration-highlight-bar flex-between">
+      <div class="duration-highlight-bar">
         <div class="flex-align-center gap-8">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-          <span class="fs-13 text-secondary">Stage Classification:</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          <span class="fs-13 text-secondary">Stage Classification</span>
         </div>
-        <strong class="fs-14 fw-700" style="color:#F59E0B;"><%= @offer.stage_type.to_s.upcase %></strong>
+        <span class="badge-document-tag"><%= @offer.stage_type.to_s.upcase %></span>
       </div>
     </div>
 
-    <%# ─── Article 4: Verification Token + QR ─── %>
+    <%# ─── Article 4: Cryptographic Verification ─── %>
     <div class="agreement-article-box mb-30">
-      <h2 class="agreement-article-title flex-align-center gap-8">
+      <h2 class="agreement-article-title">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
         Article 4 — Cryptographic Verification
       </h2>
@@ -125,78 +129,70 @@
       </p>
 
       <div class="cert-details-grid">
-        <%# Left: Token %>
-        <div>
-          <div class="duration-highlight-bar" style="flex-direction:column; align-items:flex-start; gap:8px;">
-            <span class="fs-11 text-muted fw-700" style="text-transform:uppercase; letter-spacing:0.08em;">Cryptographic Verification Token</span>
-            <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-              <code style="font-size:13px; font-weight:700; color:#F59E0B; font-family:monospace; word-break:break-all;"><%= @agreement.verification_token %></code>
-              <span style="font-size:10px; font-weight:700; color:#10B981; white-space:nowrap; margin-left:12px;">✓ IMMUTABLE</span>
-            </div>
+        <%# Left: Verification Token %>
+        <div class="cert-token-box">
+          <span class="cert-token-label">Cryptographic Verification Token</span>
+          <div class="cert-token-row">
+            <code class="cert-token-value"><%= @agreement.verification_token %></code>
+            <span class="cert-token-immutable">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              IMMUTABLE
+            </span>
           </div>
         </div>
 
         <%# Right: QR Code %>
-        <div style="display:flex; flex-direction:column; align-items:center; padding:16px; background:var(--bg-primary); border:1px solid rgba(245,158,11,0.2); border-radius:var(--radius-md);">
-          <div style="background:#FFFFFF; padding:10px; border-radius:8px; line-height:0; box-shadow:0 4px 12px rgba(0,0,0,0.3); margin-bottom:10px;">
+        <div class="cert-qr-box">
+          <div class="cert-qr-inner">
             <%= qr.as_svg(offset: 0, color: "000000", shape_rendering: "crispEdges", module_size: 3, standalone: true).html_safe %>
           </div>
-          <span style="font-size:10px; font-weight:700; color:#F59E0B; letter-spacing:0.08em; text-transform:uppercase;">Scan to Verify</span>
-          <span style="font-size:10px; color:var(--text-muted);">StageUp Trust Ledger</span>
+          <span class="cert-qr-label">Scan to Verify</span>
+          <span class="cert-qr-sublabel">StageUp Trust Ledger</span>
         </div>
       </div>
     </div>
 
     <%# ─── Signatures ─── %>
     <div class="border-top pt-30">
-      <div class="mb-20">
+      <div class="cert-signatures-header">
         <h2 class="agreement-article-title">Signatures</h2>
-        <p class="text-muted fs-13 mt-4">
-          Each party must sign below for this certificate to be fully executed. All three signatures are present — status: <strong style="color:#10B981;">Fully Executed</strong>
+        <p class="cert-signatures-status">
+          Each party must sign below for this certificate to be fully executed. All three signatures are present — status: <strong>Fully Executed</strong>
         </p>
       </div>
 
       <div class="agreement-signatures-grid">
         <%# Student %>
         <div class="agreement-sign-box">
-          <div style="margin-bottom:12px;">
-            <span style="font-size:10px; font-weight:700; color:#10B981; text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:6px;">✓ Student</span>
-            <strong style="font-size:15px; color:var(--text-primary); display:block; margin-bottom:4px;"><%= @student.first_name %> <%= @student.last_name %></strong>
-            <span style="font-size:11px; color:var(--text-muted);">
-              <%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
-            </span>
-          </div>
-          <div style="border-top:1px solid var(--border-color); padding-top:10px;">
-            <span style="font-size:10px; color:var(--text-muted);">Graduate Intern</span>
-          </div>
+          <span class="sign-role-label">✓ Student</span>
+          <strong class="sign-name"><%= @student.first_name %> <%= @student.last_name %></strong>
+          <span class="sign-date">
+            <%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
+          </span>
+          <hr class="sign-divider">
+          <span class="sign-role-sub">Graduate Intern</span>
         </div>
 
         <%# Employer %>
         <div class="agreement-sign-box">
-          <div style="margin-bottom:12px;">
-            <span style="font-size:10px; font-weight:700; color:#10B981; text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:6px;">✓ Employer</span>
-            <strong style="font-size:15px; color:var(--text-primary); display:block; margin-bottom:4px;"><%= @company.name %></strong>
-            <span style="font-size:11px; color:var(--text-muted);">
-              <%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
-            </span>
-          </div>
-          <div style="border-top:1px solid var(--border-color); padding-top:10px;">
-            <span style="font-size:10px; color:var(--text-muted);">Host Organisation</span>
-          </div>
+          <span class="sign-role-label">✓ Employer</span>
+          <strong class="sign-name"><%= @company.name %></strong>
+          <span class="sign-date">
+            <%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
+          </span>
+          <hr class="sign-divider">
+          <span class="sign-role-sub">Host Organisation</span>
         </div>
 
         <%# University %>
         <div class="agreement-sign-box">
-          <div style="margin-bottom:12px;">
-            <span style="font-size:10px; font-weight:700; color:#10B981; text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:6px;">✓ University</span>
-            <strong style="font-size:15px; color:var(--text-primary); display:block; margin-bottom:4px;"><%= @student.university&.name || "ISET Sfax" %></strong>
-            <span style="font-size:11px; color:var(--text-muted);">
-              <%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
-            </span>
-          </div>
-          <div style="border-top:1px solid var(--border-color); padding-top:10px;">
-            <span style="font-size:10px; color:var(--text-muted);">Academic Institution</span>
-          </div>
+          <span class="sign-role-label">✓ University</span>
+          <strong class="sign-name"><%= @student.university&.name || "ISET Sfax" %></strong>
+          <span class="sign-date">
+            <%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
+          </span>
+          <hr class="sign-divider">
+          <span class="sign-role-sub">Academic Institution</span>
         </div>
       </div>
     </div>
