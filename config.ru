@@ -19,8 +19,23 @@ STATIC_PUBLIC_PATHS = {
   "/robots.txt" => "robots.txt"
 }.freeze
 
-def serve_application_css
-  css = File.read(APP_CSS_PATH)
+def serve_application_css(request_path)
+  relative = request_path.delete_prefix("/assets/")
+  candidates = [
+    File.join(PUBLIC_ROOT, "assets", relative),
+    File.join(PUBLIC_ROOT, "assets", "application.css"),
+    APP_CSS_PATH
+  ]
+
+  css = candidates.find { |file| File.file?(file) }&.then { |file| File.read(file) }
+  unless css
+    return [
+      404,
+      { "content-type" => "text/plain; charset=utf-8" },
+      ["application stylesheet not found"]
+    ]
+  end
+
   css = "#{css}\n#{File.read(CERT_POLISH_PATH)}" if File.exist?(CERT_POLISH_PATH)
 
   [
@@ -30,6 +45,13 @@ def serve_application_css
       "cache-control" => "public, max-age=31536000"
     },
     [css]
+  ]
+rescue => e
+  $stderr.puts "CSS ERROR: #{e.class}: #{e.message}"
+  [
+    500,
+    { "content-type" => "text/plain; charset=utf-8" },
+    ["CSS Error: #{e.class}: #{e.message}"]
   ]
 end
 
@@ -93,20 +115,16 @@ boot_error = nil
 run lambda { |env|
   path = env["PATH_INFO"].to_s
 
-  if path.match?(%r{\A/assets/application(?:-[0-9a-f]+)?\.css\z})
-    return serve_application_css
-  end
-
-  if path.start_with?("/assets/")
-    relative_path = path.delete_prefix("/assets/")
-    static_response = serve_public_file(File.join("assets", relative_path))
-    return static_response if static_response
-  end
-
-  if (relative_path = STATIC_PUBLIC_PATHS[path])
-    static_response = serve_public_file(relative_path)
-    return static_response if static_response
-  end
+  static_response =
+    if path.match?(%r{\A/assets/application(?:-[0-9a-f]+)?\.css\z})
+      serve_application_css(path)
+    elsif path.start_with?("/assets/")
+      relative_path = path.delete_prefix("/assets/")
+      serve_public_file(File.join("assets", relative_path))
+    elsif (relative_path = STATIC_PUBLIC_PATHS[path])
+      serve_public_file(relative_path)
+    end
+  next static_response if static_response
 
   begin
     rails_app ||= boot_stageup_app
@@ -117,7 +135,7 @@ run lambda { |env|
     $stderr.puts e.backtrace.first(15).join("\n")
     [
       500,
-      { "content-type" => "text/plain" },
+      { "content-type" => "text/plain; charset=utf-8" },
       ["Boot Error: #{boot_error.class}: #{boot_error.message}\n\n#{boot_error.backtrace.first(15).join("\n")}"]
     ]
   end
