@@ -3,10 +3,10 @@
 <% qr_url = verify_certificate_url(token: @agreement.verification_token) %>
 <% qr = RQRCode::QRCode.new(qr_url) %>
 
-<div class="agreement-container">
+<div class="cert-page-wrap">
 
   <%# ─── Action Bar ─── %>
-  <div class="agreement-action-bar hide-on-print">
+  <div class="cert-action-bar hide-on-print">
     <%= link_to root_path, class: "btn btn-secondary" do %>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
       Home
@@ -17,180 +17,168 @@
     </button>
   </div>
 
-  <div class="agreement-card">
+  <div class="cert-document">
 
-
-    <%# ─── Document Header ─── %>
-    <div class="agreement-header">
-      <div class="cert-header-badges">
-        <span class="badge-document-tag">
-          <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <%# ══════════ DOCUMENT HEADER ══════════ %>
+    <header class="cert-doc-header">
+      <div class="cert-doc-meta">
+        <span class="cert-meta-tag">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Certificate of Completion
         </span>
-        <span class="badge-document-id">ID: AGR-<%= @agreement.id %></span>
+        <span class="cert-meta-id">AGR-<%= @agreement.id %></span>
       </div>
+      <h1 class="cert-doc-title">CERTIFICATE OF COMPLETION</h1>
+      <p class="cert-doc-subtitle">Issued in accordance with Tunisian law governing higher education internship programmes</p>
+      <div class="cert-doc-rule"></div>
+    </header>
 
-      <h1 class="agreement-title">CERTIFICATE OF COMPLETION</h1>
-      <p class="agreement-subtitle">This certificate is issued in accordance with Tunisian law governing higher education internship programmes.</p>
-    </div>
-
-    <%# ─── Article 1: Graduate & Parties ─── %>
-    <div class="agreement-article-box mb-24">
-      <h2 class="agreement-article-title">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <%# ══════════ ARTICLE 1: PARTIES ══════════ %>
+    <section class="cert-section">
+      <div class="cert-section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         Article 1 — Graduate &amp; Parties
-      </h2>
-      <p class="agreement-text mb-12">
-        This Certificate of Completion is jointly issued by the three parties below, confirming the successful fulfilment of all internship obligations.
-      </p>
+      </div>
+      <p class="cert-section-text">This Certificate of Completion is jointly issued by the three parties below, confirming the successful fulfilment of all internship obligations.</p>
 
-      <div class="parties-cards-grid">
-        <div class="party-info-card">
-          <span class="party-role-badge">The Graduate</span>
-          <strong class="party-name"><%= @student.first_name %> <%= @student.last_name %></strong>
-          <span class="party-meta">Enrolled at <%= @student.university&.name || "Higher Education Institution" %></span>
-          <span class="party-submeta">(<%= @student.respond_to?(:major) && @student.major.present? ? @student.major : "Software Engineering" %>)</span>
+      <div class="cert-parties">
+        <div class="cert-party">
+          <span class="cert-party-role">The Graduate</span>
+          <strong class="cert-party-name"><%= @student.first_name %> <%= @student.last_name %></strong>
+          <span class="cert-party-detail">Enrolled at <%= @student.university&.name || "Higher Education Institution" %></span>
+          <span class="cert-party-sub"><%= @student.respond_to?(:major) && @student.major.present? ? @student.major : "Software Engineering" %></span>
         </div>
-
-        <div class="party-info-card">
-          <span class="party-role-badge">The Employer</span>
-          <strong class="party-name"><%= @company.name %></strong>
-          <span class="party-meta">Host organisation – <%= @offer.title %></span>
+        <div class="cert-party-divider"></div>
+        <div class="cert-party">
+          <span class="cert-party-role">The Employer</span>
+          <strong class="cert-party-name"><%= @company.name %></strong>
+          <span class="cert-party-detail"><%= @offer.title %></span>
+          <span class="cert-party-sub">Host Organisation</span>
         </div>
-
-        <div class="party-info-card">
-          <span class="party-role-badge">The University</span>
-          <strong class="party-name"><%= @student.university&.name || "ISET Sfax" %></strong>
-          <span class="party-meta">Official Higher Education Institution</span>
+        <div class="cert-party-divider"></div>
+        <div class="cert-party">
+          <span class="cert-party-role">The University</span>
+          <strong class="cert-party-name"><%= @student.university&.name || "ISET Sfax" %></strong>
+          <span class="cert-party-detail">Official Higher Education Institution</span>
         </div>
       </div>
-    </div>
+    </section>
 
-    <%# ─── Article 2: Internship Period ─── %>
-    <div class="agreement-article-box mb-24">
-      <h2 class="agreement-article-title">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+    <%# ══════════ ARTICLE 2: PERIOD ══════════ %>
+    <section class="cert-section">
+      <div class="cert-section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
         Article 2 — Internship Period
-      </h2>
-      <p class="agreement-text mb-12">
+      </div>
+      <p class="cert-section-text">
         The internship commenced on <strong><%= @agreement.start_date.strftime("%B %d, %Y") %></strong> and concluded on <strong><%= @agreement.end_date.strftime("%B %d, %Y") %></strong>, in compliance with Tunisian Higher Education regulations.
       </p>
-
-      <div class="duration-highlight-bar">
-        <div class="flex-align-center gap-8">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span class="fs-13 text-secondary">Calculated Period</span>
+      <div class="cert-stat-row">
+        <div class="cert-stat">
+          <span class="cert-stat-label">Duration</span>
+          <span class="cert-stat-value"><%= duration_days %> <em>days</em></span>
         </div>
-        <strong class="fs-14 color-primary fw-700">
-          <%= duration_days %> Days
-          <span class="fs-12 text-muted fw-400">&nbsp;(~<%= (duration_days / 30.0).round(1) %> months)</span>
-        </strong>
+        <div class="cert-stat">
+          <span class="cert-stat-label">Approximate</span>
+          <span class="cert-stat-value"><%= (duration_days / 30.0).round(1) %> <em>months</em></span>
+        </div>
+        <div class="cert-stat">
+          <span class="cert-stat-label">Classification</span>
+          <span class="cert-stat-value cert-stat-badge"><%= @offer.stage_type.to_s.upcase %></span>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <%# ─── Article 3: Internship Subject ─── %>
-    <div class="agreement-article-box mb-24">
-      <h2 class="agreement-article-title">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        Article 3 — Internship Subject &amp; Classification
-      </h2>
-      <p class="agreement-text mb-12">
-        <%= @student.first_name %> carried out an internship titled <strong>"<%= @offer.title %>"</strong> at <%= @company.name %>, classified as a <strong><%= @offer.stage_type.to_s.upcase %></strong> stage under the terms described in the original offer.
+    <%# ══════════ ARTICLE 3: SUBJECT ══════════ %>
+    <section class="cert-section">
+      <div class="cert-section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Article 3 — Internship Subject
+      </div>
+      <p class="cert-section-text">
+        <strong><%= @student.first_name %> <%= @student.last_name %></strong> successfully completed an internship titled <strong>"<%= @offer.title %>"</strong> at <strong><%= @company.name %></strong>, classified as a <span class="cert-type-pill"><%= @offer.stage_type.to_s.upcase %></span> stage under the terms of the original offer.
       </p>
+    </section>
 
-      <div class="duration-highlight-bar">
-        <div class="flex-align-center gap-8">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-          <span class="fs-13 text-secondary">Stage Classification</span>
-        </div>
-        <span class="badge-document-tag"><%= @offer.stage_type.to_s.upcase %></span>
-      </div>
-    </div>
-
-    <%# ─── Article 4: Cryptographic Verification ─── %>
-    <div class="agreement-article-box mb-30">
-      <h2 class="agreement-article-title">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+    <%# ══════════ ARTICLE 4: VERIFICATION ══════════ %>
+    <section class="cert-section cert-section-verify">
+      <div class="cert-section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
         Article 4 — Cryptographic Verification
-      </h2>
-      <p class="agreement-text mb-16">
-        This certificate is immutably recorded on the StageUp Trust Ledger. Scan the QR code or visit the verification URL to confirm its authenticity instantly.
-      </p>
-
-      <div class="cert-verify-grid">
-        <%# Left: Token panel %>
-        <div class="cert-token-panel">
-          <div class="cert-token-header">
-            <span class="cert-token-label">Cryptographic Verification Token</span>
-            <span class="cert-immutable-badge">
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              IMMUTABLE
-            </span>
-          </div>
-          <code class="cert-token-value"><%= @agreement.verification_token %></code>
-          <div class="cert-token-footer">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            <span><%= verify_certificate_url(token: @agreement.verification_token) %></span>
-          </div>
-        </div>
-
-        <%# Right: QR Code %>
-        <div class="cert-qr-panel">
-          <div class="cert-qr-inner">
-            <%= qr.as_svg(offset: 0, color: "000000", shape_rendering: "crispEdges", module_size: 4, standalone: true).html_safe %>
-          </div>
-          <div class="cert-qr-caption">
-            <span class="cert-qr-label">Scan to Verify</span>
-            <span class="cert-qr-sublabel">StageUp Trust Ledger</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <%# ─── Signatures ─── %>
-    <div class="border-top pt-30">
-      <div class="cert-signatures-header">
-        <h2 class="agreement-article-title">Signatures</h2>
-        <p class="cert-signatures-status">
-          Each party must sign below for this certificate to be fully executed. All three signatures are present — status: <strong>Fully Executed</strong>
-        </p>
       </div>
 
-      <div class="agreement-signatures-grid">
-        <%# Student %>
-        <div class="agreement-sign-box">
-          <span class="sign-role-label">✓ Student</span>
-          <strong class="sign-name"><%= @student.first_name %> <%= @student.last_name %></strong>
-          <span class="sign-date">
-            <%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
-          </span>
-          <hr class="sign-divider">
-          <span class="sign-role-sub">Graduate Intern</span>
+      <div class="cert-verify-layout">
+
+        <%# LEFT: token info %>
+        <div class="cert-verify-info">
+          <p class="cert-section-text" style="margin-bottom: 20px;">
+            This certificate is immutably recorded on the StageUp Trust Ledger. Scan the QR code or visit the URL below to confirm its authenticity instantly.
+          </p>
+
+          <div class="cert-token-block">
+            <div class="cert-token-top">
+              <span class="cert-token-label">Verification Token</span>
+              <span class="cert-immutable-pill">
+                <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                IMMUTABLE
+              </span>
+            </div>
+            <code class="cert-token-hash"><%= @agreement.verification_token %></code>
+            <div class="cert-token-url">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              <span><%= qr_url %></span>
+            </div>
+          </div>
         </div>
 
-        <%# Employer %>
-        <div class="agreement-sign-box">
-          <span class="sign-role-label">✓ Employer</span>
-          <strong class="sign-name"><%= @company.name %></strong>
-          <span class="sign-date">
-            <%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
-          </span>
-          <hr class="sign-divider">
-          <span class="sign-role-sub">Host Organisation</span>
+        <%# RIGHT: QR code %>
+        <div class="cert-qr-wrap">
+          <div class="cert-qr-box">
+            <%= qr.as_svg(offset: 0, color: "000000", shape_rendering: "crispEdges", module_size: 3, standalone: true).html_safe %>
+          </div>
+          <span class="cert-qr-scan-label">Scan to Verify</span>
+          <span class="cert-qr-scan-sub">StageUp Trust Ledger</span>
         </div>
 
-        <%# University %>
-        <div class="agreement-sign-box">
-          <span class="sign-role-label">✓ University</span>
-          <strong class="sign-name"><%= @student.university&.name || "ISET Sfax" %></strong>
-          <span class="sign-date">
-            <%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("Signed %b %d, %Y at %H:%M UTC") : "Pending" %>
-          </span>
-          <hr class="sign-divider">
-          <span class="sign-role-sub">Academic Institution</span>
+      </div>
+    </section>
+
+    <%# ══════════ SIGNATURES ══════════ %>
+    <footer class="cert-signatures">
+      <div class="cert-sig-header">
+        <h2 class="cert-sig-title">Signatures</h2>
+        <div class="cert-fully-executed">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Fully Executed — all three parties have signed
         </div>
       </div>
-    </div>
 
-  </div><%# end .agreement-card %>
-</div><%# end .agreement-container %>
+      <div class="cert-sig-grid">
+        <div class="cert-sig-card">
+          <span class="cert-sig-role">Graduate</span>
+          <strong class="cert-sig-name"><%= @student.first_name %> <%= @student.last_name %></strong>
+          <span class="cert-sig-date"><%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("%b %d, %Y · %H:%M UTC") : "Pending" %></span>
+          <div class="cert-sig-line"></div>
+          <span class="cert-sig-capacity">Graduate Intern</span>
+        </div>
+
+        <div class="cert-sig-card">
+          <span class="cert-sig-role">Employer</span>
+          <strong class="cert-sig-name"><%= @company.name %></strong>
+          <span class="cert-sig-date"><%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("%b %d, %Y · %H:%M UTC") : "Pending" %></span>
+          <div class="cert-sig-line"></div>
+          <span class="cert-sig-capacity">Host Organisation</span>
+        </div>
+
+        <div class="cert-sig-card">
+          <span class="cert-sig-role">University</span>
+          <strong class="cert-sig-name"><%= @student.university&.name || "ISET Sfax" %></strong>
+          <span class="cert-sig-date"><%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("%b %d, %Y · %H:%M UTC") : "Pending" %></span>
+          <div class="cert-sig-line"></div>
+          <span class="cert-sig-capacity">Academic Institution</span>
+        </div>
+      </div>
+    </footer>
+
+  </div><%# end .cert-document %>
+</div><%# end .cert-page-wrap %>
