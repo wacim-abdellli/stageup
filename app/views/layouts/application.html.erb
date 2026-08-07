@@ -28,9 +28,8 @@
       })();
     </script>
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <link rel="stylesheet" href="/assets/application.css" data-turbo-track="reload">
+    <%# Served via Rails controller — /assets/* crashes on Vercel serverless %>
+    <link rel="stylesheet" href="<%= stageup_stylesheet_path %>" data-turbo-track="reload">
     <%= render "layouts/nav_critical_styles" %>
     <script src="https://unpkg.com/lucide@latest" nonce="<%= content_security_policy_nonce %>"></script>
     <script nonce="<%= content_security_policy_nonce %>">

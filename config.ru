@@ -26,57 +26,5 @@ if Rails.env.production?
   end
 end
 
-class StageUpCssAssets
-  CSS_PATTERN = %r{\A/assets/application(?:-[0-9a-f]+)?\.css\z}
-
-  def initialize(app)
-    @app = app
-  end
-
-  def call(env)
-    path = env["PATH_INFO"].to_s
-    return @app.call(env) unless path.match?(CSS_PATTERN)
-
-    serve_css(path)
-  rescue => e
-    Rails.logger.error "[StageUpCssAssets] #{e.class}: #{e.message}"
-    @app.call(env)
-  end
-
-  private
-
-  def serve_css(request_path)
-    relative = request_path.delete_prefix("/assets/")
-    candidates = [
-      Rails.public_path.join("assets", relative),
-      Rails.public_path.join("assets", "application.css"),
-      Rails.root.join("app/assets/stylesheets/application.css")
-    ]
-
-    file = candidates.find(&:file?)
-    unless file
-      return [
-        404,
-        { "content-type" => "text/plain; charset=utf-8" },
-        ["application stylesheet not found"]
-      ]
-    end
-
-    css = file.read
-    polish = Rails.public_path.join("certificate-polish.css")
-    css = "#{css}\n#{polish.read}" if polish.file?
-
-    [
-      200,
-      {
-        "content-type" => "text/css; charset=utf-8",
-        "cache-control" => "public, max-age=31536000"
-      },
-      [css]
-    ]
-  end
-end
-
-use StageUpCssAssets
 run Rails.application
 Rails.application.load_server
