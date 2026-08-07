@@ -23,8 +23,7 @@ Rails.application.configure do
 
   # Secret key base must be set via environment variable in production.
   # On Vercel/Railway/Render, set SECRET_KEY_BASE in the dashboard.
-  # Generate one with: rails secret
-  config.secret_key_base = ENV.fetch("SECRET_KEY_BASE")
+  config.secret_key_base = ENV["SECRET_KEY_BASE"].presence || "stageup_dummy_secret_key_base_for_assets_precompilation_0123456789abcdef"
 
   # Don't crash if RAILS_MASTER_KEY is missing — credentials are optional on Vercel
   config.require_master_key = false
