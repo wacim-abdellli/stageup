@@ -35,6 +35,31 @@ rescue => e
      ["Boot Error: #{e.class}: #{e.message}\n\n#{e.backtrace.first(15).join("\n")}"]]
   }
 else
+  class StageUpCssFallback
+    def initialize(app)
+      @app = app
+    end
+
+    def call(env)
+      path = env["PATH_INFO"].to_s
+      return @app.call(env) unless path.match?(%r{\A/assets/application(?:-[0-9a-f]+)?\.css\z})
+
+      css = File.read(File.expand_path("app/assets/stylesheets/application.css", __dir__))
+      polish_path = File.expand_path("public/certificate-polish.css", __dir__)
+      css = "#{css}\n#{File.read(polish_path)}" if File.exist?(polish_path)
+
+      [
+        200,
+        {
+          "Content-Type" => "text/css; charset=utf-8",
+          "Cache-Control" => "public, max-age=31536000"
+        },
+        [css]
+      ]
+    end
+  end
+
+  use StageUpCssFallback
   use Rack::Static,
     urls: [
       "/assets",
