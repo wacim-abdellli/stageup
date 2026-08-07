@@ -1,4 +1,5 @@
 <% content_for :title, "Certificate of Completion – #{@student.first_name} #{@student.last_name}" %>
+<% content_for :description, "Verify the official internship certificate of #{@student.first_name} #{@student.last_name} at #{@company.name}. Issued by StageUp Trust Ledger." %>
 <% duration_days = (@agreement.end_date - @agreement.start_date).to_i %>
 <% qr_url = verify_certificate_url(token: @agreement.verification_token) %>
 <% qr = RQRCode::QRCode.new(qr_url) %>
@@ -21,6 +22,11 @@
 
     <%# ══════════ DOCUMENT HEADER ══════════ %>
     <header class="cert-doc-header">
+      <div class="cert-issuer-mark">
+        <span class="cert-issuer-logo">StageUp</span>
+        <span class="cert-issuer-sep">·</span>
+        <span class="cert-issuer-sub">Trust Ledger</span>
+      </div>
       <div class="cert-doc-meta">
         <span class="cert-meta-tag">
           <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -111,17 +117,22 @@
 
         <%# LEFT: token info %>
         <div class="cert-verify-info">
-          <p class="cert-section-text" style="margin-bottom: 20px;">
+          <p class="cert-section-text cert-verify-intro">
             This certificate is immutably recorded on the StageUp Trust Ledger. Scan the QR code or visit the URL below to confirm its authenticity instantly.
           </p>
 
           <div class="cert-token-block">
             <div class="cert-token-top">
-              <span class="cert-token-label">Verification Token</span>
-              <span class="cert-immutable-pill">
-                <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                IMMUTABLE
-              </span>
+              <div class="cert-token-top-left">
+                <span class="cert-token-label">Verification Token</span>
+                <span class="cert-immutable-pill">
+                  <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  IMMUTABLE
+                </span>
+              </div>
+              <button type="button" class="cert-copy-btn" data-token="<%= @agreement.verification_token %>" title="Copy Verification Token" aria-label="Copy Verification Token">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="13" height="13" x="9" y="9" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
             </div>
             <code class="cert-token-hash"><%= @agreement.verification_token %></code>
             <div class="cert-token-url">
@@ -154,7 +165,7 @@
       </div>
 
       <div class="cert-sig-grid">
-        <div class="cert-sig-card">
+        <div class="cert-sig-card cert-sig-graduate">
           <span class="cert-sig-role">Graduate</span>
           <strong class="cert-sig-name"><%= @student.first_name %> <%= @student.last_name %></strong>
           <span class="cert-sig-date"><%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("%b %d, %Y · %H:%M UTC") : "Pending" %></span>
@@ -162,7 +173,7 @@
           <span class="cert-sig-capacity">Graduate Intern</span>
         </div>
 
-        <div class="cert-sig-card">
+        <div class="cert-sig-card cert-sig-employer">
           <span class="cert-sig-role">Employer</span>
           <strong class="cert-sig-name"><%= @company.name %></strong>
           <span class="cert-sig-date"><%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("%b %d, %Y · %H:%M UTC") : "Pending" %></span>
@@ -170,7 +181,7 @@
           <span class="cert-sig-capacity">Host Organisation</span>
         </div>
 
-        <div class="cert-sig-card">
+        <div class="cert-sig-card cert-sig-university">
           <span class="cert-sig-role">University</span>
           <strong class="cert-sig-name"><%= @student.university&.name || "ISET Sfax" %></strong>
           <span class="cert-sig-date"><%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("%b %d, %Y · %H:%M UTC") : "Pending" %></span>
@@ -182,3 +193,33 @@
 
   </div><%# end .cert-document %>
 </div><%# end .cert-page-wrap %>
+
+<script>
+  (function() {
+    function initCertCopy() {
+      document.querySelectorAll('.cert-copy-btn').forEach(function(btn) {
+        if (btn.dataset.copyInitialized) return;
+        btn.dataset.copyInitialized = 'true';
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var token = btn.dataset.token;
+          if (!token) return;
+          navigator.clipboard.writeText(token).then(function() {
+            btn.classList.add('cert-copy-success');
+            setTimeout(function() { btn.classList.remove('cert-copy-success'); }, 1500);
+          }).catch(function(err) {
+            console.error('Copy failed', err);
+          });
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCertCopy);
+    } else {
+      initCertCopy();
+    }
+    document.addEventListener('turbo:load', initCertCopy);
+  })();
+</script>
+
