@@ -124,6 +124,19 @@ user_uni.update!(
   profileable: uni_admin_profile
 )
 
+# ENIS University Coordinator
+uni_admin_enis = UniversityProfile.find_or_initialize_by(admin_name: "Prof. Leila Siala", department: "Computer Science Dept")
+uni_admin_enis.update!(
+  university: enis
+)
+
+user_uni_enis = User.find_or_initialize_by(email: "leila.siala@enis.tn")
+user_uni_enis.update!(
+  password: "password123456",
+  password_confirmation: "password123456",
+  profileable: uni_admin_enis
+)
+
 puts "Seeding Master Admin User..."
 admin_profile = StudentProfile.find_or_initialize_by(first_name: "Wacim", last_name: "Abdelli")
 admin_profile.update!(
