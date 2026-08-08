@@ -1,5 +1,5 @@
-<% content_for :title, "<%= t('certificates.verify.badge', default: 'Certificate of Completion') %> – #{@student.first_name} #{@student.last_name}" %>
-<% content_for :description, "Verify the official internship certificate of #{@student.first_name} #{@student.last_name} at #{@company.name}. Issued by StageUp <%= t('certificates.verify.trust_ledger', default: 'Trust Ledger') %>." %>
+<% content_for :title, "#{t('certificates.verify.badge', default: 'Certificate of Completion')} – #{@student.first_name} #{@student.last_name}" %>
+<% content_for :description, "Verify the official internship certificate of #{@student.first_name} #{@student.last_name} at #{@company.name}. Issued by StageUp #{t('certificates.verify.trust_ledger', default: 'Trust Ledger')}." %>
 <% duration_days = (@agreement.end_date - @agreement.start_date).to_i %>
 <% qr_url = verify_certificate_url(token: @agreement.verification_token) %>
 <% qr = RQRCode::QRCode.new(qr_url) %>
