@@ -417,15 +417,28 @@
               </div>
             </div>
 
-            <%# Sub-card B: Password Change %>
+            <%# Sub-card B: Authentication & Security %>
             <div class="security-subcard mb-24">
               <h4 class="fs-14 fw-600 color-primary mb-12 flex-align-center gap-6">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <%= t('users.edit.change_password_label', default: 'Change Password (Optional)') %>
+                <%= t('users.edit.security_verification_label', default: 'Security Verification & Password Change') %>
               </h4>
+              
+              <div class="security-notice-box mb-20">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" class="flex-shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span class="fs-12 text-secondary"><%= t('users.edit.current_password_help', default: 'To change your email address or set a new password, you must first verify your current password.') %></span>
+              </div>
+
+              <div class="form-group mb-24">
+                <%= f.label :current_password, t('users.edit.current_password', default: 'Current Password'), class: "form-label" %>
+                <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password", placeholder: t('users.edit.current_password_placeholder', default: 'Enter your current password to authorize changes') %>
+              </div>
+
+              <div style="border-top: 1px solid var(--border-color); margin: 24px 0;"></div>
+
               <div class="form-row-2">
-                <div class="form-group">
-                  <%= f.label :password, t('users.edit.new_password', default: 'New Password'), class: "form-label" %>
+                <div class="form-group margin-0">
+                  <%= f.label :password, t('users.edit.new_password', default: 'New Password (Optional)'), class: "form-label" %>
                   <%= f.password_field :password, class: "form-control", id: "input-new-password", autocomplete: "new-password", readonly: true, onfocus: "this.removeAttribute('readonly');", placeholder: t('users.edit.leave_blank_placeholder', default: 'Leave blank to keep unchanged') %>
                   <%# Password Strength Meter %>
                   <div class="password-meter-bar mt-8">
@@ -435,22 +448,11 @@
                     <div class="meter-segment" id="meter-4"></div>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group margin-0">
                   <%= f.label :password_confirmation, t('users.edit.confirm_password', default: 'Confirm New Password'), class: "form-label" %>
-                  <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", readonly: true, onfocus: "this.removeAttribute('readonly');" %>
+                  <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", readonly: true, onfocus: "this.removeAttribute('readonly');", placeholder: t('users.edit.confirm_password_placeholder', default: 'Repeat your new password') %>
                 </div>
               </div>
-            </div>
-
-            <%# Sub-card C: Security Guard Notice %>
-            <div class="security-notice-box mb-20">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" class="flex-shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              <span class="fs-12 text-secondary"><%= t('users.edit.current_password_help', default: 'Enter your current password ONLY if changing your email or password for security confirmation.') %></span>
-            </div>
-
-            <div class="form-group margin-0">
-              <%= f.label :current_password, t('users.edit.current_password', default: 'Current Password'), class: "form-label" %>
-              <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
             </div>
           </div>
         </div>
