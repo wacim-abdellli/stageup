@@ -194,7 +194,7 @@
   </div><%# end .cert-document %>
 </div><%# end .cert-page-wrap %>
 
-<script>
+<script nonce="<%= content_security_policy_nonce %>">
   (function() {
     function initCertCopy() {
       document.querySelectorAll('.cert-copy-btn').forEach(function(btn) {
