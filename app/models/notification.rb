@@ -23,6 +23,10 @@ class Notification < ApplicationRecord
   scope :recent, -> { order(created_at: :desc) }
   scope :by_recipient, ->(recipient) { where(recipient: recipient) }
 
+  def mark_as_read!
+    update!(read: true)
+  end
+
   def target_path
     case notifiable
     when InternshipAgreement
