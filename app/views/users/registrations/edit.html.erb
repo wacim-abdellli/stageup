@@ -426,8 +426,7 @@
               <div class="form-row-2">
                 <div class="form-group">
                   <%= f.label :password, t('users.edit.new_password', default: 'New Password'), class: "form-label" %>
-                  <%= f.password_field :password, class: "form-control", id: "input-new-password", autocomplete: "new-password", placeholder: t('users.edit.leave_blank_placeholder', default: 'Leave blank to keep unchanged') %>
-                  
+                  <%= f.password_field :password, class: "form-control", id: "input-new-password", autocomplete: "new-password", readonly: true, onfocus: "this.removeAttribute('readonly');", placeholder: t('users.edit.leave_blank_placeholder', default: 'Leave blank to keep unchanged') %>
                   <%# Password Strength Meter %>
                   <div class="password-meter-bar mt-8">
                     <div class="meter-segment" id="meter-1"></div>
@@ -438,7 +437,7 @@
                 </div>
                 <div class="form-group">
                   <%= f.label :password_confirmation, t('users.edit.confirm_password', default: 'Confirm New Password'), class: "form-label" %>
-                  <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+                  <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", readonly: true, onfocus: "this.removeAttribute('readonly');" %>
                 </div>
               </div>
             </div>
@@ -740,6 +739,39 @@
         }
         mainForm.addEventListener('input', handleDirtyState);
         mainForm.addEventListener('change', handleDirtyState);
+
+        // Client-side validation to require current_password if changing email/password
+        var currentPassInput = document.getElementById('user_current_password');
+        var emailInput = document.getElementById('user_email');
+        var originalEmail = emailInput ? emailInput.value : '';
+
+        mainForm.addEventListener('submit', function(e) {
+          var needsCurrent = false;
+          
+          if (passInput && passInput.value.length > 0) {
+            needsCurrent = true;
+          }
+          
+          if (emailInput && emailInput.value.trim().toLowerCase() !== originalEmail.trim().toLowerCase()) {
+            needsCurrent = true;
+          }
+
+          if (needsCurrent && currentPassInput && currentPassInput.value.trim() === '') {
+            e.preventDefault();
+            
+            alert("<%= escape_javascript(t('users.edit.current_password_required_js', default: 'Please enter your current password to save security changes.')) %>");
+            
+            // Highlight and focus
+            currentPassInput.style.borderColor = '#EF4444';
+            currentPassInput.focus();
+            
+            // Re-enable submit button if turbo-disabled
+            var submitBtn = mainForm.querySelector('[type="submit"]');
+            if (submitBtn) {
+              setTimeout(function() { submitBtn.disabled = false; }, 100);
+            }
+          }
+        });
       }
     }
 
