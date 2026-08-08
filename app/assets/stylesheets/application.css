@@ -22301,9 +22301,15 @@ html[dir="rtl"] .role-card:hover .role-arrow {
     padding-top: 4mm;
     margin-top: auto;
   }
+  .cpo-qr-col {
+    background: #ffffff !important;
+    padding: 2pt !important;
+    border-radius: 2pt !important;
+    display: inline-block;
+  }
   .cpo-qr-col svg {
-    width: 52pt !important;
-    height: 52pt !important;
+    width: 60pt !important;
+    height: 60pt !important;
     display: block;
   }
   .cpo-token-col {
