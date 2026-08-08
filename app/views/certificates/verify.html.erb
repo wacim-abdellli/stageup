@@ -103,7 +103,7 @@
       <%# Verification footer %>
       <div class="cpo-verify-footer">
         <div class="cpo-qr-col">
-          <%= qr.as_svg(offset: 8, color: "000000", fill: "ffffff", shape_rendering: "crispEdges", module_size: 4, standalone: true).html_safe %>
+          <%= qr.as_svg(offset: 8, color: "000000", fill: "ffffff", shape_rendering: "crispEdges", viewbox: true, use_path: true, standalone: true).html_safe %>
         </div>
         <div class="cpo-token-col">
           <p class="cpo-token-label">Verification Token (StageUp Trust Ledger)</p>
@@ -282,7 +282,7 @@
         <%# RIGHT: QR code %>
         <div class="cert-qr-wrap">
           <div class="cert-qr-box">
-            <%= qr.as_svg(offset: 8, color: "000000", fill: "ffffff", shape_rendering: "crispEdges", module_size: 4, standalone: true).html_safe %>
+            <%= qr.as_svg(offset: 8, color: "000000", fill: "ffffff", shape_rendering: "crispEdges", viewbox: true, use_path: true, standalone: true).html_safe %>
           </div>
           <span class="cert-qr-scan-label"><%= t('certificates.verify.scan_to_verify', default: 'Scan to Verify') %></span>
           <span class="cert-qr-scan-sub">StageUp <%= t('certificates.verify.trust_ledger', default: 'Trust Ledger') %></span>
