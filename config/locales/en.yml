@@ -1,4 +1,7 @@
 en:
+  time:
+    formats:
+      cert_sig: "%b %d, %Y · %H:%M UTC"
   date:
     formats:
       long: "%B %d, %Y"

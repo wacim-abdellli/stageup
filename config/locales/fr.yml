@@ -1,4 +1,50 @@
 fr:
+  time:
+    formats:
+      cert_sig: "%d %b %Y · %H:%M UTC"
+  certificates:
+    verify:
+      home: 'Accueil'
+      print: 'Imprimer / Exporter PDF'
+      trust_ledger: 'Registre de Confiance'
+      badge: 'Attestation de Réussite'
+      title: 'ATTESTATION DE RÉUSSITE'
+      subtitle: 'Délivrée conformément à la loi tunisienne régissant les stages de l''enseignement supérieur'
+      article1: 'Article 1 — Diplômé & Parties'
+      article1_text: 'Cette Attestation de Réussite est conjointement délivrée par les trois parties ci-dessous, confirmant la réussite de toutes les obligations de stage.'
+      role_graduate: 'Le Diplômé'
+      enrolled_at: 'Inscrit(e) à'
+      higher_ed: 'Établissement d''Enseignement Supérieur'
+      major_default: 'Génie Logiciel'
+      role_employer: 'L''Employeur'
+      host_org: 'Organisation d''Accueil'
+      role_university: 'L''Université'
+      official_higher_ed: 'Établissement Officiel d''Enseignement Supérieur'
+      article2: 'Article 2 — Période de Stage'
+      article2_text_html: 'Le stage a débuté le <strong>%{start_date}</strong> et s''est terminé le <strong>%{end_date}</strong>, conformément aux réglementations de l''Enseignement Supérieur Tunisien.'
+      duration: 'Durée'
+      days: 'jours'
+      approximate: 'Approximatif'
+      months: 'mois'
+      classification: 'Classification'
+      article3: 'Article 3 — Sujet de Stage'
+      article3_text_html: '<strong>%{student_name}</strong> a complété avec succès un stage intitulé <strong>"%{title}"</strong> chez <strong>%{company}</strong>, classé comme stage de type <span class="cert-type-pill">%{type}</span> selon les termes de l''offre originale.'
+      article4: 'Article 4 — Vérification Cryptographique'
+      article4_text: 'Ce certificat est enregistré de manière immuable sur le Registre de Confiance StageUp. Scannez le code QR ou visitez l''URL ci-dessous pour confirmer son authenticité instantanément.'
+      verification_token: 'Jeton de Vérification'
+      immutable: 'IMMUABLE'
+      copy_token: 'Copier le jeton'
+      scan_to_verify: 'Scanner pour Vérifier'
+      trust_ledger_full: 'Registre de Confiance StageUp'
+      signatures: 'Signatures'
+      fully_executed: 'Entièrement exécuté — les trois parties ont signé'
+      sig_graduate: 'Diplômé'
+      sig_employer: 'Employeur'
+      sig_university: 'Université'
+      cap_graduate: 'Stagiaire Diplômé'
+      cap_employer: 'Organisation d''Accueil'
+      cap_university: 'Établissement Académique'
+      pending: 'En attente'
   date:
     formats:
       long: "%-d %B %Y"
