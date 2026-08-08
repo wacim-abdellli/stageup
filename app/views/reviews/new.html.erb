@@ -33,7 +33,7 @@
         <label class="form-label"><%= t("dashboard.reviews.rating_label") %></label>
         <div class="star-picker" id="star-picker">
           <% (1..5).each do |i| %>
-            <button type="button" class="star-btn" data-v="<%= i %>" onclick="pickStar(<%= i %>)">
+            <button type="button" class="star-btn" data-v="<%= i %>">
               <i data-lucide="star" class="star-icon"></i>
             </button>
           <% end %>

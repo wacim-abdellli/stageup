@@ -1,0 +1,6 @@
+tree 84f4754986c27a9341ea22c3a5c9550ece878d77
+parent 7c06a7b5457dc20c515e81fc6f8c116d512e589c
+author Wassim Abdelli <wassimabdello94@gmail.com> 1784264465 +0100
+committer Wassim Abdelli <wassimabdello94@gmail.com> 1784264465 +0100
+
+Remove stray files, update gitignore

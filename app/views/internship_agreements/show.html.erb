@@ -272,7 +272,7 @@
               <div class="mt-12">
                 <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-block", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
                 <div class="mt-8">
-                  <button type="button" class="btn btn-secondary btn-block btn-compact" onclick="document.getElementById('decline-form').classList.toggle('d-none')"><%= t('dashboard.internship_agreements.show.decline') %></button>
+                  <button type="button" class="btn btn-secondary btn-block btn-compact" data-action="toggle-decline"><%= t('dashboard.internship_agreements.show.decline') %></button>
                 </div>
               </div>
             <% else %>
@@ -289,7 +289,7 @@
             <label class="fs-12 text-secondary fw-600 mb-6 block"><%= t('dashboard.internship_agreements.show.decline_reason') %></label>
             <%= text_area_tag :rejection_reason, nil, placeholder: t('dashboard.internship_agreements.show.decline_placeholder'), class: "decline-textarea", required: true %>
             <div class="decline-actions mt-10">
-              <button type="button" class="btn btn-secondary btn-compact-sm" onclick="document.getElementById('decline-form').classList.add('d-none')"><%= t('dashboard.internship_agreements.show.cancel') %></button>
+              <button type="button" class="btn btn-secondary btn-compact-sm" data-action="hide-decline"><%= t('dashboard.internship_agreements.show.cancel') %></button>
               <%= f.submit t('dashboard.internship_agreements.show.confirm_decline'), class: "btn btn-secondary btn-compact-sm btn-decline-confirm", data: { turbo_submits_with: t('dashboard.internship_agreements.show.declining') } %>
             </div>
           <% end %>
@@ -305,7 +305,15 @@
 
 <script nonce="<%= content_security_policy_nonce %>">
   (function() {
-    function printDoc() { window.print(); }
-    document.getElementById('print-btn')?.addEventListener('click', printDoc);
+    function init() {
+      document.getElementById('print-btn')?.addEventListener('click', function() { window.print(); });
+      var toggleBtn = document.querySelector('[data-action="toggle-decline"]');
+      var hideBtn   = document.querySelector('[data-action="hide-decline"]');
+      var form      = document.getElementById('decline-form');
+      if (toggleBtn && form) toggleBtn.addEventListener('click', function() { form.classList.toggle('d-none'); });
+      if (hideBtn   && form) hideBtn.addEventListener('click',   function() { form.classList.add('d-none'); });
+    }
+    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('turbo:load', init);
   })();
 </script>
