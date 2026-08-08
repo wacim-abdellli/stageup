@@ -90,14 +90,22 @@
                   approxEl.textContent = '';
                 }
 
-                // Tunisian Ministry of Higher Education Legal Rules
+                // Duration Guidelines & Warnings (Flexible)
                 if (warningEl) {
-                  if (stageType === "PFE" && diffDays < 120) {
-                    warningEl.classList.remove('hidden');
-                    warningEl.innerHTML = "⚠️ <strong>Tunisian Legal Requirement:</strong> A PFE (Graduation Project) must be at least 4 to 6 months (120 – 180 days). Currently: " + diffDays + " days.";
-                  } else if (stageType === "PFA" && diffDays < 60) {
-                    warningEl.classList.remove('hidden');
-                    warningEl.innerHTML = "⚠️ <strong>Tunisian Legal Requirement:</strong> A PFA (Mid-Studies Project) must be at least 2 months (60 days). Currently: " + diffDays + " days.";
+                  if (stageType === "PFA" || stageType === "INITIATION" || stageType === "OUVRIER") {
+                    if (diffDays < 20 || diffDays > 45) {
+                      warningEl.classList.remove('hidden');
+                      warningEl.innerHTML = "ℹ️ <strong>Guideline Advisory:</strong> PFA & 1st-year internships are typically ~30 days (1 month). Selected: " + diffDays + " days (Flexible).";
+                    } else {
+                      warningEl.classList.add('hidden');
+                    }
+                  } else if (stageType === "PFE") {
+                    if (diffDays < 90 || diffDays > 210) {
+                      warningEl.classList.remove('hidden');
+                      warningEl.innerHTML = "ℹ️ <strong>Guideline Advisory:</strong> PFE (Graduation Project) internships typically run for ~6 months (120 – 180 days). Selected: " + diffDays + " days (Flexible).";
+                    } else {
+                      warningEl.classList.add('hidden');
+                    }
                   } else {
                     warningEl.classList.add('hidden');
                   }
