@@ -56,6 +56,24 @@ user_student_2.update!(
   profileable: student_2_profile
 )
 
+# Student 3: Youssef Chaabane
+student_3_profile = StudentProfile.find_or_initialize_by(first_name: "Youssef", last_name: "Chaabane")
+student_3_profile.update!(
+  phone: "+216 55 443 322",
+  university: iset_sfax,
+  major: "Embedded Systems & IoT",
+  graduation_year: 2026,
+  bio: "Hardware & embedded software engineer with a passion for robotics.",
+  commitment_score: 98.0
+)
+
+user_student_3 = User.find_or_initialize_by(email: "youssef.chaabane@isetsf.rnu.tn")
+user_student_3.update!(
+  password: "password123456",
+  password_confirmation: "password123456",
+  profileable: student_3_profile
+)
+
 puts "Seeding Company Profiles..."
 # Company 1: DevCorp Sfax
 company_1_profile = CompanyProfile.find_or_initialize_by(name: "DevCorp Sfax")
@@ -217,6 +235,52 @@ agreement_1.update!(
   academic_year: "2025-2026",
   start_date: 30.days.from_now.to_date,
   end_date: 120.days.from_now.to_date
+)
+
+# 4. Cyrine Trabelsi Certificate
+sub_4 = Submission.find_or_initialize_by(student_profile: student_2_profile, offer: offer_2)
+sub_4.update!(
+  mission: mission_2,
+  status: "accepted",
+  github_link: "https://github.com/cyrine-trabelsi/ai-pipeline",
+  submission_notes: "Implemented machine learning anomaly detection pipeline with PyTorch.",
+  submitted_at: 10.days.ago,
+  accepted_at: 8.days.ago
+)
+
+agreement_2 = InternshipAgreement.find_or_initialize_by(submission: sub_4)
+agreement_2.update!(
+  status: "fully_executed",
+  verification_token: "STAGEUP-CERT-CYRINE-TRABELSI-2026",
+  student_signed_at: 8.days.ago,
+  company_signed_at: 7.days.ago,
+  university_signed_at: 6.days.ago,
+  academic_year: "2025-2026",
+  start_date: 60.days.ago.to_date,
+  end_date: 10.days.ago.to_date
+)
+
+# 5. Youssef Chaabane Certificate
+sub_5 = Submission.find_or_initialize_by(student_profile: student_3_profile, offer: offer_1)
+sub_5.update!(
+  mission: mission_1,
+  status: "accepted",
+  github_link: "https://github.com/youssef-chaabane/iot-dashboard",
+  submission_notes: "Built IoT sensor data collection dashboard with WebSockets.",
+  submitted_at: 15.days.ago,
+  accepted_at: 12.days.ago
+)
+
+agreement_3 = InternshipAgreement.find_or_initialize_by(submission: sub_5)
+agreement_3.update!(
+  status: "fully_executed",
+  verification_token: "STAGEUP-CERT-YOUSSEF-CHAABANE-2026",
+  student_signed_at: 12.days.ago,
+  company_signed_at: 11.days.ago,
+  university_signed_at: 10.days.ago,
+  academic_year: "2025-2026",
+  start_date: 90.days.ago.to_date,
+  end_date: 15.days.ago.to_date
 )
 
 company_1_profile.recalculate_metrics!
