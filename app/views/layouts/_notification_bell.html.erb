@@ -38,7 +38,7 @@
                 <% end %>
               </div>
               <div class="min-width-0 flex-1">
-                <span class="notif-item-text block text-truncate"><%= n.message %></span>
+                <span class="notif-item-text block"><%= n.message %></span>
                 <span class="notif-item-time block fs-11 text-muted mt-2"><%= time_ago_in_words(n.created_at) %> <%= t('common.ago') %></span>
               </div>
               <% unless n.read %>
