@@ -252,7 +252,7 @@
         </div>
 
         <%# 3. University Coordinator Box %>
-        <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.university_signed_at && current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id && @agreement.status != "declined" %>">
+        <div class="agreement-sign-box<%= ' awaiting-mine' if !@agreement.university_signed_at && current_user.profileable_type == "UniversityProfile" && @agreement.status != "declined" %>">
           <div class="flex-between mb-8">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7 12 2"/></svg>
             <% if @agreement.university_signed_at %>
@@ -268,7 +268,7 @@
               <p class="agreement-signed-date"><%= t('dashboard.internship_agreements.show.signed_on', date: @agreement.university_signed_at.strftime("%B %d, %Y at %H:%M")) %></p>
             </div>
           <% else %>
-            <% if current_user.profileable_type == "UniversityProfile" && @submission.student_profile.university_id == current_user.profileable.university_id && @agreement.status != "declined" %>
+            <% if current_user.profileable_type == "UniversityProfile" && @agreement.status != "declined" %>
               <div class="mt-12">
                 <%= button_to t('dashboard.internship_agreements.show.sign_agreement'), sign_submission_internship_agreement_path(@submission, @agreement), method: :post, class: "btn btn-primary btn-block", data: { turbo_submits_with: t('dashboard.internship_agreements.show.signing') } %>
                 <div class="mt-8">
@@ -283,7 +283,7 @@
       </div>
 
       <%# Decline Form %>
-      <% if current_user.profileable_type == "UniversityProfile" && @agreement.status == "pending_signatures" && @submission.student_profile.university_id == current_user.profileable.university_id %>
+      <% if current_user.profileable_type == "UniversityProfile" && @agreement.status == "pending_signatures" %>
         <div id="decline-form" class="decline-form-wrapper d-none mt-20">
           <%= form_with model: [@submission, @agreement], url: decline_submission_internship_agreement_path(@submission, @agreement), method: :post, local: true do |f| %>
             <label class="fs-12 text-secondary fw-600 mb-6 block"><%= t('dashboard.internship_agreements.show.decline_reason') %></label>
