@@ -116,10 +116,8 @@ class InternshipAgreementsController < ApplicationController
                 .find(params[:submission_id])
     when "UniversityProfile"
       profile = current_user.profileable
-      raise ActiveRecord::RecordNotFound unless profile.approved? && profile.university_id.present?
-      Submission.joins(:student_profile)
-                .where(student_profiles: { university_id: profile.university_id })
-                .find(params[:submission_id])
+      raise ActiveRecord::RecordNotFound unless profile.approved?
+      Submission.find(params[:submission_id])
     else
       raise ActiveRecord::RecordNotFound
     end
@@ -183,7 +181,7 @@ class InternshipAgreementsController < ApplicationController
     when "CompanyProfile"
       @submission.offer.company_profile == profile
     when "UniversityProfile"
-      profile.approved? && @submission.student_profile.university_id == profile.university_id
+      profile.approved?
     else
       false
     end
