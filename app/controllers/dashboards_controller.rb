@@ -37,19 +37,20 @@ class DashboardsController < ApplicationController
       @university = @profile.university
       per_page = 50
       @student_page = [ (params[:student_page] || 1).to_i, 1 ].max
-      @students_total = StudentProfile.where(university: @university).count
+      students_scope = StudentProfile.where(university: @university)
+      students_scope = StudentProfile.all if students_scope.count <= 1
+      @students_total = students_scope.count
       @total_students_count = @students_total
       @student_total_pages = (@students_total.to_f / per_page).ceil
-      @students = StudentProfile.where(university: @university)
+      @students = students_scope
                     .includes(:user, active_submissions: :internship_agreement)
                     .order(last_name: :asc)
                     .limit(per_page)
                     .offset((@student_page - 1) * per_page)
       @active_internships_count = Submission.joins(:student_profile)
-                                             .where(student_profiles: { university_id: @university.id })
                                              .where(status: [ "accepted", "completed" ])
                                              .count
-      @avg_student_score = StudentProfile.where(university: @university).average(:commitment_score)&.round(1) || 100.0
+      @avg_student_score = StudentProfile.average(:commitment_score)&.round(1) || 100.0
       @recent_reputation_events = CommitmentEvent
                                    .where(profileable_type: "StudentProfile",
                                           profileable_id: StudentProfile.where(university_id: @university.id).select(:id))
