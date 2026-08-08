@@ -439,7 +439,7 @@
               <div class="form-row-2">
                 <div class="form-group margin-0">
                   <%= f.label :password, t('users.edit.new_password', default: 'New Password (Optional)'), class: "form-label" %>
-                  <%= f.password_field :password, class: "form-control", id: "input-new-password", autocomplete: "new-password", readonly: true, onfocus: "this.removeAttribute('readonly');", placeholder: t('users.edit.leave_blank_placeholder', default: 'Leave blank to keep unchanged') %>
+                  <%= f.password_field :password, class: "form-control", id: "input-new-password", autocomplete: "new-password", readonly: true, placeholder: t('users.edit.leave_blank_placeholder', default: 'Leave blank to keep unchanged') %>
                   <%# Password Strength Meter %>
                   <div class="password-meter-bar mt-8">
                     <div class="meter-segment" id="meter-1"></div>
@@ -450,7 +450,7 @@
                 </div>
                 <div class="form-group margin-0">
                   <%= f.label :password_confirmation, t('users.edit.confirm_password', default: 'Confirm New Password'), class: "form-label" %>
-                  <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", readonly: true, onfocus: "this.removeAttribute('readonly');", placeholder: t('users.edit.confirm_password_placeholder', default: 'Repeat your new password') %>
+                  <%= f.password_field :password_confirmation, class: "form-control", id: "input-confirm-password", autocomplete: "new-password", readonly: true, placeholder: t('users.edit.confirm_password_placeholder', default: 'Repeat your new password') %>
                 </div>
               </div>
             </div>
@@ -774,6 +774,20 @@
             }
           }
         });
+
+        // Remove readonly from password fields on interaction (CSP compliant)
+        var confirmPassInput = document.getElementById('input-confirm-password');
+        function removeReadonly(e) {
+          e.target.removeAttribute('readonly');
+        }
+        if (passInput) {
+          passInput.addEventListener('focus', removeReadonly);
+          passInput.addEventListener('click', removeReadonly);
+        }
+        if (confirmPassInput) {
+          confirmPassInput.addEventListener('focus', removeReadonly);
+          confirmPassInput.addEventListener('click', removeReadonly);
+        }
       }
     }
 
