@@ -10,8 +10,8 @@ module SubmissionsHelper
 
     milestones << {
       label: I18n.t("submissions.milestones.checked"),
-      complete: sub.offer.mission.nil? || sub.auto_verification_status == "passed",
-      timestamp: nil
+      complete: sub.offer.mission.nil? || sub.auto_verification_status == "passed" || %w[accepted completed].include?(sub.status),
+      timestamp: sub.submitted_at
     }
 
     milestones << {
