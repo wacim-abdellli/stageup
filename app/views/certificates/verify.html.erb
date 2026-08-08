@@ -45,7 +45,7 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         <%= t('certificates.verify.article1', default: 'Article 1 — Graduate & Parties') %>
       </div>
-      <p class="cert-section-text">This <%= t('certificates.verify.badge', default: 'Certificate of Completion') %> is jointly issued by the three parties below, confirming the successful fulfilment of all internship obligations.</p>
+      <p class="cert-section-text"><%= t('certificates.verify.article1_text', badge: t('certificates.verify.badge', default: 'Certificate of Completion'), default: "This Certificate of Completion is jointly issued by the three parties below, confirming the successful fulfilment of all internship obligations.") %></p>
 
       <div class="cert-parties">
         <div class="cert-party">
@@ -77,7 +77,7 @@
         <%= t('certificates.verify.article2', default: 'Article 2 — Internship Period') %>
       </div>
       <p class="cert-section-text">
-        <%= t('certificates.verify.article2_text_html', start_date: I18n.l(@agreement.start_date, format: :long), end_date: I18n.l(@agreement.end_date, format: :long)) %>
+        <%= t('certificates.verify.article2_text_html', start_date: I18n.l(@agreement.start_date, format: :long), end_date: I18n.l(@agreement.end_date, format: :long), default: "The internship commenced on <strong>%{start_date}</strong> and concluded on <strong>%{end_date}</strong>, in accordance with Tunisian Higher Education regulations.") %>
       </p>
       <div class="cert-stat-row">
         <div class="cert-stat">
@@ -102,7 +102,7 @@
         <%= t('certificates.verify.article3', default: 'Article 3 — Internship Subject') %>
       </div>
       <p class="cert-section-text">
-        <%= t('certificates.verify.article3_text_html', student_name: "#{@student.first_name} #{@student.last_name}", title: @offer.title, company: @company.name, type: @offer.stage_type.to_s.upcase) %>
+        <%= t('certificates.verify.article3_text_html', student_name: "#{@student.first_name} #{@student.last_name}", title: @offer.title, company: @company.name, type: @offer.stage_type.to_s.upcase, default: "<strong>%{student_name}</strong> successfully completed a <strong>%{type}</strong> internship at <strong>%{company}</strong> under the subject: <em>\"%{title}\"</em>.") %>
       </p>
     </section>
 
@@ -118,7 +118,7 @@
         <%# LEFT: token info %>
         <div class="cert-verify-info">
           <p class="cert-section-text cert-verify-intro">
-            This certificate is immutably recorded on the StageUp <%= t('certificates.verify.trust_ledger', default: 'Trust Ledger') %>. Scan the QR code or visit the URL below to confirm its authenticity instantly.
+            <%= t('certificates.verify.article4_text', trust_ledger: t('certificates.verify.trust_ledger', default: 'Trust Ledger'), default: "This certificate is immutably recorded on the StageUp Trust Ledger. Scan the QR code or visit the URL below to confirm its authenticity instantly.") %>
           </p>
 
           <div class="cert-token-block">
