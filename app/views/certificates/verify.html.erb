@@ -1,12 +1,14 @@
-<% content_for :title, "#{t('certificates.verify.badge', default: 'Certificate of Completion')} – #{@student.first_name} #{@student.last_name}" %>
-<% content_for :description, "Verify the official internship certificate of #{@student.first_name} #{@student.last_name} at #{@company.name}. Issued by StageUp #{t('certificates.verify.trust_ledger', default: 'Trust Ledger')}." %>
+<% content_for :title, "#{t('certificates.verify.badge', default: 'Certificate of Completion')} - #{@student.first_name} #{@student.last_name}" %>
+<% content_for :description, "Verify the official internship certificate of #{@student.first_name} #{@student.last_name} at #{@company.name}. Issued by StageUp Trust Ledger." %>
 <% duration_days = (@agreement.end_date - @agreement.start_date).to_i %>
 <% qr_url = verify_certificate_url(token: @agreement.verification_token) %>
 <% qr = RQRCode::QRCode.new(qr_url) %>
+<% university_name = @student.university&.name || "ISET Sfax" %>
+<% student_major = (@student.respond_to?(:major) && @student.major.present?) ? @student.major : "Software Engineering" %>
 
 <div class="cert-page-wrap">
 
-  <%# ─── Action Bar ─── %>
+  <%# Action Bar %>
   <div class="cert-action-bar hide-on-print">
     <%= link_to root_path, class: "btn btn-secondary" do %>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
@@ -20,11 +22,11 @@
 
   <div class="cert-document">
 
-    <%# ══════════ DOCUMENT HEADER ══════════ %>
+    <%# DOCUMENT HEADER %>
     <header class="cert-doc-header">
       <div class="cert-issuer-mark">
         <span class="cert-issuer-logo">StageUp</span>
-        <span class="cert-issuer-sep">·</span>
+        <span class="cert-issuer-sep">&middot;</span>
         <span class="cert-issuer-sub"><%= t('certificates.verify.trust_ledger', default: 'Trust Ledger') %></span>
       </div>
       <div class="cert-doc-meta">
@@ -39,20 +41,20 @@
       <div class="cert-doc-rule"></div>
     </header>
 
-    <%# ══════════ ARTICLE 1: PARTIES ══════════ %>
+    <%# ARTICLE 1: PARTIES %>
     <section class="cert-section">
       <div class="cert-section-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <%= t('certificates.verify.article1', default: 'Article 1 — Graduate & Parties') %>
+        <%= t('certificates.verify.article1', default: 'Article 1 - Graduate & Parties') %>
       </div>
-      <p class="cert-section-text"><%= t('certificates.verify.article1_text', badge: t('certificates.verify.badge', default: 'Certificate of Completion'), default: "This Certificate of Completion is jointly issued by the three parties below, confirming the successful fulfilment of all internship obligations.") %></p>
+      <p class="cert-section-text"><%= t('certificates.verify.article1_text', default: 'This Certificate of Completion is jointly issued by the three parties below, confirming the successful fulfilment of all internship obligations.') %></p>
 
       <div class="cert-parties">
         <div class="cert-party">
           <span class="cert-party-role"><%= t('certificates.verify.role_graduate', default: 'The Graduate') %></span>
           <strong class="cert-party-name"><%= @student.first_name %> <%= @student.last_name %></strong>
-          <span class="cert-party-detail"><%= t('certificates.verify.enrolled_at', default: 'Enrolled at') %> <%= @student.university&.name || "<%= t('certificates.verify.higher_ed', default: 'Higher Education Institution') %>" %></span>
-          <span class="cert-party-sub"><%= @student.respond_to?(:major) && @student.major.present? ? @student.major : "<%= t('certificates.verify.major_default', default: 'Software Engineering') %>" %></span>
+          <span class="cert-party-detail"><%= t('certificates.verify.enrolled_at', default: 'Enrolled at') %> <%= university_name %></span>
+          <span class="cert-party-sub"><%= student_major %></span>
         </div>
         <div class="cert-party-divider"></div>
         <div class="cert-party">
@@ -64,20 +66,22 @@
         <div class="cert-party-divider"></div>
         <div class="cert-party">
           <span class="cert-party-role"><%= t('certificates.verify.role_university', default: 'The University') %></span>
-          <strong class="cert-party-name"><%= @student.university&.name || "ISET Sfax" %></strong>
+          <strong class="cert-party-name"><%= university_name %></strong>
           <span class="cert-party-detail">Official <%= t('certificates.verify.higher_ed', default: 'Higher Education Institution') %></span>
         </div>
       </div>
     </section>
 
-    <%# ══════════ ARTICLE 2: PERIOD ══════════ %>
+    <%# ARTICLE 2: PERIOD %>
     <section class="cert-section">
       <div class="cert-section-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-        <%= t('certificates.verify.article2', default: 'Article 2 — Internship Period') %>
+        <%= t('certificates.verify.article2', default: 'Article 2 - Internship Period') %>
       </div>
       <p class="cert-section-text">
-        <%= t('certificates.verify.article2_text_html', start_date: I18n.l(@agreement.start_date, format: :long), end_date: I18n.l(@agreement.end_date, format: :long), default: "The internship commenced on <strong>%{start_date}</strong> and concluded on <strong>%{end_date}</strong>, in accordance with Tunisian Higher Education regulations.") %>
+        <% start_str = @agreement.start_date.strftime("%B %d, %Y") %>
+        <% end_str   = @agreement.end_date.strftime("%B %d, %Y") %>
+        <%= t('certificates.verify.article2_text_html', start_date: start_str, end_date: end_str, default: "The internship commenced on <strong>#{start_str}</strong> and concluded on <strong>#{end_str}</strong>, in accordance with Tunisian Higher Education regulations.").html_safe %>
       </p>
       <div class="cert-stat-row">
         <div class="cert-stat">
@@ -95,22 +99,29 @@
       </div>
     </section>
 
-    <%# ══════════ ARTICLE 3: SUBJECT ══════════ %>
+    <%# ARTICLE 3: SUBJECT %>
     <section class="cert-section">
       <div class="cert-section-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <%= t('certificates.verify.article3', default: 'Article 3 — Internship Subject') %>
+        <%= t('certificates.verify.article3', default: 'Article 3 - Internship Subject') %>
       </div>
       <p class="cert-section-text">
-        <%= t('certificates.verify.article3_text_html', student_name: "#{@student.first_name} #{@student.last_name}", title: @offer.title, company: @company.name, type: @offer.stage_type.to_s.upcase, default: "<strong>%{student_name}</strong> successfully completed a <strong>%{type}</strong> internship at <strong>%{company}</strong> under the subject: <em>\"%{title}\"</em>.") %>
+        <% student_name = "#{@student.first_name} #{@student.last_name}" %>
+        <% offer_type   = @offer.stage_type.to_s.upcase %>
+        <%= t('certificates.verify.article3_text_html',
+              student_name: student_name,
+              title: @offer.title,
+              company: @company.name,
+              type: offer_type,
+              default: "<strong>#{student_name}</strong> successfully completed a <strong>#{offer_type}</strong> internship at <strong>#{@company.name}</strong> under the subject: <em>\"#{@offer.title}\"</em>.").html_safe %>
       </p>
     </section>
 
-    <%# ══════════ ARTICLE 4: VERIFICATION ══════════ %>
+    <%# ARTICLE 4: VERIFICATION %>
     <section class="cert-section cert-section-verify">
       <div class="cert-section-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        <%= t('certificates.verify.article4', default: 'Article 4 — Cryptographic Verification') %>
+        <%= t('certificates.verify.article4', default: 'Article 4 - Cryptographic Verification') %>
       </div>
 
       <div class="cert-verify-layout">
@@ -118,7 +129,7 @@
         <%# LEFT: token info %>
         <div class="cert-verify-info">
           <p class="cert-section-text cert-verify-intro">
-            <%= t('certificates.verify.article4_text', trust_ledger: t('certificates.verify.trust_ledger', default: 'Trust Ledger'), default: "This certificate is immutably recorded on the StageUp Trust Ledger. Scan the QR code or visit the URL below to confirm its authenticity instantly.") %>
+            <%= t('certificates.verify.article4_text', default: 'This certificate is immutably recorded on the StageUp Trust Ledger. Scan the QR code or visit the URL below to confirm its authenticity instantly.') %>
           </p>
 
           <div class="cert-token-block">
@@ -154,13 +165,13 @@
       </div>
     </section>
 
-    <%# ══════════ SIGNATURES ══════════ %>
+    <%# SIGNATURES %>
     <footer class="cert-signatures">
       <div class="cert-sig-header">
         <h2 class="cert-sig-title"><%= t('certificates.verify.signatures', default: 'Signatures') %></h2>
         <div class="cert-fully-executed">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          <%= t('certificates.verify.fully_executed', default: 'Fully Executed — all three parties have signed') %>
+          <%= t('certificates.verify.fully_executed', default: 'Fully Executed - all three parties have signed') %>
         </div>
       </div>
 
@@ -168,7 +179,7 @@
         <div class="cert-sig-card cert-sig-graduate">
           <span class="cert-sig-role"><%= t('certificates.verify.sig_graduate', default: 'Graduate') %></span>
           <strong class="cert-sig-name"><%= @student.first_name %> <%= @student.last_name %></strong>
-          <span class="cert-sig-date"><%= @agreement.student_signed_at ? I18n.l(@agreement.student_signed_at, format: :cert_sig) : t('certificates.verify.pending', default: 'Pending') %></span>
+          <span class="cert-sig-date"><%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("%b %d, %Y") : t('certificates.verify.pending', default: 'Pending') %></span>
           <div class="cert-sig-line"></div>
           <span class="cert-sig-capacity"><%= t('certificates.verify.cap_graduate', default: 'Graduate Intern') %></span>
         </div>
@@ -176,15 +187,15 @@
         <div class="cert-sig-card cert-sig-employer">
           <span class="cert-sig-role"><%= t('certificates.verify.sig_employer', default: 'Employer') %></span>
           <strong class="cert-sig-name"><%= @company.name %></strong>
-          <span class="cert-sig-date"><%= @agreement.company_signed_at ? I18n.l(@agreement.company_signed_at, format: :cert_sig) : t('certificates.verify.pending', default: 'Pending') %></span>
+          <span class="cert-sig-date"><%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("%b %d, %Y") : t('certificates.verify.pending', default: 'Pending') %></span>
           <div class="cert-sig-line"></div>
           <span class="cert-sig-capacity"><%= t('certificates.verify.host_org', default: 'Host Organisation') %></span>
         </div>
 
         <div class="cert-sig-card cert-sig-university">
           <span class="cert-sig-role"><%= t('certificates.verify.sig_university', default: 'University') %></span>
-          <strong class="cert-sig-name"><%= @student.university&.name || "ISET Sfax" %></strong>
-          <span class="cert-sig-date"><%= @agreement.university_signed_at ? I18n.l(@agreement.university_signed_at, format: :cert_sig) : t('certificates.verify.pending', default: 'Pending') %></span>
+          <strong class="cert-sig-name"><%= university_name %></strong>
+          <span class="cert-sig-date"><%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("%b %d, %Y") : t('certificates.verify.pending', default: 'Pending') %></span>
           <div class="cert-sig-line"></div>
           <span class="cert-sig-capacity"><%= t('certificates.verify.cap_university', default: 'Academic Institution') %></span>
         </div>
@@ -231,4 +242,3 @@
     document.addEventListener('turbo:load', initCertCopy);
   })();
 </script>
-
