@@ -21852,10 +21852,118 @@ html[dir="rtl"] .role-card:hover .role-arrow {
     margin: 12mm 14mm;
     size: A4 portrait;
   }
-  .cert-action-bar, .hide-on-print { display: none !important; }
-  .cert-document { border: none !important; box-shadow: none !important; background: none !important; }
+  
+  /* Hide UI elements */
+  .navbar, .navbar-mobile-menu, .cert-action-bar, .hide-on-print { 
+    display: none !important; 
+  }
+  
+  /* Force light theme colors globally during print */
+  :root, body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  /* Reset document container */
+  .cert-document { 
+    border: none !important; 
+    box-shadow: none !important; 
+    background: #ffffff !important; 
+    margin: 0 !important;
+    padding: 0 !important;
+  }
   .cert-document::before { display: none !important; }
-  .cert-doc-title { background: none !important; -webkit-text-fill-color: #000 !important; color: #000 !important; }
-  .cert-token-hash { background: #f5f5f5 !important; border-color: #ccc !important; color: #333 !important; }
+  .cert-page-wrap {
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+  
+  /* Force all certificate text to print clearly in black/dark gray */
+  .cert-doc-header, .cert-section, .cert-signatures {
+    background: #ffffff !important;
+  }
+  
+  .cert-issuer-logo { color: #000000 !important; text-shadow: none !important; }
+  .cert-issuer-sub { color: #555555 !important; }
+  
+  .cert-meta-tag, .cert-meta-id { 
+    color: #333333 !important; 
+    background: #f5f5f5 !important; 
+    border-color: #dddddd !important; 
+  }
+  
+  .cert-doc-title { 
+    background: none !important; 
+    -webkit-text-fill-color: #000000 !important; 
+    color: #000000 !important; 
+    text-shadow: none !important; 
+  }
+  
+  .cert-doc-subtitle { color: #444444 !important; }
+  .cert-doc-rule { background: #dddddd !important; }
+  
+  .cert-section-label { color: #111111 !important; }
+  .cert-section-text { color: #222222 !important; }
+  .cert-section-text strong { color: #000000 !important; }
+  
+  .cert-party-role { color: #555555 !important; }
+  .cert-party-name { color: #000000 !important; }
+  .cert-party-detail { color: #333333 !important; }
+  .cert-party-sub { color: #666666 !important; }
+  .cert-party-divider { background: #eeeeee !important; }
+  
+  .cert-stat { 
+    background: #fcfcfc !important; 
+    border-color: #dddddd !important; 
+  }
+  .cert-stat-label { color: #555555 !important; }
+  .cert-stat-value { color: #000000 !important; }
+  .cert-stat-badge { 
+    background: #f0f0f0 !important; 
+    color: #333333 !important; 
+    border-color: #cccccc !important; 
+  }
+  
+  .cert-verify-info, .cert-qr-wrap { 
+    background: #fcfcfc !important; 
+    border-color: #dddddd !important; 
+  }
+  
+  .cert-token-label { color: #555555 !important; }
+  .cert-immutable-pill { 
+    color: #059669 !important; 
+    background: #ecfdf5 !important; 
+    border-color: #a7f3d0 !important; 
+  }
+  .cert-token-hash { 
+    background: #ffffff !important; 
+    border-color: #cccccc !important; 
+    color: #000000 !important; 
+  }
+  .cert-token-url { color: #444444 !important; }
+  .cert-qr-box { 
+    background: #ffffff !important; 
+    border-color: #cccccc !important; 
+  }
+  
+  .cert-qr-box svg { filter: none !important; }
+  
+  .cert-sig-title { color: #000000 !important; }
+  .cert-fully-executed { color: #059669 !important; }
+  .cert-sig-card { 
+    background: #ffffff !important; 
+    border-color: #cccccc !important; 
+  }
+  .cert-sig-role { color: #555555 !important; }
+  .cert-sig-name { color: #000000 !important; }
+  .cert-sig-date { color: #444444 !important; }
+  .cert-sig-line { background: #dddddd !important; }
+  .cert-sig-capacity { color: #666666 !important; }
+  
+  .cert-type-pill {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
+  }
 }
 
