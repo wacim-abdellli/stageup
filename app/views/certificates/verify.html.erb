@@ -168,7 +168,7 @@
         <div class="cert-sig-card cert-sig-graduate">
           <span class="cert-sig-role"><%= t('certificates.verify.sig_graduate', default: 'Graduate') %></span>
           <strong class="cert-sig-name"><%= @student.first_name %> <%= @student.last_name %></strong>
-          <span class="cert-sig-date"><%= @agreement.student_signed_at ? @agreement.I18n.l(student_signed_at, format: :cert_sig) : t('certificates.verify.pending', default: 'Pending') %></span>
+          <span class="cert-sig-date"><%= @agreement.student_signed_at ? I18n.l(@agreement.student_signed_at, format: :cert_sig) : t('certificates.verify.pending', default: 'Pending') %></span>
           <div class="cert-sig-line"></div>
           <span class="cert-sig-capacity"><%= t('certificates.verify.cap_graduate', default: 'Graduate Intern') %></span>
         </div>
@@ -176,7 +176,7 @@
         <div class="cert-sig-card cert-sig-employer">
           <span class="cert-sig-role"><%= t('certificates.verify.sig_employer', default: 'Employer') %></span>
           <strong class="cert-sig-name"><%= @company.name %></strong>
-          <span class="cert-sig-date"><%= @agreement.company_signed_at ? @agreement.I18n.l(company_signed_at, format: :cert_sig) : t('certificates.verify.pending', default: 'Pending') %></span>
+          <span class="cert-sig-date"><%= @agreement.company_signed_at ? I18n.l(@agreement.company_signed_at, format: :cert_sig) : t('certificates.verify.pending', default: 'Pending') %></span>
           <div class="cert-sig-line"></div>
           <span class="cert-sig-capacity"><%= t('certificates.verify.host_org', default: 'Host Organisation') %></span>
         </div>
@@ -184,7 +184,7 @@
         <div class="cert-sig-card cert-sig-university">
           <span class="cert-sig-role"><%= t('certificates.verify.sig_university', default: 'University') %></span>
           <strong class="cert-sig-name"><%= @student.university&.name || "ISET Sfax" %></strong>
-          <span class="cert-sig-date"><%= @agreement.university_signed_at ? @agreement.I18n.l(university_signed_at, format: :cert_sig) : t('certificates.verify.pending', default: 'Pending') %></span>
+          <span class="cert-sig-date"><%= @agreement.university_signed_at ? I18n.l(@agreement.university_signed_at, format: :cert_sig) : t('certificates.verify.pending', default: 'Pending') %></span>
           <div class="cert-sig-line"></div>
           <span class="cert-sig-capacity"><%= t('certificates.verify.cap_university', default: 'Academic Institution') %></span>
         </div>
