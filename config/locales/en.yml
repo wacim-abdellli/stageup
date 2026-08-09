@@ -1224,6 +1224,9 @@ en:
       current_password_placeholder: Enter your current password to authorize changes
       new_password: New Password (Optional)
       leave_blank_placeholder: Leave blank to keep unchanged
+      confirm_password: Confirm New Password
+      confirm_password_placeholder: Repeat your new password
+      save_changes: Save Changes
     new_company:
       name: Company Name
       website: Company Website

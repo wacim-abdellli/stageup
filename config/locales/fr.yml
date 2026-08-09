@@ -1275,6 +1275,9 @@ fr:
       current_password_placeholder: Entrez votre mot de passe actuel pour autoriser les modifications
       new_password: Nouveau mot de passe (Optionnel)
       leave_blank_placeholder: Laissez vide pour conserver l'actuel
+      confirm_password: Confirmer le nouveau mot de passe
+      confirm_password_placeholder: Répétez votre nouveau mot de passe
+      save_changes: Enregistrer les modifications
     new_company:
       name: Nom de l'entreprise
       website: Site web de l'entreprise

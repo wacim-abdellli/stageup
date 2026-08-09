@@ -1238,6 +1238,9 @@ ar:
       current_password_placeholder: أدخل كلمة المرور الحالية لتأكيد التغييرات
       new_password: كلمة المرور الجديدة (اختياري)
       leave_blank_placeholder: اتركه فارغاً للإبقاء على الحالية دون تغيير
+      confirm_password: تأكيد كلمة المرور الجديدة
+      confirm_password_placeholder: أعد كتابة كلمة المرور الجديدة
+      save_changes: حفظ التغييرات
     new_company:
       name: اسم الشركة
       website: موقع الشركة
