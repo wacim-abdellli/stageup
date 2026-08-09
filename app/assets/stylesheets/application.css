@@ -22340,3 +22340,132 @@ html[dir="rtl"] .role-card:hover .role-arrow {
   .cpo-seal-col { flex-shrink: 0; }
   .cpo-seal svg { display: block; }
 }
+
+/* ════════════════════════════════════════════════
+   COMPANY PUBLIC PROFILE REDESIGN (.cprof-*)
+   Vercel / Linear Dark Mode Aesthetic
+   ════════════════════════════════════════════════ */
+
+.cprof-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cprof-hero-card {
+  position: relative;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), var(--shadow-md);
+}
+
+.cprof-hero-ambient {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(194, 65, 12, 0.07) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+}
+
+html[dir="rtl"] .cprof-hero-ambient {
+  right: auto;
+  left: -80px;
+}
+
+.cprof-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.cprof-avatar-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(194, 65, 12, 0.25) 0%, rgba(194, 65, 12, 0.06) 100%);
+  border: 1px solid rgba(194, 65, 12, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.cprof-hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.cprof-website-link {
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.cprof-website-link:hover {
+  color: var(--text-primary);
+}
+
+.cprof-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .cprof-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cprof-bio-box {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+}
+
+.cprof-offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.cprof-offer-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: var(--transition);
+}
+
+.cprof-offer-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-2px);
+}
+
+html[dir="rtl"] .nav-icon-start {
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .cprof-arrow-icon {
+  transform: scaleX(-1);
+}

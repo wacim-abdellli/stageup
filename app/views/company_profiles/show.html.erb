@@ -3,68 +3,86 @@
 <div class="dashboard-container profile-page-container">
 
   <%# ─── Top Navigation Bar ───────────────────────────────────────── %>
-  <div class="flex-between flex-wrap gap-12 mb-24">
+  <div class="cprof-nav-bar flex-between flex-wrap gap-12 mb-24">
     <%= link_to dashboard_path, class: "btn btn-secondary btn-compact" do %>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      <%= t('common.back_to', page: t('dashboard.title', default: 'Dashboard'), default: 'Back to Dashboard') %>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="nav-icon-start"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      <span><%= t('common.back_to', page: t('dashboard.title', default: 'Dashboard'), default: 'Back to Dashboard') %></span>
     <% end %>
+
     <% if current_user.profileable == @company_profile %>
       <%= link_to edit_user_registration_path, class: "btn btn-secondary btn-compact" do %>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        <%= t('company_profiles.show.edit_profile', default: 'Edit Company Profile') %>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="nav-icon-start"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <span><%= t('company_profiles.show.edit_profile', default: 'Edit Company Profile') %></span>
       <% end %>
     <% end %>
   </div>
 
   <%# ─── Hero Company Header ────────────────────────────────────────── %>
-  <div class="profile-hero-card mb-32">
-    <div class="profile-hero-ambient-glow"></div>
-    <div class="profile-hero-inner flex-between flex-wrap gap-24">
-      <div class="flex-align-center gap-20 flex-wrap">
-        <div class="hero-avatar-wrapper">
-          <div class="hero-avatar-circle company-avatar-circle">
+  <div class="cprof-hero-card mb-24">
+    <div class="cprof-hero-ambient"></div>
+    <div class="cprof-hero-content flex-between flex-wrap gap-20">
+      <div class="cprof-hero-main flex-align-center gap-20 flex-wrap">
+        <div class="cprof-avatar-wrap">
+          <div class="cprof-avatar-circle">
             <span><%= @company_profile.name.first.upcase rescue 'C' %></span>
           </div>
         </div>
 
-        <div>
-          <div class="flex-align-center gap-12 flex-wrap mb-8">
-            <h1 class="hero-candidate-name margin-0"><%= @company_profile.name %></h1>
+        <div class="cprof-hero-info">
+          <div class="flex-align-center gap-12 flex-wrap mb-6">
+            <h1 class="cprof-hero-title margin-0"><%= @company_profile.name %></h1>
             <% if @company_profile.verified? %>
-              <span class="hero-verified-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" class="mr-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                <%= t('company_profiles.show.verified_badge', default: 'Verified Recruiter') %>
+              <span class="badge-status badge-completed flex-align-center gap-4">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                <span><%= t('company_profiles.show.verified_badge', default: 'Verified Recruiter') %></span>
+              </span>
+            <% else %>
+              <span class="badge-status badge-pending">
+                <%= t('company_profiles.show.in_verification', default: 'Pending Audit') %>
               </span>
             <% end %>
           </div>
 
-          <% if @company_profile.website.present? %>
-            <a href="<%= @company_profile.website %>" target="_blank" class="hero-meta-pill pill-highlight">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/></svg>
-              <span><%= @company_profile.website %></span>
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ml-2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          <% end %>
+          <div class="cprof-hero-sub-row flex-align-center gap-16 flex-wrap">
+            <% if @company_profile.website.present? %>
+              <a href="<%= @company_profile.website %>" target="_blank" rel="noopener" class="cprof-website-link flex-align-center gap-6">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/></svg>
+                <span><%= @company_profile.website.sub(%r{^https?://}, '') %></span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%# Commitment Pill %>
+      <div class="cprof-hero-score-box flex-align-center gap-12">
+        <div class="score-pill">
+          <% score = @company_profile.commitment_score.to_f %>
+          <span class="dot <%= score >= 90 ? 'dot-success' : (score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
+          <strong><%= score.round(1) %></strong>
+          <span class="score-label"><%= t('dashboard.reputation.score_title', default: 'Commitment') %></span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="dashboard-grid">
+  <%# ─── Asymmetric 2-Column Grid Layout ───────────────────────────── %>
+  <div class="cprof-grid">
 
     <%# ─── Left Main Column ───────────────────────────────────────── %>
-    <div class="left-col">
+    <div class="cprof-main-col">
 
-      <%# Company Overview %>
+      <%# Company Overview Card %>
       <div class="profile-card mb-24">
-        <div class="profile-card-header flex-between mb-16">
+        <div class="profile-card-header flex-between mb-16 pb-12 border-bottom-subtle">
           <h3 class="section-heading margin-0 flex-align-center gap-8">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M3 21h18"/><path d="M19 21v-4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M3 21h18"/><path d="M19 21v-4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/><path d="M9 10h6"/><path d="M9 14h6"/><path d="M9 6h6"/></svg>
             <span><%= t('company_profiles.show.overview_heading', default: 'Company Overview') %></span>
           </h3>
-          <span class="fs-11 text-muted uppercase tracking-wide fw-600"><%= t('company_profiles.show.about_employer') %></span>
+          <span class="fs-11 text-muted uppercase tracking-wide fw-600"><%= t('company_profiles.show.about_employer', default: 'Employer Profile') %></span>
         </div>
-        <div class="candidate-bio-box">
+        <div class="cprof-bio-box">
           <p class="color-secondary fs-14 line-height-16 margin-0">
             <%= @company_profile.description.presence || t('company_profiles.show.description_fallback', default: 'No company description provided yet.') %>
           </p>
@@ -72,51 +90,88 @@
       </div>
 
       <%# Active Internship Missions Offered %>
-      <div class="profile-card">
-        <div class="profile-card-header flex-between mb-16">
+      <div class="profile-card mb-24">
+        <div class="profile-card-header flex-between mb-16 pb-12 border-bottom-subtle">
           <h3 class="section-heading margin-0 flex-align-center gap-8">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
             <span><%= t('company_profiles.show.active_missions_heading', count: @active_offers.count, default: "Active Internship Listings (#{@active_offers.count})") %></span>
           </h3>
           <% if @active_offers.any? %>
-            <span class="badge badge-info fs-11"><%= t('company_profiles.show.available_badge', count: @active_offers.count) %></span>
+            <span class="badge-status badge-accepted"><%= t('company_profiles.show.available_badge', count: @active_offers.count, default: "#{@active_offers.count} Available") %></span>
           <% end %>
         </div>
 
         <% if @active_offers.any? %>
-          <div class="offers-grid">
+          <div class="cprof-offers-grid">
             <% @active_offers.each do |offer| %>
-              <div class="offer-card">
-                <div class="offer-card-header flex-between mb-8">
-                  <span class="badge badge-info fs-11"><%= offer.stage_type.upcase %></span>
-                  <span class="badge badge-success fs-11"><%= offer.work_mode.humanize %></span>
+              <div class="cprof-offer-card">
+                <div class="cprof-offer-card-top flex-between mb-10">
+                  <span class="badge-status badge-progress"><%= offer.stage_type.upcase %></span>
+                  <span class="badge-status badge-accepted"><%= offer.work_mode.humanize %></span>
                 </div>
-                <h4 class="offer-card-title mb-4">
-                  <%= link_to offer.title, offer_path(offer), class: "hover-underline color-primary fs-15 fw-700" %>
+                <h4 class="cprof-offer-card-title mb-6">
+                  <%= link_to offer.title, offer_path(offer), class: "color-primary fs-15 fw-700 hover-underline" %>
                 </h4>
-                <div class="offer-card-location fs-12 text-muted mb-12 flex-align-center gap-4">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  <span><%= offer.location.presence || t('company_profiles.show.location_fallback', default: 'Sfax, Tunisia') %></span>
+                <div class="cprof-offer-card-meta fs-12 text-muted mb-16 flex-align-center gap-12 flex-wrap">
+                  <span class="flex-align-center gap-4">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span><%= offer.location.presence || t('company_profiles.show.location_fallback', default: 'Sfax, Tunisia') %></span>
+                  </span>
+                  <span>&middot;</span>
+                  <span><%= offer.duration_months %> <%= t('company_profiles.show.months_label', default: 'Months') %></span>
                 </div>
-                <div class="offer-card-footer flex-between">
-                  <span class="fs-12 text-muted"><%= offer.duration_months %> <%= t('company_profiles.show.months_label', default: 'Months') %></span>
-                  <%= link_to t('company_profiles.show.view_mission', default: 'View Mission'), offer_path(offer), class: "btn btn-secondary btn-compact-sm" %>
+                <div class="cprof-offer-card-bottom flex-between flex-align-center">
+                  <span class="fs-11 text-muted fw-600"><%= offer.spots %> <%= t('offers.show.spots_label', default: 'Spot(s)') %></span>
+                  <%= link_to offer_path(offer), class: "btn btn-secondary btn-compact-sm flex-align-center gap-4" do %>
+                    <span><%= t('company_profiles.show.view_mission', default: 'View Mission') %></span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="cprof-arrow-icon"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  <% end %>
                 </div>
               </div>
             <% end %>
           </div>
         <% else %>
-          <div class="empty-state-box text-center p-24">
+          <div class="empty-state-card text-center p-24">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" class="mb-8 margin-0-auto block"><path d="m3 11 18-5v12L3 14v-3z"/></svg>
             <p class="text-muted fs-13 italic margin-0"><%= t('company_profiles.show.no_active_offers', default: 'No active internship listings posted at the moment.') %></p>
           </div>
         <% end %>
       </div>
 
+      <%# Verified Reviews Section %>
+      <% if @reviews.any? %>
+        <div class="profile-card">
+          <div class="profile-card-header flex-between mb-16 pb-12 border-bottom-subtle">
+            <h3 class="section-heading margin-0 flex-align-center gap-8">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span><%= t('company_profiles.show.reviews_heading', default: 'Verified Intern Reviews') %></span>
+            </h3>
+            <span class="fs-12 fw-700 color-primary"><%= @avg_rating || "5.0" %> / 5.0 ⭐</span>
+          </div>
+
+          <div class="cprof-reviews-list">
+            <% @reviews.each do |review| %>
+              <div class="cprof-review-item py-14 border-bottom-subtle">
+                <div class="flex-between flex-align-center mb-6">
+                  <strong class="fs-13 color-primary"><%= review.author&.profileable&.full_name rescue 'Verified Student' %></strong>
+                  <div class="flex-align-center gap-2" title="<%= review.rating %>/5">
+                    <% (1..5).each do |star| %>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="<%= star <= review.rating ? '#F59E0B' : 'none' %>" stroke="#F59E0B" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <% end %>
+                  </div>
+                </div>
+                <p class="fs-13 text-secondary margin-0 line-height-15">&ldquo;<%= review.comment %>&rdquo;</p>
+                <span class="fs-11 text-muted mt-4 block"><%= time_ago_in_words(review.created_at) %> ago</span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
     </div>
 
-    <%# ─── Right Column: Company Metrics ──────────────────────────── %>
-    <div class="right-col">
+    <%# ─── Right Sidebar Column ────────────────────────────────────── %>
+    <div class="cprof-sidebar-col">
 
       <div class="profile-card rep-metrics-card mb-24">
         <div class="profile-card-header flex-between mb-16 pb-12 border-bottom-subtle">
@@ -133,10 +188,24 @@
             <span class="rep-stat-label fs-13 text-secondary"><%= t('company_profiles.show.active_missions_label', default: 'Active Missions') %></span>
             <strong class="fs-14 color-primary"><%= @active_offers.count %></strong>
           </div>
+
           <div class="rep-stat-row flex-between py-10 border-bottom-subtle">
             <span class="rep-stat-label fs-13 text-secondary"><%= t('company_profiles.show.verification_status_label', default: 'Verification State') %></span>
-            <span class="badge badge-success fs-11"><%= @company_profile.verified? ? t('company_profiles.show.verified_employer', default: 'Verified Recruiter') : t('company_profiles.show.in_verification', default: 'Pending Audit') %></span>
+            <span class="badge-status <%= @company_profile.verified? ? 'badge-completed' : 'badge-pending' %>">
+              <%= @company_profile.verified? ? t('company_profiles.show.verified_employer', default: 'Verified Recruiter') : t('company_profiles.show.in_verification', default: 'Pending Audit') %>
+            </span>
           </div>
+
+          <div class="rep-stat-row flex-between py-10 border-bottom-subtle">
+            <span class="rep-stat-label fs-13 text-secondary"><%= t('company_profiles.show.response_rate_label', default: 'Response Rate') %></span>
+            <strong class="fs-14 color-primary"><%= @company_profile.response_rate&.round(0) || 100 %>%</strong>
+          </div>
+
+          <div class="rep-stat-row flex-between py-10 border-bottom-subtle">
+            <span class="rep-stat-label fs-13 text-secondary"><%= t('company_profiles.show.avg_response_time_label', default: 'Avg Response Time') %></span>
+            <strong class="fs-14 color-primary"><%= @company_profile.avg_response_time_hours&.round(1) || 12.0 %>h</strong>
+          </div>
+
           <div class="rep-stat-row flex-between py-10">
             <span class="rep-stat-label fs-13 text-secondary"><%= t('company_profiles.show.intern_rating_label', default: 'Intern Rating') %></span>
             <strong class="fs-14 color-primary"><%= @avg_rating ? "#{@avg_rating} / 5.0 ⭐" : t('company_profiles.show.rating_fallback', default: '5.0 / 5.0 ⭐') %></strong>
@@ -149,3 +218,4 @@
   </div>
 
 </div>
+
