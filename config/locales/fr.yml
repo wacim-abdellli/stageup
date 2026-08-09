@@ -1217,6 +1217,10 @@ fr:
       rating_fallback: 5.0 / 5
       about_employer: À Propos de l'Employeur
       available_badge: "%{count} Disponibles"
+      response_rate_label: Taux de réponse
+      avg_response_time_label: Temps de réponse moyen
+      commitment_label: Engagement
+      reviews_heading: Avis Vérifiés des Stagiaires
   users:
     edit:
       page_title: Paramètres du Compte – StageUp

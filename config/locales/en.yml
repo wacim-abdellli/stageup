@@ -1166,6 +1166,10 @@ en:
       rating_fallback: 5.0 / 5
       about_employer: About Employer
       available_badge: "%{count} Available"
+      response_rate_label: Response Rate
+      avg_response_time_label: Avg Response Time
+      commitment_label: Commitment
+      reviews_heading: Verified Intern Reviews
   users:
     edit:
       page_title: Account & Profile Settings – StageUp

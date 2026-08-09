@@ -1180,6 +1180,10 @@ ar:
       rating_fallback: 5.0 / 5
       about_employer: حول صاحب العمل
       available_badge: "%{count} متاح"
+      response_rate_label: معدل الاستجابة
+      avg_response_time_label: متوسط وقت الاستجابة
+      commitment_label: الالتزام
+      reviews_heading: تقييمات المتربصين الموثقة
   users:
     edit:
       page_title: إعدادات الحساب – StageUp

@@ -61,7 +61,7 @@
           <% score = @company_profile.commitment_score.to_f %>
           <span class="dot <%= score >= 90 ? 'dot-success' : (score >= 70 ? 'dot-warning' : 'dot-danger') %>"></span>
           <strong><%= score.round(1) %></strong>
-          <span class="score-label"><%= t('dashboard.reputation.score_title', default: 'Commitment') %></span>
+          <span class="score-label"><%= t('company_profiles.show.commitment_label', default: 'Commitment') %></span>
         </div>
       </div>
     </div>
@@ -84,7 +84,7 @@
         </div>
         <div class="cprof-bio-box">
           <p class="color-secondary fs-14 line-height-16 margin-0">
-            <%= @company_profile.description.presence || t('company_profiles.show.description_fallback', default: 'No company description provided yet.') %>
+            <bdi><%= @company_profile.description.presence || t('company_profiles.show.description_fallback', default: 'No company description provided yet.') %></bdi>
           </p>
         </div>
       </div>
