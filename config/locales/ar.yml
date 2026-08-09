@@ -1,1250 +1,1233 @@
+---
 ar:
   date:
     formats:
       long: "%-d %B %Y"
-
   layouts:
-    default_title: "StageUp – تربصات موثقة في تونس"
-    meta_description: "StageUp – أول منصة تربصات موثقة في تونس. مهام إثبات العمل، نقاط السمعة، واتفاقيات رسمية."
-
+    default_title: StageUp – تربصات موثقة في تونس
+    meta_description: StageUp – أول منصة تربصات موثقة في تونس. مهام إثبات العمل، نقاط السمعة، واتفاقيات رسمية.
   activerecord:
     attributes:
       user:
-        email: "البريد الإلكتروني"
-        password: "كلمة المرور"
-        password_confirmation: "تأكيد كلمة المرور"
-        current_password: "كلمة المرور الحالية"
-        remember_me: "تذكرني"
-
+        email: البريد الإلكتروني
+        password: كلمة المرور
+        password_confirmation: تأكيد كلمة المرور
+        current_password: كلمة المرور الحالية
+        remember_me: تذكرني
   home:
-    title: "StageUp – تربصات موثقة في تونس"
-    announcement_badge: "أول سجل لإثبات العمل في تونس"
-    hero_title_html: "لا أحد يدفع ثمن التجاهل.<br><span class=\"landing-hero-gradient\">لقد غيرنا ذلك.</span>"
-    hero_subtitle: "كل عرض ومهمة وتجاهل يصبح سجلاً عاماً دائماً. أول سوق تربصات في تونس حيث تُكتسب السمعة ولا تُدعى."
-    browse_btn: "تصفح العروض"
-    dashboard_btn: "لوحة التحكم"
-    get_started_btn: "ابدأ الآن"
-    pts: "نقاط"
-    unknown_user: "مستخدم مجهول"
-    no_recent_activity: "لا يوجد نشاط مباشر مسجل بعد"
-    how_it_works: "كيف يعمل"
-    how_it_works_title: "دورة تربص أفضل"
-    how_it_works_sub: "ثقة قابلة للتحقق تحل محل السير الذاتية الثابتة غير الموثقة"
-    bento_mission_title: "مهام إثبات العمل"
-    bento_mission_text: "تجاوز تصفية السير الذاتية التي لا تنتهي. يرفق المسؤولون تحديات عملية. يقدم الطلاب الكود مباشرة لفتح المقابلات."
-    bento_reputation_title: "سجل السمعة"
-    bento_reputation_text: "تحقق من الموثوقية مسبقاً. نظام التسجيل لدينا يعاقب على التغيب ويكافئ الإنجازات الموثقة من كلا الطرفين."
-    bento_academic_title: "التحقق الأكاديمي"
-    bento_academic_text: "تتبع البريد الإلكتروني الرسمي (مثل <code>@isetsf.rnu.tn</code>) يتحقق فوراً من بيانات الطالب ويربط المنسقين."
-    featured_heading: "الفرص المميزة"
-    featured_sub_signed_in: "تصفح عروض التربصات النشطة وشارك في مهام الإثبات الخاصة بها"
-    featured_sub_signed_out: "معاينة الفرص النشطة — سجل الدخول لعرض تفاصيل المهام وتقديم الحلول"
-    featured_view_all: "عرض كل العروض ←"
-    cta_title: "مستعد لبناء سمعتك الموثقة؟"
-    cta_desc: "انضم إلى أول منصة تربصات موثقة في تونس. سجل إنجازاتك يبدأ من هنا."
-    cta_account: "إنشاء حساب"
-    cta_signin: "تسجيل الدخول"
-    stat_verification: "التحقق بإثبات العمل"
-    stat_ghosting: "التسامح مع التجاهل"
-    stat_reputation: "مقياس السمعة غير القابل للتغيير"
-    mockup_header: "سجل السمعة المباشر"
-    mockup_header_badge: "الشبكة الرئيسية"
-    mockup_row1_name: "سيرين (طالبة)"
-    mockup_row1_action: "قدمت حل الكود إلى ISET"
+    title: StageUp – تربصات موثقة في تونس
+    announcement_badge: أول سجل لإثبات العمل في تونس
+    hero_title_html: لا أحد يدفع ثمن التجاهل.<br><span class="landing-hero-gradient">لقد غيرنا ذلك.</span>
+    hero_subtitle: كل عرض ومهمة وتجاهل يصبح سجلاً عاماً دائماً. أول سوق تربصات في تونس حيث تُكتسب السمعة ولا تُدعى.
+    browse_btn: تصفح العروض
+    dashboard_btn: لوحة التحكم
+    get_started_btn: ابدأ الآن
+    pts: نقاط
+    unknown_user: مستخدم مجهول
+    no_recent_activity: لا يوجد نشاط مباشر مسجل بعد
+    how_it_works: كيف يعمل
+    how_it_works_title: دورة تربص أفضل
+    how_it_works_sub: ثقة قابلة للتحقق تحل محل السير الذاتية الثابتة غير الموثقة
+    bento_mission_title: مهام إثبات العمل
+    bento_mission_text: تجاوز تصفية السير الذاتية التي لا تنتهي. يرفق المسؤولون تحديات عملية. يقدم الطلاب الكود مباشرة لفتح المقابلات.
+    bento_reputation_title: سجل السمعة
+    bento_reputation_text: تحقق من الموثوقية مسبقاً. نظام التسجيل لدينا يعاقب على التغيب ويكافئ الإنجازات الموثقة من كلا الطرفين.
+    bento_academic_title: التحقق الأكاديمي
+    bento_academic_text: تتبع البريد الإلكتروني الرسمي (مثل <code>@isetsf.rnu.tn</code>) يتحقق فوراً من بيانات الطالب ويربط المنسقين.
+    featured_heading: الفرص المميزة
+    featured_sub_signed_in: تصفح عروض التربصات النشطة وشارك في مهام الإثبات الخاصة بها
+    featured_sub_signed_out: معاينة الفرص النشطة — سجل الدخول لعرض تفاصيل المهام وتقديم الحلول
+    featured_view_all: عرض كل العروض ←
+    cta_title: مستعد لبناء سمعتك الموثقة؟
+    cta_desc: انضم إلى أول منصة تربصات موثقة في تونس. سجل إنجازاتك يبدأ من هنا.
+    cta_account: إنشاء حساب
+    cta_signin: تسجيل الدخول
+    stat_verification: التحقق بإثبات العمل
+    stat_ghosting: التسامح مع التجاهل
+    stat_reputation: مقياس السمعة غير القابل للتغيير
+    mockup_header: سجل السمعة المباشر
+    mockup_header_badge: الشبكة الرئيسية
+    mockup_row1_name: سيرين (طالبة)
+    mockup_row1_action: قدمت حل الكود إلى ISET
     mockup_row1_score: "+10 %{pts}"
-    mockup_row2_name: "Vortech Startups"
-    mockup_row2_action: "فات موعد المراجعة (انتهت المهلة)"
+    mockup_row2_name: Vortech Startups
+    mockup_row2_action: فات موعد المراجعة (انتهت المهلة)
     mockup_row2_score: "-15 %{pts}"
-    mockup_row3_name: "محمد (طالب)"
-    mockup_row3_action: "أكمل اتفاقية PFE موثقة"
+    mockup_row3_name: محمد (طالب)
+    mockup_row3_action: أكمل اتفاقية PFE موثقة
     mockup_row3_score: "+30 %{pts}"
-    badge_new: "جديد"
-    mission_attached: "مهمة مرفقة"
-    cv_only: "سيرة ذاتية فقط"
-    unknown_company: "شركة غير معروفة"
-
+    badge_new: جديد
+    mission_attached: مهمة مرفقة
+    cv_only: سيرة ذاتية فقط
+    unknown_company: شركة غير معروفة
   user_mailer:
     coordinator_approved:
-      heading: "تمت الموافقة على الحساب"
-      subject: "تمت الموافقة على حساب المنسق الخاص بك"
-      greeting: "مرحباً %{name}،"
-      body: "تمت الموافقة على حسابك كمنسق جامعي من قبل فريق إدارة StageUp."
-      approved_badge: "تمت الموافقة"
-      login_instruction: "يمكنك الآن تسجيل الدخول لإدارة اتفاقيات التربص ومراجعة تقديمات الطلاب وتوقيع اتفاقيات التربص نيابة عن %{university}."
-      support: "إذا كانت لديك أي أسئلة، اتصل بفريق دعم StageUp."
-      regards: "مع أطيب التحيات،"
-      team: "فريق StageUp"
-      copyright: "جميع الحقوق محفوظة."
+      heading: تمت الموافقة على الحساب
+      subject: تمت الموافقة على حساب المنسق الخاص بك
+      greeting: مرحباً %{name}،
+      body: تمت الموافقة على حسابك كمنسق جامعي من قبل فريق إدارة StageUp.
+      approved_badge: تمت الموافقة
+      login_instruction: يمكنك الآن تسجيل الدخول لإدارة اتفاقيات التربص ومراجعة تقديمات الطلاب وتوقيع اتفاقيات التربص نيابة عن %{university}.
+      support: إذا كانت لديك أي أسئلة، اتصل بفريق دعم StageUp.
+      regards: مع أطيب التحيات،
+      team: فريق StageUp
+      copyright: جميع الحقوق محفوظة.
     company_verified:
-      heading: "تم التحقق من الشركة ✓"
-      subject: "تم التحقق من حساب شركتك"
-      greeting: "مرحباً،"
-      body_verified: "تم التحقق من حساب شركتك %{company_name} من قبل فريق إدارة StageUp."
-      body_verified_html: "تم التحقق من حساب شركتك <strong>%{company_name}</strong> من قبل فريق إدارة StageUp."
-      verified_badge: "تم التحقق"
-      capabilities: "يمكنك الآن نشر عروض التربص واستقبال طلبات الطلاب وإدارة مسار التوظيف الخاص بك."
-      support: "إذا كانت لديك أي أسئلة، اتصل بفريق دعم StageUp."
-      regards: "مع أطيب التحيات،"
-      team: "فريق StageUp"
-      copyright: "جميع الحقوق محفوظة."
+      heading: تم التحقق من الشركة ✓
+      subject: تم التحقق من حساب شركتك
+      greeting: مرحباً،
+      body_verified: تم التحقق من حساب شركتك %{company_name} من قبل فريق إدارة StageUp.
+      body_verified_html: تم التحقق من حساب شركتك <strong>%{company_name}</strong> من قبل فريق إدارة StageUp.
+      verified_badge: تم التحقق
+      capabilities: يمكنك الآن نشر عروض التربص واستقبال طلبات الطلاب وإدارة مسار التوظيف الخاص بك.
+      support: إذا كانت لديك أي أسئلة، اتصل بفريق دعم StageUp.
+      regards: مع أطيب التحيات،
+      team: فريق StageUp
+      copyright: جميع الحقوق محفوظة.
     application_status_updated:
-      heading: "الطلب %{status}"
-      subject: "الطلب %{status} – %{offer_title}"
-      body: "تم %{status} طلبك لـ %{offer_title} في %{company_name}."
-      body_html: "تم <strong>%{status}</strong> طلبك لـ <strong>%{offer_title}</strong> في <strong>%{company_name}</strong>."
-      view_details: "عرض التفاصيل"
+      heading: الطلب %{status}
+      subject: الطلب %{status} – %{offer_title}
+      body: تم %{status} طلبك لـ %{offer_title} في %{company_name}.
+      body_html: تم <strong>%{status}</strong> طلبك لـ <strong>%{offer_title}</strong> في <strong>%{company_name}</strong>.
+      view_details: عرض التفاصيل
     application_received:
-      heading: "تم استلام طلب جديد"
-      subject: "تم استلام طلب جديد – %{offer_title}"
+      heading: تم استلام طلب جديد
+      subject: تم استلام طلب جديد – %{offer_title}
       body: "%{student_name} تقدم إلى %{offer_title}."
       body_html: "<strong>%{student_name}</strong> تقدم إلى <strong>%{offer_title}</strong>."
-      login_instruction: "سجل الدخول إلى لوحة التحكم الخاصة بك لمراجعة سيرته الذاتية وحل الإثبات الخاص به."
-      view_applications: "عرض الطلبات"
+      login_instruction: سجل الدخول إلى لوحة التحكم الخاصة بك لمراجعة سيرته الذاتية وحل الإثبات الخاص به.
+      view_applications: عرض الطلبات
     agreement_signature_requested:
-      heading: "اتفاقية التربص جاهزة للتوقيع"
-      subject: "اتفاقية التربص جاهزة للتوقيع – %{offer_title}"
-      body: "اتفاقية التربص لـ %{offer_title} جاهزة لتوقيعك."
-      body_html: "اتفاقية التربص لـ <strong>%{offer_title}</strong> جاهزة لتوقيعك."
-      login_instruction: "جميع الأطراف راجعت الشروط. يرجى تسجيل الدخول لمراجعة وتوقيع المستند."
-      view_agreement: "عرض الاتفاقية"
+      heading: اتفاقية التربص جاهزة للتوقيع
+      subject: اتفاقية التربص جاهزة للتوقيع – %{offer_title}
+      body: اتفاقية التربص لـ %{offer_title} جاهزة لتوقيعك.
+      body_html: اتفاقية التربص لـ <strong>%{offer_title}</strong> جاهزة لتوقيعك.
+      login_instruction: جميع الأطراف راجعت الشروط. يرجى تسجيل الدخول لمراجعة وتوقيع المستند.
+      view_agreement: عرض الاتفاقية
     agreement_declined:
-      heading: "تم رفض اتفاقية التربص"
-      subject: "تم رفض اتفاقية التربص – %{offer_title}"
-      body_intro: "تم %{declined_label} اتفاقية التربص لـ %{offer_title} من قبل المنسق الجامعي."
-      body_intro_html: "تم <strong style=\"color: #F87171;\">%{declined_label}</strong> اتفاقية التربص لـ <strong>%{offer_title}</strong> من قبل المنسق الجامعي."
-      declined_label: "رفض"
-      reason_label: "السبب المقدم:"
-      body_suggestion: "يمكنك إنشاء اتفاقية جديدة بشروط مصححة إذا لزم الأمر."
-      view_agreement: "عرض الاتفاقية"
-
+      heading: تم رفض اتفاقية التربص
+      subject: تم رفض اتفاقية التربص – %{offer_title}
+      body_intro: تم %{declined_label} اتفاقية التربص لـ %{offer_title} من قبل المنسق الجامعي.
+      body_intro_html: 'تم <strong style="color: #F87171;">%{declined_label}</strong> اتفاقية التربص لـ <strong>%{offer_title}</strong> من قبل المنسق الجامعي.'
+      declined_label: رفض
+      reason_label: 'السبب المقدم:'
+      body_suggestion: يمكنك إنشاء اتفاقية جديدة بشروط مصححة إذا لزم الأمر.
+      view_agreement: عرض الاتفاقية
   nav:
-    browse_offers: "تصفح العروض"
-    dashboard: "لوحة التحكم"
-    post_offer: "نشر عرض"
-    sign_out: "تسجيل الخروج"
-    my_dashboard: "لوحة التحكم"
-    sign_in: "تسجيل الدخول"
-    home: "StageUp الصفحة الرئيسية"
-    view_offer: "عرض التفاصيل"
-    unlock: "سجل الدخول للفتح"
-    student: "طالب"
-    company: "شركة"
-    university: "جامعة"
-    user: "مستخدم"
-    main_navigation: "التنقل الرئيسي"
-    toggle_theme_title: "تبديل السمة الفاتحة/الداكنة"
-    toggle_theme_aria: "تبديل السمة"
-    user_menu: "قائمة المستخدم"
-    toggle_navigation: "تبديل التنقل"
-    select_language: "اختيار اللغة"
-    language_selector: "محدد اللغة"
-    view_my_profile: "عرض ملفي العام"
-
+    browse_offers: تصفح العروض
+    dashboard: لوحة التحكم
+    post_offer: نشر عرض
+    sign_out: تسجيل الخروج
+    my_dashboard: لوحة التحكم
+    sign_in: تسجيل الدخول
+    home: StageUp الصفحة الرئيسية
+    view_offer: عرض التفاصيل
+    unlock: سجل الدخول للفتح
+    student: طالب
+    company: شركة
+    university: جامعة
+    user: مستخدم
+    main_navigation: التنقل الرئيسي
+    toggle_theme_title: تبديل السمة الفاتحة/الداكنة
+    toggle_theme_aria: تبديل السمة
+    user_menu: قائمة المستخدم
+    toggle_navigation: تبديل التنقل
+    select_language: اختيار اللغة
+    language_selector: محدد اللغة
+    view_my_profile: عرض ملفي العام
   locales:
-    fr: "Français"
-    en: "English"
-    ar: "العربية"
-
+    fr: Français
+    en: English
+    ar: العربية
   offers:
     index:
-      title: "التربصات المتاحة – StageUp"
-      subtitle: "تصفح وقدم على فرص التربصات الموثقة"
-      eyebrow: "فرص موثقة"
+      title: التربصات المتاحة – StageUp
+      subtitle: تصفح وقدم على فرص التربصات الموثقة
+      eyebrow: فرص موثقة
       filters:
-        title: "الفلاتر"
-        search_placeholder: "ابحث بالعنوان، الشركة، المهارات..."
-        stage_type: "نوع التربص"
-        work_mode: "وضع العمل"
-        all_types: "كل الأنواع"
-        all_modes: "كل الأوضاع"
-        stage_type_pfe: "مشروع تخرج (PFE)"
-        stage_type_pfa: "مشروع نهاية السنة (PFA)"
-        clear_filters: "إعادة تعيين الفلاتر"
-        filters_active: "الفلاتر نشطة"
-      no_results: "لا توجد تربصات تطابق فلاترك"
-      no_results_hint: "حاول تعديل بحثك أو فلاترك"
+        title: الفلاتر
+        search_placeholder: ابحث بالعنوان، الشركة، المهارات...
+        stage_type: نوع التربص
+        work_mode: وضع العمل
+        all_types: كل الأنواع
+        all_modes: كل الأوضاع
+        stage_type_pfe: مشروع تخرج (PFE)
+        stage_type_pfa: مشروع نهاية السنة (PFA)
+        clear_filters: إعادة تعيين الفلاتر
+        filters_active: الفلاتر نشطة
+      no_results: لا توجد تربصات تطابق فلاترك
+      no_results_hint: حاول تعديل بحثك أو فلاترك
       active_listings:
         one: "%{count} تربص نشط"
         other: "%{count} تربصات نشطة"
-      active_listing_tooltip: "تربص نشط"
+      active_listing_tooltip: تربص نشط
       card:
-        mission_attached: "مهمة مرفقة"
-        cv_only: "سيرة ذاتية فقط"
-        view_details: "عرض التفاصيل"
-        sign_in_to_unlock: "سجل الدخول للفتح"
+        mission_attached: مهمة مرفقة
+        cv_only: سيرة ذاتية فقط
+        view_details: عرض التفاصيل
+        sign_in_to_unlock: سجل الدخول للفتح
       stats:
-        total_offers: "عروض متاحة"
-
+        total_offers: عروض متاحة
     show:
       page_title: "%{title} – StageUp"
-      title: "تفاصيل التربص"
-      apply_now: "قدم الآن"
-      sign_in_to_apply: "سجل الدخول للتقديم"
+      title: تفاصيل التربص
+      apply_now: قدم الآن
+      sign_in_to_apply: سجل الدخول للتقديم
       mission:
-        title: "مهمة إثبات العمل"
-        subtitle: "أكمل هذا التحدي لفتح طلبك"
-        duration: "الوقت المقدر: %{minutes} دقيقة"
-        submit_solution: "تقديم الحل"
-        solution_placeholder: "مستودع GitHub، رابط Figma، Google Drive..."
-        notes_placeholder: "تفسير تقني مختصر (اختياري)"
-        submit_btn: "تقديم الحل"
-        submitting: "جاري الإرسال..."
+        title: مهمة إثبات العمل
+        subtitle: أكمل هذا التحدي لفتح طلبك
+        duration: 'الوقت المقدر: %{minutes} دقيقة'
+        submit_solution: تقديم الحل
+        solution_placeholder: مستودع GitHub، رابط Figma، Google Drive...
+        notes_placeholder: تفسير تقني مختصر (اختياري)
+        submit_btn: تقديم الحل
+        submitting: جاري الإرسال...
       company:
-        title: "حول الشركة"
-        website: "الموقع الإلكتروني"
-        verified: "شريك موثق"
-        grace_period: "مجند جديد · فترة سماح"
-        grace_text: "بدأ صاحب العمل هذا مؤخراً بالنشر على StageUp. مقاييس معدل الاستجابة التفصيلية مخفية خلال فترة السماح البالغة 30 يوماً."
-        response_rate: "معدل الاستجابة"
-        avg_decision_time: "متوسط وقت القرار"
-        verified_recruiter: "مجند موثق"
-        commitment: "الالتزام"
-        avg_rating: "متوسط التقييم"
+        title: حول الشركة
+        website: الموقع الإلكتروني
+        verified: شريك موثق
+        grace_period: مجند جديد · فترة سماح
+        grace_text: بدأ صاحب العمل هذا مؤخراً بالنشر على StageUp. مقاييس معدل الاستجابة التفصيلية مخفية خلال فترة السماح البالغة 30 يوماً.
+        response_rate: معدل الاستجابة
+        avg_decision_time: متوسط وقت القرار
+        verified_recruiter: مجند موثق
+        commitment: الالتزام
+        avg_rating: متوسط التقييم
       details:
-        stage_type: "نوع التربص"
-        spots: "الأماكن المتاحة"
-        work_mode: "وضع العمل"
-        deadline: "الموعد النهائي للتقديم"
-        location: "الموقع"
-        remote: "عن بعد"
-        posted: "نُشر منذ %{time}"
+        stage_type: نوع التربص
+        spots: الأماكن المتاحة
+        work_mode: وضع العمل
+        deadline: الموعد النهائي للتقديم
+        location: الموقع
+        remote: عن بعد
+        posted: نُشر منذ %{time}
       apply:
-        cta_title: "مستعد لبدء مهمتك؟"
-        cta_desc: "قدم حلك لتحدي إثبات العمل واحصل على مراجعة مباشرة من الفريق."
-        btn: "ابدأ المهمة"
+        cta_title: مستعد لبدء مهمتك؟
+        cta_desc: قدم حلك لتحدي إثبات العمل واحصل على مراجعة مباشرة من الفريق.
+        btn: ابدأ المهمة
       auth_prompt:
-        title: "سجل الدخول للتقديم"
-        desc: "أنشئ حساباً أو سجل الدخول لتقديم حلك لهذه المهمة."
-        sign_up: "إنشاء حساب"
-        sign_in: "تسجيل الدخول"
+        title: سجل الدخول للتقديم
+        desc: أنشئ حساباً أو سجل الدخول لتقديم حلك لهذه المهمة.
+        sign_up: إنشاء حساب
+        sign_in: تسجيل الدخول
       reviews:
-        title: "تقييمات المرشحين"
+        title: تقييمات المرشحين
       application:
-        title: "الطلب"
-        must_sign_in: "يجب أن تكون مسجل الدخول كطالب للتقديم أو القيام بمهمة إثبات العمل."
-        mission_prompt: "هذا العرض يحتوي على مهمة مرفقة. النقر أدناه يبدأ <strong>نافذة 48 ساعة</strong> لإكمال المهمة وتقديم عملك."
-        start_mission: "بدء مهمة الإثبات"
-        cv_prompt: "هذا العرض يقبل طلبات السيرة الذاتية القياسية. انقر أدناه لمراجعة رابط سيرتك الذاتية والتقديم."
-        apply_cv: "التقديم بسيرة ذاتية"
-        mission_in_progress: "مهمة قيد التنفيذ"
-        mission_deadline_warning: "لقد بدأت هذه المهمة. لا تنسَ تقديم رابط الكود الخاص بك قبل الموعد النهائي 48 ساعة!"
-        submit_solution: "تقديم رابط الحل →"
-        status_label: "حالة الطلب:"
-        view_submission: "عرض رابط تقديمي"
-        students_only: "الطلاب المسجلون دخولهم فقط يمكنهم التقديم على التربصات."
+        title: الطلب
+        must_sign_in: يجب أن تكون مسجل الدخول كطالب للتقديم أو القيام بمهمة إثبات العمل.
+        mission_prompt: هذا العرض يحتوي على مهمة مرفقة. النقر أدناه يبدأ <strong>نافذة 48 ساعة</strong> لإكمال المهمة وتقديم عملك.
+        start_mission: بدء مهمة الإثبات
+        cv_prompt: هذا العرض يقبل طلبات السيرة الذاتية القياسية. انقر أدناه لمراجعة رابط سيرتك الذاتية والتقديم.
+        apply_cv: التقديم بسيرة ذاتية
+        mission_in_progress: مهمة قيد التنفيذ
+        mission_deadline_warning: لقد بدأت هذه المهمة. لا تنسَ تقديم رابط الكود الخاص بك قبل الموعد النهائي 48 ساعة!
+        submit_solution: تقديم رابط الحل →
+        status_label: 'حالة الطلب:'
+        view_submission: عرض رابط تقديمي
+        students_only: الطلاب المسجلون دخولهم فقط يمكنهم التقديم على التربصات.
         statuses:
-          started: "بدأت"
-          submitted: "مقدم"
-          reviewed: "تمت المراجعة"
-          accepted: "مقبول"
-          rejected: "مرفوض"
-          completed: "مكتمل"
-        modal_mission_desc: "أنت على وشك بدء مهمة إثبات العمل لـ <strong>%{offer_title}</strong>."
-        modal_timer: "نافذة الوقت:"
-        modal_success_reward: "مكافأة النجاح:"
-        modal_missed_deadline: "انتهت المهلة:"
-        modal_penalty: "عقوبة الالتزام"
-        modal_confirm: "هل أنت متأكد من أن لديك الوقت لبدء هذا التحدي الآن؟"
-        modal_cv_desc: "أنت تتقدم إلى <strong>%{offer_title}</strong> في %{company_name}."
-        cv_link_label: "رابط السيرة الذاتية / المستند"
-        cv_link_hint: "أضف رابطاً عاماً من Google Drive، Dropbox، LinkedIn، أو PDF لسيرتك الذاتية."
-        cv_placeholder: "https://drive.google.com/your-cv.pdf"
-        confirm_start: "تأكيد وبدء المهمة"
-        confirm_submit_cv: "تأكيد وتقديم السيرة الذاتية"
+          started: بدأت
+          submitted: مقدم
+          reviewed: تمت المراجعة
+          accepted: مقبول
+          rejected: مرفوض
+          completed: مكتمل
+        modal_mission_desc: أنت على وشك بدء مهمة إثبات العمل لـ <strong>%{offer_title}</strong>.
+        modal_timer: 'نافذة الوقت:'
+        modal_success_reward: 'مكافأة النجاح:'
+        modal_missed_deadline: 'انتهت المهلة:'
+        modal_penalty: عقوبة الالتزام
+        modal_confirm: هل أنت متأكد من أن لديك الوقت لبدء هذا التحدي الآن؟
+        modal_cv_desc: أنت تتقدم إلى <strong>%{offer_title}</strong> في %{company_name}.
+        cv_link_label: رابط السيرة الذاتية / المستند
+        cv_link_hint: أضف رابطاً عاماً من Google Drive، Dropbox، LinkedIn، أو PDF لسيرتك الذاتية.
+        cv_placeholder: https://drive.google.com/your-cv.pdf
+        confirm_start: تأكيد وبدء المهمة
+        confirm_submit_cv: تأكيد وتقديم السيرة الذاتية
       deadline:
-        passed: "انتهت المهلة"
-        one_day: "بقي يوم واحد"
-        days_left: "بقي %{count} أيام"
+        passed: انتهت المهلة
+        one_day: بقي يوم واحد
+        days_left: بقي %{count} أيام
       match_breakdown:
-        skills: "المهارات"
-        major: "التخصص"
-        readiness: "النقاط"
-        match_label: "مطابقة"
-
+        skills: المهارات
+        major: التخصص
+        readiness: النقاط
+        match_label: مطابقة
     new:
-      title: "نشر تربص – StageUp"
-      heading: "نشر عرض تربص"
-      subtitle: "املأ التفاصيل أدناه. يمكنك إرفاق مهمة إثبات عمل اختيارية لفلترة المرشحين حسب المهارة."
+      title: نشر تربص – StageUp
+      heading: نشر عرض تربص
+      subtitle: املأ التفاصيل أدناه. يمكنك إرفاق مهمة إثبات عمل اختيارية لفلترة المرشحين حسب المهارة.
       form:
-        internship_details: "تفاصيل التربص"
-        title_placeholder: "مثلاً: متدرب مطور واجهات أمامية"
-        description_label: "الوصف والمتطلبات"
-        description_placeholder: "صف المهام والأدوات والملف الشخصي المطلوب..."
-        stage_type_pfe: "مشروع تخرج (PFE)"
-        stage_type_pfa: "مشروع نهاية سنة (PFA)"
-        stage_type_initiation: "إدخال / مراقبة"
-        stage_type_free: "حر / تطوير المهارات"
-        stage_type_prompt: "اختر نوعاً"
-        location_placeholder: "مثلاً: صفاقس"
-        mission_section: "مهمة إثبات العمل"
-        mission_description_text: "أضف اختباراً عملياً (30–90 دقيقة) لفلترة المرشحين بالمهارة الحقيقية. اتركه فارغاً للتقديم بالسيرة الذاتية فقط."
-        mission_title_placeholder: "مثلاً: بناء شريط تنقل متجاوب"
-        mission_instructions_label: "التعليمات ومعايير التقييم"
-        mission_instructions_placeholder: "الهدف، المواصفات، الموارد، وتفاصيل التقييم..."
-        mission_duration_placeholder: "مثلاً: 60"
-        submit: "نشر التربص"
-        submitting: "جاري النشر…"
+        internship_details: تفاصيل التربص
+        title_placeholder: 'مثلاً: متدرب مطور واجهات أمامية'
+        description_label: الوصف والمتطلبات
+        description_placeholder: صف المهام والأدوات والملف الشخصي المطلوب...
+        stage_type_pfe: مشروع تخرج (PFE)
+        stage_type_pfa: مشروع نهاية سنة (PFA)
+        stage_type_initiation: إدخال / مراقبة
+        stage_type_free: حر / تطوير المهارات
+        stage_type_prompt: اختر نوعاً
+        location_placeholder: 'مثلاً: صفاقس'
+        mission_section: مهمة إثبات العمل
+        mission_description_text: أضف اختباراً عملياً (30–90 دقيقة) لفلترة المرشحين بالمهارة الحقيقية. اتركه فارغاً للتقديم بالسيرة الذاتية فقط.
+        mission_title_placeholder: 'مثلاً: بناء شريط تنقل متجاوب'
+        mission_instructions_label: التعليمات ومعايير التقييم
+        mission_instructions_placeholder: الهدف، المواصفات، الموارد، وتفاصيل التقييم...
+        mission_duration_placeholder: 'مثلاً: 60'
+        submit: نشر التربص
+        submitting: جاري النشر…
       preview:
-        title: "معاينة"
-        mission_attached: "مهمة مرفقة"
-        cv_only: "سيرة ذاتية فقط"
-
+        title: معاينة
+        mission_attached: مهمة مرفقة
+        cv_only: سيرة ذاتية فقط
     edit:
-      title: "تعديل عرض التربص – StageUp"
-      heading: "تعديل عرض التربص"
-      subtitle: "حدّث تفاصيل أو مهمة إثبات العمل لهذا العرض."
+      title: تعديل عرض التربص – StageUp
+      heading: تعديل عرض التربص
+      subtitle: حدّث تفاصيل أو مهمة إثبات العمل لهذا العرض.
       form:
-        submit: "تحديث العرض"
-        submitting: "جاري التحديث…"
-        delete: "حذف"
-        deleting: "جاري الحذف…"
-        delete_confirm: "هل أنت متأكد؟ هذا الإجراء لا يمكن التراجع عنه."
-
+        submit: تحديث العرض
+        submitting: جاري التحديث…
+        delete: حذف
+        deleting: جاري الحذف…
+        delete_confirm: هل أنت متأكد؟ هذا الإجراء لا يمكن التراجع عنه.
     form:
-      title: "عنوان التربص"
-      stage_type: "نوع التربص"
-      spots: "الأماكن المتاحة"
-      work_mode: "وضع العمل"
-      location: "الموقع"
-      deadline: "الموعد النهائي"
-      description: "الوصف"
-      mission_title: "عنوان المهمة"
-      mission_duration: "مدة المهمة"
-      mission_description: "وصف المهمة"
+      title: عنوان التربص
+      stage_type: نوع التربص
+      spots: الأماكن المتاحة
+      work_mode: وضع العمل
+      location: الموقع
+      deadline: الموعد النهائي
+      description: الوصف
+      mission_title: عنوان المهمة
+      mission_duration: مدة المهمة
+      mission_description: وصف المهمة
     status:
-      active: "نشط"
-      closed: "مغلق"
-      draft: "مسودة"
-
+      active: نشط
+      closed: مغلق
+      draft: مسودة
   dashboard:
-    title: "لوحة التحكم"
-    welcome_back: "مرحباً بعودتك، %{name}"
-    today_is: "اليوم هو %{date}"
+    title: لوحة التحكم
+    welcome_back: مرحباً بعودتك، %{name}
+    today_is: اليوم هو %{date}
     welcome_sub:
-      student: "إدارة طلباتك، متابعة تقدم التربصات، وبناء نقاط التزامك."
-      company: "مراجعة طلاب المتقدمين، نشر مهام الإثبات، وإدارة عروض التربص النشطة."
-      university: "مراقبة اتفاقيات تربص الطلاب وتتبع التزامات الشركاء الجامعيين."
+      student: إدارة طلباتك، متابعة تقدم التربصات، وبناء نقاط التزامك.
+      company: مراجعة طلاب المتقدمين، نشر مهام الإثبات، وإدارة عروض التربص النشطة.
+      university: مراقبة اتفاقيات تربص الطلاب وتتبع التزامات الشركاء الجامعيين.
     quick_stats:
-      title: "إحصائيات سريعة"
-      active_applications: "الطلبات النشطة"
-      completed_internships: "التربصات المكتملة"
-      reputation_score: "نقاط السمعة"
-      pending_reviews: "التقييمات المعلقة"
+      title: إحصائيات سريعة
+      active_applications: الطلبات النشطة
+      completed_internships: التربصات المكتملة
+      reputation_score: نقاط السمعة
+      pending_reviews: التقييمات المعلقة
     tabs:
-      applications: "طلباتي"
-      offers: "عروضي"
-      agreements: "الاتفاقيات"
-      reputation: "السمعة"
-      reviews: "التقييمات"
+      applications: طلباتي
+      offers: عروضي
+      agreements: الاتفاقيات
+      reputation: السمعة
+      reviews: التقييمات
     kanban:
-      title: "متتبع الطلبات"
+      title: متتبع الطلبات
       columns:
-        applied: "تم التقديم"
-        mission: "مهمة"
-        review: "قيد المراجعة"
-        accepted: "مقبول"
-        completed: "مكتمل"
-      empty: "لا توجد طلبات في هذه المرحلة"
+        applied: تم التقديم
+        mission: مهمة
+        review: قيد المراجعة
+        accepted: مقبول
+        completed: مكتمل
+      empty: لا توجد طلبات في هذه المرحلة
     applications:
-      title: "طلباتي"
-      empty: "لم تتقدم لأي تربص بعد"
-      browse_offers: "تصفح العروض"
+      title: طلباتي
+      empty: لم تتقدم لأي تربص بعد
+      browse_offers: تصفح العروض
       status:
-        pending: "معلق"
-        mission_pending: "مهمة معلقة"
-        in_review: "قيد المراجعة"
-        accepted: "مقبول"
-        rejected: "مرفوض"
-        completed: "مكتمل"
+        pending: معلق
+        mission_pending: مهمة معلقة
+        in_review: قيد المراجعة
+        accepted: مقبول
+        rejected: مرفوض
+        completed: مكتمل
       actions:
-        view_mission: "عرض المهمة"
-        submit_solution: "تقديم الحل"
-        view_agreement: "عرض الاتفاقية"
-        withdraw: "سحب"
+        view_mission: عرض المهمة
+        submit_solution: تقديم الحل
+        view_agreement: عرض الاتفاقية
+        withdraw: سحب
       mission_status:
-        not_started: "لم تبدأ"
-        in_progress: "قيد التنفيذ"
-        submitted: "مقدم"
-        graded: "مقيم"
+        not_started: لم تبدأ
+        in_progress: قيد التنفيذ
+        submitted: مقدم
+        graded: مقيم
     offers:
-      title: "عروضي للتربصات"
-      empty: "لم تنشر أي تربصات بعد"
-      post_offer: "نشر عرض جديد"
+      title: عروضي للتربصات
+      empty: لم تنشر أي تربصات بعد
+      post_offer: نشر عرض جديد
       status:
-        draft: "مسودة"
-        published: "منشور"
-        closed: "مغلق"
+        draft: مسودة
+        published: منشور
+        closed: مغلق
       actions:
-        edit: "تعديل"
-        view_applications: "عرض الطلبات"
-        close: "إغلاق"
-        draft_label: "مسودة"
-        applicant_count: "مقدم(ة)"
-        delete_draft: "حذف"
-        delete_draft_confirm: "حذف هذه المسودة نهائياً؟"
-        archive: "أرشفة"
-        archive_confirm: "أرشفة هذا العرض؟"
-        post_offer_empty: "نشر عرض"
-        no_offers_title: "لم يتم نشر أي عروض بعد"
-        no_offers_text: "انشر أول عرض تربص لك لجذب المواهب واستلام تقديمات المهام."
+        edit: تعديل
+        view_applications: عرض الطلبات
+        close: إغلاق
+        draft_label: مسودة
+        applicant_count: مقدم(ة)
+        delete_draft: حذف
+        delete_draft_confirm: حذف هذه المسودة نهائياً؟
+        archive: أرشفة
+        archive_confirm: أرشفة هذا العرض؟
+        post_offer_empty: نشر عرض
+        no_offers_title: لم يتم نشر أي عروض بعد
+        no_offers_text: انشر أول عرض تربص لك لجذب المواهب واستلام تقديمات المهام.
     agreements:
-      title: "اتفاقيات التربص"
-      empty: "لا توجد اتفاقيات بعد"
+      title: اتفاقيات التربص
+      empty: لا توجد اتفاقيات بعد
       status:
-        pending_signatures: "بانتظار التوقيعات"
-        signed: "موقعة بالكامل"
-        declined: "مرفوضة"
-        expired: "منتهية الصلاحية"
+        pending_signatures: بانتظار التوقيعات
+        signed: موقعة بالكامل
+        declined: مرفوضة
+        expired: منتهية الصلاحية
       actions:
-        view: "عرض الاتفاقية"
-        sign: "توقيع"
+        view: عرض الاتفاقية
+        sign: توقيع
     reputation:
-      title: "سجل السمعة"
-      current_score: "النقاط الحالية"
-      score_label: "نقاط الالتزام"
-      history_title: "تاريخ النقاط"
-      empty: "لا توجد أحداث سمعة بعد"
-      public_verified_label: "عام · موثق"
-      avg_rating: "متوسط التقييم"
-      metrics_title: "مقاييس السمعة"
-      active_offers: "العروض النشطة"
-      verification_label: "التحقق"
-      verified_status: "موثق"
-      grace_period: "فترة سماح"
-      associated_students: "الطلاب المنتسبون"
-      ledger_title: "سجل الالتزام"
-      event_label: "حدث"
+      title: سجل السمعة
+      current_score: النقاط الحالية
+      score_label: نقاط الالتزام
+      history_title: تاريخ النقاط
+      empty: لا توجد أحداث سمعة بعد
+      public_verified_label: عام · موثق
+      avg_rating: متوسط التقييم
+      metrics_title: مقاييس السمعة
+      active_offers: العروض النشطة
+      verification_label: التحقق
+      verified_status: موثق
+      grace_period: فترة سماح
+      associated_students: الطلاب المنتسبون
+      ledger_title: سجل الالتزام
+      event_label: حدث
       events:
-        applied: "تقدم لتربص"
-        mission_submitted: "قدم حل مهمة"
-        mission_approved: "تمت الموافقة على المهمة"
-        mission_rejected: "تم رفض المهمة"
-        agreement_signed: "وقّع الاتفاقية"
-        review_received: "تلقى تقييماً"
-        no_show: "عقوبة تغيب"
+        applied: تقدم لتربص
+        mission_submitted: قدم حل مهمة
+        mission_approved: تمت الموافقة على المهمة
+        mission_rejected: تم رفض المهمة
+        agreement_signed: وقّع الاتفاقية
+        review_received: تلقى تقييماً
+        no_show: عقوبة تغيب
       delta:
         positive: "+%{points}"
         negative: "%{points}"
     profile:
-      title: "ملفي الشخصي"
+      title: ملفي الشخصي
       roles:
-        student: "طالب"
-        company: "شركة"
-        university: "جامعة"
-      edit: "تعديل الملف"
-      view_public: "عرض ملفي الشخصي"
+        student: طالب
+        company: شركة
+        university: جامعة
+      edit: تعديل الملف
+      view_public: عرض ملفي الشخصي
     profile_bento:
-      full_name: "الاسم الكامل"
-      phone: "الهاتف"
-      phone_not_specified: "غير محدد"
-      major: "التخصص"
-      major_not_specified: "غير محدد"
-      graduation_year: "سنة التخرج"
-      graduation_not_specified: "غير محدد"
-      university: "الجامعة"
-      university_self_declared: "معلن ذاتياً / غير مرتبط"
-      skills: "المهارات"
-      skills_none: "لم تضف أي مهارات"
-      bio: "نبذة"
-      bio_empty: "لا توجد نبذة بعد"
-      company_name: "اسم الشركة"
-      website: "الموقع الإلكتروني"
-      website_not_provided: "غير متوفر"
-      verification_status: "حالة التحقق"
-      verified: "موثق"
-      not_verified: "غير موثق"
-      description: "الوصف"
-      description_empty: "لم يقدم أي وصف"
-      admin_name: "اسم المنسق"
-      department: "القسم"
-      institution_name: "اسم المؤسسة"
+      full_name: الاسم الكامل
+      phone: الهاتف
+      phone_not_specified: غير محدد
+      major: التخصص
+      major_not_specified: غير محدد
+      graduation_year: سنة التخرج
+      graduation_not_specified: غير محدد
+      university: الجامعة
+      university_self_declared: معلن ذاتياً / غير مرتبط
+      skills: المهارات
+      skills_none: لم تضف أي مهارات
+      bio: نبذة
+      bio_empty: لا توجد نبذة بعد
+      company_name: اسم الشركة
+      website: الموقع الإلكتروني
+      website_not_provided: غير متوفر
+      verification_status: حالة التحقق
+      verified: موثق
+      not_verified: غير موثق
+      description: الوصف
+      description_empty: لم يقدم أي وصف
+      admin_name: اسم المنسق
+      department: القسم
+      institution_name: اسم المؤسسة
     active_internships:
-      title: "التربصات النشطة وتقدم المراحل"
-      company_label: "الشركة:"
+      title: التربصات النشطة وتقدم المراحل
+      company_label: 'الشركة:'
       match: "% تطابق"
-      milestone_done: "مكتمل"
-      waiting_employer: "بانتظار صاحب العمل"
-      mark_completed: "تحديد كمكتمل"
-      completing: "جارٍ الإكمال…"
-      abandon: "تخلي"
-      abandoning: "جارٍ التخلي…"
-      abandon_confirm: "هل أنت متأكد من رغبتك في التخلي عن هذا التربص؟ ستتأثر نقاط التزامك."
-      awaiting_signatures: "بانتظار التوقيعات"
-      agreement_declined: "الاتفاقية مرفوضة"
-      view_sign_agreement: "عرض وتوقيع الاتفاقية"
-      generate_agreement: "إنشاء اتفاقية التربص"
-      view_certificate: "عرض الشهادة"
-      leave_review: "ترك تقييم"
-      review_submitted: "تم تقديم التقييم"
-      no_active_title: "لا توجد تربصات نشطة"
-      no_active_text: "لم تبدأ أي تربصات على StageUp بعد. ابحث عن العروض النشطة، وتقدم، وأكمل مهمة الإثبات الخاصة بك!"
-      browse_active: "تصفح العروض النشطة"
+      milestone_done: مكتمل
+      waiting_employer: بانتظار صاحب العمل
+      mark_completed: تحديد كمكتمل
+      completing: جارٍ الإكمال…
+      abandon: تخلي
+      abandoning: جارٍ التخلي…
+      abandon_confirm: هل أنت متأكد من رغبتك في التخلي عن هذا التربص؟ ستتأثر نقاط التزامك.
+      awaiting_signatures: بانتظار التوقيعات
+      agreement_declined: الاتفاقية مرفوضة
+      view_sign_agreement: عرض وتوقيع الاتفاقية
+      generate_agreement: إنشاء اتفاقية التربص
+      view_certificate: عرض الشهادة
+      leave_review: ترك تقييم
+      review_submitted: تم تقديم التقييم
+      no_active_title: لا توجد تربصات نشطة
+      no_active_text: لم تبدأ أي تربصات على StageUp بعد. ابحث عن العروض النشطة، وتقدم، وأكمل مهمة الإثبات الخاصة بك!
+      browse_active: تصفح العروض النشطة
     reviews:
-      title: "التقييمات"
-      write_review: "ترك تقييم"
-      subtitle_html: "شارك تجربتك مع <strong>%{name}</strong>"
-      internship: "التربص"
-      rating_label: "التقييم"
-      click_to_rate: "انقر على نجمة للتقييم"
-      feedback: "ملاحظات وتقييم"
-      comment_placeholder: "صف التعاون، المهارات المكتسبة، الاحترافية، وأي تعليقات بناءة..."
-      hint: "لا يمكن تعديل التقييمات بعد الإرسال."
+      title: التقييمات
+      write_review: ترك تقييم
+      subtitle_html: شارك تجربتك مع <strong>%{name}</strong>
+      internship: التربص
+      rating_label: التقييم
+      click_to_rate: انقر على نجمة للتقييم
+      feedback: ملاحظات وتقييم
+      comment_placeholder: صف التعاون، المهارات المكتسبة، الاحترافية، وأي تعليقات بناءة...
+      hint: لا يمكن تعديل التقييمات بعد الإرسال.
       char_count: "%{count} / الحد الأدنى %{min}"
       char_count_suffix: " / الحد الأدنى %{min}"
-      submit: "إرسال التقييم"
-      submitting: "جاري الإرسال…"
-      turbo_confirm: "لا يمكن تعديل التقييمات بعد الإرسال. هل تريد المتابعة؟"
+      submit: إرسال التقييم
+      submitting: جاري الإرسال…
+      turbo_confirm: لا يمكن تعديل التقييمات بعد الإرسال. هل تريد المتابعة؟
       rating:
         labels:
-          - ضعيف
-          - أقل من المتوسط
-          - متوسط
-          - جيد
-          - ممتاز
+        - ضعيف
+        - أقل من المتوسط
+        - متوسط
+        - جيد
+        - ممتاز
     pending_approval:
-      title: "التحقق معلق"
-      logged_in_as: "مسجل الدخول كـ: %{email}"
-      subtitle: "حسابك كمنسق جامعي قيد المراجعة"
-      what_next: "ماذا يحدث بعد ذلك؟"
-      step1: "سنقوم بالتحقق من نطاق بريدك الجامعي الرسمي."
-      step2: "قد نتواصل مع رئيس قسمك أو نراجع سجلات الجامعة."
-      step3: "بمجرد الموافقة، ستتلقى بريداً إلكترونياً وسيتم فتح الوصول الكامل."
-      contact: "بحاجة إلى تفعيل عاجل؟ تواصل معنا على %{email}"
-      registration_thanks: "شكراً لتسجيلك كمنسق لـ %{university} (%{department})."
-      privacy_notice: "لحماية خصوصية بيانات الطلاب، يجب التحقق من لوحات تحكم المنسقين من قبل مسؤولي StageUp قبل التفعيل."
+      title: التحقق معلق
+      logged_in_as: 'مسجل الدخول كـ: %{email}'
+      subtitle: حسابك كمنسق جامعي قيد المراجعة
+      what_next: ماذا يحدث بعد ذلك؟
+      step1: سنقوم بالتحقق من نطاق بريدك الجامعي الرسمي.
+      step2: قد نتواصل مع رئيس قسمك أو نراجع سجلات الجامعة.
+      step3: بمجرد الموافقة، ستتلقى بريداً إلكترونياً وسيتم فتح الوصول الكامل.
+      contact: بحاجة إلى تفعيل عاجل؟ تواصل معنا على %{email}
+      registration_thanks: شكراً لتسجيلك كمنسق لـ %{university} (%{department}).
+      privacy_notice: لحماية خصوصية بيانات الطلاب، يجب التحقق من لوحات تحكم المنسقين من قبل مسؤولي StageUp قبل التفعيل.
     internship_agreements:
       show:
-        title: "اتفاقية التربص"
-        subtitle: "هذه الاتفاقية مبرمة وفقاً للقانون التونسي المنظم لبرامج التربص."
-        declined_title: "الاتفاقية مرفوضة"
-        declined_reason: "السبب: %{reason}"
-        declined_by: "مرفوضة من قبل منسق %{university}"
-        certificate_banner: "الشهادة متاحة"
-        certificate_sub: "هذا التربص منفذ بالكامل ويمكن التحقق منه علناً."
-        print: "طباعة / حفظ PDF"
-        view_certificate: "فتح الشهادة ←"
-        fully_executed_badge: "منفذة بالكامل — جميع الأطراف وقعت"
-        declined_badge: "مرفوضة — الجامعة رفضت هذه الاتفاقية"
-        pending_badge: "بانتظار التوقيعات — بانتظار: %{signatories}"
-        article1: "المادة 1 — الأطراف"
-        article1_text: "هذه الاتفاقية مبرمة بين الأطراف الثلاثة التالية:"
-        article2: "المادة 2 — التواريخ والمدة"
-        article2_text: "يبدأ التربص في %{start_date} وينتهي في %{end_date}."
-        article3: "المادة 3 — موضوع التربص"
-        article3_text: "%{name} سيقوم بتربص بعنوان \"%{title}\" في %{company} وفقاً للشروط الموصوفة في العرض الأصلي."
-        student_role: "الطالب:"
-        employer_role: "صاحب العمل:"
-        university_role: "الجامعة:"
-        duration: "المدة الإجمالية: %{days} يوماً."
-        enrolled_at: "مسجل في"
-        registered_in_tunisia: "مسجل في تونس"
-        signatures: "التوقيعات"
-        student_box: "الطالب"
-        employer_box: "صاحب العمل"
-        university_box: "المنسق الجامعي"
-        signed: "موقع"
-        not_signed: "لم يوقع بعد"
-        signed_on: "وقع في: %{date}"
-        sign_agreement: "توقيع الاتفاقية"
-        signing: "جاري التوقيع…"
-        decline: "رفض الاتفاقية"
-        decline_reason: "سبب الرفض:"
-        decline_placeholder: "اشرح سبب رفض هذه الاتفاقية…"
-        cancel: "إلغاء"
-        confirm_decline: "تأكيد الرفض"
-        declining: "جاري الرفض…"
-        independent: "مستقل"
-        affiliated_university: "جامعة منتسبة"
-        no_major: "لم يحدد تخصص"
-        self_declared: "مستقل / معلن ذاتياً"
-        signatures_desc: "يجب على كل طرف التوقيع أدناه حتى تصبح هذه الاتفاقية نافذة بالكامل."
+        title: اتفاقية التربص
+        subtitle: هذه الاتفاقية مبرمة وفقاً للقانون التونسي المنظم لبرامج التربص.
+        declined_title: الاتفاقية مرفوضة
+        declined_reason: 'السبب: %{reason}'
+        declined_by: مرفوضة من قبل منسق %{university}
+        certificate_banner: الشهادة متاحة
+        certificate_sub: هذا التربص منفذ بالكامل ويمكن التحقق منه علناً.
+        print: طباعة / حفظ PDF
+        view_certificate: فتح الشهادة ←
+        fully_executed_badge: منفذة بالكامل — جميع الأطراف وقعت
+        declined_badge: مرفوضة — الجامعة رفضت هذه الاتفاقية
+        pending_badge: 'بانتظار التوقيعات — بانتظار: %{signatories}'
+        article1: المادة 1 — الأطراف
+        article1_text: 'هذه الاتفاقية مبرمة بين الأطراف الثلاثة التالية:'
+        article2: المادة 2 — التواريخ والمدة
+        article2_text: يبدأ التربص في %{start_date} وينتهي في %{end_date}.
+        article3: المادة 3 — موضوع التربص
+        article3_text: '%{name} سيقوم بتربص بعنوان "%{title}" في %{company} وفقاً للشروط الموصوفة في العرض الأصلي.'
+        student_role: 'الطالب:'
+        employer_role: 'صاحب العمل:'
+        university_role: 'الجامعة:'
+        duration: 'المدة الإجمالية: %{days} يوماً.'
+        enrolled_at: مسجل في
+        registered_in_tunisia: مسجل في تونس
+        signatures: التوقيعات
+        student_box: الطالب
+        employer_box: صاحب العمل
+        university_box: المنسق الجامعي
+        signed: موقع
+        not_signed: لم يوقع بعد
+        signed_on: 'وقع في: %{date}'
+        sign_agreement: توقيع الاتفاقية
+        signing: جاري التوقيع…
+        decline: رفض الاتفاقية
+        decline_reason: 'سبب الرفض:'
+        decline_placeholder: اشرح سبب رفض هذه الاتفاقية…
+        cancel: إلغاء
+        confirm_decline: تأكيد الرفض
+        declining: جاري الرفض…
+        independent: مستقل
+        affiliated_university: جامعة منتسبة
+        no_major: لم يحدد تخصص
+        self_declared: مستقل / معلن ذاتياً
+        signatures_desc: يجب على كل طرف التوقيع أدناه حتى تصبح هذه الاتفاقية نافذة بالكامل.
     certificates:
       verify:
-        title: "شهادة إتمام"
-        subtitle: "موثقة ومصدقة عبر سجل الثقة StageUp"
-        recipient: "تشهد هذه الشهادة بأن"
-        institution: "المؤسسة"
-        duration: "المدة"
-        stage_type: "نوع التربص"
-        verification_id: "معرّف التحقق"
-        signatures: "التوقيعات الرقمية والتحقق القانوني"
-        student: "طالب"
-        employer: "صاحب العمل"
-        university: "المنسق الجامعي"
-        signed: "موقع"
-        signed_on: "وقع في: %{date}"
-        qr: "امسح للتحقق من الأصالة"
-
+        title: شهادة إتمام
+        subtitle: موثقة ومصدقة عبر سجل الثقة StageUp
+        recipient: تشهد هذه الشهادة بأن
+        institution: المؤسسة
+        duration: المدة
+        stage_type: نوع التربص
+        verification_id: معرّف التحقق
+        signatures: التوقيعات الرقمية والتحقق القانوني
+        student: طالب
+        employer: صاحب العمل
+        university: المنسق الجامعي
+        signed: موقع
+        signed_on: 'وقع في: %{date}'
+        qr: امسح للتحقق من الأصالة
   pending_approval:
-    title: "الحساب قيد الموافقة"
-    subtitle: "حسابك كمنسق جامعي قيد المراجعة"
-    description: "فريقنا يتحقق من بياناتك. ستتلقى بريداً إلكترونياً عند الموافقة."
-    contact_support: "لديك أسئلة؟ تواصل مع الدعم"
-
+    title: الحساب قيد الموافقة
+    subtitle: حسابك كمنسق جامعي قيد المراجعة
+    description: فريقنا يتحقق من بياناتك. ستتلقى بريداً إلكترونياً عند الموافقة.
+    contact_support: لديك أسئلة؟ تواصل مع الدعم
   notifications:
-    title: "الإشعارات"
-    mark_all_read: "تحديد الكل كمقروء"
-    bell_aria: "الإشعارات"
+    title: الإشعارات
+    mark_all_read: تحديد الكل كمقروء
+    bell_aria: الإشعارات
     unread_count:
       one: "%{count} غير مقروء"
       other: "%{count} غير مقروءة"
-    today: "اليوم"
-    yesterday: "أمس"
-    mark_read: "تحديد كمقروء"
-    empty_title: "على اطلاع كامل"
-    empty: "لا توجد إشعارات بعد"
-    empty_desc: "ليس لديك إشعارات جديدة."
-    page_info: "الصفحة %{current} من %{total}"
+    today: اليوم
+    yesterday: أمس
+    mark_read: تحديد كمقروء
+    empty_title: على اطلاع كامل
+    empty: لا توجد إشعارات بعد
+    empty_desc: ليس لديك إشعارات جديدة.
+    page_info: الصفحة %{current} من %{total}
     types:
-      application_received: "طلب جديد"
-      application_accepted: "تم قبول الطلب"
-      application_rejected: "تم رفض الطلب"
-      mission_submitted: "تم تقديم المهمة"
-      mission_graded: "تم تقييم المهمة"
-      agreement_ready: "الاتفاقية جاهزة للتوقيع"
-      agreement_signed: "تم توقيع الاتفاقية"
-      review_received: "تقييم جديد"
-      review_requested: "طُلب التقييم"
+      application_received: طلب جديد
+      application_accepted: تم قبول الطلب
+      application_rejected: تم رفض الطلب
+      mission_submitted: تم تقديم المهمة
+      mission_graded: تم تقييم المهمة
+      agreement_ready: الاتفاقية جاهزة للتوقيع
+      agreement_signed: تم توقيع الاتفاقية
+      review_received: تقييم جديد
+      review_requested: طُلب التقييم
     actions:
-      view: "عرض"
-      dismiss: "تجاهل"
-
+      view: عرض
+      dismiss: تجاهل
   submissions:
     edit:
-      title: "تقديم إثبات العمل – StageUp"
-      heading: "تقديم إثبات العمل"
-      eyebrow: "الخطوة 2 من 2 · تقديم الإثبات"
-      description: "الصق رابط الحل المكتمل الخاص بك وملاحظات التفسير الاختيارية أدناه."
-      internship_label: "عرض التربص"
-      mission_label: "المهمة المرفقة"
-      no_mission: "لا توجد مهمة مرفقة"
+      title: تقديم إثبات العمل – StageUp
+      heading: تقديم إثبات العمل
+      eyebrow: الخطوة 2 من 2 · تقديم الإثبات
+      description: الصق رابط الحل المكتمل الخاص بك وملاحظات التفسير الاختيارية أدناه.
+      internship_label: عرض التربص
+      mission_label: المهمة المرفقة
+      no_mission: لا توجد مهمة مرفقة
       form:
-        github_link: "رابط الحل (مستودع GitHub، ملف Figma، Google Drive)"
-        github_link_placeholder: "https://github.com/myusername/myrepo"
-        url_warning_html: "تأكد من أن الرابط <strong>متاح للعموم</strong> حتى يتمكن المسؤولون من التحقق من عملك."
-        notes: "ملاحظات / شرح تقني (اختياري)"
-        notes_placeholder: "صف تفاصيل التنفيذ الخاصة بك، مجموعة التقنيات المستخدمة، تعليمات الإعداد، أو الافتراضات الرئيسية..."
-        submit: "تقديم حل الإثبات ←"
-        submitting: "جاري الإرسال…"
-        cancel: "إلغاء"
+        github_link: رابط الحل (مستودع GitHub، ملف Figma، Google Drive)
+        github_link_placeholder: https://github.com/myusername/myrepo
+        url_warning_html: تأكد من أن الرابط <strong>متاح للعموم</strong> حتى يتمكن المسؤولون من التحقق من عملك.
+        notes: ملاحظات / شرح تقني (اختياري)
+        notes_placeholder: صف تفاصيل التنفيذ الخاصة بك، مجموعة التقنيات المستخدمة، تعليمات الإعداد، أو الافتراضات الرئيسية...
+        submit: تقديم حل الإثبات ←
+        submitting: جاري الإرسال…
+        cancel: إلغاء
     milestones:
-      applied: "تم التقديم"
-      checked: "تم الفحص"
-      accepted: "مقبول"
-      signed: "موقع"
-      done: "مكتمل"
-
+      applied: تم التقديم
+      checked: تم الفحص
+      accepted: مقبول
+      signed: موقع
+      done: مكتمل
   agreements:
     status:
-      pending_signatures: "بانتظار التوقيعات"
-      approved: "معتمد بالكامل"
-
+      pending_signatures: بانتظار التوقيعات
+      approved: معتمد بالكامل
   sessions:
     new:
-      title: "تسجيل الدخول"
-      subtitle: "ادخل إلى لوحة التحكم"
-      email: "البريد الإلكتروني"
-      email_placeholder: "example@email.com"
-      password: "كلمة المرور"
-      toggle_password_aria: "إظهار/إخفاء كلمة المرور"
-      remember_me: "تذكرني"
-      forgot_password: "نسيت كلمة المرور؟"
-      submit: "دخول"
-      submitting: "جاري الدخول..."
-      no_account: "لا تملك حساباً؟ %{link}"
-      sign_up: "إنشاء حساب"
-      role_select: "دخول كـ %{role}"
-
+      title: تسجيل الدخول
+      subtitle: ادخل إلى لوحة التحكم
+      email: البريد الإلكتروني
+      email_placeholder: example@email.com
+      password: كلمة المرور
+      toggle_password_aria: إظهار/إخفاء كلمة المرور
+      remember_me: تذكرني
+      forgot_password: نسيت كلمة المرور؟
+      submit: دخول
+      submitting: جاري الدخول...
+      no_account: لا تملك حساباً؟ %{link}
+      sign_up: إنشاء حساب
+      role_select: دخول كـ %{role}
   passwords:
     new:
-      title: "نسيت كلمة المرور؟"
-      subtitle: "سنرسل لك تعليمات إعادة تعيين كلمة المرور"
-      errors_title: "يرجى تصحيح الأخطاء التالية:"
-      email_placeholder: "example@email.com"
-      submit: "إرسال تعليمات إعادة التعيين"
-      sign_in: "تسجيل الدخول"
-      sign_up: "إنشاء حساب"
+      title: نسيت كلمة المرور؟
+      subtitle: سنرسل لك تعليمات إعادة تعيين كلمة المرور
+      errors_title: 'يرجى تصحيح الأخطاء التالية:'
+      email_placeholder: example@email.com
+      submit: إرسال تعليمات إعادة التعيين
+      sign_in: تسجيل الدخول
+      sign_up: إنشاء حساب
     edit:
-      title: "تغيير كلمة المرور"
-      subtitle: "أدخل بيانات الاعتماد الجديدة أدناه"
-      errors_title: "يرجى تصحيح الأخطاء التالية:"
-      new_password: "كلمة المرور الجديدة"
+      title: تغيير كلمة المرور
+      subtitle: أدخل بيانات الاعتماد الجديدة أدناه
+      errors_title: 'يرجى تصحيح الأخطاء التالية:'
+      new_password: كلمة المرور الجديدة
       minimum_characters: "(الحد الأدنى %{count} أحرف)"
-      confirm_new_password: "تأكيد كلمة المرور الجديدة"
-      submit: "تغيير كلمة المرور"
-      sign_in: "تسجيل الدخول"
-      sign_up: "إنشاء حساب"
-
+      confirm_new_password: تأكيد كلمة المرور الجديدة
+      submit: تغيير كلمة المرور
+      sign_in: تسجيل الدخول
+      sign_up: إنشاء حساب
   registrations:
     select_role:
-      title: "اختر دورك"
-      subtitle: "حدد كيف ستستخدم StageUp للبدء"
+      title: اختر دورك
+      subtitle: حدد كيف ستستخدم StageUp للبدء
       student:
-        title: "طالب"
-        desc: "ابحث عن تربصات موثقة، ابنِ سمعتك، احصل على وظيفة"
+        title: طالب
+        desc: ابحث عن تربصات موثقة، ابنِ سمعتك، احصل على وظيفة
       company:
-        title: "شركة"
-        desc: "انشر تربصات، قيم المواهب بمهام إثبات العمل"
+        title: شركة
+        desc: انشر تربصات، قيم المواهب بمهام إثبات العمل
       university:
-        title: "منسق جامعي"
-        desc: "تحقق من الطلاب، تتبع الاتفاقيات، إدارة الشراكات الأكاديمية"
-      already_account_html: "لديك حساب بالفعل؟ %{link}"
-      sign_in: "تسجيل الدخول"
+        title: منسق جامعي
+        desc: تحقق من الطلاب، تتبع الاتفاقيات، إدارة الشراكات الأكاديمية
+      already_account_html: لديك حساب بالفعل؟ %{link}
+      sign_in: تسجيل الدخول
     new_student:
-      title: "تسجيل طالب"
-      subtitle: "أنشئ ملفك الشخصي كطالب موثق"
-      errors_title: "يرجى تصحيح الأخطاء التالية:"
-      not_student: "لست طالباً؟"
+      title: تسجيل طالب
+      subtitle: أنشئ ملفك الشخصي كطالب موثق
+      errors_title: 'يرجى تصحيح الأخطاء التالية:'
+      not_student: لست طالباً؟
       form:
-        first_name: "الاسم الأول"
-        first_name_placeholder: "محمد"
-        last_name: "اللقب"
-        last_name_placeholder: "بن علي"
-        phone: "رقم الهاتف"
+        first_name: الاسم الأول
+        first_name_placeholder: محمد
+        last_name: اللقب
+        last_name_placeholder: بن علي
+        phone: رقم الهاتف
         phone_placeholder: "+216 99 123 456"
-        university: "الجامعة / المعهد"
-        university_placeholder: "اختر مؤسستك"
-        major: "التخصص / المجال"
-        major_placeholder: "هندسة البرمجيات"
-        graduation_year: "سنة التخرج"
-        graduation_year_placeholder: "2027"
-        bio: "نبذة قصيرة"
-        bio_placeholder: "أخبرنا عن نفسك، مهاراتك، اهتماماتك..."
-        email: "البريد الإلكتروني الجامعي"
-        email_placeholder: "student@isetsf.rnu.tn"
-        email_hint: "استخدم بريدك الجامعي الرسمي (مثل @isetsf.rnu.tn) للتحقق الفوري"
-        password: "كلمة المرور"
-        password_confirmation: "تأكيد كلمة المرور"
-        submit: "إنشاء حساب"
-        submitting: "جاري الإنشاء..."
-      back: "رجوع"
+        university: الجامعة / المعهد
+        university_placeholder: اختر مؤسستك
+        major: التخصص / المجال
+        major_placeholder: هندسة البرمجيات
+        graduation_year: سنة التخرج
+        graduation_year_placeholder: '2027'
+        bio: نبذة قصيرة
+        bio_placeholder: أخبرنا عن نفسك، مهاراتك، اهتماماتك...
+        email: البريد الإلكتروني الجامعي
+        email_placeholder: student@isetsf.rnu.tn
+        email_hint: استخدم بريدك الجامعي الرسمي (مثل @isetsf.rnu.tn) للتحقق الفوري
+        password: كلمة المرور
+        password_confirmation: تأكيد كلمة المرور
+        submit: إنشاء حساب
+        submitting: جاري الإنشاء...
+      back: رجوع
     new_company:
-      title: "تسجيل شركة"
-      subtitle: "أنشئ ملف شركتك الموثق"
-      errors_title: "يرجى تصحيح الأخطاء التالية:"
-      not_company: "لست شركة؟"
+      title: تسجيل شركة
+      subtitle: أنشئ ملف شركتك الموثق
+      errors_title: 'يرجى تصحيح الأخطاء التالية:'
+      not_company: لست شركة؟
       form:
-        name: "اسم الشركة"
-        name_placeholder: "شركتك الناشئة"
-        website: "الموقع الإلكتروني (اختياري)"
-        website_placeholder: "https://mystartup.tn"
-        description: "وصف الشركة"
-        description_placeholder: "ماذا تفعل شركتك؟ التقنيات المستخدمة، المهمة، الثقافة..."
-        email: "البريد الإلكتروني المهني"
-        email_placeholder: "hr@mystartup.tn"
-        password: "كلمة المرور"
-        password_confirmation: "تأكيد كلمة المرور"
-        submit: "إنشاء حساب"
-        submitting: "جاري الإنشاء..."
-      back: "رجوع"
+        name: اسم الشركة
+        name_placeholder: شركتك الناشئة
+        website: الموقع الإلكتروني (اختياري)
+        website_placeholder: https://mystartup.tn
+        description: وصف الشركة
+        description_placeholder: ماذا تفعل شركتك؟ التقنيات المستخدمة، المهمة، الثقافة...
+        email: البريد الإلكتروني المهني
+        email_placeholder: hr@mystartup.tn
+        password: كلمة المرور
+        password_confirmation: تأكيد كلمة المرور
+        submit: إنشاء حساب
+        submitting: جاري الإنشاء...
+      back: رجوع
     new_university:
-      title: "تسجيل منسق جامعي"
-      subtitle: "سجل كمنسق أكاديمي"
-      errors_title: "يرجى تصحيح الأخطاء التالية:"
-      not_coordinator: "لست منسقاً؟"
+      title: تسجيل منسق جامعي
+      subtitle: سجل كمنسق أكاديمي
+      errors_title: 'يرجى تصحيح الأخطاء التالية:'
+      not_coordinator: لست منسقاً؟
       form:
-        university: "الجامعة"
-        university_placeholder: "اختر مؤسستك"
-        admin_name: "الاسم الكامل للمنسق"
-        admin_name_placeholder: "أ. أحمد منصور"
-        department: "القسم / الكلية"
-        department_placeholder: "قسم تكنولوجيا المعلومات"
-        email: "البريد الإلكتروني الجامعي الرسمي"
-        email_placeholder: "admin@isetsf.rnu.tn"
-        email_hint: "يجب أن يكون عنوان @university.tn أو @institute.rnu.tn رسمياً"
-        password: "كلمة المرور"
-        password_confirmation: "تأكيد كلمة المرور"
-        submit: "تسجيل المنسق"
-        submitting: "جاري التسجيل..."
-      back: "رجوع"
+        university: الجامعة
+        university_placeholder: اختر مؤسستك
+        admin_name: الاسم الكامل للمنسق
+        admin_name_placeholder: أ. أحمد منصور
+        department: القسم / الكلية
+        department_placeholder: قسم تكنولوجيا المعلومات
+        email: البريد الإلكتروني الجامعي الرسمي
+        email_placeholder: admin@isetsf.rnu.tn
+        email_hint: يجب أن يكون عنوان @university.tn أو @institute.rnu.tn رسمياً
+        password: كلمة المرور
+        password_confirmation: تأكيد كلمة المرور
+        submit: تسجيل المنسق
+        submitting: جاري التسجيل...
+      back: رجوع
     edit:
-      title: "تعديل الحساب — StageUp"
-      heading: "إعدادات الحساب"
-      subtitle: "حدّث بريدك الإلكتروني أو غيّر كلمة المرور."
-      account_details: "تفاصيل الحساب"
-      email_placeholder: "example@email.com"
-      change_password: "تغيير كلمة المرور"
-      leave_blank: "اتركه فارغاً إذا لم ترد التغيير"
-      toggle_password_aria: "إظهار/إخفاء كلمة المرور"
-      confirm_changes: "تأكيد التغييرات"
-      current_password_placeholder: "أدخل كلمة المرور الحالية لتأكيد التغييرات"
-      current_password_hint: "نحتاج إلى كلمة المرور الحالية لتأكيد أي تغييرات"
-      submit: "تحديث الحساب"
-      danger_zone_label: "حذف الحساب"
-      danger_zone_desc: "هذا الإجراء لا رجعة فيه وسيزيل جميع بياناتك."
-      delete_account: "حذف الحساب"
-      delete_confirm: "حذف حسابك نهائياً؟"
-
+      title: تعديل الحساب — StageUp
+      heading: إعدادات الحساب
+      subtitle: حدّث بريدك الإلكتروني أو غيّر كلمة المرور.
+      account_details: تفاصيل الحساب
+      email_placeholder: example@email.com
+      change_password: تغيير كلمة المرور
+      leave_blank: اتركه فارغاً إذا لم ترد التغيير
+      toggle_password_aria: إظهار/إخفاء كلمة المرور
+      confirm_changes: تأكيد التغييرات
+      current_password_placeholder: أدخل كلمة المرور الحالية لتأكيد التغييرات
+      current_password_hint: نحتاج إلى كلمة المرور الحالية لتأكيد أي تغييرات
+      submit: تحديث الحساب
+      danger_zone_label: حذف الحساب
+      danger_zone_desc: هذا الإجراء لا رجعة فيه وسيزيل جميع بياناتك.
+      delete_account: حذف الحساب
+      delete_confirm: حذف حسابك نهائياً؟
   admin:
     subnav:
-      overview: "نظرة عامة"
-      users: "المستخدمون"
-      offers: "العروض"
-      coordinators: "المنسقون"
-      companies: "الشركات"
-      agreements: "الاتفاقيات"
+      overview: نظرة عامة
+      users: المستخدمون
+      offers: العروض
+      coordinators: المنسقون
+      companies: الشركات
+      agreements: الاتفاقيات
     roles:
-      student: "طلاب"
-      company: "شركات"
-      university: "منسقون"
-      admin: "مشرفون"
+      student: طلاب
+      company: شركات
+      university: منسقون
+      admin: مشرفون
     kpi:
-      total_users: "إجمالي مستخدمي المنصة"
-      students: "طلاب"
-      companies: "شركات"
-      active_offers: "التربصات النشطة"
+      total_users: إجمالي مستخدمي المنصة
+      students: طلاب
+      companies: شركات
+      active_offers: التربصات النشطة
       total_posted: "%{count} إجمالي المنشور"
-      submissions: "تسليمات الإثبات"
-      accepted: "مقبولة"
-      agreements: "الاتفاقيات الصادرة"
-      signed: "موقّعة"
+      submissions: تسليمات الإثبات
+      accepted: مقبولة
+      agreements: الاتفاقيات الصادرة
+      signed: موقّعة
     dashboard:
-      badge: "لوحة التحكم الرئيسية"
-      title: "لوحة تحكم المشرف"
-      subtitle: "إشراف المنصة والتحليلات وإدارة المحتوى"
-      recent_submissions: "أحدث تسليمات الإثبات"
-      no_submissions: "لا توجد تسليمات مسجلة بعد."
+      badge: لوحة التحكم الرئيسية
+      title: لوحة تحكم المشرف
+      subtitle: إشراف المنصة والتحليلات وإدارة المحتوى
+      recent_submissions: أحدث تسليمات الإثبات
+      no_submissions: لا توجد تسليمات مسجلة بعد.
       stats:
-        total_users: "إجمالي المستخدمين"
-        total_offers: "إجمالي العروض"
-        pending_coordinators: "المنسقون المعلّقون"
-        pending_companies: "الشركات المعلّقة"
+        total_users: إجمالي المستخدمين
+        total_offers: إجمالي العروض
+        pending_coordinators: المنسقون المعلّقون
+        pending_companies: الشركات المعلّقة
       sections:
-        coordinators: "منسقو الجامعات"
-        companies: "الشركات"
+        coordinators: منسقو الجامعات
+        companies: الشركات
       coordinators:
         domain_matched: "✓ تطابق النطاق"
         domain_check_needed: "⚠️ يحتاج فحص النطاق"
-        title: "المنسقون المعلّقون"
-        empty: "لا يوجد منسقون معلّقون"
-        approve: "موافقة"
-        approving: "جارٍ الموافقة…"
-        reject: "رفض"
-        reject_confirm: "رفض هذا المنسق؟ سيتم حذف حسابه."
-        all_clear_title: "كل شيء واضح"
+        title: المنسقون المعلّقون
+        empty: لا يوجد منسقون معلّقون
+        approve: موافقة
+        approving: جارٍ الموافقة…
+        reject: رفض
+        reject_confirm: رفض هذا المنسق؟ سيتم حذف حسابه.
+        all_clear_title: كل شيء واضح
       companies:
-        title: "الشركات المعلّقة"
-        empty: "لا توجد شركات معلّقة"
-        verify: "تحقق"
-        verifying: "جارٍ التحقق…"
-        reject: "رفض"
-        reject_confirm: "رفض هذه الشركة؟ سيتم حذف حسابها."
-        no_website: "لا يوجد موقع إلكتروني"
-        all_clear_title: "كل شيء واضح"
-        all_clear_text: "لا توجد ملفات شركة غير موثقة."
+        title: الشركات المعلّقة
+        empty: لا توجد شركات معلّقة
+        verify: تحقق
+        verifying: جارٍ التحقق…
+        reject: رفض
+        reject_confirm: رفض هذه الشركة؟ سيتم حذف حسابها.
+        no_website: لا يوجد موقع إلكتروني
+        all_clear_title: كل شيء واضح
+        all_clear_text: لا توجد ملفات شركة غير موثقة.
     users:
-      title: "إدارة المستخدمين"
-      subtitle: "إدارة الحسابات وصلاحيات الأدوار وحالات الوصول في المنصة"
-      search_placeholder: "ابحث بالبريد الإلكتروني..."
-      email: "البريد الإلكتروني"
-      role: "دور الملف"
-      admin_status: "حالة المشرف"
-      joined: "تاريخ الانضمام"
-      actions: "الإجراءات"
-      locked: "مقفل"
-      is_admin: "مشرف"
-      standard: "قياسي"
-      grant_admin: "تعيين كمشرف"
-      revoke_admin: "إلغاء الإشراف"
-      grant_confirm: "منح صلاحيات المشرف لهذا المستخدم؟"
-      revoke_confirm: "إلغاء صلاحيات المشرف من هذا المستخدم؟"
-      lock: "قفل الحساب"
-      unlock: "إلغاء القفل"
-      lock_confirm: "قفل حساب هذا المستخدم؟"
-      unlock_confirm: "إلغاء قفل هذا الحساب؟"
+      title: إدارة المستخدمين
+      subtitle: إدارة الحسابات وصلاحيات الأدوار وحالات الوصول في المنصة
+      search_placeholder: ابحث بالبريد الإلكتروني...
+      email: البريد الإلكتروني
+      role: دور الملف
+      admin_status: حالة المشرف
+      joined: تاريخ الانضمام
+      actions: الإجراءات
+      locked: مقفل
+      is_admin: مشرف
+      standard: قياسي
+      grant_admin: تعيين كمشرف
+      revoke_admin: إلغاء الإشراف
+      grant_confirm: منح صلاحيات المشرف لهذا المستخدم؟
+      revoke_confirm: إلغاء صلاحيات المشرف من هذا المستخدم؟
+      lock: قفل الحساب
+      unlock: إلغاء القفل
+      lock_confirm: قفل حساب هذا المستخدم؟
+      unlock_confirm: إلغاء قفل هذا الحساب؟
       you: "(المستخدم الحالي)"
-      no_results: "لم يتم العثور على مستخدمين"
-      no_results_hint: "جرب تعديل البحث أو فلاتر الأدوار"
+      no_results: لم يتم العثور على مستخدمين
+      no_results_hint: جرب تعديل البحث أو فلاتر الأدوار
       show:
-        title: "فحص الأمان – StageUp Admin"
-        badge: "مفتش الأمان والاعتماد"
-        heading: "تدقيق الحساب:"
-        subtitle: "فحص تفصيلي لملف المستخدم والتحقق من النطاق والاعتماد"
-        back_to_users: "العودة إلى المستخدمين"
-        admin_dashboard: "لوحة تحكم المشرف"
-        identity_heading: "هوية الحساب والاعتماد"
-        email_label: "البريد الإلكتروني"
-        role_label: "دور الحساب"
-        registration_date_label: "تاريخ التسجيل"
-        admin_privileges_label: "صلاحيات المشرف"
-        administrator_badge: "مشرف"
-        standard_user_badge: "مستخدم عادي"
-        account_status_label: "حالة الحساب"
-        account_locked_badge: "الحساب مقفل"
-        active_badge: "نشط"
-        coordinator_heading: "تدقيق التحقق من المنسق الأكاديمي"
-        approved_badge: "منسق معتمد"
-        pending_badge: "بانتظار الموافقة"
-        audit_signal: "إشارة تدقيق الأمان:"
-        domain_match: "نطاق البريد يطابق نطاق الجامعة الرسمي (%{domain}). ثقة عالية بالأصالة."
-        domain_mismatch: "نطاق البريد (%{user_domain}) لا يطابق نطاق الجامعة الرسمي (%{uni_domain}). افحص اعتمادات القسم بعناية."
-        coordinator_name_label: "اسم المنسق"
-        department_label: "القسم الأكاديمي"
-        institution_label: "المؤسسة"
-        official_domain_label: "النطاق الرسمي"
-        registered_students_label: "الطلاب المسجلون"
+        title: فحص الأمان – StageUp Admin
+        badge: مفتش الأمان والاعتماد
+        heading: 'تدقيق الحساب:'
+        subtitle: فحص تفصيلي لملف المستخدم والتحقق من النطاق والاعتماد
+        back_to_users: العودة إلى المستخدمين
+        admin_dashboard: لوحة تحكم المشرف
+        identity_heading: هوية الحساب والاعتماد
+        email_label: البريد الإلكتروني
+        role_label: دور الحساب
+        registration_date_label: تاريخ التسجيل
+        admin_privileges_label: صلاحيات المشرف
+        administrator_badge: مشرف
+        standard_user_badge: مستخدم عادي
+        account_status_label: حالة الحساب
+        account_locked_badge: الحساب مقفل
+        active_badge: نشط
+        coordinator_heading: تدقيق التحقق من المنسق الأكاديمي
+        approved_badge: منسق معتمد
+        pending_badge: بانتظار الموافقة
+        audit_signal: 'إشارة تدقيق الأمان:'
+        domain_match: نطاق البريد يطابق نطاق الجامعة الرسمي (%{domain}). ثقة عالية بالأصالة.
+        domain_mismatch: نطاق البريد (%{user_domain}) لا يطابق نطاق الجامعة الرسمي (%{uni_domain}). افحص اعتمادات القسم بعناية.
+        coordinator_name_label: اسم المنسق
+        department_label: القسم الأكاديمي
+        institution_label: المؤسسة
+        official_domain_label: النطاق الرسمي
+        registered_students_label: الطلاب المسجلون
         students_count: "%{count} طلاب"
-        revoke_approval: "إلغاء الموافقة"
-        revoke_approval_confirm: "إلغاء موافقة المنسق؟ سيفقد الوصول إلى توقيع الاتفاقيات."
-        approve_coordinator: "الموافقة على المنسق"
-        approving: "جارٍ الموافقة…"
-        delete_account: "حذف الحساب"
-        delete_account_confirm: "حذف حساب المنسق هذا نهائياً؟"
-        employer_heading: "تدقيق والتحقق من صاحب العمل"
-        verified_employer_badge: "صاحب عمل موثق"
-        pending_verification_badge: "بانتظار التحقق"
-        company_name_label: "اسم الشركة"
-        website_label: "الموقع الرسمي"
-        no_website: "لم يتم توفير موقع إلكتروني"
-        offers_posted_label: "العروض المنشورة"
+        revoke_approval: إلغاء الموافقة
+        revoke_approval_confirm: إلغاء موافقة المنسق؟ سيفقد الوصول إلى توقيع الاتفاقيات.
+        approve_coordinator: الموافقة على المنسق
+        approving: جارٍ الموافقة…
+        delete_account: حذف الحساب
+        delete_account_confirm: حذف حساب المنسق هذا نهائياً؟
+        employer_heading: تدقيق والتحقق من صاحب العمل
+        verified_employer_badge: صاحب عمل موثق
+        pending_verification_badge: بانتظار التحقق
+        company_name_label: اسم الشركة
+        website_label: الموقع الرسمي
+        no_website: لم يتم توفير موقع إلكتروني
+        offers_posted_label: العروض المنشورة
         offers_count: "%{count} عروض"
-        description_label: "وصف الشركة"
-        no_description: "لم يتم توفير وصف."
-        view_company_profile: "عرض الملف العام للشركة"
-        revoke_verification: "إلغاء التحقق"
-        verify_company: "التحقق من الشركة"
-        verifying: "جارٍ التحقق…"
-        security_controls_heading: "تحكم أمان المشرف"
-        toggle_admin_heading: "تبديل دور مشرف النظام"
-        revoke_admin: "إلغاء صلاحيات المشرف"
-        grant_admin: "منح صلاحيات المشرف"
-        toggle_admin_confirm: "هل أنت متأكد من تغيير صلاحيات المشرف لـ %{email}؟"
-        account_lock_heading: "قفل الوصول للحساب"
-        unlock_account: "فتح الحساب"
-        lock_account: "قفل الحساب"
-        toggle_lock_confirm: "قفل/فتح هذا الحساب؟"
-        self_inspection_warning: "أنت تفحص حاليًا حساب المشرف الرئيسي الخاص بك."
+        description_label: وصف الشركة
+        no_description: لم يتم توفير وصف.
+        view_company_profile: عرض الملف العام للشركة
+        revoke_verification: إلغاء التحقق
+        verify_company: التحقق من الشركة
+        verifying: جارٍ التحقق…
+        security_controls_heading: تحكم أمان المشرف
+        toggle_admin_heading: تبديل دور مشرف النظام
+        revoke_admin: إلغاء صلاحيات المشرف
+        grant_admin: منح صلاحيات المشرف
+        toggle_admin_confirm: هل أنت متأكد من تغيير صلاحيات المشرف لـ %{email}؟
+        account_lock_heading: قفل الوصول للحساب
+        unlock_account: فتح الحساب
+        lock_account: قفل الحساب
+        toggle_lock_confirm: قفل/فتح هذا الحساب؟
+        self_inspection_warning: أنت تفحص حاليًا حساب المشرف الرئيسي الخاص بك.
     offers:
-      title: "إدارة ومراجعة العروض"
-      subtitle: "مراجعة عروض التربصات وإدارتها وتعديل حالتها"
-      search_placeholder: "ابحث بالعنوان، الموقع..."
+      title: إدارة ومراجعة العروض
+      subtitle: مراجعة عروض التربصات وإدارتها وتعديل حالتها
+      search_placeholder: ابحث بالعنوان، الموقع...
       table:
-        title: "عنوان التربص"
-        company: "الشركة"
-        details: "التفاصيل"
-        status: "الحالة"
-        actions: "الإجراءات"
-        spots: "أماكن"
-      close: "إغلاق العرض"
-      activate: "تنشيط"
-      delete_confirm: "حذف هذا العرض نهائياً؟"
-      no_results: "لم يتم العثور على عروض"
-      no_results_hint: "جرب تعديل البحث أو فلتر الحالة"
+        title: عنوان التربص
+        company: الشركة
+        details: التفاصيل
+        status: الحالة
+        actions: الإجراءات
+        spots: أماكن
+      close: إغلاق العرض
+      activate: تنشيط
+      delete_confirm: حذف هذا العرض نهائياً؟
+      no_results: لم يتم العثور على عروض
+      no_results_hint: جرب تعديل البحث أو فلتر الحالة
     coordinators:
-      title: "منسقو الجامعات الأكاديميون"
-      subtitle: "مراجعة طلبات منسقي الجامعات وإدارة الموافقات"
-      search_placeholder: "ابحث باسم المنسق، القسم..."
-      pending: "في انتظار الموافقة"
-      approved: "معتمد"
-      approved_badge: "معتمد"
-      pending_badge: "معلق"
-      no_results: "لم يتم العثور على منسقين"
-      no_results_hint: "جرب تعديل البحث أو فلتر الحالة"
+      title: منسقو الجامعات الأكاديميون
+      subtitle: مراجعة طلبات منسقي الجامعات وإدارة الموافقات
+      search_placeholder: ابحث باسم المنسق، القسم...
+      pending: في انتظار الموافقة
+      approved: معتمد
+      approved_badge: معتمد
+      pending_badge: معلق
+      no_results: لم يتم العثور على منسقين
+      no_results_hint: جرب تعديل البحث أو فلتر الحالة
       table:
-        name: "اسم المنسق"
-        institution: "المؤسسة / القسم"
-        status: "حالة الموافقة"
-        actions: "الإجراءات"
+        name: اسم المنسق
+        institution: المؤسسة / القسم
+        status: حالة الموافقة
+        actions: الإجراءات
     companies:
-      title: "توثيق الشركات"
-      subtitle: "إدارة ملفات الشركات ومراجعة المؤهلات ومنح شارات التوثيق"
-      search_placeholder: "ابحث باسم الشركة، الموقع..."
-      unverified: "غير موثقة"
-      verified: "موثقة"
-      verified_badge: "موثقة"
-      unverified_badge: "غير موثقة"
-      revoke: "إلغاء التوثيق"
-      no_results: "لم يتم العثور على شركات"
-      no_results_hint: "جرب تعديل البحث أو فلتر التوثيق"
+      title: توثيق الشركات
+      subtitle: إدارة ملفات الشركات ومراجعة المؤهلات ومنح شارات التوثيق
+      search_placeholder: ابحث باسم الشركة، الموقع...
+      unverified: غير موثقة
+      verified: موثقة
+      verified_badge: موثقة
+      unverified_badge: غير موثقة
+      revoke: إلغاء التوثيق
+      no_results: لم يتم العثور على شركات
+      no_results_hint: جرب تعديل البحث أو فلتر التوثيق
       table:
-        name: "اسم الشركة"
-        contact: "البريد والموقع"
-        offers_posted: "العروض المنشورة"
-        offers: "عروض"
-        status: "حالة التوثيق"
-        actions: "الإجراءات"
+        name: اسم الشركة
+        contact: البريد والموقع
+        offers_posted: العروض المنشورة
+        offers: عروض
+        status: حالة التوثيق
+        actions: الإجراءات
     agreements:
-      title: "اتفاقيات التربص"
-      subtitle: "مراقبة اتفاقيات التربص الثلاثية الملتزمة قانونياً"
-      no_results: "لم يتم العثور على اتفاقيات"
-      no_results_hint: "لا توجد اتفاقيات تربص تطابق الفلتر المحدد."
+      title: اتفاقيات التربص
+      subtitle: مراقبة اتفاقيات التربص الثلاثية الملتزمة قانونياً
+      no_results: لم يتم العثور على اتفاقيات
+      no_results_hint: لا توجد اتفاقيات تربص تطابق الفلتر المحدد.
       table:
-        id: "الاتفاقية / الرمز"
-        student: "الطالب"
-        offer: "عرض التربص"
-        dates: "التواريخ"
-        status: "الحالة"
-        actions: "الإجراءات"
+        id: الاتفاقية / الرمز
+        student: الطالب
+        offer: عرض التربص
+        dates: التواريخ
+        status: الحالة
+        actions: الإجراءات
       show:
-        title: "الاتفاقية #%{id} – StageUp Admin"
-        heading: "اتفاقية التربص #%{id}"
-        verification_token: "رمز التحقق:"
-        metadata: "بيانات الاتفاقية"
-        start_date: "تاريخ البداية:"
-        end_date: "تاريخ النهاية:"
-        status_label: "الحالة:"
-        verification_url: "رابط التحقق:"
-        signatures_log: "سجل التوقيعات"
-        student_signature: "توقيع الطالب:"
-        company_signature: "توقيع الشركة:"
-        university_signature: "توقيع الجامعة:"
-        pending: "معلق"
-
+        title: 'الاتفاقية #%{id} – StageUp Admin'
+        heading: 'اتفاقية التربص #%{id}'
+        verification_token: 'رمز التحقق:'
+        metadata: بيانات الاتفاقية
+        start_date: 'تاريخ البداية:'
+        end_date: 'تاريخ النهاية:'
+        status_label: 'الحالة:'
+        verification_url: 'رابط التحقق:'
+        signatures_log: سجل التوقيعات
+        student_signature: 'توقيع الطالب:'
+        company_signature: 'توقيع الشركة:'
+        university_signature: 'توقيع الجامعة:'
+        pending: معلق
   internship_agreements:
     show:
-      page_title: "اتفاقية التربص – StageUp"
-      title: "اتفاقية التربص"
-      subtitle: "اتفاقية تربص ثلاثية الأطراف"
+      page_title: اتفاقية التربص – StageUp
+      title: اتفاقية التربص
+      subtitle: اتفاقية تربص ثلاثية الأطراف
       status:
-        pending: "بانتظار التوقيعات"
-        signed: "موقعة بالكامل"
-        declined: "مرفوضة"
+        pending: بانتظار التوقيعات
+        signed: موقعة بالكامل
+        declined: مرفوضة
       parties:
-        student: "الطالب"
-        company: "مشرف الشركة"
-        university: "المنسق الجامعي"
+        student: الطالب
+        company: مشرف الشركة
+        university: المنسق الجامعي
       actions:
-        sign: "توقيع الاتفاقية"
-        download: "تحميل PDF"
-        decline: "رفض"
-        decline_reason: "سبب الرفض"
-        decline_confirm: "هل أنت متأكد؟ لا يمكن التراجع."
+        sign: توقيع الاتفاقية
+        download: تحميل PDF
+        decline: رفض
+        decline_reason: سبب الرفض
+        decline_confirm: هل أنت متأكد؟ لا يمكن التراجع.
       details:
-        start_date: "تاريخ البداية"
-        end_date: "تاريخ النهاية"
-        work_mode: "وضع العمل"
-        location: "الموقع"
-        description: "وصف المهمة"
+        start_date: تاريخ البداية
+        end_date: تاريخ النهاية
+        work_mode: وضع العمل
+        location: الموقع
+        description: وصف المهمة
       signatures:
-        signed_by: "موقعة من %{name} في %{date}"
-        pending: "بانتظار التوقيع"
-        your_turn: "دورك للتوقيع"
+        signed_by: موقعة من %{name} في %{date}
+        pending: بانتظار التوقيع
+        your_turn: دورك للتوقيع
     new:
-      title: "اتفاقية التربص"
-      subtitle: "اتفاقية تربص ثلاثية الأطراف تونسية"
-      errors_title: "يرجى تصحيح الأخطاء التالية:"
-      dates_title: "تواريخ التربص"
+      title: اتفاقية التربص
+      subtitle: اتفاقية تربص ثلاثية الأطراف تونسية
+      errors_title: 'يرجى تصحيح الأخطاء التالية:'
+      dates_title: تواريخ التربص
       form:
-        start_date: "تاريخ البداية"
-        end_date: "تاريخ النهاية"
-        work_mode: "وضع العمل"
-        location: "الموقع"
-        description: "وصف المهمة"
-        description_placeholder: "صف مهمة التربص، الأهداف، والمخرجات..."
-        generate: "إنشاء الاتفاقية"
-        generating: "جاري الإنشاء..."
-
+        start_date: تاريخ البداية
+        end_date: تاريخ النهاية
+        work_mode: وضع العمل
+        location: الموقع
+        description: وصف المهمة
+        description_placeholder: صف مهمة التربص، الأهداف، والمخرجات...
+        generate: إنشاء الاتفاقية
+        generating: جاري الإنشاء...
   certificates:
     verify:
-      title: "شهادة إتمام"
-      subtitle: "موثقة ومصدقة عبر سجل الثقة StageUp"
-      recipient_label: "هذا يشهد بأن"
-      institution: "المؤسسة"
-      duration: "المدة"
-      stage_type: "نوع التربص"
-      verification_id: "معرّف التحقق"
-      signatures_heading: "التوقيعات الرقمية والتحقق القانوني"
-      student_role: "طالب"
-      employer_role: "صاحب العمل"
-      university_role: "منسق جامعي"
-      signed: "موقع"
-      qr_label: "امسح للتحقق من الأصالة"
-      badge_text: "شهادة تربص موثقة رسمياً"
-      fulfillment_text: "أكمل بنجاح تربصاً رسمياً بعنوان %{title} في %{company}."
-      academic_partner: "شريك أكاديمي"
-      signed_on: "وقع في: %{date}"
-
+      title: شهادة إتمام
+      subtitle: موثقة ومصدقة عبر سجل الثقة StageUp
+      recipient_label: هذا يشهد بأن
+      institution: المؤسسة
+      duration: المدة
+      stage_type: نوع التربص
+      verification_id: معرّف التحقق
+      signatures_heading: التوقيعات الرقمية والتحقق القانوني
+      student_role: طالب
+      employer_role: صاحب العمل
+      university_role: منسق جامعي
+      signed: موقع
+      qr_label: امسح للتحقق من الأصالة
+      badge_text: شهادة تربص موثقة رسمياً
+      fulfillment_text: أكمل بنجاح تربصاً رسمياً بعنوان %{title} في %{company}.
+      academic_partner: شريك أكاديمي
+      signed_on: 'وقع في: %{date}'
   kanban:
     columns:
-      applied: "تم التقديم"
-      mission: "مهمة"
-      review: "قيد المراجعة"
-      accepted: "مقبول"
-      rejected: "مرفوض"
-      completed: "مكتمل"
+      applied: تم التقديم
+      mission: مهمة
+      review: قيد المراجعة
+      accepted: مقبول
+      rejected: مرفوض
+      completed: مكتمل
     card:
-      view_proof: "عرض الدليل"
-      view_cv: "عرض السيرة الذاتية"
-      no_proof: "لا يوجد دليل مقدم"
-      view_profile: "عرض الملف الشخصي"
-      agreement: "الاتفاقية"
+      view_proof: عرض الدليل
+      view_cv: عرض السيرة الذاتية
+      no_proof: لا يوجد دليل مقدم
+      view_profile: عرض الملف الشخصي
+      agreement: الاتفاقية
     actions:
-      accept: "قبول"
-      reject: "رفض"
-      accepting: "جارٍ القبول…"
-      rejecting: "جارٍ الرفض…"
+      accept: قبول
+      reject: رفض
+      accepting: جارٍ القبول…
+      rejecting: جارٍ الرفض…
     empty:
-      review: "لا توجد طلبات معلقة"
-      accepted: "لا يوجد مرشحون مقبولون نشطون"
-      rejected: "لا توجد طلبات مرفوضة"
-
+      review: لا توجد طلبات معلقة
+      accepted: لا يوجد مرشحون مقبولون نشطون
+      rejected: لا توجد طلبات مرفوضة
   common:
-    skip_link: "تخطى إلى المحتوى الرئيسي"
-    all: "الكل"
-    n_a: "غ.م"
-    errors_title: "يرجى تصحيح الأخطاء أدناه:"
-    save: "حفظ"
-    cancel: "إلغاء"
-    delete: "حذف"
-    edit: "تعديل"
-    view: "عرض"
-    view_all: "عرض الكل"
-    back: "رجوع"
-    next: "التالي"
-    previous: "السابق"
-    submit: "إرسال"
-    confirm: "تأكيد"
-    close: "إغلاق"
-    dismiss_alert: "تجاهل التنبيه"
-    loading: "جاري التحميل..."
-    error: "حدث خطأ"
-    errors: "خطأ (أخطاء)"
-    success: "نجاح!"
-    required: "مطلوب"
-    optional: "اختياري"
+    skip_link: تخطى إلى المحتوى الرئيسي
+    all: الكل
+    n_a: غ.م
+    errors_title: 'يرجى تصحيح الأخطاء أدناه:'
+    save: حفظ
+    cancel: إلغاء
+    delete: حذف
+    edit: تعديل
+    view: عرض
+    view_all: عرض الكل
+    back: رجوع
+    next: التالي
+    previous: السابق
+    submit: إرسال
+    confirm: تأكيد
+    close: إغلاق
+    dismiss_alert: تجاهل التنبيه
+    loading: جاري التحميل...
+    error: حدث خطأ
+    errors: خطأ (أخطاء)
+    success: نجاح!
+    required: مطلوب
+    optional: اختياري
     out_of: "%{count} / %{max}"
-    search: "بحث"
-    filter: "تصفية"
-    sort: "ترتيب"
+    search: بحث
+    filter: تصفية
+    sort: ترتيب
     date_format: "%d/%m/%Y"
-    clear_filters: "إعادة تعيين الفلاتر"
+    clear_filters: إعادة تعيين الفلاتر
     time_ago:
-      just_now: "الآن"
-      minutes_ago: "منذ %{count} دقيقة"
-      hours_ago: "منذ %{count} ساعة"
-      days_ago: "منذ %{count} يوم"
-      weeks_ago: "منذ %{count} أسبوع"
-      months_ago: "منذ %{count} شهر"
-      years_ago: "منذ %{count} سنة"
+      just_now: الآن
+      minutes_ago: منذ %{count} دقيقة
+      hours_ago: منذ %{count} ساعة
+      days_ago: منذ %{count} يوم
+      weeks_ago: منذ %{count} أسبوع
+      months_ago: منذ %{count} شهر
+      years_ago: منذ %{count} سنة
     status:
-      active: "نشط"
-      inactive: "غير نشط"
-      pending: "معلق"
-      approved: "موافق عليه"
-      rejected: "مرفوض"
-      draft: "مسودة"
-      published: "منشور"
-      closed: "مغلق"
-      completed: "مكتمل"
-      expired: "منتهي"
+      active: نشط
+      inactive: غير نشط
+      pending: معلق
+      approved: موافق عليه
+      rejected: مرفوض
+      draft: مسودة
+      published: منشور
+      closed: مغلق
+      completed: مكتمل
+      expired: منتهي
     work_modes:
-      on_site: "حضوري"
-      remote: "عن بعد"
-      hybrid: "هجين"
+      on_site: حضوري
+      remote: عن بعد
+      hybrid: هجين
     stage_types:
-      pfe: "مشروع تخرج (PFE)"
-      pfa: "مشروع نهاية السنة (PFA)"
-      stage: "تربص صيفي"
-      alternance: "التعليم بالتناوب"
-      initiation: "إدخال / مراقبة"
-      free: "حر / تطوير المهارات"
+      pfe: مشروع تخرج (PFE)
+      pfa: مشروع نهاية السنة (PFA)
+      stage: تربص صيفي
+      alternance: التعليم بالتناوب
+      initiation: إدخال / مراقبة
+      free: حر / تطوير المهارات
     spot:
-      one: "مكان"
-      other: "أماكن"
-    available: "متاح"
-    yes: "نعم"
-    no: "لا"
-    unrated: "غير مقيّم"
-    reviews: "تقييمات"
-    hours: "ساعات"
-    ago: ""
-    back_to: "العودة إلى %{page}"
-
+      one: مكان
+      other: أماكن
+    available: متاح
+    true: نعم
+    false: لا
+    unrated: غير مقيّم
+    reviews: تقييمات
+    hours: ساعات
+    ago: ''
+    back_to: العودة إلى %{page}
   student_profiles:
     show:
       title_suffix: "– ملف الطالب"
-      badge_student: "طالب متربص"
-      major_fallback: "هندسة البرمجيات"
-      class_of: "دفعة %{year}"
-      completed_prefix: "مكتمل"
-      verified_ledger_badge: "سجل معتمد"
-      reputation_history_title: "سجل السمعة"
-      no_ledger_history: "لا توجد أحداث سمعة مسجلة بعد."
+      badge_student: طالب متربص
+      major_fallback: هندسة البرمجيات
+      class_of: دفعة %{year}
+      completed_prefix: مكتمل
+      verified_ledger_badge: سجل معتمد
+      reputation_history_title: سجل السمعة
+      no_ledger_history: لا توجد أحداث سمعة مسجلة بعد.
       events_recorded: "%{count} حدث مسجل"
-      verified_title: "مرشح موثق نشط"
-      verified_badge: "مرشح موثق"
-      commitment_score: "نقاط الالتزام"
-      employer_rating: "تقييم صاحب العمل"
-      verified_missions: "المهام الموثقة"
-      completed: "مكتملة"
+      verified_title: مرشح موثق نشط
+      verified_badge: مرشح موثق
+      commitment_score: نقاط الالتزام
+      employer_rating: تقييم صاحب العمل
+      verified_missions: المهام الموثقة
+      completed: مكتملة
       skills_verified: "%{count} مهارات موثقة"
-      verified_completion: "إتمام موثق"
-      academic_details: "التفاصيل الأكاديمية"
-      university_label: "الجامعة"
-      autonomous_student: "طالب مستقل"
-      major_label: "التخصص"
-      class_of_label: "دفعة"
-      phone_label: "هاتف التواصل"
-      reputation_ledger: "سجل السمعة"
-      verified: "موثق"
-
+      verified_completion: إتمام موثق
+      academic_details: التفاصيل الأكاديمية
+      university_label: الجامعة
+      autonomous_student: طالب مستقل
+      major_label: التخصص
+      class_of_label: دفعة
+      phone_label: هاتف التواصل
+      reputation_ledger: سجل السمعة
+      verified: موثق
   company_profiles:
     show:
       title_suffix: "– ملف الشركة"
-      verified_badge: "شركة موثقة"
-      edit_profile: "تعديل ملف الشركة"
-      overview_heading: "نظرة عامة ومهمة"
-      description_fallback: "صاحب عمل رائد في البرمجيات والتكنولوجيا على StageUp."
-      active_missions_heading: "مهام التربص المفتوحة (%{count})"
-      location_fallback: "صفاقس، تونس"
-      months_label: "أشهر"
-      view_mission: "عرض المهمة ←"
-      no_active_offers: "لا توجد عروض تربص مفتوحة حالياً."
-      employer_stats_title: "إحصائيات صاحب العمل"
-      active_missions_label: "المهام النشطة"
-      verification_status_label: "حالة التوثيق"
-      verified_employer: "صاحب عمل موثق"
-      in_verification: "قيد التوثيق"
-      intern_rating_label: "تقييم المتربصين"
-      rating_fallback: "5.0 / 5"
-      about_employer: "حول صاحب العمل"
+      verified_badge: شركة موثقة
+      edit_profile: تعديل ملف الشركة
+      overview_heading: نظرة عامة ومهمة
+      description_fallback: صاحب عمل رائد في البرمجيات والتكنولوجيا على StageUp.
+      active_missions_heading: مهام التربص المفتوحة (%{count})
+      location_fallback: صفاقس، تونس
+      months_label: أشهر
+      view_mission: عرض المهمة ←
+      no_active_offers: لا توجد عروض تربص مفتوحة حالياً.
+      employer_stats_title: إحصائيات صاحب العمل
+      active_missions_label: المهام النشطة
+      verification_status_label: حالة التوثيق
+      verified_employer: صاحب عمل موثق
+      in_verification: قيد التوثيق
+      intern_rating_label: تقييم المتربصين
+      rating_fallback: 5.0 / 5
+      about_employer: حول صاحب العمل
       available_badge: "%{count} متاح"
-
   users:
     edit:
-      page_title: "إعدادات الحساب – StageUp"
-      tab_personal: "الملف الشخصي"
-      tab_skills: "المهارات والتقنيات"
-      tab_resume: "السيرة الذاتية"
-      tab_security: "الحساب والأمان"
-      preview_student_label: "طالب متربص"
-      preview_company_label: "ملف الشركة"
-      preview_university_label: "حساب الجامعة"
-      view_public_profile: "عرض الملف العام"
-      personal_heading: "تفاصيل الملف الشخصي"
-      personal_subtext: "معلومات المحفظة العامة المرئية لأصحاب العمل"
-      section_identity: "معلومات الهوية"
-      section_academic: "المعلومات الأكاديمية والتواصل"
+      page_title: إعدادات الحساب – StageUp
+      tab_personal: الملف الشخصي
+      tab_skills: المهارات والتقنيات
+      tab_resume: السيرة الذاتية
+      tab_security: الحساب والأمان
+      preview_student_label: طالب متربص
+      preview_company_label: ملف الشركة
+      preview_university_label: حساب الجامعة
+      view_public_profile: عرض الملف العام
+      personal_heading: تفاصيل الملف الشخصي
+      personal_subtext: معلومات المحفظة العامة المرئية لأصحاب العمل
+      section_identity: معلومات الهوية
+      section_academic: المعلومات الأكاديمية والتواصل
       phone_placeholder: "+216 XX XXX XXX"
-      phone_hint: "مرئي فقط لأصحاب العمل المقبولين"
-      major_placeholder: "مثال: هندسة البرمجيات، علم البيانات والذكاء الاصطناعي"
-      section_portfolio: "المحفظة والسيرة الذاتية"
-      bio_placeholder: "أنا طالب في السنة النهائية شغوف بتطوير منتجات الذكاء الاصطناعي والمنصات الويب..."
-      website_placeholder: "https://example.tn"
-      description_placeholder: "صف ثقافة شركتك، مجموعة التقنيات، وفرص المهام."
-      department_placeholder: "مثال: قسم تكنولوجيا المعلومات وعلوم الحاسوب"
-      skills_heading: "تصنيف المهارات والمجالات"
-      skills_subtext: "اختر من بين 200+ مهارة في الإدارة، الهندسة، التصميم، البيانات والتكنولوجيا"
-      skills_count_label: "المهارات المحددة"
-      clear_skills: "مسح الكل"
-      skill_search_placeholder: "ابحث بين 200+ مهارة (مثال: SEO, SolidWorks, Figma, Python, Finance)..."
-      all_skills_label: "كل المهارات (%{count})"
-      selected_stack_label: "مجموعتي المختارة"
-      picked_suffix: "مختارة"
-      resume_heading: "السيرة الذاتية"
-      resume_subtext: "ملف PDF متاح لأصحاب العمل الموثقين"
-      preview_pdf: "معاينة PDF"
-      dropzone_label: "اسحب وأفلت سيرتك الذاتية PDF هنا"
-      dropzone_hint: "PDF فقط · الحجم الأقصى 5 ميجابايت"
-      browse_pdf: "تصفح ملف PDF"
-      security_heading: "البريد الإلكتروني وبيانات الحساب"
-      security_subtext: "إدارة بيانات تسجيل الدخول والأمان"
-      email_address_label: "البريد الإلكتروني"
-      change_password_label: "تغيير كلمة المرور (اختياري)"
-      unsaved_changes: "لديك تغييرات غير محفوظة"
+      phone_hint: مرئي فقط لأصحاب العمل المقبولين
+      major_placeholder: 'مثال: هندسة البرمجيات، علم البيانات والذكاء الاصطناعي'
+      section_portfolio: المحفظة والسيرة الذاتية
+      bio_placeholder: أنا طالب في السنة النهائية شغوف بتطوير منتجات الذكاء الاصطناعي والمنصات الويب...
+      website_placeholder: https://example.tn
+      description_placeholder: صف ثقافة شركتك، مجموعة التقنيات، وفرص المهام.
+      department_placeholder: 'مثال: قسم تكنولوجيا المعلومات وعلوم الحاسوب'
+      skills_heading: تصنيف المهارات والمجالات
+      skills_subtext: اختر من بين 200+ مهارة في الإدارة، الهندسة، التصميم، البيانات والتكنولوجيا
+      skills_count_label: المهارات المحددة
+      clear_skills: مسح الكل
+      skill_search_placeholder: 'ابحث بين 200+ مهارة (مثال: SEO, SolidWorks, Figma, Python, Finance)...'
+      all_skills_label: كل المهارات (%{count})
+      selected_stack_label: مجموعتي المختارة
+      picked_suffix: مختارة
+      resume_heading: السيرة الذاتية
+      resume_subtext: ملف PDF متاح لأصحاب العمل الموثقين
+      preview_pdf: معاينة PDF
+      dropzone_label: اسحب وأفلت سيرتك الذاتية PDF هنا
+      dropzone_hint: PDF فقط · الحجم الأقصى 5 ميجابايت
+      browse_pdf: تصفح ملف PDF
+      security_heading: البريد الإلكتروني وبيانات الحساب
+      security_subtext: إدارة بيانات تسجيل الدخول والأمان
+      email_address_label: البريد الإلكتروني
+      change_password_label: تغيير كلمة المرور (اختياري)
+      unsaved_changes: لديك تغييرات غير محفوظة
       bio_char_suffix: " / %{max}"
-      selected_file_prefix: "المحدد:"
-
+      selected_file_prefix: 'المحدد:'
   pwa:
-    name: "StageUp"
-    description: "StageUp – تربصات موثقة في تونس"
+    name: StageUp
+    description: StageUp – تربصات موثقة في تونس
+  commitment_events:
+    descriptions:
+      student_completed_internship: إتمام برنامج التربص الموثق بنجاح
+      company_responded_on_time: تقييم التقديم في الوقت المحدد
+      student_ghosted_offer: تجاهل موعد الرد على عرض التربص
+      student_abandoned_mission: الانسحاب من مهمة تربص جارية
+      student_mission_expired: انتهاء مهلة تقديم المهمة
+      company_responded_late: رد متأخر على طلب الترشح
+      company_ghosted_offer: عدم الرد على طلب الترشح
+      company_cancelled_internship: إلغاء اتفاقية التربص

@@ -1,1378 +1,1270 @@
+---
 fr:
   time:
     formats:
       cert_sig: "%d %b %Y · %H:%M UTC"
   certificates:
     verify:
-      home: 'Accueil'
-      print: 'Imprimer / Exporter PDF'
-      trust_ledger: 'Registre de Confiance'
-      badge: 'Attestation de Réussite'
-      title: 'ATTESTATION DE RÉUSSITE'
-      subtitle: 'Délivrée conformément à la loi tunisienne régissant les stages de l''enseignement supérieur'
-      article1: 'Article 1 — Diplômé & Parties'
-      article1_text: 'Cette Attestation de Réussite est conjointement délivrée par les trois parties ci-dessous, confirmant la réussite de toutes les obligations de stage.'
-      role_graduate: 'Le Diplômé'
-      enrolled_at: 'Inscrit(e) à'
-      higher_ed: 'Établissement d''Enseignement Supérieur'
-      major_default: 'Génie Logiciel'
-      role_employer: 'L''Employeur'
-      host_org: 'Organisation d''Accueil'
-      role_university: 'L''Université'
-      official_higher_ed: 'Établissement Officiel d''Enseignement Supérieur'
-      article2: 'Article 2 — Période de Stage'
-      article2_text_html: 'Le stage a débuté le <strong>%{start_date}</strong> et s''est terminé le <strong>%{end_date}</strong>, conformément aux réglementations de l''Enseignement Supérieur Tunisien.'
-      duration: 'Durée'
-      days: 'jours'
-      approximate: 'Approximatif'
-      months: 'mois'
-      classification: 'Classification'
-      article3: 'Article 3 — Sujet de Stage'
-      article3_text_html: '<strong>%{student_name}</strong> a complété avec succès un stage intitulé <strong>"%{title}"</strong> chez <strong>%{company}</strong>, classé comme stage de type <span class="cert-type-pill">%{type}</span> selon les termes de l''offre originale.'
-      article4: 'Article 4 — Vérification Cryptographique'
-      article4_text: 'Ce certificat est enregistré de manière immuable sur le Registre de Confiance StageUp. Scannez le code QR ou visitez l''URL ci-dessous pour confirmer son authenticité instantanément.'
-      verification_token: 'Jeton de Vérification'
-      immutable: 'IMMUABLE'
-      copy_token: 'Copier le jeton'
-      scan_to_verify: 'Scanner pour Vérifier'
-      trust_ledger_full: 'Registre de Confiance StageUp'
-      signatures: 'Signatures'
-      fully_executed: 'Entièrement exécuté — les trois parties ont signé'
-      sig_graduate: 'Diplômé'
-      sig_employer: 'Employeur'
-      sig_university: 'Université'
-      cap_graduate: 'Stagiaire Diplômé'
-      cap_employer: 'Organisation d''Accueil'
-      cap_university: 'Établissement Académique'
-      pending: 'En attente'
+      title: Attestation de Réussite
+      subtitle: Vérifiée & Authentifiée via StageUp Trust Ledger
+      recipient_label: Ceci certifie que
+      institution: Institution
+      duration: Durée
+      stage_type: Type de Stage
+      verification_id: ID de Vérification
+      signatures_heading: Signatures Numériques & Vérification Légale
+      student_role: Étudiant
+      employer_role: Employeur
+      university_role: Coordinateur Universitaire
+      signed: Signé
+      qr_label: Scannez pour vérifier l'authenticité
+      badge_text: STAGE OFFICIELLEMENT CERTIFIÉ
+      fulfillment_text: a terminé avec succès un stage officiel en tant que %{title} chez %{company}.
+      academic_partner: Partenaire Académique
+      signed_on: 'Signé : %{date}'
   date:
     formats:
       long: "%-d %B %Y"
-    month_names: [~, janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre]
-  
+    month_names:
+    -
+    - janvier
+    - février
+    - mars
+    - avril
+    - mai
+    - juin
+    - juillet
+    - août
+    - septembre
+    - octobre
+    - novembre
+    - décembre
   datetime:
     distance_in_words:
       about_x_hours:
-        one: "il y a environ une heure"
-        other: "il y a environ %{count} heures"
+        one: il y a environ une heure
+        other: il y a environ %{count} heures
       about_x_months:
-        one: "il y a environ un mois"
-        other: "il y a environ %{count} mois"
+        one: il y a environ un mois
+        other: il y a environ %{count} mois
       about_x_years:
-        one: "il y a environ un an"
-        other: "il y a environ %{count} ans"
+        one: il y a environ un an
+        other: il y a environ %{count} ans
       almost_x_years:
-        one: "il y a presque un an"
-        other: "il y a presque %{count} ans"
-      half_a_minute: "il y a une demi-minute"
+        one: il y a presque un an
+        other: il y a presque %{count} ans
+      half_a_minute: il y a une demi-minute
       less_than_x_minutes:
-        zero: "il y a moins d'une minute"
-        one: "il y a moins d'une minute"
-        other: "il y a moins de %{count} minutes"
+        zero: il y a moins d'une minute
+        one: il y a moins d'une minute
+        other: il y a moins de %{count} minutes
       less_than_x_seconds:
-        zero: "il y a moins d'une seconde"
-        one: "il y a moins d'une seconde"
-        other: "il y a moins de %{count} secondes"
+        zero: il y a moins d'une seconde
+        one: il y a moins d'une seconde
+        other: il y a moins de %{count} secondes
       over_x_years:
-        one: "il y a plus d'un an"
-        other: "il y a plus de %{count} ans"
+        one: il y a plus d'un an
+        other: il y a plus de %{count} ans
       x_days:
-        one: "il y a 1 jour"
-        other: "il y a %{count} jours"
+        one: il y a 1 jour
+        other: il y a %{count} jours
       x_minutes:
-        one: "il y a 1 minute"
-        other: "il y a %{count} minutes"
+        one: il y a 1 minute
+        other: il y a %{count} minutes
       x_months:
-        one: "il y a 1 mois"
-        other: "il y a %{count} mois"
+        one: il y a 1 mois
+        other: il y a %{count} mois
       x_seconds:
-        one: "il y a 1 seconde"
-        other: "il y a %{count} secondes"
-
+        one: il y a 1 seconde
+        other: il y a %{count} secondes
   layouts:
-    default_title: "StageUp – Stages Vérifiés en Tunisie"
-    meta_description: "StageUp – La première plateforme de stages vérifiés en Tunisie. Missions de preuve de travail, score de réputation, et conventions officielles."
-
+    default_title: StageUp – Stages Vérifiés en Tunisie
+    meta_description: StageUp – La première plateforme de stages vérifiés en Tunisie. Missions de preuve de travail, score de réputation, et conventions officielles.
   activerecord:
     attributes:
       user:
-        email: "Email"
-        password: "Mot de passe"
-        password_confirmation: "Confirmer le mot de passe"
-        current_password: "Mot de passe actuel"
-        remember_me: "Se souvenir de moi"
-
+        email: Email
+        password: Mot de passe
+        password_confirmation: Confirmer le mot de passe
+        current_password: Mot de passe actuel
+        remember_me: Se souvenir de moi
   home:
-    title: "StageUp – Stages Vérifiés en Tunisie"
-    announcement_badge: "Le premier registre de preuve de travail en Tunisie"
-    hero_title_html: "Personne ne paie le prix du ghosting.<br><span class=\"landing-hero-gradient\">Nous avons changé cela.</span>"
-    hero_subtitle: "Chaque offre, mission et absence devient un registre public permanent. Le premier marché du stage en Tunisie où la réputation se mérite."
-    browse_btn: "Parcourir les offres"
-    dashboard_btn: "Tableau de bord"
-    get_started_btn: "Commencer"
-    pts: "pts"
-    unknown_user: "Utilisateur Inconnu"
-    no_recent_activity: "Aucune activité en direct enregistrée"
-    how_it_works: "COMMENT ÇA MARCHE"
-    how_it_works_title: "Un Meilleur Cycle de Stage"
-    how_it_works_sub: "Une confiance vérifiable qui remplace les CV statiques et non vérifiés"
-    bento_mission_title: "Missions de Preuve de Travail"
-    bento_mission_text: "Fini le filtrage interminable des CV. Les recruteurs proposent des défis pratiques. Les étudiants soumettent leur code pour débloquer des entretiens."
-    bento_reputation_title: "Registre de Réputation"
-    bento_reputation_text: "Vérifiez la fiabilité en amont. Notre système de score pénalise les absences et récompense les validations des deux côtés."
-    bento_academic_title: "Vérification Académique"
-    bento_academic_text: "Le suivi par email officiel (ex. <code>@isetsf.rnu.tn</code>) vérifie instantanément les identifiants étudiants et connecte les coordinateurs."
-    featured_heading: "Offres en Vedette"
-    featured_sub_signed_in: "Parcourez les offres de stage actives et réalisez leurs missions de preuve"
-    featured_sub_signed_out: "Aperçu des opportunités actives — Connectez-vous pour voir les détails des missions et soumettre vos solutions"
-    featured_view_all: "Voir toutes les offres →"
-    cta_title: "Prêt à bâtir votre réputation vérifiée ?"
-    cta_desc: "Rejoignez la première plateforme de stages vérifiés en Tunisie. Votre parcours commence ici."
-    cta_account: "Créer un compte"
-    cta_signin: "Connexion"
-    stat_verification: "Vérification par Preuve de Travail"
-    stat_ghosting: "Tolérance au Ghosting"
-    stat_reputation: "Échelle de Réputation Immuable"
-    mockup_header: "Registre de Réputation en Direct"
-    mockup_header_badge: "Mainnet"
-    mockup_row1_name: "Cyrine (Étudiante)"
-    mockup_row1_action: "A soumis une solution de code à ISET"
+    title: StageUp – Stages Vérifiés en Tunisie
+    announcement_badge: Le premier registre de preuve de travail en Tunisie
+    hero_title_html: Personne ne paie le prix du ghosting.<br><span class="landing-hero-gradient">Nous avons changé cela.</span>
+    hero_subtitle: Chaque offre, mission et absence devient un registre public permanent. Le premier marché du stage en Tunisie où la réputation se mérite.
+    browse_btn: Parcourir les offres
+    dashboard_btn: Tableau de bord
+    get_started_btn: Commencer
+    pts: pts
+    unknown_user: Utilisateur Inconnu
+    no_recent_activity: Aucune activité en direct enregistrée
+    how_it_works: COMMENT ÇA MARCHE
+    how_it_works_title: Un Meilleur Cycle de Stage
+    how_it_works_sub: Une confiance vérifiable qui remplace les CV statiques et non vérifiés
+    bento_mission_title: Missions de Preuve de Travail
+    bento_mission_text: Fini le filtrage interminable des CV. Les recruteurs proposent des défis pratiques. Les étudiants soumettent leur code pour débloquer des entretiens.
+    bento_reputation_title: Registre de Réputation
+    bento_reputation_text: Vérifiez la fiabilité en amont. Notre système de score pénalise les absences et récompense les validations des deux côtés.
+    bento_academic_title: Vérification Académique
+    bento_academic_text: Le suivi par email officiel (ex. <code>@isetsf.rnu.tn</code>) vérifie instantanément les identifiants étudiants et connecte les coordinateurs.
+    featured_heading: Offres en Vedette
+    featured_sub_signed_in: Parcourez les offres de stage actives et réalisez leurs missions de preuve
+    featured_sub_signed_out: Aperçu des opportunités actives — Connectez-vous pour voir les détails des missions et soumettre vos solutions
+    featured_view_all: Voir toutes les offres →
+    cta_title: Prêt à bâtir votre réputation vérifiée ?
+    cta_desc: Rejoignez la première plateforme de stages vérifiés en Tunisie. Votre parcours commence ici.
+    cta_account: Créer un compte
+    cta_signin: Connexion
+    stat_verification: Vérification par Preuve de Travail
+    stat_ghosting: Tolérance au Ghosting
+    stat_reputation: Échelle de Réputation Immuable
+    mockup_header: Registre de Réputation en Direct
+    mockup_header_badge: Mainnet
+    mockup_row1_name: Cyrine (Étudiante)
+    mockup_row1_action: A soumis une solution de code à ISET
     mockup_row1_score: "+10 %{pts}"
-    mockup_row2_name: "Vortech Startups"
-    mockup_row2_action: "Date limite d'évaluation dépassée (Grâce expirée)"
+    mockup_row2_name: Vortech Startups
+    mockup_row2_action: Date limite d'évaluation dépassée (Grâce expirée)
     mockup_row2_score: "-15 %{pts}"
-    mockup_row3_name: "Mohamed (Étudiant)"
-    mockup_row3_action: "A complété une convention de PFE vérifiée"
+    mockup_row3_name: Mohamed (Étudiant)
+    mockup_row3_action: A complété une convention de PFE vérifiée
     mockup_row3_score: "+30 %{pts}"
-    badge_new: "Nouveau"
-    mission_attached: "Mission Incluse"
-    cv_only: "CV Uniquement"
-    unknown_company: "Entreprise inconnue"
-
+    badge_new: Nouveau
+    mission_attached: Mission Incluse
+    cv_only: CV Uniquement
+    unknown_company: Entreprise inconnue
   user_mailer:
     coordinator_approved:
-      heading: "Compte Approuvé"
-      subject: "Votre compte coordinateur a été approuvé"
-      greeting: "Bonjour %{name},"
-      body: "Votre compte de coordinateur universitaire a été approuvé par l'équipe d'administration StageUp."
-      approved_badge: "Approuvé"
-      login_instruction: "Vous pouvez maintenant vous connecter pour gérer les conventions de stage, examiner les soumissions des étudiants et signer les conventions de stage au nom de %{university}."
-      support: "Si vous avez des questions, contactez l'équipe d'assistance StageUp."
-      regards: "Cordialement,"
-      team: "L'Équipe StageUp"
-      copyright: "Tous droits réservés."
+      heading: Compte Approuvé
+      subject: Votre compte coordinateur a été approuvé
+      greeting: Bonjour %{name},
+      body: Votre compte de coordinateur universitaire a été approuvé par l'équipe d'administration StageUp.
+      approved_badge: Approuvé
+      login_instruction: Vous pouvez maintenant vous connecter pour gérer les conventions de stage, examiner les soumissions des étudiants et signer les conventions de stage au nom de %{university}.
+      support: Si vous avez des questions, contactez l'équipe d'assistance StageUp.
+      regards: Cordialement,
+      team: L'Équipe StageUp
+      copyright: Tous droits réservés.
     company_verified:
-      heading: "Entreprise Vérifiée ✓"
-      subject: "Votre compte entreprise a été vérifié"
-      greeting: "Bonjour,"
-      body_verified: "Votre compte entreprise %{company_name} a été vérifié par l'équipe d'administration StageUp."
-      body_verified_html: "Votre compte entreprise <strong>%{company_name}</strong> a été vérifié par l'équipe d'administration StageUp."
-      verified_badge: "Vérifié"
-      capabilities: "Vous pouvez maintenant publier des offres de stage, recevoir des candidatures d'étudiants et gérer votre pipeline de recrutement."
-      support: "Si vous avez des questions, contactez l'équipe d'assistance StageUp."
-      regards: "Cordialement,"
-      team: "L'Équipe StageUp"
-      copyright: "Tous droits réservés."
+      heading: Entreprise Vérifiée ✓
+      subject: Votre compte entreprise a été vérifié
+      greeting: Bonjour,
+      body_verified: Votre compte entreprise %{company_name} a été vérifié par l'équipe d'administration StageUp.
+      body_verified_html: Votre compte entreprise <strong>%{company_name}</strong> a été vérifié par l'équipe d'administration StageUp.
+      verified_badge: Vérifié
+      capabilities: Vous pouvez maintenant publier des offres de stage, recevoir des candidatures d'étudiants et gérer votre pipeline de recrutement.
+      support: Si vous avez des questions, contactez l'équipe d'assistance StageUp.
+      regards: Cordialement,
+      team: L'Équipe StageUp
+      copyright: Tous droits réservés.
     application_status_updated:
-      heading: "Candidature %{status}"
-      subject: "Candidature %{status} – %{offer_title}"
-      body: "Votre candidature pour %{offer_title} chez %{company_name} a été %{status}."
-      body_html: "Votre candidature pour <strong>%{offer_title}</strong> chez <strong>%{company_name}</strong> a été <strong>%{status}</strong>."
-      view_details: "Voir les Détails"
+      heading: Candidature %{status}
+      subject: Candidature %{status} – %{offer_title}
+      body: Votre candidature pour %{offer_title} chez %{company_name} a été %{status}.
+      body_html: Votre candidature pour <strong>%{offer_title}</strong> chez <strong>%{company_name}</strong> a été <strong>%{status}</strong>.
+      view_details: Voir les Détails
     application_received:
-      heading: "Nouvelle Candidature Reçue"
-      subject: "Nouvelle Candidature Reçue – %{offer_title}"
+      heading: Nouvelle Candidature Reçue
+      subject: Nouvelle Candidature Reçue – %{offer_title}
       body: "%{student_name} a postulé à %{offer_title}."
       body_html: "<strong>%{student_name}</strong> a postulé à <strong>%{offer_title}</strong>."
-      login_instruction: "Connectez-vous à votre tableau de bord pour consulter son CV et sa solution de preuve."
-      view_applications: "Voir les Candidatures"
+      login_instruction: Connectez-vous à votre tableau de bord pour consulter son CV et sa solution de preuve.
+      view_applications: Voir les Candidatures
     agreement_signature_requested:
-      heading: "Convention de Stage Prête à Signer"
-      subject: "Convention de Stage Prête à Signer – %{offer_title}"
-      body: "La convention de stage pour %{offer_title} est prête pour votre signature."
-      body_html: "La convention de stage pour <strong>%{offer_title}</strong> est prête pour votre signature."
-      login_instruction: "Toutes les parties ont examiné les termes. Veuillez vous connecter pour examiner et signer le document."
-      view_agreement: "Voir la Convention"
+      heading: Convention de Stage Prête à Signer
+      subject: Convention de Stage Prête à Signer – %{offer_title}
+      body: La convention de stage pour %{offer_title} est prête pour votre signature.
+      body_html: La convention de stage pour <strong>%{offer_title}</strong> est prête pour votre signature.
+      login_instruction: Toutes les parties ont examiné les termes. Veuillez vous connecter pour examiner et signer le document.
+      view_agreement: Voir la Convention
     agreement_declined:
-      heading: "Convention de Stage Refusée"
-      subject: "Convention de Stage Refusée – %{offer_title}"
-      body_intro: "La convention de stage pour %{offer_title} a été %{declined_label} par le coordinateur universitaire."
-      body_intro_html: "La convention de stage pour <strong>%{offer_title}</strong> a été <strong style=\"color: #F87171;\">%{declined_label}</strong> par le coordinateur universitaire."
-      declined_label: "refusée"
-      reason_label: "Motif fourni :"
-      body_suggestion: "Vous pouvez générer une nouvelle convention avec des termes corrigés si nécessaire."
-      view_agreement: "Voir la Convention"
-
+      heading: Convention de Stage Refusée
+      subject: Convention de Stage Refusée – %{offer_title}
+      body_intro: La convention de stage pour %{offer_title} a été %{declined_label} par le coordinateur universitaire.
+      body_intro_html: 'La convention de stage pour <strong>%{offer_title}</strong> a été <strong style="color: #F87171;">%{declined_label}</strong> par le coordinateur universitaire.'
+      declined_label: refusée
+      reason_label: 'Motif fourni :'
+      body_suggestion: Vous pouvez générer une nouvelle convention avec des termes corrigés si nécessaire.
+      view_agreement: Voir la Convention
   nav:
-    browse_offers: "Parcourir les offres"
-    dashboard: "Tableau de bord"
-    post_offer: "Publier une offre"
-    sign_out: "Déconnexion"
-    my_dashboard: "Mon tableau de bord"
-    sign_in: "Connexion"
-    home: "StageUp Accueil"
-    view_offer: "Voir les détails"
-    unlock: "Connectez-vous pour débloquer"
-    student: "Étudiant"
-    company: "Entreprise"
-    university: "Université"
-    user: "Utilisateur"
-    main_navigation: "Navigation principale"
-    toggle_theme_title: "Changer le thème Clair/Sombre"
-    toggle_theme_aria: "Changer le thème"
-    user_menu: "Menu utilisateur"
-    toggle_navigation: "Afficher/masquer la navigation"
-    select_language: "Choisir la langue"
-    language_selector: "Sélecteur de langue"
-    view_my_profile: "Voir mon profil public"
-
+    browse_offers: Parcourir les offres
+    dashboard: Tableau de bord
+    post_offer: Publier une offre
+    sign_out: Déconnexion
+    my_dashboard: Mon tableau de bord
+    sign_in: Connexion
+    home: StageUp Accueil
+    view_offer: Voir les détails
+    unlock: Connectez-vous pour débloquer
+    student: Étudiant
+    company: Entreprise
+    university: Université
+    user: Utilisateur
+    main_navigation: Navigation principale
+    toggle_theme_title: Changer le thème Clair/Sombre
+    toggle_theme_aria: Changer le thème
+    user_menu: Menu utilisateur
+    toggle_navigation: Afficher/masquer la navigation
+    select_language: Choisir la langue
+    language_selector: Sélecteur de langue
+    view_my_profile: Voir mon profil public
   locales:
-    fr: "Français"
-    en: "English"
-    ar: "العربية"
-
+    fr: Français
+    en: English
+    ar: العربية
   offers:
     index:
-      title: "Stages Disponibles – StageUp"
-      subtitle: "Parcourez et postulez aux offres de stage vérifiées"
-      eyebrow: "OPPORTUNITÉS VÉRIFIÉES"
+      title: Stages Disponibles – StageUp
+      subtitle: Parcourez et postulez aux offres de stage vérifiées
+      eyebrow: OPPORTUNITÉS VÉRIFIÉES
       filters:
-        title: "Filtres"
-        search_placeholder: "Rechercher par titre, entreprise, compétences..."
-        stage_type: "Type de Stage"
-        work_mode: "Mode de Travail"
-        all_types: "Tous les Types"
-        all_modes: "Tous les Modes"
-        stage_type_pfe: "PFE (Projet de Fin d'Études)"
-        stage_type_pfa: "PFA (Projet de Fin d'Année)"
-        clear_filters: "Réinitialiser"
-        filters_active: "Filtres actifs"
-      no_results: "Aucun stage ne correspond à vos filtres"
-      no_results_hint: "Essayez de modifier votre recherche ou vos filtres"
+        title: Filtres
+        search_placeholder: Rechercher par titre, entreprise, compétences...
+        stage_type: Type de Stage
+        work_mode: Mode de Travail
+        all_types: Tous les Types
+        all_modes: Tous les Modes
+        stage_type_pfe: PFE (Projet de Fin d'Études)
+        stage_type_pfa: PFA (Projet de Fin d'Année)
+        clear_filters: Réinitialiser
+        filters_active: Filtres actifs
+      no_results: Aucun stage ne correspond à vos filtres
+      no_results_hint: Essayez de modifier votre recherche ou vos filtres
       active_listings:
         one: "%{count} offre active"
         other: "%{count} offres actives"
-      active_listing_tooltip: "Offre active"
+      active_listing_tooltip: Offre active
       card:
-        mission_attached: "Mission Incluse"
-        cv_only: "CV Uniquement"
-        view_details: "Voir les Détails"
-        sign_in_to_unlock: "Connectez-vous pour débloquer"
+        mission_attached: Mission Incluse
+        cv_only: CV Uniquement
+        view_details: Voir les Détails
+        sign_in_to_unlock: Connectez-vous pour débloquer
       stats:
-        total_offers: "offres disponibles"
-
+        total_offers: offres disponibles
     show:
       page_title: "%{title} – StageUp"
-      title: "Détails du Stage"
-      apply_now: "Postuler Maintenant"
-      sign_in_to_apply: "Connectez-vous pour Postuler"
+      title: Détails du Stage
+      apply_now: Postuler Maintenant
+      sign_in_to_apply: Connectez-vous pour Postuler
       mission:
-        title: "Mission de Preuve de Travail"
-        subtitle: "Complétez ce défi pour débloquer votre candidature"
-        duration: "Temps estimé : %{minutes} minutes"
-        submit_solution: "Soumettre la Solution"
-        solution_placeholder: "Repo GitHub, lien Figma, Google Drive..."
-        notes_placeholder: "Explication technique brève (optionnel)"
-        submit_btn: "Soumettre la Solution"
-        submitting: "Envoi en cours..."
+        title: Mission de Preuve de Travail
+        subtitle: Complétez ce défi pour débloquer votre candidature
+        duration: 'Temps estimé : %{minutes} minutes'
+        submit_solution: Soumettre la Solution
+        solution_placeholder: Repo GitHub, lien Figma, Google Drive...
+        notes_placeholder: Explication technique brève (optionnel)
+        submit_btn: Soumettre la Solution
+        submitting: Envoi en cours...
       company:
-        title: "À Propos de l'Entreprise"
-        website: "Site Web"
-        verified: "Partenaire Vérifié"
-        grace_period: "Nouveau Recruteur · Période de Grâce"
-        grace_text: "Cet employeur a récemment commencé à publier sur StageUp. Les métriques détaillées de taux de réponse sont masquées pendant leur période de grâce de 30 jours."
-        response_rate: "Taux de Réponse"
-        avg_decision_time: "Temps Moyen de Décision"
-        verified_recruiter: "Recruteur Vérifié"
-        commitment: "Engagement"
-        avg_rating: "Note Moyenne"
+        title: À Propos de l'Entreprise
+        website: Site Web
+        verified: Partenaire Vérifié
+        grace_period: Nouveau Recruteur · Période de Grâce
+        grace_text: Cet employeur a récemment commencé à publier sur StageUp. Les métriques détaillées de taux de réponse sont masquées pendant leur période de grâce de 30 jours.
+        response_rate: Taux de Réponse
+        avg_decision_time: Temps Moyen de Décision
+        verified_recruiter: Recruteur Vérifié
+        commitment: Engagement
+        avg_rating: Note Moyenne
       details:
-        stage_type: "Type de Stage"
-        spots: "Places Disponibles"
-        work_mode: "Mode de Travail"
-        deadline: "Date Limite de Candidature"
-        location: "Lieu"
-        remote: "À Distance"
-        posted: "Publié il y a %{time}"
+        stage_type: Type de Stage
+        spots: Places Disponibles
+        work_mode: Mode de Travail
+        deadline: Date Limite de Candidature
+        location: Lieu
+        remote: À Distance
+        posted: Publié il y a %{time}
       apply:
-        cta_title: "Prêt à commencer votre mission ?"
-        cta_desc: "Soumettez votre solution au défi de preuve de travail et soyez évalué directement par l'équipe."
-        btn: "Commencer la Mission"
+        cta_title: Prêt à commencer votre mission ?
+        cta_desc: Soumettez votre solution au défi de preuve de travail et soyez évalué directement par l'équipe.
+        btn: Commencer la Mission
       auth_prompt:
-        title: "Connectez-vous pour Postuler"
-        desc: "Créez un compte ou connectez-vous pour soumettre votre solution à cette mission."
-        sign_up: "Créer un Compte"
-        sign_in: "Se Connecter"
+        title: Connectez-vous pour Postuler
+        desc: Créez un compte ou connectez-vous pour soumettre votre solution à cette mission.
+        sign_up: Créer un Compte
+        sign_in: Se Connecter
       reviews:
-        title: "Avis des Candidats"
+        title: Avis des Candidats
       application:
-        title: "Candidature"
-        must_sign_in: "Vous devez être connecté en tant qu'étudiant pour postuler ou prendre en charge la mission de preuve de travail."
-        mission_prompt: "Cette offre a une tâche attachée. Cliquer ci-dessous démarre une <strong>fenêtre de 48 heures</strong> pour compléter la mission et soumettre votre travail."
-        start_mission: "Commencer la Mission de Preuve"
-        cv_prompt: "Cette offre accepte les candidatures CV standard. Cliquez ci-dessous pour revoir votre lien CV et soumettre."
-        apply_cv: "Postuler avec CV"
-        mission_in_progress: "Mission en Cours"
-        mission_deadline_warning: "Vous avez commencé cette mission. N'oubliez pas de soumettre votre lien de code avant la limite de 48h !"
-        submit_solution: "Soumettre l'URL de la Solution →"
-        status_label: "Statut de la Candidature :"
-        view_submission: "Voir Mon Lien de Soumission"
-        students_only: "Seuls les étudiants connectés peuvent postuler aux stages."
+        title: Candidature
+        must_sign_in: Vous devez être connecté en tant qu'étudiant pour postuler ou prendre en charge la mission de preuve de travail.
+        mission_prompt: Cette offre a une tâche attachée. Cliquer ci-dessous démarre une <strong>fenêtre de 48 heures</strong> pour compléter la mission et soumettre votre travail.
+        start_mission: Commencer la Mission de Preuve
+        cv_prompt: Cette offre accepte les candidatures CV standard. Cliquez ci-dessous pour revoir votre lien CV et soumettre.
+        apply_cv: Postuler avec CV
+        mission_in_progress: Mission en Cours
+        mission_deadline_warning: Vous avez commencé cette mission. N'oubliez pas de soumettre votre lien de code avant la limite de 48h !
+        submit_solution: Soumettre l'URL de la Solution →
+        status_label: 'Statut de la Candidature :'
+        view_submission: Voir Mon Lien de Soumission
+        students_only: Seuls les étudiants connectés peuvent postuler aux stages.
         statuses:
-          started: "Commencé"
-          submitted: "Soumis"
-          reviewed: "Examiné"
-          accepted: "Accepté"
-          rejected: "Rejeté"
-          completed: "Terminé"
-        modal_mission_desc: "Vous êtes sur le point de commencer la mission de preuve de travail pour <strong>%{offer_title}</strong>."
-        modal_timer: "Fenêtre de Temps :"
-        modal_success_reward: "Récompense en cas de succès :"
-        modal_missed_deadline: "Délai dépassé :"
-        modal_penalty: "Pénalité d'Engagement"
-        modal_confirm: "Êtes-vous sûr d'avoir le temps de commencer ce défi maintenant ?"
-        modal_cv_desc: "Vous postulez à <strong>%{offer_title}</strong> chez %{company_name}."
-        cv_link_label: "Lien CV / Document"
-        cv_link_hint: "Collez un lien public Google Drive, Dropbox, LinkedIn ou PDF vers votre CV."
-        cv_placeholder: "https://drive.google.com/your-cv.pdf"
-        confirm_start: "Confirmer et Démarrer la Mission"
-        confirm_submit_cv: "Confirmer et Soumettre le CV"
+          started: Commencé
+          submitted: Soumis
+          reviewed: Examiné
+          accepted: Accepté
+          rejected: Rejeté
+          completed: Terminé
+        modal_mission_desc: Vous êtes sur le point de commencer la mission de preuve de travail pour <strong>%{offer_title}</strong>.
+        modal_timer: 'Fenêtre de Temps :'
+        modal_success_reward: 'Récompense en cas de succès :'
+        modal_missed_deadline: 'Délai dépassé :'
+        modal_penalty: Pénalité d'Engagement
+        modal_confirm: Êtes-vous sûr d'avoir le temps de commencer ce défi maintenant ?
+        modal_cv_desc: Vous postulez à <strong>%{offer_title}</strong> chez %{company_name}.
+        cv_link_label: Lien CV / Document
+        cv_link_hint: Collez un lien public Google Drive, Dropbox, LinkedIn ou PDF vers votre CV.
+        cv_placeholder: https://drive.google.com/your-cv.pdf
+        confirm_start: Confirmer et Démarrer la Mission
+        confirm_submit_cv: Confirmer et Soumettre le CV
       deadline:
-        passed: "Date limite dépassée"
-        one_day: "1 jour restant"
+        passed: Date limite dépassée
+        one_day: 1 jour restant
         days_left: "%{count} jours restants"
       match_breakdown:
-        skills: "Compétences"
-        major: "Filière"
-        readiness: "Score"
-        match_label: "Correspondance"
-
+        skills: Compétences
+        major: Filière
+        readiness: Score
+        match_label: Correspondance
     new:
-      title: "Publier un Stage – StageUp"
-      heading: "Publier une Offre de Stage"
-      subtitle: "Remplissez les détails ci-dessous. Vous pouvez éventuellement joindre une mission de preuve de travail pour filtrer les candidats par compétence."
+      title: Publier un Stage – StageUp
+      heading: Publier une Offre de Stage
+      subtitle: Remplissez les détails ci-dessous. Vous pouvez éventuellement joindre une mission de preuve de travail pour filtrer les candidats par compétence.
       form:
-        internship_details: "Détails du Stage"
-        title_placeholder: "ex. Stagiaire Développeur Front-End"
-        description_label: "Description & Prérequis"
-        description_placeholder: "Décrivez les tâches, les outils et le profil recherché..."
-        stage_type_pfe: "PFE (Projet de Fin d'Études)"
-        stage_type_pfa: "PFA (Projet de Fin d'Année)"
-        stage_type_initiation: "Initiation / Observation"
-        stage_type_free: "Libre / Développement de Compétences"
-        stage_type_prompt: "Sélectionnez un type"
-        location_placeholder: "ex. Sfax"
-        mission_section: "Mission de Preuve de Travail"
-        mission_description_text: "Ajoutez un test pratique (30–90 min) pour filtrer les candidats par compétence réelle. Laissez vide pour les candidatures CV standard."
-        mission_title_placeholder: "ex. Construire une Barre de Navigation Responsive"
-        mission_instructions_label: "Instructions & Grille d'Évaluation"
-        mission_instructions_placeholder: "Objectif, spécifications, ressources et détails d'évaluation..."
-        mission_duration_placeholder: "ex. 60"
-        submit: "Publier le Stage"
-        submitting: "Publication…"
+        internship_details: Détails du Stage
+        title_placeholder: ex. Stagiaire Développeur Front-End
+        description_label: Description & Prérequis
+        description_placeholder: Décrivez les tâches, les outils et le profil recherché...
+        stage_type_pfe: PFE (Projet de Fin d'Études)
+        stage_type_pfa: PFA (Projet de Fin d'Année)
+        stage_type_initiation: Initiation / Observation
+        stage_type_free: Libre / Développement de Compétences
+        stage_type_prompt: Sélectionnez un type
+        location_placeholder: ex. Sfax
+        mission_section: Mission de Preuve de Travail
+        mission_description_text: Ajoutez un test pratique (30–90 min) pour filtrer les candidats par compétence réelle. Laissez vide pour les candidatures CV standard.
+        mission_title_placeholder: ex. Construire une Barre de Navigation Responsive
+        mission_instructions_label: Instructions & Grille d'Évaluation
+        mission_instructions_placeholder: Objectif, spécifications, ressources et détails d'évaluation...
+        mission_duration_placeholder: ex. 60
+        submit: Publier le Stage
+        submitting: Publication…
       preview:
-        title: "Aperçu"
-        mission_attached: "Mission Incluse"
-        cv_only: "CV Uniquement"
-
+        title: Aperçu
+        mission_attached: Mission Incluse
+        cv_only: CV Uniquement
     edit:
-      title: "Modifier l'Offre de Stage – StageUp"
-      heading: "Modifier l'Offre de Stage"
-      subtitle: "Mettez à jour les détails ou la mission de preuve de cette offre."
+      title: Modifier l'Offre de Stage – StageUp
+      heading: Modifier l'Offre de Stage
+      subtitle: Mettez à jour les détails ou la mission de preuve de cette offre.
       form:
-        submit: "Mettre à Jour l'Offre"
-        submitting: "Mise à jour…"
-        delete: "Supprimer"
-        deleting: "Suppression…"
-        delete_confirm: "Êtes-vous sûr ? Cette action est irréversible."
-
+        submit: Mettre à Jour l'Offre
+        submitting: Mise à jour…
+        delete: Supprimer
+        deleting: Suppression…
+        delete_confirm: Êtes-vous sûr ? Cette action est irréversible.
     form:
-      title: "Titre du Stage"
-      stage_type: "Type de Stage"
-      spots: "Places Disponibles"
-      work_mode: "Mode de Travail"
-      location: "Lieu"
-      deadline: "Date Limite"
-      description: "Description"
-      mission_title: "Titre de la Mission"
-      mission_duration: "Durée de la Mission"
-      mission_description: "Description de la Mission"
+      title: Titre du Stage
+      stage_type: Type de Stage
+      spots: Places Disponibles
+      work_mode: Mode de Travail
+      location: Lieu
+      deadline: Date Limite
+      description: Description
+      mission_title: Titre de la Mission
+      mission_duration: Durée de la Mission
+      mission_description: Description de la Mission
     status:
-      active: "Active"
-      closed: "Fermée"
-      draft: "Brouillon"
-
+      active: Active
+      closed: Fermée
+      draft: Brouillon
   dashboard:
-    title: "Tableau de Bord"
-    welcome_back: "Bon retour, %{name}"
-    today_is: "Aujourd'hui, nous sommes le %{date}"
+    title: Tableau de Bord
+    welcome_back: Bon retour, %{name}
+    today_is: Aujourd'hui, nous sommes le %{date}
     welcome_sub:
-      student: "Gérez vos candidatures, suivez l'avancement des stages, et bâtissez votre score d'engagement."
-      company: "Examinez les candidatures étudiants, publiez des missions de preuve, et gérez les offres de stage actives."
-      university: "Surveillez les conventions de stage étudiantes et suivez les engagements des partenaires universitaires."
+      student: Gérez vos candidatures, suivez l'avancement des stages, et bâtissez votre score d'engagement.
+      company: Examinez les candidatures étudiants, publiez des missions de preuve, et gérez les offres de stage actives.
+      university: Surveillez les conventions de stage étudiantes et suivez les engagements des partenaires universitaires.
     quick_stats:
-      title: "Statistiques Rapides"
-      active_applications: "Candidatures Actives"
-      completed_internships: "Stages Terminés"
-      reputation_score: "Score de Réputation"
-      pending_reviews: "Avis en Attente"
+      title: Statistiques Rapides
+      active_applications: Candidatures Actives
+      completed_internships: Stages Terminés
+      reputation_score: Score de Réputation
+      pending_reviews: Avis en Attente
     tabs:
-      applications: "Mes Candidatures"
-      offers: "Mes Offres"
-      agreements: "Conventions"
-      reputation: "Réputation"
-      reviews: "Avis"
+      applications: Mes Candidatures
+      offers: Mes Offres
+      agreements: Conventions
+      reputation: Réputation
+      reviews: Avis
     kanban:
-      title: "Suivi des Candidatures"
+      title: Suivi des Candidatures
       columns:
-        applied: "Candidature Envoyée"
-        mission: "Mission"
-        review: "En Évaluation"
-        accepted: "Accepté"
-        completed: "Terminé"
-      empty: "Aucune candidature dans cette étape"
+        applied: Candidature Envoyée
+        mission: Mission
+        review: En Évaluation
+        accepted: Accepté
+        completed: Terminé
+      empty: Aucune candidature dans cette étape
     applications:
-      title: "Mes Candidatures"
-      empty: "Vous n'avez pas encore postulé à des stages"
-      browse_offers: "Parcourir les Offres"
+      title: Mes Candidatures
+      empty: Vous n'avez pas encore postulé à des stages
+      browse_offers: Parcourir les Offres
       status:
-        pending: "En Attente"
-        mission_pending: "Mission en Attente"
-        in_review: "En Évaluation"
-        accepted: "Accepté"
-        rejected: "Rejeté"
-        completed: "Terminé"
+        pending: En Attente
+        mission_pending: Mission en Attente
+        in_review: En Évaluation
+        accepted: Accepté
+        rejected: Rejeté
+        completed: Terminé
       actions:
-        view_mission: "Voir la Mission"
-        submit_solution: "Soumettre la Solution"
-        view_agreement: "Voir la Convention"
-        withdraw: "Retirer"
+        view_mission: Voir la Mission
+        submit_solution: Soumettre la Solution
+        view_agreement: Voir la Convention
+        withdraw: Retirer
       mission_status:
-        not_started: "Non Commencé"
-        in_progress: "En Cours"
-        submitted: "Soumis"
-        graded: "Évalué"
+        not_started: Non Commencé
+        in_progress: En Cours
+        submitted: Soumis
+        graded: Évalué
     offers:
-      title: "Mes Offres de Stage"
-      empty: "Vous n'avez pas encore publié de stages"
-      post_offer: "Publier une Offre"
+      title: Mes Offres de Stage
+      empty: Vous n'avez pas encore publié de stages
+      post_offer: Publier une Offre
       status:
-        draft: "Brouillon"
-        published: "Publié"
-        closed: "Fermé"
+        draft: Brouillon
+        published: Publié
+        closed: Fermé
       actions:
-        edit: "Modifier"
-        view_applications: "Voir les Candidatures"
-        close: "Fermer"
-        draft_label: "Brouillon"
-        applicant_count: "candidat(s)"
-        delete_draft: "Supprimer"
-        delete_draft_confirm: "Supprimer définitivement ce brouillon ?"
-        archive: "Archiver"
-        archive_confirm: "Archiver cette offre ?"
-        post_offer_empty: "Publier une Offre"
-        no_offers_title: "Aucune Offre Publiée"
-        no_offers_text: "Publiez votre première offre de stage pour attirer des talents et recevoir des soumissions de missions."
+        edit: Modifier
+        view_applications: Voir les Candidatures
+        close: Fermer
+        draft_label: Brouillon
+        applicant_count: candidat(s)
+        delete_draft: Supprimer
+        delete_draft_confirm: Supprimer définitivement ce brouillon ?
+        archive: Archiver
+        archive_confirm: Archiver cette offre ?
+        post_offer_empty: Publier une Offre
+        no_offers_title: Aucune Offre Publiée
+        no_offers_text: Publiez votre première offre de stage pour attirer des talents et recevoir des soumissions de missions.
     agreements:
-      title: "Conventions de Stage"
-      empty: "Aucune convention pour le moment"
+      title: Conventions de Stage
+      empty: Aucune convention pour le moment
       status:
-        pending_signatures: "Signatures en Attente"
-        signed: "Entièrement Signée"
-        declined: "Refusée"
-        expired: "Expirée"
+        pending_signatures: Signatures en Attente
+        signed: Entièrement Signée
+        declined: Refusée
+        expired: Expirée
       actions:
-        view: "Voir la Convention"
-        sign: "Signer"
+        view: Voir la Convention
+        sign: Signer
     reputation:
-      title: "Registre de Réputation"
-      current_score: "Score Actuel"
-      score_label: "Score d'Engagement"
-      history_title: "Historique du Score"
-      empty: "Aucun événement de réputation pour l'instant"
-      public_verified_label: "Public · Vérifié"
-      avg_rating: "Note Moy."
-      metrics_title: "Métriques de Réputation"
-      active_offers: "Offres Actives"
-      verification_label: "Vérification"
-      verified_status: "Vérifié"
-      grace_period: "Période de Grâce"
-      associated_students: "Étudiants Associés"
-      ledger_title: "Registre d'Engagement"
-      event_label: "Événement"
+      title: Registre de Réputation
+      current_score: Score Actuel
+      score_label: Score d'Engagement
+      history_title: Historique du Score
+      empty: Aucun événement de réputation pour l'instant
       events:
-        applied: "Candidature envoyée"
-        mission_submitted: "Solution de mission soumise"
-        mission_approved: "Mission approuvée"
-        mission_rejected: "Mission rejetée"
-        agreement_signed: "Convention signée"
-        review_received: "Avis reçu"
-        no_show: "Pénalité d'absence"
+        applied: Candidature envoyée
+        mission_submitted: Solution de mission soumise
+        mission_approved: Mission approuvée
+        mission_rejected: Mission rejetée
+        agreement_signed: Convention signée
+        review_received: Avis reçu
+        no_show: Pénalité d'absence
       delta:
         positive: "+%{points}"
         negative: "%{points}"
     profile:
-      title: "Mon Profil"
+      title: Mon Profil
       roles:
-        student: "Étudiant"
-        company: "Entreprise"
-        university: "Université"
-      edit: "Modifier le Profil"
-      view_public: "Voir mon Profil"
+        student: Étudiant
+        company: Entreprise
+        university: Université
+      edit: Modifier le Profil
+      view_public: Voir mon Profil
     profile_bento:
-      full_name: "Nom Complet"
-      phone: "Téléphone"
-      phone_not_specified: "Non spécifié"
-      major: "Filière"
-      major_not_specified: "Non spécifié"
-      graduation_year: "Année de Diplôme"
-      graduation_not_specified: "Non spécifié"
-      university: "Université"
-      university_self_declared: "Autodéclaré / Non associé"
-      skills: "Compétences"
-      skills_none: "Aucune ajoutée"
-      bio: "Bio"
-      bio_empty: "Pas de bio pour l'instant"
-      company_name: "Nom de l'Entreprise"
-      website: "Site Web"
-      website_not_provided: "Non fourni"
-      verification_status: "Statut de Vérification"
-      verified: "Vérifié"
-      not_verified: "Non vérifié"
-      description: "Description"
-      description_empty: "Aucune description fournie"
-      admin_name: "Nom du Coordinateur"
-      department: "Département"
-      institution_name: "Nom de l'Institution"
+      full_name: Nom Complet
+      phone: Téléphone
+      phone_not_specified: Non spécifié
+      major: Filière
+      major_not_specified: Non spécifié
+      graduation_year: Année de Diplôme
+      graduation_not_specified: Non spécifié
+      university: Université
+      university_self_declared: Autodéclaré / Non associé
+      skills: Compétences
+      skills_none: Aucune ajoutée
+      bio: Bio
+      bio_empty: Pas de bio pour l'instant
+      company_name: Nom de l'Entreprise
+      website: Site Web
+      website_not_provided: Non fourni
+      verification_status: Statut de Vérification
+      verified: Vérifié
+      not_verified: Non vérifié
+      description: Description
+      description_empty: Aucune description fournie
+      admin_name: Nom du Coordinateur
+      department: Département
+      institution_name: Nom de l'Institution
     active_internships:
-      title: "Stages Actifs & Progression des Jalons"
-      company_label: "Entreprise :"
+      title: Stages Actifs & Progression des Jalons
+      company_label: 'Entreprise :'
       match: "% de Correspondance"
-      milestone_done: "Terminé"
-      waiting_employer: "En Attente de l'Employeur"
-      mark_completed: "Marquer Terminé"
-      completing: "Finalisation…"
-      abandon: "Abandonner"
-      abandoning: "Abandon…"
-      abandon_confirm: "Êtes-vous sûr de vouloir abandonner ce stage ? Votre score d'engagement sera pénalisé."
-      awaiting_signatures: "En Attente de Signatures"
-      agreement_declined: "Convention Refusée"
-      view_sign_agreement: "Voir et Signer la Convention"
-      generate_agreement: "Générer la Convention de Stage"
-      view_certificate: "Voir le Certificat"
-      leave_review: "Laisser un Avis"
-      review_submitted: "Avis Soumis"
-      no_active_title: "Aucun Stage Actif"
-      no_active_text: "Vous n'avez encore commencé aucun stage sur StageUp. Recherchez des offres actives, postulez et complétez votre mission de preuve !"
-      browse_active: "Parcourir les Offres Actives"
+      milestone_done: Terminé
+      waiting_employer: En Attente de l'Employeur
+      mark_completed: Marquer Terminé
+      completing: Finalisation…
+      abandon: Abandonner
+      abandoning: Abandon…
+      abandon_confirm: Êtes-vous sûr de vouloir abandonner ce stage ? Votre score d'engagement sera pénalisé.
+      awaiting_signatures: En Attente de Signatures
+      agreement_declined: Convention Refusée
+      view_sign_agreement: Voir et Signer la Convention
+      generate_agreement: Générer la Convention de Stage
+      view_certificate: Voir le Certificat
+      leave_review: Laisser un Avis
+      review_submitted: Avis Soumis
+      no_active_title: Aucun Stage Actif
+      no_active_text: Vous n'avez encore commencé aucun stage sur StageUp. Recherchez des offres actives, postulez et complétez votre mission de preuve !
+      browse_active: Parcourir les Offres Actives
     reviews:
-      title: "Avis"
-      write_review: "Laisser un Avis"
-      subtitle_html: "Partagez votre expérience avec <strong>%{name}</strong>"
-      internship: "Stage"
-      rating_label: "Note"
-      click_to_rate: "Cliquez sur une étoile pour noter"
-      feedback: "Commentaire & Avis"
-      comment_placeholder: "Décrivez la collaboration, les compétences acquises, le professionnalisme et tous commentaires constructifs..."
-      hint: "Les avis ne peuvent pas être modifiés une fois soumis."
-      char_count: "%{count} / min %{min}"
-      char_count_suffix: " / min %{min}"
-      submit: "Soumettre l'Avis"
-      submitting: "Envoi en cours…"
-      turbo_confirm: "Les avis ne peuvent pas être modifiés après soumission. Continuer ?"
+      title: Avis
+      empty: Aucun avis pour l'instant
+      given: Donnés
+      received: Reçus
+      write_review: Rédiger un Avis
       rating:
-        labels:
-          - Faible
-          - En dessous de la moyenne
-          - Moyen
-          - Bien
-          - Excellent
+        excellent: Excellent
+        good: Bien
+        average: Moyen
+        poor: Faible
+      placeholder: Partagez votre expérience...
     pending_approval:
-      title: "Vérification en Attente"
-      logged_in_as: "Connecté en tant que : %{email}"
-      subtitle: "Votre compte coordinateur universitaire est en cours de vérification"
-      what_next: "Que se passe-t-il ensuite ?"
-      step1: "Nous vérifierons votre domaine d'email universitaire officiel."
-      step2: "Nous pourrons contacter votre chef de département ou consulter les registres universitaires."
-      step3: "Une fois approuvé, vous recevrez un email de notification et l'accès complet sera débloqué."
-      contact: "Besoin d'une activation urgente ? Contactez-nous à %{email}"
-      registration_thanks: "Merci de vous être inscrit en tant que coordinateur pour %{university} (%{department})."
-      privacy_notice: "Pour protéger la confidentialité des données des étudiants, les tableaux de bord des coordinateurs doivent être vérifiés par les administrateurs StageUp avant activation."
+      title: Vérification en Attente
+      logged_in_as: 'Connecté en tant que : %{email}'
+      subtitle: Votre compte coordinateur universitaire est en cours de vérification
+      what_next: Que se passe-t-il ensuite ?
+      step1: Nous vérifierons votre domaine d'email universitaire officiel.
+      step2: Nous pourrons contacter votre chef de département ou consulter les registres universitaires.
+      step3: Une fois approuvé, vous recevrez un email de notification et l'accès complet sera débloqué.
+      contact: Besoin d'une activation urgente ? Contactez-nous à %{email}
+      registration_thanks: Merci de vous être inscrit en tant que coordinateur pour %{university} (%{department}).
+      privacy_notice: Pour protéger la confidentialité des données des étudiants, les tableaux de bord des coordinateurs doivent être vérifiés par les administrateurs StageUp avant activation.
     internship_agreements:
       show:
-        title: "CONVENTION DE STAGE"
-        subtitle: "Cette convention est établie conformément à la loi tunisienne régissant les programmes de stage."
-        declined_title: "Convention Refusée"
-        declined_reason: "Motif : %{reason}"
-        declined_by: "Refusée par le coordinateur de %{university}"
-        certificate_banner: "Certificat Disponible"
-        certificate_sub: "Ce stage est entièrement exécuté et publiquement vérifiable."
-        print: "Imprimer / Sauvegarder PDF"
-        view_certificate: "Ouvrir le Certificat →"
-        fully_executed_badge: "EXÉCUTÉ — Toutes les parties ont signé"
-        declined_badge: "REFUSÉE — L'université a rejeté cette convention"
-        pending_badge: "SIGNATURES EN ATTENTE — En attente : %{signatories}"
-        article1: "Article 1 — Parties"
-        article1_text: "La présente Convention de Stage est conclue entre les trois parties suivantes :"
-        article2: "Article 2 — Dates & Durée"
-        article2_text: "Le stage débutera le %{start_date} et se terminera le %{end_date}."
-        article3: "Article 3 — Objet du Stage"
-        article3_text: "%{name} effectuera un stage intitulé \"%{title}\" chez %{company} selon les termes décrits dans l'offre originale."
-        student_role: "L'Étudiant :"
-        employer_role: "L'Employeur :"
-        university_role: "L'Université :"
-        duration: "Durée totale : %{days} jours."
-        enrolled_at: "inscrit à"
-        registered_in_tunisia: "enregistré en Tunisie"
-        signatures: "Signatures"
-        student_box: "Étudiant"
-        employer_box: "Employeur"
-        university_box: "Coordinateur Universitaire"
-        signed: "Signé"
-        not_signed: "Pas encore signé"
-        signed_on: "Signé le : %{date}"
-        sign_agreement: "Signer la Convention"
-        signing: "Signature…"
-        decline: "Refuser la Convention"
-        decline_reason: "Motif du refus :"
-        decline_placeholder: "Expliquez pourquoi cette convention est refusée…"
-        cancel: "Annuler"
-        confirm_decline: "Confirmer le Refus"
-        declining: "Refus en cours…"
-        independent: "Indépendant"
-        affiliated_university: "une université affiliée"
-        no_major: "Aucune spécialité spécifiée"
-        self_declared: "Indépendant / Auto-déclaré"
-        signatures_desc: "Chaque partie doit signer ci-dessous pour que cette convention soit pleinement exécutée."
+        title: CONVENTION DE STAGE
+        subtitle: Cette convention est établie conformément à la loi tunisienne régissant les programmes de stage.
+        declined_title: Convention Refusée
+        declined_reason: 'Motif : %{reason}'
+        declined_by: Refusée par le coordinateur de %{university}
+        certificate_banner: Certificat Disponible
+        certificate_sub: Ce stage est entièrement exécuté et publiquement vérifiable.
+        print: Imprimer / Sauvegarder PDF
+        view_certificate: Ouvrir le Certificat →
+        fully_executed_badge: EXÉCUTÉ — Toutes les parties ont signé
+        declined_badge: REFUSÉE — L'université a rejeté cette convention
+        pending_badge: 'SIGNATURES EN ATTENTE — En attente : %{signatories}'
+        article1: Article 1 — Parties
+        article1_text: 'La présente Convention de Stage est conclue entre les trois parties suivantes :'
+        article2: Article 2 — Dates & Durée
+        article2_text: Le stage débutera le %{start_date} et se terminera le %{end_date}.
+        article3: Article 3 — Objet du Stage
+        article3_text: '%{name} effectuera un stage intitulé "%{title}" chez %{company} selon les termes décrits dans l''offre originale.'
+        student_role: 'L''Étudiant :'
+        employer_role: 'L''Employeur :'
+        university_role: 'L''Université :'
+        duration: 'Durée totale : %{days} jours.'
+        enrolled_at: inscrit à
+        registered_in_tunisia: enregistré en Tunisie
+        signatures: Signatures
+        student_box: Étudiant
+        employer_box: Employeur
+        university_box: Coordinateur Universitaire
+        signed: Signé
+        not_signed: Pas encore signé
+        signed_on: 'Signé le : %{date}'
+        sign_agreement: Signer la Convention
+        signing: Signature…
+        decline: Refuser la Convention
+        decline_reason: 'Motif du refus :'
+        decline_placeholder: Expliquez pourquoi cette convention est refusée…
+        cancel: Annuler
+        confirm_decline: Confirmer le Refus
+        declining: Refus en cours…
+        independent: Indépendant
+        affiliated_university: une université affiliée
+        no_major: Aucune spécialité spécifiée
+        self_declared: Indépendant / Auto-déclaré
+        signatures_desc: Chaque partie doit signer ci-dessous pour que cette convention soit pleinement exécutée.
     certificates:
       verify:
-        title: "Attestation de Réussite"
-        subtitle: "Vérifiée & Authentifiée via StageUp Trust Ledger"
-        recipient: "Ceci certifie que"
-        institution: "Institution"
-        duration: "Durée"
-        stage_type: "Type de Stage"
-        verification_id: "ID de Vérification"
-        signatures: "Signatures Numériques & Vérification Légale"
-        student: "Étudiant"
-        employer: "Employeur"
-        university: "Coordinateur Universitaire"
-        signed: "Signé"
-        signed_on: "Signé le : %{date}"
-        qr: "Scannez pour vérifier l'authenticité"
-        view_applications: "Voir les Candidatures"
-        close: "Fermer"
-    agreements:
-      title: "Conventions de Stage"
-      empty: "Aucune convention pour le moment"
-      status:
-        pending_signatures: "Signatures en Attente"
-        signed: "Entièrement Signée"
-        declined: "Refusée"
-        expired: "Expirée"
-      actions:
-        view: "Voir la Convention"
-        sign: "Signer"
-    reputation:
-      title: "Registre de Réputation"
-      current_score: "Score Actuel"
-      score_label: "Score d'Engagement"
-      history_title: "Historique du Score"
-      empty: "Aucun événement de réputation pour l'instant"
-      events:
-        applied: "Candidature envoyée"
-        mission_submitted: "Solution de mission soumise"
-        mission_approved: "Mission approuvée"
-        mission_rejected: "Mission rejetée"
-        agreement_signed: "Convention signée"
-        review_received: "Avis reçu"
-        no_show: "Pénalité d'absence"
-      delta:
-        positive: "+%{points}"
-        negative: "%{points}"
-    reviews:
-      title: "Avis"
-      empty: "Aucun avis pour l'instant"
-      given: "Donnés"
-      received: "Reçus"
-      write_review: "Rédiger un Avis"
-      rating:
-        excellent: "Excellent"
-        good: "Bien"
-        average: "Moyen"
-        poor: "Faible"
-      placeholder: "Partagez votre expérience..."
-
+        title: Attestation de Réussite
+        subtitle: Vérifiée & Authentifiée via StageUp Trust Ledger
+        recipient: Ceci certifie que
+        institution: Institution
+        duration: Durée
+        stage_type: Type de Stage
+        verification_id: ID de Vérification
+        signatures: Signatures Numériques & Vérification Légale
+        student: Étudiant
+        employer: Employeur
+        university: Coordinateur Universitaire
+        signed: Signé
+        signed_on: 'Signé le : %{date}'
+        qr: Scannez pour vérifier l'authenticité
+        view_applications: Voir les Candidatures
+        close: Fermer
   pending_approval:
-    title: "Compte en Attente d'Approbation"
-    subtitle: "Votre compte coordinateur universitaire est en cours de vérification"
-    description: "Notre équipe vérifie vos identifiants. Vous recevrez un email une fois approuvé."
-    contact_support: "Des questions ? Contactez le support"
-
+    title: Compte en Attente d'Approbation
+    subtitle: Votre compte coordinateur universitaire est en cours de vérification
+    description: Notre équipe vérifie vos identifiants. Vous recevrez un email une fois approuvé.
+    contact_support: Des questions ? Contactez le support
   notifications:
-    title: "Notifications"
-    mark_all_read: "Tout Marquer comme Lu"
-    bell_aria: "Notifications"
+    title: Notifications
+    mark_all_read: Tout Marquer comme Lu
+    bell_aria: Notifications
     unread_count:
       one: "%{count} non lue"
       other: "%{count} non lues"
-    today: "Aujourd'hui"
-    yesterday: "Hier"
-    mark_read: "Marquer comme Lu"
-    empty_title: "Vous êtes à jour"
-    empty: "Aucune notification pour l'instant"
-    empty_desc: "Vous n'avez aucune nouvelle notification."
-    page_info: "Page %{current} sur %{total}"
+    today: Aujourd'hui
+    yesterday: Hier
+    mark_read: Marquer comme Lu
+    empty_title: Vous êtes à jour
+    empty: Aucune notification pour l'instant
+    empty_desc: Vous n'avez aucune nouvelle notification.
+    page_info: Page %{current} sur %{total}
     types:
-      application_received: "Nouvelle Candidature"
-      application_accepted: "Candidature Acceptée"
-      application_rejected: "Candidature Rejetée"
-      mission_submitted: "Mission Soumise"
-      mission_graded: "Mission Évaluée"
-      agreement_ready: "Convention Prête à Signer"
-      agreement_signed: "Convention Signée"
-      review_received: "Nouvel Avis"
-      review_requested: "Avis Demandé"
+      application_received: Nouvelle Candidature
+      application_accepted: Candidature Acceptée
+      application_rejected: Candidature Rejetée
+      mission_submitted: Mission Soumise
+      mission_graded: Mission Évaluée
+      agreement_ready: Convention Prête à Signer
+      agreement_signed: Convention Signée
+      review_received: Nouvel Avis
+      review_requested: Avis Demandé
     actions:
-      view: "Voir"
-      dismiss: "Ignorer"
-
+      view: Voir
+      dismiss: Ignorer
   submissions:
     edit:
-      title: "Soumettre une Preuve de Travail – StageUp"
-      heading: "Soumettre une Preuve de Travail"
-      eyebrow: "ÉTAPE 2 SUR 2 · SOUMISSION DE PREUVE"
-      description: "Collez l'URL de votre solution terminée et vos notes d'explication facultatives ci-dessous."
-      internship_label: "Offre de Stage"
-      mission_label: "Mission Attachée"
-      no_mission: "Aucune mission attachée"
+      title: Soumettre une Preuve de Travail – StageUp
+      heading: Soumettre une Preuve de Travail
+      eyebrow: ÉTAPE 2 SUR 2 · SOUMISSION DE PREUVE
+      description: Collez l'URL de votre solution terminée et vos notes d'explication facultatives ci-dessous.
+      internship_label: Offre de Stage
+      mission_label: Mission Attachée
+      no_mission: Aucune mission attachée
       form:
-        github_link: "URL de la Solution (Repo GitHub, Fichier Figma, Google Drive)"
-        github_link_placeholder: "https://github.com/monutilisateur/monrepo"
-        url_warning_html: "Assurez-vous que votre URL est <strong>accessible publiquement</strong> pour que les recruteurs puissent vérifier votre travail."
-        notes: "Notes / Explication Technique (Optionnel)"
-        notes_placeholder: "Décrivez vos détails d'implémentation, la stack technique utilisée, les instructions d'installation ou les hypothèses clés..."
-        submit: "Soumettre la Solution de Preuve →"
-        submitting: "Envoi en cours…"
-        cancel: "Annuler"
+        github_link: URL de la Solution (Repo GitHub, Fichier Figma, Google Drive)
+        github_link_placeholder: https://github.com/monutilisateur/monrepo
+        url_warning_html: Assurez-vous que votre URL est <strong>accessible publiquement</strong> pour que les recruteurs puissent vérifier votre travail.
+        notes: Notes / Explication Technique (Optionnel)
+        notes_placeholder: Décrivez vos détails d'implémentation, la stack technique utilisée, les instructions d'installation ou les hypothèses clés...
+        submit: Soumettre la Solution de Preuve →
+        submitting: Envoi en cours…
+        cancel: Annuler
     milestones:
-      applied: "Candidature envoyée"
-      checked: "Vérifié"
-      accepted: "Accepté"
-      signed: "Signé"
-      done: "Terminé"
-
+      applied: Candidature envoyée
+      checked: Vérifié
+      accepted: Accepté
+      signed: Signé
+      done: Terminé
   agreements:
     status:
-      pending_signatures: "Signatures en attente"
-      approved: "Approuvé"
-
+      pending_signatures: Signatures en attente
+      approved: Approuvé
   registrations:
     select_role:
-      title: "Choisissez Votre Rôle"
-      subtitle: "Sélectionnez comment vous utiliserez StageUp pour commencer"
+      title: Choisissez Votre Rôle
+      subtitle: Sélectionnez comment vous utiliserez StageUp pour commencer
       student:
-        title: "Étudiant"
-        desc: "Trouvez des stages vérifiés, bâtissez votre réputation, soyez embauché"
+        title: Étudiant
+        desc: Trouvez des stages vérifiés, bâtissez votre réputation, soyez embauché
       company:
-        title: "Entreprise"
-        desc: "Publiez des stages, évaluez les talents avec des missions de preuve de travail"
+        title: Entreprise
+        desc: Publiez des stages, évaluez les talents avec des missions de preuve de travail
       university:
-        title: "Coordinateur Universitaire"
-        desc: "Vérifiez les étudiants, suivez les conventions et partenariats"
-      already_account_html: "Vous avez déjà un compte ? %{link}"
-      sign_in: "Se Connecter"
+        title: Coordinateur Universitaire
+        desc: Vérifiez les étudiants, suivez les conventions et partenariats
+      already_account_html: Vous avez déjà un compte ? %{link}
+      sign_in: Se Connecter
     new_student:
-      title: "Inscription Étudiant"
-      subtitle: "Créez votre profil étudiant vérifié"
-      errors_title: "Veuillez corriger les erreurs suivantes :"
-      not_student: "Pas un étudiant ?"
+      title: Inscription Étudiant
+      subtitle: Créez votre profil étudiant vérifié
+      errors_title: 'Veuillez corriger les erreurs suivantes :'
+      not_student: Pas un étudiant ?
       form:
-        first_name: "Prénom"
-        first_name_placeholder: "Mohamed"
-        last_name: "Nom"
-        last_name_placeholder: "Ben Ali"
-        phone: "Numéro de Téléphone"
+        first_name: Prénom
+        first_name_placeholder: Mohamed
+        last_name: Nom
+        last_name_placeholder: Ben Ali
+        phone: Numéro de Téléphone
         phone_placeholder: "+216 99 123 456"
-        university: "Université / Institut"
-        university_placeholder: "Sélectionnez votre établissement"
-        major: "Filière / Spécialité"
-        major_placeholder: "Génie Logiciel"
-        graduation_year: "Année de Diplôme"
-        graduation_year_placeholder: "2027"
-        bio: "Bio Courte"
-        bio_placeholder: "Parlez de vous, vos compétences, vos centres d'intérêt..."
-        email: "Email Universitaire"
-        email_placeholder: "student@isetsf.rnu.tn"
-        email_hint: "Utilisez votre email universitaire officiel (ex. @isetsf.rnu.tn) pour une vérification instantanée"
-        password: "Mot de Passe"
-        password_confirmation: "Confirmer le Mot de Passe"
-        submit: "Créer le Compte"
-        submitting: "Création..."
-      back: "Retour"
+        university: Université / Institut
+        university_placeholder: Sélectionnez votre établissement
+        major: Filière / Spécialité
+        major_placeholder: Génie Logiciel
+        graduation_year: Année de Diplôme
+        graduation_year_placeholder: '2027'
+        bio: Bio Courte
+        bio_placeholder: Parlez de vous, vos compétences, vos centres d'intérêt...
+        email: Email Universitaire
+        email_placeholder: student@isetsf.rnu.tn
+        email_hint: Utilisez votre email universitaire officiel (ex. @isetsf.rnu.tn) pour une vérification instantanée
+        password: Mot de Passe
+        password_confirmation: Confirmer le Mot de Passe
+        submit: Créer le Compte
+        submitting: Création...
+      back: Retour
     new_company:
-      title: "Inscription Entreprise"
-      subtitle: "Créez votre profil d'entreprise vérifié"
-      errors_title: "Veuillez corriger les erreurs suivantes :"
-      not_company: "Pas une entreprise ?"
+      title: Inscription Entreprise
+      subtitle: Créez votre profil d'entreprise vérifié
+      errors_title: 'Veuillez corriger les erreurs suivantes :'
+      not_company: Pas une entreprise ?
       form:
-        name: "Nom de l'Entreprise"
-        name_placeholder: "Votre Startup"
-        website: "Site Web (Optionnel)"
-        website_placeholder: "https://mystartup.tn"
-        description: "Description de l'Entreprise"
-        description_placeholder: "Que fait votre entreprise ? Stack technique, mission, culture..."
-        email: "Email Professionnel"
-        email_placeholder: "hr@mystartup.tn"
-        password: "Mot de Passe"
-        password_confirmation: "Confirmer le Mot de Passe"
-        submit: "Créer le Compte"
-        submitting: "Création..."
-      back: "Retour"
+        name: Nom de l'Entreprise
+        name_placeholder: Votre Startup
+        website: Site Web (Optionnel)
+        website_placeholder: https://mystartup.tn
+        description: Description de l'Entreprise
+        description_placeholder: Que fait votre entreprise ? Stack technique, mission, culture...
+        email: Email Professionnel
+        email_placeholder: hr@mystartup.tn
+        password: Mot de Passe
+        password_confirmation: Confirmer le Mot de Passe
+        submit: Créer le Compte
+        submitting: Création...
+      back: Retour
     new_university:
-      title: "Inscription Coordinateur Universitaire"
-      subtitle: "Inscrivez-vous comme coordinateur académique"
-      errors_title: "Veuillez corriger les erreurs suivantes :"
-      not_coordinator: "Pas un coordinateur ?"
+      title: Inscription Coordinateur Universitaire
+      subtitle: Inscrivez-vous comme coordinateur académique
+      errors_title: 'Veuillez corriger les erreurs suivantes :'
+      not_coordinator: Pas un coordinateur ?
       form:
-        university: "Université"
-        university_placeholder: "Sélectionnez votre établissement"
-        admin_name: "Nom Complet du Coordinateur"
-        admin_name_placeholder: "Pr. Ahmed Mansour"
-        department: "Département / Faculté"
-        department_placeholder: "Département des Technologies de l'Information"
-        email: "Email Universitaire Officiel"
-        email_placeholder: "admin@isetsf.rnu.tn"
-        email_hint: "Doit être une adresse officielle @université.tn ou @institut.rnu.tn"
-        password: "Mot de Passe"
-        password_confirmation: "Confirmer le Mot de Passe"
-        submit: "Enregistrer le Coordinateur"
-        submitting: "Enregistrement..."
-      back: "Retour"
+        university: Université
+        university_placeholder: Sélectionnez votre établissement
+        admin_name: Nom Complet du Coordinateur
+        admin_name_placeholder: Pr. Ahmed Mansour
+        department: Département / Faculté
+        department_placeholder: Département des Technologies de l'Information
+        email: Email Universitaire Officiel
+        email_placeholder: admin@isetsf.rnu.tn
+        email_hint: Doit être une adresse officielle @université.tn ou @institut.rnu.tn
+        password: Mot de Passe
+        password_confirmation: Confirmer le Mot de Passe
+        submit: Enregistrer le Coordinateur
+        submitting: Enregistrement...
+      back: Retour
     edit:
-      title: "Modifier le Compte — StageUp"
-      heading: "Paramètres du Compte"
-      subtitle: "Mettez à jour votre adresse email ou changez votre mot de passe."
-      account_details: "Détails du Compte"
-      email_placeholder: "email@exemple.com"
-      change_password: "Changer le Mot de Passe"
-      leave_blank: "laisser vide si inchangé"
-      toggle_password_aria: "Afficher/masquer le mot de passe"
-      confirm_changes: "Confirmer les Modifications"
-      current_password_placeholder: "Entrez le mot de passe actuel pour confirmer"
-      current_password_hint: "Nous avons besoin de votre mot de passe actuel pour confirmer les modifications"
-      submit: "Mettre à Jour le Compte"
-      danger_zone_label: "Supprimer le Compte"
-      danger_zone_desc: "Cette action est irréversible et supprime toutes vos données."
-      delete_account: "Supprimer le Compte"
-      delete_confirm: "Supprimer définitivement votre compte ?"
-
+      title: Modifier le Compte — StageUp
+      heading: Paramètres du Compte
+      subtitle: Mettez à jour votre adresse email ou changez votre mot de passe.
+      account_details: Détails du Compte
+      email_placeholder: email@exemple.com
+      change_password: Changer le Mot de Passe
+      leave_blank: laisser vide si inchangé
+      toggle_password_aria: Afficher/masquer le mot de passe
+      confirm_changes: Confirmer les Modifications
+      current_password_placeholder: Entrez le mot de passe actuel pour confirmer
+      current_password_hint: Nous avons besoin de votre mot de passe actuel pour confirmer les modifications
+      submit: Mettre à Jour le Compte
+      danger_zone_label: Supprimer le Compte
+      danger_zone_desc: Cette action est irréversible et supprime toutes vos données.
+      delete_account: Supprimer le Compte
+      delete_confirm: Supprimer définitivement votre compte ?
   sessions:
     new:
-      title: "Connexion"
-      subtitle: "Accédez à votre tableau de bord"
-      email: "Email"
-      email_placeholder: "email@exemple.com"
-      password: "Mot de Passe"
-      toggle_password_aria: "Afficher/masquer le mot de passe"
-      remember_me: "Se souvenir de moi"
-      forgot_password: "Mot de passe oublié ?"
-      submit: "Se Connecter"
-      submitting: "Connexion..."
-      no_account: "Pas de compte ? %{link}"
-      sign_up: "S'inscrire"
-      role_select: "Se connecter en tant que %{role}"
-
+      title: Connexion
+      subtitle: Accédez à votre tableau de bord
+      email: Email
+      email_placeholder: email@exemple.com
+      password: Mot de Passe
+      toggle_password_aria: Afficher/masquer le mot de passe
+      remember_me: Se souvenir de moi
+      forgot_password: Mot de passe oublié ?
+      submit: Se Connecter
+      submitting: Connexion...
+      no_account: Pas de compte ? %{link}
+      sign_up: S'inscrire
+      role_select: Se connecter en tant que %{role}
   passwords:
     new:
-      title: "Mot de passe oublié ?"
-      subtitle: "Nous vous enverrons les instructions de réinitialisation"
-      errors_title: "Veuillez corriger les erreurs suivantes :"
-      email_placeholder: "email@exemple.com"
-      submit: "Envoyer les instructions"
-      sign_in: "Connexion"
-      sign_up: "S'inscrire"
+      title: Mot de passe oublié ?
+      subtitle: Nous vous enverrons les instructions de réinitialisation
+      errors_title: 'Veuillez corriger les erreurs suivantes :'
+      email_placeholder: email@exemple.com
+      submit: Envoyer les instructions
+      sign_in: Connexion
+      sign_up: S'inscrire
     edit:
-      title: "Changer votre mot de passe"
-      subtitle: "Entrez vos nouveaux identifiants ci-dessous"
-      errors_title: "Veuillez corriger les erreurs suivantes :"
-      new_password: "Nouveau mot de passe"
+      title: Changer votre mot de passe
+      subtitle: Entrez vos nouveaux identifiants ci-dessous
+      errors_title: 'Veuillez corriger les erreurs suivantes :'
+      new_password: Nouveau mot de passe
       minimum_characters: "(minimum %{count} caractères)"
-      confirm_new_password: "Confirmer le nouveau mot de passe"
-      submit: "Changer mon mot de passe"
-      sign_in: "Connexion"
-      sign_up: "S'inscrire"
-
+      confirm_new_password: Confirmer le nouveau mot de passe
+      submit: Changer mon mot de passe
+      sign_in: Connexion
+      sign_up: S'inscrire
   admin:
     subnav:
-      overview: "Vue d'ensemble"
-      users: "Utilisateurs"
-      offers: "Offres"
-      coordinators: "Coordinateurs"
-      companies: "Entreprises"
-      agreements: "Conventions"
+      overview: Vue d'ensemble
+      users: Utilisateurs
+      offers: Offres
+      coordinators: Coordinateurs
+      companies: Entreprises
+      agreements: Conventions
     roles:
-      student: "Étudiants"
-      company: "Entreprises"
-      university: "Coordinateurs"
-      admin: "Administrateurs"
+      student: Étudiants
+      company: Entreprises
+      university: Coordinateurs
+      admin: Administrateurs
     kpi:
-      total_users: "Utilisateurs Totaux"
-      students: "Étudiants"
-      companies: "Entreprises"
-      active_offers: "Stages Actifs"
+      total_users: Utilisateurs Totaux
+      students: Étudiants
+      companies: Entreprises
+      active_offers: Stages Actifs
       total_posted: "%{count} Offres Publiées"
-      submissions: "Soumissions de Preuve"
-      accepted: "Acceptées"
-      agreements: "Conventions Émises"
-      signed: "Signées"
+      submissions: Soumissions de Preuve
+      accepted: Acceptées
+      agreements: Conventions Émises
+      signed: Signées
     dashboard:
-      badge: "PANNEAU ADMIN MASTER"
-      title: "Tableau de Bord Admin"
-      subtitle: "Supervision, analyses et modération de la plateforme"
-      recent_submissions: "Soumissions de Preuve Récents"
-      no_submissions: "Aucune soumission enregistrée pour l'instant."
+      badge: PANNEAU ADMIN MASTER
+      title: Tableau de Bord Admin
+      subtitle: Supervision, analyses et modération de la plateforme
+      recent_submissions: Soumissions de Preuve Récents
+      no_submissions: Aucune soumission enregistrée pour l'instant.
       stats:
-        total_users: "Utilisateurs Totaux"
-        total_offers: "Offres Totales"
-        pending_coordinators: "Coordinateurs en Attente"
-        pending_companies: "Entreprises en Attente"
+        total_users: Utilisateurs Totaux
+        total_offers: Offres Totales
+        pending_coordinators: Coordinateurs en Attente
+        pending_companies: Entreprises en Attente
       sections:
-        coordinators: "Coordinateurs Universitaires"
-        companies: "Entreprises"
+        coordinators: Coordinateurs Universitaires
+        companies: Entreprises
       coordinators:
         domain_matched: "✓ Domaine Confirmé"
         domain_check_needed: "⚠️ Vérification du Domaine Requise"
-        title: "Coordinateurs en Attente"
-        empty: "Aucun coordinateur en attente"
-        approve: "Approuver"
-        approving: "Approbation…"
-        reject: "Rejeter"
-        reject_confirm: "Rejeter ce coordinateur ? Son compte sera supprimé."
-        all_clear_title: "Tout Est Clair"
+        title: Coordinateurs en Attente
+        empty: Aucun coordinateur en attente
+        approve: Approuver
+        approving: Approbation…
+        reject: Rejeter
+        reject_confirm: Rejeter ce coordinateur ? Son compte sera supprimé.
+        all_clear_title: Tout Est Clair
       companies:
-        title: "Entreprises en Attente"
-        empty: "Aucune entreprise en attente"
-        verify: "Vérifier"
-        verifying: "Vérification…"
-        reject: "Rejeter"
-        reject_confirm: "Rejeter cette entreprise ? Son compte sera supprimé."
-        no_website: "Pas de site web"
-        all_clear_title: "Tout Est Clair"
-        all_clear_text: "Aucun profil d'entreprise non vérifié."
+        title: Entreprises en Attente
+        empty: Aucune entreprise en attente
+        verify: Vérifier
+        verifying: Vérification…
+        reject: Rejeter
+        reject_confirm: Rejeter cette entreprise ? Son compte sera supprimé.
+        no_website: Pas de site web
+        all_clear_title: Tout Est Clair
+        all_clear_text: Aucun profil d'entreprise non vérifié.
     users:
-      title: "Gestion des Utilisateurs"
-      subtitle: "Gérez les comptes, les autorisations de rôle et les états d'accès"
-      search_placeholder: "Rechercher par email..."
-      email: "Email"
-      role: "Rôle de Profil"
-      admin_status: "Statut Admin"
-      joined: "Date d'Inscription"
-      actions: "Actions"
-      locked: "VERROUILLÉ"
-      is_admin: "ADMIN"
-      standard: "Standard"
-      grant_admin: "Nommer Admin"
-      revoke_admin: "Rétrograder"
-      grant_confirm: "Accorder les privilèges d'administrateur ?"
-      revoke_confirm: "Rétrograder les privilèges d'administrateur ?"
-      lock: "Verrouiller"
-      unlock: "Déverrouiller"
-      lock_confirm: "Verrouiller le compte de cet utilisateur ?"
-      unlock_confirm: "Déverrouiller ce compte ?"
+      title: Gestion des Utilisateurs
+      subtitle: Gérez les comptes, les autorisations de rôle et les états d'accès
+      search_placeholder: Rechercher par email...
+      email: Email
+      role: Rôle de Profil
+      admin_status: Statut Admin
+      joined: Date d'Inscription
+      actions: Actions
+      locked: VERROUILLÉ
+      is_admin: ADMIN
+      standard: Standard
+      grant_admin: Nommer Admin
+      revoke_admin: Rétrograder
+      grant_confirm: Accorder les privilèges d'administrateur ?
+      revoke_confirm: Rétrograder les privilèges d'administrateur ?
+      lock: Verrouiller
+      unlock: Déverrouiller
+      lock_confirm: Verrouiller le compte de cet utilisateur ?
+      unlock_confirm: Déverrouiller ce compte ?
       you: "(Utilisateur Actuel)"
-      no_results: "Aucun utilisateur trouvé"
-      no_results_hint: "Essayez de modifier votre recherche ou vos filtres de rôle"
+      no_results: Aucun utilisateur trouvé
+      no_results_hint: Essayez de modifier votre recherche ou vos filtres de rôle
       show:
-        title: "Inspection de Sécurité – StageUp Admin"
-        badge: "INSPECTEUR DE SÉCURITÉ & IDENTIFIANTS"
-        heading: "Audit du Compte :"
-        subtitle: "Inspection détaillée du profil utilisateur, validation du domaine et vérification des identifiants"
-        back_to_users: "Retour aux Utilisateurs"
-        admin_dashboard: "Tableau de Bord Admin"
-        identity_heading: "Identité & Identifiants du Compte"
-        email_label: "Adresse Email"
-        role_label: "Rôle du Compte"
-        registration_date_label: "Date d'Inscription"
-        admin_privileges_label: "Privilèges Admin"
-        administrator_badge: "ADMINISTRATEUR"
-        standard_user_badge: "UTILISATEUR STANDARD"
-        account_status_label: "Statut du Compte"
-        account_locked_badge: "COMPTE VERROUILLÉ"
-        active_badge: "ACTIF"
-        coordinator_heading: "Audit de Vérification du Coordinateur Académique"
-        approved_badge: "COORDINATEUR APPROUVÉ"
-        pending_badge: "APPROBATION EN ATTENTE"
-        audit_signal: "Signal d'Audit de Sécurité :"
-        domain_match: "Le domaine de l'email correspond au domaine universitaire officiel (%{domain}). Haute confiance d'authenticité."
-        domain_mismatch: "Le domaine de l'email (%{user_domain}) ne correspond pas au domaine universitaire officiel (%{uni_domain}). Inspectez soigneusement les identifiants."
-        coordinator_name_label: "Nom du Coordinateur"
-        department_label: "Département Académique"
-        institution_label: "Institution"
-        official_domain_label: "Domaine Officiel"
-        registered_students_label: "Étudiants Inscrits"
+        title: Inspection de Sécurité – StageUp Admin
+        badge: INSPECTEUR DE SÉCURITÉ & IDENTIFIANTS
+        heading: 'Audit du Compte :'
+        subtitle: Inspection détaillée du profil utilisateur, validation du domaine et vérification des identifiants
+        back_to_users: Retour aux Utilisateurs
+        admin_dashboard: Tableau de Bord Admin
+        identity_heading: Identité & Identifiants du Compte
+        email_label: Adresse Email
+        role_label: Rôle du Compte
+        registration_date_label: Date d'Inscription
+        admin_privileges_label: Privilèges Admin
+        administrator_badge: ADMINISTRATEUR
+        standard_user_badge: UTILISATEUR STANDARD
+        account_status_label: Statut du Compte
+        account_locked_badge: COMPTE VERROUILLÉ
+        active_badge: ACTIF
+        coordinator_heading: Audit de Vérification du Coordinateur Académique
+        approved_badge: COORDINATEUR APPROUVÉ
+        pending_badge: APPROBATION EN ATTENTE
+        audit_signal: 'Signal d''Audit de Sécurité :'
+        domain_match: Le domaine de l'email correspond au domaine universitaire officiel (%{domain}). Haute confiance d'authenticité.
+        domain_mismatch: Le domaine de l'email (%{user_domain}) ne correspond pas au domaine universitaire officiel (%{uni_domain}). Inspectez soigneusement les identifiants.
+        coordinator_name_label: Nom du Coordinateur
+        department_label: Département Académique
+        institution_label: Institution
+        official_domain_label: Domaine Officiel
+        registered_students_label: Étudiants Inscrits
         students_count: "%{count} étudiants"
-        revoke_approval: "Révoquer l'Approbation"
-        revoke_approval_confirm: "Révoquer l'approbation du coordinateur ? Il perdra l'accès à la signature des conventions."
-        approve_coordinator: "Approuver le Coordinateur"
-        approving: "Approbation…"
-        delete_account: "Supprimer le Compte"
-        delete_account_confirm: "Supprimer définitivement ce compte coordinateur ?"
-        employer_heading: "Audit & Vérification de l'Employeur"
-        verified_employer_badge: "EMPLOYEUR VÉRIFIÉ"
-        pending_verification_badge: "VÉRIFICATION EN ATTENTE"
-        company_name_label: "Nom de l'Entreprise"
-        website_label: "Site Web Officiel"
-        no_website: "Aucun site web fourni"
-        offers_posted_label: "Offres Publiées"
+        revoke_approval: Révoquer l'Approbation
+        revoke_approval_confirm: Révoquer l'approbation du coordinateur ? Il perdra l'accès à la signature des conventions.
+        approve_coordinator: Approuver le Coordinateur
+        approving: Approbation…
+        delete_account: Supprimer le Compte
+        delete_account_confirm: Supprimer définitivement ce compte coordinateur ?
+        employer_heading: Audit & Vérification de l'Employeur
+        verified_employer_badge: EMPLOYEUR VÉRIFIÉ
+        pending_verification_badge: VÉRIFICATION EN ATTENTE
+        company_name_label: Nom de l'Entreprise
+        website_label: Site Web Officiel
+        no_website: Aucun site web fourni
+        offers_posted_label: Offres Publiées
         offers_count: "%{count} offres"
-        description_label: "Description de l'Entreprise"
-        no_description: "Aucune description fournie."
-        view_company_profile: "Voir le Profil Public"
-        revoke_verification: "Révoquer la Vérification"
-        verify_company: "Vérifier l'Entreprise"
-        verifying: "Vérification…"
-        security_controls_heading: "Contrôles de Sécurité Admin"
-        toggle_admin_heading: "Basculer le Rôle Admin Système"
-        revoke_admin: "Retirer les Droits Admin"
-        grant_admin: "Accorder les Droits Admin"
-        toggle_admin_confirm: "Êtes-vous sûr de vouloir modifier les privilèges admin pour %{email} ?"
-        account_lock_heading: "Verrouillage d'Accès au Compte"
-        unlock_account: "Déverrouiller le Compte"
-        lock_account: "Verrouiller le Compte"
-        toggle_lock_confirm: "Verrouiller/déverrouiller ce compte ?"
-        self_inspection_warning: "Vous inspectez actuellement votre propre compte Admin Master."
+        description_label: Description de l'Entreprise
+        no_description: Aucune description fournie.
+        view_company_profile: Voir le Profil Public
+        revoke_verification: Révoquer la Vérification
+        verify_company: Vérifier l'Entreprise
+        verifying: Vérification…
+        security_controls_heading: Contrôles de Sécurité Admin
+        toggle_admin_heading: Basculer le Rôle Admin Système
+        revoke_admin: Retirer les Droits Admin
+        grant_admin: Accorder les Droits Admin
+        toggle_admin_confirm: Êtes-vous sûr de vouloir modifier les privilèges admin pour %{email} ?
+        account_lock_heading: Verrouillage d'Accès au Compte
+        unlock_account: Déverrouiller le Compte
+        lock_account: Verrouiller le Compte
+        toggle_lock_confirm: Verrouiller/déverrouiller ce compte ?
+        self_inspection_warning: Vous inspectez actuellement votre propre compte Admin Master.
     offers:
-      title: "Modération des Offres"
-      subtitle: "Examinez, gérez les statuts ou modérez les offres de stage"
-      search_placeholder: "Rechercher par titre, lieu..."
+      title: Modération des Offres
+      subtitle: Examinez, gérez les statuts ou modérez les offres de stage
+      search_placeholder: Rechercher par titre, lieu...
       table:
-        title: "Titre du Stage"
-        company: "Entreprise"
-        details: "Détails"
-        status: "Statut"
-        actions: "Actions"
-        spots: "places"
-      close: "Fermer l'Offre"
-      activate: "Activer"
-      delete_confirm: "Supprimer définitivement cette offre ?"
-      no_results: "Aucune offre trouvée"
-      no_results_hint: "Essayez d'ajuster votre recherche ou filtre de statut"
+        title: Titre du Stage
+        company: Entreprise
+        details: Détails
+        status: Statut
+        actions: Actions
+        spots: places
+      close: Fermer l'Offre
+      activate: Activer
+      delete_confirm: Supprimer définitivement cette offre ?
+      no_results: Aucune offre trouvée
+      no_results_hint: Essayez d'ajuster votre recherche ou filtre de statut
     coordinators:
-      title: "Coordinateurs Académiques"
-      subtitle: "Examinez les candidatures des coordinateurs universitaires"
-      search_placeholder: "Rechercher par nom, département..."
-      pending: "En Attente"
-      approved: "Approuvés"
-      approved_badge: "APPROUVÉ"
-      pending_badge: "EN ATTENTE"
-      no_results: "Aucun coordinateur trouvé"
-      no_results_hint: "Essayez de modifier votre recherche ou vos filtres"
+      title: Coordinateurs Académiques
+      subtitle: Examinez les candidatures des coordinateurs universitaires
+      search_placeholder: Rechercher par nom, département...
+      pending: En Attente
+      approved: Approuvés
+      approved_badge: APPROUVÉ
+      pending_badge: EN ATTENTE
+      no_results: Aucun coordinateur trouvé
+      no_results_hint: Essayez de modifier votre recherche ou vos filtres
       table:
-        name: "Nom du Coordinateur"
-        institution: "Établissement / Dép."
-        status: "Statut d'Approbation"
-        actions: "Actions"
+        name: Nom du Coordinateur
+        institution: Établissement / Dép.
+        status: Statut d'Approbation
+        actions: Actions
     companies:
-      title: "Vérifications des Entreprises"
-      subtitle: "Gérez les profils d'entreprises et les badges de vérification"
-      search_placeholder: "Rechercher par nom, site web..."
-      unverified: "Non Vérifiées"
-      verified: "Vérifiées"
-      verified_badge: "VÉRIFIÉ"
-      unverified_badge: "NON VÉRIFIÉ"
-      revoke: "Révoquer la Vérification"
-      no_results: "Aucune entreprise trouvée"
-      no_results_hint: "Essayez de modifier votre recherche ou vos filtres"
+      title: Vérifications des Entreprises
+      subtitle: Gérez les profils d'entreprises et les badges de vérification
+      search_placeholder: Rechercher par nom, site web...
+      unverified: Non Vérifiées
+      verified: Vérifiées
+      verified_badge: VÉRIFIÉ
+      unverified_badge: NON VÉRIFIÉ
+      revoke: Révoquer la Vérification
+      no_results: Aucune entreprise trouvée
+      no_results_hint: Essayez de modifier votre recherche ou vos filtres
       table:
-        name: "Nom de l'Entreprise"
-        contact: "Email & Site Web"
-        offers_posted: "Offres Publiées"
-        offers: "offres"
-        status: "État de Vérification"
-        actions: "Actions"
+        name: Nom de l'Entreprise
+        contact: Email & Site Web
+        offers_posted: Offres Publiées
+        offers: offres
+        status: État de Vérification
+        actions: Actions
     agreements:
-      title: "Conventions de Stage"
-      subtitle: "Supervisez les conventions de stage tripartite tripartite"
-      no_results: "Aucune convention trouvée"
-      no_results_hint: "Aucune convention ne correspond au filtre sélectionné."
+      title: Conventions de Stage
+      subtitle: Supervisez les conventions de stage tripartite tripartite
+      no_results: Aucune convention trouvée
+      no_results_hint: Aucune convention ne correspond au filtre sélectionné.
       table:
-        id: "Convention / Jeton"
-        student: "Étudiant"
-        offer: "Offre de Stage"
-        dates: "Dates"
-        status: "Statut"
-        actions: "Actions"
+        id: Convention / Jeton
+        student: Étudiant
+        offer: Offre de Stage
+        dates: Dates
+        status: Statut
+        actions: Actions
       show:
-        title: "Convention #%{id} – StageUp Admin"
-        heading: "Convention de Stage #%{id}"
-        verification_token: "Jeton de vérification :"
-        metadata: "Métadonnées de la Convention"
-        start_date: "Date de début :"
-        end_date: "Date de fin :"
-        status_label: "Statut :"
-        verification_url: "URL de vérification :"
-        signatures_log: "Journal des Signatures"
-        student_signature: "Signature étudiant :"
-        company_signature: "Signature entreprise :"
-        university_signature: "Signature université :"
-        pending: "En attente"
-
+        title: 'Convention #%{id} – StageUp Admin'
+        heading: 'Convention de Stage #%{id}'
+        verification_token: 'Jeton de vérification :'
+        metadata: Métadonnées de la Convention
+        start_date: 'Date de début :'
+        end_date: 'Date de fin :'
+        status_label: 'Statut :'
+        verification_url: 'URL de vérification :'
+        signatures_log: Journal des Signatures
+        student_signature: 'Signature étudiant :'
+        company_signature: 'Signature entreprise :'
+        university_signature: 'Signature université :'
+        pending: En attente
   internship_agreements:
     show:
-      page_title: "Convention de Stage – StageUp"
-      title: "Convention de Stage"
-      subtitle: "Convention de stage tripartite"
+      page_title: Convention de Stage – StageUp
+      title: Convention de Stage
+      subtitle: Convention de stage tripartite
       status:
-        pending: "Signatures en Attente"
-        signed: "Entièrement Signée"
-        declined: "Refusée"
+        pending: Signatures en Attente
+        signed: Entièrement Signée
+        declined: Refusée
       parties:
-        student: "Étudiant"
-        company: "Superviseur Entreprise"
-        university: "Coordinateur Universitaire"
+        student: Étudiant
+        company: Superviseur Entreprise
+        university: Coordinateur Universitaire
       actions:
-        sign: "Signer la Convention"
-        download: "Télécharger PDF"
-        decline: "Refuser"
-        decline_reason: "Motif du refus"
-        decline_confirm: "Êtes-vous sûr ? Cette action est irréversible."
+        sign: Signer la Convention
+        download: Télécharger PDF
+        decline: Refuser
+        decline_reason: Motif du refus
+        decline_confirm: Êtes-vous sûr ? Cette action est irréversible.
       details:
-        start_date: "Date de Début"
-        end_date: "Date de Fin"
-        work_mode: "Mode de Travail"
-        location: "Lieu"
-        description: "Description de la Mission"
+        start_date: Date de Début
+        end_date: Date de Fin
+        work_mode: Mode de Travail
+        location: Lieu
+        description: Description de la Mission
       signatures:
-        signed_by: "Signé par %{name} le %{date}"
-        pending: "Signature en attente"
-        your_turn: "C'est à vous de signer"
+        signed_by: Signé par %{name} le %{date}
+        pending: Signature en attente
+        your_turn: C'est à vous de signer
     new:
-      title: "Convention de Stage"
-      subtitle: "Convention de Stage Tripartite Tunisienne"
-      errors_title: "Veuillez corriger les erreurs suivantes :"
-      dates_title: "Dates du Stage"
+      title: Convention de Stage
+      subtitle: Convention de Stage Tripartite Tunisienne
+      errors_title: 'Veuillez corriger les erreurs suivantes :'
+      dates_title: Dates du Stage
       form:
-        start_date: "Date de Début"
-        end_date: "Date de Fin"
-        work_mode: "Mode de Travail"
-        location: "Lieu"
-        description: "Description de la Mission"
-        description_placeholder: "Décrivez la mission, les objectifs, et les livrables..."
-        generate: "Générer la Convention"
-        generating: "Génération..."
-
-  certificates:
-    verify:
-      title: "Attestation de Réussite"
-      subtitle: "Vérifiée & Authentifiée via StageUp Trust Ledger"
-      recipient_label: "Ceci certifie que"
-      institution: "Institution"
-      duration: "Durée"
-      stage_type: "Type de Stage"
-      verification_id: "ID de Vérification"
-      signatures_heading: "Signatures Numériques & Vérification Légale"
-      student_role: "Étudiant"
-      employer_role: "Employeur"
-      university_role: "Coordinateur Universitaire"
-      signed: "Signé"
-      qr_label: "Scannez pour vérifier l'authenticité"
-      badge_text: "STAGE OFFICIELLEMENT CERTIFIÉ"
-      fulfillment_text: "a terminé avec succès un stage officiel en tant que %{title} chez %{company}."
-      academic_partner: "Partenaire Académique"
-      signed_on: "Signé : %{date}"
-
+        start_date: Date de Début
+        end_date: Date de Fin
+        work_mode: Mode de Travail
+        location: Lieu
+        description: Description de la Mission
+        description_placeholder: Décrivez la mission, les objectifs, et les livrables...
+        generate: Générer la Convention
+        generating: Génération...
   kanban:
     columns:
-      applied: "Candidature Envoyée"
-      mission: "Mission"
-      review: "En Évaluation"
-      accepted: "Accepté"
-      rejected: "Rejeté"
-      completed: "Terminé"
+      applied: Candidature Envoyée
+      mission: Mission
+      review: En Évaluation
+      accepted: Accepté
+      rejected: Rejeté
+      completed: Terminé
     card:
-      view_proof: "Voir la Preuve"
-      view_cv: "Voir le CV"
-      no_proof: "Aucune preuve soumise"
-      view_profile: "Voir le Profil"
-      agreement: "Convention"
+      view_proof: Voir la Preuve
+      view_cv: Voir le CV
+      no_proof: Aucune preuve soumise
+      view_profile: Voir le Profil
+      agreement: Convention
     actions:
-      accept: "Accepter"
-      reject: "Refuser"
-      accepting: "Acceptation…"
-      rejecting: "Rejet…"
+      accept: Accepter
+      reject: Refuser
+      accepting: Acceptation…
+      rejecting: Rejet…
     empty:
-      review: "Aucune candidature en attente"
-      accepted: "Aucun candidat accepté actif"
-      rejected: "Aucune candidature refusée"
-
+      review: Aucune candidature en attente
+      accepted: Aucun candidat accepté actif
+      rejected: Aucune candidature refusée
   common:
-    skip_link: "Aller au contenu principal"
-    all: "Tous"
-    n_a: "N/D"
-    errors_title: "Veuillez corriger les erreurs ci-dessous :"
-    save: "Enregistrer"
-    cancel: "Annuler"
-    delete: "Supprimer"
-    edit: "Modifier"
-    view: "Voir"
-    view_all: "Voir Tout"
-    back: "Retour"
-    next: "Suivant"
-    previous: "Précédent"
-    submit: "Soumettre"
-    confirm: "Confirmer"
-    close: "Fermer"
-    dismiss_alert: "Ignorer l'alerte"
-    loading: "Chargement..."
-    error: "Une erreur s'est produite"
-    errors: "erreur(s)"
-    success: "Succès !"
-    required: "Requis"
-    optional: "Optionnel"
+    skip_link: Aller au contenu principal
+    all: Tous
+    n_a: N/D
+    errors_title: 'Veuillez corriger les erreurs ci-dessous :'
+    save: Enregistrer
+    cancel: Annuler
+    delete: Supprimer
+    edit: Modifier
+    view: Voir
+    view_all: Voir Tout
+    back: Retour
+    next: Suivant
+    previous: Précédent
+    submit: Soumettre
+    confirm: Confirmer
+    close: Fermer
+    dismiss_alert: Ignorer l'alerte
+    loading: Chargement...
+    error: Une erreur s'est produite
+    errors: erreur(s)
+    success: Succès !
+    required: Requis
+    optional: Optionnel
     out_of: "%{count} / %{max}"
-    search: "Rechercher"
-    filter: "Filtrer"
-    sort: "Trier"
+    search: Rechercher
+    filter: Filtrer
+    sort: Trier
     date_format: "%d/%m/%Y"
-    clear_filters: "Effacer les filtres"
+    clear_filters: Effacer les filtres
     time_ago:
-      just_now: "À l'instant"
-      minutes_ago: "Il y a %{count} minutes"
-      hours_ago: "Il y a %{count} heures"
-      days_ago: "Il y a %{count} jours"
-      weeks_ago: "Il y a %{count} semaines"
-      months_ago: "Il y a %{count} mois"
-      years_ago: "Il y a %{count} ans"
+      just_now: À l'instant
+      minutes_ago: Il y a %{count} minutes
+      hours_ago: Il y a %{count} heures
+      days_ago: Il y a %{count} jours
+      weeks_ago: Il y a %{count} semaines
+      months_ago: Il y a %{count} mois
+      years_ago: Il y a %{count} ans
     status:
-      active: "Actif"
-      inactive: "Inactif"
-      pending: "En Attente"
-      approved: "Approuvé"
-      rejected: "Rejeté"
-      draft: "Brouillon"
-      published: "Publié"
-      closed: "Fermé"
-      completed: "Terminé"
-      expired: "Expiré"
+      active: Actif
+      inactive: Inactif
+      pending: En Attente
+      approved: Approuvé
+      rejected: Rejeté
+      draft: Brouillon
+      published: Publié
+      closed: Fermé
+      completed: Terminé
+      expired: Expiré
     work_modes:
-      on_site: "Présentiel"
-      remote: "À Distance"
-      hybrid: "Hybride"
+      on_site: Présentiel
+      remote: À Distance
+      hybrid: Hybride
     stage_types:
-      pfe: "PFE (Projet de Fin d'Études)"
-      pfa: "PFA (Projet de Fin d'Année)"
-      stage: "Stage d'Été"
-      alternance: "Alternance"
-      initiation: "Initiation / Observation"
-      free: "Libre / Développement de Compétences"
+      pfe: PFE (Projet de Fin d'Études)
+      pfa: PFA (Projet de Fin d'Année)
+      stage: Stage d'Été
+      alternance: Alternance
+      initiation: Initiation / Observation
+      free: Libre / Développement de Compétences
     spot:
-      one: "place"
-      other: "places"
-    available: "disponible"
-    yes: "Oui"
-    no: "Non"
-    unrated: "Non évalué"
-    reviews: "avis"
-    hours: "heures"
-    ago: ""
-    back_to: "Retour à %{page}"
-
+      one: place
+      other: places
+    available: disponible
+    true: Oui
+    false: Non
+    unrated: Non évalué
+    reviews: avis
+    hours: heures
+    ago: ''
+    back_to: Retour à %{page}
   student_profiles:
     show:
       title_suffix: "– Profil Candidat"
-      badge_student: "Candidat Étudiant"
-      major_fallback: "Génie Logiciel"
-      class_of: "Promotion %{year}"
-      completed_prefix: "Terminé"
-      verified_ledger_badge: "REGISTRE CERTIFIÉ"
-      reputation_history_title: "Historique de Réputation"
-      no_ledger_history: "Aucun événement de réputation enregistré."
+      badge_student: Candidat Étudiant
+      major_fallback: Génie Logiciel
+      class_of: Promotion %{year}
+      completed_prefix: Terminé
+      verified_ledger_badge: REGISTRE CERTIFIÉ
+      reputation_history_title: Historique de Réputation
+      no_ledger_history: Aucun événement de réputation enregistré.
       events_recorded: "%{count} Événements Enregistrés"
-      verified_title: "Candidat Vérifié Actif"
-      verified_badge: "Candidat Vérifié"
-      commitment_score: "Score d'Engagement"
-      employer_rating: "Note Employeur"
-      verified_missions: "Missions Vérifiées"
-      completed: "Terminées"
+      verified_title: Candidat Vérifié Actif
+      verified_badge: Candidat Vérifié
+      commitment_score: Score d'Engagement
+      employer_rating: Note Employeur
+      verified_missions: Missions Vérifiées
+      completed: Terminées
       skills_verified: "%{count} Compétences Vérifiées"
-      verified_completion: "Achèvement Vérifié"
-      academic_details: "Détails Académiques"
-      university_label: "Université"
-      autonomous_student: "Étudiant Autonome"
-      major_label: "Filière"
-      class_of_label: "Promotion"
-      phone_label: "Téléphone"
-      reputation_ledger: "Registre de Réputation"
-      verified: "Vérifié"
-
+      verified_completion: Achèvement Vérifié
+      academic_details: Détails Académiques
+      university_label: Université
+      autonomous_student: Étudiant Autonome
+      major_label: Filière
+      class_of_label: Promotion
+      phone_label: Téléphone
+      reputation_ledger: Registre de Réputation
+      verified: Vérifié
   company_profiles:
     show:
       title_suffix: "– Profil Employeur"
-      verified_badge: "Entreprise Certifiée"
-      edit_profile: "Modifier le Profil Entreprise"
-      overview_heading: "Présentation & Mission"
-      description_fallback: "Employeur leader en logiciels et technologies sur StageUp."
-      active_missions_heading: "Missions de Stage Ouvertes (%{count})"
-      location_fallback: "Sfax, Tunisie"
-      months_label: "Mois"
-      view_mission: "Voir la Mission →"
-      no_active_offers: "Aucune offre de stage actuellement ouverte."
-      employer_stats_title: "Statistiques Employeur"
-      active_missions_label: "Missions Actives"
-      verification_status_label: "Statut de Vérification"
-      verified_employer: "Employeur Certifié"
-      in_verification: "En Cours de Vérification"
-      intern_rating_label: "Note des Stagiaires"
-      rating_fallback: "5.0 / 5"
-      about_employer: "À Propos de l'Employeur"
+      verified_badge: Entreprise Certifiée
+      edit_profile: Modifier le Profil Entreprise
+      overview_heading: Présentation & Mission
+      description_fallback: Employeur leader en logiciels et technologies sur StageUp.
+      active_missions_heading: Missions de Stage Ouvertes (%{count})
+      location_fallback: Sfax, Tunisie
+      months_label: Mois
+      view_mission: Voir la Mission →
+      no_active_offers: Aucune offre de stage actuellement ouverte.
+      employer_stats_title: Statistiques Employeur
+      active_missions_label: Missions Actives
+      verification_status_label: Statut de Vérification
+      verified_employer: Employeur Certifié
+      in_verification: En Cours de Vérification
+      intern_rating_label: Note des Stagiaires
+      rating_fallback: 5.0 / 5
+      about_employer: À Propos de l'Employeur
       available_badge: "%{count} Disponibles"
-
   users:
     edit:
-      page_title: "Paramètres du Compte – StageUp"
-      tab_personal: "Profil Personnel"
-      tab_skills: "Compétences & Stack"
-      tab_resume: "CV & Documents"
-      tab_security: "Compte & Sécurité"
-      preview_student_label: "Candidat Étudiant"
-      preview_company_label: "Profil Entreprise"
-      preview_university_label: "Compte Université"
-      view_public_profile: "Voir le Profil Public"
-      personal_heading: "Détails du Profil Personnel"
-      personal_subtext: "Informations de portfolio public visibles par les employeurs"
-      section_identity: "Identité"
-      section_academic: "Informations Académiques & Contact"
+      page_title: Paramètres du Compte – StageUp
+      tab_personal: Profil Personnel
+      tab_skills: Compétences & Stack
+      tab_resume: CV & Documents
+      tab_security: Compte & Sécurité
+      preview_student_label: Candidat Étudiant
+      preview_company_label: Profil Entreprise
+      preview_university_label: Compte Université
+      view_public_profile: Voir le Profil Public
+      personal_heading: Détails du Profil Personnel
+      personal_subtext: Informations de portfolio public visibles par les employeurs
+      section_identity: Identité
+      section_academic: Informations Académiques & Contact
       phone_placeholder: "+216 XX XXX XXX"
-      phone_hint: "Visible uniquement pour les employeurs acceptés"
-      major_placeholder: "ex. Génie Logiciel, Data Science & IA"
-      section_portfolio: "Portfolio & Bio"
-      bio_placeholder: "Je suis un étudiant en dernière année passionné par le développement d'IA et de plateformes web..."
-      website_placeholder: "https://example.tn"
-      description_placeholder: "Décrivez la culture, la stack technique et les missions de votre entreprise."
-      department_placeholder: "ex. Département Informatique & Télécoms"
-      skills_heading: "Taxonomie des Compétences & Domaines"
-      skills_subtext: "Sélectionnez parmi 200+ compétences en Gestion, Ingénierie, Design, Data & IT"
-      skills_count_label: "Compétences Sélectionnées"
-      clear_skills: "Tout Effacer"
-      skill_search_placeholder: "Rechercher parmi 200+ compétences (ex. SEO, SolidWorks, Figma, Python, Finance)..."
-      all_skills_label: "Toutes les Compétences (%{count})"
-      selected_stack_label: "Ma Stack Sélectionnée"
-      picked_suffix: "sélectionnées"
-      resume_heading: "CV & Documents"
-      resume_subtext: "Document PDF accessible par les employeurs vérifiés"
-      preview_pdf: "Aperçu PDF"
-      dropzone_label: "Glissez-déposez votre CV PDF ici"
-      dropzone_hint: "PDF uniquement · Taille max 5 Mo"
-      browse_pdf: "Parcourir le PDF"
-      security_heading: "Email & Identifiants du Compte"
-      security_subtext: "Gérer les identifiants de connexion et la sécurité"
-      email_address_label: "Adresse Email"
-      change_password_label: "Changer le Mot de Passe (Optionnel)"
-      unsaved_changes: "Vous avez des modifications non enregistrées"
+      phone_hint: Visible uniquement pour les employeurs acceptés
+      major_placeholder: ex. Génie Logiciel, Data Science & IA
+      section_portfolio: Portfolio & Bio
+      bio_placeholder: Je suis un étudiant en dernière année passionné par le développement d'IA et de plateformes web...
+      website_placeholder: https://example.tn
+      description_placeholder: Décrivez la culture, la stack technique et les missions de votre entreprise.
+      department_placeholder: ex. Département Informatique & Télécoms
+      skills_heading: Taxonomie des Compétences & Domaines
+      skills_subtext: Sélectionnez parmi 200+ compétences en Gestion, Ingénierie, Design, Data & IT
+      skills_count_label: Compétences Sélectionnées
+      clear_skills: Tout Effacer
+      skill_search_placeholder: Rechercher parmi 200+ compétences (ex. SEO, SolidWorks, Figma, Python, Finance)...
+      all_skills_label: Toutes les Compétences (%{count})
+      selected_stack_label: Ma Stack Sélectionnée
+      picked_suffix: sélectionnées
+      resume_heading: CV & Documents
+      resume_subtext: Document PDF accessible par les employeurs vérifiés
+      preview_pdf: Aperçu PDF
+      dropzone_label: Glissez-déposez votre CV PDF ici
+      dropzone_hint: PDF uniquement · Taille max 5 Mo
+      browse_pdf: Parcourir le PDF
+      security_heading: Email & Identifiants du Compte
+      security_subtext: Gérer les identifiants de connexion et la sécurité
+      email_address_label: Adresse Email
+      change_password_label: Changer le Mot de Passe (Optionnel)
+      unsaved_changes: Vous avez des modifications non enregistrées
       bio_char_suffix: " / %{max}"
-      selected_file_prefix: "Sélectionné :"
-
+      selected_file_prefix: 'Sélectionné :'
   pwa:
-    name: "StageUp"
-    description: "StageUp – Stages Vérifiés en Tunisie"
+    name: StageUp
+    description: StageUp – Stages Vérifiés en Tunisie
+  commitment_events:
+    descriptions:
+      student_completed_internship: Stage PFE vérifié terminé avec succès
+      company_responded_on_time: Évaluation de la soumission dans les délais
+      student_ghosted_offer: Délai de réponse à une offre dépassé
+      student_abandoned_mission: Abandon d'une mission de stage en cours
+      student_mission_expired: Délai de la mission de stage expiré
+      company_responded_late: Réponse tardive à la candidature
+      company_ghosted_offer: Absence de réponse à une candidature
+      company_cancelled_internship: Annulation de la convention de stage

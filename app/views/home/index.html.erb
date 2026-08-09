@@ -76,7 +76,7 @@
                     </div>
                     <div class="mockup-row-info">
                       <span class="mockup-user-name"><%= name %></span>
-                      <span class="mockup-action-text"><%= event.description.presence || event.event_type.humanize %></span>
+                      <span class="mockup-action-text"><%= t("commitment_events.descriptions.#{event.event_type}", default: event.description.presence || event.event_type.humanize) %></span>
                     </div>
                   <% else %>
                     <div class="mockup-avatar avatar-muted" style="background: rgba(255,255,255,0.05); color: var(--text-muted);">?</div>

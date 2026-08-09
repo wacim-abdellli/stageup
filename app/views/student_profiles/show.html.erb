@@ -217,12 +217,12 @@
             <% @commitment_events.each do |event| %>
               <div class="sidebar-ledger-item pb-12 mb-12 border-bottom-subtle">
                 <div class="flex-between flex-align-center mb-4">
-                  <strong class="fs-13 color-primary"><%= event.event_type.to_s.humanize.titleize %></strong>
+                  <strong class="fs-13 color-primary"><%= t("commitment_events.descriptions.#{event.event_type}", default: event.event_type.to_s.humanize.titleize) %></strong>
                   <span class="fs-12 fw-700 <%= event.score_delta > 0 ? 'color-emerald' : 'color-rose' %>">
                     <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %> pts
                   </span>
                 </div>
-                <p class="fs-12 text-muted margin-0 mb-4 line-height-14"><%= event.description %></p>
+                <p class="fs-12 text-muted margin-0 mb-4 line-height-14"><%= t("commitment_events.descriptions.#{event.event_type}", default: event.description) %></p>
                 <span class="fs-11 text-muted"><%= time_ago_in_words(event.created_at) %> ago</span>
               </div>
             <% end %>

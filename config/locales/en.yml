@@ -1,3 +1,4 @@
+---
 en:
   time:
     formats:
@@ -5,1157 +6,1073 @@ en:
   date:
     formats:
       long: "%B %d, %Y"
-
   layouts:
-    default_title: "StageUp – Verified Internships in Tunisia"
-    meta_description: "StageUp – Tunisia's first verified internship platform. Proof-of-work missions, reputation scoring, and official agreements."
-
+    default_title: StageUp – Verified Internships in Tunisia
+    meta_description: StageUp – Tunisia's first verified internship platform. Proof-of-work missions, reputation scoring, and official agreements.
   activerecord:
     attributes:
       user:
-        email: "Email"
-        password: "Password"
-        password_confirmation: "Confirm password"
-        current_password: "Current password"
-        remember_me: "Remember me"
-
+        email: Email
+        password: Password
+        password_confirmation: Confirm password
+        current_password: Current password
+        remember_me: Remember me
   home:
-    title: "StageUp – Verified Internships in Tunisia"
-    announcement_badge: "Tunisia's First Proof-of-Work Registry"
-    hero_title_html: "Nobody pays a price for ghosting.<br><span class=\"landing-hero-gradient\">We changed that.</span>"
-    hero_subtitle: "Every offer, mission, and no-show becomes a permanent public record. Tunisia's first internship market where reputation is earned, not claimed."
-    browse_btn: "Browse Internships"
-    dashboard_btn: "Go to Dashboard"
-    get_started_btn: "Get Started"
-    pts: "pts"
-    unknown_user: "Unknown User"
-    no_recent_activity: "No live activity recorded yet"
-    how_it_works: "HOW IT WORKS"
-    how_it_works_title: "A Better Internship Loop"
-    how_it_works_sub: "Verifiable trust replacing static, unverified resumes"
-    bento_mission_title: "Proof-of-Work Missions"
-    bento_mission_text: "Skip endless CV filtering. Recruiters attach hands-on challenges. Students submit code directly to unlock interviews."
-    bento_reputation_title: "Reputation Ledger"
-    bento_reputation_text: "Verify reliability upfront. Our scoring system penalizes no-shows and rewards verified completions on both sides."
-    bento_academic_title: "Academic Verification"
-    bento_academic_text: "Official email tracking (e.g. <code>@isetsf.rnu.tn</code>) instantly verifies student credentials and connects coordinators."
-    featured_heading: "Featured Opportunities"
-    featured_sub_signed_in: "Browse active internship listings and take on their proof missions"
-    featured_sub_signed_out: "Preview active opportunities — Sign in to view full mission details and submit solutions"
-    featured_view_all: "View All Offers →"
-    cta_title: "Ready to build your verified reputation?"
-    cta_desc: "Join Tunisia's first verified internship platform. Your track record starts here."
-    cta_account: "Create an Account"
-    cta_signin: "Sign In"
-    stat_verification: "Proof-of-Work Verification"
-    stat_ghosting: "Ghosting Tolerance"
-    stat_reputation: "Immutable Reputation Scale"
-    mockup_header: "Live Reputation Ledger"
-    mockup_header_badge: "Mainnet"
-    mockup_row1_name: "Cyrine (Student)"
-    mockup_row1_action: "Submitted code solution to ISET"
+    title: StageUp – Verified Internships in Tunisia
+    announcement_badge: Tunisia's First Proof-of-Work Registry
+    hero_title_html: Nobody pays a price for ghosting.<br><span class="landing-hero-gradient">We changed that.</span>
+    hero_subtitle: Every offer, mission, and no-show becomes a permanent public record. Tunisia's first internship market where reputation is earned, not claimed.
+    browse_btn: Browse Internships
+    dashboard_btn: Go to Dashboard
+    get_started_btn: Get Started
+    pts: pts
+    unknown_user: Unknown User
+    no_recent_activity: No live activity recorded yet
+    how_it_works: HOW IT WORKS
+    how_it_works_title: A Better Internship Loop
+    how_it_works_sub: Verifiable trust replacing static, unverified resumes
+    bento_mission_title: Proof-of-Work Missions
+    bento_mission_text: Skip endless CV filtering. Recruiters attach hands-on challenges. Students submit code directly to unlock interviews.
+    bento_reputation_title: Reputation Ledger
+    bento_reputation_text: Verify reliability upfront. Our scoring system penalizes no-shows and rewards verified completions on both sides.
+    bento_academic_title: Academic Verification
+    bento_academic_text: Official email tracking (e.g. <code>@isetsf.rnu.tn</code>) instantly verifies student credentials and connects coordinators.
+    featured_heading: Featured Opportunities
+    featured_sub_signed_in: Browse active internship listings and take on their proof missions
+    featured_sub_signed_out: Preview active opportunities — Sign in to view full mission details and submit solutions
+    featured_view_all: View All Offers →
+    cta_title: Ready to build your verified reputation?
+    cta_desc: Join Tunisia's first verified internship platform. Your track record starts here.
+    cta_account: Create an Account
+    cta_signin: Sign In
+    stat_verification: Proof-of-Work Verification
+    stat_ghosting: Ghosting Tolerance
+    stat_reputation: Immutable Reputation Scale
+    mockup_header: Live Reputation Ledger
+    mockup_header_badge: Mainnet
+    mockup_row1_name: Cyrine (Student)
+    mockup_row1_action: Submitted code solution to ISET
     mockup_row1_score: "+10 %{pts}"
-    mockup_row2_name: "Vortech Startups"
-    mockup_row2_action: "Missed review deadline (Grace ended)"
+    mockup_row2_name: Vortech Startups
+    mockup_row2_action: Missed review deadline (Grace ended)
     mockup_row2_score: "-15 %{pts}"
-    mockup_row3_name: "Mohamed (Student)"
-    mockup_row3_action: "Completed verified PFE agreement"
+    mockup_row3_name: Mohamed (Student)
+    mockup_row3_action: Completed verified PFE agreement
     mockup_row3_score: "+30 %{pts}"
-    badge_new: "New"
-    mission_attached: "Mission Attached"
-    cv_only: "CV Only"
-    unknown_company: "Unknown Company"
-
+    badge_new: New
+    mission_attached: Mission Attached
+    cv_only: CV Only
+    unknown_company: Unknown Company
   user_mailer:
     coordinator_approved:
-      heading: "Account Approved"
-      subject: "Your Coordinator Account Has Been Approved"
-      greeting: "Hello %{name},"
-      body: "Your university coordinator account has been approved by the StageUp administration team."
-      approved_badge: "Approved"
-      login_instruction: "You can now log in to manage internship agreements, review student submissions, and sign conventions de stage on behalf of %{university}."
-      support: "If you have any questions, contact the StageUp support team."
-      regards: "Best regards,"
-      team: "The StageUp Team"
-      copyright: "All rights reserved."
+      heading: Account Approved
+      subject: Your Coordinator Account Has Been Approved
+      greeting: Hello %{name},
+      body: Your university coordinator account has been approved by the StageUp administration team.
+      approved_badge: Approved
+      login_instruction: You can now log in to manage internship agreements, review student submissions, and sign conventions de stage on behalf of %{university}.
+      support: If you have any questions, contact the StageUp support team.
+      regards: Best regards,
+      team: The StageUp Team
+      copyright: All rights reserved.
     company_verified:
-      heading: "Company Verified ✓"
-      subject: "Your Company Account Has Been Verified"
-      greeting: "Hello,"
-      body_verified: "Your company account %{company_name} has been verified by the StageUp administration team."
-      body_verified_html: "Your company account <strong>%{company_name}</strong> has been verified by the StageUp administration team."
-      verified_badge: "Verified"
-      capabilities: "You can now post internship offers, receive student applications, and manage your recruitment pipeline."
-      support: "If you have any questions, contact the StageUp support team."
-      regards: "Best regards,"
-      team: "The StageUp Team"
-      copyright: "All rights reserved."
+      heading: Company Verified ✓
+      subject: Your Company Account Has Been Verified
+      greeting: Hello,
+      body_verified: Your company account %{company_name} has been verified by the StageUp administration team.
+      body_verified_html: Your company account <strong>%{company_name}</strong> has been verified by the StageUp administration team.
+      verified_badge: Verified
+      capabilities: You can now post internship offers, receive student applications, and manage your recruitment pipeline.
+      support: If you have any questions, contact the StageUp support team.
+      regards: Best regards,
+      team: The StageUp Team
+      copyright: All rights reserved.
     application_status_updated:
-      heading: "Application %{status}"
-      subject: "Application %{status} – %{offer_title}"
-      body: "Your application for %{offer_title} at %{company_name} has been %{status}."
-      body_html: "Your application for <strong>%{offer_title}</strong> at <strong>%{company_name}</strong> has been <strong>%{status}</strong>."
-      view_details: "View Details"
+      heading: Application %{status}
+      subject: Application %{status} – %{offer_title}
+      body: Your application for %{offer_title} at %{company_name} has been %{status}.
+      body_html: Your application for <strong>%{offer_title}</strong> at <strong>%{company_name}</strong> has been <strong>%{status}</strong>.
+      view_details: View Details
     application_received:
-      heading: "New Application Received"
-      subject: "New Application Received – %{offer_title}"
+      heading: New Application Received
+      subject: New Application Received – %{offer_title}
       body: "%{student_name} has applied to %{offer_title}."
       body_html: "<strong>%{student_name}</strong> has applied to <strong>%{offer_title}</strong>."
-      login_instruction: "Log in to your dashboard to review their CV and proof solution."
-      view_applications: "View Applications"
+      login_instruction: Log in to your dashboard to review their CV and proof solution.
+      view_applications: View Applications
     agreement_signature_requested:
-      heading: "Convention de Stage Ready for Signature"
-      subject: "Convention de Stage Ready for Signature – %{offer_title}"
-      body: "The internship agreement for %{offer_title} is ready for your signature."
-      body_html: "The internship agreement for <strong>%{offer_title}</strong> is ready for your signature."
-      login_instruction: "All parties have reviewed the terms. Please log in to review and sign the document."
-      view_agreement: "View Agreement"
+      heading: Convention de Stage Ready for Signature
+      subject: Convention de Stage Ready for Signature – %{offer_title}
+      body: The internship agreement for %{offer_title} is ready for your signature.
+      body_html: The internship agreement for <strong>%{offer_title}</strong> is ready for your signature.
+      login_instruction: All parties have reviewed the terms. Please log in to review and sign the document.
+      view_agreement: View Agreement
     agreement_declined:
-      heading: "Convention de Stage Declined"
-      subject: "Convention de Stage Declined – %{offer_title}"
-      body_intro: "The internship agreement for %{offer_title} has been %{declined_label} by the university coordinator."
-      body_intro_html: "The internship agreement for <strong>%{offer_title}</strong> has been <strong style=\"color: #F87171;\">%{declined_label}</strong> by the university coordinator."
-      declined_label: "declined"
-      reason_label: "Reason provided:"
-      body_suggestion: "You may generate a new agreement with corrected terms if needed."
-      view_agreement: "View Agreement"
-
+      heading: Convention de Stage Declined
+      subject: Convention de Stage Declined – %{offer_title}
+      body_intro: The internship agreement for %{offer_title} has been %{declined_label} by the university coordinator.
+      body_intro_html: 'The internship agreement for <strong>%{offer_title}</strong> has been <strong style="color: #F87171;">%{declined_label}</strong> by the university coordinator.'
+      declined_label: declined
+      reason_label: 'Reason provided:'
+      body_suggestion: You may generate a new agreement with corrected terms if needed.
+      view_agreement: View Agreement
   nav:
-    browse_offers: "Browse Offers"
-    dashboard: "Dashboard"
-    post_offer: "Post an Offer"
-    sign_out: "Sign Out"
-    my_dashboard: "My Dashboard"
-    sign_in: "Sign In"
-    home: "StageUp Home"
-    view_offer: "View details"
-    unlock: "Sign in to unlock"
-    student: "Student"
-    company: "Company"
-    university: "University"
-    user: "User"
-    main_navigation: "Main navigation"
-    toggle_theme_title: "Toggle Light/Dark Theme"
-    toggle_theme_aria: "Toggle theme"
-    user_menu: "User menu"
-    toggle_navigation: "Toggle navigation"
-    select_language: "Select language"
-    language_selector: "Language selector"
-    view_my_profile: "View My Public Profile"
-
+    browse_offers: Browse Offers
+    dashboard: Dashboard
+    post_offer: Post an Offer
+    sign_out: Sign Out
+    my_dashboard: My Dashboard
+    sign_in: Sign In
+    home: StageUp Home
+    view_offer: View details
+    unlock: Sign in to unlock
+    student: Student
+    company: Company
+    university: University
+    user: User
+    main_navigation: Main navigation
+    toggle_theme_title: Toggle Light/Dark Theme
+    toggle_theme_aria: Toggle theme
+    user_menu: User menu
+    toggle_navigation: Toggle navigation
+    select_language: Select language
+    language_selector: Language selector
+    view_my_profile: View My Public Profile
   locales:
-    fr: "Français"
-    en: "English"
-    ar: "العربية"
-
+    fr: Français
+    en: English
+    ar: العربية
   offers:
     index:
-      title: "Available Internships – StageUp"
-      subtitle: "Browse and apply to verified internship opportunities"
-      eyebrow: "VERIFIED OPPORTUNITIES"
+      title: Available Internships – StageUp
+      subtitle: Browse and apply to verified internship opportunities
+      eyebrow: VERIFIED OPPORTUNITIES
       filters:
-        title: "Filters"
-        search_placeholder: "Search by title, company, skills..."
-        stage_type: "Stage Type"
-        work_mode: "Work Mode"
-        all_types: "All Types"
-        all_modes: "All Modes"
-        stage_type_pfe: "PFE (Final Year Project)"
-        stage_type_pfa: "PFA (Mid-Study)"
-        clear_filters: "Reset Filters"
-        filters_active: "Filters active"
-      no_results: "No internships match your filters"
-      no_results_hint: "Try adjusting your search or filters"
+        title: Filters
+        search_placeholder: Search by title, company, skills...
+        stage_type: Stage Type
+        work_mode: Work Mode
+        all_types: All Types
+        all_modes: All Modes
+        stage_type_pfe: PFE (Final Year Project)
+        stage_type_pfa: PFA (Mid-Study)
+        clear_filters: Reset Filters
+        filters_active: Filters active
+      no_results: No internships match your filters
+      no_results_hint: Try adjusting your search or filters
       active_listings:
         one: "%{count} active listing"
         other: "%{count} active listings"
-      active_listing_tooltip: "Active listing"
+      active_listing_tooltip: Active listing
       card:
-        mission_attached: "Mission Attached"
-        cv_only: "CV Only"
-        view_details: "View Details"
-        sign_in_to_unlock: "Sign in to unlock"
+        mission_attached: Mission Attached
+        cv_only: CV Only
+        view_details: View Details
+        sign_in_to_unlock: Sign in to unlock
       stats:
-        total_offers: "offers available"
-
+        total_offers: offers available
     show:
       page_title: "%{title} – StageUp"
-      title: "Internship Details"
-      apply_now: "Apply Now"
-      sign_in_to_apply: "Sign In to Apply"
+      title: Internship Details
+      apply_now: Apply Now
+      sign_in_to_apply: Sign In to Apply
       mission:
-        title: "Proof-of-Work Mission"
-        subtitle: "Complete this challenge to unlock your application"
-        duration: "Estimated time: %{minutes} minutes"
-        submit_solution: "Submit Solution"
-        solution_placeholder: "GitHub repo, Figma link, Google Drive..."
-        notes_placeholder: "Brief technical explanation (optional)"
-        submit_btn: "Submit Solution"
-        submitting: "Submitting..."
+        title: Proof-of-Work Mission
+        subtitle: Complete this challenge to unlock your application
+        duration: 'Estimated time: %{minutes} minutes'
+        submit_solution: Submit Solution
+        solution_placeholder: GitHub repo, Figma link, Google Drive...
+        notes_placeholder: Brief technical explanation (optional)
+        submit_btn: Submit Solution
+        submitting: Submitting...
       company:
-        title: "About the Company"
-        website: "Website"
-        verified: "Verified Partner"
-        grace_period: "New Recruiter · Grace Period"
-        grace_text: "This employer recently started posting on StageUp. Detailed response rate metrics are hidden during their 30-day grace period."
-        response_rate: "Response Rate"
-        avg_decision_time: "Avg. Decision Time"
-        verified_recruiter: "Verified Recruiter"
-        commitment: "Commitment"
-        avg_rating: "Average Rating"
+        title: About the Company
+        website: Website
+        verified: Verified Partner
+        grace_period: New Recruiter · Grace Period
+        grace_text: This employer recently started posting on StageUp. Detailed response rate metrics are hidden during their 30-day grace period.
+        response_rate: Response Rate
+        avg_decision_time: Avg. Decision Time
+        verified_recruiter: Verified Recruiter
+        commitment: Commitment
+        avg_rating: Average Rating
       details:
-        stage_type: "Stage Type"
-        spots: "Spots Available"
-        work_mode: "Work Mode"
-        deadline: "Application Deadline"
-        location: "Location"
-        remote: "Remote"
-        posted: "Posted %{time} ago"
+        stage_type: Stage Type
+        spots: Spots Available
+        work_mode: Work Mode
+        deadline: Application Deadline
+        location: Location
+        remote: Remote
+        posted: Posted %{time} ago
       apply:
-        cta_title: "Ready to start your mission?"
-        cta_desc: "Submit your solution to the proof-of-work challenge and get reviewed directly by the team."
-        btn: "Start Mission"
+        cta_title: Ready to start your mission?
+        cta_desc: Submit your solution to the proof-of-work challenge and get reviewed directly by the team.
+        btn: Start Mission
       auth_prompt:
-        title: "Sign In to Apply"
-        desc: "Create an account or sign in to submit your solution to this mission."
-        sign_up: "Create Account"
-        sign_in: "Sign In"
+        title: Sign In to Apply
+        desc: Create an account or sign in to submit your solution to this mission.
+        sign_up: Create Account
+        sign_in: Sign In
       reviews:
-        title: "Candidate Reviews"
+        title: Candidate Reviews
       application:
-        title: "Application"
-        must_sign_in: "You must be logged in as a student to apply or take on the proof-of-work mission."
-        mission_prompt: "This offer has an attached task. Clicking below starts a <strong>48-hour window</strong> to complete the mission and submit your work."
-        start_mission: "Start Proof Mission"
-        cv_prompt: "This offer accepts standard CV applications. Click below to review your CV link and submit."
-        apply_cv: "Apply with CV"
-        mission_in_progress: "Mission In Progress"
-        mission_deadline_warning: "You started this mission. Don't forget to submit your code link before the 48h deadline!"
-        submit_solution: "Submit Solution URL →"
-        status_label: "Application Status:"
-        view_submission: "View My Submission Link"
-        students_only: "Only logged-in students can apply to internships."
+        title: Application
+        must_sign_in: You must be logged in as a student to apply or take on the proof-of-work mission.
+        mission_prompt: This offer has an attached task. Clicking below starts a <strong>48-hour window</strong> to complete the mission and submit your work.
+        start_mission: Start Proof Mission
+        cv_prompt: This offer accepts standard CV applications. Click below to review your CV link and submit.
+        apply_cv: Apply with CV
+        mission_in_progress: Mission In Progress
+        mission_deadline_warning: You started this mission. Don't forget to submit your code link before the 48h deadline!
+        submit_solution: Submit Solution URL →
+        status_label: 'Application Status:'
+        view_submission: View My Submission Link
+        students_only: Only logged-in students can apply to internships.
         statuses:
-          started: "Started"
-          submitted: "Submitted"
-          reviewed: "Reviewed"
-          accepted: "Accepted"
-          rejected: "Rejected"
-          completed: "Completed"
-        modal_mission_desc: "You are about to start the proof-of-work mission for <strong>%{offer_title}</strong>."
-        modal_timer: "Timer Window:"
-        modal_success_reward: "Success Reward:"
-        modal_missed_deadline: "Missed Deadline:"
-        modal_penalty: "Commitment Penalty"
-        modal_confirm: "Are you sure you have time to start this challenge right now?"
-        modal_cv_desc: "You are applying to <strong>%{offer_title}</strong> at %{company_name}."
-        cv_link_label: "CV Link / Document URL"
-        cv_link_hint: "Paste a public Google Drive, Dropbox, LinkedIn, or PDF link to your resume."
-        cv_placeholder: "https://drive.google.com/your-cv.pdf"
-        confirm_start: "Confirm & Start Mission"
-        confirm_submit_cv: "Confirm & Submit CV"
+          started: Started
+          submitted: Submitted
+          reviewed: Reviewed
+          accepted: Accepted
+          rejected: Rejected
+          completed: Completed
+        modal_mission_desc: You are about to start the proof-of-work mission for <strong>%{offer_title}</strong>.
+        modal_timer: 'Timer Window:'
+        modal_success_reward: 'Success Reward:'
+        modal_missed_deadline: 'Missed Deadline:'
+        modal_penalty: Commitment Penalty
+        modal_confirm: Are you sure you have time to start this challenge right now?
+        modal_cv_desc: You are applying to <strong>%{offer_title}</strong> at %{company_name}.
+        cv_link_label: CV Link / Document URL
+        cv_link_hint: Paste a public Google Drive, Dropbox, LinkedIn, or PDF link to your resume.
+        cv_placeholder: https://drive.google.com/your-cv.pdf
+        confirm_start: Confirm & Start Mission
+        confirm_submit_cv: Confirm & Submit CV
       deadline:
-        passed: "Deadline passed"
-        one_day: "1 day left"
+        passed: Deadline passed
+        one_day: 1 day left
         days_left: "%{count} days left"
       match_breakdown:
-        skills: "Skills"
-        major: "Major"
-        readiness: "Score"
-        match_label: "Match"
-
+        skills: Skills
+        major: Major
+        readiness: Score
+        match_label: Match
     new:
-      title: "Post an Internship – StageUp"
-      heading: "Post an Internship Offer"
-      subtitle: "Fill in the details below. You can optionally attach a proof-of-work mission to filter candidates by skill."
+      title: Post an Internship – StageUp
+      heading: Post an Internship Offer
+      subtitle: Fill in the details below. You can optionally attach a proof-of-work mission to filter candidates by skill.
       form:
-        internship_details: "Internship Details"
-        title_placeholder: "e.g. Front-End Web Developer Intern"
-        description_label: "Description & Requirements"
-        description_placeholder: "Describe the tasks, tools, and profile you're looking for..."
-        stage_type_pfe: "PFE (Graduation)"
-        stage_type_pfa: "PFA (Mid-Study)"
-        stage_type_initiation: "Initiation / Observation"
-        stage_type_free: "Free / Skill-Building"
-        stage_type_prompt: "Select type"
-        location_placeholder: "e.g. Sfax"
-        mission_section: "Proof of Work Mission"
-        mission_description_text: "Attach a small hands-on test (30–90 min) to filter candidates by real skill. Leave blank for standard CV-only applications."
-        mission_title_placeholder: "e.g. Build a Responsive Navigation Bar"
-        mission_instructions_label: "Instructions & Rubric"
-        mission_instructions_placeholder: "Goal, specs, resources, and evaluation details..."
-        mission_duration_placeholder: "e.g. 60"
-        submit: "Post Internship"
-        submitting: "Posting…"
+        internship_details: Internship Details
+        title_placeholder: e.g. Front-End Web Developer Intern
+        description_label: Description & Requirements
+        description_placeholder: Describe the tasks, tools, and profile you're looking for...
+        stage_type_pfe: PFE (Graduation)
+        stage_type_pfa: PFA (Mid-Study)
+        stage_type_initiation: Initiation / Observation
+        stage_type_free: Free / Skill-Building
+        stage_type_prompt: Select type
+        location_placeholder: e.g. Sfax
+        mission_section: Proof of Work Mission
+        mission_description_text: Attach a small hands-on test (30–90 min) to filter candidates by real skill. Leave blank for standard CV-only applications.
+        mission_title_placeholder: e.g. Build a Responsive Navigation Bar
+        mission_instructions_label: Instructions & Rubric
+        mission_instructions_placeholder: Goal, specs, resources, and evaluation details...
+        mission_duration_placeholder: e.g. 60
+        submit: Post Internship
+        submitting: Posting…
       preview:
-        title: "Preview"
-        mission_attached: "Mission Included"
-        cv_only: "CV Only"
-
+        title: Preview
+        mission_attached: Mission Included
+        cv_only: CV Only
     edit:
-      title: "Edit Internship Offer – StageUp"
-      heading: "Edit Internship Offer"
-      subtitle: "Update the details or proof mission for this offer."
+      title: Edit Internship Offer – StageUp
+      heading: Edit Internship Offer
+      subtitle: Update the details or proof mission for this offer.
       form:
-        submit: "Update Offer"
-        submitting: "Updating…"
-        delete: "Delete"
-        deleting: "Deleting…"
-        delete_confirm: "Are you sure? This action cannot be undone."
-
+        submit: Update Offer
+        submitting: Updating…
+        delete: Delete
+        deleting: Deleting…
+        delete_confirm: Are you sure? This action cannot be undone.
     form:
-      title: "Internship Title"
-      stage_type: "Stage Type"
-      spots: "Available Spots"
-      work_mode: "Work Mode"
-      location: "Location"
-      deadline: "Deadline"
-      description: "Description"
-      mission_title: "Mission Title"
-      mission_duration: "Mission Duration"
-      mission_description: "Mission Description"
+      title: Internship Title
+      stage_type: Stage Type
+      spots: Available Spots
+      work_mode: Work Mode
+      location: Location
+      deadline: Deadline
+      description: Description
+      mission_title: Mission Title
+      mission_duration: Mission Duration
+      mission_description: Mission Description
     status:
-      active: "Active"
-      closed: "Closed"
-      draft: "Draft"
-
+      active: Active
+      closed: Closed
+      draft: Draft
   dashboard:
-    title: "Dashboard"
-    welcome_back: "Welcome back, %{name}"
-    today_is: "Today is %{date}"
+    title: Dashboard
+    welcome_back: Welcome back, %{name}
+    today_is: Today is %{date}
     welcome_sub:
-      student: "Manage your applications, track internship progress, and build your commitment score."
-      company: "Review student applicants, publish proof missions, and manage active internship offers."
-      university: "Monitor student internship agreements and track university partner commitments."
+      student: Manage your applications, track internship progress, and build your commitment score.
+      company: Review student applicants, publish proof missions, and manage active internship offers.
+      university: Monitor student internship agreements and track university partner commitments.
     quick_stats:
-      title: "Quick Stats"
-      active_applications: "Active Applications"
-      completed_internships: "Completed Internships"
-      reputation_score: "Reputation Score"
-      pending_reviews: "Pending Reviews"
+      title: Quick Stats
+      active_applications: Active Applications
+      completed_internships: Completed Internships
+      reputation_score: Reputation Score
+      pending_reviews: Pending Reviews
     tabs:
-      applications: "My Applications"
-      offers: "My Offers"
-      agreements: "Agreements"
-      reputation: "Reputation"
-      reviews: "Reviews"
+      applications: My Applications
+      offers: My Offers
+      agreements: Agreements
+      reputation: Reputation
+      reviews: Reviews
     kanban:
-      title: "Application Tracker"
+      title: Application Tracker
       columns:
-        applied: "Applied"
-        mission: "Mission"
-        review: "Under Review"
-        accepted: "Accepted"
-        rejected: "Rejected"
-        completed: "Completed"
-      empty: "No applications in this stage"
+        applied: Applied
+        mission: Mission
+        review: Under Review
+        accepted: Accepted
+        rejected: Rejected
+        completed: Completed
+      empty: No applications in this stage
     applications:
-      title: "My Applications"
-      empty: "You haven't applied to any internships yet"
-      browse_offers: "Browse Offers"
+      title: My Applications
+      empty: You haven't applied to any internships yet
+      browse_offers: Browse Offers
       status:
-        pending: "Pending"
-        mission_pending: "Mission Pending"
-        in_review: "Under Review"
-        accepted: "Accepted"
-        rejected: "Rejected"
-        completed: "Completed"
+        pending: Pending
+        mission_pending: Mission Pending
+        in_review: Under Review
+        accepted: Accepted
+        rejected: Rejected
+        completed: Completed
       actions:
-        view_mission: "View Mission"
-        submit_solution: "Submit Solution"
-        view_agreement: "View Agreement"
-        withdraw: "Withdraw"
+        view_mission: View Mission
+        submit_solution: Submit Solution
+        view_agreement: View Agreement
+        withdraw: Withdraw
       mission_status:
-        not_started: "Not Started"
-        in_progress: "In Progress"
-        submitted: "Submitted"
-        graded: "Graded"
+        not_started: Not Started
+        in_progress: In Progress
+        submitted: Submitted
+        graded: Graded
     offers:
-      title: "My Internship Offers"
-      empty: "You haven't posted any internships yet"
-      post_offer: "Post an Offer"
+      title: My Internship Offers
+      empty: You haven't posted any internships yet
+      post_offer: Post an Offer
       status:
-        draft: "Draft"
-        published: "Published"
-        closed: "Closed"
+        draft: Draft
+        published: Published
+        closed: Closed
       actions:
-        edit: "Edit"
-        view_applications: "View Applications"
-        close: "Close"
-        draft_label: "Draft"
-        applicant_count: "applicant(s)"
-        delete_draft: "Delete"
-        delete_draft_confirm: "Permanently delete this draft?"
-        archive: "Archive"
-        archive_confirm: "Archive this offer?"
-        post_offer_empty: "Post an Offer"
-        no_offers_title: "No Offers Posted Yet"
-        no_offers_text: "Publish your first internship offer to attract candidate talent and receive proof mission submissions."
+        edit: Edit
+        view_applications: View Applications
+        close: Close
+        draft_label: Draft
+        applicant_count: applicant(s)
+        delete_draft: Delete
+        delete_draft_confirm: Permanently delete this draft?
+        archive: Archive
+        archive_confirm: Archive this offer?
+        post_offer_empty: Post an Offer
+        no_offers_title: No Offers Posted Yet
+        no_offers_text: Publish your first internship offer to attract candidate talent and receive proof mission submissions.
     agreements:
-      title: "Internship Agreements"
-      empty: "No agreements yet"
+      title: Internship Agreements
+      empty: No agreements yet
       status:
-        pending_signatures: "Pending Signatures"
-        signed: "Fully Signed"
-        declined: "Declined"
-        expired: "Expired"
+        pending_signatures: Pending Signatures
+        signed: Fully Signed
+        declined: Declined
+        expired: Expired
       actions:
-        view: "View Agreement"
-        sign: "Sign"
+        view: View Agreement
+        sign: Sign
     reputation:
-      title: "Reputation Ledger"
-      current_score: "Current Score"
-      score_label: "Commitment Score"
-      history_title: "Score History"
-      empty: "No reputation events yet"
-      public_verified_label: "Public · Verified"
-      avg_rating: "Avg. Rating"
-      metrics_title: "Reputation Metrics"
-      active_offers: "Active Offers"
-      verification_label: "Verification"
-      verified_status: "Verified"
-      grace_period: "Grace Period"
-      associated_students: "Associated Students"
-      ledger_title: "Commitment Ledger"
-      event_label: "Event"
+      title: Reputation Ledger
+      current_score: Current Score
+      score_label: Commitment Score
+      history_title: Score History
+      empty: No reputation events yet
       events:
-        applied: "Applied to internship"
-        mission_submitted: "Submitted mission solution"
-        mission_approved: "Mission approved"
-        mission_rejected: "Mission rejected"
-        agreement_signed: "Signed agreement"
-        review_received: "Received review"
-        no_show: "No-show penalty"
+        applied: Applied to internship
+        mission_submitted: Submitted mission solution
+        mission_approved: Mission approved
+        mission_rejected: Mission rejected
+        agreement_signed: Signed agreement
+        review_received: Received review
+        no_show: No-show penalty
       delta:
         positive: "+%{points}"
         negative: "%{points}"
     profile:
-      title: "My Profile"
+      title: My Profile
       roles:
-        student: "Student"
-        company: "Company"
-        university: "University"
-      edit: "Edit Profile"
-      view_public: "View My Profile"
+        student: Student
+        company: Company
+        university: University
+      edit: Edit Profile
+      view_public: View My Profile
     profile_bento:
-      full_name: "Full Name"
-      phone: "Phone"
-      phone_not_specified: "Not specified"
-      major: "Major"
-      major_not_specified: "Not specified"
-      graduation_year: "Graduation Year"
-      graduation_not_specified: "Not specified"
-      university: "University"
-      university_self_declared: "Self-declared / Unassociated"
-      skills: "Skills"
-      skills_none: "None added"
-      bio: "Bio"
-      bio_empty: "No bio yet"
-      company_name: "Company Name"
-      website: "Website"
-      website_not_provided: "Not provided"
-      verification_status: "Verification Status"
-      verified: "Verified"
-      not_verified: "Not verified"
-      description: "Description"
-      description_empty: "No description provided"
-      admin_name: "Coordinator Name"
-      department: "Department"
-      institution_name: "Institution Name"
+      full_name: Full Name
+      phone: Phone
+      phone_not_specified: Not specified
+      major: Major
+      major_not_specified: Not specified
+      graduation_year: Graduation Year
+      graduation_not_specified: Not specified
+      university: University
+      university_self_declared: Self-declared / Unassociated
+      skills: Skills
+      skills_none: None added
+      bio: Bio
+      bio_empty: No bio yet
+      company_name: Company Name
+      website: Website
+      website_not_provided: Not provided
+      verification_status: Verification Status
+      verified: Verified
+      not_verified: Not verified
+      description: Description
+      description_empty: No description provided
+      admin_name: Coordinator Name
+      department: Department
+      institution_name: Institution Name
     active_internships:
-      title: "Active Internships & Milestone Progress"
-      company_label: "Company:"
+      title: Active Internships & Milestone Progress
+      company_label: 'Company:'
       match: "% Match"
-      milestone_done: "Done"
-      waiting_employer: "Waiting for Employer"
-      mark_completed: "Mark Completed"
-      completing: "Completing…"
-      abandon: "Abandon"
-      abandoning: "Abandoning…"
-      abandon_confirm: "Are you sure you want to abandon this internship? Your commitment score will be penalized."
-      awaiting_signatures: "Awaiting Signatures"
-      agreement_declined: "Agreement Declined"
-      view_sign_agreement: "View & Sign Agreement"
-      generate_agreement: "Generate Convention de Stage"
-      view_certificate: "View Certificate"
-      leave_review: "Leave Review"
-      review_submitted: "Review Submitted"
-      no_active_title: "No Active Internships"
-      no_active_text: "You haven't started any internships on StageUp yet. Search for active offers, apply, and complete your proof mission!"
-      browse_active: "Browse Active Offers"
+      milestone_done: Done
+      waiting_employer: Waiting for Employer
+      mark_completed: Mark Completed
+      completing: Completing…
+      abandon: Abandon
+      abandoning: Abandoning…
+      abandon_confirm: Are you sure you want to abandon this internship? Your commitment score will be penalized.
+      awaiting_signatures: Awaiting Signatures
+      agreement_declined: Agreement Declined
+      view_sign_agreement: View & Sign Agreement
+      generate_agreement: Generate Convention de Stage
+      view_certificate: View Certificate
+      leave_review: Leave Review
+      review_submitted: Review Submitted
+      no_active_title: No Active Internships
+      no_active_text: You haven't started any internships on StageUp yet. Search for active offers, apply, and complete your proof mission!
+      browse_active: Browse Active Offers
     reviews:
-      title: "Reviews"
-      write_review: "Leave a Review"
-      subtitle_html: "Share your experience with <strong>%{name}</strong>"
-      internship: "Internship"
-      rating_label: "Rating"
-      click_to_rate: "Click a star to rate"
-      feedback: "Feedback & Review"
-      comment_placeholder: "Describe the collaboration, skills learned, professionalism, and any constructive comments..."
-      hint: "Reviews cannot be edited once submitted."
-      char_count: "%{count} / min %{min}"
-      char_count_suffix: " / min %{min}"
-      submit: "Submit Review"
-      submitting: "Submitting…"
-      turbo_confirm: "Reviews cannot be edited after submission. Continue?"
+      title: Reviews
+      empty: No reviews yet
+      given: Given
+      received: Received
+      write_review: Write a Review
       rating:
-        labels:
-          - Poor
-          - Below Average
-          - Average
-          - Good
-          - Excellent
+        excellent: Excellent
+        good: Good
+        average: Average
+        poor: Poor
+      placeholder: Share your experience...
     pending_approval:
-      title: "Verification Pending"
-      logged_in_as: "Logged in as: %{email}"
-      subtitle: "Your university coordinator account is under review"
-      what_next: "What happens next?"
-      step1: "We will verify your official university email domain."
-      step2: "We may contact your department head or review university records."
-      step3: "Once approved, you will receive a notification email and full access will be unlocked."
-      contact: "Need urgent activation? Contact us at %{email}"
-      registration_thanks: "Thank you for registering as a coordinator for %{university} (%{department})."
-      privacy_notice: "To protect student data privacy, coordinator dashboards must be verified by StageUp administrators before activation."
+      title: Verification Pending
+      logged_in_as: 'Logged in as: %{email}'
+      subtitle: Your university coordinator account is under review
+      what_next: What happens next?
+      step1: We will verify your official university email domain.
+      step2: We may contact your department head or review university records.
+      step3: Once approved, you will receive a notification email and full access will be unlocked.
+      contact: Need urgent activation? Contact us at %{email}
+      registration_thanks: Thank you for registering as a coordinator for %{university} (%{department}).
+      privacy_notice: To protect student data privacy, coordinator dashboards must be verified by StageUp administrators before activation.
     internship_agreements:
       show:
-        title: "CONVENTION DE STAGE"
-        subtitle: "This agreement is made in accordance with Tunisian law governing internship programmes."
-        declined_title: "Agreement Declined"
-        declined_reason: "Reason: %{reason}"
-        declined_by: "Declined by %{university} coordinator"
-        certificate_banner: "Certificate Available"
-        certificate_sub: "This internship is fully executed and publicly verifiable."
-        print: "Print / Save PDF"
-        view_certificate: "Open Public Certificate →"
-        fully_executed_badge: "FULLY EXECUTED — All parties have signed"
-        declined_badge: "DECLINED — University rejected this agreement"
-        pending_badge: "PENDING SIGNATURES — Awaiting: %{signatories}"
-        article1: "Article 1 — Parties"
-        article1_text: "This Convention de Stage is entered into between the following three parties:"
-        article2: "Article 2 — Dates & Duration"
-        article2_text: "The internship shall commence on %{start_date} and conclude on %{end_date}."
-        article3: "Article 3 — Internship Subject"
-        article3_text: "%{name} shall carry out an internship titled \"%{title}\" at %{company} under the terms described in the original offer."
-        student_role: "The Student:"
-        employer_role: "The Employer:"
-        university_role: "The University:"
-        duration: "Total duration: %{days} days."
-        enrolled_at: "enrolled at"
-        registered_in_tunisia: "registered in Tunisia"
-        signatures: "Signatures"
-        student_box: "Student"
-        employer_box: "Employer"
-        university_box: "University Coordinator"
-        signed: "Signed"
-        not_signed: "Not signed yet"
-        signed_on: "Signed on: %{date}"
-        sign_agreement: "Sign Agreement"
-        signing: "Signing…"
-        decline: "Decline Agreement"
-        decline_reason: "Reason for declining:"
-        decline_placeholder: "Explain why this agreement is being declined..."
-        cancel: "Cancel"
-        confirm_decline: "Confirm Decline"
-        declining: "Declining…"
-        independent: "Independent"
-        affiliated_university: "an affiliated university"
-        no_major: "No major specified"
-        self_declared: "Independent / Self-declared"
-        signatures_desc: "Each party must sign below for this agreement to be fully executed. Once all three signatures are present, the status will automatically update to \"Fully Executed\"."
+        title: CONVENTION DE STAGE
+        subtitle: This agreement is made in accordance with Tunisian law governing internship programmes.
+        declined_title: Agreement Declined
+        declined_reason: 'Reason: %{reason}'
+        declined_by: Declined by %{university} coordinator
+        certificate_banner: Certificate Available
+        certificate_sub: This internship is fully executed and publicly verifiable.
+        print: Print / Save PDF
+        view_certificate: Open Public Certificate →
+        fully_executed_badge: FULLY EXECUTED — All parties have signed
+        declined_badge: DECLINED — University rejected this agreement
+        pending_badge: 'PENDING SIGNATURES — Awaiting: %{signatories}'
+        article1: Article 1 — Parties
+        article1_text: 'This Convention de Stage is entered into between the following three parties:'
+        article2: Article 2 — Dates & Duration
+        article2_text: The internship shall commence on %{start_date} and conclude on %{end_date}.
+        article3: Article 3 — Internship Subject
+        article3_text: '%{name} shall carry out an internship titled "%{title}" at %{company} under the terms described in the original offer.'
+        student_role: 'The Student:'
+        employer_role: 'The Employer:'
+        university_role: 'The University:'
+        duration: 'Total duration: %{days} days.'
+        enrolled_at: enrolled at
+        registered_in_tunisia: registered in Tunisia
+        signatures: Signatures
+        student_box: Student
+        employer_box: Employer
+        university_box: University Coordinator
+        signed: Signed
+        not_signed: Not signed yet
+        signed_on: 'Signed on: %{date}'
+        sign_agreement: Sign Agreement
+        signing: Signing…
+        decline: Decline Agreement
+        decline_reason: 'Reason for declining:'
+        decline_placeholder: Explain why this agreement is being declined...
+        cancel: Cancel
+        confirm_decline: Confirm Decline
+        declining: Declining…
+        independent: Independent
+        affiliated_university: an affiliated university
+        no_major: No major specified
+        self_declared: Independent / Self-declared
+        signatures_desc: Each party must sign below for this agreement to be fully executed. Once all three signatures are present, the status will automatically update to "Fully Executed".
     certificates:
       verify:
-        title: "Certificate of Completion"
-        subtitle: "Verified & Authenticated via StageUp Trust Ledger"
-        recipient: "This certifies that"
-        institution: "Institution"
-        duration: "Duration"
-        stage_type: "Stage Type"
-        verification_id: "Verification ID"
-        signatures: "Digital Signatures & Legal Verification"
-        student: "Student"
-        employer: "Employer"
-        university: "University Coordinator"
-        signed: "Signed"
-        signed_on: "Signed: %{date}"
-        qr: "Scan to verify authenticity"
-        view_applications: "View Applications"
-        close: "Close"
-    agreements:
-      title: "Internship Agreements"
-      empty: "No agreements yet"
-      status:
-        pending_signatures: "Pending Signatures"
-        signed: "Fully Signed"
-        declined: "Declined"
-        expired: "Expired"
-      actions:
-        view: "View Agreement"
-        sign: "Sign"
-    reputation:
-      title: "Reputation Ledger"
-      current_score: "Current Score"
-      score_label: "Commitment Score"
-      history_title: "Score History"
-      empty: "No reputation events yet"
-      events:
-        applied: "Applied to internship"
-        mission_submitted: "Submitted mission solution"
-        mission_approved: "Mission approved"
-        mission_rejected: "Mission rejected"
-        agreement_signed: "Signed agreement"
-        review_received: "Received review"
-        no_show: "No-show penalty"
-      delta:
-        positive: "+%{points}"
-        negative: "%{points}"
-    reviews:
-      title: "Reviews"
-      empty: "No reviews yet"
-      given: "Given"
-      received: "Received"
-      write_review: "Write a Review"
-      rating:
-        excellent: "Excellent"
-        good: "Good"
-        average: "Average"
-        poor: "Poor"
-      placeholder: "Share your experience..."
-
+        title: Certificate of Completion
+        subtitle: Verified & Authenticated via StageUp Trust Ledger
+        recipient: This certifies that
+        institution: Institution
+        duration: Duration
+        stage_type: Stage Type
+        verification_id: Verification ID
+        signatures: Digital Signatures & Legal Verification
+        student: Student
+        employer: Employer
+        university: University Coordinator
+        signed: Signed
+        signed_on: 'Signed: %{date}'
+        qr: Scan to verify authenticity
+        view_applications: View Applications
+        close: Close
   pending_approval:
-    title: "Account Pending Approval"
-    subtitle: "Your university coordinator account is under review"
-    description: "Our team is verifying your credentials. You'll receive an email once approved."
-    contact_support: "Questions? Contact support"
-
+    title: Account Pending Approval
+    subtitle: Your university coordinator account is under review
+    description: Our team is verifying your credentials. You'll receive an email once approved.
+    contact_support: Questions? Contact support
   notifications:
-    title: "Notifications"
-    mark_all_read: "Mark All Read"
+    title: Notifications
+    mark_all_read: Mark All Read
     unread_count:
       one: "%{count} unread"
       other: "%{count} unread"
-    bell_aria: "Notifications"
-    today: "Today"
-    yesterday: "Yesterday"
-    mark_read: "Mark Read"
-    empty_title: "All Caught Up"
-    empty: "No notifications yet"
-    empty_desc: "You have no new notifications."
-    page_info: "Page %{current} of %{total}"
+    bell_aria: Notifications
+    today: Today
+    yesterday: Yesterday
+    mark_read: Mark Read
+    empty_title: All Caught Up
+    empty: No notifications yet
+    empty_desc: You have no new notifications.
+    page_info: Page %{current} of %{total}
     types:
-      application_received: "New Application"
-      application_accepted: "Application Accepted"
-      application_rejected: "Application Rejected"
-      mission_submitted: "Mission Submitted"
-      mission_graded: "Mission Graded"
-      agreement_ready: "Agreement Ready to Sign"
-      agreement_signed: "Agreement Signed"
-      review_received: "New Review"
-      review_requested: "Review Requested"
+      application_received: New Application
+      application_accepted: Application Accepted
+      application_rejected: Application Rejected
+      mission_submitted: Mission Submitted
+      mission_graded: Mission Graded
+      agreement_ready: Agreement Ready to Sign
+      agreement_signed: Agreement Signed
+      review_received: New Review
+      review_requested: Review Requested
     actions:
-      view: "View"
-      dismiss: "Dismiss"
-
+      view: View
+      dismiss: Dismiss
   submissions:
     edit:
-      title: "Submit Proof of Work – StageUp"
-      heading: "Submit Proof of Work"
-      eyebrow: "STEP 2 OF 2 · PROOF SUBMISSION"
-      description: "Paste your completed solution URL and optional explanation notes below."
-      internship_label: "Internship Offer"
-      mission_label: "Attached Mission"
-      no_mission: "No mission attached"
+      title: Submit Proof of Work – StageUp
+      heading: Submit Proof of Work
+      eyebrow: STEP 2 OF 2 · PROOF SUBMISSION
+      description: Paste your completed solution URL and optional explanation notes below.
+      internship_label: Internship Offer
+      mission_label: Attached Mission
+      no_mission: No mission attached
       form:
-        github_link: "Solution URL (GitHub Repo, Figma File, Google Drive)"
-        github_link_placeholder: "https://github.com/myusername/myrepo"
-        url_warning_html: "Ensure your URL is <strong>publicly accessible</strong> so recruiters can verify your work."
-        notes: "Notes / Technical Explanation (Optional)"
-        notes_placeholder: "Describe your implementation details, tech stack used, setup instructions, or key assumptions..."
-        submit: "Submit Proof Solution →"
-        submitting: "Submitting…"
-        cancel: "Cancel"
+        github_link: Solution URL (GitHub Repo, Figma File, Google Drive)
+        github_link_placeholder: https://github.com/myusername/myrepo
+        url_warning_html: Ensure your URL is <strong>publicly accessible</strong> so recruiters can verify your work.
+        notes: Notes / Technical Explanation (Optional)
+        notes_placeholder: Describe your implementation details, tech stack used, setup instructions, or key assumptions...
+        submit: Submit Proof Solution →
+        submitting: Submitting…
+        cancel: Cancel
     milestones:
-      applied: "Applied"
-      checked: "Checked"
-      accepted: "Accepted"
-      signed: "Signed"
-      done: "Done"
-
+      applied: Applied
+      checked: Checked
+      accepted: Accepted
+      signed: Signed
+      done: Done
   agreements:
     status:
-      pending_signatures: "Pending Signatures"
-      approved: "Fully Approved"
-
+      pending_signatures: Pending Signatures
+      approved: Fully Approved
   registrations:
     select_role:
-      title: "Choose Your Role"
-      subtitle: "Select how you'll use StageUp to get started"
+      title: Choose Your Role
+      subtitle: Select how you'll use StageUp to get started
       student:
-        title: "Student"
-        desc: "Find verified internships, build reputation, get hired"
+        title: Student
+        desc: Find verified internships, build reputation, get hired
       company:
-        title: "Company"
-        desc: "Post internships, evaluate talent with proof-of-work missions"
+        title: Company
+        desc: Post internships, evaluate talent with proof-of-work missions
       university:
-        title: "University Coordinator"
-        desc: "Verify students, track agreements, manage partnerships"
-      already_account_html: "Already have an account? %{link}"
-      sign_in: "Sign In"
+        title: University Coordinator
+        desc: Verify students, track agreements, manage partnerships
+      already_account_html: Already have an account? %{link}
+      sign_in: Sign In
     new_student:
-      title: "Student Registration"
-      subtitle: "Create your verified student profile"
-      errors_title: "Please resolve the following errors:"
-      not_student: "Not a student?"
+      title: Student Registration
+      subtitle: Create your verified student profile
+      errors_title: 'Please resolve the following errors:'
+      not_student: Not a student?
       form:
-        first_name: "First Name"
-        first_name_placeholder: "Mohamed"
-        last_name: "Last Name"
-        last_name_placeholder: "Ben Ali"
-        phone: "Phone Number"
+        first_name: First Name
+        first_name_placeholder: Mohamed
+        last_name: Last Name
+        last_name_placeholder: Ben Ali
+        phone: Phone Number
         phone_placeholder: "+216 99 123 456"
-        university: "University / Institute"
-        university_placeholder: "Select your institution"
-        major: "Major / Specialization"
-        major_placeholder: "Software Engineering"
-        graduation_year: "Graduation Year"
-        graduation_year_placeholder: "2027"
-        bio: "Short Bio"
-        bio_placeholder: "Tell us about yourself, your skills, interests..."
-        email: "University Email"
-        email_placeholder: "student@isetsf.rnu.tn"
-        email_hint: "Use your official university email (e.g. @isetsf.rnu.tn) for instant verification"
-        password: "Password"
-        password_confirmation: "Confirm Password"
-        submit: "Create Account"
-        submitting: "Creating..."
-      back: "Back"
+        university: University / Institute
+        university_placeholder: Select your institution
+        major: Major / Specialization
+        major_placeholder: Software Engineering
+        graduation_year: Graduation Year
+        graduation_year_placeholder: '2027'
+        bio: Short Bio
+        bio_placeholder: Tell us about yourself, your skills, interests...
+        email: University Email
+        email_placeholder: student@isetsf.rnu.tn
+        email_hint: Use your official university email (e.g. @isetsf.rnu.tn) for instant verification
+        password: Password
+        password_confirmation: Confirm Password
+        submit: Create Account
+        submitting: Creating...
+      back: Back
     new_company:
-      title: "Company Registration"
-      subtitle: "Create your verified company profile"
-      errors_title: "Please resolve the following errors:"
-      not_company: "Not a company?"
+      title: Company Registration
+      subtitle: Create your verified company profile
+      errors_title: 'Please resolve the following errors:'
+      not_company: Not a company?
       form:
-        name: "Company Name"
-        name_placeholder: "Your Startup"
-        website: "Website (Optional)"
-        website_placeholder: "https://mystartup.tn"
-        description: "Company Description"
-        description_placeholder: "What does your company do? Tech stack, mission, culture..."
-        email: "Work Email"
-        email_placeholder: "hr@mystartup.tn"
-        password: "Password"
-        password_confirmation: "Confirm Password"
-        submit: "Create Account"
-        submitting: "Creating..."
-      back: "Back"
+        name: Company Name
+        name_placeholder: Your Startup
+        website: Website (Optional)
+        website_placeholder: https://mystartup.tn
+        description: Company Description
+        description_placeholder: What does your company do? Tech stack, mission, culture...
+        email: Work Email
+        email_placeholder: hr@mystartup.tn
+        password: Password
+        password_confirmation: Confirm Password
+        submit: Create Account
+        submitting: Creating...
+      back: Back
     new_university:
-      title: "University Coordinator Registration"
-      subtitle: "Register as an academic coordinator"
-      errors_title: "Please resolve the following errors:"
-      not_coordinator: "Not a coordinator?"
+      title: University Coordinator Registration
+      subtitle: Register as an academic coordinator
+      errors_title: 'Please resolve the following errors:'
+      not_coordinator: Not a coordinator?
       form:
-        university: "University"
-        university_placeholder: "Select your institution"
-        admin_name: "Coordinator Full Name"
-        admin_name_placeholder: "Prof. Ahmed Mansour"
-        department: "Department / Faculty"
-        department_placeholder: "Department of Information Technology"
-        email: "Official University Email"
-        email_placeholder: "admin@isetsf.rnu.tn"
-        email_hint: "Must be an official @university.tn or @institute.rnu.tn address"
-        password: "Password"
-        password_confirmation: "Confirm Password"
-        submit: "Register Coordinator"
-        submitting: "Registering..."
-      back: "Back"
+        university: University
+        university_placeholder: Select your institution
+        admin_name: Coordinator Full Name
+        admin_name_placeholder: Prof. Ahmed Mansour
+        department: Department / Faculty
+        department_placeholder: Department of Information Technology
+        email: Official University Email
+        email_placeholder: admin@isetsf.rnu.tn
+        email_hint: Must be an official @university.tn or @institute.rnu.tn address
+        password: Password
+        password_confirmation: Confirm Password
+        submit: Register Coordinator
+        submitting: Registering...
+      back: Back
     edit:
-      title: "Edit Account — StageUp"
-      heading: "Account Settings"
-      subtitle: "Update your email address or change your password."
-      account_details: "Account Details"
-      email_placeholder: "email@example.com"
-      change_password: "Change Password"
-      leave_blank: "leave blank if not changing"
-      toggle_password_aria: "Toggle password visibility"
-      confirm_changes: "Confirm Changes"
-      current_password_placeholder: "Enter current password to confirm changes"
-      current_password_hint: "We need your current password to confirm any changes"
-      submit: "Update Account"
-      danger_zone_label: "Delete Account"
-      danger_zone_desc: "This action is irreversible and removes all your data."
-      delete_account: "Delete Account"
-      delete_confirm: "Permanently delete your account?"
-
+      title: Edit Account — StageUp
+      heading: Account Settings
+      subtitle: Update your email address or change your password.
+      account_details: Account Details
+      email_placeholder: email@example.com
+      change_password: Change Password
+      leave_blank: leave blank if not changing
+      toggle_password_aria: Toggle password visibility
+      confirm_changes: Confirm Changes
+      current_password_placeholder: Enter current password to confirm changes
+      current_password_hint: We need your current password to confirm any changes
+      submit: Update Account
+      danger_zone_label: Delete Account
+      danger_zone_desc: This action is irreversible and removes all your data.
+      delete_account: Delete Account
+      delete_confirm: Permanently delete your account?
   sessions:
     new:
-      title: "Sign In"
-      subtitle: "Access your dashboard"
-      email: "Email"
-      email_placeholder: "email@example.com"
-      password: "Password"
-      toggle_password_aria: "Toggle password visibility"
-      remember_me: "Remember me"
-      forgot_password: "Forgot password?"
-      submit: "Sign In"
-      submitting: "Signing in..."
-      no_account: "Don't have an account? %{link}"
-      sign_up: "Sign Up"
-      role_select: "Sign in as %{role}"
-
+      title: Sign In
+      subtitle: Access your dashboard
+      email: Email
+      email_placeholder: email@example.com
+      password: Password
+      toggle_password_aria: Toggle password visibility
+      remember_me: Remember me
+      forgot_password: Forgot password?
+      submit: Sign In
+      submitting: Signing in...
+      no_account: Don't have an account? %{link}
+      sign_up: Sign Up
+      role_select: Sign in as %{role}
   passwords:
     new:
-      title: "Forgot your password?"
-      subtitle: "We will send you password reset instructions"
-      errors_title: "Please resolve the following errors:"
-      email_placeholder: "email@example.com"
-      submit: "Send reset instructions"
-      sign_in: "Log in"
-      sign_up: "Sign up"
+      title: Forgot your password?
+      subtitle: We will send you password reset instructions
+      errors_title: 'Please resolve the following errors:'
+      email_placeholder: email@example.com
+      submit: Send reset instructions
+      sign_in: Log in
+      sign_up: Sign up
     edit:
-      title: "Change your password"
-      subtitle: "Enter your new credentials below"
-      errors_title: "Please resolve the following errors:"
-      new_password: "New password"
+      title: Change your password
+      subtitle: Enter your new credentials below
+      errors_title: 'Please resolve the following errors:'
+      new_password: New password
       minimum_characters: "(minimum %{count} characters)"
-      confirm_new_password: "Confirm new password"
-      submit: "Change my password"
-      sign_in: "Log in"
-      sign_up: "Sign up"
-
+      confirm_new_password: Confirm new password
+      submit: Change my password
+      sign_in: Log in
+      sign_up: Sign up
   admin:
     subnav:
-      overview: "Overview"
-      users: "Users"
-      offers: "Offers"
-      coordinators: "Coordinators"
-      companies: "Companies"
-      agreements: "Agreements"
+      overview: Overview
+      users: Users
+      offers: Offers
+      coordinators: Coordinators
+      companies: Companies
+      agreements: Agreements
     roles:
-      student: "Students"
-      company: "Companies"
-      university: "Coordinators"
-      admin: "Admins"
+      student: Students
+      company: Companies
+      university: Coordinators
+      admin: Admins
     kpi:
-      total_users: "Total Platform Users"
-      students: "Students"
-      companies: "Companies"
-      active_offers: "Active Internships"
+      total_users: Total Platform Users
+      students: Students
+      companies: Companies
+      active_offers: Active Internships
       total_posted: "%{count} Total Posted"
-      submissions: "Proof Submissions"
-      accepted: "Accepted"
-      agreements: "Agreements Issued"
-      signed: "Signed"
+      submissions: Proof Submissions
+      accepted: Accepted
+      agreements: Agreements Issued
+      signed: Signed
     dashboard:
-      badge: "MASTER ADMIN PANEL"
-      title: "Admin Dashboard"
-      subtitle: "Platform oversight, analytics, and moderation"
-      recent_submissions: "Recent Proof Submissions"
-      no_submissions: "No submissions recorded yet."
+      badge: MASTER ADMIN PANEL
+      title: Admin Dashboard
+      subtitle: Platform oversight, analytics, and moderation
+      recent_submissions: Recent Proof Submissions
+      no_submissions: No submissions recorded yet.
       stats:
-        total_users: "Total Users"
-        total_offers: "Total Offers"
-        pending_coordinators: "Pending Coordinators"
-        pending_companies: "Pending Companies"
+        total_users: Total Users
+        total_offers: Total Offers
+        pending_coordinators: Pending Coordinators
+        pending_companies: Pending Companies
       sections:
-        coordinators: "University Coordinators"
-        companies: "Companies"
+        coordinators: University Coordinators
+        companies: Companies
       coordinators:
         domain_matched: "✓ Domain Matched"
         domain_check_needed: "⚠️ Domain Check Needed"
-        title: "Pending Coordinators"
-        empty: "No coordinators pending"
-        approve: "Approve"
-        approving: "Approving…"
-        reject: "Reject"
-        reject_confirm: "Reject this coordinator? Their account will be removed."
-        all_clear_title: "All Clear"
+        title: Pending Coordinators
+        empty: No coordinators pending
+        approve: Approve
+        approving: Approving…
+        reject: Reject
+        reject_confirm: Reject this coordinator? Their account will be removed.
+        all_clear_title: All Clear
       companies:
-        title: "Pending Companies"
-        empty: "No companies pending"
-        verify: "Verify"
-        verifying: "Verifying…"
-        reject: "Reject"
-        reject_confirm: "Reject this company? Their account will be removed."
-        no_website: "No website"
-        all_clear_title: "All Clear"
-        all_clear_text: "No unverified company profiles."
+        title: Pending Companies
+        empty: No companies pending
+        verify: Verify
+        verifying: Verifying…
+        reject: Reject
+        reject_confirm: Reject this company? Their account will be removed.
+        no_website: No website
+        all_clear_title: All Clear
+        all_clear_text: No unverified company profiles.
     users:
-      title: "User Management"
-      subtitle: "Manage accounts, role permissions, and access states across StageUp"
-      search_placeholder: "Search by email..."
-      email: "Email"
-      role: "Profile Role"
-      admin_status: "Admin Status"
-      joined: "Joined Date"
-      actions: "Actions"
-      locked: "LOCKED"
-      is_admin: "ADMIN"
-      standard: "Standard"
-      grant_admin: "Make Admin"
-      revoke_admin: "Revoke Admin"
-      grant_confirm: "Grant admin privileges to this user?"
-      revoke_confirm: "Revoke admin privileges from this user?"
-      lock: "Lock Account"
-      unlock: "Unlock"
-      lock_confirm: "Lock this user account?"
-      unlock_confirm: "Unlock this account?"
+      title: User Management
+      subtitle: Manage accounts, role permissions, and access states across StageUp
+      search_placeholder: Search by email...
+      email: Email
+      role: Profile Role
+      admin_status: Admin Status
+      joined: Joined Date
+      actions: Actions
+      locked: LOCKED
+      is_admin: ADMIN
+      standard: Standard
+      grant_admin: Make Admin
+      revoke_admin: Revoke Admin
+      grant_confirm: Grant admin privileges to this user?
+      revoke_confirm: Revoke admin privileges from this user?
+      lock: Lock Account
+      unlock: Unlock
+      lock_confirm: Lock this user account?
+      unlock_confirm: Unlock this account?
       you: "(Current User)"
-      no_results: "No users found"
-      no_results_hint: "Try clearing your search or role filters"
+      no_results: No users found
+      no_results_hint: Try clearing your search or role filters
       show:
-        title: "User Security Inspection – StageUp Admin"
-        badge: "SECURITY & CREDENTIAL INSPECTOR"
-        heading: "Account Audit:"
-        subtitle: "Detailed user profile inspection, domain validation, and credential verification"
-        back_to_users: "Back to Users"
-        admin_dashboard: "Admin Dashboard"
-        identity_heading: "Account Identity & Credentials"
-        email_label: "Email Address"
-        role_label: "Account Role"
-        registration_date_label: "Registration Date"
-        admin_privileges_label: "Admin Privileges"
-        administrator_badge: "ADMINISTRATOR"
-        standard_user_badge: "STANDARD USER"
-        account_status_label: "Account Status"
-        account_locked_badge: "ACCOUNT LOCKED"
-        active_badge: "ACTIVE"
-        coordinator_heading: "Academic Coordinator Verification Audit"
-        approved_badge: "APPROVED COORDINATOR"
-        pending_badge: "PENDING APPROVAL"
-        audit_signal: "Security Audit Signal:"
-        domain_match: "Email domain matches the official university domain (%{domain}). High authenticity confidence."
-        domain_mismatch: "Email domain (%{user_domain}) does not match the official university domain (%{uni_domain}). Inspect department credentials carefully."
-        coordinator_name_label: "Coordinator Name"
-        department_label: "Academic Department"
-        institution_label: "Institution"
-        official_domain_label: "Official Domain"
-        registered_students_label: "Registered Students"
+        title: User Security Inspection – StageUp Admin
+        badge: SECURITY & CREDENTIAL INSPECTOR
+        heading: 'Account Audit:'
+        subtitle: Detailed user profile inspection, domain validation, and credential verification
+        back_to_users: Back to Users
+        admin_dashboard: Admin Dashboard
+        identity_heading: Account Identity & Credentials
+        email_label: Email Address
+        role_label: Account Role
+        registration_date_label: Registration Date
+        admin_privileges_label: Admin Privileges
+        administrator_badge: ADMINISTRATOR
+        standard_user_badge: STANDARD USER
+        account_status_label: Account Status
+        account_locked_badge: ACCOUNT LOCKED
+        active_badge: ACTIVE
+        coordinator_heading: Academic Coordinator Verification Audit
+        approved_badge: APPROVED COORDINATOR
+        pending_badge: PENDING APPROVAL
+        audit_signal: 'Security Audit Signal:'
+        domain_match: Email domain matches the official university domain (%{domain}). High authenticity confidence.
+        domain_mismatch: Email domain (%{user_domain}) does not match the official university domain (%{uni_domain}). Inspect department credentials carefully.
+        coordinator_name_label: Coordinator Name
+        department_label: Academic Department
+        institution_label: Institution
+        official_domain_label: Official Domain
+        registered_students_label: Registered Students
         students_count: "%{count} students"
-        revoke_approval: "Revoke Approval"
-        revoke_approval_confirm: "Revoke coordinator approval? They will lose access to signing agreements."
-        approve_coordinator: "Approve Coordinator"
-        approving: "Approving…"
-        delete_account: "Delete Account"
-        delete_account_confirm: "Permanently delete this coordinator account?"
-        employer_heading: "Employer Audit & Verification"
-        verified_employer_badge: "VERIFIED EMPLOYER"
-        pending_verification_badge: "PENDING VERIFICATION"
-        company_name_label: "Company Name"
-        website_label: "Official Website"
-        no_website: "No website provided"
-        offers_posted_label: "Offers Posted"
+        revoke_approval: Revoke Approval
+        revoke_approval_confirm: Revoke coordinator approval? They will lose access to signing agreements.
+        approve_coordinator: Approve Coordinator
+        approving: Approving…
+        delete_account: Delete Account
+        delete_account_confirm: Permanently delete this coordinator account?
+        employer_heading: Employer Audit & Verification
+        verified_employer_badge: VERIFIED EMPLOYER
+        pending_verification_badge: PENDING VERIFICATION
+        company_name_label: Company Name
+        website_label: Official Website
+        no_website: No website provided
+        offers_posted_label: Offers Posted
         offers_count: "%{count} offers"
-        description_label: "Company Description"
-        no_description: "No description provided."
-        view_company_profile: "View Public Company Profile"
-        revoke_verification: "Revoke Verification"
-        verify_company: "Verify Company"
-        verifying: "Verifying…"
-        security_controls_heading: "Admin Security Controls"
-        toggle_admin_heading: "Toggle System Admin Role"
-        revoke_admin: "Revoke Admin Rights"
-        grant_admin: "Grant Admin Rights"
-        toggle_admin_confirm: "Are you sure you want to change admin privileges for %{email}?"
-        account_lock_heading: "Account Access Lock"
-        unlock_account: "Unlock Account"
-        lock_account: "Lock Account"
-        toggle_lock_confirm: "Lock/unlock this account?"
-        self_inspection_warning: "You are currently inspecting your own Master Admin account."
+        description_label: Company Description
+        no_description: No description provided.
+        view_company_profile: View Public Company Profile
+        revoke_verification: Revoke Verification
+        verify_company: Verify Company
+        verifying: Verifying…
+        security_controls_heading: Admin Security Controls
+        toggle_admin_heading: Toggle System Admin Role
+        revoke_admin: Revoke Admin Rights
+        grant_admin: Grant Admin Rights
+        toggle_admin_confirm: Are you sure you want to change admin privileges for %{email}?
+        account_lock_heading: Account Access Lock
+        unlock_account: Unlock Account
+        lock_account: Lock Account
+        toggle_lock_confirm: Lock/unlock this account?
+        self_inspection_warning: You are currently inspecting your own Master Admin account.
     offers:
-      title: "Offer Moderation"
-      subtitle: "Review, manage status, or moderate posted internship listings"
-      search_placeholder: "Search by title, location..."
+      title: Offer Moderation
+      subtitle: Review, manage status, or moderate posted internship listings
+      search_placeholder: Search by title, location...
       table:
-        title: "Internship Title"
-        company: "Company"
-        details: "Details"
-        status: "Status"
-        actions: "Actions"
-        spots: "spots"
-      close: "Close Offer"
-      activate: "Activate"
-      delete_confirm: "Permanently delete this offer listing?"
-      no_results: "No offers found"
-      no_results_hint: "Try adjusting your search query or status filter"
+        title: Internship Title
+        company: Company
+        details: Details
+        status: Status
+        actions: Actions
+        spots: spots
+      close: Close Offer
+      activate: Activate
+      delete_confirm: Permanently delete this offer listing?
+      no_results: No offers found
+      no_results_hint: Try adjusting your search query or status filter
     coordinators:
-      title: "Academic Coordinators"
-      subtitle: "Review university coordinator applications and manage verification approvals"
-      search_placeholder: "Search by coordinator name, department..."
-      pending: "Pending Approval"
-      approved: "Approved"
-      approved_badge: "APPROVED"
-      pending_badge: "PENDING"
-      no_results: "No coordinators found"
-      no_results_hint: "Try clearing your search or status filter"
+      title: Academic Coordinators
+      subtitle: Review university coordinator applications and manage verification approvals
+      search_placeholder: Search by coordinator name, department...
+      pending: Pending Approval
+      approved: Approved
+      approved_badge: APPROVED
+      pending_badge: PENDING
+      no_results: No coordinators found
+      no_results_hint: Try clearing your search or status filter
       table:
-        name: "Coordinator Name"
-        institution: "Institution / Dept"
-        status: "Approval Status"
-        actions: "Actions"
+        name: Coordinator Name
+        institution: Institution / Dept
+        status: Approval Status
+        actions: Actions
     companies:
-      title: "Company Verifications"
-      subtitle: "Manage company profiles, review credentials, and grant verification badges"
-      search_placeholder: "Search by company name, website..."
-      unverified: "Unverified"
-      verified: "Verified"
-      verified_badge: "VERIFIED"
-      unverified_badge: "UNVERIFIED"
-      revoke: "Revoke Verification"
-      no_results: "No companies found"
-      no_results_hint: "Try clearing your search query or verification filter"
+      title: Company Verifications
+      subtitle: Manage company profiles, review credentials, and grant verification badges
+      search_placeholder: Search by company name, website...
+      unverified: Unverified
+      verified: Verified
+      verified_badge: VERIFIED
+      unverified_badge: UNVERIFIED
+      revoke: Revoke Verification
+      no_results: No companies found
+      no_results_hint: Try clearing your search query or verification filter
       table:
-        name: "Company Name"
-        contact: "Contact Email & Site"
-        offers_posted: "Offers Posted"
-        offers: "offers"
-        status: "Verification State"
-        actions: "Actions"
+        name: Company Name
+        contact: Contact Email & Site
+        offers_posted: Offers Posted
+        offers: offers
+        status: Verification State
+        actions: Actions
     agreements:
-      title: "Internship Agreements"
-      subtitle: "Monitor legally binding tri-party internship agreements across StageUp"
-      no_results: "No agreements found"
-      no_results_hint: "No internship agreements match the selected filter."
+      title: Internship Agreements
+      subtitle: Monitor legally binding tri-party internship agreements across StageUp
+      no_results: No agreements found
+      no_results_hint: No internship agreements match the selected filter.
       table:
-        id: "Agreement / Token"
-        student: "Student"
-        offer: "Internship Offer"
-        dates: "Dates"
-        status: "Status"
-        actions: "Actions"
+        id: Agreement / Token
+        student: Student
+        offer: Internship Offer
+        dates: Dates
+        status: Status
+        actions: Actions
       show:
-        title: "Agreement #%{id} – StageUp Admin"
-        heading: "Internship Agreement #%{id}"
-        verification_token: "Verification Token:"
-        metadata: "Agreement Metadata"
-        start_date: "Start Date:"
-        end_date: "End Date:"
-        status_label: "Status:"
-        verification_url: "Verification URL:"
-        signatures_log: "Signatures Log"
-        student_signature: "Student Signature:"
-        company_signature: "Company Signature:"
-        university_signature: "University Signature:"
-        pending: "Pending"
-
+        title: 'Agreement #%{id} – StageUp Admin'
+        heading: 'Internship Agreement #%{id}'
+        verification_token: 'Verification Token:'
+        metadata: Agreement Metadata
+        start_date: 'Start Date:'
+        end_date: 'End Date:'
+        status_label: 'Status:'
+        verification_url: 'Verification URL:'
+        signatures_log: Signatures Log
+        student_signature: 'Student Signature:'
+        company_signature: 'Company Signature:'
+        university_signature: 'University Signature:'
+        pending: Pending
   internship_agreements:
     show:
-      page_title: "Convention de Stage – StageUp"
-      title: "Internship Agreement"
-      subtitle: "Three-party internship convention"
+      page_title: Convention de Stage – StageUp
+      title: Internship Agreement
+      subtitle: Three-party internship convention
       status:
-        pending: "Pending Signatures"
-        signed: "Fully Signed"
-        declined: "Declined"
+        pending: Pending Signatures
+        signed: Fully Signed
+        declined: Declined
       parties:
-        student: "Student"
-        company: "Company Supervisor"
-        university: "University Coordinator"
+        student: Student
+        company: Company Supervisor
+        university: University Coordinator
       actions:
-        sign: "Sign Agreement"
-        download: "Download PDF"
-        decline: "Decline"
-        decline_reason: "Reason for Decline"
-        decline_confirm: "Are you sure? This action cannot be undone."
+        sign: Sign Agreement
+        download: Download PDF
+        decline: Decline
+        decline_reason: Reason for Decline
+        decline_confirm: Are you sure? This action cannot be undone.
       details:
-        start_date: "Start Date"
-        end_date: "End Date"
-        work_mode: "Work Mode"
-        location: "Location"
-        description: "Mission Description"
+        start_date: Start Date
+        end_date: End Date
+        work_mode: Work Mode
+        location: Location
+        description: Mission Description
       signatures:
-        signed_by: "Signed by %{name} on %{date}"
-        pending: "Signature pending"
-        your_turn: "Your turn to sign"
+        signed_by: Signed by %{name} on %{date}
+        pending: Signature pending
+        your_turn: Your turn to sign
     new:
-      title: "Convention de Stage"
-      subtitle: "Tunisian Three-Way Internship Agreement"
-      errors_title: "Please resolve the following errors:"
-      dates_title: "Internship Dates"
+      title: Convention de Stage
+      subtitle: Tunisian Three-Way Internship Agreement
+      errors_title: 'Please resolve the following errors:'
+      dates_title: Internship Dates
       form:
-        start_date: "Start Date"
-        end_date: "End Date"
-        work_mode: "Work Mode"
-        location: "Location"
-        description: "Mission Description"
-        description_placeholder: "Describe the mission, objectives, and deliverables..."
-        generate: "Generate Agreement"
-        generating: "Generating..."
-
+        start_date: Start Date
+        end_date: End Date
+        work_mode: Work Mode
+        location: Location
+        description: Mission Description
+        description_placeholder: Describe the mission, objectives, and deliverables...
+        generate: Generate Agreement
+        generating: Generating...
   certificates:
     verify:
-      title: "Certificate of Completion"
-      subtitle: "Verified & Authenticated via StageUp Trust Ledger"
-      recipient_label: "This certifies that"
-      institution: "Institution"
-      duration: "Duration"
-      stage_type: "Stage Type"
-      verification_id: "Verification ID"
-      signatures_heading: "Digital Signatures & Legal Verification"
-      student_role: "Student"
-      employer_role: "Employer"
-      university_role: "University Coordinator"
-      signed: "Signed"
-      qr_label: "Scan to verify authenticity"
-      badge_text: "OFFICIALLY VERIFIED INTERNSHIP CERTIFICATE"
-      fulfillment_text: "has successfully completed an official internship as %{title} at %{company}."
-      academic_partner: "Academic Partner"
-      signed_on: "Signed: %{date}"
-
+      title: Certificate of Completion
+      subtitle: Verified & Authenticated via StageUp Trust Ledger
+      recipient_label: This certifies that
+      institution: Institution
+      duration: Duration
+      stage_type: Stage Type
+      verification_id: Verification ID
+      signatures_heading: Digital Signatures & Legal Verification
+      student_role: Student
+      employer_role: Employer
+      university_role: University Coordinator
+      signed: Signed
+      qr_label: Scan to verify authenticity
+      badge_text: OFFICIALLY VERIFIED INTERNSHIP CERTIFICATE
+      fulfillment_text: has successfully completed an official internship as %{title} at %{company}.
+      academic_partner: Academic Partner
+      signed_on: 'Signed: %{date}'
   kanban:
     columns:
-      applied: "Applied"
-      mission: "Mission"
-      review: "Under Review"
-      accepted: "Accepted"
-      rejected: "Rejected"
-      completed: "Completed"
+      applied: Applied
+      mission: Mission
+      review: Under Review
+      accepted: Accepted
+      rejected: Rejected
+      completed: Completed
     card:
-      view_proof: "View Proof"
-      view_cv: "View CV"
-      no_proof: "No proof submitted"
-      view_profile: "View Profile"
-      agreement: "Agreement"
+      view_proof: View Proof
+      view_cv: View CV
+      no_proof: No proof submitted
+      view_profile: View Profile
+      agreement: Agreement
     actions:
-      accept: "Accept"
-      reject: "Reject"
-      accepting: "Accepting…"
-      rejecting: "Rejecting…"
+      accept: Accept
+      reject: Reject
+      accepting: Accepting…
+      rejecting: Rejecting…
     empty:
-      review: "No pending submissions"
-      accepted: "No active accepted candidates"
-      rejected: "No rejected applications"
-
+      review: No pending submissions
+      accepted: No active accepted candidates
+      rejected: No rejected applications
   common:
-    skip_link: "Skip to main content"
-    all: "All"
-    n_a: "N/A"
-    errors_title: "Please fix the errors below:"
-    save: "Save"
-    cancel: "Cancel"
-    delete: "Delete"
-    edit: "Edit"
-    view: "View"
-    view_all: "View All"
-    back: "Back"
-    next: "Next"
-    previous: "Previous"
-    submit: "Submit"
-    confirm: "Confirm"
-    close: "Close"
-    dismiss_alert: "Dismiss alert"
-    loading: "Loading..."
-    error: "An error occurred"
-    errors: "error(s)"
-    success: "Success!"
-    required: "Required"
-    optional: "Optional"
+    skip_link: Skip to main content
+    all: All
+    n_a: N/A
+    errors_title: 'Please fix the errors below:'
+    save: Save
+    cancel: Cancel
+    delete: Delete
+    edit: Edit
+    view: View
+    view_all: View All
+    back: Back
+    next: Next
+    previous: Previous
+    submit: Submit
+    confirm: Confirm
+    close: Close
+    dismiss_alert: Dismiss alert
+    loading: Loading...
+    error: An error occurred
+    errors: error(s)
+    success: Success!
+    required: Required
+    optional: Optional
     out_of: "%{count} / %{max}"
-    search: "Search"
-    filter: "Filter"
-    sort: "Sort"
+    search: Search
+    filter: Filter
+    sort: Sort
     date_format: "%m/%d/%Y"
-    clear_filters: "Clear Filters"
+    clear_filters: Clear Filters
     time_ago:
-      just_now: "Just now"
+      just_now: Just now
       minutes_ago: "%{count} minutes ago"
       hours_ago: "%{count} hours ago"
       days_ago: "%{count} days ago"
@@ -1163,134 +1080,140 @@ en:
       months_ago: "%{count} months ago"
       years_ago: "%{count} years ago"
     status:
-      active: "Active"
-      inactive: "Inactive"
-      pending: "Pending"
-      approved: "Approved"
-      rejected: "Rejected"
-      draft: "Draft"
-      published: "Published"
-      closed: "Closed"
-      completed: "Completed"
-      expired: "Expired"
+      active: Active
+      inactive: Inactive
+      pending: Pending
+      approved: Approved
+      rejected: Rejected
+      draft: Draft
+      published: Published
+      closed: Closed
+      completed: Completed
+      expired: Expired
     work_modes:
-      on_site: "On-site"
-      remote: "Remote"
-      hybrid: "Hybrid"
+      on_site: On-site
+      remote: Remote
+      hybrid: Hybrid
     stage_types:
-      pfe: "PFE (Final Year Project)"
-      pfa: "PFA (Mid-Study)"
-      stage: "Summer Internship"
-      alternance: "Apprenticeship"
-      initiation: "Initiation / Observation"
-      free: "Free / Skill-Building"
+      pfe: PFE (Final Year Project)
+      pfa: PFA (Mid-Study)
+      stage: Summer Internship
+      alternance: Apprenticeship
+      initiation: Initiation / Observation
+      free: Free / Skill-Building
     spot:
-      one: "spot"
-      other: "spots"
-    available: "available"
-    yes: "Yes"
-    no: "No"
-    unrated: "Unrated"
-    reviews: "reviews"
-    hours: "hours"
-    ago: "ago"
-    back_to: "Back to %{page}"
-
+      one: spot
+      other: spots
+    available: available
+    true: 'Yes'
+    false: 'No'
+    unrated: Unrated
+    reviews: reviews
+    hours: hours
+    ago: ago
+    back_to: Back to %{page}
   student_profiles:
     show:
       title_suffix: "– Candidate Profile"
-      badge_student: "Student Candidate"
-      major_fallback: "Software Engineering"
-      class_of: "Class of %{year}"
-      completed_prefix: "Completed"
-      verified_ledger_badge: "VERIFIED LEDGER"
-      reputation_history_title: "Reputation Event History"
-      no_ledger_history: "No reputation ledger events recorded yet."
+      badge_student: Student Candidate
+      major_fallback: Software Engineering
+      class_of: Class of %{year}
+      completed_prefix: Completed
+      verified_ledger_badge: VERIFIED LEDGER
+      reputation_history_title: Reputation Event History
+      no_ledger_history: No reputation ledger events recorded yet.
       events_recorded: "%{count} Events Recorded"
-      verified_title: "Active Verified Candidate"
-      verified_badge: "Verified Candidate"
-      commitment_score: "Commitment Score"
-      employer_rating: "Employer Rating"
-      verified_missions: "Verified Missions"
-      completed: "Completed"
+      verified_title: Active Verified Candidate
+      verified_badge: Verified Candidate
+      commitment_score: Commitment Score
+      employer_rating: Employer Rating
+      verified_missions: Verified Missions
+      completed: Completed
       skills_verified: "%{count} Skills Verified"
-      verified_completion: "Verified Completion"
-      academic_details: "Academic Details"
-      university_label: "University"
-      autonomous_student: "Autonomous Student"
-      major_label: "Major"
-      class_of_label: "Class Of"
-      phone_label: "Contact Phone"
-      reputation_ledger: "Reputation Ledger"
-      verified: "Verified"
-
+      verified_completion: Verified Completion
+      academic_details: Academic Details
+      university_label: University
+      autonomous_student: Autonomous Student
+      major_label: Major
+      class_of_label: Class Of
+      phone_label: Contact Phone
+      reputation_ledger: Reputation Ledger
+      verified: Verified
   company_profiles:
     show:
       title_suffix: "– Employer Profile"
-      verified_badge: "Verified Company"
-      edit_profile: "Edit Company Profile"
-      overview_heading: "Company Overview & Mission"
-      description_fallback: "Leading software & technology employer on StageUp."
-      active_missions_heading: "Active Open Internship Missions (%{count})"
-      location_fallback: "Sfax, Tunisia"
-      months_label: "Months"
-      view_mission: "View Mission →"
-      no_active_offers: "No active internship offers currently open."
-      employer_stats_title: "Employer Stats"
-      active_missions_label: "Active Missions"
-      verification_status_label: "Verification Status"
-      verified_employer: "Verified Employer"
-      in_verification: "In Verification"
-      intern_rating_label: "Intern Rating"
-      rating_fallback: "5.0 / 5"
-      about_employer: "About Employer"
+      verified_badge: Verified Company
+      edit_profile: Edit Company Profile
+      overview_heading: Company Overview & Mission
+      description_fallback: Leading software & technology employer on StageUp.
+      active_missions_heading: Active Open Internship Missions (%{count})
+      location_fallback: Sfax, Tunisia
+      months_label: Months
+      view_mission: View Mission →
+      no_active_offers: No active internship offers currently open.
+      employer_stats_title: Employer Stats
+      active_missions_label: Active Missions
+      verification_status_label: Verification Status
+      verified_employer: Verified Employer
+      in_verification: In Verification
+      intern_rating_label: Intern Rating
+      rating_fallback: 5.0 / 5
+      about_employer: About Employer
       available_badge: "%{count} Available"
-
   users:
     edit:
-      page_title: "Account & Profile Settings – StageUp"
-      tab_personal: "Personal Profile"
-      tab_skills: "Skills & Stack"
-      tab_resume: "Resume & CV"
-      tab_security: "Account & Security"
-      preview_student_label: "Student Candidate"
-      preview_company_label: "Company Profile"
-      preview_university_label: "University Account"
-      view_public_profile: "View Public Profile"
-      personal_heading: "Personal Profile Details"
-      personal_subtext: "Public portfolio information visible to employers and companies"
-      section_identity: "Identity Details"
-      section_academic: "Academic & Contact Information"
+      page_title: Account & Profile Settings – StageUp
+      tab_personal: Personal Profile
+      tab_skills: Skills & Stack
+      tab_resume: Resume & CV
+      tab_security: Account & Security
+      preview_student_label: Student Candidate
+      preview_company_label: Company Profile
+      preview_university_label: University Account
+      view_public_profile: View Public Profile
+      personal_heading: Personal Profile Details
+      personal_subtext: Public portfolio information visible to employers and companies
+      section_identity: Identity Details
+      section_academic: Academic & Contact Information
       phone_placeholder: "+216 XX XXX XXX"
-      phone_hint: "Visible only to accepted employers"
-      major_placeholder: "e.g. Software Engineering, Data Science & AI"
-      section_portfolio: "Portfolio & Bio Summary"
-      bio_placeholder: "I'm a final-year engineering student passionate about building AI products and web platforms..."
-      website_placeholder: "https://example.tn"
-      description_placeholder: "Describe your company culture, technology stack, and mission opportunities."
-      department_placeholder: "e.g. IT & Computer Science Department"
-      skills_heading: "Skills & Domain Taxonomy"
-      skills_subtext: "Select from 200+ skills across Business, Engineering, Design, Data & Software"
-      skills_count_label: "Skills Selected"
-      clear_skills: "Clear All"
-      skill_search_placeholder: "Search 200+ skills (e.g. SEO, SolidWorks, Figma, Python, Finance, Marketing)..."
-      all_skills_label: "All Skills (%{count})"
-      selected_stack_label: "My Selected Stack"
-      picked_suffix: "picked"
-      resume_heading: "Resume & CV Document"
-      resume_subtext: "PDF document accessible by verified employers"
-      preview_pdf: "Preview PDF"
-      dropzone_label: "Drag & drop your PDF resume here"
-      dropzone_hint: "PDF only · Maximum file size 5MB"
-      browse_pdf: "Browse PDF File"
-      security_heading: "Account Email & Credentials"
-      security_subtext: "Manage login credentials and security authentication"
-      email_address_label: "Email Address"
-      change_password_label: "Change Password (Optional)"
-      unsaved_changes: "You have unsaved profile changes"
+      phone_hint: Visible only to accepted employers
+      major_placeholder: e.g. Software Engineering, Data Science & AI
+      section_portfolio: Portfolio & Bio Summary
+      bio_placeholder: I'm a final-year engineering student passionate about building AI products and web platforms...
+      website_placeholder: https://example.tn
+      description_placeholder: Describe your company culture, technology stack, and mission opportunities.
+      department_placeholder: e.g. IT & Computer Science Department
+      skills_heading: Skills & Domain Taxonomy
+      skills_subtext: Select from 200+ skills across Business, Engineering, Design, Data & Software
+      skills_count_label: Skills Selected
+      clear_skills: Clear All
+      skill_search_placeholder: Search 200+ skills (e.g. SEO, SolidWorks, Figma, Python, Finance, Marketing)...
+      all_skills_label: All Skills (%{count})
+      selected_stack_label: My Selected Stack
+      picked_suffix: picked
+      resume_heading: Resume & CV Document
+      resume_subtext: PDF document accessible by verified employers
+      preview_pdf: Preview PDF
+      dropzone_label: Drag & drop your PDF resume here
+      dropzone_hint: PDF only · Maximum file size 5MB
+      browse_pdf: Browse PDF File
+      security_heading: Account Email & Credentials
+      security_subtext: Manage login credentials and security authentication
+      email_address_label: Email Address
+      change_password_label: Change Password (Optional)
+      unsaved_changes: You have unsaved profile changes
       bio_char_suffix: " / %{max}"
-      selected_file_prefix: "Selected:"
-
+      selected_file_prefix: 'Selected:'
   pwa:
-    name: "StageUp"
-    description: "StageUp – Verified Internships in Tunisia"
+    name: StageUp
+    description: StageUp – Verified Internships in Tunisia
+  commitment_events:
+    descriptions:
+      student_completed_internship: Completed verified internship program
+      company_responded_on_time: Evaluated mission submission on time
+      student_ghosted_offer: Ghosted an internship offer response deadline
+      student_abandoned_mission: Abandoned an active mission submission
+      student_mission_expired: Mission submission deadline expired
+      company_responded_late: Responded late to candidate submission
+      company_ghosted_offer: Failed to respond to candidate application
+      company_cancelled_internship: Cancelled active internship agreement
