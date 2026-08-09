@@ -270,6 +270,7 @@ fr:
       details:
         stage_type: Type de Stage
         spots: Places Disponibles
+        spots_label: place(s)
         work_mode: Mode de Travail
         deadline: Date Limite de Candidature
         location: Lieu

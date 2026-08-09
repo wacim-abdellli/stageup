@@ -199,6 +199,7 @@ en:
       details:
         stage_type: Stage Type
         spots: Spots Available
+        spots_label: spot(s)
         work_mode: Work Mode
         deadline: Application Deadline
         location: Location

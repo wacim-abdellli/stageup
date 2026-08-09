@@ -196,6 +196,7 @@ ar:
       details:
         stage_type: نوع التربص
         spots: الأماكن المتاحة
+        spots_label: أماكن
         work_mode: وضع العمل
         deadline: الموعد النهائي للتقديم
         location: الموقع

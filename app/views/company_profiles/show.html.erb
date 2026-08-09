@@ -121,7 +121,7 @@
                   <span><%= offer.duration_months %> <%= t('company_profiles.show.months_label', default: 'Months') %></span>
                 </div>
                 <div class="cprof-offer-card-bottom flex-between flex-align-center">
-                  <span class="fs-11 text-muted fw-600"><%= offer.spots %> <%= t('offers.show.spots_label', default: 'Spot(s)') %></span>
+                  <span class="fs-11 text-muted fw-600"><%= offer.spots %> <%= t('common.spot', count: offer.spots) %></span>
                   <%= link_to offer_path(offer), class: "btn btn-secondary btn-compact-sm flex-align-center gap-4" do %>
                     <span><%= t('company_profiles.show.view_mission', default: 'View Mission') %></span>
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="cprof-arrow-icon"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
