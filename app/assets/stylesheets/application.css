@@ -18667,7 +18667,7 @@ button.btn-accent:hover,
 
 [data-theme="light"] .nav-cta-btn .nav-cta-icon {
 
-  stroke: #FFFFFF;
+  stroke: #0F172A;
 
 }
 
@@ -18675,9 +18675,9 @@ button.btn-accent:hover,
 
 [data-theme="light"] .nav-cta-btn:hover {
 
-  background: #1E293B;
+  background: #F8FAFC;
 
-  color: #FFFFFF;
+  color: #0F172A;
 
 }
 
