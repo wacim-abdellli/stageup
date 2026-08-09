@@ -376,6 +376,12 @@ ar:
         post_offer_empty: نشر عرض
         no_offers_title: لم يتم نشر أي عروض بعد
         no_offers_text: انشر أول عرض تربص لك لجذب المواهب واستلام تقديمات المهام.
+      status_active: نشط
+      status_filled: مكتمل
+      status_archived: مؤرشف
+      status_draft: مسودة
+      archive: أرشفة
+      applicant_count: عدد المترشحين
     agreements:
       title: اتفاقيات التربص
       empty: لا توجد اتفاقيات بعد
@@ -1218,6 +1224,29 @@ ar:
       unsaved_changes: لديك تغييرات غير محفوظة
       bio_char_suffix: " / %{max}"
       selected_file_prefix: 'المحدد:'
+      title: إعدادات الحساب والملف الشخصي
+      subtitle: إدارة محفظتك العامة، مهاراتك التقنية، وتفضيلات الأمان الخاصة بك.
+      email: البريد الإلكتروني للحساب
+      security_verification_label: التحقق من الأمان وتغيير كلمة المرور
+      current_password_help: لتغيير بريدك الإلكتروني أو تعيين كلمة مرور جديدة، يجب عليك أولاً إدخال كلمة المرور الحالية.
+      current_password: كلمة المرور الحالية
+      current_password_placeholder: أدخل كلمة المرور الحالية لتأكيد التغييرات
+      new_password: كلمة المرور الجديدة (اختياري)
+      leave_blank_placeholder: اتركه فارغاً للإبقاء على الحالية دون تغيير
+    new_company:
+      name: اسم الشركة
+      website: موقع الشركة
+      description: نبذة عن الشركة
+    new_student:
+      first_name: الاسم الأول
+      last_name: اللقب
+      phone: رقم الهاتف
+      graduation_year: سنة التخرج
+      major: التخصص / الاختصاص
+      bio: نبذة شخصية
+    new_university:
+      admin_name: الاسم الكامل للمنسق
+      department: القسم الجامعي
   pwa:
     name: StageUp
     description: StageUp – تربصات موثقة في تونس
@@ -1231,3 +1260,7 @@ ar:
       company_responded_late: رد متأخر على طلب الترشح
       company_ghosted_offer: عدم الرد على طلب الترشح
       company_cancelled_internship: إلغاء اتفاقية التربص
+  roles:
+    student_profile: ملف الطالب
+    company_profile: ملف الشركة
+    university_profile: ملف الجامعة

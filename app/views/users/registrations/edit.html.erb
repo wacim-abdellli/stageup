@@ -14,7 +14,7 @@
           <% end %>
           <span class="settings-role-badge">
             <span class="role-status-dot"></span>
-            <span><%= current_user.profileable_type.underscore.humanize.upcase %></span>
+            <span><%= t("roles.#{current_user.profileable_type.underscore}", default: current_user.profileable_type.underscore.humanize.upcase) %></span>
           </span>
         </div>
         <h1 class="settings-hub-title margin-0"><%= t('users.edit.title', default: 'Account & Profile Settings') %></h1>

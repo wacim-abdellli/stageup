@@ -450,6 +450,12 @@ fr:
         post_offer_empty: Publier une Offre
         no_offers_title: Aucune Offre Publiée
         no_offers_text: Publiez votre première offre de stage pour attirer des talents et recevoir des soumissions de missions.
+      status_active: Actif
+      status_filled: Pourvu
+      status_archived: Archivé
+      status_draft: Brouillon
+      archive: Archiver
+      applicant_count: Candidatures
     agreements:
       title: Conventions de Stage
       empty: Aucune convention pour le moment
@@ -1255,6 +1261,29 @@ fr:
       unsaved_changes: Vous avez des modifications non enregistrées
       bio_char_suffix: " / %{max}"
       selected_file_prefix: 'Sélectionné :'
+      title: Paramètres du compte & du profil
+      subtitle: Gérez votre portfolio public, vos compétences techniques et vos préférences de sécurité.
+      email: Adresse e-mail du compte
+      security_verification_label: Vérification de sécurité & Changement de mot de passe
+      current_password_help: Pour modifier votre e-mail ou définir un nouveau mot de passe, veuillez d'abord vérifier votre mot de passe actuel.
+      current_password: Mot de passe actuel
+      current_password_placeholder: Entrez votre mot de passe actuel pour autoriser les modifications
+      new_password: Nouveau mot de passe (Optionnel)
+      leave_blank_placeholder: Laissez vide pour conserver l'actuel
+    new_company:
+      name: Nom de l'entreprise
+      website: Site web de l'entreprise
+      description: Aperçu de l'entreprise
+    new_student:
+      first_name: Prénom
+      last_name: Nom
+      phone: Numéro de téléphone
+      graduation_year: Année de diplôme
+      major: Filière / Spécialité
+      bio: Bio & Résumé
+    new_university:
+      admin_name: Nom complet du coordinateur
+      department: Département universitaire
   pwa:
     name: StageUp
     description: StageUp – Stages Vérifiés en Tunisie
@@ -1268,3 +1297,7 @@ fr:
       company_responded_late: Réponse tardive à la candidature
       company_ghosted_offer: Absence de réponse à une candidature
       company_cancelled_internship: Annulation de la convention de stage
+  roles:
+    student_profile: PROFIL ÉTUDIANT
+    company_profile: PROFIL ENTREPRISE
+    university_profile: PROFIL UNIVERSITÉ

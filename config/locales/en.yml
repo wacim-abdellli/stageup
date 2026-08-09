@@ -380,6 +380,12 @@ en:
         post_offer_empty: Post an Offer
         no_offers_title: No Offers Posted Yet
         no_offers_text: Publish your first internship offer to attract candidate talent and receive proof mission submissions.
+      status_active: Active
+      status_filled: Filled
+      status_archived: Archived
+      status_draft: Draft
+      archive: Archive
+      applicant_count: Applicant Count
     agreements:
       title: Internship Agreements
       empty: No agreements yet
@@ -1204,6 +1210,29 @@ en:
       unsaved_changes: You have unsaved profile changes
       bio_char_suffix: " / %{max}"
       selected_file_prefix: 'Selected:'
+      title: Account & Profile Settings
+      subtitle: Manage your public portfolio, technical skills taxonomy, and security preferences.
+      email: Account Email Address
+      security_verification_label: Security Verification & Password Change
+      current_password_help: To change your email address or set a new password, you must first verify your current password.
+      current_password: Current Password
+      current_password_placeholder: Enter your current password to authorize changes
+      new_password: New Password (Optional)
+      leave_blank_placeholder: Leave blank to keep unchanged
+    new_company:
+      name: Company Name
+      website: Company Website
+      description: Company Overview
+    new_student:
+      first_name: First Name
+      last_name: Last Name
+      phone: Phone Number
+      graduation_year: Graduation Year
+      major: Field of Study / Major
+      bio: Bio & Summary
+    new_university:
+      admin_name: Coordinator Full Name
+      department: University Department
   pwa:
     name: StageUp
     description: StageUp – Verified Internships in Tunisia
@@ -1217,3 +1246,7 @@ en:
       company_responded_late: Responded late to candidate submission
       company_ghosted_offer: Failed to respond to candidate application
       company_cancelled_internship: Cancelled active internship agreement
+  roles:
+    student_profile: STUDENT PROFILE
+    company_profile: COMPANY PROFILE
+    university_profile: UNIVERSITY PROFILE

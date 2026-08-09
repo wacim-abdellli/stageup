@@ -383,7 +383,7 @@
                         <%= link_to offer.title, offer_path(offer), class: "offer-mgmt-link" %>
                       </strong>
                       <span class="inline-list-sm-meta">
-                        <%= offer.draft? ? t('dashboard.offers.draft_label') : offer.status.humanize %> &middot; <%= offer.submissions.size %> <%= t('dashboard.offers.applicant_count') %>
+                        <%= offer.draft? ? t('dashboard.offers.draft_label') : t("dashboard.offers.status_#{offer.status}", default: offer.status.humanize) %> &middot; <%= offer.submissions.size %> <%= t('dashboard.offers.applicant_count') %>
                       </span>
                     </div>
                   </div>
