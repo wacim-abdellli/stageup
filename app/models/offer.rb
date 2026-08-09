@@ -42,6 +42,15 @@ class Offer < ApplicationRecord
     status == "draft"
   end
 
+  def duration_months
+    case stage_type
+    when "PFE" then 4
+    when "PFA" then 2
+    when "initiation" then 1
+    else 3
+    end
+  end
+
   private
 
   def skill_match_score(student)
