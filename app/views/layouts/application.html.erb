@@ -247,9 +247,7 @@
 
   <body>
     <a href="#main-content" class="skip-link"><%= t('common.skip_link') %></a>
-    <% if current_user %>
-      <%= render "layouts/navbar" %>
-    <% end %>
+    <%= render "layouts/navbar" %>
     <main id="main-content">
       <% if flash[:notice] || flash[:alert] %>
         <div class="flash-portal" aria-live="polite" role="status">

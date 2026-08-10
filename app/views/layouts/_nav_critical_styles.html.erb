@@ -108,6 +108,42 @@
     border-color: rgba(255, 255, 255, 0.16);
   }
 
+  .nav-signin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .nav-signin-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+  }
+
+  [data-theme="light"] .nav-signin-btn {
+    background: #FFFFFF;
+    color: #0F172A;
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  [data-theme="light"] .nav-signin-btn:hover {
+    background: #F8FAFC;
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #0F172A;
+  }
+
   .lang-dropdown-wrapper {
     position: relative;
     display: inline-flex;

@@ -18,11 +18,6 @@
           </div>
         </div>
 
-        <% unless current_user %>
-          <div class="landing-logo-row animate-in visible stagger-1">
-            <%= render "layouts/navbar_brand" %>
-          </div>
-        <% end %>
 
         <h1 class="landing-hero-title animate-in visible stagger-2">
           <%= t('home.hero_title_html') %>

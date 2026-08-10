@@ -21,16 +21,18 @@
           <span><%= t('nav.browse_offers') %></span>
         <% end %>
 
-        <%= link_to dashboard_path,
-              class: "nav-link #{'nav-link-active' if current_page?(dashboard_path)}",
-              aria: { current: (current_page?(dashboard_path) ? "page" : nil) } do %>
-          <svg class="nav-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="7" height="9" x="3" y="3" rx="1"/>
-            <rect width="7" height="5" x="14" y="3" rx="1"/>
-            <rect width="7" height="9" x="14" y="12" rx="1"/>
-            <rect width="7" height="5" x="3" y="14" rx="1"/>
-          </svg>
-          <span><%= t('nav.dashboard') %></span>
+        <% if current_user %>
+          <%= link_to dashboard_path,
+                class: "nav-link #{'nav-link-active' if current_page?(dashboard_path)}",
+                aria: { current: (current_page?(dashboard_path) ? "page" : nil) } do %>
+            <svg class="nav-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="7" height="9" x="3" y="3" rx="1"/>
+              <rect width="7" height="5" x="14" y="3" rx="1"/>
+              <rect width="7" height="9" x="14" y="12" rx="1"/>
+              <rect width="7" height="5" x="3" y="14" rx="1"/>
+            </svg>
+            <span><%= t('nav.dashboard') %></span>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -39,7 +41,7 @@
     <div class="navbar-right" id="nav-menu">
 
       <%# Company CTA %>
-      <% if current_user.profileable_type == "CompanyProfile" %>
+      <% if current_user && current_user.profileable_type == "CompanyProfile" %>
         <%= link_to new_offer_path, class: "nav-cta-btn" do %>
           <svg class="nav-cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14"/>
@@ -58,105 +60,117 @@
       <%# Locale Switcher (FR/EN/AR) %>
       <%= render "layouts/locale_switcher" %>
 
-      <%# Notification bell %>
-      <%= render "layouts/notification_bell" %>
+      <% if current_user %>
+        <%# Notification bell %>
+        <%= render "layouts/notification_bell" %>
 
-      <%# User Avatar + Dropdown %>
-      <div class="nav-user-menu" id="nav-user-menu">
-        <button class="nav-avatar-btn" id="nav-avatar-toggle"
-                aria-label="<%= t('nav.user_menu') %>"
-                aria-expanded="false"
-                aria-haspopup="true">
-          <span class="nav-avatar-circle">
-            <%= current_user.email[0].upcase %>
-          </span>
-          <span class="nav-avatar-name">
-            <% prof = current_user.profileable %>
-            <%= (prof.respond_to?(:first_name) && prof.first_name.present?) ? prof.first_name : ((prof.respond_to?(:name) && prof.name.present?) ? prof.name : current_user.email.split('@').first) %>
-          </span>
-          <svg class="nav-avatar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m6 9 6 6 6-6"/>
-          </svg>
-        </button>
-
-        <div class="nav-user-dropdown" id="nav-user-dropdown" role="menu">
-          <% role_label = case current_user.profileable_type
-                          when "StudentProfile" then t('nav.student')
-                          when "CompanyProfile" then t('nav.company')
-                          when "UniversityProfile" then t('nav.university')
-                          else t('nav.user')
-                          end %>
-
-          <div class="nav-dropdown-profile">
-            <div class="nav-dropdown-avatar">
+        <%# User Avatar + Dropdown %>
+        <div class="nav-user-menu" id="nav-user-menu">
+          <button class="nav-avatar-btn" id="nav-avatar-toggle"
+                  aria-label="<%= t('nav.user_menu') %>"
+                  aria-expanded="false"
+                  aria-haspopup="true">
+            <span class="nav-avatar-circle">
               <%= current_user.email[0].upcase %>
+            </span>
+            <span class="nav-avatar-name">
+              <% prof = current_user.profileable %>
+              <%= (prof.respond_to?(:first_name) && prof.first_name.present?) ? prof.first_name : ((prof.respond_to?(:name) && prof.name.present?) ? prof.name : current_user.email.split('@').first) %>
+            </span>
+            <svg class="nav-avatar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+
+          <div class="nav-user-dropdown" id="nav-user-dropdown" role="menu">
+            <% role_label = case current_user.profileable_type
+                            when "StudentProfile" then t('nav.student')
+                            when "CompanyProfile" then t('nav.company')
+                            when "UniversityProfile" then t('nav.university')
+                            else t('nav.user')
+                            end %>
+
+            <div class="nav-dropdown-profile">
+              <div class="nav-dropdown-avatar">
+                <%= current_user.email[0].upcase %>
+              </div>
+              <div class="nav-dropdown-info">
+                <span class="nav-dropdown-email" title="<%= current_user.email %>"><%= current_user.email %></span>
+                <span class="nav-dropdown-role-badge"><%= role_label %></span>
+              </div>
             </div>
-            <div class="nav-dropdown-info">
-              <span class="nav-dropdown-email" title="<%= current_user.email %>"><%= current_user.email %></span>
-              <span class="nav-dropdown-role-badge"><%= role_label %></span>
-            </div>
+
+            <div class="nav-dropdown-divider"></div>
+
+            <% if current_user.admin? %>
+              <%= link_to admin_dashboard_path, class: "nav-dropdown-item nav-admin-link", role: "menuitem" do %>
+                <svg class="nav-dropdown-icon text-indigo" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span><%= t('admin.dashboard.title', default: 'Admin Panel') %></span>
+              <% end %>
+            <% end %>
+
+            <% my_nav_profile_path = case current_user.profileable_type
+                                    when "StudentProfile" then student_profile_path(current_user.profileable)
+                                    when "CompanyProfile" then company_profile_path(current_user.profileable)
+                                    else nil
+                                    end %>
+            <% if my_nav_profile_path %>
+              <%= link_to my_nav_profile_path, class: "nav-dropdown-item", role: "menuitem" do %>
+                <svg class="nav-dropdown-icon text-indigo" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span><%= t('nav.view_my_profile', default: 'View My Public Profile') %></span>
+              <% end %>
+            <% end %>
+
+            <%= link_to dashboard_path, class: "nav-dropdown-item", role: "menuitem" do %>
+              <svg class="nav-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="7" height="9" x="3" y="3" rx="1"/>
+                <rect width="7" height="5" x="14" y="3" rx="1"/>
+                <rect width="7" height="9" x="14" y="12" rx="1"/>
+                <rect width="7" height="5" x="3" y="14" rx="1"/>
+              </svg>
+              <span><%= t('nav.my_dashboard') %></span>
+            <% end %>
+
+            <%= link_to offers_path, class: "nav-dropdown-item", role: "menuitem" do %>
+              <svg class="nav-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+              </svg>
+              <span><%= t('nav.browse_offers') %></span>
+            <% end %>
+
+            <div class="nav-dropdown-divider"></div>
+
+            <%= button_to destroy_user_session_path,
+                  method: :delete,
+                  class: "nav-dropdown-item nav-dropdown-signout",
+                  role: "menuitem",
+                  form: { "data-turbo": false } do %>
+              <svg class="nav-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" x2="9" y1="12" y2="12"/>
+              </svg>
+              <span><%= t('nav.sign_out') %></span>
+            <% end %>
           </div>
-
-          <div class="nav-dropdown-divider"></div>
-
-          <% if current_user.admin? %>
-            <%= link_to admin_dashboard_path, class: "nav-dropdown-item nav-admin-link", role: "menuitem" do %>
-              <svg class="nav-dropdown-icon text-indigo" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-              <span><%= t('admin.dashboard.title', default: 'Admin Panel') %></span>
-            <% end %>
-          <% end %>
-
-          <% my_nav_profile_path = case current_user.profileable_type
-                                  when "StudentProfile" then student_profile_path(current_user.profileable)
-                                  when "CompanyProfile" then company_profile_path(current_user.profileable)
-                                  else nil
-                                  end %>
-          <% if my_nav_profile_path %>
-            <%= link_to my_nav_profile_path, class: "nav-dropdown-item", role: "menuitem" do %>
-              <svg class="nav-dropdown-icon text-indigo" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-              </svg>
-              <span><%= t('nav.view_my_profile', default: 'View My Public Profile') %></span>
-            <% end %>
-          <% end %>
-
-          <%= link_to dashboard_path, class: "nav-dropdown-item", role: "menuitem" do %>
-            <svg class="nav-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="7" height="9" x="3" y="3" rx="1"/>
-              <rect width="7" height="5" x="14" y="3" rx="1"/>
-              <rect width="7" height="9" x="14" y="12" rx="1"/>
-              <rect width="7" height="5" x="3" y="14" rx="1"/>
-            </svg>
-            <span><%= t('nav.my_dashboard') %></span>
-          <% end %>
-
-          <%= link_to offers_path, class: "nav-dropdown-item", role: "menuitem" do %>
-            <svg class="nav-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-            </svg>
-            <span><%= t('nav.browse_offers') %></span>
-          <% end %>
-
-          <div class="nav-dropdown-divider"></div>
-
-          <%= button_to destroy_user_session_path,
-                method: :delete,
-                class: "nav-dropdown-item nav-dropdown-signout",
-                role: "menuitem",
-                form: { "data-turbo": false } do %>
-            <svg class="nav-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-              <polyline points="16 17 21 12 16 7"/>
-              <line x1="21" x2="9" y1="12" y2="12"/>
-            </svg>
-            <span><%= t('nav.sign_out') %></span>
-          <% end %>
         </div>
-      </div>
+      <% else %>
+        <%# Sign In Button for Guest Users %>
+        <%= link_to new_user_session_path, class: "nav-signin-btn" do %>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/>
+            <line x1="15" x2="3" y1="12" y2="12"/>
+          </svg>
+          <span><%= t('nav.sign_in', default: 'Sign In') %></span>
+        <% end %>
+      <% end %>
 
       <%# Hamburger (mobile) %>
       <button class="navbar-hamburger" id="nav-toggle" aria-label="<%= t('nav.toggle_navigation') %>" aria-expanded="false">
@@ -175,43 +189,45 @@
       <span><%= t('nav.browse_offers') %></span>
     <% end %>
 
-    <%= link_to dashboard_path, class: "mobile-nav-link #{'mobile-nav-link-active' if current_page?(dashboard_path)}" do %>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="14" rx="1"/></svg>
-      <span><%= t('nav.my_dashboard') %></span>
-    <% end %>
-
-    <% if current_user.admin? %>
-      <%= link_to admin_dashboard_path, class: "mobile-nav-link mobile-nav-admin" do %>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span><%= t('admin.dashboard.title', default: 'Admin Panel') %></span>
+    <% if current_user %>
+      <%= link_to dashboard_path, class: "mobile-nav-link #{'mobile-nav-link-active' if current_page?(dashboard_path)}" do %>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="14" rx="1"/></svg>
+        <span><%= t('nav.my_dashboard') %></span>
       <% end %>
-    <% end %>
 
-    <% my_nav_profile_path = case current_user.profileable_type
-                            when "StudentProfile" then student_profile_path(current_user.profileable)
-                            when "CompanyProfile" then company_profile_path(current_user.profileable)
-                            else nil
-                            end %>
-    <% if my_nav_profile_path %>
-      <%= link_to my_nav_profile_path, class: "mobile-nav-link" do %>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span><%= t('nav.view_my_profile', default: 'View My Public Profile') %></span>
+      <% if current_user.admin? %>
+        <%= link_to admin_dashboard_path, class: "mobile-nav-link mobile-nav-admin" do %>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span><%= t('admin.dashboard.title', default: 'Admin Panel') %></span>
+        <% end %>
       <% end %>
-    <% end %>
 
-    <%= link_to notifications_path, class: "mobile-nav-link" do %>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-      <span><%= t('notifications.title', default: 'Notifications') %></span>
-      <% unread = current_user.notifications.unread.count rescue 0 %>
-      <% if unread > 0 %>
-        <span class="mobile-nav-notif-badge"><%= unread %></span>
+      <% my_nav_profile_path = case current_user.profileable_type
+                              when "StudentProfile" then student_profile_path(current_user.profileable)
+                              when "CompanyProfile" then company_profile_path(current_user.profileable)
+                              else nil
+                              end %>
+      <% if my_nav_profile_path %>
+        <%= link_to my_nav_profile_path, class: "mobile-nav-link" do %>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span><%= t('nav.view_my_profile', default: 'View My Public Profile') %></span>
+        <% end %>
       <% end %>
-    <% end %>
 
-    <% if current_user.profileable_type == "CompanyProfile" %>
-      <%= link_to new_offer_path, class: "mobile-nav-link mobile-nav-cta" do %>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-        <span><%= t('nav.post_offer') %></span>
+      <%= link_to notifications_path, class: "mobile-nav-link" do %>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        <span><%= t('notifications.title', default: 'Notifications') %></span>
+        <% unread = current_user.notifications.unread.count rescue 0 %>
+        <% if unread > 0 %>
+          <span class="mobile-nav-notif-badge"><%= unread %></span>
+        <% end %>
+      <% end %>
+
+      <% if current_user.profileable_type == "CompanyProfile" %>
+        <%= link_to new_offer_path, class: "mobile-nav-link mobile-nav-cta" do %>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          <span><%= t('nav.post_offer') %></span>
+        <% end %>
       <% end %>
     <% end %>
 
@@ -235,25 +251,32 @@
 
     <div class="mobile-nav-divider"></div>
 
-    <div class="mobile-nav-user-card">
-      <div class="mobile-nav-user-avatar">
-        <%= current_user.email[0].upcase %>
+    <% if current_user %>
+      <div class="mobile-nav-user-card">
+        <div class="mobile-nav-user-avatar">
+          <%= current_user.email[0].upcase %>
+        </div>
+        <div class="mobile-nav-user-details">
+          <span class="mobile-nav-user-name">
+            <% prof = current_user.profileable %>
+            <%= (prof.respond_to?(:first_name) && prof.first_name.present?) ? "#{prof.first_name} #{prof.last_name rescue ''}" : ((prof.respond_to?(:name) && prof.name.present?) ? prof.name : current_user.email.split('@').first) %>
+          </span>
+          <span class="mobile-nav-user-email" title="<%= current_user.email %>"><%= current_user.email %></span>
+        </div>
       </div>
-      <div class="mobile-nav-user-details">
-        <span class="mobile-nav-user-name">
-          <% prof = current_user.profileable %>
-          <%= (prof.respond_to?(:first_name) && prof.first_name.present?) ? "#{prof.first_name} #{prof.last_name rescue ''}" : ((prof.respond_to?(:name) && prof.name.present?) ? prof.name : current_user.email.split('@').first) %>
-        </span>
-        <span class="mobile-nav-user-email" title="<%= current_user.email %>"><%= current_user.email %></span>
-      </div>
-    </div>
 
-    <%= button_to destroy_user_session_path,
-          method: :delete,
-          class: "mobile-nav-signout",
-          form: { "data-turbo": false } do %>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
-      <span><%= t('nav.sign_out') %></span>
+      <%= button_to destroy_user_session_path,
+            method: :delete,
+            class: "mobile-nav-signout",
+            form: { "data-turbo": false } do %>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+        <span><%= t('nav.sign_out') %></span>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path, class: "mobile-nav-link mobile-nav-signin" do %>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+        <span><%= t('nav.sign_in', default: 'Sign In') %></span>
+      <% end %>
     <% end %>
   </div>
 </nav>
