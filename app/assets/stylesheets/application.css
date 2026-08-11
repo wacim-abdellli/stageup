@@ -22436,6 +22436,10 @@ html[dir="rtl"] .cprof-hero-ambient {
   }
 }
 
+.logo-up-accent {
+  color: #F97316;
+}
+
 .cprof-bio-box {
   background: rgba(255, 255, 255, 0.015);
   border: 1px solid var(--border-color);

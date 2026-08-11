@@ -1,20 +1,32 @@
 <div class="logo-lockup">
-  <svg width="36" height="36" viewBox="0 0 100 100" class="flex-shrink-0" role="img" aria-label="StageUp Logo">
+  <%# StageUp Logo: Dark squircle with ascending steps + verified orange badge %>
+  <svg width="36" height="36" viewBox="0 0 100 100" class="flex-shrink-0" role="img" aria-label="StageUp Logo" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="stageup-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#F97316" />
-        <stop offset="50%" stop-color="#EA580C" />
-        <stop offset="100%" stop-color="#C2410C" />
-      </linearGradient>
-      <filter id="bolt-glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.35"/>
-      </filter>
+      <radialGradient id="su-bg-glow" cx="70%" cy="30%" r="60%">
+        <stop offset="0%" stop-color="#2A1810"/>
+        <stop offset="100%" stop-color="#0A0A0A"/>
+      </radialGradient>
     </defs>
-    <%# Rounded Squircle Container %>
-    <rect width="100" height="100" rx="26" fill="url(#stageup-logo-grad)"/>
-    <rect width="96" height="96" x="2" y="2" rx="24" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2.5"/>
-    <%# Bold Crisp High-Contrast Lightning Bolt %>
-    <polygon points="62,12 34,48 52,48 38,88 68,44 48,44" fill="#FFFFFF" filter="url(#bolt-glow)"/>
+
+    <%# Dark squircle container with orange corner glow %>
+    <rect width="100" height="100" rx="26" fill="url(#su-bg-glow)"/>
+    <rect width="98" height="98" x="1" y="1" rx="25" fill="none" stroke="rgba(249,115,22,0.18)" stroke-width="1.5"/>
+
+    <%# Ascending career steps — 3 bold white bars growing left-to-right %>
+    <%# Step 1 - bottom left (shortest) %>
+    <rect x="16" y="66" width="20" height="8" rx="3" fill="#FFFFFF"/>
+    <%# Step 2 - middle %>
+    <rect x="16" y="52" width="36" height="8" rx="3" fill="#FFFFFF"/>
+    <%# Step 3 - top right (longest) %>
+    <rect x="16" y="38" width="52" height="8" rx="3" fill="#FFFFFF"/>
+
+    <%# Upward arrow on top step %>
+    <polygon points="74,42 80,34 86,42 82,42 82,28 78,28 78,42" fill="#FFFFFF"/>
+
+    <%# Verified badge — orange circle with white check at bottom-right %>
+    <circle cx="74" cy="72" r="14" fill="#F97316"/>
+    <polyline points="66,72 71,78 82,64" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
-  <span class="logo-lockup-text">StageUp</span>
+
+  <span class="logo-lockup-text">Stage<span class="logo-up-accent">Up</span></span>
 </div>
