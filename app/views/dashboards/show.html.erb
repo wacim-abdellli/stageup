@@ -217,135 +217,14 @@
       <% if @role_type == "StudentProfile" %>
 
         <%# Active Internships & Milestones %>
-        <div class="profile-card mb-30">
-          <div class="section-heading-row">
-            <div class="section-title-left">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              <h2><%= t('dashboard.active_internships.title') %></h2>
-            </div>
-          </div>
-
-          <% if @active_internships.any? %>
-            <div class="inline-list">
-              <% @active_internships.each do |sub| %>
-                <div class="internship-item">
-                  <%# Top Header Row %>
-                  <div class="internship-item-top-row">
-                    <div class="min-width-0 flex-1">
-                      <h3 class="internship-item-title fs-16 fw-700 color-primary mb-4"><%= sub.offer.title %></h3>
-                      <div class="flex-align-center gap-8 flex-wrap">
-                        <span class="fs-13 text-muted fw-500">
-                          <%= t('dashboard.active_internships.company_label') %> <strong class="color-primary"><%= sub.offer.company_profile.name %></strong>
-                        </span>
-                        <span class="badge-status <%= "badge-#{sub.status}" %>"><%= sub.status.humanize %></span>
-                        <% match_pct = sub.offer.match_percentage_for(@profile) rescue 100 %>
-                        <% if match_pct < 100 %>
-                          <span class="match-badge <%= match_pct >= 70 ? 'match-badge-high' : (match_pct >= 40 ? 'match-badge-medium' : 'match-badge-low') %>"><%= match_pct %>% <%= t('dashboard.active_internships.match') %></span>
-                        <% end %>
-                      </div>
-                    </div>
-
-                    <%# Primary Agreement Action Button %>
-                    <div class="flex-shrink-0">
-                      <% if sub.status == "accepted" %>
-                        <% if sub.internship_agreement %>
-                          <%= link_to submission_internship_agreement_path(sub, sub.internship_agreement), class: "btn btn-primary btn-compact" do %>
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                            <%= t('dashboard.active_internships.view_sign_agreement', default: 'View & Sign Agreement') %> &rarr;
-                          <% end %>
-                        <% else %>
-                          <%= link_to new_submission_internship_agreement_path(sub), class: "btn btn-secondary btn-compact" do %>
-                            <%= t('dashboard.active_internships.generate_agreement', default: 'Generate Agreement') %> &rarr;
-                          <% end %>
-                        <% end %>
-                      <% elsif sub.internship_agreement&.verification_token.present? %>
-                        <%= link_to verify_certificate_path(token: sub.internship_agreement.verification_token), class: "btn btn-primary btn-compact", target: "_blank" do %>
-                          📜 <%= t('dashboard.active_internships.view_certificate', default: 'View Certificate') %>
-                        <% end %>
-                      <% end %>
-                    </div>
-                  </div>
-
-                  <%# Milestone Stepper Progress Timeline %>
-                  <div class="timeline-container my-8">
-                    <div class="timeline-steps">
-                      <% submission_milestones(sub).each_with_index do |ms, idx| %>
-                        <div class="timeline-step-wrapper">
-                          <div class="timeline-tooltip">
-                            <% if ms[:timestamp] %>
-                              <%= ms[:timestamp].strftime("%b %d, %Y") %>
-                            <% else %>
-                              <%= ms[:complete] ? t('dashboard.active_internships.milestone_done') : "—" %>
-                            <% end %>
-                          </div>
-                          <div class="timeline-step <%= ms[:complete] ? 'completed' : 'pending' %>">
-                            <% if ms[:complete] %>
-                              <svg class="timeline-step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                            <% else %>
-                              <%= idx + 1 %>
-                            <% end %>
-                          </div>
-                          <% if idx < submission_milestones(sub).length - 1 %>
-                            <div class="timeline-line <%= ms[:complete] ? 'completed' : 'pending' %>"></div>
-                          <% end %>
-                          <span class="timeline-label <%= ms[:complete] ? 'completed' : '' %>"><%= ms[:label] %></span>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-
-                  <%# Card Footer Management Actions %>
-                  <div class="internship-item-footer">
-                    <div class="flex-align-center gap-8">
-                      <% if sub.internship_agreement.present? %>
-                        <% if sub.internship_agreement.status == "fully_executed" %>
-                          <span class="badge-status badge-completed">✓ <%= t('dashboard.internship_agreements.show.fully_executed_badge', default: 'Fully Executed') %></span>
-                        <% elsif sub.internship_agreement.status == "declined" %>
-                          <span class="badge-status badge-declined"><%= t('dashboard.active_internships.agreement_declined') %></span>
-                        <% else %>
-                          <span class="badge-status badge-pending">⏳ <%= t('dashboard.active_internships.awaiting_signatures', default: 'Signatures Pending') %></span>
-                        <% end %>
-                      <% end %>
-                    </div>
-
-                    <div class="flex-align-center gap-8">
-                      <% if sub.status == "accepted" %>
-                        <% if sub.student_confirmed_completed %>
-                          <span class="badge-status badge-completion-pending">
-                            <%= t('dashboard.active_internships.waiting_employer') %>
-                          </span>
-                        <% else %>
-                          <%= button_to t('dashboard.active_internships.mark_completed'), confirm_completion_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-sm", data: { turbo_submits_with: t('dashboard.active_internships.completing') } %>
-                          <%= button_to t('dashboard.active_internships.abandon'), abandon_submission_path(sub), method: :post, class: "btn btn-secondary btn-compact-danger btn-compact-sm", data: { turbo_confirm: t('dashboard.active_internships.abandon_confirm'), turbo_submits_with: t('dashboard.active_internships.abandoning') } %>
-                        <% end %>
-                      <% else %>
-                        <% my_review = sub.reviews.detect { |r| r.author_id == current_user.id } %>
-                        <% if my_review.nil? %>
-                          <%= link_to t('dashboard.active_internships.leave_review'), new_submission_review_path(sub), class: "btn btn-primary btn-compact-sm" %>
-                        <% else %>
-                          <span class="fs-12 text-muted"><%= t('dashboard.active_internships.review_submitted') %></span>
-                        <% end %>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% else %>
-            <div class="empty-state-card">
-              <div class="empty-state-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              </div>
-              <h3 class="empty-state-title"><%= t('dashboard.active_internships.no_active_title') %></h3>
-              <p class="empty-state-text">
-                <%= t('dashboard.active_internships.no_active_text') %>
-              </p>
-              <%= link_to t('dashboard.active_internships.browse_active'), offers_path, class: "btn btn-primary btn-compact" %>
-            </div>
-          <% end %>
-        </div>
+        <%= render "dashboards/active_internships_card" %>
 
       <% elsif @role_type == "CompanyProfile" %>
+
+        <%# Active Internships & Milestones for Company %>
+        <% if @active_internships.any? %>
+          <%= render "dashboards/active_internships_card" %>
+        <% end %>
 
         <%# Applications Pipeline (Kanban Board) %>
         <div class="profile-card mb-30">

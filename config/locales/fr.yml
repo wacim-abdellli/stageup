@@ -521,9 +521,11 @@ fr:
     active_internships:
       title: Stages Actifs & Progression des Jalons
       company_label: 'Entreprise :'
+      student_label: 'Étudiant :'
       match: "% de Correspondance"
       milestone_done: Terminé
       waiting_employer: En Attente de l'Employeur
+      waiting_student: En Attente de l'Étudiant
       mark_completed: Marquer Terminé
       completing: Finalisation…
       abandon: Abandonner

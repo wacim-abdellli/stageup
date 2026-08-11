@@ -457,9 +457,11 @@ ar:
     active_internships:
       title: التربصات النشطة وتقدم المراحل
       company_label: 'الشركة:'
+      student_label: 'الطالب:'
       match: "% تطابق"
       milestone_done: مكتمل
       waiting_employer: بانتظار صاحب العمل
+      waiting_student: بانتظار الطالب
       mark_completed: تحديد كمكتمل
       completing: جارٍ الإكمال…
       abandon: تخلي

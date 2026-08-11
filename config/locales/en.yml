@@ -451,9 +451,11 @@ en:
     active_internships:
       title: Active Internships & Milestone Progress
       company_label: 'Company:'
+      student_label: 'Student:'
       match: "% Match"
       milestone_done: Done
       waiting_employer: Waiting for Employer
+      waiting_student: Waiting for Student
       mark_completed: Mark Completed
       completing: Completing…
       abandon: Abandon
