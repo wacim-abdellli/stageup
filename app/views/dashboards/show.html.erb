@@ -562,12 +562,15 @@
                   <div class="ledger-event-body">
                     <div class="ledger-event-header">
                       <span class="ledger-event-title"><%= (event.respond_to?(:event_type) && event.event_type.present?) ? t("commitment_events.descriptions.#{event.event_type}", default: event.event_type.humanize) : t('dashboard.reputation.event_label') %></span>
-                      <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : 'delta-negative' %>">
+                      <span class="ledger-event-delta <%= event.score_delta > 0 ? 'delta-positive' : (event.score_delta == 0 ? 'delta-neutral' : 'delta-negative') %>">
                         <%= event.score_delta > 0 ? "+#{event.score_delta}" : event.score_delta %>
                       </span>
                     </div>
-                    <p class="ledger-event-desc"><%= t("commitment_events.descriptions.#{event.event_type}", default: event.description) %></p>
-                    <span class="ledger-event-time"><%= time_ago_in_words(event.created_at) %></span>
+                    <% event_title_text = t("commitment_events.descriptions.#{event.event_type}", default: event.event_type.humanize) rescue "" %>
+                    <% if event.description.present? && event.description.strip != event_title_text.strip && event.description != event.event_type.humanize %>
+                      <p class="ledger-event-desc"><%= event.description %></p>
+                    <% end %>
+                    <span class="ledger-event-time"><%= time_ago_in_words(event.created_at) %> <%= t('common.ago') %></span>
                   </div>
                 </div>
               <% end %>
