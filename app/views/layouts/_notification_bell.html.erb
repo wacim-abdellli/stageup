@@ -25,7 +25,7 @@
         <% notifications = current_user.notifications.order(created_at: :desc).limit(5) %>
         <% if notifications.any? %>
           <% notifications.each do |n| %>
-            <%= link_to n.target_path, class: "notif-item #{'unread' unless n.read}" do %>
+            <%= link_to notification_path(n), class: "notif-item #{'unread' unless n.read}" do %>
               <div class="notif-item-icon flex-shrink-0">
                 <% if n.action.include?('agreement') %>
                   📜

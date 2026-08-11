@@ -23,7 +23,7 @@
             <div class="notif-item-icon <%= action_icon_color(notification.action) %>">
               <%= render_notification_icon_svg(notification.action) %>
             </div>
-            <%= link_to notification.target_path, class: "notif-item-content flex-1 min-width-0 text-decoration-none" do %>
+            <%= link_to notification_path(notification), class: "notif-item-content flex-1 min-width-0 text-decoration-none" do %>
               <p class="notif-item-message color-primary fw-500 mb-4"><%= notification.message %></p>
               <span class="notif-item-time fs-12 text-muted block"><%= "#{time_ago_in_words(notification.created_at)} #{t("common.ago")}".strip %></span>
             <% end %>

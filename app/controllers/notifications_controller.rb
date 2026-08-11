@@ -13,6 +13,12 @@ class NotificationsController < ApplicationController
     @total_pages = (current_user.notifications.count.to_f / PER_PAGE).ceil
   end
 
+  def show
+    @notification = current_user.notifications.find(params[:id])
+    @notification.mark_as_read! unless @notification.read?
+    redirect_to @notification.target_path
+  end
+
   def update
     @notification = current_user.notifications.find(params[:id])
     @notification.mark_as_read!
