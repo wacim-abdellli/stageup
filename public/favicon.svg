@@ -1,12 +1,25 @@
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="stageup-fav-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F97316" />
-      <stop offset="50%" stop-color="#EA580C" />
-      <stop offset="100%" stop-color="#C2410C" />
+    <linearGradient id="su-sq-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1C1412"/>
+      <stop offset="100%" stop-color="#0A0A0A"/>
+    </linearGradient>
+    <linearGradient id="su-badge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#EA580C"/>
     </linearGradient>
   </defs>
-  <rect width="100" height="100" rx="26" fill="url(#stageup-fav-grad)"/>
-  <rect width="96" height="96" x="2" y="2" rx="24" fill="none" stroke="rgba(255, 255, 255, 0.25)" stroke-width="3"/>
-  <polygon points="62,12 34,48 52,48 38,88 68,44 48,44" fill="#FFFFFF"/>
+
+  <rect width="100" height="100" rx="26" fill="url(#su-sq-grad)"/>
+  <rect width="98" height="98" x="1" y="1" rx="25" fill="none" stroke="rgba(249,115,22,0.25)" stroke-width="2"/>
+
+  <line x1="24" y1="78" x2="38" y2="18" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <line x1="62" y1="78" x2="76" y2="18" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <line x1="27" y1="68" x2="65" y2="68" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <line x1="32" y1="48" x2="70" y2="48" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <line x1="38" y1="28" x2="76" y2="28" stroke="white" stroke-width="7" stroke-linecap="round"/>
+
+  <circle cx="76" cy="26" r="16" fill="url(#su-badge-grad)"/>
+  <circle cx="76" cy="26" r="16" fill="none" stroke="#0A0A0A" stroke-width="2.5"/>
+  <polyline points="68,26 73,32 84,19" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
