@@ -479,26 +479,29 @@ ar:
       browse_active: تصفح العروض النشطة
     reviews:
       title: التقييمات
-      write_review: ترك تقييم
-      subtitle_html: شارك تجربتك مع <strong>%{name}</strong>
-      internship: التربص
-      rating_label: التقييم
-      click_to_rate: انقر على نجمة للتقييم
-      feedback: ملاحظات وتقييم
-      comment_placeholder: صف التعاون، المهارات المكتسبة، الاحترافية، وأي تعليقات بناءة...
-      hint: لا يمكن تعديل التقييمات بعد الإرسال.
-      char_count: "%{count} / الحد الأدنى %{min}"
-      char_count_suffix: " / الحد الأدنى %{min}"
-      submit: إرسال التقييم
-      submitting: جاري الإرسال…
-      turbo_confirm: لا يمكن تعديل التقييمات بعد الإرسال. هل تريد المتابعة؟
+      empty: لا توجد تقييمات بعد
+      given: المقدمة
+      received: المستلمة
+      write_review: كتابة تقييم
+      subtitle_html: شارك تقييمك الصريح حول فترة تربصك مع <strong>%{name}</strong>. يساعد تقييمك في بناء سمعة موثوقة على منصة StageUp.
+      internship: منصب التربص
+      rating_label: التقييم العام
+      click_to_rate: انقر على النجوم للتقييم (من 1 إلى 5)
+      feedback: الملاحظات والتقييم الكتابي
+      comment_placeholder: شارك تجربتك في العمل خلال هذا التربص، أهم الدروس المستفادة، وجودة التواصل...
+      hint: يلزم 10 أحرف على الأقل. يرجى التقييم باحترام وبشكل بناء.
+      char_count: "%{count} / %{min} أحرف كحد أدنى"
+      char_count_suffix: " / 10 أحرف كحد أدنى"
+      submit: إرسال التقييم الموثق
+      submitting: جارٍ إرسال التقييم…
+      turbo_confirm: هل أنت متأكد من رغبتك في إرسال هذا التقييم؟ سيتم تسجيله بشكل دائم على ملف السمعة الخاص بالمتلقي.
       rating:
         labels:
-        - ضعيف
-        - أقل من المتوسط
-        - متوسط
-        - جيد
-        - ممتاز
+          - سيئ جداً
+          - متوسط
+          - جيد
+          - جيد جداً
+          - ممتاز جداً
     pending_approval:
       title: التحقق معلق
       logged_in_as: 'مسجل الدخول كـ: %{email}'

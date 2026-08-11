@@ -73,6 +73,7 @@
     });
   }
   document.querySelectorAll('#star-picker .star-btn').forEach(function(b,i,a) {
+    b.addEventListener('click', function() { pickStar(i + 1); });
     b.addEventListener('mouseenter', function() {
       a.forEach(function(x,j) { x.classList.toggle('hover', j <= i); });
     });

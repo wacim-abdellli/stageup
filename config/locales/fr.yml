@@ -547,7 +547,25 @@ fr:
       given: Donnés
       received: Reçus
       write_review: Rédiger un Avis
+      subtitle_html: Partagez votre avis honnête sur votre stage chez <strong>%{name}</strong>. Votre évaluation contribue à bâtir une réputation de confiance sur StageUp.
+      internship: Poste de Stage
+      rating_label: Évaluation Globale
+      click_to_rate: Cliquez sur les étoiles pour noter (1 à 5)
+      feedback: Commentaires & Avis Écrit
+      comment_placeholder: Partagez votre expérience de travail pendant ce stage, vos apprentissages et la qualité de la communication...
+      hint: Minimum 10 caractères requis. Restez respectueux et constructif.
+      char_count_suffix: " / min 10 caract."
+      char_count: "%{count} / min %{min} caract."
+      submit: Publier l'Avis Vérifié
+      submitting: Publication en cours…
+      turbo_confirm: Êtes-vous sûr de vouloir publier cet avis ? Il sera consigné de manière permanente sur le profil du destinataire.
       rating:
+        labels:
+          - Insatisfaisant
+          - Moyen
+          - Bon
+          - Très bon
+          - En tous points excellent
         excellent: Excellent
         good: Bien
         average: Moyen

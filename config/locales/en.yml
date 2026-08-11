@@ -477,7 +477,25 @@ en:
       given: Given
       received: Received
       write_review: Write a Review
+      subtitle_html: Share your honest feedback about your internship with <strong>%{name}</strong>. Your review helps build trusted reputation on StageUp.
+      internship: Internship Position
+      rating_label: Overall Rating
+      click_to_rate: Click stars to rate (1 to 5)
+      feedback: Written Feedback & Review
+      comment_placeholder: Share your experience working on this internship, key takeaways, and communication quality...
+      hint: Minimum 10 characters required. Be respectful and constructive.
+      char_count_suffix: " / min 10 chars"
+      char_count: "%{count} / min %{min} chars"
+      submit: Submit Verified Review
+      submitting: Submitting Review…
+      turbo_confirm: Are you sure you want to submit this review? It will be permanently recorded on the recipient's reputation profile.
       rating:
+        labels:
+          - Terrible
+          - Disappointing
+          - Good
+          - Very Good
+          - Outstanding
         excellent: Excellent
         good: Good
         average: Average
