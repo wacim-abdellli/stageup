@@ -173,6 +173,41 @@
         <% end %>
       </div>
 
+      <%# Verified Reviews Received %>
+      <% if @reviews.present? && @reviews.any? %>
+        <div class="candidate-section-card mt-24">
+          <h3 class="candidate-section-title mb-16">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" class="mr-8 color-amber"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span><%= t('company_profiles.show.reviews_heading', default: 'Verified Employer Reviews') %></span>
+          </h3>
+
+          <div class="candidate-experience-list">
+            <% @reviews.each do |review| %>
+              <% author_profile = review.author.profileable %>
+              <% author_name = author_profile.is_a?(CompanyProfile) ? author_profile.name : "#{author_profile.first_name} #{author_profile.last_name}" %>
+              <div class="candidate-exp-item pb-16 mb-16 border-bottom-subtle">
+                <div class="flex-between flex-align-center mb-8">
+                  <div class="flex-align-center gap-10">
+                    <div class="exp-company-avatar">
+                      <span><%= author_name.first.upcase rescue 'C' %></span>
+                    </div>
+                    <div>
+                      <strong class="exp-title block color-primary fs-14"><%= author_name %></strong>
+                      <span class="fs-12 text-muted"><%= review.submission.offer.title rescue nil %></span>
+                    </div>
+                  </div>
+                  <div class="color-amber fs-14 fw-700">
+                    ★ <%= review.rating %>.0 / 5
+                  </div>
+                </div>
+                <p class="fs-13 text-secondary margin-0 mb-4 line-height-14"><%= review.comment %></p>
+                <span class="fs-11 text-muted"><%= time_ago_in_words(review.created_at) %> <%= t('common.ago') %></span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
     </div>
 
     <%# Right Sidebar Section (30%) %>

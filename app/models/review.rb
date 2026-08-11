@@ -3,6 +3,8 @@
 class Review < ApplicationRecord
   after_save :recalculate_receiver_rating
   after_destroy :recalculate_receiver_rating
+  after_create_commit :notify_receiver
+
   belongs_to :submission
   belongs_to :author, class_name: "User"
   belongs_to :receiver, class_name: "User"
@@ -15,6 +17,23 @@ class Review < ApplicationRecord
   validate :author_and_receiver_must_be_participants
 
   private
+
+  def notify_receiver
+    author_name = if author.profileable_type == "StudentProfile"
+      "#{author.profileable.first_name} #{author.profileable.last_name}"
+    elsif author.profileable_type == "CompanyProfile"
+      author.profileable.name
+    else
+      "A user"
+    end
+
+    Notification.trigger(
+      recipient: receiver,
+      action: "review_received",
+      message: "#{author_name} left a #{rating}.0 ⭐ review for '#{submission.offer.title}'.",
+      notifiable: submission
+    )
+  end
 
   def recalculate_receiver_rating
     profile = receiver.profileable

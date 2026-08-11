@@ -463,6 +463,44 @@
         </div>
       <% end %>
 
+      <%# Received Reviews Card %>
+      <% if defined?(@received_reviews) && @received_reviews.present? && @received_reviews.any? %>
+        <div class="profile-card p-25 mt-24">
+          <div class="ledger-card-header mb-16">
+            <div class="ledger-card-title-row">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" class="color-amber"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <h3 class="ledger-card-title"><%= t('dashboard.reviews.received_title', default: 'Verified Reviews') %></h3>
+            </div>
+            <span class="ledger-card-sub"><%= @received_reviews.count %> <%= t('dashboard.reviews.count_label', default: 'reviews') %></span>
+          </div>
+
+          <div class="received-reviews-list">
+            <% @received_reviews.each do |rev| %>
+              <% author_profile = rev.author.profileable %>
+              <% author_name = author_profile.is_a?(StudentProfile) ? "#{author_profile.first_name} #{author_profile.last_name}" : author_profile.name %>
+              <div class="received-review-item py-12 border-bottom-subtle">
+                <div class="flex-between flex-align-center mb-6">
+                  <div class="flex-align-center gap-8">
+                    <div class="kanban-avatar avatar-indigo flex-shrink-0" style="width: 24px; height: 24px; font-size: 11px;">
+                      <%= author_name.first.upcase rescue 'U' %>
+                    </div>
+                    <strong class="fs-13 color-primary"><%= author_name %></strong>
+                  </div>
+                  <div class="flex-align-center gap-4 color-amber fs-13 fw-700">
+                    <span>★ <%= rev.rating %>.0</span>
+                  </div>
+                </div>
+                <p class="fs-12 text-secondary margin-0 mb-4 line-height-14"><%= rev.comment %></p>
+                <div class="flex-between fs-11 text-muted">
+                  <span><%= rev.submission.offer.title rescue nil %></span>
+                  <span><%= time_ago_in_words(rev.created_at) %> <%= t('common.ago') %></span>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
     </div>
 
   </div>

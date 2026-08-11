@@ -17,6 +17,7 @@ class DashboardsController < ApplicationController
       @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc).limit(50)
       @commitment_score = @profile.commitment_score
       @avg_rating = @profile.cached_average_rating
+      @received_reviews = Review.where(receiver_id: @user.id).includes(:author, submission: :offer).order(created_at: :desc)
     elsif @role_type == "CompanyProfile"
       company_subs = @profile.submissions.where(status: [ "accepted", "completed" ])
       @active_internships = company_subs.includes(student_profile: :university, offer: :company_profile, reviews: [], internship_agreement: []).order(created_at: :desc)
@@ -33,6 +34,7 @@ class DashboardsController < ApplicationController
       @company_offers = @profile.offers.includes(:skills, :submissions).order(created_at: :desc)
 
       @commitment_ledger_events = @profile.commitment_events.order(created_at: :desc).limit(50)
+      @received_reviews = Review.where(receiver_id: @user.id).includes(:author, submission: :offer).order(created_at: :desc)
     elsif @role_type == "UniversityProfile"
       @university = @profile.university
       per_page = 50
