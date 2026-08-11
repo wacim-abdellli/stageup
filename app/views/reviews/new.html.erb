@@ -4,7 +4,7 @@
   <div class="form-page-header">
     <h1 class="form-page-title"><%= t("dashboard.reviews.write_review") %></h1>
     <p class="form-page-subtitle">
-      <%= t("dashboard.reviews.subtitle_html", name: current_user == @submission.student_profile.user ? @submission.offer.company_profile.name : "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name}") %>
+      <%= t("dashboard.reviews.subtitle_html", name: current_user == @submission.student_profile.user ? @submission.offer.company_profile.name : "#{@submission.student_profile.first_name} #{@submission.student_profile.last_name}").html_safe %>
     </p>
   </div>
 
@@ -12,7 +12,12 @@
 
     <div class="review-context-card">
       <div class="review-context-row">
-        <i data-lucide="briefcase"></i>
+        <div class="review-context-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+        </div>
         <div>
           <span class="review-context-label"><%= t("dashboard.reviews.internship") %></span>
           <strong class="review-context-value"><%= @submission.offer.title %></strong>
@@ -22,32 +27,43 @@
 
     <% if @review.errors.any? %>
       <div class="flash-message flash-alert mb-20">
-        <i data-lucide="alert-circle" class="icon-16 flex-shrink-0 stroke-danger"></i>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
         <span><%= @review.errors.full_messages.first %></span>
       </div>
     <% end %>
 
     <%= form_with model: [@submission, @review], local: true do |f| %>
 
-      <div class="form-group">
+      <div class="form-group mb-24">
         <label class="form-label"><%= t("dashboard.reviews.rating_label") %></label>
         <div class="star-picker" id="star-picker">
           <% (1..5).each do |i| %>
-            <button type="button" class="star-btn" data-v="<%= i %>">
-              <i data-lucide="star" class="star-icon"></i>
+            <button type="button" class="star-btn" data-v="<%= i %>" aria-label="Rate <%= i %> out of 5 stars">
+              <svg class="star-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
             </button>
           <% end %>
         </div>
         <%= f.hidden_field :rating, id: "rv" %>
-        <span id="sh" class="form-hint"><%= t("dashboard.reviews.click_to_rate") %></span>
+        <div class="mt-8">
+          <span id="sh" class="rating-status-badge unrated">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span><%= t("dashboard.reviews.click_to_rate") %></span>
+          </span>
+        </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group mb-24">
         <label class="form-label" for="comment"><%= t("dashboard.reviews.feedback") %></label>
         <%= f.text_area :comment, id: "comment", class: "form-control", rows: 5,
             placeholder: t("dashboard.reviews.comment_placeholder"),
             required: true, oninput: "updateCC(this)" %>
-        <div class="form-hint-row">
+        <div class="form-hint-row mt-8">
           <small class="form-hint"><%= t("dashboard.reviews.hint") %></small>
           <span id="cc" class="char-count" data-suffix="<%= t('dashboard.reviews.char_count_suffix', min: 10) %>"><%= t("dashboard.reviews.char_count", count: 0, min: 10) %></span>
         </div>
@@ -67,7 +83,9 @@
   var labels = JSON.parse('<%= raw t("dashboard.reviews.rating.labels").to_json %>');
   function pickStar(v) {
     document.getElementById('rv').value = v;
-    document.getElementById('sh').textContent = labels[v-1] + ' (' + v + '/5)';
+    var badge = document.getElementById('sh');
+    badge.classList.remove('unrated');
+    badge.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> <span>' + labels[v-1] + ' (' + v + '.0 / 5)</span>';
     document.querySelectorAll('#star-picker .star-btn').forEach(function(b,i) {
       b.classList.toggle('active', i < v);
     });
@@ -89,4 +107,3 @@
     c.classList.toggle('char-count-ok', n >= 10);
   }
 <% end %>
-
