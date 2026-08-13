@@ -5717,13 +5717,13 @@ button.btn-accent:hover,
 
 
 .settings-hub-header {
-
   position: relative;
-
   border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+}
 
-  padding-bottom: 20px;
-
+.settings-header-ambient {
+  display: none;
 }
 
 
@@ -6312,20 +6312,60 @@ button.btn-accent:hover,
 
 
 
-/* Showcase Box: Selected Stack */
-
+/* Showcase Box: Selected Stack (Terracotta theme) */
 .selected-stack-showcase-box {
-
-  background: rgba(16, 185, 129, 0.03);
-
-  border: 1px solid rgba(16, 185, 129, 0.18);
-
+  background: rgba(194, 65, 12, 0.04);
+  border: 1px solid rgba(234, 88, 12, 0.2);
   border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
 
-  padding: 18px 20px;
+/* Orange dot for selected stack (replaces green) */
+.stack-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #FB923C;
+  box-shadow: 0 0 6px rgba(251, 146, 60, 0.7);
+  display: inline-block;
+  flex-shrink: 0;
+}
 
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+/* Pill showing count of selected skills */
+.skills-count-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  background: rgba(194, 65, 12, 0.1);
+  border: 1px solid rgba(234, 88, 12, 0.25);
+  color: #FB923C;
+}
 
+/* Ghost danger button for Clear All */
+.btn-ghost-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #F87171;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-ghost-danger:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #EF4444;
 }
 
 
@@ -6544,29 +6584,17 @@ button.btn-accent:hover,
 
 
 .hub-skill-search-field {
-
   width: 100%;
-
-  height: 42px;
-
-  padding-left: 38px;
-
-  padding-right: 70px;
-
+  height: 40px;
+  padding-left: 36px;
+  padding-right: 80px;
   font-size: 13px;
-
-  font-weight: 500;
-
-  background: var(--bg-tertiary);
-
+  font-weight: 400;
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-
   border-radius: var(--radius-md);
-
   color: var(--text-primary);
-
   transition: var(--transition);
-
 }
 
 
@@ -7266,38 +7294,37 @@ button.btn-accent:hover,
 /* Account & Security Sub-Cards */
 
 .security-subcard {
-
-  background: rgba(255, 255, 255, 0.02);
-
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-
   border-radius: var(--radius-md);
-
   padding: 20px 22px;
-
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: var(--transition);
 }
 
+.security-subcard:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
 
+.security-subcard h4 {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 16px !important;
+}
 
 .security-notice-box {
-
   display: flex;
-
-  align-items: center;
-
+  align-items: flex-start;
   gap: 10px;
-
-  padding: 12px 14px;
-
+  padding: 11px 14px;
   border-radius: 8px;
-
-  background: rgba(245, 158, 11, 0.06);
-
-  border: 1px solid rgba(245, 158, 11, 0.2);
-
+  background: rgba(245, 158, 11, 0.05);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
 }
-
-
 
 .hairline-divider {
 

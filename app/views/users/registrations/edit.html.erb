@@ -287,76 +287,43 @@
                     <p class="fs-12 text-muted margin-0"><%= t('users.edit.skills_subtext', default: 'Curate your verified skill matrix from 300+ competencies across 15 specialized domains') %></p>
                   </div>
                 </div>
-                <div class="flex-align-center gap-10">
-                  <span class="skills-counter-badge" id="skills-live-counter" data-suffix="<%= j(strip_tags(t('users.edit.skills_count_label', default: 'Skills Selected'))) %>">
-                    <span class="pulse-emerald-dot"></span>
-                    <span id="skills-counter-text"><%= @profile.skill_ids.count %> <%= strip_tags(t('users.edit.skills_count_label', default: 'Skills Selected')) %></span>
-                  </span>
-                  <button type="button" class="btn btn-secondary btn-compact flex-align-center gap-6" id="btn-clear-skills" title="<%= t('users.edit.clear_skills', default: 'Clear All') %>">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                    <span><%= t('users.edit.clear_skills', default: 'Clear All') %></span>
-                  </button>
-                </div>
               </div>
 
               <%# Active Selected Stack Top Showcase Box %>
-              <div class="selected-stack-showcase-box mb-24" id="selected-stack-container">
-                <div class="flex-between flex-align-center mb-12">
+              <div class="selected-stack-showcase-box mb-20" id="selected-stack-container">
+                <div class="flex-between flex-align-center mb-10">
                   <div class="flex-align-center gap-8">
-                    <span class="pulse-emerald-dot"></span>
-                    <strong class="fs-13 fw-700 color-primary"><%= t('users.edit.selected_stack_label', default: 'My Selected Stack') %></strong>
+                    <span class="stack-status-dot"></span>
+                    <strong class="fs-13 fw-600 color-primary"><%= t('users.edit.selected_stack_label', default: 'My Selected Stack') %></strong>
                   </div>
-                  <span class="fs-11 text-muted fw-600" id="selected-panel-count" data-suffix="<%= j(strip_tags(t('users.edit.picked_suffix', default: 'picked'))) %>">
-                    <%= @profile.skill_ids.count %> <%= strip_tags(t('users.edit.picked_suffix', default: 'picked')) %>
-                  </span>
-                </div>
-                
-                <div class="selected-chips-flex-wrap" id="selected-chips-list">
-                  <%# Dynamically populated by JS %>
+                  <div class="flex-align-center gap-8">
+                    <span class="skills-count-pill" id="skills-live-counter">
+                      <span id="skills-counter-text"><%= @profile.skill_ids.count %></span> <%= strip_tags(t('users.edit.skills_count_label', default: 'Skills Selected')) %>
+                    </span>
+                    <button type="button" class="btn-ghost-danger flex-align-center gap-5" id="btn-clear-skills" title="<%= t('users.edit.clear_skills', default: 'Clear All') %>">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                      <span><%= t('users.edit.clear_skills', default: 'Clear All') %></span>
+                    </button>
+                  </div>
                 </div>
 
+                <div class="selected-chips-flex-wrap" id="selected-chips-list"></div>
+
                 <div class="empty-stack-placeholder <%= 'd-none' if @profile.skill_ids.any? %>" id="empty-stack-msg">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                  <span><%= t('users.edit.empty_stack_message', default: 'No skills selected yet. Click any skill pill below or search to assemble your stack.') %></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                  <span><%= t('users.edit.empty_stack_message', default: 'Search and click skills below to build your stack.') %></span>
                 </div>
               </div>
 
-              <%# Command Bar: Search Input + Category Dropdown %>
-              <div class="skills-search-toolbar mb-16">
+              <%# Command Bar: Search Input only — domain pills below handle filtering %>
+              <div class="skills-search-toolbar mb-14">
                 <div class="skill-search-input-wrapper flex-1">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" class="skill-search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                  <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="<%= j(strip_tags(t('users.edit.skill_search_placeholder', default: 'Search 300+ skills (e.g. Figma, Python, SolidWorks, Docker, Finance, React)...'))) %>">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" class="skill-search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="Search skills — Python, React, Docker, Figma...">
                   <kbd class="search-kbd-hint" id="search-kbd-hint">⌘K</kbd>
                   <button type="button" class="search-clear-btn" id="search-clear-btn" aria-label="Clear Search" style="display: none;">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                   </button>
-                </div>
-
-                <div class="custom-cat-dropdown" id="custom-cat-dropdown">
-                  <button type="button" class="custom-cat-trigger" id="custom-cat-trigger">
-                    <span id="custom-cat-selected-text"><%= t('users.edit.all_domains_filter', default: 'All Domains') %> (<%= Skill.count %>)</span>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="select-chevron"><polyline points="6 9 12 15 18 9"/></svg>
-                  </button>
-
-                  <div class="custom-cat-menu" id="custom-cat-menu">
-                    <button type="button" class="custom-cat-option active" data-value="all">
-                      <span class="flex-align-center gap-8">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 1 0 10 10H12Z"/></svg>
-                        <span><%= t('users.edit.all_domains_filter', default: 'All Domains') %></span>
-                      </span>
-                      <span class="custom-opt-badge"><%= Skill.count %></span>
-                    </button>
-                    <% (@skills_by_category || {}).each do |cat_name, list| %>
-                      <% icon_raw = cat_icons[cat_name] || default_cat_icon %>
-                      <button type="button" class="custom-cat-option" data-value="<%= cat_name.parameterize %>">
-                        <span class="flex-align-center gap-8 text-truncate">
-                          <%= raw icon_raw %>
-                          <span class="text-truncate"><%= cat_name %></span>
-                        </span>
-                        <span class="custom-opt-badge"><%= list.count %></span>
-                      </button>
-                    <% end %>
-                  </div>
                 </div>
               </div>
 
@@ -642,7 +609,6 @@
       // ─── 4. SKILLS & TAXONOMY CONTROLS ─────────────────────────
       var chipBoxes = document.querySelectorAll('.skill-chip-box');
       var selectedChipsList = document.getElementById('selected-chips-list');
-      var selectedPanelCount = document.getElementById('selected-panel-count');
       var liveCounterText = document.getElementById('skills-counter-text');
       var navBadge = document.getElementById('nav-skills-badge');
       var clearBtn = document.getElementById('btn-clear-skills');
@@ -715,13 +681,11 @@
           }
         }
 
-        var suffix = selectedPanelCount ? selectedPanelCount.dataset.suffix : 'picked';
-        var liveSuffix = (liveCounterText && liveCounterText.parentElement) ? liveCounterText.parentElement.dataset.suffix : 'Skills Selected';
-
-        if (selectedPanelCount) selectedPanelCount.textContent = count + ' ' + suffix;
-        if (liveCounterText) liveCounterText.textContent = count + ' ' + liveSuffix;
+        // Update the skills count pill (new unified counter)
+        if (liveCounterText) liveCounterText.textContent = count;
         if (navBadge) navBadge.textContent = count;
       }
+
 
       chipBoxes.forEach(function(chip) {
         var chk = chip.querySelector('.skill-chip-checkbox');
