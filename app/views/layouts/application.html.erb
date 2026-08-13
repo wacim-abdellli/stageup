@@ -248,7 +248,7 @@
 
   <body>
     <a href="#main-content" class="skip-link"><%= t('common.skip_link') %></a>
-    <% unless devise_controller? %>
+    <% unless devise_controller? && !user_signed_in? %>
       <%= render "layouts/navbar" %>
     <% end %>
     <main id="main-content">
