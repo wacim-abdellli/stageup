@@ -5706,11 +5706,11 @@ button.btn-accent:hover,
 
 .settings-hub-container {
 
-  max-width: 1200px;
+  max-width: 960px;
 
   margin: 0 auto;
 
-  padding: 32px 24px 80px;
+  padding: 20px 16px 60px;
 
 }
 
@@ -5888,9 +5888,9 @@ button.btn-accent:hover,
 
   display: grid;
 
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 220px 1fr;
 
-  gap: 28px;
+  gap: 20px;
 
   align-items: start;
 
@@ -6927,7 +6927,7 @@ button.btn-accent:hover,
 
 /* Skills Matrix Viewport Container */
 .skills-matrix-viewport {
-  max-height: 480px;
+  max-height: 380px;
   overflow-y: auto;
   padding-right: 6px;
   border-radius: var(--radius-md);
