@@ -6925,6 +6925,40 @@ button.btn-accent:hover,
   color: #FB923C;
 }
 
+/* Skills Matrix Viewport Container */
+.skills-matrix-viewport {
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 6px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  background: rgba(15, 16, 21, 0.3);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.skills-matrix-viewport::-webkit-scrollbar {
+  width: 6px;
+}
+
+.skills-matrix-viewport::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.skills-matrix-viewport::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+.skills-matrix-viewport.single-domain-mode {
+  max-height: none;
+  overflow-y: visible;
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
 /* Skills Categories Grid */
 .skills-categories-grid {
   display: flex;

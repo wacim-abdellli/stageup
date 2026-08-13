@@ -378,55 +378,57 @@
                 <% end %>
               </div>
 
-              <%# Matrix of Domain Categories and Skills %>
-              <div class="skills-categories-grid" id="skills-matrix">
-                <%= fields_for :student_profile, @profile do |sp| %>
-                  <%= hidden_field_tag "student_profile[skill_ids][]", "" %>
-                  <% (@skills_by_category || {}).each do |category_title, skills_arr| %>
-                    <% slug = category_title.parameterize %>
-                    <% cat_icon = cat_icons[category_title] || default_cat_icon %>
-                    <div class="skills-cat-card" data-cat-slug="<%= slug %>">
-                      <div class="skills-cat-header flex-between flex-align-center mb-14">
-                        <div class="flex-align-center gap-10">
-                          <span class="skills-cat-icon-wrap"><%= raw cat_icon %></span>
-                          <h4 class="fs-14 fw-700 color-primary margin-0"><%= category_title %></h4>
-                          <span class="cat-count-badge"><%= skills_arr.count %></span>
-                        </div>
-                        <div class="flex-align-center gap-8">
-                          <span class="cat-active-pill" id="cat-active-pill-<%= slug %>" style="display: none;">0 active</span>
-                          <button type="button" class="btn-cat-quick-toggle" data-cat-slug="<%= slug %>">
-                            <span class="toggle-text"><%= t('users.edit.select_all_cat', default: 'Select All') %></span>
-                          </button>
-                        </div>
-                      </div>
-
-                      <div class="skills-chips-wrap">
-                        <% skills_arr.each do |skill_obj| %>
-                          <% selected = @profile.skill_ids.include?(skill_obj.id) %>
-                          <div class="skill-chip-box <%= 'chip-active' if selected %>"
-                               data-skill-id="<%= skill_obj.id %>"
-                               data-skill-name="<%= skill_obj.name %>"
-                               data-skill-query="<%= skill_obj.name.downcase %>">
-                            <%= check_box_tag "student_profile[skill_ids][]", skill_obj.id, selected, class: "skill-chip-checkbox" %>
-                            <span class="chip-label-text"><%= skill_obj.name %></span>
-                            <span class="chip-check-icon" aria-hidden="true">
-                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                            </span>
+              <%# Matrix Viewport Container for Domain Categories and Skills %>
+              <div class="skills-matrix-viewport" id="skills-matrix-viewport">
+                <div class="skills-categories-grid" id="skills-matrix">
+                  <%= fields_for :student_profile, @profile do |sp| %>
+                    <%= hidden_field_tag "student_profile[skill_ids][]", "" %>
+                    <% (@skills_by_category || {}).each do |category_title, skills_arr| %>
+                      <% slug = category_title.parameterize %>
+                      <% cat_icon = cat_icons[category_title] || default_cat_icon %>
+                      <div class="skills-cat-card" data-cat-slug="<%= slug %>">
+                        <div class="skills-cat-header flex-between flex-align-center mb-14">
+                          <div class="flex-align-center gap-10">
+                            <span class="skills-cat-icon-wrap"><%= raw cat_icon %></span>
+                            <h4 class="fs-14 fw-700 color-primary margin-0"><%= category_title %></h4>
+                            <span class="cat-count-badge"><%= skills_arr.count %></span>
                           </div>
-                        <% end %>
-                      </div>
-                    </div>
-                  <% end %>
-                <% end %>
+                          <div class="flex-align-center gap-8">
+                            <span class="cat-active-pill" id="cat-active-pill-<%= slug %>" style="display: none;">0 active</span>
+                            <button type="button" class="btn-cat-quick-toggle" data-cat-slug="<%= slug %>">
+                              <span class="toggle-text"><%= t('users.edit.select_all_cat', default: 'Select All') %></span>
+                            </button>
+                          </div>
+                        </div>
 
-                <%# Empty Search Results State %>
-                <div class="skills-zero-results-card" id="skills-zero-results" style="display: none;">
-                  <div class="zero-results-icon mb-12">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        <div class="skills-chips-wrap">
+                          <% skills_arr.each do |skill_obj| %>
+                            <% selected = @profile.skill_ids.include?(skill_obj.id) %>
+                            <div class="skill-chip-box <%= 'chip-active' if selected %>"
+                                 data-skill-id="<%= skill_obj.id %>"
+                                 data-skill-name="<%= skill_obj.name %>"
+                                 data-skill-query="<%= skill_obj.name.downcase %>">
+                              <%= check_box_tag "student_profile[skill_ids][]", skill_obj.id, selected, class: "skill-chip-checkbox" %>
+                              <span class="chip-label-text"><%= skill_obj.name %></span>
+                              <span class="chip-check-icon" aria-hidden="true">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                              </span>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+
+                  <%# Empty Search Results State %>
+                  <div class="skills-zero-results-card" id="skills-zero-results" style="display: none;">
+                    <div class="zero-results-icon mb-12">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    </div>
+                    <h4 class="fs-15 fw-700 color-primary mb-6"><%= t('users.edit.no_skills_found', default: 'No skills found matching') %> "<span id="zero-query-text"></span>"</h4>
+                    <p class="fs-12 text-muted margin-0 mb-14">Try searching with a broader keyword, domain acronym, or clear your query.</p>
+                    <button type="button" class="btn btn-secondary btn-compact" id="btn-reset-search">Clear Search Query</button>
                   </div>
-                  <h4 class="fs-15 fw-700 color-primary mb-6"><%= t('users.edit.no_skills_found', default: 'No skills found matching') %> "<span id="zero-query-text"></span>"</h4>
-                  <p class="fs-12 text-muted margin-0 mb-14">Try searching with a broader keyword, domain acronym, or clear your query.</p>
-                  <button type="button" class="btn btn-secondary btn-compact" id="btn-reset-search">Clear Search Query</button>
                 </div>
               </div>
 
@@ -794,9 +796,18 @@
       function filterSkills() {
         var query = searchInput ? searchInput.value.toLowerCase().trim() : '';
         var totalVisibleCategories = 0;
+        var matrixViewport = document.getElementById('skills-matrix-viewport');
 
         if (searchClearBtn) {
           searchClearBtn.style.display = query ? 'flex' : 'none';
+        }
+
+        if (matrixViewport) {
+          if (activeCat === 'all' && !query) {
+            matrixViewport.classList.remove('single-domain-mode');
+          } else {
+            matrixViewport.classList.add('single-domain-mode');
+          }
         }
 
         catBlocks.forEach(function(block) {
