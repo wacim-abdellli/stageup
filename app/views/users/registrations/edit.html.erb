@@ -1,5 +1,26 @@
 <% content_for :title, strip_tags(t('users.edit.page_title', default: "Account & Profile Settings – StageUp")) %>
 
+<%
+  cat_icons = {
+    "Data Science, AI & Analytics" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>',
+    "Backend & Software Architecture" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>',
+    "Frontend & Web Engineering" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+    "DevOps, Cloud & Infrastructure" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>',
+    "Mobile & Cross-Platform Development" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+    "Cybersecurity & Network Engineering" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    "Design, Creative & User Experience" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2Z"/></svg>',
+    "Mechanical & Industrial Engineering" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>',
+    "Electrical, Electronics & Embedded Systems" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    "Civil Engineering & Architecture" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg>',
+    "Biotechnology, Chemistry & Healthcare" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>',
+    "Business, Management & Strategy" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+    "Finance, Banking & Accounting" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+    "Human Resources & Legal" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    "Languages & Professional Leadership" => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'
+  }
+  default_cat_icon = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="12 8 8 12 12 16 16 12 12 8"/></svg>'
+%>
+
 <div class="dashboard-container settings-hub-container">
   
   <%# ─── Settings Header Bar ────────────────────────────────────────── %>
@@ -91,7 +112,7 @@
           </nav>
         </div>
 
-        <%# Live Mini Profile Card Preview (Clean & Aligned Layout) %>
+        <%# Live Mini Profile Card Preview (Ultra-Clean & Tactile Card) %>
         <div class="sidebar-profile-preview-card mt-20">
           <div class="preview-card-header">
             <div class="preview-avatar-circle">
@@ -118,7 +139,16 @@
               </span>
             </div>
           </div>
+
           <% if current_user.profileable_type == "StudentProfile" %>
+            <div class="preview-stats-row mb-12">
+              <div class="score-pill">
+                <span class="dot dot-success"></span>
+                <strong><%= (@profile.commitment_score rescue 100).to_i %>%</strong>
+                <span class="score-label"><%= t('dashboard.commitment_score', default: 'Commitment') %></span>
+              </div>
+            </div>
+
             <%= link_to student_profile_path(@profile), class: "btn btn-secondary btn-compact w-100 fs-12 justify-center flex-align-center gap-6" do %>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               <span><%= t('users.edit.view_public_profile', default: 'View Public Profile') %></span>
@@ -138,8 +168,8 @@
         <%# ─── TAB PANE 1: PERSONAL / PROFILE ────────────────────────── %>
         <div class="settings-pane active" id="pane-personal">
           <div class="settings-card mb-24">
-            <div class="settings-card-header mb-20">
-              <div class="flex-align-center gap-10">
+            <div class="settings-card-header mb-24 flex-between flex-wrap gap-12">
+              <div class="flex-align-center gap-12">
                 <div class="settings-icon-badge">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </div>
@@ -246,60 +276,86 @@
           <div class="settings-pane" id="pane-skills">
             <div class="settings-card mb-24">
 
-              <%# Pane Header %>
-              <div class="settings-card-header mb-24 flex-between flex-wrap gap-12">
-                <div class="flex-align-center gap-10">
+              <%# Pane Header with Taxonomy Stats & Reset %>
+              <div class="settings-card-header mb-24 flex-between flex-wrap gap-16">
+                <div class="flex-align-center gap-12">
                   <div class="settings-icon-badge">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                   </div>
                   <div>
-                    <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.skills_heading', default: 'Skills & Domain Taxonomy') %></h3>
-                    <p class="fs-12 text-muted margin-0"><%= t('users.edit.skills_subtext', default: 'Select from 300+ skills across Business, Engineering, Design & IT') %></p>
+                    <div class="flex-align-center gap-8 mb-4">
+                      <h3 class="fs-17 fw-700 color-primary margin-0"><%= t('users.edit.skills_heading', default: 'Skills & Domain Taxonomy') %></h3>
+                      <span class="cat-count-badge fs-10"><%= (@skills_by_category || {}).keys.count %> Domains &middot; <%= Skill.count %> Skills</span>
+                    </div>
+                    <p class="fs-12 text-muted margin-0"><%= t('users.edit.skills_subtext', default: 'Curate your verified skill matrix from 300+ competencies across 15 specialized domains') %></p>
                   </div>
                 </div>
-                <div class="flex-align-center gap-8">
-                  <span class="badge badge-success fs-12" id="skills-live-counter" data-suffix="<%= j(strip_tags(t('users.edit.skills_count_label', default: 'Skills Selected'))) %>">
-                    <%= @profile.skill_ids.count %> <%= strip_tags(t('users.edit.skills_count_label', default: 'Skills Selected')) %>
+                <div class="flex-align-center gap-10">
+                  <span class="skills-counter-badge" id="skills-live-counter" data-suffix="<%= j(strip_tags(t('users.edit.skills_count_label', default: 'Skills Selected'))) %>">
+                    <span class="pulse-emerald-dot"></span>
+                    <span id="skills-counter-text"><%= @profile.skill_ids.count %> <%= strip_tags(t('users.edit.skills_count_label', default: 'Skills Selected')) %></span>
                   </span>
-                  <button type="button" class="btn btn-secondary btn-compact" id="btn-clear-skills"><%= t('users.edit.clear_skills', default: 'Clear All') %></button>
+                  <button type="button" class="btn btn-secondary btn-compact flex-align-center gap-6" id="btn-clear-skills" title="<%= t('users.edit.clear_skills', default: 'Clear All') %>">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                    <span><%= t('users.edit.clear_skills', default: 'Clear All') %></span>
+                  </button>
                 </div>
               </div>
 
               <%# Active Selected Stack Top Showcase Box %>
-              <div class="selected-stack-showcase-box mb-24">
+              <div class="selected-stack-showcase-box mb-24" id="selected-stack-container">
                 <div class="flex-between flex-align-center mb-12">
                   <div class="flex-align-center gap-8">
                     <span class="pulse-emerald-dot"></span>
                     <strong class="fs-13 fw-700 color-primary"><%= t('users.edit.selected_stack_label', default: 'My Selected Stack') %></strong>
                   </div>
-                  <span class="fs-11 text-muted" id="selected-panel-count" data-suffix="<%= j(strip_tags(t('users.edit.picked_suffix', default: 'picked'))) %>"><%= @profile.skill_ids.count %> <%= strip_tags(t('users.edit.picked_suffix', default: 'picked')) %></span>
+                  <span class="fs-11 text-muted fw-600" id="selected-panel-count" data-suffix="<%= j(strip_tags(t('users.edit.picked_suffix', default: 'picked'))) %>">
+                    <%= @profile.skill_ids.count %> <%= strip_tags(t('users.edit.picked_suffix', default: 'picked')) %>
+                  </span>
                 </div>
+                
                 <div class="selected-chips-flex-wrap" id="selected-chips-list">
                   <%# Dynamically populated by JS %>
                 </div>
+
+                <div class="empty-stack-placeholder <%= 'd-none' if @profile.skill_ids.any? %>" id="empty-stack-msg">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                  <span><%= t('users.edit.empty_stack_message', default: 'No skills selected yet. Click any skill pill below or search to assemble your stack.') %></span>
+                </div>
               </div>
 
-              <%# Toolbar: Search Bar + Domain Dropdown %>
-              <div class="skills-search-toolbar mb-24">
+              <%# Command Bar: Search Input + Category Dropdown %>
+              <div class="skills-search-toolbar mb-16">
                 <div class="skill-search-input-wrapper flex-1">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" class="skill-search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                  <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="<%= j(strip_tags(t('users.edit.skill_search_placeholder', default: 'Search 300+ skills across Business, Engineering, Design & IT...'))) %>">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" class="skill-search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="hub-skill-search" class="form-control hub-skill-search-field" placeholder="<%= j(strip_tags(t('users.edit.skill_search_placeholder', default: 'Search 300+ skills (e.g. Figma, Python, SolidWorks, Docker, Finance, React)...'))) %>">
+                  <kbd class="search-kbd-hint" id="search-kbd-hint">⌘K</kbd>
+                  <button type="button" class="search-clear-btn" id="search-clear-btn" aria-label="Clear Search" style="display: none;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
                 </div>
 
                 <div class="custom-cat-dropdown" id="custom-cat-dropdown">
                   <button type="button" class="custom-cat-trigger" id="custom-cat-trigger">
-                    <span id="custom-cat-selected-text">All Categories (<%= Skill.count %>)</span>
+                    <span id="custom-cat-selected-text"><%= t('users.edit.all_domains_filter', default: 'All Domains') %> (<%= Skill.count %>)</span>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="select-chevron"><polyline points="6 9 12 15 18 9"/></svg>
                   </button>
 
                   <div class="custom-cat-menu" id="custom-cat-menu">
                     <button type="button" class="custom-cat-option active" data-value="all">
-                      <span>All Categories</span>
+                      <span class="flex-align-center gap-8">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 1 0 10 10H12Z"/></svg>
+                        <span><%= t('users.edit.all_domains_filter', default: 'All Domains') %></span>
+                      </span>
                       <span class="custom-opt-badge"><%= Skill.count %></span>
                     </button>
                     <% (@skills_by_category || {}).each do |cat_name, list| %>
+                      <% icon_raw = cat_icons[cat_name] || default_cat_icon %>
                       <button type="button" class="custom-cat-option" data-value="<%= cat_name.parameterize %>">
-                        <span><%= cat_name %></span>
+                        <span class="flex-align-center gap-8 text-truncate">
+                          <%= raw icon_raw %>
+                          <span class="text-truncate"><%= cat_name %></span>
+                        </span>
                         <span class="custom-opt-badge"><%= list.count %></span>
                       </button>
                     <% end %>
@@ -307,18 +363,41 @@
                 </div>
               </div>
 
-              <%# Collapsible Category Grid (Clean 2-Column Responsive Matrix) %>
+              <%# Quick-Filter Domain Carousel Pills Bar %>
+              <div class="skills-domain-pills-bar mb-24" id="domain-quick-pills">
+                <button type="button" class="domain-quick-pill active" data-target-cat="all">
+                  <span><%= t('users.edit.all_domains_filter', default: 'All Domains') %></span>
+                  <span class="pill-badge"><%= Skill.count %></span>
+                </button>
+                <% (@skills_by_category || {}).each do |cat_name, list| %>
+                  <% short_label = cat_name.split(',').first.split('&').first.strip %>
+                  <button type="button" class="domain-quick-pill" data-target-cat="<%= cat_name.parameterize %>" title="<%= cat_name %>">
+                    <span><%= short_label %></span>
+                    <span class="pill-badge"><%= list.count %></span>
+                  </button>
+                <% end %>
+              </div>
+
+              <%# Matrix of Domain Categories and Skills %>
               <div class="skills-categories-grid" id="skills-matrix">
                 <%= fields_for :student_profile, @profile do |sp| %>
                   <%= hidden_field_tag "student_profile[skill_ids][]", "" %>
                   <% (@skills_by_category || {}).each do |category_title, skills_arr| %>
-                    <div class="skills-cat-card" data-cat-slug="<%= category_title.parameterize %>">
+                    <% slug = category_title.parameterize %>
+                    <% cat_icon = cat_icons[category_title] || default_cat_icon %>
+                    <div class="skills-cat-card" data-cat-slug="<%= slug %>">
                       <div class="skills-cat-header flex-between flex-align-center mb-14">
-                        <div class="flex-align-center gap-8">
-                          <span class="cat-accent-dot"></span>
-                          <h4 class="fs-13 fw-700 color-primary margin-0"><%= category_title %></h4>
+                        <div class="flex-align-center gap-10">
+                          <span class="skills-cat-icon-wrap"><%= raw cat_icon %></span>
+                          <h4 class="fs-14 fw-700 color-primary margin-0"><%= category_title %></h4>
+                          <span class="cat-count-badge"><%= skills_arr.count %></span>
                         </div>
-                        <span class="cat-count-badge"><%= skills_arr.count %></span>
+                        <div class="flex-align-center gap-8">
+                          <span class="cat-active-pill" id="cat-active-pill-<%= slug %>" style="display: none;">0 active</span>
+                          <button type="button" class="btn-cat-quick-toggle" data-cat-slug="<%= slug %>">
+                            <span class="toggle-text"><%= t('users.edit.select_all_cat', default: 'Select All') %></span>
+                          </button>
+                        </div>
                       </div>
 
                       <div class="skills-chips-wrap">
@@ -330,22 +409,37 @@
                                data-skill-query="<%= skill_obj.name.downcase %>">
                             <%= check_box_tag "student_profile[skill_ids][]", skill_obj.id, selected, class: "skill-chip-checkbox" %>
                             <span class="chip-label-text"><%= skill_obj.name %></span>
-                            <span class="chip-check-icon" aria-hidden="true">✓</span>
+                            <span class="chip-check-icon" aria-hidden="true">
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </span>
                           </div>
                         <% end %>
                       </div>
                     </div>
                   <% end %>
                 <% end %>
+
+                <%# Empty Search Results State %>
+                <div class="skills-zero-results-card" id="skills-zero-results" style="display: none;">
+                  <div class="zero-results-icon mb-12">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                  </div>
+                  <h4 class="fs-15 fw-700 color-primary mb-6"><%= t('users.edit.no_skills_found', default: 'No skills found matching') %> "<span id="zero-query-text"></span>"</h4>
+                  <p class="fs-12 text-muted margin-0 mb-14">Try searching with a broader keyword, domain acronym, or clear your query.</p>
+                  <button type="button" class="btn btn-secondary btn-compact" id="btn-reset-search">Clear Search Query</button>
+                </div>
               </div>
+
             </div>
           </div>
+        <% end %>
 
-          <%# ─── TAB PANE 3: RESUME & CV (STUDENT ONLY) ─────────────────── %>
+        <%# ─── TAB PANE 3: RESUME & CV (STUDENT ONLY) ─────────────────── %>
+        <% if current_user.profileable_type == "StudentProfile" %>
           <div class="settings-pane" id="pane-cv">
             <div class="settings-card mb-24">
-              <div class="settings-card-header mb-20">
-                <div class="flex-align-center gap-10">
+              <div class="settings-card-header mb-24 flex-between flex-wrap gap-12">
+                <div class="flex-align-center gap-12">
                   <div class="settings-icon-badge">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
                   </div>
@@ -358,18 +452,20 @@
 
               <%= fields_for :student_profile, @profile do |sp| %>
                 <% if @profile.cv.attached? %>
-                  <div class="cv-active-card mb-20 flex-between flex-wrap gap-12">
-                    <div class="flex-align-center gap-12">
+                  <div class="cv-active-card mb-24 flex-between flex-wrap gap-16">
+                    <div class="flex-align-center gap-14">
                       <div class="pdf-file-badge">PDF</div>
                       <div>
                         <strong class="fs-14 color-primary block text-truncate"><%= @profile.cv.filename %></strong>
                         <span class="fs-12 text-muted"><%= number_to_human_size(@profile.cv.byte_size) %> &middot; Uploaded</span>
                       </div>
                     </div>
-                    <%= link_to rails_blob_path(@profile.cv, disposition: "inline"), target: "_blank", class: "btn btn-secondary btn-compact" do %>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                      <%= t('users.edit.preview_pdf', default: 'Preview PDF') %>
-                    <% end %>
+                    <div class="flex-align-center gap-8">
+                      <%= link_to rails_blob_path(@profile.cv, disposition: "inline"), target: "_blank", class: "btn btn-secondary btn-compact flex-align-center gap-6" do %>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <span><%= t('users.edit.preview_pdf', default: 'Preview PDF') %></span>
+                      <% end %>
+                    </div>
                   </div>
                 <% end %>
 
@@ -378,12 +474,12 @@
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                   </div>
                   <div class="fs-14 fw-600 color-primary mb-4"><%= t('users.edit.dropzone_label', default: 'Drag & drop your PDF resume here') %></div>
-                  <div class="fs-12 text-muted mb-14"><%= t('users.edit.dropzone_hint', default: 'PDF only · Maximum file size 5MB') %></div>
+                  <div class="fs-12 text-muted mb-16"><%= t('users.edit.dropzone_hint', default: 'PDF only · Maximum file size 5MB') %></div>
                   <label class="btn btn-primary btn-compact cursor-pointer">
                     <span><%= t('users.edit.browse_pdf', default: 'Browse PDF File') %></span>
                     <%= sp.file_field :cv, id: "cv-file-input", accept: "application/pdf", class: "d-none" %>
                   </label>
-                  <div class="fs-12 text-emerald fw-600 mt-10 display-none" id="cv-selected-filename"></div>
+                  <div class="fs-12 text-emerald fw-600 mt-12 display-none" id="cv-selected-filename"></div>
                 </div>
               <% end %>
             </div>
@@ -393,8 +489,8 @@
         <%# ─── TAB PANE 4: ACCOUNT & SECURITY ────────────────────────── %>
         <div class="settings-pane" id="pane-security">
           <div class="settings-card mb-24">
-            <div class="settings-card-header mb-20">
-              <div class="flex-align-center gap-10">
+            <div class="settings-card-header mb-24 flex-between flex-wrap gap-12">
+              <div class="flex-align-center gap-12">
                 <div class="settings-icon-badge">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 </div>
@@ -407,9 +503,9 @@
 
             <%# Sub-card A: Email %>
             <div class="security-subcard mb-24">
-              <h4 class="fs-14 fw-600 color-primary mb-12 flex-align-center gap-6">
+              <h4 class="fs-14 fw-600 color-primary mb-14 flex-align-center gap-8">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <%= t('users.edit.email_address_label', default: 'Email Address') %>
+                <span><%= t('users.edit.email_address_label', default: 'Email Address') %></span>
               </h4>
               <div class="form-group margin-0">
                 <%= f.label :email, t('users.edit.email', default: 'Account Email Address'), class: "form-label" %>
@@ -419,9 +515,9 @@
 
             <%# Sub-card B: Authentication & Security %>
             <div class="security-subcard mb-24">
-              <h4 class="fs-14 fw-600 color-primary mb-12 flex-align-center gap-6">
+              <h4 class="fs-14 fw-600 color-primary mb-14 flex-align-center gap-8">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <%= t('users.edit.security_verification_label', default: 'Security Verification & Password Change') %>
+                <span><%= t('users.edit.security_verification_label', default: 'Security Verification & Password Change') %></span>
               </h4>
               
               <div class="security-notice-box mb-20">
@@ -434,7 +530,7 @@
                 <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password", placeholder: t('users.edit.current_password_placeholder', default: 'Enter your current password to authorize changes') %>
               </div>
 
-              <div style="border-top: 1px solid var(--border-color); margin: 24px 0;"></div>
+              <div class="hairline-divider mb-24"></div>
 
               <div class="form-row-2">
                 <div class="form-group margin-0">
@@ -478,7 +574,7 @@
 <script nonce="<%= content_security_policy_nonce %>">
   (function() {
     function initMasterSettings() {
-      // ─── 1. TRUE TAB SWITCHING ──────────────────────────────────
+      // ─── 1. TAB SWITCHING ──────────────────────────────────────
       var navButtons = document.querySelectorAll('.settings-nav-item');
       var panes = document.querySelectorAll('.settings-pane');
 
@@ -496,7 +592,7 @@
         });
       });
 
-      // ─── 2. LIVE MINI PROFILE PREVIEW CARD ──────────────────────
+      // ─── 2. LIVE MINI PROFILE PREVIEW ─────────────────────────
       var firstNameInput = document.getElementById('input-first-name');
       var lastNameInput = document.getElementById('input-last-name');
       var companyNameInput = document.getElementById('input-company-name');
@@ -544,22 +640,28 @@
         updateBioCount();
       }
 
-      // ─── 4. SKILLS MATRIX & SELECTED SIDE PANEL SYNCHRONIZATION 
+      // ─── 4. SKILLS & TAXONOMY CONTROLS ─────────────────────────
       var chipBoxes = document.querySelectorAll('.skill-chip-box');
       var selectedChipsList = document.getElementById('selected-chips-list');
       var selectedPanelCount = document.getElementById('selected-panel-count');
-      var liveCounter = document.getElementById('skills-live-counter');
+      var liveCounterText = document.getElementById('skills-counter-text');
       var navBadge = document.getElementById('nav-skills-badge');
       var clearBtn = document.getElementById('btn-clear-skills');
       var searchInput = document.getElementById('hub-skill-search');
-      var catPills = document.querySelectorAll('.hub-cat-pill');
+      var searchClearBtn = document.getElementById('search-clear-btn');
+      var resetSearchBtn = document.getElementById('btn-reset-search');
       var catBlocks = document.querySelectorAll('.skills-cat-card');
+      var domainPills = document.querySelectorAll('.domain-quick-pill');
+      var emptyStackMsg = document.getElementById('empty-stack-msg');
+      var zeroResultsCard = document.getElementById('skills-zero-results');
+      var zeroQueryText = document.getElementById('zero-query-text');
       var activeCat = 'all';
 
       function syncSelectedPanel() {
         if (!selectedChipsList) return;
         selectedChipsList.innerHTML = '';
         var count = 0;
+        var catCounts = {};
 
         chipBoxes.forEach(function(chip) {
           var chk = chip.querySelector('.skill-chip-checkbox');
@@ -567,10 +669,15 @@
             count++;
             var sName = chip.dataset.skillName || 'Skill';
             var sId = chip.dataset.skillId;
+            var parentCard = chip.closest('.skills-cat-card');
+            if (parentCard) {
+              var slug = parentCard.dataset.catSlug;
+              catCounts[slug] = (catCounts[slug] || 0) + 1;
+            }
 
             var tag = document.createElement('div');
             tag.className = 'selected-panel-chip';
-            tag.innerHTML = '<span>' + sName + '</span><button type="button" class="remove-chip-btn" data-id="' + sId + '" aria-label="Remove"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>';
+            tag.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="mr-2"><polyline points="20 6 9 17 4 12"/></svg><span>' + sName + '</span><button type="button" class="remove-chip-btn" data-id="' + sId + '" aria-label="Remove skill"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>';
 
             tag.querySelector('.remove-chip-btn').addEventListener('click', function(e) {
               e.stopPropagation();
@@ -583,8 +690,37 @@
           }
         });
 
-        if (selectedPanelCount) selectedPanelCount.textContent = count + ' ' + selectedPanelCount.dataset.suffix;
-        if (liveCounter) liveCounter.textContent = count + ' ' + liveCounter.dataset.suffix;
+        // Update category active badges
+        catBlocks.forEach(function(card) {
+          var slug = card.dataset.catSlug;
+          var actCount = catCounts[slug] || 0;
+          var actPill = document.getElementById('cat-active-pill-' + slug);
+          if (actPill) {
+            if (actCount > 0) {
+              actPill.textContent = actCount + ' selected';
+              actPill.style.display = 'inline-flex';
+            } else {
+              actPill.style.display = 'none';
+            }
+          }
+        });
+
+        // Empty state visibility
+        if (emptyStackMsg) {
+          if (count === 0) {
+            emptyStackMsg.classList.remove('d-none');
+            emptyStackMsg.style.display = 'flex';
+          } else {
+            emptyStackMsg.classList.add('d-none');
+            emptyStackMsg.style.display = 'none';
+          }
+        }
+
+        var suffix = selectedPanelCount ? selectedPanelCount.dataset.suffix : 'picked';
+        var liveSuffix = (liveCounterText && liveCounterText.parentElement) ? liveCounterText.parentElement.dataset.suffix : 'Skills Selected';
+
+        if (selectedPanelCount) selectedPanelCount.textContent = count + ' ' + suffix;
+        if (liveCounterText) liveCounterText.textContent = count + ' ' + liveSuffix;
         if (navBadge) navBadge.textContent = count;
       }
 
@@ -607,6 +743,40 @@
         });
       });
 
+      // Select All / Clear per Category
+      document.querySelectorAll('.btn-cat-quick-toggle').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var slug = btn.dataset.catSlug;
+          var card = document.querySelector('.skills-cat-card[data-cat-slug="' + slug + '"]');
+          if (!card) return;
+
+          var checkboxes = card.querySelectorAll('.skill-chip-checkbox');
+          var allChecked = Array.from(checkboxes).every(function(c) { return c.checked; });
+
+          checkboxes.forEach(function(chk) {
+            chk.checked = !allChecked;
+            var box = chk.closest('.skill-chip-box');
+            if (box) {
+              if (!allChecked) {
+                box.classList.add('chip-active');
+              } else {
+                box.classList.remove('chip-active');
+              }
+            }
+          });
+
+          var toggleSpan = btn.querySelector('.toggle-text');
+          if (toggleSpan) {
+            toggleSpan.textContent = allChecked ? '<%= t('users.edit.select_all_cat', default: 'Select All') %>' : '<%= t('users.edit.clear_cat', default: 'Clear') %>';
+          }
+
+          var floatingSaveBar = document.getElementById('floating-save-bar');
+          if (floatingSaveBar) floatingSaveBar.classList.add('bar-visible');
+          syncSelectedPanel();
+        });
+      });
+
       if (clearBtn) {
         clearBtn.addEventListener('click', function() {
           document.querySelectorAll('.skill-chip-checkbox').forEach(function(chk) {
@@ -623,6 +793,11 @@
       // Filter skills matrix
       function filterSkills() {
         var query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        var totalVisibleCategories = 0;
+
+        if (searchClearBtn) {
+          searchClearBtn.style.display = query ? 'flex' : 'none';
+        }
 
         catBlocks.forEach(function(block) {
           var slug = block.dataset.catSlug;
@@ -644,14 +819,94 @@
 
           if (hasVisible) {
             block.style.display = 'block';
+            totalVisibleCategories++;
           } else {
             block.style.display = 'none';
           }
         });
+
+        if (zeroResultsCard) {
+          if (totalVisibleCategories === 0) {
+            zeroResultsCard.style.display = 'block';
+            if (zeroQueryText) zeroQueryText.textContent = query;
+          } else {
+            zeroResultsCard.style.display = 'none';
+          }
+        }
       }
 
-      if (searchInput) searchInput.addEventListener('input', filterSkills);
+      if (searchInput) {
+        searchInput.addEventListener('input', filterSkills);
 
+        // Keyboard focus shortcut: Cmd+K or Ctrl+K or /
+        document.addEventListener('keydown', function(e) {
+          if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            searchInput.focus();
+            searchInput.select();
+          }
+        });
+      }
+
+      if (searchClearBtn) {
+        searchClearBtn.addEventListener('click', function() {
+          if (searchInput) {
+            searchInput.value = '';
+            filterSkills();
+            searchInput.focus();
+          }
+        });
+      }
+
+      if (resetSearchBtn) {
+        resetSearchBtn.addEventListener('click', function() {
+          if (searchInput) {
+            searchInput.value = '';
+          }
+          activeCat = 'all';
+          updateDomainPillState('all');
+          filterSkills();
+        });
+      }
+
+      // Domain Quick Pills Carousel
+      function updateDomainPillState(targetCat) {
+        domainPills.forEach(function(p) {
+          if (p.dataset.targetCat === targetCat) {
+            p.classList.add('active');
+          } else {
+            p.classList.remove('active');
+          }
+        });
+
+        // Sync dropdown
+        if (customOptions) {
+          customOptions.forEach(function(opt) {
+            if (opt.dataset.value === targetCat) {
+              opt.classList.add('active');
+              var titleText = opt.querySelector('span:first-child').textContent;
+              var badgeText = opt.querySelector('.custom-opt-badge').textContent;
+              if (customSelectedText) {
+                customSelectedText.textContent = titleText + ' (' + badgeText + ')';
+              }
+            } else {
+              opt.classList.remove('active');
+            }
+          });
+        }
+      }
+
+      domainPills.forEach(function(pill) {
+        pill.addEventListener('click', function(e) {
+          e.preventDefault();
+          var targetCat = pill.dataset.targetCat;
+          activeCat = targetCat;
+          updateDomainPillState(targetCat);
+          filterSkills();
+        });
+      });
+
+      // Custom Dropdown Controls
       var customDropdown = document.getElementById('custom-cat-dropdown');
       var customTrigger = document.getElementById('custom-cat-trigger');
       var customMenu = document.getElementById('custom-cat-menu');
@@ -677,6 +932,7 @@
               customSelectedText.textContent = titleText + ' (' + badgeText + ')';
             }
 
+            updateDomainPillState(activeCat);
             customDropdown.classList.remove('is-open');
             filterSkills();
           });
@@ -689,17 +945,47 @@
         });
       }
 
-      // Initial sync
+      // Initial Selected Stack sync
       syncSelectedPanel();
 
       // ─── 5. CV FILE SELECTION PREVIEW ─────────────────────────
       var cvInput = document.getElementById('cv-file-input');
       var cvNameBox = document.getElementById('cv-selected-filename');
+      var cvDropzone = document.getElementById('cv-dropzone');
+
       if (cvInput && cvNameBox) {
         cvInput.addEventListener('change', function() {
           if (cvInput.files && cvInput.files[0]) {
-            cvNameBox.textContent = '<%= t('users.edit.selected_file_prefix') %> ' + cvInput.files[0].name;
+            cvNameBox.textContent = '<%= t('users.edit.selected_file_prefix', default: 'Selected:') %> ' + cvInput.files[0].name;
             cvNameBox.style.display = 'block';
+            var floatingSaveBar = document.getElementById('floating-save-bar');
+            if (floatingSaveBar) floatingSaveBar.classList.add('bar-visible');
+          }
+        });
+      }
+
+      if (cvDropzone && cvInput) {
+        ['dragenter', 'dragover'].forEach(function(eventName) {
+          cvDropzone.addEventListener(eventName, function(e) {
+            e.preventDefault();
+            cvDropzone.classList.add('dropzone-dragover');
+          });
+        });
+
+        ['dragleave', 'drop'].forEach(function(eventName) {
+          cvDropzone.addEventListener(eventName, function(e) {
+            e.preventDefault();
+            cvDropzone.classList.remove('dropzone-dragover');
+          });
+        });
+
+        cvDropzone.addEventListener('drop', function(e) {
+          if (e.dataTransfer.files && e.dataTransfer.files.length) {
+            cvInput.files = e.dataTransfer.files;
+            cvNameBox.textContent = '<%= t('users.edit.selected_file_prefix', default: 'Selected:') %> ' + e.dataTransfer.files[0].name;
+            cvNameBox.style.display = 'block';
+            var floatingSaveBar = document.getElementById('floating-save-bar');
+            if (floatingSaveBar) floatingSaveBar.classList.add('bar-visible');
           }
         });
       }
@@ -763,11 +1049,9 @@
             
             alert("<%= escape_javascript(t('users.edit.current_password_required_js', default: 'Please enter your current password to save security changes.')) %>");
             
-            // Highlight and focus
             currentPassInput.style.borderColor = '#EF4444';
             currentPassInput.focus();
             
-            // Re-enable submit button if turbo-disabled
             var submitBtn = mainForm.querySelector('[type="submit"]');
             if (submitBtn) {
               setTimeout(function() { submitBtn.disabled = false; }, 100);
@@ -775,7 +1059,7 @@
           }
         });
 
-        // Remove readonly from password fields on interaction (CSP compliant)
+        // Remove readonly from password fields on interaction
         var confirmPassInput = document.getElementById('input-confirm-password');
         function removeReadonly(e) {
           e.target.removeAttribute('readonly');

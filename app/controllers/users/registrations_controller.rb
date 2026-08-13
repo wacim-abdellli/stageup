@@ -115,7 +115,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /users/edit
   def edit
     @profile = current_user.profileable
-    @skills_by_category = Skill.all.order(:name).group_by { |s| s.category.presence || "General" } if current_user.profileable_type == "StudentProfile"
+    @skills_by_category = load_categorized_skills if current_user.profileable_type == "StudentProfile"
     render :edit
   end
 
@@ -123,7 +123,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     @profile = resource.profileable
-    @skills_by_category = Skill.all.order(:name).group_by { |s| s.category.presence || "General" } if resource.profileable_type == "StudentProfile"
+    @skills_by_category = load_categorized_skills if resource.profileable_type == "StudentProfile"
 
     profile_updated = update_profile_attributes
 
@@ -180,5 +180,30 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def university_profile_params
     params.require(:university_profile).permit(:university_id, :admin_name, :department)
+  end
+
+  def load_categorized_skills
+    domain_order = [
+      "Data Science, AI & Analytics",
+      "Backend & Software Architecture",
+      "Frontend & Web Engineering",
+      "DevOps, Cloud & Infrastructure",
+      "Mobile & Cross-Platform Development",
+      "Cybersecurity & Network Engineering",
+      "Design, Creative & User Experience",
+      "Mechanical & Industrial Engineering",
+      "Electrical, Electronics & Embedded Systems",
+      "Civil Engineering & Architecture",
+      "Biotechnology, Chemistry & Healthcare",
+      "Business, Management & Strategy",
+      "Finance, Banking & Accounting",
+      "Human Resources & Legal",
+      "Languages & Professional Leadership"
+    ]
+    grouped = Skill.all.order(:name).group_by { |s| s.category.presence || "General" }
+    grouped.sort_by do |cat_name, _|
+      idx = domain_order.index(cat_name)
+      idx ? [0, idx] : [1, cat_name]
+    end.to_h
   end
 end

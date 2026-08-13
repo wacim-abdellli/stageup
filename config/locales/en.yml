@@ -1215,13 +1215,18 @@ en:
       description_placeholder: Describe your company culture, technology stack, and mission opportunities.
       department_placeholder: e.g. IT & Computer Science Department
       skills_heading: Skills & Domain Taxonomy
-      skills_subtext: Select from 200+ skills across Business, Engineering, Design, Data & Software
+      skills_subtext: Curate your verified skill matrix from 300+ competencies across 15 specialized domains
       skills_count_label: Skills Selected
       clear_skills: Clear All
-      skill_search_placeholder: Search 200+ skills (e.g. SEO, SolidWorks, Figma, Python, Finance, Marketing)...
+      skill_search_placeholder: Search 300+ skills (e.g. Figma, Python, SolidWorks, Docker, Finance, React)...
       all_skills_label: All Skills (%{count})
+      all_domains_filter: All Domains
       selected_stack_label: My Selected Stack
       picked_suffix: picked
+      empty_stack_message: No skills selected yet. Click any skill pill below or search to assemble your stack.
+      select_all_cat: Select All
+      clear_cat: Clear
+      no_skills_found: No skills found matching
       resume_heading: Resume & CV Document
       resume_subtext: PDF document accessible by verified employers
       preview_pdf: Preview PDF

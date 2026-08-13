@@ -1214,13 +1214,18 @@ ar:
       description_placeholder: صف ثقافة شركتك، مجموعة التقنيات، وفرص المهام.
       department_placeholder: 'مثال: قسم تكنولوجيا المعلومات وعلوم الحاسوب'
       skills_heading: تصنيف المهارات والمجالات
-      skills_subtext: اختر من بين 200+ مهارة في الإدارة، الهندسة، التصميم، البيانات والتكنولوجيا
+      skills_subtext: حدد مهاراتك من بين أكثر من 300 مهارة متخصصة عبر 15 مجالاً
       skills_count_label: المهارات المحددة
       clear_skills: مسح الكل
-      skill_search_placeholder: 'ابحث بين 200+ مهارة (مثال: SEO, SolidWorks, Figma, Python, Finance)...'
+      skill_search_placeholder: 'ابحث بين 300+ مهارة (مثال: Figma, Python, SolidWorks, Docker, Finance, React)...'
       all_skills_label: كل المهارات (%{count})
+      all_domains_filter: جميع المجالات
       selected_stack_label: مجموعتي المختارة
       picked_suffix: مختارة
+      empty_stack_message: لم يتم تحديد أي مهارات بعد. انقر على المهارات أدناه أو ابحث لإضافة مهاراتك.
+      select_all_cat: تحديد الكل
+      clear_cat: مسح
+      no_skills_found: لم يتم العثور على مهارات مطابقة لـ
       resume_heading: السيرة الذاتية
       resume_subtext: ملف PDF متاح لأصحاب العمل الموثقين
       preview_pdf: معاينة PDF

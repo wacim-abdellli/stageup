@@ -1266,13 +1266,18 @@ fr:
       description_placeholder: Décrivez la culture, la stack technique et les missions de votre entreprise.
       department_placeholder: ex. Département Informatique & Télécoms
       skills_heading: Taxonomie des Compétences & Domaines
-      skills_subtext: Sélectionnez parmi 200+ compétences en Gestion, Ingénierie, Design, Data & IT
+      skills_subtext: Personnalisez votre matrice de compétences parmi plus de 300 compétences réparties en 15 domaines
       skills_count_label: Compétences Sélectionnées
       clear_skills: Tout Effacer
-      skill_search_placeholder: Rechercher parmi 200+ compétences (ex. SEO, SolidWorks, Figma, Python, Finance)...
+      skill_search_placeholder: Rechercher parmi 300+ compétences (ex. Figma, Python, SolidWorks, Docker, Finance, React)...
       all_skills_label: Toutes les Compétences (%{count})
+      all_domains_filter: Tous les Domaines
       selected_stack_label: Ma Stack Sélectionnée
       picked_suffix: sélectionnées
+      empty_stack_message: Aucune compétence sélectionnée. Cliquez sur les compétences ci-dessous ou effectuez une recherche pour composer votre profil.
+      select_all_cat: Tout Sélectionner
+      clear_cat: Effacer
+      no_skills_found: Aucune compétence trouvée pour
       resume_heading: CV & Documents
       resume_subtext: Document PDF accessible par les employeurs vérifiés
       preview_pdf: Aperçu PDF
