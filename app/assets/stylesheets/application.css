@@ -5105,63 +5105,21 @@ button.btn-accent:hover,
 
 
 /* 2-Column Settings Hub & Skills Matrix Design System */
-
 .settings-hub-container {
-
-  max-width: 1120px !important;
-
-  margin: 40px auto 80px !important;
-
-  padding: 0 24px;
-
+  max-width: 1200px;
+  margin: 16px auto 0;
+  padding: 0 24px 60px;
 }
-
-
 
 .settings-hub-header {
-
   position: relative;
-
-  overflow: hidden;
-
-  background: rgba(15, 16, 21, 0.95);
-
-  border: 1px solid var(--border-color);
-
-  border-radius: var(--radius-lg);
-
-  padding: 28px 32px;
-
-  backdrop-filter: blur(20px);
-
-  -webkit-backdrop-filter: blur(20px);
-
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-
-  margin-bottom: 32px !important;
-
-}
-
-
-
-.settings-header-ambient {
-
-  position: absolute;
-
-  top: -40px;
-
-  left: -40px;
-
-  width: 250px;
-
-  height: 250px;
-
-  background: radial-gradient(circle, rgba(194, 65, 12, 0.12) 0%, rgba(99, 102, 241, 0.06) 50%, transparent 80%);
-
-  pointer-events: none;
-
-  z-index: 0;
-
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 0 12px 0;
+  margin-bottom: 16px;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 
