@@ -67,7 +67,7 @@ skills_data = {
   ],
 
   'Data Science, AI & Analytics' => [
-    'Data Analysis', 'Python for Data Science', 'R Programming', 'Machine Learning',
+    'Data Science', 'Data Analysis', 'Python for Data Science', 'R Programming', 'Machine Learning',
     'Deep Learning', 'PyTorch', 'TensorFlow', 'Computer Vision', 'OpenCV',
     'Natural Language Processing (NLP)', 'LLMs & RAG Architecture', 'Prompt Engineering',
     'LangChain', 'LlamaIndex', 'Hugging Face', 'Data Engineering', 'Apache Spark',
@@ -78,20 +78,20 @@ skills_data = {
   'Backend & Software Architecture' => [
     'Ruby on Rails', 'Node.js', 'Python', 'Django', 'FastAPI', 'Java', 'Spring Boot',
     'Go (Golang)', 'C# / .NET', 'PHP', 'Laravel', 'Express.js', 'NestJS', 'PostgreSQL',
-    'MySQL', 'MongoDB', 'Redis', 'GraphQL', 'REST API', 'Elasticsearch', 'SQLite',
+    'MySQL', 'SQL', 'MongoDB', 'Redis', 'GraphQL', 'REST API', 'Elasticsearch', 'SQLite',
     'Firebase', 'Supabase', 'Prisma', 'Cassandra', 'Neo4j', 'DynamoDB', 'CockroachDB',
     'Apache Kafka', 'RabbitMQ', 'gRPC', 'WebSockets', 'Elixir', 'Phoenix'
   ],
 
   'Frontend & Web Engineering' => [
     'React', 'Next.js', 'Vue.js', 'Nuxt.js', 'TypeScript', 'JavaScript', 'HTML5 & CSS3',
-    'Tailwind CSS', 'Sass / SCSS', 'Svelte', 'SvelteKit', 'Redux', 'Zustand', 'Webpack',
+    'CSS', 'Tailwind CSS', 'Sass / SCSS', 'Svelte', 'SvelteKit', 'Redux', 'Zustand', 'Webpack',
     'Vite', 'Bootstrap', 'WebAssembly', 'Storybook', 'Shadcn UI', 'Radix UI',
     'Three.js', 'WebGL', 'Alpine.js', 'Angular'
   ],
 
   'DevOps, Cloud & Infrastructure' => [
-    'Docker', 'Kubernetes', 'AWS', 'Google Cloud (GCP)', 'Microsoft Azure',
+    'Docker', 'Git', 'Kubernetes', 'AWS', 'Google Cloud (GCP)', 'Microsoft Azure',
     'CI/CD Pipelines', 'GitHub Actions', 'Terraform', 'Ansible', 'Linux / Bash',
     'Nginx', 'Microservices', 'System Design', 'Serverless', 'Helm', 'Prometheus',
     'Grafana', 'Datadog', 'Cloudflare', 'Vercel / Render'
