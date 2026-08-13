@@ -5705,21 +5705,15 @@ button.btn-accent:hover,
 /* ─── Settings Hub & Profile Settings System (Vercel / Linear Aesthetic) ─── */
 
 .settings-hub-container {
-
   max-width: 1200px;
-
   margin: 0 auto;
-
-  padding: 32px 24px 80px;
-
+  padding: 16px 24px 60px;
 }
-
-
 
 .settings-hub-header {
   position: relative;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 12px;
+  padding-bottom: 8px;
 }
 
 .settings-header-ambient {
