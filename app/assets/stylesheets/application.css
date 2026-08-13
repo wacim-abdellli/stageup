@@ -5885,15 +5885,23 @@ button.btn-accent:hover,
 /* 2-Column Responsive Layout */
 
 .settings-hub-grid {
-
   display: grid;
-
   grid-template-columns: 260px 1fr;
-
   gap: 24px;
-
   align-items: start;
+  min-width: 0;
+  overflow: hidden;
+}
 
+/* The right content column must not bleed beyond its grid cell */
+.settings-content-area {
+  min-width: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.settings-sidebar {
+  min-width: 0;
 }
 
 
@@ -6872,6 +6880,7 @@ button.btn-accent:hover,
   display: flex;
   gap: 16px;
   overflow-x: auto;
+  max-width: 100%;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 0;
   margin-bottom: 24px;
