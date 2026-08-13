@@ -6405,87 +6405,25 @@ button.btn-accent:hover,
 
 
 .selected-panel-chip {
-
   display: inline-flex;
-
   align-items: center;
-
   gap: 6px;
-
-  padding: 6px 12px;
-
-  border-radius: 9999px;
-
-  background: rgba(16, 185, 129, 0.12);
-
-  border: 1px solid rgba(16, 185, 129, 0.35);
-  align-items: center;
-
-}
-
-
-
-.selected-panel-chip {
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 5px;
-
-  padding: 5px 10px;
-
+  padding: 4px 10px;
   border-radius: 6px;
-
   background: rgba(194, 65, 12, 0.12);
-
-  border: 1px solid rgba(234, 88, 12, 0.35);
-
+  border: 1px solid rgba(234, 88, 12, 0.3);
   color: #FB923C;
-
   font-size: 12px;
-
   font-weight: 500;
-
   animation: popIn 0.15s ease-out;
-
 }
-
-
 
 @keyframes popIn {
-
   from { opacity: 0; transform: scale(0.92); }
-
   to { opacity: 1; transform: scale(1); }
-
 }
 
-
-
 .remove-chip-btn {
-
-  display: inline-flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  width: 16px;
-
-  height: 16px;
-
-  border-radius: 50%;
-
-  background: rgba(239, 68, 68, 0.15);
-
-  border: none;
-
-  color: #EF4444;
-
-  cursor: pointer;
-
-  padding: 0;
 
   transition: all 0.15s ease;
 
@@ -7760,54 +7698,39 @@ button.btn-accent:hover,
 
 .selected-panel-chip {
 
-  display: flex;
-
+.selected-panel-chip {
+  display: inline-flex;
   align-items: center;
-
-  justify-content: space-between;
-
-  padding: 6px 12px;
-
+  gap: 6px;
+  padding: 4px 10px;
   border-radius: 6px;
-
-  background: rgba(16, 185, 129, 0.1);
-
-  border: 1px solid rgba(16, 185, 129, 0.3);
-
-  color: #34D399;
-
+  background: rgba(194, 65, 12, 0.12);
+  border: 1px solid rgba(234, 88, 12, 0.3);
+  color: #FB923C;
   font-size: 12px;
-
-  font-weight: 600;
-
+  font-weight: 500;
+  animation: popIn 0.15s ease-out;
 }
-
-
 
 .remove-chip-btn {
-
-  background: none;
-
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
   border: none;
-
-  color: #EF4444;
-
-  font-size: 14px;
-
-  font-weight: 700;
-
+  color: var(--text-muted);
   cursor: pointer;
-
-  padding: 0 4px;
-
+  padding: 0;
+  margin-left: 2px;
+  transition: var(--transition);
 }
 
-
-
 .remove-chip-btn:hover {
-
+  background: rgba(239, 68, 68, 0.2);
   color: #F87171;
-
 }
 
 
