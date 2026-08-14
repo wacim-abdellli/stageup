@@ -24,7 +24,7 @@
 <div class="settings-hub-container">
   
   <%# ─── Settings Header Bar ────────────────────────────────────────── %>
-  <div class="settings-hub-header">
+  <div class="settings-hub-header mb-20">
     <div class="settings-top-row">
       <%= link_to dashboard_path, class: "settings-breadcrumb-link" do %>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
@@ -36,8 +36,86 @@
         <span><%= t("roles.#{current_user.profileable_type.underscore}", default: current_user.profileable_type.underscore.humanize.upcase) %></span>
       </span>
     </div>
-    <h1 class="settings-hub-title"><%= t('users.edit.title', default: 'Account & Profile Settings') %></h1>
-    <p class="settings-hub-subtitle"><%= t('users.edit.subtitle', default: 'Manage your public portfolio, technical skills taxonomy, and security preferences.') %></p>
+
+    <div class="flex-between flex-align-center flex-wrap gap-16 mt-4 mb-16">
+      <div>
+        <h1 class="settings-hub-title"><%= t('users.edit.title', default: 'Account & Profile Settings') %></h1>
+        <p class="settings-hub-subtitle"><%= t('users.edit.subtitle', default: 'Manage your public portfolio, technical skills taxonomy, and security preferences.') %></p>
+      </div>
+
+      <%# Integrated Mini Profile Banner Widget (Top Right Header Anchor) %>
+      <div class="header-profile-banner-widget">
+        <div class="preview-avatar-circle">
+          <span id="preview-avatar-text"><%= (current_user.email.first rescue 'U').upcase %></span>
+        </div>
+        <div class="header-widget-info">
+          <strong class="sidebar-preview-name block color-primary text-truncate fs-13 margin-0 fw-700" id="preview-name-text">
+            <% if current_user.profileable_type == "StudentProfile" %>
+              <%= @profile.first_name.presence || "Candidate" %> <%= @profile.last_name %>
+            <% elsif current_user.profileable_type == "CompanyProfile" %>
+              <%= @profile.name.presence || "Employer" %>
+            <% else %>
+              <%= current_user.email.split('@').first %>
+            <% end %>
+          </strong>
+          <% if current_user.profileable_type == "StudentProfile" %>
+            <div class="score-pill score-pill-compact mt-2">
+              <span class="dot dot-success"></span>
+              <strong><%= (@profile.commitment_score rescue 100).to_i %>%</strong>
+              <span class="score-label"><%= t('dashboard.commitment_score', default: 'Commitment') %></span>
+            </div>
+          <% end %>
+        </div>
+        <% if current_user.profileable_type == "StudentProfile" %>
+          <%= link_to student_profile_path(@profile), class: "btn btn-secondary btn-compact fs-11 flex-align-center gap-4 ml-6", title: t('users.edit.view_public_profile', default: 'View Public Profile') do %>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>Public Profile</span>
+          <% end %>
+        <% elsif current_user.profileable_type == "CompanyProfile" %>
+          <%= link_to company_profile_path(@profile), class: "btn btn-secondary btn-compact fs-11 flex-align-center gap-4 ml-6", title: t('users.edit.view_public_profile', default: 'View Public Profile') do %>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>Public Profile</span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <%# ─── Horizontal Segmented Navigation Tab Strip ─────────────────── %>
+    <nav class="settings-horizontal-nav-bar" role="tablist">
+      <button type="button" class="settings-nav-item active" data-pane="pane-personal">
+        <span class="settings-nav-icon-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        <span><%= t('users.edit.tab_personal', default: 'Personal Profile') %></span>
+      </button>
+
+      <% if current_user.profileable_type == "StudentProfile" %>
+        <button type="button" class="settings-nav-item" data-pane="pane-skills">
+          <span class="settings-nav-icon-badge">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </span>
+          <span><%= t('users.edit.tab_skills', default: 'Skills & Stack') %></span>
+          <span class="sidebar-count-badge" id="nav-skills-badge"><%= @profile.skill_ids.count %></span>
+        </button>
+
+        <button type="button" class="settings-nav-item" data-pane="pane-cv">
+          <span class="settings-nav-icon-badge">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+          </span>
+          <span><%= t('users.edit.tab_resume', default: 'Resume & CV') %></span>
+          <% if @profile.cv.attached? %>
+            <span class="fs-10 text-emerald fw-700">PDF</span>
+          <% end %>
+        </button>
+      <% end %>
+
+      <button type="button" class="settings-nav-item" data-pane="pane-security">
+        <span class="settings-nav-icon-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </span>
+        <span><%= t('users.edit.tab_security', default: 'Account & Security') %></span>
+      </button>
+    </nav>
   </div>
 
   <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), method: :put, html: { multipart: true, id: "settings-main-form" } do |f| %>
@@ -56,110 +134,8 @@
       </div>
     <% end %>
 
-    <%# ─── 2-Column Hub Layout ───────────────────────────────────────── %>
-    <div class="settings-hub-grid">
-
-      <%# Left Sidebar Navigation & Mini Profile Preview Card %>
-      <div class="settings-sidebar">
-        <div class="settings-nav-card mb-12">
-          <nav class="settings-nav-list" role="tablist">
-            <button type="button" class="settings-nav-item active" data-pane="pane-personal">
-              <span class="flex-align-center gap-12">
-                <span class="settings-nav-icon-badge">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                </span>
-                <span><%= t('users.edit.tab_personal', default: 'Personal Profile') %></span>
-              </span>
-              <span class="tab-status-dot dot-active"></span>
-            </button>
-
-            <% if current_user.profileable_type == "StudentProfile" %>
-              <button type="button" class="settings-nav-item" data-pane="pane-skills">
-                <span class="flex-align-center gap-12">
-                  <span class="settings-nav-icon-badge">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                  </span>
-                  <span><%= t('users.edit.tab_skills', default: 'Skills & Stack') %></span>
-                </span>
-                <span class="sidebar-count-badge" id="nav-skills-badge"><%= @profile.skill_ids.count %></span>
-              </button>
-
-              <button type="button" class="settings-nav-item" data-pane="pane-cv">
-                <span class="flex-align-center gap-12">
-                  <span class="settings-nav-icon-badge">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-                  </span>
-                  <span><%= t('users.edit.tab_resume', default: 'Resume & CV') %></span>
-                </span>
-                <% if @profile.cv.attached? %>
-                  <span class="fs-10 text-emerald fw-700">PDF</span>
-                <% end %>
-              </button>
-            <% end %>
-
-            <button type="button" class="settings-nav-item" data-pane="pane-security">
-              <span class="flex-align-center gap-12">
-                <span class="settings-nav-icon-badge">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                </span>
-                <span><%= t('users.edit.tab_security', default: 'Account & Security') %></span>
-              </span>
-            </button>
-          </nav>
-        </div>
-
-        <%# Live Mini Profile Card Preview (Ultra-Clean & Tactile Card) %>
-        <div class="sidebar-profile-preview-card mt-12">
-          <div class="preview-card-header">
-            <div class="preview-avatar-circle">
-              <span id="preview-avatar-text"><%= (current_user.email.first rescue 'U').upcase %></span>
-            </div>
-            <div class="preview-card-info">
-              <strong class="sidebar-preview-name block color-primary text-truncate fs-14 margin-0 fw-700" id="preview-name-text">
-                <% if current_user.profileable_type == "StudentProfile" %>
-                  <%= @profile.first_name.presence || "Candidate" %> <%= @profile.last_name %>
-                <% elsif current_user.profileable_type == "CompanyProfile" %>
-                  <%= @profile.name.presence || "Employer" %>
-                <% else %>
-                  <%= current_user.email.split('@').first %>
-                <% end %>
-              </strong>
-              <span class="fs-12 text-muted block text-truncate mt-2" id="preview-sub-text">
-                <% if current_user.profileable_type == "StudentProfile" %>
-                  <%= @profile.university&.name || @profile.major.presence || t('users.edit.preview_student_label', default: 'Student Candidate') %>
-                <% elsif current_user.profileable_type == "CompanyProfile" %>
-                  <%= t('users.edit.preview_company_label', default: 'Company Profile') %>
-                <% else %>
-                  <%= t('users.edit.preview_university_label', default: 'University Account') %>
-                <% end %>
-              </span>
-            </div>
-          </div>
-
-          <% if current_user.profileable_type == "StudentProfile" %>
-            <div class="preview-stats-row mb-12">
-              <div class="score-pill">
-                <span class="dot dot-success"></span>
-                <strong><%= (@profile.commitment_score rescue 100).to_i %>%</strong>
-                <span class="score-label"><%= t('dashboard.commitment_score', default: 'Commitment') %></span>
-              </div>
-            </div>
-
-            <%= link_to student_profile_path(@profile), class: "btn btn-secondary btn-compact w-100 fs-12 justify-center flex-align-center gap-6" do %>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              <span><%= t('users.edit.view_public_profile', default: 'View Public Profile') %></span>
-            <% end %>
-          <% elsif current_user.profileable_type == "CompanyProfile" %>
-            <%= link_to company_profile_path(@profile), class: "btn btn-secondary btn-compact w-100 fs-12 justify-center flex-align-center gap-6" do %>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              <span><%= t('users.edit.view_public_profile', default: 'View Public Profile') %></span>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-
-      <%# Right Main Pane Content Container %>
-      <div class="settings-content-area">
+    <%# ─── Full Width Focused Settings Area ─────────────────────────── %>
+    <div class="settings-content-area settings-content-focused">
 
         <%# ─── TAB PANE 1: PERSONAL / PROFILE ────────────────────────── %>
         <div class="settings-pane active" id="pane-personal">
@@ -528,11 +504,8 @@
             <%= link_to t('common.cancel', default: 'Cancel'), dashboard_path, class: "btn btn-secondary btn-compact" %>
             <%= f.submit t('users.edit.save_changes', default: 'Save Changes'), class: "btn btn-primary btn-compact px-20", data: { turbo_submits_with: t('users.edit.save_changes', default: 'Save Changes') } %>
           </div>
-        </div>
-
       </div>
 
-    </div>
   <% end %>
 </div>
 

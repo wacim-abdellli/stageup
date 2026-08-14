@@ -1233,9 +1233,9 @@
     border-color: #E2E8F0 !important;
   }
 
-  /* ─── Premium Vercel/Linear Settings Hub Design System Overrides ─── */
+  /* ─── Premium Vercel/Linear Settings Hub System Overrides ─── */
   .settings-hub-container {
-    max-width: 1100px !important;
+    max-width: 1060px !important;
     margin: 0 auto !important;
     padding: 16px 20px 60px !important;
   }
@@ -1243,8 +1243,8 @@
   .settings-hub-header {
     position: relative !important;
     border-bottom: 1px solid var(--border-color) !important;
-    padding-bottom: 14px !important;
-    margin-bottom: 20px !important;
+    padding-bottom: 16px !important;
+    margin-bottom: 24px !important;
     background: transparent !important;
   }
 
@@ -1307,54 +1307,26 @@
     line-height: 1.4 !important;
   }
 
-  #settings-main-form {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .settings-hub-grid {
-    display: grid !important;
-    grid-template-columns: 240px 1fr !important;
-    gap: 24px !important;
-    align-items: start !important;
-    margin-top: 0 !important;
-  }
-
-  @media (max-width: 900px) {
-    .settings-hub-grid {
-      grid-template-columns: 1fr !important;
-    }
-  }
-
-  /* Left Sidebar Navigation */
-  .settings-sidebar {
-    min-width: 0 !important;
-    position: sticky !important;
-    top: 80px !important;
-  }
-
-  .settings-nav-card {
+  /* ─── Top Horizontal Segmented Navigation Tab Strip ─── */
+  .settings-horizontal-nav-bar {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 5px !important;
     background: var(--bg-secondary) !important;
     border: 1px solid var(--border-color) !important;
     border-radius: 12px !important;
-    padding: 6px !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
-    margin-bottom: 14px !important;
+    flex-wrap: wrap !important;
+    margin-top: 16px !important;
   }
 
-  .settings-nav-list {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 3px !important;
-  }
-
-  .settings-nav-item {
-    position: relative !important;
-    width: 100% !important;
-    display: flex !important;
+  .settings-horizontal-nav-bar .settings-nav-item {
+    width: auto !important;
+    display: inline-flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
-    padding: 8px 12px !important;
+    gap: 8px !important;
+    padding: 8px 16px !important;
     min-height: 38px !important;
     border-radius: 8px !important;
     border: 1px solid transparent !important;
@@ -1363,34 +1335,26 @@
     font-size: 13px !important;
     font-weight: 500 !important;
     cursor: pointer !important;
-    text-align: left !important;
     transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
     box-sizing: border-box !important;
   }
 
-  .settings-nav-item:hover {
+  .settings-horizontal-nav-bar .settings-nav-item:hover {
     background: rgba(255, 255, 255, 0.04) !important;
     color: var(--text-primary) !important;
     border-color: rgba(255, 255, 255, 0.06) !important;
   }
 
-  .settings-nav-item.active {
-    background: rgba(194, 65, 12, 0.12) !important;
-    border-color: rgba(194, 65, 12, 0.25) !important;
+  .settings-horizontal-nav-bar .settings-nav-item.active {
+    background: rgba(194, 65, 12, 0.14) !important;
+    border-color: rgba(194, 65, 12, 0.3) !important;
     color: #FB923C !important;
     font-weight: 600 !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
   }
 
-  .settings-nav-item.active::before {
-    content: '' !important;
-    position: absolute !important;
-    left: 0 !important;
-    top: 6px !important;
-    bottom: 6px !important;
-    width: 3px !important;
-    background: #EA580C !important;
-    border-radius: 0 2px 2px 0 !important;
+  .settings-horizontal-nav-bar .settings-nav-item.active::before {
+    display: none !important;
   }
 
   .settings-nav-icon-badge {
@@ -1432,40 +1396,41 @@
     border-color: rgba(194, 65, 12, 0.35) !important;
   }
 
-  /* Mini Profile Sidebar Preview Card */
-  .sidebar-profile-preview-card {
-    background: var(--bg-secondary) !important;
+  /* Header Profile Banner Widget */
+  .header-profile-banner-widget {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 6px 14px !important;
+    background: rgba(255, 255, 255, 0.02) !important;
     border: 1px solid var(--border-color) !important;
-    border-radius: 12px !important;
-    padding: 14px !important;
-    margin-top: 14px !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+    border-radius: 9999px !important;
+    backdrop-filter: blur(12px) !important;
   }
 
-  .preview-card-header {
+  .header-widget-info {
     display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    margin-bottom: 12px !important;
+    flex-direction: column !important;
   }
 
-  .preview-avatar-circle {
-    width: 38px !important;
-    height: 38px !important;
-    border-radius: 50% !important;
-    background: linear-gradient(135deg, #C2410C 0%, #EA580C 100%) !important;
-    color: #FFFFFF !important;
-    font-family: 'Outfit', sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 15px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex-shrink: 0 !important;
-    box-shadow: 0 2px 8px rgba(194, 65, 12, 0.3) !important;
+  .score-pill-compact {
+    padding: 1px 8px !important;
+    font-size: 11px !important;
+    height: auto !important;
   }
 
-  /* Right Main Content Card */
+  /* Full Width Centered Focused Layout */
+  .settings-content-focused {
+    max-width: 960px !important;
+    margin: 0 auto !important;
+  }
+
+  #settings-main-form {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Main Content Card */
   .settings-card {
     background: var(--bg-secondary) !important;
     border: 1px solid var(--border-color) !important;
@@ -1621,8 +1586,8 @@
   }
 
   /* Light Theme Overrides */
-  [data-theme="light"] .settings-nav-card,
-  [data-theme="light"] .sidebar-profile-preview-card,
+  [data-theme="light"] .settings-horizontal-nav-bar,
+  [data-theme="light"] .header-profile-banner-widget,
   [data-theme="light"] .settings-card {
     background: #FFFFFF !important;
     border-color: #E2E8F0 !important;
@@ -1641,12 +1606,12 @@
     box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.12) !important;
   }
 
-  [data-theme="light"] .settings-nav-item:hover {
+  [data-theme="light"] .settings-horizontal-nav-bar .settings-nav-item:hover {
     background: #F1F5F9 !important;
     color: #0F172A !important;
   }
 
-  [data-theme="light"] .settings-nav-item.active {
+  [data-theme="light"] .settings-horizontal-nav-bar .settings-nav-item.active {
     background: rgba(194, 65, 12, 0.08) !important;
     border-color: rgba(194, 65, 12, 0.2) !important;
     color: #C2410C !important;
