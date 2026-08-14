@@ -24,8 +24,8 @@
 <div class="settings-hub-container">
   
   <%# ─── Settings Header Bar ────────────────────────────────────────── %>
-  <div class="settings-hub-header mb-12">
-    <div class="flex-between flex-align-center flex-wrap gap-12 mb-8">
+  <div class="settings-hub-header">
+    <div class="flex-between flex-align-center flex-wrap gap-12 mb-6">
       <div class="flex-align-center gap-10">
         <%= link_to dashboard_path, class: "btn-back-settings" do %>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
@@ -38,7 +38,7 @@
       </div>
     </div>
     <h1 class="settings-hub-title margin-0"><%= t('users.edit.title', default: 'Account & Profile Settings') %></h1>
-    <p class="settings-hub-subtitle margin-0 mt-4"><%= t('users.edit.subtitle', default: 'Manage your public portfolio, technical skills taxonomy, and security preferences.') %></p>
+    <p class="settings-hub-subtitle margin-0 mt-2"><%= t('users.edit.subtitle', default: 'Manage your public portfolio, technical skills taxonomy, and security preferences.') %></p>
   </div>
 
   <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), method: :put, html: { multipart: true, id: "settings-main-form" } do |f| %>
@@ -62,7 +62,7 @@
 
       <%# Left Sidebar Navigation & Mini Profile Preview Card %>
       <div class="settings-sidebar">
-        <div class="settings-nav-card mb-20">
+        <div class="settings-nav-card mb-12">
           <nav class="settings-nav-list" role="tablist">
             <button type="button" class="settings-nav-item active" data-pane="pane-personal">
               <span class="flex-align-center gap-12">
@@ -110,7 +110,7 @@
         </div>
 
         <%# Live Mini Profile Card Preview (Ultra-Clean & Tactile Card) %>
-        <div class="sidebar-profile-preview-card mt-20">
+        <div class="sidebar-profile-preview-card mt-12">
           <div class="preview-card-header">
             <div class="preview-avatar-circle">
               <span id="preview-avatar-text"><%= (current_user.email.first rescue 'U').upcase %></span>
@@ -164,8 +164,8 @@
 
         <%# ─── TAB PANE 1: PERSONAL / PROFILE ────────────────────────── %>
         <div class="settings-pane active" id="pane-personal">
-          <div class="settings-card mb-24">
-            <div class="settings-card-header mb-24 flex-between flex-wrap gap-12">
+          <div class="settings-card mb-16">
+            <div class="settings-card-header mb-14 flex-between flex-wrap gap-12">
               <div class="flex-align-center gap-12">
                 <div class="settings-icon-badge">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -271,10 +271,10 @@
         <%# ─── TAB PANE 2: SKILLS & STACK (STUDENT ONLY) ────────────────── %>
         <% if current_user.profileable_type == "StudentProfile" %>
           <div class="settings-pane" id="pane-skills">
-            <div class="settings-card mb-24">
+            <div class="settings-card mb-16">
 
               <%# Pane Header with Taxonomy Stats & Reset %>
-              <div class="settings-card-header mb-24 flex-between flex-wrap gap-16">
+              <div class="settings-card-header mb-14 flex-between flex-wrap gap-16">
                 <div class="flex-align-center gap-12">
                   <div class="settings-icon-badge">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -403,8 +403,8 @@
         <%# ─── TAB PANE 3: RESUME & CV (STUDENT ONLY) ─────────────────── %>
         <% if current_user.profileable_type == "StudentProfile" %>
           <div class="settings-pane" id="pane-cv">
-            <div class="settings-card mb-24">
-              <div class="settings-card-header mb-24 flex-between flex-wrap gap-12">
+            <div class="settings-card mb-16">
+              <div class="settings-card-header mb-14 flex-between flex-wrap gap-12">
                 <div class="flex-align-center gap-12">
                   <div class="settings-icon-badge">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -418,7 +418,7 @@
 
               <%= fields_for :student_profile, @profile do |sp| %>
                 <% if @profile.cv.attached? %>
-                  <div class="cv-active-card mb-24 flex-between flex-wrap gap-16">
+                  <div class="cv-active-card mb-16 flex-between flex-wrap gap-16">
                     <div class="flex-align-center gap-14">
                       <div class="pdf-file-badge">PDF</div>
                       <div>
@@ -454,8 +454,8 @@
 
         <%# ─── TAB PANE 4: ACCOUNT & SECURITY ────────────────────────── %>
         <div class="settings-pane" id="pane-security">
-          <div class="settings-card mb-24">
-            <div class="settings-card-header mb-24 flex-between flex-wrap gap-12">
+          <div class="settings-card mb-16">
+            <div class="settings-card-header mb-14 flex-between flex-wrap gap-12">
               <div class="flex-align-center gap-12">
                 <div class="settings-icon-badge">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -468,7 +468,7 @@
             </div>
 
             <%# Sub-card A: Email %>
-            <div class="security-subcard mb-24">
+            <div class="security-subcard mb-16">
               <h4 class="fs-14 fw-600 color-primary mb-14 flex-align-center gap-8">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 <span><%= t('users.edit.email_address_label', default: 'Email Address') %></span>

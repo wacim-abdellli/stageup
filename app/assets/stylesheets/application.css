@@ -5107,8 +5107,8 @@ button.btn-accent:hover,
 /* 2-Column Settings Hub & Skills Matrix Design System */
 .settings-hub-container {
   max-width: 1200px;
-  margin: 16px auto 0;
-  padding: 0 24px 60px;
+  margin: 0 auto;
+  padding: 12px 24px 48px;
 }
 
 .settings-hub-header {
@@ -5116,8 +5116,8 @@ button.btn-accent:hover,
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--border-color);
-  padding: 0 0 12px 0;
-  margin-bottom: 16px;
+  padding: 0 0 10px 0;
+  margin-bottom: 14px;
   box-shadow: none;
   border-radius: 0;
 }
@@ -5665,13 +5665,14 @@ button.btn-accent:hover,
 .settings-hub-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 16px 24px 60px;
+  padding: 12px 24px 48px;
 }
 
 .settings-hub-header {
   position: relative;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 8px;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .settings-header-ambient {
@@ -6175,39 +6176,22 @@ button.btn-accent:hover,
 
 
 .settings-card {
-
   background: var(--bg-secondary);
-
   border: 1px solid var(--border-color);
-
   border-radius: var(--radius-lg);
-
-  padding: 28px 32px;
-
+  padding: 20px 24px;
   box-shadow: var(--shadow-sm);
-
 }
-
-
 
 @media (max-width: 640px) {
-
   .settings-card {
-
-    padding: 20px 16px;
-
+    padding: 16px 14px;
   }
-
 }
 
-
-
 .settings-card-header {
-
   border-bottom: 1px solid var(--border-color);
-
-  padding-bottom: 18px;
-
+  padding-bottom: 12px;
 }
 
 
@@ -7060,13 +7044,9 @@ button.btn-accent:hover,
 /* Field Group Sections (Personal Tab) */
 
 .field-group-section {
-
   border-bottom: 1px solid var(--border-color);
-
-  padding-bottom: 24px;
-
-  margin-bottom: 24px;
-
+  padding-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 
@@ -8024,21 +8004,13 @@ button.btn-accent:hover,
 
 
 .settings-card {
-
   background: var(--bg-secondary);
-
   border: 1px solid var(--border-color);
-
   border-radius: var(--radius-lg);
-
-  padding: 32px 36px;
-
+  padding: 20px 24px;
   backdrop-filter: blur(16px);
-
   -webkit-backdrop-filter: blur(16px);
-
   box-shadow: var(--shadow-sm);
-
 }
 
 
