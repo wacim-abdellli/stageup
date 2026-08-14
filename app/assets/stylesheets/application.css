@@ -5116,8 +5116,8 @@ button.btn-accent:hover,
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--border-color);
-  padding: 0 0 10px 0;
-  margin-bottom: 14px;
+  padding: 0 0 6px 0;
+  margin-bottom: 0;
   box-shadow: none;
   border-radius: 0;
 }
