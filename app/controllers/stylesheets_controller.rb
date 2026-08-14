@@ -7,7 +7,7 @@ class StylesheetsController < ApplicationController
 
     if css_file.file?
       css = css_file.read
-      expires_in 1.hour, public: true
+      expires_in 10.seconds, public: true
       render body: css, content_type: "text/css; charset=utf-8"
     else
       head :not_found
