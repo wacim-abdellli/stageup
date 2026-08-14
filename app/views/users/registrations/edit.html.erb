@@ -25,20 +25,19 @@
   
   <%# ─── Settings Header Bar ────────────────────────────────────────── %>
   <div class="settings-hub-header">
-    <div class="flex-between flex-align-center flex-wrap gap-12 mb-6">
-      <div class="flex-align-center gap-10">
-        <%= link_to dashboard_path, class: "btn-back-settings" do %>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mr-4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          <span><%= t('dashboard.title', default: 'Dashboard') %></span>
-        <% end %>
-        <span class="settings-role-badge">
-          <span class="role-status-dot"></span>
-          <span><%= t("roles.#{current_user.profileable_type.underscore}", default: current_user.profileable_type.underscore.humanize.upcase) %></span>
-        </span>
-      </div>
+    <div class="settings-top-row">
+      <%= link_to dashboard_path, class: "settings-breadcrumb-link" do %>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span><%= t('dashboard.title', default: 'Dashboard') %></span>
+      <% end %>
+      <span class="settings-breadcrumb-sep">/</span>
+      <span class="settings-role-badge">
+        <span class="role-status-dot"></span>
+        <span><%= t("roles.#{current_user.profileable_type.underscore}", default: current_user.profileable_type.underscore.humanize.upcase) %></span>
+      </span>
     </div>
-    <h1 class="settings-hub-title margin-0"><%= t('users.edit.title', default: 'Account & Profile Settings') %></h1>
-    <p class="settings-hub-subtitle margin-0 mt-2"><%= t('users.edit.subtitle', default: 'Manage your public portfolio, technical skills taxonomy, and security preferences.') %></p>
+    <h1 class="settings-hub-title"><%= t('users.edit.title', default: 'Account & Profile Settings') %></h1>
+    <p class="settings-hub-subtitle"><%= t('users.edit.subtitle', default: 'Manage your public portfolio, technical skills taxonomy, and security preferences.') %></p>
   </div>
 
   <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), method: :put, html: { multipart: true, id: "settings-main-form" } do |f| %>
