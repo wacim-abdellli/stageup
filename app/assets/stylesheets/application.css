@@ -22627,7 +22627,7 @@ html[dir="rtl"] .role-card:hover .role-arrow {
    ════════════════════════════════════════════════ */
 
 /* Hide the print cert on screen */
-#cert-print-page { display: none; }
+#cert-print-page { display: none !important; }
 
 @media print {
   @page {
