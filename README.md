@@ -290,5 +290,5 @@ kamal app exec 'rails db:migrate'
 Proprietary software. All rights reserved.
 
 <div align="center">
-Built with ❤️ in Tunisia ·
+Built with ❤️ in Tunisia · Powered by StageUp Team
 </div>
