@@ -11,7 +11,7 @@ Rails.application.configure do
     policy.img_src     :self, :https, :data
     policy.object_src  :none
     policy.script_src  :self, "https://unpkg.com"
-    policy.style_src   :self
+    policy.style_src   :self, "https://fonts.googleapis.com"
     policy.base_uri    :self
     policy.form_action :self
     policy.frame_ancestors :none

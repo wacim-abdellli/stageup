@@ -110,7 +110,8 @@
       <%# Verification Footer %>
       <div class="cert-diploma-footer">
         <div class="cert-diploma-qr-col">
-          <%= qr.as_svg(offset: 0, color: "1A1A2E", shape_rendering: "crispEdges", viewbox: true, use_path: true, standalone: true).html_safe %>
+          <% qr_svg = qr.as_svg(offset: 0, color: "000000", shape_rendering: "crispEdges", viewbox: true, use_path: true, standalone: false) %>
+          <%= qr_svg.sub('<svg ', '<svg width="64" height="64" ').html_safe %>
         </div>
         <div class="cert-diploma-token-col">
           <p class="cert-diploma-token-label"><%= t('certificates.verify.verification_token', default: 'Verification Token') %> (StageUp <%= t('certificates.verify.trust_ledger', default: 'Trust Ledger') %>)</p>
