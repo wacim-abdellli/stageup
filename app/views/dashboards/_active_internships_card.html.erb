@@ -44,7 +44,7 @@
                   <% end %>
                 <% end %>
               <% elsif sub.internship_agreement&.verification_token.present? %>
-                <%= link_to verify_certificate_path(token: sub.internship_agreement.verification_token), class: "btn btn-primary btn-compact", target: "_blank" do %>
+                <%= link_to verify_certificate_path(token: sub.internship_agreement.verification_token), class: "btn btn-primary btn-compact", target: "_blank", data: { turbo: false } do %>
                   📜 <%= t('dashboard.active_internships.view_certificate', default: 'View Certificate') %>
                 <% end %>
               <% end %>

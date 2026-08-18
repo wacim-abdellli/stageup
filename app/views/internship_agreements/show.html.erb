@@ -43,7 +43,8 @@
         <%= link_to t('dashboard.internship_agreements.show.view_certificate'),
             verify_certificate_path(token: @agreement.verification_token),
             class: "btn btn-primary btn-compact",
-            target: "_blank" %>
+            target: "_blank",
+            data: { turbo: false } %>
       </div>
     <% end %>
 

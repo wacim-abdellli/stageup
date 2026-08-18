@@ -27,5 +27,7 @@ class CertificatesController < ApplicationController
     @student    = @submission.student_profile
     @offer      = @submission.offer
     @company    = @offer.company_profile
+
+    render :verify, layout: "certificate"
   end
 end

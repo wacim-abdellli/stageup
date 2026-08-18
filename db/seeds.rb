@@ -234,8 +234,7 @@ sub_3.update!(
   status: "accepted",
   github_link: "https://github.com/wacim-abdellli/data-challenge",
   submission_notes: "Cleaned telemetry dataset and trained PyTorch anomaly detection model.",
-  submitted_at: 5.days.ago,
-  accepted_at: 4.days.ago
+  submitted_at: 5.days.ago
 )
 
 agreement_1 = InternshipAgreement.find_or_initialize_by(submission: sub_3)
@@ -245,7 +244,6 @@ agreement_1.update!(
   student_signed_at: 4.days.ago,
   company_signed_at: 4.days.ago,
   university_signed_at: 3.days.ago,
-  academic_year: "2025-2026",
   start_date: 30.days.from_now.to_date,
   end_date: 120.days.from_now.to_date
 )
@@ -257,18 +255,16 @@ sub_4.update!(
   status: "accepted",
   github_link: "https://github.com/cyrine-trabelsi/ai-pipeline",
   submission_notes: "Implemented machine learning anomaly detection pipeline with PyTorch.",
-  submitted_at: 10.days.ago,
-  accepted_at: 8.days.ago
+  submitted_at: 10.days.ago
 )
 
 agreement_2 = InternshipAgreement.find_or_initialize_by(submission: sub_4)
 agreement_2.update!(
   status: "fully_executed",
-  verification_token: "STAGEUP-CERT-CYRINE-TRABELSI-2026",
+  verification_token: "9BV0bQXrNWsGjUmEJHOBuw",
   student_signed_at: 8.days.ago,
   company_signed_at: 7.days.ago,
   university_signed_at: 6.days.ago,
-  academic_year: "2025-2026",
   start_date: 60.days.ago.to_date,
   end_date: 10.days.ago.to_date
 )
@@ -280,8 +276,7 @@ sub_5.update!(
   status: "accepted",
   github_link: "https://github.com/youssef-chaabane/iot-dashboard",
   submission_notes: "Built IoT sensor data collection dashboard with WebSockets.",
-  submitted_at: 15.days.ago,
-  accepted_at: 12.days.ago
+  submitted_at: 15.days.ago
 )
 
 agreement_3 = InternshipAgreement.find_or_initialize_by(submission: sub_5)
@@ -291,7 +286,6 @@ agreement_3.update!(
   student_signed_at: 12.days.ago,
   company_signed_at: 11.days.ago,
   university_signed_at: 10.days.ago,
-  academic_year: "2025-2026",
   start_date: 90.days.ago.to_date,
   end_date: 15.days.ago.to_date
 )

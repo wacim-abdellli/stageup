@@ -30,6 +30,22 @@ css_app = lambda do |env|
   path = env["PATH_INFO"].to_s
 
   if path.end_with?(".css") || path.include?("stylesheet")
+    # Check if specific static file exists in public/
+    clean_path = path.delete_prefix("/")
+    public_file = Rails.root.join("public", clean_path)
+    if File.file?(public_file)
+      content = File.read(public_file)
+      return [
+        200,
+        {
+          "content-type" => "text/css; charset=utf-8",
+          "cache-control" => "public, max-age=3600",
+          "content-length" => content.bytesize.to_s
+        },
+        [content]
+      ]
+    end
+
     css_file = Rails.root.join("app/assets/stylesheets/application.css")
     if File.file?(css_file)
       content = File.read(css_file)
@@ -37,7 +53,7 @@ css_app = lambda do |env|
         200,
         {
           "content-type" => "text/css; charset=utf-8",
-          "cache-control" => "public, max-age=31536000, immutable",
+          "cache-control" => "public, max-age=3600",
           "content-length" => content.bytesize.to_s
         },
         [content]
