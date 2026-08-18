@@ -7,8 +7,439 @@
 <% student_major = (@student.respond_to?(:major) && @student.major.present?) ? @student.major : "Software Engineering" %>
 <% start_str = @agreement.start_date.strftime("%B %d, %Y") %>
 <% end_str   = @agreement.end_date.strftime("%B %d, %Y") %>
-
-
+<% content_for :head do %>
+  <style>
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 8mm 10mm;
+      }
+      *, *::before, *::after {
+        text-shadow: none !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+      html, body {
+        background: #FFFFFF !important;
+        color: #0F172A !important;
+        font-size: 8.5pt !important;
+        line-height: 1.35 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .navbar, .navbar-mobile-menu, .cert-action-bar, .hide-on-print, .cert-copy-btn {
+        display: none !important;
+      }
+      .cert-page-wrap {
+        padding: 0 !important;
+        margin: 0 auto !important;
+        max-width: 100% !important;
+        min-height: auto !important;
+      }
+      .cert-document {
+        background: #FFFFFF !important;
+        color: #0F172A !important;
+        box-shadow: none !important;
+        border: 2px solid #C9A84C !important;
+        border-radius: 4px !important;
+        outline: 1px solid rgba(201, 168, 76, 0.4) !important;
+        outline-offset: -5px !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .cert-document::before, .cert-document::after {
+        display: none !important;
+      }
+      .cert-doc-header {
+        background: #FDFBF7 !important;
+        border-bottom: 1.5px solid #C9A84C !important;
+        padding: 12px 24px 10px !important;
+        text-align: center !important;
+      }
+      .cert-issuer-mark {
+        margin-bottom: 4px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+      }
+      .cert-issuer-logo {
+        color: #9A6F09 !important;
+        font-size: 10pt !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.08em !important;
+      }
+      .cert-issuer-sep { color: #C9A84C !important; }
+      .cert-issuer-sub {
+        color: #786C5E !important;
+        font-size: 7pt !important;
+        font-weight: 600 !important;
+      }
+      .cert-doc-meta {
+        margin-bottom: 6px !important;
+        display: flex !important;
+        justify-content: center !important;
+        gap: 8px !important;
+      }
+      .cert-meta-tag {
+        color: #9A6F09 !important;
+        background: #FEF8ED !important;
+        border: 1px solid #D4AF37 !important;
+        font-size: 6.5pt !important;
+        font-weight: 700 !important;
+        padding: 2px 8px !important;
+        border-radius: 9999px !important;
+      }
+      .cert-meta-id {
+        color: #786C5E !important;
+        border: 1px solid #E5E7EB !important;
+        background: #FFFFFF !important;
+        font-size: 7pt !important;
+        padding: 2px 8px !important;
+        border-radius: 9999px !important;
+      }
+      .cert-doc-title {
+        color: #8B5E0A !important;
+        -webkit-text-fill-color: #8B5E0A !important;
+        background: none !important;
+        font-size: 16pt !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.06em !important;
+        margin: 4px 0 !important;
+        line-height: 1.15 !important;
+      }
+      .cert-doc-subtitle {
+        color: #6B7280 !important;
+        font-size: 7.5pt !important;
+        margin: 0 auto 6px !important;
+        max-width: 480px !important;
+        font-style: italic !important;
+      }
+      .cert-doc-rule { margin-top: 4px !important; }
+      .cert-doc-rule::before, .cert-doc-rule::after {
+        background: #C9A84C !important;
+        height: 1px !important;
+      }
+      .cert-section {
+        background: #FFFFFF !important;
+        border-bottom: 1px solid #F1ECE1 !important;
+        padding: 8px 24px !important;
+      }
+      .cert-section-label {
+        color: #9A6F09 !important;
+        border-bottom: 1px solid #F1ECE1 !important;
+        font-size: 6.5pt !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.12em !important;
+        margin-bottom: 5px !important;
+        padding-bottom: 3px !important;
+      }
+      .cert-section-label svg {
+        stroke: #9A6F09 !important;
+        width: 10px !important;
+        height: 10px !important;
+      }
+      .cert-section-text {
+        color: #1F2937 !important;
+        font-size: 8pt !important;
+        line-height: 1.45 !important;
+        margin: 0 !important;
+      }
+      .cert-section-text strong {
+        color: #0F172A !important;
+        font-weight: 700 !important;
+      }
+      .cert-section-text em { color: #1F2937 !important; }
+      .cert-parties {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+        margin-top: 6px !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .cert-party-divider { display: none !important; }
+      .cert-party {
+        background: #FDFBF7 !important;
+        border: 1px solid #E8DFD1 !important;
+        border-radius: 4px !important;
+        padding: 6px 10px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+      }
+      .cert-party-role {
+        color: #9A6F09 !important;
+        font-size: 6pt !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.1em !important;
+        text-transform: uppercase !important;
+        margin-bottom: 2px !important;
+      }
+      .cert-party-name {
+        color: #0F172A !important;
+        font-size: 8.5pt !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+      }
+      .cert-party-detail {
+        color: #4B5563 !important;
+        font-size: 7pt !important;
+        line-height: 1.25 !important;
+      }
+      .cert-party-sub {
+        color: #6B7280 !important;
+        font-size: 6.5pt !important;
+        font-style: italic !important;
+      }
+      .cert-stat-row {
+        display: flex !important;
+        margin-top: 6px !important;
+        background: #FDFBF7 !important;
+        border: 1px solid #E8DFD1 !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+      }
+      .cert-stat {
+        flex: 1 !important;
+        padding: 5px 10px !important;
+        border-right: 1px solid #E8DFD1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1px !important;
+      }
+      .cert-stat:last-child { border-right: none !important; }
+      .cert-stat-label {
+        color: #786C5E !important;
+        font-size: 6pt !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.1em !important;
+        text-transform: uppercase !important;
+      }
+      .cert-stat-value {
+        color: #0F172A !important;
+        font-size: 12pt !important;
+        font-weight: 800 !important;
+        line-height: 1.1 !important;
+      }
+      .cert-stat-value em {
+        font-size: 7.5pt !important;
+        color: #6B7280 !important;
+        font-style: normal !important;
+      }
+      .cert-stat-badge {
+        color: #9A6F09 !important;
+        font-size: 10pt !important;
+        font-weight: 800 !important;
+      }
+      .cert-section-verify { border-bottom: none !important; }
+      .cert-verify-layout {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 14px !important;
+        align-items: center !important;
+        margin-top: 4px !important;
+      }
+      .cert-verify-info { flex: 1 !important; }
+      .cert-verify-intro {
+        font-size: 7.5pt !important;
+        color: #4B5563 !important;
+        margin-bottom: 6px !important;
+        line-height: 1.4 !important;
+      }
+      .cert-token-block {
+        background: #FDFBF7 !important;
+        border: 1px solid #E8DFD1 !important;
+        border-radius: 4px !important;
+        padding: 6px 10px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        margin-top: 0 !important;
+      }
+      .cert-token-top {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+      }
+      .cert-token-top-left {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+      }
+      .cert-token-label {
+        color: #786C5E !important;
+        font-size: 6pt !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.1em !important;
+        text-transform: uppercase !important;
+      }
+      .cert-immutable-pill {
+        color: #047857 !important;
+        background: #ECFDF5 !important;
+        border: 1px solid #A7F3D0 !important;
+        font-size: 5.5pt !important;
+        font-weight: 800 !important;
+        padding: 1px 6px !important;
+        border-radius: 9999px !important;
+      }
+      .cert-token-hash {
+        background: #F3F4F6 !important;
+        color: #1F2937 !important;
+        border: 1px solid #E5E7EB !important;
+        border-radius: 3px !important;
+        font-family: ui-monospace, monospace !important;
+        font-size: 7.5pt !important;
+        font-weight: 600 !important;
+        padding: 4px 8px !important;
+        word-break: break-all !important;
+        display: block !important;
+        line-height: 1.3 !important;
+      }
+      .cert-token-url {
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+      }
+      .cert-token-url svg {
+        stroke: #6B7280 !important;
+        width: 8px !important;
+        height: 8px !important;
+      }
+      .cert-token-url span {
+        color: #6B7280 !important;
+        font-size: 6.5pt !important;
+      }
+      .cert-qr-wrap {
+        width: 80px !important;
+        flex-shrink: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+      }
+      .cert-qr-box {
+        background: #FFFFFF !important;
+        border: 1px solid #C9A84C !important;
+        border-radius: 4px !important;
+        padding: 4px !important;
+        width: 74px !important;
+        height: 74px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: none !important;
+      }
+      .cert-qr-box svg {
+        width: 66px !important;
+        height: 66px !important;
+        max-width: 66px !important;
+        max-height: 66px !important;
+        display: block !important;
+      }
+      .cert-qr-scan-label {
+        color: #9A6F09 !important;
+        font-size: 5.5pt !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.1em !important;
+        text-transform: uppercase !important;
+      }
+      .cert-qr-scan-sub {
+        color: #6B7280 !important;
+        font-size: 5.5pt !important;
+      }
+      .cert-signatures {
+        background: #FDFBF7 !important;
+        border-top: 1.5px solid #C9A84C !important;
+        padding: 8px 24px 10px !important;
+      }
+      .cert-sig-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        margin-bottom: 6px !important;
+      }
+      .cert-sig-title {
+        color: #0F172A !important;
+        font-size: 7.5pt !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.08em !important;
+        margin: 0 !important;
+      }
+      .cert-fully-executed {
+        color: #047857 !important;
+        background: #ECFDF5 !important;
+        border: 1px solid #A7F3D0 !important;
+        font-size: 6pt !important;
+        font-weight: 700 !important;
+        padding: 2px 8px !important;
+        border-radius: 9999px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+      }
+      .cert-sig-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+      }
+      .cert-sig-card {
+        background: #FFFFFF !important;
+        border: 1px solid #E8DFD1 !important;
+        border-radius: 4px !important;
+        padding: 6px 8px !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1px !important;
+        box-shadow: none !important;
+      }
+      .cert-sig-role {
+        color: #9A6F09 !important;
+        font-size: 5.5pt !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.1em !important;
+      }
+      .cert-sig-name {
+        color: #0F172A !important;
+        font-size: 8pt !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+      }
+      .cert-sig-date {
+        color: #6B7280 !important;
+        font-size: 6.5pt !important;
+      }
+      .cert-sig-line {
+        border-top: 1px solid #D4AF37 !important;
+        margin: 3px 0 2px !important;
+        height: 0 !important;
+      }
+      .cert-sig-capacity {
+        color: #786C5E !important;
+        font-size: 6pt !important;
+        font-style: italic !important;
+      }
+      .cert-document,
+      .cert-doc-header,
+      .cert-section,
+      .cert-signatures,
+      .cert-sig-card,
+      .cert-parties,
+      .cert-stat-row,
+      .cert-token-block {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+    }
+  </style>
+<% end %>
 
 <div class="cert-page-wrap">
 
