@@ -1,0 +1,422 @@
+/* =====================================================================
+   STAGEUP CERTIFICATE OF COMPLETION – STANDALONE CSS
+   Served from /cert.css (public/cert.css) – no asset pipeline needed
+   ===================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: #F5F0E8;
+  color: #1A1A2E;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ── Action bar ──────────────────────────────────────────────────────── */
+.cert-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.cert-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: opacity 0.15s;
+  line-height: 1.4;
+}
+.cert-btn:hover { opacity: 0.85; }
+.cert-btn-secondary {
+  background: #FFFFFF;
+  color: #1A1A2E;
+  border: 1px solid rgba(201,168,76,0.5);
+}
+.cert-btn-primary {
+  background: linear-gradient(135deg, #8B5E0A 0%, #C9A84C 100%);
+  color: #FFFFFF;
+}
+
+/* ── Page wrapper ─────────────────────────────────────────────────────── */
+.cert-page-wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+/* ── Diploma frame ────────────────────────────────────────────────────── */
+.cert-diploma-frame {
+  width: 100%;
+  background: #FDFCF8;
+  color: #1A1A2E;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #C9A84C;
+  outline: 6px solid #F5ECD5;
+  outline-offset: -9px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(201,168,76,0.35);
+  overflow: hidden;
+}
+.cert-diploma-frame::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(201,168,76,0.3);
+  pointer-events: none;
+  border-radius: 2px;
+  z-index: 0;
+}
+
+/* Gold gradient stripes */
+.cert-diploma-stripe {
+  background: linear-gradient(90deg, #8B5E0A 0%, #C9A84C 30%, #F5D78E 50%, #C9A84C 70%, #8B5E0A 100%);
+  height: 8px;
+  flex-shrink: 0;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Diploma body */
+.cert-diploma-body {
+  flex: 1;
+  padding: 36px 48px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #1A1A2E;
+  position: relative;
+  z-index: 1;
+  background: #FDFCF8;
+}
+
+/* Issuer row */
+.cert-diploma-issuer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.cert-diploma-logo {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #C9A84C;
+}
+.cert-diploma-sep { color: #C9A84C; font-size: 16px; }
+.cert-diploma-ledger {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8B7355;
+}
+
+/* Ornament */
+.cert-diploma-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 440px;
+  margin-bottom: 14px;
+}
+.cert-diploma-orn-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A84C);
+  display: block;
+}
+.cert-diploma-ornament .cert-diploma-orn-line:last-child {
+  background: linear-gradient(90deg, #C9A84C, transparent);
+}
+.cert-diploma-orn-diamond {
+  width: 7px;
+  height: 7px;
+  background: #C9A84C;
+  transform: rotate(45deg);
+  display: inline-block;
+  flex-shrink: 0;
+}
+.cert-diploma-ornament-sm { margin: 16px 0 20px; max-width: 320px; }
+
+/* Title */
+.cert-diploma-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #8B5E0A;
+  margin: 0 0 8px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.cert-diploma-decree {
+  font-size: 12.5px;
+  color: #8B7355;
+  font-style: italic;
+  margin: 0 0 14px;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+/* Student name */
+.cert-diploma-name-wrap {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cert-diploma-student-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(24px, 3.8vw, 36px);
+  font-weight: 800;
+  color: #1A1A2E;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.cert-diploma-name-underline {
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #C9A84C 25%, #C9A84C 75%, transparent);
+  width: 260px;
+  margin: 0 auto;
+}
+
+/* Achievement */
+.cert-diploma-achievement {
+  font-size: 14px;
+  color: #2D2825;
+  margin: 0 0 6px;
+  line-height: 1.6;
+  max-width: 600px;
+}
+.cert-diploma-stage-type { color: #8B5E0A; font-weight: 800; letter-spacing: 0.04em; }
+.cert-diploma-company { color: #1A1A2E; font-weight: 700; }
+.cert-diploma-subject {
+  font-size: 13px;
+  color: #6B6054;
+  margin: 0 0 18px;
+  font-style: italic;
+  max-width: 540px;
+}
+.cert-diploma-subject em { font-style: normal; color: #2D2825; }
+
+/* Meta row */
+.cert-diploma-meta-row {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(201,168,76,0.45);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 4px;
+  width: 100%;
+  max-width: 580px;
+  background: linear-gradient(180deg, #FDF8EE 0%, #FDFCF8 100%);
+}
+.cert-diploma-meta-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 14px;
+  align-items: center;
+}
+.cert-diploma-meta-divider { width: 1px; background: rgba(201,168,76,0.35); }
+.cert-diploma-meta-label {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #8B7355;
+}
+.cert-diploma-meta-val { font-size: 12px; font-weight: 700; color: #1A1A2E; }
+
+/* Signatures */
+.cert-diploma-sigs {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 680px;
+  margin: 8px 0 24px;
+}
+.cert-diploma-sig {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+}
+.cert-diploma-sig-line {
+  width: 100%;
+  max-width: 140px;
+  height: 1px;
+  background: rgba(201,168,76,0.6);
+  margin-bottom: 6px;
+}
+.cert-diploma-sig-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1A1A2E;
+  margin: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+.cert-diploma-sig-role {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8B5E0A;
+  margin: 0;
+}
+.cert-diploma-sig-date { font-size: 9px; color: #6B6054; margin: 0; }
+
+/* Footer */
+.cert-diploma-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-top: 1px solid rgba(201,168,76,0.35);
+  padding-top: 18px;
+  margin-top: auto;
+  gap: 16px;
+  background: #FDFCF8;
+}
+
+/* QR code – strictly constrained */
+.cert-diploma-qr-col {
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
+  min-height: 72px;
+  max-width: 72px;
+  max-height: 72px;
+  flex-shrink: 0;
+  background: #FFFFFF;
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 4px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.cert-diploma-qr-col svg {
+  width: 64px !important;
+  height: 64px !important;
+  max-width: 64px !important;
+  max-height: 64px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  display: block;
+  flex-shrink: 0;
+}
+
+.cert-diploma-token-col { flex: 1; text-align: left; overflow: hidden; }
+.cert-diploma-token-label {
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8B5E0A;
+  margin: 0 0 3px;
+}
+.cert-diploma-token-val {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #5B4A0A;
+  margin: 0 0 2px;
+  word-break: break-all;
+}
+.cert-diploma-token-url { font-size: 8.5px; color: #8B7355; margin: 0; word-break: break-all; }
+.cert-diploma-seal-col { flex-shrink: 0; }
+.cert-diploma-seal svg { display: block; }
+
+/* ── Print / PDF (A4 Landscape) ──────────────────────────────────────── */
+@media print {
+  @page { size: A4 landscape; margin: 6mm; }
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  html, body {
+    background: #FDFCF8 !important;
+    font-size: 9pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .cert-action-bar { display: none !important; }
+  .cert-page-wrap { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+  .cert-diploma-frame {
+    border: 3px solid #C9A84C !important;
+    outline: 5px solid #F5ECD5 !important;
+    outline-offset: -8px !important;
+    box-shadow: none !important;
+    min-height: 185mm !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    background: #FDFCF8 !important;
+  }
+  .cert-diploma-body { padding: 7mm 12mm 5mm !important; background: #FDFCF8 !important; }
+  .cert-diploma-title { font-size: 22pt !important; }
+  .cert-diploma-student-name { font-size: 24pt !important; }
+  .cert-diploma-achievement { font-size: 10.5pt !important; }
+  .cert-diploma-meta-row { max-width: 440pt !important; }
+  .cert-diploma-sigs { max-width: 480pt !important; }
+  .cert-diploma-qr-col {
+    width: 52pt !important;
+    height: 52pt !important;
+    max-width: 52pt !important;
+    max-height: 52pt !important;
+    min-width: 52pt !important;
+    min-height: 52pt !important;
+    overflow: hidden !important;
+  }
+  .cert-diploma-qr-col svg {
+    width: 44pt !important;
+    height: 44pt !important;
+    max-width: 44pt !important;
+    max-height: 44pt !important;
+  }
+  .cert-diploma-seal svg { width: 58pt !important; height: 58pt !important; }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .cert-diploma-body { padding: 24px 20px 20px; }
+  .cert-diploma-sigs { flex-direction: column; gap: 16px; }
+  .cert-diploma-meta-row { flex-direction: column; }
+  .cert-diploma-meta-divider { width: 100%; height: 1px; }
+  .cert-diploma-footer { flex-direction: column; align-items: flex-start; }
+  .cert-diploma-sig-name { white-space: normal; }
+}
