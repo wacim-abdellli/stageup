@@ -33,6 +33,8 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link rel="stylesheet" href="<%= stageup_stylesheet_path %>?v=v8" data-turbo-track="reload">
     <%= render "layouts/nav_critical_styles" %>
+    <%# Page-level style overrides — loaded AFTER the main theme so they win the cascade %>
+    <%= yield :page_styles %>
     <script src="https://unpkg.com/lucide@latest" nonce="<%= content_security_policy_nonce %>"></script>
     <script nonce="<%= content_security_policy_nonce %>">
       (function() {
