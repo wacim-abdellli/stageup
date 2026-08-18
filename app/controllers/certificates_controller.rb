@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CertificatesController < ApplicationController
+  layout 'certificate'
   skip_before_action :authenticate_user!
   skip_before_action :ensure_valid_profile!
 
