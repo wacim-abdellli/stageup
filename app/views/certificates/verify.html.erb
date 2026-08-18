@@ -7,12 +7,329 @@
 <% student_major = (@student.respond_to?(:major) && @student.major.present?) ? @student.major : "Software Engineering" %>
 <% start_str = @agreement.start_date.strftime("%B %d, %Y") %>
 <% end_str   = @agreement.end_date.strftime("%B %d, %Y") %>
+
 <% content_for :head do %>
   <style>
+    /* ═══════════════════════════════════════════════════════
+       OFFICIAL CERTIFICATE DIPLOMA — SCREEN & PRINT ENGINE
+       ═══════════════════════════════════════════════════════ */
+    .cert-page-wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+      min-height: 100vh;
+    }
+    .cert-action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .cert-diploma-frame {
+      width: 100%;
+      background: #FDFCF8 !important;
+      color: #1A1A2E !important;
+      border-radius: 4px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 3px solid #C9A84C !important;
+      outline: 6px solid #F5ECD5 !important;
+      outline-offset: -9px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(201, 168, 76, 0.5);
+      box-sizing: border-box;
+    }
+    .cert-diploma-frame::after {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(201, 168, 76, 0.45);
+      pointer-events: none;
+      border-radius: 2px;
+    }
+    .cert-diploma-stripe {
+      background: linear-gradient(90deg, #8B5E0A 0%, #C9A84C 30%, #F5D78E 50%, #C9A84C 70%, #8B5E0A 100%) !important;
+      height: 8px;
+      flex-shrink: 0;
+      width: 100%;
+    }
+    .cert-diploma-body {
+      flex: 1;
+      padding: 36px 48px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #1A1A2E !important;
+      position: relative;
+      z-index: 1;
+    }
+    .cert-diploma-issuer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .cert-diploma-logo {
+      font-family: 'Outfit', sans-serif !important;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #C9A84C !important;
+    }
+    .cert-diploma-sep {
+      color: #C9A84C !important;
+      font-size: 16px;
+    }
+    .cert-diploma-ledger {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8B7355 !important;
+    }
+    .cert-diploma-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 440px;
+      margin-bottom: 14px;
+    }
+    .cert-diploma-orn-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C9A84C) !important;
+      display: block;
+    }
+    .cert-diploma-ornament .cert-diploma-orn-line:last-child {
+      background: linear-gradient(90deg, #C9A84C, transparent) !important;
+    }
+    .cert-diploma-orn-diamond {
+      width: 7px;
+      height: 7px;
+      background: #C9A84C !important;
+      transform: rotate(45deg);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .cert-diploma-ornament-sm {
+      margin: 16px 0 20px;
+      max-width: 320px;
+    }
+    .cert-diploma-title {
+      font-family: 'Outfit', sans-serif !important;
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #8B5E0A !important;
+      margin: 0 0 8px;
+      line-height: 1.1;
+      text-transform: uppercase;
+      text-shadow: none !important;
+    }
+    .cert-diploma-decree {
+      font-size: 12.5px;
+      color: #8B7355 !important;
+      font-style: italic;
+      margin: 0 0 14px;
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+    .cert-diploma-name-wrap {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cert-diploma-student-name {
+      font-family: 'Outfit', sans-serif !important;
+      font-size: clamp(24px, 3.8vw, 36px);
+      font-weight: 800;
+      color: #1A1A2E !important;
+      margin: 0 0 6px;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+    .cert-diploma-name-underline {
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, #C9A84C 25%, #C9A84C 75%, transparent) !important;
+      width: 260px;
+      margin: 0 auto;
+    }
+    .cert-diploma-achievement {
+      font-size: 14px;
+      color: #2D2825 !important;
+      margin: 0 0 6px;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+    .cert-diploma-stage-type {
+      color: #8B5E0A !important;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .cert-diploma-company {
+      color: #1A1A2E !important;
+      font-weight: 700;
+    }
+    .cert-diploma-subject {
+      font-size: 13px;
+      color: #6B6054 !important;
+      margin: 0 0 18px;
+      font-style: italic;
+      max-width: 540px;
+    }
+    .cert-diploma-subject em {
+      font-style: normal;
+      color: #2D2825 !important;
+    }
+    .cert-diploma-meta-row {
+      display: flex;
+      align-items: stretch;
+      border: 1px solid rgba(201, 168, 76, 0.45) !important;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 4px;
+      width: 100%;
+      max-width: 580px;
+      background: linear-gradient(180deg, #FDF8EE 0%, #FDFCF8 100%) !important;
+    }
+    .cert-diploma-meta-cell {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 8px 14px;
+      align-items: center;
+    }
+    .cert-diploma-meta-divider {
+      width: 1px;
+      background: rgba(201, 168, 76, 0.35) !important;
+    }
+    .cert-diploma-meta-label {
+      font-size: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #8B7355 !important;
+    }
+    .cert-diploma-meta-val {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1A1A2E !important;
+    }
+    .cert-diploma-sigs {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+      max-width: 680px;
+      margin: 8px 0 24px;
+    }
+    .cert-diploma-sig {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      text-align: center;
+    }
+    .cert-diploma-sig-line {
+      width: 100%;
+      max-width: 140px;
+      height: 1px;
+      background: rgba(201, 168, 76, 0.6) !important;
+      margin-bottom: 6px;
+    }
+    .cert-diploma-sig-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #1A1A2E !important;
+      margin: 0;
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+    .cert-diploma-sig-role {
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #8B5E0A !important;
+      margin: 0;
+    }
+    .cert-diploma-sig-date {
+      font-size: 9px;
+      color: #6B6054 !important;
+      margin: 0;
+    }
+    .cert-diploma-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      border-top: 1px solid rgba(201, 168, 76, 0.35) !important;
+      padding-top: 18px;
+      margin-top: auto;
+      gap: 16px;
+    }
+    .cert-diploma-qr-col {
+      width: 68px;
+      height: 68px;
+      flex-shrink: 0;
+      background: #FFFFFF !important;
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      border-radius: 4px;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cert-diploma-qr-col svg {
+      width: 60px !important;
+      height: 60px !important;
+      display: block;
+    }
+    .cert-diploma-token-col {
+      flex: 1;
+      text-align: left;
+    }
+    .cert-diploma-token-label {
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8B5E0A !important;
+      margin: 0 0 3px;
+    }
+    .cert-diploma-token-val {
+      font-family: ui-monospace, monospace !important;
+      font-size: 11px;
+      font-weight: 600;
+      color: #5B4A0A !important;
+      margin: 0 0 2px;
+      word-break: break-all;
+    }
+    .cert-diploma-token-url {
+      font-size: 8.5px;
+      color: #8B7355 !important;
+      margin: 0;
+      word-break: break-all;
+    }
+    .cert-diploma-seal-col {
+      flex-shrink: 0;
+    }
+    .cert-diploma-seal svg {
+      display: block;
+    }
+
     @media print {
       @page {
-        size: A4 portrait;
-        margin: 8mm 10mm;
+        size: A4 landscape;
+        margin: 6mm;
       }
       *, *::before, *::after {
         text-shadow: none !important;
@@ -21,430 +338,96 @@
         color-adjust: exact !important;
       }
       html, body {
-        background: #FFFFFF !important;
-        color: #0F172A !important;
-        font-size: 8.5pt !important;
-        line-height: 1.35 !important;
+        background: #FDFCF8 !important;
+        color: #1A1A2E !important;
         margin: 0 !important;
         padding: 0 !important;
+        font-size: 9pt !important;
+        width: 100% !important;
+        height: 100% !important;
       }
-      .navbar, .navbar-mobile-menu, .cert-action-bar, .hide-on-print, .cert-copy-btn {
+      .navbar,
+      .navbar-mobile-menu,
+      .cert-action-bar,
+      .hide-on-print {
         display: none !important;
       }
       .cert-page-wrap {
         padding: 0 !important;
-        margin: 0 auto !important;
+        margin: 0 !important;
         max-width: 100% !important;
         min-height: auto !important;
+        width: 100% !important;
+        height: 100% !important;
       }
-      .cert-document {
-        background: #FFFFFF !important;
-        color: #0F172A !important;
+      .cert-diploma-frame {
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 185mm !important;
         box-shadow: none !important;
-        border: 2px solid #C9A84C !important;
-        border-radius: 4px !important;
-        outline: 1px solid rgba(201, 168, 76, 0.4) !important;
-        outline-offset: -5px !important;
+        border: 3px solid #C9A84C !important;
+        outline: 5px solid #F5ECD5 !important;
+        outline-offset: -8px !important;
         page-break-inside: avoid !important;
         break-inside: avoid !important;
-        margin: 0 !important;
-        padding: 0 !important;
       }
-      .cert-document::before, .cert-document::after {
-        display: none !important;
+      .cert-diploma-frame::after {
+        inset: 10px !important;
+        border: 1px solid rgba(201, 168, 76, 0.4) !important;
       }
-      .cert-doc-header {
-        background: #FDFBF7 !important;
-        border-bottom: 1.5px solid #C9A84C !important;
-        padding: 12px 24px 10px !important;
-        text-align: center !important;
+      .cert-diploma-stripe {
+        height: 7px !important;
       }
-      .cert-issuer-mark {
-        margin-bottom: 4px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 6px !important;
+      .cert-diploma-body {
+        padding: 7mm 12mm 5mm !important;
       }
-      .cert-issuer-logo {
-        color: #9A6F09 !important;
-        font-size: 10pt !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.08em !important;
+      .cert-diploma-title {
+        font-size: 22pt !important;
+        margin-bottom: 2mm !important;
       }
-      .cert-issuer-sep { color: #C9A84C !important; }
-      .cert-issuer-sub {
-        color: #786C5E !important;
-        font-size: 7pt !important;
-        font-weight: 600 !important;
+      .cert-diploma-student-name {
+        font-size: 24pt !important;
+        margin-bottom: 2mm !important;
       }
-      .cert-doc-meta {
-        margin-bottom: 6px !important;
-        display: flex !important;
-        justify-content: center !important;
-        gap: 8px !important;
+      .cert-diploma-achievement {
+        font-size: 10.5pt !important;
+        margin-bottom: 1.5mm !important;
       }
-      .cert-meta-tag {
-        color: #9A6F09 !important;
-        background: #FEF8ED !important;
-        border: 1px solid #D4AF37 !important;
-        font-size: 6.5pt !important;
-        font-weight: 700 !important;
-        padding: 2px 8px !important;
-        border-radius: 9999px !important;
+      .cert-diploma-subject {
+        font-size: 9.5pt !important;
+        margin-bottom: 3.5mm !important;
       }
-      .cert-meta-id {
-        color: #786C5E !important;
-        border: 1px solid #E5E7EB !important;
-        background: #FFFFFF !important;
-        font-size: 7pt !important;
-        padding: 2px 8px !important;
-        border-radius: 9999px !important;
+      .cert-diploma-meta-row {
+        padding: 2mm 6mm !important;
+        margin-bottom: 2mm !important;
+        max-width: 440pt !important;
       }
-      .cert-doc-title {
-        color: #8B5E0A !important;
-        -webkit-text-fill-color: #8B5E0A !important;
-        background: none !important;
-        font-size: 16pt !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.06em !important;
-        margin: 4px 0 !important;
-        line-height: 1.15 !important;
+      .cert-diploma-sigs {
+        margin: 4mm 0 3mm !important;
+        max-width: 480pt !important;
       }
-      .cert-doc-subtitle {
-        color: #6B7280 !important;
-        font-size: 7.5pt !important;
-        margin: 0 auto 6px !important;
-        max-width: 480px !important;
-        font-style: italic !important;
+      .cert-diploma-footer {
+        padding-top: 2.5mm !important;
+        margin-top: auto !important;
       }
-      .cert-doc-rule { margin-top: 4px !important; }
-      .cert-doc-rule::before, .cert-doc-rule::after {
-        background: #C9A84C !important;
-        height: 1px !important;
+      .cert-diploma-qr-col {
+        width: 48pt !important;
+        height: 48pt !important;
       }
-      .cert-section {
-        background: #FFFFFF !important;
-        border-bottom: 1px solid #F1ECE1 !important;
-        padding: 8px 24px !important;
+      .cert-diploma-qr-col svg {
+        width: 48pt !important;
+        height: 48pt !important;
       }
-      .cert-section-label {
-        color: #9A6F09 !important;
-        border-bottom: 1px solid #F1ECE1 !important;
-        font-size: 6.5pt !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.12em !important;
-        margin-bottom: 5px !important;
-        padding-bottom: 3px !important;
-      }
-      .cert-section-label svg {
-        stroke: #9A6F09 !important;
-        width: 10px !important;
-        height: 10px !important;
-      }
-      .cert-section-text {
-        color: #1F2937 !important;
-        font-size: 8pt !important;
-        line-height: 1.45 !important;
-        margin: 0 !important;
-      }
-      .cert-section-text strong {
-        color: #0F172A !important;
-        font-weight: 700 !important;
-      }
-      .cert-section-text em { color: #1F2937 !important; }
-      .cert-parties {
-        display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 8px !important;
-        margin-top: 6px !important;
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-      .cert-party-divider { display: none !important; }
-      .cert-party {
-        background: #FDFBF7 !important;
-        border: 1px solid #E8DFD1 !important;
-        border-radius: 4px !important;
-        padding: 6px 10px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 2px !important;
-      }
-      .cert-party-role {
-        color: #9A6F09 !important;
-        font-size: 6pt !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.1em !important;
-        text-transform: uppercase !important;
-        margin-bottom: 2px !important;
-      }
-      .cert-party-name {
-        color: #0F172A !important;
-        font-size: 8.5pt !important;
-        font-weight: 700 !important;
-        line-height: 1.2 !important;
-      }
-      .cert-party-detail {
-        color: #4B5563 !important;
-        font-size: 7pt !important;
-        line-height: 1.25 !important;
-      }
-      .cert-party-sub {
-        color: #6B7280 !important;
-        font-size: 6.5pt !important;
-        font-style: italic !important;
-      }
-      .cert-stat-row {
-        display: flex !important;
-        margin-top: 6px !important;
-        background: #FDFBF7 !important;
-        border: 1px solid #E8DFD1 !important;
-        border-radius: 4px !important;
-        overflow: hidden !important;
-      }
-      .cert-stat {
-        flex: 1 !important;
-        padding: 5px 10px !important;
-        border-right: 1px solid #E8DFD1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 1px !important;
-      }
-      .cert-stat:last-child { border-right: none !important; }
-      .cert-stat-label {
-        color: #786C5E !important;
-        font-size: 6pt !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.1em !important;
-        text-transform: uppercase !important;
-      }
-      .cert-stat-value {
-        color: #0F172A !important;
-        font-size: 12pt !important;
-        font-weight: 800 !important;
-        line-height: 1.1 !important;
-      }
-      .cert-stat-value em {
-        font-size: 7.5pt !important;
-        color: #6B7280 !important;
-        font-style: normal !important;
-      }
-      .cert-stat-badge {
-        color: #9A6F09 !important;
-        font-size: 10pt !important;
-        font-weight: 800 !important;
-      }
-      .cert-section-verify { border-bottom: none !important; }
-      .cert-verify-layout {
-        display: flex !important;
-        flex-direction: row !important;
-        gap: 14px !important;
-        align-items: center !important;
-        margin-top: 4px !important;
-      }
-      .cert-verify-info { flex: 1 !important; }
-      .cert-verify-intro {
-        font-size: 7.5pt !important;
-        color: #4B5563 !important;
-        margin-bottom: 6px !important;
-        line-height: 1.4 !important;
-      }
-      .cert-token-block {
-        background: #FDFBF7 !important;
-        border: 1px solid #E8DFD1 !important;
-        border-radius: 4px !important;
-        padding: 6px 10px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 4px !important;
-        margin-top: 0 !important;
-      }
-      .cert-token-top {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-      }
-      .cert-token-top-left {
-        display: flex !important;
-        align-items: center !important;
-        gap: 6px !important;
-      }
-      .cert-token-label {
-        color: #786C5E !important;
-        font-size: 6pt !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.1em !important;
-        text-transform: uppercase !important;
-      }
-      .cert-immutable-pill {
-        color: #047857 !important;
-        background: #ECFDF5 !important;
-        border: 1px solid #A7F3D0 !important;
-        font-size: 5.5pt !important;
-        font-weight: 800 !important;
-        padding: 1px 6px !important;
-        border-radius: 9999px !important;
-      }
-      .cert-token-hash {
-        background: #F3F4F6 !important;
-        color: #1F2937 !important;
-        border: 1px solid #E5E7EB !important;
-        border-radius: 3px !important;
-        font-family: ui-monospace, monospace !important;
-        font-size: 7.5pt !important;
-        font-weight: 600 !important;
-        padding: 4px 8px !important;
-        word-break: break-all !important;
-        display: block !important;
-        line-height: 1.3 !important;
-      }
-      .cert-token-url {
-        display: flex !important;
-        align-items: center !important;
-        gap: 4px !important;
-      }
-      .cert-token-url svg {
-        stroke: #6B7280 !important;
-        width: 8px !important;
-        height: 8px !important;
-      }
-      .cert-token-url span {
-        color: #6B7280 !important;
-        font-size: 6.5pt !important;
-      }
-      .cert-qr-wrap {
-        width: 80px !important;
-        flex-shrink: 0 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-      }
-      .cert-qr-box {
-        background: #FFFFFF !important;
-        border: 1px solid #C9A84C !important;
-        border-radius: 4px !important;
-        padding: 4px !important;
-        width: 74px !important;
-        height: 74px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        box-shadow: none !important;
-      }
-      .cert-qr-box svg {
-        width: 66px !important;
-        height: 66px !important;
-        max-width: 66px !important;
-        max-height: 66px !important;
-        display: block !important;
-      }
-      .cert-qr-scan-label {
-        color: #9A6F09 !important;
-        font-size: 5.5pt !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.1em !important;
-        text-transform: uppercase !important;
-      }
-      .cert-qr-scan-sub {
-        color: #6B7280 !important;
-        font-size: 5.5pt !important;
-      }
-      .cert-signatures {
-        background: #FDFBF7 !important;
-        border-top: 1.5px solid #C9A84C !important;
-        padding: 8px 24px 10px !important;
-      }
-      .cert-sig-header {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        margin-bottom: 6px !important;
-      }
-      .cert-sig-title {
-        color: #0F172A !important;
-        font-size: 7.5pt !important;
-        font-weight: 800 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.08em !important;
-        margin: 0 !important;
-      }
-      .cert-fully-executed {
-        color: #047857 !important;
-        background: #ECFDF5 !important;
-        border: 1px solid #A7F3D0 !important;
-        font-size: 6pt !important;
-        font-weight: 700 !important;
-        padding: 2px 8px !important;
-        border-radius: 9999px !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 4px !important;
-      }
-      .cert-sig-grid {
-        display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 8px !important;
-      }
-      .cert-sig-card {
-        background: #FFFFFF !important;
-        border: 1px solid #E8DFD1 !important;
-        border-radius: 4px !important;
-        padding: 6px 8px !important;
-        text-align: center !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 1px !important;
-        box-shadow: none !important;
-      }
-      .cert-sig-role {
-        color: #9A6F09 !important;
-        font-size: 5.5pt !important;
-        font-weight: 800 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.1em !important;
-      }
-      .cert-sig-name {
-        color: #0F172A !important;
-        font-size: 8pt !important;
-        font-weight: 700 !important;
-        line-height: 1.2 !important;
-      }
-      .cert-sig-date {
-        color: #6B7280 !important;
-        font-size: 6.5pt !important;
-      }
-      .cert-sig-line {
-        border-top: 1px solid #D4AF37 !important;
-        margin: 3px 0 2px !important;
-        height: 0 !important;
-      }
-      .cert-sig-capacity {
-        color: #786C5E !important;
-        font-size: 6pt !important;
-        font-style: italic !important;
-      }
-      .cert-document,
-      .cert-doc-header,
-      .cert-section,
-      .cert-signatures,
-      .cert-sig-card,
-      .cert-parties,
-      .cert-stat-row,
-      .cert-token-block {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
+      .cert-diploma-seal svg {
+        width: 58pt !important;
+        height: 58pt !important;
       }
     }
   </style>
 <% end %>
 
 <div class="cert-page-wrap">
-
-
-  <%# Action Bar %>
+  <%# Top Action Bar %>
   <div class="cert-action-bar hide-on-print">
     <%= link_to root_path, class: "btn btn-secondary" do %>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
@@ -456,210 +439,125 @@
     </button>
   </div>
 
-  <div class="cert-document">
+  <%# The Main Certificate Diploma Card %>
+  <div class="cert-diploma-frame">
+    <%# Top gold gradient stripe %>
+    <div class="cert-diploma-stripe cert-diploma-stripe-top"></div>
 
-    <%# DOCUMENT HEADER %>
-    <header class="cert-doc-header">
-      <div class="cert-issuer-mark">
-        <span class="cert-issuer-logo">StageUp</span>
-        <span class="cert-issuer-sep">&middot;</span>
-        <span class="cert-issuer-sub"><%= t('certificates.verify.trust_ledger', default: 'Trust Ledger') %></span>
+    <div class="cert-diploma-body">
+      <%# Issuer Header %>
+      <div class="cert-diploma-issuer">
+        <span class="cert-diploma-logo">StageUp</span>
+        <span class="cert-diploma-sep">&middot;</span>
+        <span class="cert-diploma-ledger"><%= t('certificates.verify.trust_ledger', default: 'Trust Ledger') %></span>
       </div>
-      <div class="cert-doc-meta">
-        <span class="cert-meta-tag">
-          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <%= t('certificates.verify.badge', default: 'Certificate of Completion') %>
-        </span>
-        <span class="cert-meta-id">AGR-<%= @agreement.id %></span>
-      </div>
-      <h1 class="cert-doc-title"><%= t('certificates.verify.title', default: 'CERTIFICATE OF COMPLETION') %></h1>
-      <p class="cert-doc-subtitle"><%= t('certificates.verify.subtitle', default: 'Issued in accordance with Tunisian law governing higher education internship programmes') %></p>
-      <div class="cert-doc-rule"></div>
-    </header>
 
-    <%# ARTICLE 1: PARTIES %>
-    <section class="cert-section">
-      <div class="cert-section-label">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <%= t('certificates.verify.article1', default: 'Article 1 - Graduate & Parties') %>
+      <%# Ornamental line with Gold Star %>
+      <div class="cert-diploma-ornament">
+        <span class="cert-diploma-orn-line"></span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#C9A84C" stroke="none"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+        <span class="cert-diploma-orn-line"></span>
       </div>
-      <p class="cert-section-text"><%= t('certificates.verify.article1_text', default: 'This Certificate of Completion is jointly issued by the three parties below, confirming the successful fulfilment of all internship obligations.') %></p>
 
-      <div class="cert-parties">
-        <div class="cert-party">
-          <span class="cert-party-role"><%= t('certificates.verify.role_graduate', default: 'The Graduate') %></span>
-          <strong class="cert-party-name"><%= @student.first_name %> <%= @student.last_name %></strong>
-          <span class="cert-party-detail"><%= t('certificates.verify.enrolled_at', default: 'Enrolled at') %> <%= university_name %></span>
-          <span class="cert-party-sub"><%= student_major %></span>
-        </div>
-        <div class="cert-party-divider"></div>
-        <div class="cert-party">
-          <span class="cert-party-role"><%= t('certificates.verify.role_employer', default: 'The Employer') %></span>
-          <strong class="cert-party-name"><%= @company.name %></strong>
-          <span class="cert-party-detail"><%= @offer.title %></span>
-          <span class="cert-party-sub"><%= t('certificates.verify.host_org', default: 'Host Organisation') %></span>
-        </div>
-        <div class="cert-party-divider"></div>
-        <div class="cert-party">
-          <span class="cert-party-role"><%= t('certificates.verify.role_university', default: 'The University') %></span>
-          <strong class="cert-party-name"><%= university_name %></strong>
-          <span class="cert-party-detail">Official <%= t('certificates.verify.higher_ed', default: 'Higher Education Institution') %></span>
-        </div>
-      </div>
-    </section>
+      <%# Title & Decree %>
+      <h1 class="cert-diploma-title"><%= t('certificates.verify.badge', default: 'Certificate of Completion') %></h1>
+      <p class="cert-diploma-decree">This is to certify that</p>
 
-    <%# ARTICLE 2: PERIOD %>
-    <section class="cert-section">
-      <div class="cert-section-label">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-        <%= t('certificates.verify.article2', default: 'Article 2 - Internship Period') %>
+      <%# Student Name %>
+      <div class="cert-diploma-name-wrap">
+        <h2 class="cert-diploma-student-name"><%= @student.first_name %> <%= @student.last_name %></h2>
+        <div class="cert-diploma-name-underline"></div>
       </div>
-      <p class="cert-section-text">
-        <% start_str = @agreement.start_date.strftime("%B %d, %Y") %>
-        <% end_str   = @agreement.end_date.strftime("%B %d, %Y") %>
-        <%= t('certificates.verify.article2_text_html', start_date: start_str, end_date: end_str, default: "The internship commenced on <strong>#{start_str}</strong> and concluded on <strong>#{end_str}</strong>, in accordance with Tunisian Higher Education regulations.").html_safe %>
+
+      <%# Achievement Description %>
+      <p class="cert-diploma-achievement">
+        has successfully completed a
+        <strong class="cert-diploma-stage-type"><%= @offer.stage_type.to_s.upcase %></strong>
+        internship programme at
+        <strong class="cert-diploma-company"><%= @company.name %></strong>
       </p>
-      <div class="cert-stat-row">
-        <div class="cert-stat">
-          <span class="cert-stat-label"><%= t('certificates.verify.duration', default: 'Duration') %></span>
-          <span class="cert-stat-value"><%= duration_days %> <em><%= t('certificates.verify.days', default: 'days') %></em></span>
+      <p class="cert-diploma-subject">under the subject: &ldquo;<em><%= @offer.title %></em>&rdquo;</p>
+
+      <%# Metadata Row %>
+      <div class="cert-diploma-meta-row">
+        <div class="cert-diploma-meta-cell">
+          <span class="cert-diploma-meta-label"><%= t('certificates.verify.institution', default: 'Institution') %></span>
+          <span class="cert-diploma-meta-val"><%= university_name %></span>
         </div>
-        <div class="cert-stat">
-          <span class="cert-stat-label"><%= t('certificates.verify.approximate', default: 'Approximate') %></span>
-          <span class="cert-stat-value"><%= (duration_days / 30.0).round(1) %> <em><%= t('certificates.verify.months', default: 'months') %></em></span>
+        <div class="cert-diploma-meta-divider"></div>
+        <div class="cert-diploma-meta-cell">
+          <span class="cert-diploma-meta-label"><%= t('certificates.verify.duration', default: 'Duration') %></span>
+          <span class="cert-diploma-meta-val"><%= duration_days %> <%= t('certificates.verify.days', default: 'days') %></span>
         </div>
-        <div class="cert-stat">
-          <span class="cert-stat-label"><%= t('certificates.verify.classification', default: 'Classification') %></span>
-          <span class="cert-stat-value cert-stat-badge"><%= @offer.stage_type.to_s.upcase %></span>
+        <div class="cert-diploma-meta-divider"></div>
+        <div class="cert-diploma-meta-cell">
+          <span class="cert-diploma-meta-label"><%= t('certificates.verify.period', default: 'Period') %></span>
+          <span class="cert-diploma-meta-val"><%= start_str %> &ndash; <%= end_str %></span>
         </div>
       </div>
-    </section>
 
-    <%# ARTICLE 3: SUBJECT %>
-    <section class="cert-section">
-      <div class="cert-section-label">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <%= t('certificates.verify.article3', default: 'Article 3 - Internship Subject') %>
-      </div>
-      <p class="cert-section-text">
-        <% student_name = "#{@student.first_name} #{@student.last_name}" %>
-        <% offer_type   = @offer.stage_type.to_s.upcase %>
-        <%= t('certificates.verify.article3_text_html',
-              student_name: student_name,
-              title: @offer.title,
-              company: @company.name,
-              type: offer_type,
-              default: "<strong>#{student_name}</strong> successfully completed a <strong>#{offer_type}</strong> internship at <strong>#{@company.name}</strong> under the subject: <em>\"#{@offer.title}\"</em>.").html_safe %>
-      </p>
-    </section>
-
-    <%# ARTICLE 4: VERIFICATION %>
-    <section class="cert-section cert-section-verify">
-      <div class="cert-section-label">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        <%= t('certificates.verify.article4', default: 'Article 4 - Cryptographic Verification') %>
+      <%# Second Ornament %>
+      <div class="cert-diploma-ornament cert-diploma-ornament-sm">
+        <span class="cert-diploma-orn-line"></span>
+        <span class="cert-diploma-orn-diamond"></span>
+        <span class="cert-diploma-orn-line"></span>
       </div>
 
-      <div class="cert-verify-layout">
+      <%# Signatures Row %>
+      <div class="cert-diploma-sigs">
+        <div class="cert-diploma-sig">
+          <div class="cert-diploma-sig-line"></div>
+          <p class="cert-diploma-sig-name"><%= @student.first_name %> <%= @student.last_name %></p>
+          <p class="cert-diploma-sig-role"><%= t('certificates.verify.cap_graduate', default: 'Graduate Intern') %></p>
+          <p class="cert-diploma-sig-date"><%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("%b %d, %Y") : "—" %></p>
+        </div>
+        <div class="cert-diploma-sig">
+          <div class="cert-diploma-sig-line"></div>
+          <p class="cert-diploma-sig-name"><%= @company.name %></p>
+          <p class="cert-diploma-sig-role"><%= t('certificates.verify.host_org', default: 'Host Organisation') %></p>
+          <p class="cert-diploma-sig-date"><%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("%b %d, %Y") : "—" %></p>
+        </div>
+        <div class="cert-diploma-sig">
+          <div class="cert-diploma-sig-line"></div>
+          <p class="cert-diploma-sig-name"><%= university_name %></p>
+          <p class="cert-diploma-sig-role"><%= t('certificates.verify.cap_university', default: 'Academic Institution') %></p>
+          <p class="cert-diploma-sig-date"><%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("%b %d, %Y") : "—" %></p>
+        </div>
+      </div>
 
-        <%# LEFT: token info %>
-        <div class="cert-verify-info">
-          <p class="cert-section-text cert-verify-intro">
-            <%= t('certificates.verify.article4_text', default: 'This certificate is immutably recorded on the StageUp Trust Ledger. Scan the QR code or visit the URL below to confirm its authenticity instantly.') %>
-          </p>
-
-          <div class="cert-token-block">
-            <div class="cert-token-top">
-              <div class="cert-token-top-left">
-                <span class="cert-token-label"><%= t('certificates.verify.verification_token', default: 'Verification Token') %></span>
-                <span class="cert-immutable-pill">
-                  <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                  <%= t('certificates.verify.immutable', default: 'IMMUTABLE') %>
-                </span>
-              </div>
-              <button type="button" class="cert-copy-btn" data-token="<%= @agreement.verification_token %>" title="<%= t('certificates.verify.copy_token', default: 'Copy Verification Token') %>" aria-label="<%= t('certificates.verify.copy_token', default: 'Copy Verification Token') %>">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="13" height="13" x="9" y="9" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              </button>
-            </div>
-            <code class="cert-token-hash"><%= @agreement.verification_token %></code>
-            <div class="cert-token-url">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-              <span><%= qr_url %></span>
-            </div>
+      <%# Verification Footer %>
+      <div class="cert-diploma-footer">
+        <div class="cert-diploma-qr-col">
+          <%= qr.as_svg(offset: 0, color: "1A1A2E", shape_rendering: "crispEdges", viewbox: true, use_path: true, standalone: true).html_safe %>
+        </div>
+        <div class="cert-diploma-token-col">
+          <p class="cert-diploma-token-label"><%= t('certificates.verify.verification_token', default: 'Verification Token') %> (StageUp <%= t('certificates.verify.trust_ledger', default: 'Trust Ledger') %>)</p>
+          <p class="cert-diploma-token-val"><%= @agreement.verification_token %></p>
+          <p class="cert-diploma-token-url"><%= qr_url %></p>
+        </div>
+        <div class="cert-diploma-seal-col">
+          <div class="cert-diploma-seal">
+            <svg viewBox="0 0 80 80" width="76" height="76">
+              <circle cx="40" cy="40" r="38" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+              <circle cx="40" cy="40" r="33" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+              <path d="M40 10 L43 25 L58 20 L50 33 L65 38 L50 43 L58 56 L43 51 L40 66 L37 51 L22 56 L30 43 L15 38 L30 33 L22 20 L37 25 Z" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.6"/>
+              <text x="40" y="36" text-anchor="middle" font-size="6" font-weight="800" letter-spacing="1" fill="#C9A84C" font-family="Outfit, sans-serif">STAGE</text>
+              <text x="40" y="44" text-anchor="middle" font-size="6" font-weight="800" letter-spacing="1" fill="#C9A84C" font-family="Outfit, sans-serif">UP</text>
+              <text x="40" y="52" text-anchor="middle" font-size="4" letter-spacing="0.5" fill="#C9A84C" font-family="Outfit, sans-serif">VERIFIED</text>
+            </svg>
           </div>
         </div>
-
-        <%# RIGHT: QR code %>
-        <div class="cert-qr-wrap">
-          <div class="cert-qr-box">
-            <%= qr.as_svg(offset: 8, color: "000000", fill: "ffffff", shape_rendering: "crispEdges", viewbox: true, use_path: true, standalone: true).html_safe %>
-          </div>
-          <span class="cert-qr-scan-label"><%= t('certificates.verify.scan_to_verify', default: 'Scan to Verify') %></span>
-          <span class="cert-qr-scan-sub">StageUp <%= t('certificates.verify.trust_ledger', default: 'Trust Ledger') %></span>
-        </div>
-
       </div>
-    </section>
+    </div>
 
-    <%# SIGNATURES %>
-    <footer class="cert-signatures">
-      <div class="cert-sig-header">
-        <h2 class="cert-sig-title"><%= t('certificates.verify.signatures', default: 'Signatures') %></h2>
-        <div class="cert-fully-executed">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          <%= t('certificates.verify.fully_executed', default: 'Fully Executed - all three parties have signed') %>
-        </div>
-      </div>
-
-      <div class="cert-sig-grid">
-        <div class="cert-sig-card cert-sig-graduate">
-          <span class="cert-sig-role"><%= t('certificates.verify.sig_graduate', default: 'Graduate') %></span>
-          <strong class="cert-sig-name"><%= @student.first_name %> <%= @student.last_name %></strong>
-          <span class="cert-sig-date"><%= @agreement.student_signed_at ? @agreement.student_signed_at.strftime("%b %d, %Y") : t('certificates.verify.pending', default: 'Pending') %></span>
-          <div class="cert-sig-line"></div>
-          <span class="cert-sig-capacity"><%= t('certificates.verify.cap_graduate', default: 'Graduate Intern') %></span>
-        </div>
-
-        <div class="cert-sig-card cert-sig-employer">
-          <span class="cert-sig-role"><%= t('certificates.verify.sig_employer', default: 'Employer') %></span>
-          <strong class="cert-sig-name"><%= @company.name %></strong>
-          <span class="cert-sig-date"><%= @agreement.company_signed_at ? @agreement.company_signed_at.strftime("%b %d, %Y") : t('certificates.verify.pending', default: 'Pending') %></span>
-          <div class="cert-sig-line"></div>
-          <span class="cert-sig-capacity"><%= t('certificates.verify.host_org', default: 'Host Organisation') %></span>
-        </div>
-
-        <div class="cert-sig-card cert-sig-university">
-          <span class="cert-sig-role"><%= t('certificates.verify.sig_university', default: 'University') %></span>
-          <strong class="cert-sig-name"><%= university_name %></strong>
-          <span class="cert-sig-date"><%= @agreement.university_signed_at ? @agreement.university_signed_at.strftime("%b %d, %Y") : t('certificates.verify.pending', default: 'Pending') %></span>
-          <div class="cert-sig-line"></div>
-          <span class="cert-sig-capacity"><%= t('certificates.verify.cap_university', default: 'Academic Institution') %></span>
-        </div>
-      </div>
-    </footer>
-
-  </div><%# end .cert-document %>
-</div><%# end .cert-page-wrap %>
+    <%# Bottom gold gradient stripe %>
+    <div class="cert-diploma-stripe cert-diploma-stripe-bottom"></div>
+  </div>
+</div>
 
 <script nonce="<%= content_security_policy_nonce %>">
   (function() {
-    function initCertCopy() {
-      document.querySelectorAll('.cert-copy-btn').forEach(function(btn) {
-        if (btn.dataset.copyInitialized) return;
-        btn.dataset.copyInitialized = 'true';
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          var token = btn.dataset.token;
-          if (!token) return;
-          navigator.clipboard.writeText(token).then(function() {
-            btn.classList.add('cert-copy-success');
-            setTimeout(function() { btn.classList.remove('cert-copy-success'); }, 1500);
-          }).catch(function(err) {
-            console.error('Copy failed', err);
-          });
-        });
-      });
-
+    function initCertPrint() {
       var printBtn = document.getElementById('cert-print-btn');
       if (printBtn && !printBtn.dataset.printInitialized) {
         printBtn.dataset.printInitialized = 'true';
@@ -671,10 +569,10 @@
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initCertCopy);
+      document.addEventListener('DOMContentLoaded', initCertPrint);
     } else {
-      initCertCopy();
+      initCertPrint();
     }
-    document.addEventListener('turbo:load', initCertCopy);
+    document.addEventListener('turbo:load', initCertPrint);
   })();
 </script>
