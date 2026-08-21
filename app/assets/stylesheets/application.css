@@ -17010,78 +17010,296 @@ button.btn-accent:hover,
 
 
 
+/* ============================================================
+   ADVANCED MOTION DESIGN SYSTEM (Vercel & Linear Dynamics)
+   ============================================================ */
+
+/* 1. Ambient Background & Cinema Glow */
 @keyframes glowPulse {
-
-  0%, 100% { opacity: 0.6; }
-
-  50%      { opacity: 1; }
-
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 0.95; transform: scale(1.08) translate3d(0, -10px, 0); }
 }
 
-
-
-.animate-in {
-
-  opacity: 0;
-
-  transform: translateY(20px);
-
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-
+@keyframes auroraMesh {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
-
-
-
-.animate-in.visible {
-
-  opacity: 1;
-
-  transform: translateY(0);
-
-}
-
-
-
-.animate-in.visible.animate-down {
-
-  opacity: 1;
-
-  transform: translateY(0);
-
-}
-
-
 
 .cinema-glow-bg {
-
-  animation: glowPulse 6s ease-in-out infinite;
-
+  animation: glowPulse 7s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
+/* 2. Floating Physics */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%      { transform: translateY(-8px) rotate(0.5deg); }
+}
 
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-5px); }
+}
 
-.stagger-1 { animation-delay: 0.1s; transition-delay: 0.1s; }
+.motion-float {
+  animation: floatSlow 6s ease-in-out infinite;
+  will-change: transform;
+}
 
-.stagger-2 { animation-delay: 0.2s; transition-delay: 0.2s; }
+.motion-float-gentle {
+  animation: floatGentle 4.5s ease-in-out infinite;
+  will-change: transform;
+}
 
-.stagger-3 { animation-delay: 0.3s; transition-delay: 0.3s; }
+/* 3. Radar Sonar Multi-Ring Ripple for Live Indicators */
+@keyframes sonarRipple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7),
+                0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0),
+                0 0 0 16px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0),
+                0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
 
-.stagger-4 { animation-delay: 0.4s; transition-delay: 0.4s; }
+@keyframes pulseDotWarning {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
 
-.stagger-5 { animation-delay: 0.5s; transition-delay: 0.5s; }
+.mockup-pulse-dot,
+.status-dot-active,
+.live-sonar-dot {
+  animation: sonarRipple 2.2s cubic-bezier(0.25, 1, 0.5, 1) infinite !important;
+  will-change: box-shadow;
+}
 
-.stagger-6 { animation-delay: 0.6s; transition-delay: 0.6s; }
+/* 4. Button Sheen & Shimmer Light Sweep */
+@keyframes btnSheen {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
 
+.btn-primary,
+.btn-accent,
+.landing-cta-btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.22s ease,
+              border-color 0.22s ease !important;
+}
 
+.btn-primary::after,
+.btn-accent::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%) skewX(-20deg);
+  pointer-events: none;
+}
 
+.btn-primary:hover::after,
+.btn-accent:hover::after {
+  animation: btnSheen 0.85s ease-out;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* 5. Interactive Card Spring & Elevation Dynamics */
+.glass-card,
+.hero-mockup-card,
+.bento-card,
+.offer-card,
+.dashboard-card,
+.table-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s ease !important;
+  will-change: transform, box-shadow;
+}
+
+.offer-card:hover,
+.bento-card:hover,
+.hero-mockup-card:hover {
+  transform: translateY(-4px) scale(1.006);
+  border-color: rgba(194, 65, 12, 0.35) !important;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.65),
+              0 0 24px -4px rgba(194, 65, 12, 0.22) !important;
+}
+
+/* 6. Rotating Border Beam Sweep */
+@keyframes borderBeamRotate {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.border-beam-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.border-beam-card::before {
+  content: '';
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, var(--primary) 60deg, transparent 120deg);
+  animation: borderBeamRotate 8s linear infinite;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 7. Announcement Badge Shimmer */
+@keyframes badgeGradientFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.landing-announcement-badge {
+  background-size: 200% 200%;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease !important;
+}
+
+.landing-announcement-badge:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 20px -2px rgba(194, 65, 12, 0.35);
+  border-color: rgba(194, 65, 12, 0.5) !important;
+}
+
+/* 8. Stepper Line Live Flow Connector */
+@keyframes connectorFlow {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+.stepper-line-active {
+  background: linear-gradient(90deg, var(--success) 0%, #34D399 50%, var(--success) 100%) !important;
+  background-size: 200% 100% !important;
+  animation: connectorFlow 2.5s linear infinite !important;
+}
+
+/* 9. Cascade Stagger Entry Animations with Spring & Blur */
+@keyframes springFadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+    filter: blur(4px);
+  }
+  70% {
+    opacity: 0.9;
+    transform: translateY(-2px) scale(1.002);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.animate-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.animate-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.animate-in.visible.animate-down {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-1 { animation-delay: 0.08s; transition-delay: 0.08s; }
+.stagger-2 { animation-delay: 0.16s; transition-delay: 0.16s; }
+.stagger-3 { animation-delay: 0.24s; transition-delay: 0.24s; }
+.stagger-4 { animation-delay: 0.32s; transition-delay: 0.32s; }
+.stagger-5 { animation-delay: 0.40s; transition-delay: 0.40s; }
+.stagger-6 { animation-delay: 0.48s; transition-delay: 0.48s; }
+.stagger-7 { animation-delay: 0.56s; transition-delay: 0.56s; }
+.stagger-8 { animation-delay: 0.64s; transition-delay: 0.64s; }
+.stagger-9 { animation-delay: 0.72s; transition-delay: 0.72s; }
+.stagger-10 { animation-delay: 0.80s; transition-delay: 0.80s; }
+
+/* 10. Stat Counter Hover Dynamics */
+.landing-stat-item {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-stat-item:hover {
+  transform: translateY(-3px);
+}
+
+.landing-stat-item:hover .stat-number {
+  color: var(--primary-hover) !important;
+  text-shadow: 0 0 16px rgba(194, 65, 12, 0.45);
+}
+
+/* 11. Subtle Micro-Tilt for Mockup Rows */
+.mockup-row {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.25s ease,
+              border-color 0.25s ease !important;
+}
+
+.mockup-row:hover {
+  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* 12. Accessibility: Respect Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
-
-  .animate-in { opacity: 1; animation: none !important; }
-
-  .cinema-glow-bg { animation: none; }
-
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-in { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .cinema-glow-bg { animation: none !important; }
+  .mockup-pulse-dot { animation: none !important; }
+  .btn-primary::after, .btn-accent::after { display: none !important; }
 }
 
 
