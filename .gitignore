@@ -36,3 +36,26 @@
 # Stray files
 query
 start
+
+# Tool / IDE session data
+/.playwright-mcp/
+/.git-rewrite/
+/.antigravity-white-profile/
+/.antigravity-white-profile-debug/
+/.antigravity-white-browser-profile/
+/.ruby-lsp/
+__pycache__/
+*.pyc
+
+# OS junk
+*.lnk
+Thumbs.db
+desktop.ini
+
+# Launcher scripts (local dev helpers)
+START_ANTIGRAVITY_*.vbs
+START_ANTIGRAVITY_*.cmd
+
+# Scratch scripts
+/scratch/*
+!/scratch/.keep
